@@ -71,6 +71,7 @@ Karten, die des Spiels und die der Plugins.
 | `versatzX`/`versatzY` sind für den Zusammenbau **nicht** zu gebrauchen — wer sie als Lage im Gebäude liest, bekommt bei der Kapelle eine senkrechte Spanne von 192 statt 96 | **widerlegt** | eigener Fehlversuch, an der Kapelle gemessen |
 | Dass `teile` die Grundfläche nennt: `n = √teile` | **belegt** | Die Rechenvorschrift des fremden Werkzeugs kommt über ihre Eckenzählung auf denselben Wert; Gegenprobe an den drei Kirchen |
 | **Die gm1-Dateien enthalten Altbestand aus Stronghold 1**, den Crusader nicht benutzt — etwa Holzpalisaden statt Steinmauern. Wer nach Grundfläche filtert, zieht ihn mit | **belegt** | Von Daniel im gerenderten Beispieldorf erkannt: die 1×1-Bauten kamen als Holzwälle heraus, die es in Crusader nicht gibt |
+| **Jedes Gebaeude liegt mehrfach vor: je Ausrichtung und je Zustand** (offen mit Arbeiter, geschlossen ohne). Eine Bau-Nummer zeigt darum auf eine Gruppe von Bildern, nicht auf eines | **belegt** | Von Daniel an den Baeckereien im 4x4-Bogen erkannt. Erklaert die Zahl: 154 Bilder fuer 16 Werkstaetten sind rund zehn Fassungen je Gebaeude |
 | Welche Bau-Nummer welches Bild hat | **offen** | Keine Liste bekannt. Die Grundfläche aus `teile` ist der Filter: sie schneidet die Kandidaten je Nummer auf wenige zusammen |
 
 Leser: `lib/gm1.js` (`leseGm1`, `bildVon`, `ganzesGebaeude`).
@@ -542,6 +543,20 @@ Frage aus der Wunschliste: kostet das Nachbauen einer halbkaputten Mauer so viel
 | Auch der spieleigene KI-Bauweg zieht fuer Mauern keinen Stein ab | **abgelesen** | Abschnitt 5: kein Abzug im Mauerzweig; nur die Pruefung "mind. 1 Stein vorhanden" bei einem schon gebauten Schritt |
 
 **Einschraenkung:** Gemessen am Endstand des Gefechts (Uhr eingefroren); die Wirkung (Hoehenschreiben aendert Stein nicht) ist aber phasenunabhaengig. Der Menue-Bau eines Menschen ueber die Bauleiste zahlt Stein - das ist aber nicht der reaktive Nachbau-Weg.
+
+### Lord-Tod erkennen: der Ausloeser fuer die Kettenreaktion (05.09.2026)
+
+*gemessen im Gefecht (Pfad 2).*
+
+Die Erkennungsregel aus Abschnitt 3 ist bestaetigt: Der Lord ist die Einheit mit unitType == 55, und jeder AKTIVE Spieler hat genau einen. Gemessen: Spieler 2 (Einheit 5, 165000 Leben), Spieler 3 (Einheit 17, 150000), Spieler 4 (Einheit 19, 150000); Spieler 1 (Mensch) hat keinen - in diesem Aufbau nicht besetzt.
+
+| Aussage | Marke | Beleg |
+|---|---|---|
+| Ein Lord je aktivem Spieler, Typ 55, Leben bei +0x3C8 | **gemessen** | 3 Lords, je genau einer, Leben 165000/150000 (voll) |
+| Der Ausloeser ist das Leben, nicht der logicalState | **gemessen** | Lord-Leben 165000 -> 0 gepoked: Leben=0, aber logicalState blieb 2 (Einheit noch da). Wie bei Gebaeuden entfernt das Spiel die Einheit erst beim toedlichen Treffer, nicht beim Erreichen von 0 |
+| Robuster Trigger: je Tick das Lord-Leben lesen; faellt es auf <=0 (oder Einheit verschwindet, logicalState 0), ist der Lord tot | **abgeleitet** | folgt aus dem Obigen |
+
+**Fuer die Kettenreaktion:** Der Trigger steht. Die Reaktion selbst (alles abreissen ausser Lager/Markt, Ressourcen verkaufen, Geld an den Verbuendeten) baut auf schon belegten Bausteinen auf (Abriss mit Gruppenschutz, Geld/Waren verschicken) und ist der naechste Schritt.
 
 ## 4. Verhalten
 
