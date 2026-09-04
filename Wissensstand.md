@@ -476,7 +476,7 @@ Befehl `GCT_BUY_OR_SELL` (38).
 
 ### Balance-Dateien (JSON): Feldnamen und Kostenreihenfolge (SBA, 04.09.2026)
 
-*gemessen von SBA. Quelle: `DDanielDragon/shc-vergleichstabelle`, `doku/Bedienungsanleitung.md` Abschnitt 5 - hier nur der Auszug, nicht doppelt gepflegt.*
+*gemessen von SBA. Quelle: `DanielFleger/shc-vergleichstabelle`, `doku/Bedienungsanleitung.md` Abschnitt 5 - hier nur der Auszug, nicht doppelt gepflegt.*
 
 Die Balance-JSON (Ascension, Team-Liga) bildet ihre Felder so auf die Spielwerte ab - **106 Treffer gegen 2 Abweichungen**, und die zwei waren Fehler in der Tabelle (Katapult/Tribok mit falschen Lebenspunkten), nicht in der Abbildung:
 
