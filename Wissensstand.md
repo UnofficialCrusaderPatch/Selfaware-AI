@@ -56,6 +56,25 @@ Nutzbar gemacht in `lib/karte.js` (`leseVorschau`, `vorschauAlsPng`) und in der
 Oberfläche unter *Vorlage → Karte des Spiels wählen*. Der Server findet 189
 Karten, die des Spiels und die der Plugins.
 
+## 1c. Die Bildersammlungen (.gm1)
+
+| Aussage | Marke | Beleg |
+|---|---|---|
+| Kopf 88 Byte; @12 Anzahl Bilder, @20 Datenart, @80 Datengröße. Danach 10 Farbtafeln zu 256 Farben (je 2 Byte, 5-5-5), dann je Bild Offset, Größe und ein 16-Byte-Kopf | **belegt** | Stronghold-Wiki und die Umsetzung von LordVonAdel; alle 199 `.gm1` im `gm`-Ordner lesen ihren Kopf fehlerfrei |
+| Datenart 3 sind Gebäude und Kacheln. Davon gibt es 20 Dateien | **gemessen** | 118 Bewegtbilder, 33 gepackte, 20 Oberflächen, 20 der Art 3, 4 ungepackte, 3 Schriften |
+| **Ein Eintrag ist immer genau eine Kachel breit (30 Punkte).** Ein Gebäude besteht aus mehreren | **gemessen** | In allen vier Gebäude-Dateien ist jede Breite 30 |
+| **`teile` ist eine Quadratzahl und nennt die Grundfläche: `teile = n·n` bei n×n Kacheln** | **belegt** | Nur Quadratzahlen kommen vor (1, 4, 9, 16, 25, 36, 49, 81, 121, 169). Summe über alle Bauten ergibt genau die Bildanzahl der Datei. Gegenprobe `tile_churches`: 36, 81, 169 — und die Tabelle sagt Kapelle 6×6, Kirche 9×9, Kathedrale 13×13 |
+| `versatzX`/`versatzY` sind Punkte auf einer gemeinsamen Fläche der ganzen Datei, nicht im Gebäude — je Bau den kleinsten Wert abziehen | **gemessen** | Ohne Abzug wachsen die Bildbreiten monoton über die Datei |
+| Das Feld bei +14 (früher „Baubreite" genannt) sagt über die Größe nichts | **widerlegt** | Es trägt in allen 20 Dateien nur 0 oder 30 |
+| **Wie die Teile eines Gebäudes zueinander liegen: gelöst.** Die Lage steht *nicht* in der Datei, sie wird gerechnet. Die Teile füllen eine Raute von der untersten Spitze nach oben — erst 1 Kachel, dann 2, 3 … bis n, danach wieder abwärts. Je Kachel 32 Punkte nach rechts, je Zeile 8 nach oben und 16 nach links; ab der Mitte 16 nach rechts. Startpunkt: `y = Höhe − 16`, `x = ⌊n/2⌋·30 + (n−1) − (n gerade ? 15 : 0)`. Bildgröße `n·30 + (n−1)·2` breit | **belegt** | Nachgebaut nach Gm1KonverterCrossPlatform; im Bild geprüft: Kathedrale, Kirche, Kapelle und zerstörte Kathedrale stehen richtig zusammen |
+| **`kachelVersatz` hebt den Aufbau über seine Kachel.** Ohne dieses Feld schwebt das Dach. Bei `richtung` 3 kommen 14 Punkte nach rechts dazu | **belegt** | dieselbe Quelle, dasselbe Bild |
+| `versatzX`/`versatzY` sind für den Zusammenbau **nicht** zu gebrauchen — wer sie als Lage im Gebäude liest, bekommt bei der Kapelle eine senkrechte Spanne von 192 statt 96 | **widerlegt** | eigener Fehlversuch, an der Kapelle gemessen |
+| Dass `teile` die Grundfläche nennt: `n = √teile` | **belegt** | Die Rechenvorschrift des fremden Werkzeugs kommt über ihre Eckenzählung auf denselben Wert; Gegenprobe an den drei Kirchen |
+| **Die gm1-Dateien enthalten Altbestand aus Stronghold 1**, den Crusader nicht benutzt — etwa Holzpalisaden statt Steinmauern. Wer nach Grundfläche filtert, zieht ihn mit | **belegt** | Von Daniel im gerenderten Beispieldorf erkannt: die 1×1-Bauten kamen als Holzwälle heraus, die es in Crusader nicht gibt |
+| Welche Bau-Nummer welches Bild hat | **offen** | Keine Liste bekannt. Die Grundfläche aus `teile` ist der Filter: sie schneidet die Kandidaten je Nummer auf wenige zusammen |
+
+Leser: `lib/gm1.js` (`leseGm1`, `bildVon`, `ganzesGebaeude`).
+
 ## 2. Die drei Nummernsätze
 
 Die häufigste Fehlerquelle. Dasselbe Bauwerk hat drei verschiedene Nummern.
@@ -492,6 +511,23 @@ Die Balance-JSON (Ascension, Team-Liga) bildet ihre Felder so auf die Spielwerte
 | Walls | `wallDamage` |
 
 Die Kostenliste ist ein Feld mit fuenf Zahlen, deren Bedeutung nirgends in der Datei steht. Reihenfolge ueber Abgleich mit bekannten Werten ermittelt, **213 Treffer gegen 2**: **Holz, Stein, Eisen, Pech, Gold**. Deckt sich mit der Reihenfolge der Laufzeit-Kostentabelle aus Abschnitt 3 - zwei unabhaengige Quellen.
+
+### Einheiten befehligen: Ziel-Felder reichen nicht, die Funktion muss gerufen werden (04.09.2026)
+
+*gemessen im laufenden Gefecht (Pfad 2, 266 Einheiten) ueber peek/poke.*
+
+Die Bewegungsfelder einer Einheit sind bestaetigt (Einheit i = 0x0138854C + i*1168):
+`+0xC4/0xC6` Position x/y, `+0xC8/0xCA` Zielkoordinaten, `+0xD4` Kachel, `+0xD8` Zielkachel (int), `+0xFA` Wegplan-Index, `+0xFC` Wegplan-Laenge, `+0xFE` Wegplan (byte[400]), `+0x374` destinationNeeded (short).
+
+An einer laufenden KI-Einheit abgelesen (Holzfaeller, Spieler 3): Position (199,361), Zielkoordinaten (168,318), Kachel 78878 -> Zielkachel 73644, Wegplan-Laenge 59, Index 13. So sieht "laeuft zu fernem Ziel" aus.
+
+| Aussage | Marke | Beleg |
+|---|---|---|
+| **Das Schreiben der Ziel-Felder (Zielkachel, Zielkoordinaten, destinationNeeded) bewegt eine Einheit NICHT** | **gemessen** | Poke kam an (Zielkachel wechselte auf den neuen Wert), aber: ein ruhendes Tier blieb stehen, und eine laufende Einheit behielt ihren ALTEN Wegplan (Index/Laenge unveraendert 13/59) statt umzuleiten. destinationNeeded 1/2/4 durchprobiert, kein Effekt |
+| destinationNeeded ist ein fluechtiger Ausloeser, kein stehendes Flag | **gemessen** | bei Laeufern wie Ruhenden immer 0 - der Wegfinder verbraucht ihn sofort |
+| Der Wegplan (+0xFE) wird in `setDestinationForUnit` berechnet, der Tick-Update FOLGT ihm nur | **abgelesen** | Dekompilat von 0x0053D3D0: teleportUnitToUnitXAndY, dann Pfadberechnung ueber PathConnectionLayer/translationMatrix inline. Kein deferred-Flag |
+
+**Folge fuer das Modul (gehoert SVS):** Einheiten befehligen braucht einen Aufruf von `setDestinationForUnit` (0x0053D3D0). Signatur laut Dekompilat: `BOOLEnum setDestinationForUnit(UnitsState *this, int unitID, uint x, uint y, int reusePathingInfo)` - thiscall, `this` = UnitsState 0x01387F38 (die Funktion nutzt ohnehin die Globale). Also `core.exposeCode(0x0053D3D0, 5, 1)` (this + 4 Argumente), Aufrufart wie bei tryPlaceAIV am ret-imm gegenpruefen. Dann ein Befehl der Art `{ "einheit_ziel": { "nr": N, "x": X, "y": Y } }`. Koordinaten 0..399; ist die Zielkachel kein Spielfeld, liefert die Funktion FALSE (Gueltigkeitskarte 0x21AEC98).
 
 ## 4. Verhalten
 
