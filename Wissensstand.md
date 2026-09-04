@@ -474,6 +474,25 @@ MapAndTimeState +0x780  copyOfBuyAndSalesPrice BuySellPair[25]
 Für „alle Ressourcen verkaufen" der richtige Anlaufpunkt, zusammen mit dem
 Befehl `GCT_BUY_OR_SELL` (38).
 
+### Balance-Dateien (JSON): Feldnamen und Kostenreihenfolge (SBA, 04.09.2026)
+
+*gemessen von SBA. Quelle: `DDanielDragon/shc-vergleichstabelle`, `doku/Bedienungsanleitung.md` Abschnitt 5 - hier nur der Auszug, nicht doppelt gepflegt.*
+
+Die Balance-JSON (Ascension, Team-Liga) bildet ihre Felder so auf die Spielwerte ab - **106 Treffer gegen 2 Abweichungen**, und die zwei waren Fehler in der Tabelle (Katapult/Tribok mit falschen Lebenspunkten), nicht in der Abbildung:
+
+| Tabellenspalte | JSON-Feld |
+|---|---|
+| Health | `health` |
+| Arrow | `arrowDamage` |
+| Crossbow | `xbowDamage` |
+| Sling | `stoneDamage` |
+| Unit base | `baseMeleeDamage` |
+| Buildings | `buildingDamage` |
+| Towers and gates | `fortificationDamage` |
+| Walls | `wallDamage` |
+
+Die Kostenliste ist ein Feld mit fuenf Zahlen, deren Bedeutung nirgends in der Datei steht. Reihenfolge ueber Abgleich mit bekannten Werten ermittelt, **213 Treffer gegen 2**: **Holz, Stein, Eisen, Pech, Gold**. Deckt sich mit der Reihenfolge der Laufzeit-Kostentabelle aus Abschnitt 3 - zwei unabhaengige Quellen.
+
 ## 4. Verhalten
 
 | Aussage | Marke | Beleg |
