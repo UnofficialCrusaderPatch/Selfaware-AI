@@ -529,6 +529,20 @@ An einer laufenden KI-Einheit abgelesen (Holzfaeller, Spieler 3): Position (199,
 
 **Folge fuer das Modul (gehoert SVS):** Einheiten befehligen braucht einen Aufruf von `setDestinationForUnit` (0x0053D3D0). Signatur laut Dekompilat: `BOOLEnum setDestinationForUnit(UnitsState *this, int unitID, uint x, uint y, int reusePathingInfo)` - thiscall, `this` = UnitsState 0x01387F38 (die Funktion nutzt ohnehin die Globale). Also `core.exposeCode(0x0053D3D0, 5, 1)` (this + 4 Argumente), Aufrufart wie bei tryPlaceAIV am ret-imm gegenpruefen. Dann ein Befehl der Art `{ "einheit_ziel": { "nr": N, "x": X, "y": Y } }`. Koordinaten 0..399; ist die Zielkachel kein Spielfeld, liefert die Funktion FALSE (Gueltigkeitskarte 0x21AEC98).
 
+### Mauer nachbauen kostet keinen Stein - halb wie ganz (05.09.2026)
+
+*gemessen im Gefecht (Pfad 2), Mauerkachel 50004 (Steinmauer, volle Hoehe 98).*
+
+Frage aus der Wunschliste: kostet das Nachbauen einer halbkaputten Mauer so viel Stein wie einer ganz kaputten? Antwort: **beide kosten nichts.**
+
+| Aussage | Marke | Beleg |
+|---|---|---|
+| Der reaktive Nachbau (Hoehe direkt zurueckschreiben) kostet 0 Stein, egal wie stark beschaedigt | **gemessen** | Spieler 4 hatte 122 Stein. Kachel von Hoehe 49 (halb) auf 98 zurueck: 122->122. Von Hoehe 0 (ganz) auf 98 zurueck: 122->122. Gesamtdifferenz 0 |
+| Grund: der Nachbau schreibt die Hoehe in den Speicher und geht am Rohstoffsystem vorbei | **belegt** | eine Speicherschreibung hat keine Rohstoff-Nebenwirkung; deckt sich mit Abschnitt 5 |
+| Auch der spieleigene KI-Bauweg zieht fuer Mauern keinen Stein ab | **abgelesen** | Abschnitt 5: kein Abzug im Mauerzweig; nur die Pruefung "mind. 1 Stein vorhanden" bei einem schon gebauten Schritt |
+
+**Einschraenkung:** Gemessen am Endstand des Gefechts (Uhr eingefroren); die Wirkung (Hoehenschreiben aendert Stein nicht) ist aber phasenunabhaengig. Der Menue-Bau eines Menschen ueber die Bauleiste zahlt Stein - das ist aber nicht der reaktive Nachbau-Weg.
+
 ## 4. Verhalten
 
 | Aussage | Marke | Beleg |
