@@ -4,6 +4,8 @@ Der Katalog aller Meilensteine auf dem Weg zur selbstlernenden KI. Ein Meilenste
 
 Zwei Spalten, zwei Abnahmen: **Definition** = Daniel hat festgelegt, *was* geprueft wird. **Erreicht** = Daniel hat es am Spiel gesehen. Jede Abnahme wird hier mit Datum eingetragen; die Messung dazu steht in `doku/Wissensstand.md` des Village-Studio-Repos.
 
+Diese Datei ist die eine Quelle des Katalogs und wird direkt gepflegt. Werkzeuge zu den Meilensteinen liegen in `werkzeug/`.
+
 Lieferung 1 (30.09.2026): Bloecke M1 Grundlagen, M2 Spiel starten, M3 Gefecht steuern, M4 Spielende und Lord-Tod, M5 Ticks. Folgen: Mods und eigene KI, Einheiten, Wirtschaft, Burg, Ausloeser, die Ansicht der KI, Zuschauen, Lernschleife.
 
 ## Uebersicht
@@ -20,6 +22,10 @@ Lieferung 1 (30.09.2026): Bloecke M1 Grundlagen, M2 Spiel starten, M3 Gefecht st
 | M2.04 | Spiel per Befehl beenden | belegt | abgenommen 30.09.2026 | - |
 | M2.05 | Absturz und Haengen erkennen | offen | abgenommen 30.09.2026 | - |
 | M2.06 | Mehrere Spiele gleichzeitig | offen | abgenommen 30.09.2026 | - |
+| M2.07 | UCP3-GUI schliessen, ohne die Config zu beruehren | gemessen | Daniels Wunsch 30.09.2026 | Hintergrund belegt 30.09., 20:59 - live offen |
+| M2.08 | Wann die GUI die Config schreibt | gemessen | Daniels Wunsch 30.09.2026 | - |
+| M2.09 | UCP3-GUI oeffnen, ohne die Config zu beruehren | Werkzeug gebaut, ungetestet | Daniels Wunsch 30.09.2026 | - |
+| M2.10 | Ein Spiel ohne unser Modul beenden | gemessen: von hier NICHT moeglich | Daniels Wunsch 30.09.2026 | - |
 | M3.01 | Zurueck ins Hauptmenue per Befehl | gemessen | abgenommen 30.09.2026 | - |
 | M3.02 | Eigenes Spiel ohne Maus starten | teils gemessen | abgenommen 30.09.2026 | - |
 | M3.03 | Kampagne und eigenes Spiel sicher unterscheiden | offen | abgenommen 30.09.2026 | - |
@@ -157,6 +163,42 @@ STAND: offen. Die 'laeuft schon'-Sperre greift je Installation; ob Kopien sich C
 WIDERLEGT, WENN: eine zweite Kopie im 'laeuft schon'-Dialog haengt.  
 
 **Vorschlag:** Erst nach dem ersten durchgespielten Spiel (deine Regel).  
+
+### M2.07 UCP3-GUI schliessen, ohne die Config zu beruehren
+
+*Stand: gemessen 30.09.2026. Daniel: "es gibt keinen zu kleinen Schritt".*
+
+ANLEITUNG: `python werkzeug/gui.py schliessen` (im Selfaware-AI-Repo). Das Werkzeug bittet die GUI zu schliessen - dieselbe Nachricht wie ein Klick aufs X - und wartet bis zu 15 s. Erzwungen wird nie.  
+ERKLAERUNG: Die GUI muss zu sein, bevor wir testen, weil sie beim Spielstart die Config ueberschreibt (M2.08). Sie laeuft auf derselben Rechtestufe wie Claude und darf deshalb von hier geschlossen werden (Pfad lesbar: `%LOCALAPPDATA%\UCP3-GUI\UCP3-GUI.exe`).  
+TEST, EINGEBAUT: geschafft = kein GUI-Prozess mehr UND Pruefsumme der Config vorher = nachher. Nicht geschafft = Prozess lebt nach 15 s noch; das Werkzeug nennt den wahrscheinlichen Grund (offener Dialog, z. B. ungespeicherte Aenderungen) und verwirft nichts.  
+GEMESSEN 30.09., 20:59: GUI (PID 30528) geschlossen, Config-Pruefsumme `58591298a2e027cc` vorher wie nachher, Rueckgabe 0.  
+DU SIEHST: das GUI-Fenster verschwindet, ohne dass du klickst.  
+WIDERLEGT, WENN: die GUI weiterlaeuft oder die Pruefsumme sich aendert.  
+
+### M2.08 Wann die GUI die Config schreibt
+
+*Stand: gemessen 30.09.2026.*
+
+ERGEBNIS: Die GUI schreibt die Config **beim Spielstart aus der GUI** - Aenderungszeit der Config 20:21:34 = Startzeit des Spiels, auf die Sekunde. **Beim Schliessen schreibt sie nicht** (Pruefsumme gleich, M2.07). Beim Oeffnen: noch offen, prueft M2.09.  
+FOLGE: Das Spiel nie aus der GUI starten, solange getestet wird. Wer es doch tut, verliert `villagestudio` in der Config und bekommt ein Spiel ohne unser Modul (M2.10).  
+WIDERLEGT, WENN: die Config sich aendert, ohne dass aus der GUI gestartet wurde.  
+
+### M2.09 UCP3-GUI oeffnen, ohne die Config zu beruehren
+
+*Stand: Werkzeug gebaut, noch nicht ausgefuehrt.*
+
+ANLEITUNG: `python werkzeug/gui.py oeffnen`. Startet die GUI, wartet auf ihren Prozess und vergleicht die Pruefsumme der Config 10 s spaeter.  
+TEST, EINGEBAUT: geschafft = GUI-Prozess da UND Config unveraendert. Meldet ausdruecklich, falls schon das Oeffnen schreibt.  
+WIDERLEGT, WENN: die Pruefsumme sich beim blossen Oeffnen aendert.  
+
+### M2.10 Ein Spiel ohne unser Modul beenden
+
+*Stand: gemessen 30.09.2026 - von hier aus NICHT moeglich.*
+
+WARUM NICHT: Das aus der GUI gestartete Spiel (PID 15208) laeuft auf hoeherer Rechtestufe - schon sein Programmpfad ist von hier aus nicht lesbar. Von aussen beenden scheitert daran (Betriebsregeln: Fehler 5). Der einzige Weg von innen ist unser Modul (`{ "beenden": true }`, M2.04) - und genau das fehlt in einem Spiel, das aus der GUI kam.  
+ANLEITUNG: Daniel schliesst dieses eine Spiel selbst. Vorbeugung: das Spiel nur ueber `werkzeug/starte_spiel.py` (VillageStudio) bzw. die Entwicklermodus-Verknuepfung starten - dann ist das Modul drin und das Beenden geht per Befehl.  
+TEST: `python werkzeug/gui.py status` meldet "hoehere Rechtestufe, von hier NICHT beendbar" oder "laeuft nicht".  
+WIDERLEGT, WENN: sich ein aus der GUI gestartetes Spiel doch von hier beenden laesst.  
 
 ### M3.01 Zurueck ins Hauptmenue per Befehl
 
