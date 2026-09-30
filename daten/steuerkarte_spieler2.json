@@ -1,0 +1,382 @@
+{
+ "spieler": 2,
+ "start": 1000,
+ "schritt": 100,
+ "nicht_angefasst": [
+  "+0x48",
+  "+0xE60",
+  "+0xE64",
+  "+0x35D4"
+ ],
+ "ergebnisse": [
+  {
+   "feld": "+0x78",
+   "adresse": "0x01163258",
+   "original": 21,
+   "geschrieben": 1021,
+   "danach": 23,
+   "tick": 1200,
+   "urteil": "neu berechnet"
+  },
+  {
+   "feld": "+0x84",
+   "adresse": "0x01163264",
+   "original": 51,
+   "geschrieben": 1051,
+   "danach": 55,
+   "tick": 1300,
+   "urteil": "neu berechnet"
+  },
+  {
+   "feld": "+0x88",
+   "adresse": "0x01163268",
+   "original": 6,
+   "geschrieben": 1006,
+   "danach": 8,
+   "tick": 1400,
+   "urteil": "neu berechnet"
+  },
+  {
+   "feld": "+0x8C",
+   "adresse": "0x0116326C",
+   "original": 11,
+   "geschrieben": 1011,
+   "danach": 11,
+   "tick": 1500,
+   "urteil": "zurueckgesetzt"
+  },
+  {
+   "feld": "+0x444",
+   "adresse": "0x01163624",
+   "original": 100,
+   "geschrieben": 1100,
+   "danach": 1100,
+   "tick": 1600,
+   "urteil": "gehalten"
+  },
+  {
+   "feld": "+0x448",
+   "adresse": "0x01163628",
+   "original": 1850,
+   "geschrieben": 2850,
+   "danach": 2850,
+   "tick": 1700,
+   "urteil": "gehalten"
+  },
+  {
+   "feld": "+0x44C",
+   "adresse": "0x0116362C",
+   "original": 0,
+   "geschrieben": 1000,
+   "danach": 1000,
+   "tick": 1800,
+   "urteil": "gehalten"
+  },
+  {
+   "feld": "+0x450",
+   "adresse": "0x01163630",
+   "original": 1,
+   "geschrieben": 1001,
+   "danach": 0,
+   "tick": 1900,
+   "urteil": "neu berechnet"
+  },
+  {
+   "feld": "+0x4D8",
+   "adresse": "0x011636B8",
+   "original": 33,
+   "geschrieben": 1033,
+   "danach": 1033,
+   "tick": 2000,
+   "urteil": "gehalten"
+  },
+  {
+   "feld": "+0x500",
+   "adresse": "0x011636E0",
+   "original": 13,
+   "geschrieben": 1013,
+   "danach": 13,
+   "tick": 2100,
+   "urteil": "zurueckgesetzt"
+  },
+  {
+   "feld": "+0x50C",
+   "adresse": "0x011636EC",
+   "original": 1826,
+   "geschrieben": 2826,
+   "danach": 2726,
+   "tick": 2200,
+   "urteil": "weitergerechnet"
+  },
+  {
+   "feld": "+0x2088",
+   "adresse": "0x01165268",
+   "original": 198,
+   "geschrieben": 1198,
+   "danach": 197,
+   "tick": 2300,
+   "urteil": "neu berechnet"
+  },
+  {
+   "feld": "+0x2094",
+   "adresse": "0x01165274",
+   "original": 12,
+   "geschrieben": 1012,
+   "danach": 12,
+   "tick": 2400,
+   "urteil": "zurueckgesetzt"
+  },
+  {
+   "feld": "+0x209C",
+   "adresse": "0x0116527C",
+   "original": 24,
+   "geschrieben": 1024,
+   "danach": 28,
+   "tick": 2500,
+   "urteil": "neu berechnet"
+  },
+  {
+   "feld": "+0x20AC",
+   "adresse": "0x0116528C",
+   "original": 3,
+   "geschrieben": 1003,
+   "danach": 1003,
+   "tick": 2600,
+   "urteil": "gehalten"
+  },
+  {
+   "feld": "+0x20B0",
+   "adresse": "0x01165290",
+   "original": 61,
+   "geschrieben": 1061,
+   "danach": 91,
+   "tick": 2700,
+   "urteil": "neu berechnet"
+  },
+  {
+   "feld": "+0x20B4",
+   "adresse": "0x01165294",
+   "original": 8463,
+   "geschrieben": 9463,
+   "danach": 3549,
+   "tick": 2800,
+   "urteil": "neu berechnet"
+  },
+  {
+   "feld": "+0x20EC",
+   "adresse": "0x011652CC",
+   "original": 11976,
+   "geschrieben": 12976,
+   "danach": 13576,
+   "tick": 2900,
+   "urteil": "weitergerechnet"
+  },
+  {
+   "feld": "+0x2180",
+   "adresse": "0x01165360",
+   "original": 34,
+   "geschrieben": 1034,
+   "danach": 34,
+   "tick": 3000,
+   "urteil": "zurueckgesetzt"
+  },
+  {
+   "feld": "+0x2188",
+   "adresse": "0x01165368",
+   "original": 6,
+   "geschrieben": 1006,
+   "danach": 11,
+   "tick": 3100,
+   "urteil": "neu berechnet"
+  },
+  {
+   "feld": "+0x2190",
+   "adresse": "0x01165370",
+   "original": 5,
+   "geschrieben": 1005,
+   "danach": 5,
+   "tick": 3200,
+   "urteil": "zurueckgesetzt"
+  },
+  {
+   "feld": "+0x223C",
+   "adresse": "0x0116541C",
+   "original": 34,
+   "geschrieben": 1034,
+   "danach": 34,
+   "tick": 3300,
+   "urteil": "zurueckgesetzt"
+  },
+  {
+   "feld": "+0x2A54",
+   "adresse": "0x01165C34",
+   "original": 4,
+   "geschrieben": 1004,
+   "danach": 1004,
+   "tick": 3400,
+   "urteil": "gehalten"
+  },
+  {
+   "feld": "+0x2AE4",
+   "adresse": "0x01165CC4",
+   "original": 4,
+   "geschrieben": 1004,
+   "danach": 1,
+   "tick": 3500,
+   "urteil": "neu berechnet"
+  },
+  {
+   "feld": "+0x2AF8",
+   "adresse": "0x01165CD8",
+   "original": 4,
+   "geschrieben": 1004,
+   "danach": 5,
+   "tick": 3600,
+   "urteil": "neu berechnet"
+  },
+  {
+   "feld": "+0x2AFC",
+   "adresse": "0x01165CDC",
+   "original": 6,
+   "geschrieben": 1006,
+   "danach": 1006,
+   "tick": 3700,
+   "urteil": "gehalten"
+  },
+  {
+   "feld": "+0x2B08",
+   "adresse": "0x01165CE8",
+   "original": 129,
+   "geschrieben": 1129,
+   "danach": 5,
+   "tick": 3800,
+   "urteil": "neu berechnet"
+  },
+  {
+   "feld": "+0x2B0C",
+   "adresse": "0x01165CEC",
+   "original": 8,
+   "geschrieben": 1008,
+   "danach": 9,
+   "tick": 3900,
+   "urteil": "neu berechnet"
+  },
+  {
+   "feld": "+0x2B14",
+   "adresse": "0x01165CF4",
+   "original": 13,
+   "geschrieben": 1013,
+   "danach": 13,
+   "tick": 4000,
+   "urteil": "zurueckgesetzt"
+  },
+  {
+   "feld": "+0x2B38",
+   "adresse": "0x01165D18",
+   "original": 79,
+   "geschrieben": 1079,
+   "danach": 1081,
+   "tick": 4100,
+   "urteil": "weitergerechnet"
+  },
+  {
+   "feld": "+0x2B3C",
+   "adresse": "0x01165D1C",
+   "original": 81,
+   "geschrieben": 1081,
+   "danach": 1083,
+   "tick": 4200,
+   "urteil": "weitergerechnet"
+  },
+  {
+   "feld": "+0x2B50",
+   "adresse": "0x01165D30",
+   "original": 2,
+   "geschrieben": 1002,
+   "danach": 0,
+   "tick": 4300,
+   "urteil": "neu berechnet"
+  },
+  {
+   "feld": "+0x2B6C",
+   "adresse": "0x01165D4C",
+   "original": 12,
+   "geschrieben": 1012,
+   "danach": 14,
+   "tick": 4400,
+   "urteil": "neu berechnet"
+  },
+  {
+   "feld": "+0x2B70",
+   "adresse": "0x01165D50",
+   "original": 21,
+   "geschrieben": 1021,
+   "danach": 0,
+   "tick": 4500,
+   "urteil": "neu berechnet"
+  },
+  {
+   "feld": "+0x2B78",
+   "adresse": "0x01165D58",
+   "original": 1,
+   "geschrieben": 1001,
+   "danach": 1,
+   "tick": 4600,
+   "urteil": "zurueckgesetzt"
+  },
+  {
+   "feld": "+0x3100",
+   "adresse": "0x011662E0",
+   "original": 5,
+   "geschrieben": 1005,
+   "danach": 2,
+   "tick": 4700,
+   "urteil": "neu berechnet"
+  },
+  {
+   "feld": "+0x3684",
+   "adresse": "0x01166864",
+   "original": 42,
+   "geschrieben": 1042,
+   "danach": 42,
+   "tick": 4800,
+   "urteil": "zurueckgesetzt"
+  },
+  {
+   "feld": "+0x3860",
+   "adresse": "0x01166A40",
+   "original": 0,
+   "geschrieben": 1000,
+   "danach": 1,
+   "tick": 4900,
+   "urteil": "neu berechnet"
+  },
+  {
+   "feld": "+0x389C",
+   "adresse": "0x01166A7C",
+   "original": 24,
+   "geschrieben": 1024,
+   "danach": 1024,
+   "tick": 5000,
+   "urteil": "gehalten"
+  },
+  {
+   "feld": "+0x3928",
+   "adresse": "0x01166B08",
+   "original": 18,
+   "geschrieben": 1018,
+   "danach": 18,
+   "tick": 5100,
+   "urteil": "zurueckgesetzt"
+  },
+  {
+   "feld": "+0x39D4",
+   "adresse": "0x01166BB4",
+   "original": 5100,
+   "geschrieben": 6100,
+   "danach": 6200,
+   "tick": 5200,
+   "urteil": "weitergerechnet"
+  }
+ ]
+}

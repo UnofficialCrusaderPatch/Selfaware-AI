@@ -532,3 +532,15 @@ Beide KIs hatten bei Tick 114 je 1850 Gold. Beobachter-Daten: `daten/lauf2_danie
 - **M5.06 Pause auf den Tick genau** `{ "tickpause": { "bei": N, "alle": K, "bis": M } }` - ein Waechter im Taktgeber `everyTick()`, der jeden Tick laeuft. **Test `werkzeug/tickpause_test.py`:** bei Tempo 100 UND 1000 haelt das Spiel exakt beim Ziel-Tick an (+0), danach laeuft kein Tick mehr durch. Damit ist auch **M5.03 beantwortet: unser Modul laeuft wirklich jeden Tick mit.**
 - **M5.07 Pause bei Tick 1 eines neuen Spiels** `"startpause": 1` im Startbefehl. Zweimal exakt bei Tick 1. Zwei Funde auf dem Weg: (a) **Im Hauptmenue kommen nur Startbefehle durch** - `tickpause` und `pause` im Menue werden stillschweigend verworfen; (b) **waehrend des Gefechtsaufbaus liefert der Tickzaehler kurz Unsinn** (7.807.163) - der Waechter ignoriert jetzt Werte weit ueber dem Ziel.
 - **Erster Blick in den Spielbeginn, tick-genau:** Tick 1-25 nur neutrale Einheiten; Tick 50 je Spieler 1 Einheit ohne Lord; **Tick 100 je ein Lord** (4 bzw. 5 Einheiten); Tick 400 rund 20 Einheiten. Die Lords erscheinen zwischen Tick 50 und 100.
+
+### Lauf 4 - 30.09.2026, 21:40 - Steuerkarte der Spielerfelder
+
+- **M6.04 Steuerkarte** `werkzeug/steuerkarte.py <ausgabe.json> [start] [schritt] [spieler]`: frisches Selbstspiel, Pause genau bei Tick 1000, Schnappschuss, 100 Ticks weiter, zweiter Schnappschuss; Kandidaten = die Felder von Spieler 2, die sich bewegt haben. Je Feld: Original + 1000 schreiben, **genau 100 Ticks** (Tick-Pause), zuruecklesen, einordnen, Original zurueck. Werte mit Betrag >= 100.000 nicht angefasst (vermutlich Zeiger).
+- Umfang: 45 bewegte Felder, 4 nicht angefasst, **41 getestet in rund 2,5 Minuten** (41 Schritte zu je 100 Ticks; die Zeit geht in die Befehle, nicht in die Ticks).
+- **Ergebnis: 13 steuerbar, 28 vom Spiel berechnet.**
+  - gehalten (8): +0x444 (100), +0x448 (1850), +0x44C (0), **+0x4D8 Holz** (Ware 2), +0x20AC (3), +0x2A54 (4), +0x2AFC (6), +0x389C (24)
+  - weitergerechnet (5): **+0x50C Gold** (Ware 15; 2826 -> 2726, 100 ausgegeben), +0x20EC (11976, +600 je 100 Ticks), +0x2B38 (79), +0x2B3C (81), +0x39D4 (5100, +100 je 100 Ticks - zaehlt mit den Ticks)
+  - zurueckgesetzt (10): +0x8C, **+0x500 (Ware 12, Fleisch)**, +0x2094, +0x2180, +0x2190, +0x223C, +0x2B14, +0x2B78, +0x3684, +0x3928
+  - neu berechnet (18): +0x78, +0x84, +0x88, +0x450, +0x2088, +0x209C, +0x20B0, +0x20B4, +0x2188, +0x2AE4, +0x2AF8, +0x2B08, +0x2B0C, +0x2B50, +0x2B6C, +0x2B70, +0x3100, +0x3860
+- Auffaellig: Holz bleibt stehen, **Fleisch wird zurueckgesetzt** - Nahrung zaehlt das Spiel offenbar aus dem Kornspeicher nach, Holz nicht. Ungeprueft.
+- Was die Felder bedeuten, ist bis auf Holz, Fleisch und Gold **nicht gedeutet** - die Karte sagt nur, WAS steuerbar ist. Rohdaten: `daten/steuerkarte_spieler2.json`.
