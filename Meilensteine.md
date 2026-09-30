@@ -564,7 +564,7 @@ Das Ziel ist kein wiederholbares Spiel, sondern eine KI, die **jeden Tick auf sp
 ## Naechste Kette: Spielstaende als Trainingslagen (M7, Definition offen fuer Daniel)
 
 - **M7.01** Spielstand speichern per Befehl, ohne Maus. - **Im Hintergrund belegt 30.09., 22:03** (Lauf 7), Live-Abnahme durch Daniel offen.
-- **M7.02** Spielstand laden per Befehl.
+- **M7.02** Spielstand laden per Befehl. - **Im Hintergrund belegt 30.09., 22:16-22:21** (Lauf 8, per Name, mit Lade-Pause), Live-Abnahme durch Daniel offen.
 - **M7.03** Gegenprobe: Schnappschuss direkt nach dem Speichern und direkt nach dem Laden - gleich bis auf das bekannte Rauschen = verlustfrei.
 - **M7.04** Szenario-Bibliothek: benannte Spielstaende fuer Sonderfaelle (Lord in Gefahr, Belagerung, Wirtschaftskrise); jeder Trainingslauf startet exakt dort.
 - Danach **M8** Ansicht der KI je Tick und erste Reaktions-Regel mit gemessener Reaktionszeit in Ticks.
@@ -609,3 +609,23 @@ Werkzeug: `werkzeug/speichern.py "<Name>"`. Selbstspiel Grumpy, pausiert bei Tic
 - **Nebenbefund zum Sammeln:** Derselbe pausierte Stand, dreimal gespeichert: 1.056.101 / 1.056.104 / 1.056.104 Byte. Ein gespeicherter Stand ist also nicht Byte fuer Byte immer gleich lang - fuer M7.03 den Vergleich im Speicher machen (Schnappschuss nach Laden), nicht an der Datei.
 - **Verlust bemerkt:** Die erste Fassung (22:03) ist durch das Ueberschreiben weg. Seitdem kopiert `speichern.py` jede gespeicherte Fassung mit Uhrzeit nach `daten/spielstaende/` (nicht im Repo, 1 MB je Stand).
 - **Offen:** Live-Abnahme durch Daniel (Dialog steht offen, Eintrag oben in der Liste).
+
+### Lauf 8 - 30.09.2026, 22:12-22:22 - M7.02 Laden per Name (Daniels Auftrag: Walltest 4, Waffengebaeude_test, den aeltesten)
+
+Werkzeug: `werkzeug/laden.py "<Name>"` (oder `--liste`). Rezept aus dem Menue-Handbuch (02.09.) uebernommen, dazu zwei neue Teile:
+
+- **Liste im Speicher gelesen statt geraten (gemessen):** Das Spiel sortiert nach einem eigenen Datum, das nicht immer zur Dateizeit passt (Walltest 3: Datei 19:21, Liste 17:28 Weltzeit). Anzahl bei `0x0112661C` (30); Eintrag n (0 = oben) = Namensnummer k bei `0x01126E28 + 4n`; Name bei `0x11BFCF8 + k*0x3E9` (`getLoadedMapNameForIndex` 0x0046C2E0, `daten/dekomp_kartenliste.c`). Geladen wird n = markierte Zeile + Scrollstand. (Die Strukturliste nennt `DAT_ArrayOfMapIndices` bei +0x884 = `0x01126E2C`; das Spiel liest aber Feld[n-1], also beginnt die Liste effektiv 4 Byte davor.) Aeltester Stand in der Liste = letzter Eintrag = **Tiberias 4 LUL** (Datei 12.04.2020) - nach Dateizeit ebenfalls der aelteste.
+- **Neue Lade-Pause im Modul (`{"ladepause": true}`):** haelt beim ersten Tick an, an dem die Spielzeit springt - in beide Richtungen. Anlass (Panne, opportunistisch genutzt): die erste Fassung nutzte die Tick-Pause "jetzt + 1"; die greift nur, wenn der geladene Stand SPAETER liegt als der alte. Beim Laden eines frueheren Stands waere das Spiel ungebremst weitergelaufen.
+
+| Stand | Eintrag | erster Tick nach dem Laden | Beleg |
+|---|---|---|---|
+| Walltest 4 | 1 | **18.988** | Bild `m7-02_Walltest_4_t18988.png` - Bergfried im Mauerring, rote Truppen (wie Bild vom 02.09.) |
+| M7-01 Speichertest Grumpy T1100 (Probe mit bekannter Loesung) | 0 | **1.100** = gespeicherte Spielzeit | Sprung -17.888 erkannt, sofort angehalten |
+| Waffengebaeude_test | 15 | **24.604** | anderes Gelaende (Oase, Felder, Bergfried mit Truppen); Waffenwerkstaetten im Bildausschnitt nicht eindeutig zu sehen |
+| Tiberias 4 LUL (aeltester, 2020) | 29 (Scrollstand 14, Zeile 15) | **83.339** | grosse Burg mit Wassergraben; laedt ohne Absturz |
+
+- **Gegenprobe vorher festgelegt, einmal nicht bestanden:** Fuer Walltest 4 hatte ich aus dem Handbuch 40.524 Ticks vorhergesagt - es waren 18.988. Vermutung (ungeprueft): das Handbuch hat die Zeit gemessen, nachdem das Spiel schon weitergelaufen war (dort steht, die Pause kam zu spaet). Die harte Probe lieferte dann M7-01: geladen = gespeichert = 1.100, auf den Tick.
+- **Laden ist tick-genau:** der erste Tick nach dem Laden ist die gespeicherte Spielzeit selbst (M7-01: 1.100).
+- **Beobachtung, Ursache offen:** Nach dem Anhalten kamen noch drei Tick-Aufrufe an, alle mit derselben Spielzeit - der Taktgeber laeuft kurz weiter, ohne dass die Zeit vorrueckt.
+- **Beobachtung:** Nach dem Laden von Tiberias stand das Tempo auf 20 (vorher 1000er-Bereich) - vermutlich bringt der Spielstand sein Tempo mit. Danach auf Daniels Zuschauertempo 90 gesetzt.
+- **Offen:** Live-Abnahme durch Daniel (Tiberias steht pausiert im Spiel); M7.03 = Schnappschuss nach Speichern gegen Schnappschuss nach Laden.

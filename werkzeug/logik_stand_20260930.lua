@@ -67,6 +67,9 @@ local PAUSE        = 0x1FEA054
 -- Tick-genaue Pause (30.09.2026, Selfaware-AI, Daniels Idee): { naechster, alle, bis, anzahl }
 -- Oben deklariert, weil einzelbefehl und der Taktgeber beide darauf zugreifen.
 local tickPause    = nil
+-- Lade-Pause (30.09.2026, M7.02): { letzter, nachlauf } - haelt beim ersten Tick
+-- nach einem Laden an, egal ob der geladene Stand frueher oder spaeter liegt.
+local ladePause    = nil
 
 -- Einheiten befehligen (05.09.2026). Blosses Schreiben der Ziel-Felder bewegt
 -- eine Einheit NICHT (gemessen) - der Wegplan wird in setDestinationForUnit
@@ -716,6 +719,21 @@ local function einzelbefehl(cmd)
     tickPause = { naechster = tonumber(tp.bei), alle = tonumber(tp.alle), bis = tonumber(tp.bis), anzahl = 0 }
     log(INFO, string.format("TICKPAUSE: scharf - Pause bei Tick %d%s (jetzt Tick %d).",
       tickPause.naechster, tickPause.alle and (", danach alle " .. tickPause.alle) or "", tick()))
+    return true
+  end
+
+  -- { "ladepause": true }  oder  { "ladepause": "aus" }
+  -- Merkt sich die Spielzeit und haelt an, sobald sie springt (nicht +0/+1) -
+  -- das ist der erste Tick eines geladenen Stands. Die Tick-Pause taugt dafuer
+  -- nicht: sie greift nur, wenn der geladene Stand SPAETER liegt als der alte.
+  if cmd.ladepause ~= nil then
+    if cmd.ladepause == "aus" or cmd.ladepause == false then
+      ladePause = nil
+      log(INFO, "LADEPAUSE: aus.")
+      return true
+    end
+    ladePause = { letzter = tick(), nachlauf = 0 }
+    log(INFO, string.format("LADEPAUSE: scharf (jetzt Tick %d).", ladePause.letzter))
     return true
   end
 
@@ -2103,8 +2121,29 @@ local function tickPauseTick()
   end
 end
 
+local function ladePauseTick()
+  if ladePause == nil then return end
+  local t = tick()
+  if ladePause.nachlauf > 0 then
+    -- Nach dem Sprung noch ein paar Ticks nachhalten: kommt hier noch ein Tick an,
+    -- hat das Laden die Pause wieder aufgehoben.
+    core.writeInteger(PAUSE, 1)
+    ladePause.nachlauf = ladePause.nachlauf - 1
+    log(INFO, string.format("LADEPAUSE: nachgehalten bei Tick %d.", t))
+    if ladePause.nachlauf == 0 then ladePause = nil end
+    return
+  end
+  local d = t - ladePause.letzter
+  ladePause.letzter = t
+  if d == 0 or d == 1 then return end
+  core.writeInteger(PAUSE, 1)
+  ladePause.nachlauf = 3
+  log(INFO, string.format("LADEPAUSE: Spielzeit sprang um %d auf Tick %d - angehalten.", d, t))
+end
+
 local function everyTick()
-  pcall(tickPauseTick)        -- zuerst: die Pause soll vor allem anderen greifen
+  pcall(ladePauseTick)        -- zuerst: die Pause soll vor allem anderen greifen
+  pcall(tickPauseTick)
   pcall(mauerwachtTick)
   pcall(gebaeudewachtTick)
   pcall(bauwachtTick)
