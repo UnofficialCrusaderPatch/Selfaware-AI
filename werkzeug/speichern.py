@@ -14,46 +14,39 @@ beantwortet das (gemessen). Jede gespeicherte Fassung wird mit Uhrzeit nach
 daten/spielstaende/ kopiert.
 
 Aufruf:  python speichern.py "M7-01 Speichertest Grumpy T1100"
+Als Baustein:  from speichern import speichere; pfad = speichere("M7-03 ...")
 """
-import os, re, shutil, struct, sys, time
+import os, shutil, struct, sys, time
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from befehl import sende
+from laden import befehl, peek
 
 TEXT_INDEX, LAENGEN, CURSOR, TEXTE = 0x01652740, 0x016527D0, 0x01652810, 0x01652890
 ORDNER = os.path.expandvars(r"%USERPROFILE%\Documents\Stronghold Crusader\Saves")
 SAMMLUNG = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "daten", "spielstaende")
 
-def lies(adr):
-    for z in sende({"player": 1, "peek": adr, "worte": 1}, 0.6):
-        m = re.search(r"PEEK 0x%08X: (\S+)" % adr, z)
-        if m:
-            return int(m.group(1), 16) & 0xFFFFFFFF
-    return None
-
-def main():
-    name = sys.argv[1]
+def speichere(name):
+    """Speichert unter diesem Namen; gibt den Pfad der Kopie in daten/spielstaende/ zurueck."""
     roh = name.encode("latin-1") + b"\0"
     if len(roh) > 33:
-        print("NICHT GESCHAFFT: Name zu lang (%d Zeichen, hoechstens 32)" % (len(roh) - 1)); sys.exit(1)
+        raise RuntimeError("Name zu lang (%d Zeichen, hoechstens 32)" % (len(roh) - 1))
     ziel = os.path.join(ORDNER, name + ".sav")
     vorher = os.path.getmtime(ziel) if os.path.exists(ziel) else None
 
-    print(sende({"player": 1, "optionen": 3}, 1.5))                   # Dialog oeffnen
-    idx = lies(TEXT_INDEX)
+    print(befehl({"optionen": 3}, 1.5))                               # Dialog oeffnen
+    idx = peek(TEXT_INDEX)[0]
     print("aktives Textfeld:", idx)
-    if idx is None or idx > 15:
-        print("NICHT GESCHAFFT: aktives Textfeld unbrauchbar (%s)" % idx); sys.exit(1)
+    if idx > 15:
+        raise RuntimeError("aktives Textfeld unbrauchbar (%s)" % idx)
     basis = TEXTE + idx * 250
     roh += b"\0" * (-len(roh) % 4)
     for i in range(0, len(roh), 4):                                   # Name wortweise schreiben
-        sende({"player": 1, "poke": basis + i, "wert": struct.unpack("<i", roh[i:i + 4])[0]}, 0.5)
-    laenge = len(name)
-    sende({"player": 1, "poke": LAENGEN + idx * 4, "wert": laenge}, 0.5)
-    sende({"player": 1, "poke": CURSOR + idx * 4, "wert": laenge}, 0.5)
-    print("Laenge im Feld jetzt:", lies(LAENGEN + idx * 4))
-    print(sende({"player": 1, "laden": 3}, 3.0))                      # Knopf Speichern
+        befehl({"poke": basis + i, "wert": struct.unpack("<i", roh[i:i + 4])[0]}, 0.5)
+    befehl({"poke": LAENGEN + idx * 4, "wert": len(name)}, 0.5)
+    befehl({"poke": CURSOR + idx * 4, "wert": len(name)}, 0.5)
+    print("Laenge im Feld jetzt:", peek(LAENGEN + idx * 4)[0])
+    print(befehl({"laden": 3}, 3.0))                                  # Knopf Speichern
     if vorher is not None:                                            # Name gibt es: Spiel fragt "Ueberschreiben?"
-        print(sende({"player": 1, "dialogJa": True}, 3.0))
+        print(befehl({"dialogJa": True}, 3.0))
 
     for _ in range(10):
         if os.path.exists(ziel) and os.path.getmtime(ziel) != vorher:
@@ -61,9 +54,13 @@ def main():
             kopie = os.path.join(SAMMLUNG, "%s_%s.sav" % (name, time.strftime("%Y%m%d-%H%M%S")))
             os.makedirs(SAMMLUNG, exist_ok=True)
             shutil.copy2(ziel, kopie)                                 # jede Fassung aufheben, auch beim Ueberschreiben
-            print("GESCHAFFT: %s (%d Byte), Kopie %s" % (ziel, os.path.getsize(ziel), kopie)); return
+            print("GESCHAFFT: %s (%d Byte), Kopie %s" % (ziel, os.path.getsize(ziel), kopie))
+            return kopie
         time.sleep(1)
-    print("NICHT GESCHAFFT: keine neue Datei %s nach 10 s" % ziel); sys.exit(1)
+    raise RuntimeError("keine neue Datei %s nach 10 s" % ziel)
 
 if __name__ == "__main__":
-    main()
+    try:
+        speichere(sys.argv[1])
+    except RuntimeError as e:
+        print("NICHT GESCHAFFT:", e); sys.exit(1)

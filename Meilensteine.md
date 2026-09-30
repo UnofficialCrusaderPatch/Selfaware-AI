@@ -564,8 +564,8 @@ Das Ziel ist kein wiederholbares Spiel, sondern eine KI, die **jeden Tick auf sp
 ## Naechste Kette: Spielstaende als Trainingslagen (M7, Definition offen fuer Daniel)
 
 - **M7.01** Spielstand speichern per Befehl, ohne Maus. - **Im Hintergrund belegt 30.09., 22:03** (Lauf 7), Live-Abnahme durch Daniel offen.
-- **M7.02** Spielstand laden per Befehl. - **Im Hintergrund belegt 30.09., 22:16-22:21** (Lauf 8, per Name, mit Lade-Pause), Live-Abnahme durch Daniel offen.
-- **M7.03** Gegenprobe: Schnappschuss direkt nach dem Speichern und direkt nach dem Laden - gleich bis auf das bekannte Rauschen = verlustfrei.
+- **M7.02** Spielstand laden per Befehl. - **Abgenommen von Daniel 30.09., 22:23** ("ja nehme ab"; Lauf 8).
+- **M7.03** Gegenprobe: Schnappschuss direkt nach dem Speichern und direkt nach dem Laden - gleich bis auf das bekannte Rauschen = verlustfrei. - **30.09., 23:28-23:33 gemessen (Lauf 9): so wie definiert NICHT erfuellt** - der geladene Stand ist die Welt einen Tick weiter, der Tickzaehler zeigt aber den gespeicherten Wert; wiederholbar ist das Laden dagegen (zweimal laden = gleich). Entscheidung bei Daniel, ob das fuer M7.04 reicht.
 - **M7.04** Szenario-Bibliothek: benannte Spielstaende fuer Sonderfaelle (Lord in Gefahr, Belagerung, Wirtschaftskrise); jeder Trainingslauf startet exakt dort.
 - Danach **M8** Ansicht der KI je Tick und erste Reaktions-Regel mit gemessener Reaktionszeit in Ticks.
 
@@ -629,3 +629,30 @@ Werkzeug: `werkzeug/laden.py "<Name>"` (oder `--liste`). Rezept aus dem Menue-Ha
 - **Beobachtung, Ursache offen:** Nach dem Anhalten kamen noch drei Tick-Aufrufe an, alle mit derselben Spielzeit - der Taktgeber laeuft kurz weiter, ohne dass die Zeit vorrueckt.
 - **Beobachtung:** Nach dem Laden von Tiberias stand das Tempo auf 20 (vorher 1000er-Bereich) - vermutlich bringt der Spielstand sein Tempo mit. Danach auf Daniels Zuschauertempo 90 gesetzt.
 - **Offen:** Live-Abnahme durch Daniel (Tiberias steht pausiert im Spiel); M7.03 = Schnappschuss nach Speichern gegen Schnappschuss nach Laden.
+
+### Lauf 9 - 30.09.2026, 23:21-23:34 - M7.03 Verlusttest: verliert Speichern und Wiederladen etwas?
+
+Vorlauf: Das Spiel war um 22:24 zu (Log endet 8 s nach dem Laden eines Stands mit Tick 25.194; kein Absturz in der Windows-Ereignisanzeige). Neu gestartet per `VillageStudio/werkzeug/bis_menue.py` (10 s bis Hauptmenue, Config unveraendert).
+
+**Zwei Pannen, beide opportunistisch zu Faehigkeiten gemacht:**
+- **Laden aus dem Hauptmenue:** dort reicht das Modul nur Listen (`{"befehle": [...]}`) und wenige Einzelbefehle durch - `optionen`, `laden`, `ladepause` einzeln kaemen nie an. `laden.py`/`speichern.py` schicken jetzt jeden Befehl als Liste; im Hauptmenue oeffnet `laden.py` erst die Einstellungen (`hauptmenue: 8`). Gemessen: Spielstart + Laden = Tick 1100 in rund 20 s.
+- **Wiederladen mit gleicher Spielzeit (23:36):** M7-01 ueber M7-01 geladen -> kein Zeitsprung -> die Lade-Pause merkte nichts, das Spiel lief bis Tick 1564. **Gemessen dazu:** der Taktgeber des Moduls laeuft auch in der Pause (Tick-Pause auf den aktuellen Tick loeste im pausierten Spiel aus, Spielzeit blieb stehen). Die Lade-Pause erkennt ein Laden jetzt an **Zeitsprung ODER aufgehobener Pause** (scharf gemacht wird im pausierten Spiel; Laden hebt die Pause auf). Proben: scharf im pausierten Spiel, 3 s nichts geladen -> loest nicht aus; zweimal M7-01 hintereinander -> "Laden erkannt (Pause aufgehoben) bei Tick 1100".
+
+**Der Verlusttest** (`werkzeug/verlusttest.py`, Bericht `daten/verlusttest_232853.json`): M7-01 laden, genau 100 Ticks -> A (Tick 1200); speichern als `M7-03 Verlusttest Grumpy T1200` -> A2; M7-01 laden (Speicher ueberschrieben) -> Z; M7-03 laden -> B. Je Schnappschuss 11 Bereiche, 3,6 MB.
+
+**Eingrenzung** (`werkzeug/verlust_eingrenzen.py`, Bericht `daten/verlust_eingrenzen_233135.json`):
+
+| Vergleich | abweichende Woerter (ausser Rauschen) | heisst |
+|---|---|---|
+| A gegen A2 | 0 | Speichern veraendert nichts |
+| A gegen Z (Gegenprobe) | 3.917 | der Vergleich misst etwas |
+| B gegen B2 (zweimal dieselbe Datei laden) | 1 (Kern +0xB0, 1 -> 2) | **Laden ist wiederholbar** |
+| A gegen A' (zweimal "M7-01 + 100 Ticks") | 2 (Kern +0xB4/+0xB8) | der Lauf ist wiederholbar (in diesem Fenster) |
+| **A gegen B** (vorher festgelegter Massstab) | **1.655** | **nicht verlustfrei wie definiert** |
+| B gegen A'1 (A plus ein Tick) | **60** | B ist die Welt **einen Tick weiter** |
+| B1 gegen A'2 (einen Tick spaeter) | 76 | der Versatz bleibt bei einem Tick |
+
+- **Befund:** Nach dem Laden steht der Tickzaehler auf dem gespeicherten Wert (1200), Einheiten, Gebaeude und Spieler sind aber schon einen Tick weiter (z. B. Gebaeude-Zeitstempel 1201 statt 1200). Ob das Speichern oder das Laden den Tick dazugibt, ist **offen** (A2 = A, der laufende Stand aendert sich beim Speichern also nicht).
+- **Die 60 Reststellen:** Gebaeudeliste-Kopf +0x8 (nach jedem Laden 2000, im Lauf 69) und +0x10; vier Gebaeude (Nr. 3, 5, 12, 14) mit Zaehlern um einen Schritt anders; bei allen Spielern +0x2AE4 (2 statt 1); Spieler 2/3 +0x6C, +0x2AEC, +0x2B08; ein Einheitenfeld; Kern +0x98/+0xA0/+0xB8; 23 Stellen in der Grafikschicht. **Gold, Vorraete und die uebrigen Einheitendaten: gleich.**
+- **Kern +0xA0** = Tick des letzten Ladens + 1 (A: 1101 nach Laden bei 1100; B: 1201 nach Laden bei 1200) - ein Lade-Merker, kein Spielzustand.
+- **Was das fuer das Training heisst (Vorschlag, Daniels Entscheidung):** Fuer die Szenario-Bibliothek zaehlt, dass jeder Trainingslauf aus einem Spielstand **gleich** startet - das ist belegt (B = B2). Der Startpunkt einer Lage ist dann "der geladene Stand", nicht "der Moment des Speicherns".

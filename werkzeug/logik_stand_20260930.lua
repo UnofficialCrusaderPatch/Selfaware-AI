@@ -723,17 +723,24 @@ local function einzelbefehl(cmd)
   end
 
   -- { "ladepause": true }  oder  { "ladepause": "aus" }
-  -- Merkt sich die Spielzeit und haelt an, sobald sie springt (nicht +0/+1) -
-  -- das ist der erste Tick eines geladenen Stands. Die Tick-Pause taugt dafuer
-  -- nicht: sie greift nur, wenn der geladene Stand SPAETER liegt als der alte.
+  -- Haelt beim ersten Tick eines geladenen Stands an. Zwei Erkennungszeichen:
+  --  1. die Spielzeit springt (nicht +0/+1),
+  --  2. die Pause ist aufgehoben, obwohl beim Scharfmachen pausiert war -
+  --     das Laden hebt die Pause auf (gemessen 02.09.). Zeichen 2 braucht es fuer
+  --     das Wiederladen eines Stands mit DERSELBEN Spielzeit (gemessen 30.09.,
+  --     23:36: M7-01 ueber M7-01, kein Sprung, das Spiel lief bis Tick 1564).
+  -- Der Taktgeber laeuft auch in der Pause (gemessen 30.09., 23:38), die
+  -- Spielzeit steht dabei - im pausierten Spiel loest also nichts aus.
+  -- Die Tick-Pause taugt nicht: sie greift nur, wenn der Stand SPAETER liegt.
   if cmd.ladepause ~= nil then
     if cmd.ladepause == "aus" or cmd.ladepause == false then
       ladePause = nil
       log(INFO, "LADEPAUSE: aus.")
       return true
     end
-    ladePause = { letzter = tick(), nachlauf = 0 }
-    log(INFO, string.format("LADEPAUSE: scharf (jetzt Tick %d).", ladePause.letzter))
+    ladePause = { letzter = tick(), nachlauf = 0, pausiert = (core.readInteger(PAUSE) or 0) ~= 0 }
+    log(INFO, string.format("LADEPAUSE: scharf (jetzt Tick %d, %s).", ladePause.letzter,
+      ladePause.pausiert and "pausiert" or "NICHT pausiert - nur der Zeitsprung zaehlt"))
     return true
   end
 
@@ -2135,10 +2142,12 @@ local function ladePauseTick()
   end
   local d = t - ladePause.letzter
   ladePause.letzter = t
-  if d == 0 or d == 1 then return end
+  local aufgehoben = ladePause.pausiert and (core.readInteger(PAUSE) or 0) == 0
+  if (d == 0 or d == 1) and not aufgehoben then return end
   core.writeInteger(PAUSE, 1)
   ladePause.nachlauf = 3
-  log(INFO, string.format("LADEPAUSE: Spielzeit sprang um %d auf Tick %d - angehalten.", d, t))
+  log(INFO, string.format("LADEPAUSE: Laden erkannt (%s) bei Tick %d - angehalten.",
+    (d ~= 0 and d ~= 1) and ("Spielzeit sprang um " .. d) or "Pause aufgehoben", t))
 end
 
 local function everyTick()
