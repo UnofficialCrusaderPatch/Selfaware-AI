@@ -586,3 +586,9 @@ Das Ziel ist kein wiederholbares Spiel, sondern eine KI, die **jeden Tick auf sp
 - **Naechster Schritt:** die Funktion finden, die im Spiel das Optionen-Fenster oeffnet (wie Esc), dann Speichern + Dateiname; Beweis ist allein die neue .sav-Datei im Ordner, nicht das Bild.
 
 **Korrektur zu Lauf 6 (21:58):** `{"bild": "karte"}` liefert das echte Spielbild (das `"menue"`-Bild ist im Spiel das Mischbild mit pinkem Streifen - Daniel hat es erkannt). Darauf ist zu sehen: **der Speichern-Dialog IST offen** (Liste der Spielstaende, Knoepfe Speichern/Zurueck, **leeres Namensfeld**). Die Aussage "der Dialog geht im Spiel nicht auf" war falsch - gemessen war die Ansichtsnummer, geurteilt ueber den Dialog; ein Dialog, der sich darueberlegt, aendert die Ansicht nicht. Vermutlich speicherte der Knopf nur wegen des leeren Namens nicht. **M12.01 Bild vom laufenden Spiel: `{"bild": "karte"}` - belegt** (Bild `daten/bilder/bild_karte_1.png`, nicht im Repo).
+
+**Spur zum Namensfeld (22:00, fuer M7.01):**
+- `MenuTextInputState` beginnt bei **0x011265A8** (Groesse 0x1828): markierte Zeile `0x01126624` = Feld +0x7C, Scrollstand `0x01126628` = +0x80 (aus der Lade-Messung vom 02.09. zurueckgerechnet).
+- Knopf 3 "Speichern" (`MenuItemActionHandler_SaveLoadMap_Buttons` 0x004943B0, case 3) holt den Dateinamen ueber `UserTextHandler::getCurrentText(&DAT_UserTextHandlerState)`; ist `textContentLengthArray[textArrayIndex]` leer, passiert nichts - **deshalb speicherte Lauf 6 nicht** (Dekompilat: `daten/dekomp_speichern_knopf.c`).
+- Beim Oeffnen leert das Spiel das Feld (`activateModalDialogAndClearText`, MMT_SAVE_MAP).
+- Kandidaten zum Setzen des Namens: `getCurrentText` 0x004697C0, `getTextArrayPointer` 0x004697E0, **`setTextEntryAndUpdateCursor` 0x00469800** (this, p1, p2), `resetToTextIndex` 0x00469790. Naechster Schritt: diese entschluesseln (Adresse von DAT_UserTextHandlerState + Aufbau der Textablage), Namen schreiben, Knopf 3, Beweis = neue .sav im Ordner.
