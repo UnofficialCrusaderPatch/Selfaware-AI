@@ -577,3 +577,10 @@ Das Ziel ist kein wiederholbares Spiel, sondern eine KI, die **jeden Tick auf sp
   - (b) `AutoSaveTriggered` (0x00489880) ist **kein einfacher Speicherknopf**, sondern ein netzwerk-synchronisierter Spielbefehl (verpackt Parameter, merkt je Spieler die Ankuendigung). Direkt rufen moeglich, aber riskanter.
   - Vorschlag: (a) zuerst - derselbe, schon belegte Mechanismus wie beim Laden.
 - Nebenbei: `{"kamera": [x, y]}` gibt es schon (Uebergabe 02.09.) - Kamera an eine Kartenstelle, nuetzlich fuers Zuschauen (M12).
+
+### Lauf 6 - 30.09.2026, 21:55 - erster Speicherversuch (M7.01), nicht geschafft - was wir dabei gelernt haben
+
+- Speicherordner: `Documents\Stronghold Crusader\Saves` (neuester Stand vorher: "Walltest 4", 30.08.2026).
+- Im laufenden Selbstspiel (Tick 1100): `{"optionen": 3}` (Speichern) und `{"laden": 3}` (Knopf Speichern) melden beide `ok=true` - **aber keine neue Datei**, und die **Ansichtsnummer bleibt 14** (im Spiel). **Befund:** im laufenden Spiel oeffnen die Knopf-Befehle keinen Dialog; vermutlich muss das Spieloptionen-Fenster (Esc) erst offen sein, bevor seine Knoepfe wirken. Ungeprueft.
+- Die Bilder (`{"bild": "menue"}`) zeigen das bekannte **Mischbild** (oben altes Hauptmenue, unten Statusleiste) - kein Beweis in die eine oder andere Richtung. `"blt": true` in dieser Form loeste das Umkopieren NICHT aus (Logzeile fehlt) - die richtige Form des Schalters ist zu klaeren.
+- **Naechster Schritt:** die Funktion finden, die im Spiel das Optionen-Fenster oeffnet (wie Esc), dann Speichern + Dateiname; Beweis ist allein die neue .sav-Datei im Ordner, nicht das Bild.
