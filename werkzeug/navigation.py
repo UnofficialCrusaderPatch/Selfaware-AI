@@ -29,13 +29,13 @@ FELDER = {"kameraX": 0x021AEC74, "kameraY": 0x021AEC78, "hoehe": 0x021AEC60, "br
 def felder():
     return {k: peek(a)[0] for k, a in FELDER.items()}
 
-def bild(name, flaeche="karte"):
+def bild(name, flaeche="karte", vorsilbe="m9"):
     """Speicherbild: "karte" = Kartenflaeche, "menue" = Flaeche mit der Leiste unten."""
     from PIL import Image
     befehl({"bild": flaeche}, 2.0)
     im = Image.open(os.path.join(SPIEL, "ucp", "villagestudio", "vs_%s.bmp" % flaeche)).convert("RGB")
     os.makedirs(BILDER, exist_ok=True)
-    im.save(os.path.join(BILDER, "m9_%s_%s.png" % (name, flaeche)))
+    im.save(os.path.join(BILDER, "%s_%s_%s.png" % (vorsilbe, name, flaeche)))
     return im
 
 def anteil(a, b):

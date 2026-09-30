@@ -70,6 +70,8 @@ local tickPause    = nil
 -- Lade-Pause (30.09.2026, M7.02): { letzter, nachlauf } - haelt beim ersten Tick
 -- nach einem Laden an, egal ob der geladene Stand frueher oder spaeter liegt.
 local ladePause    = nil
+-- Lord-Wacht (30.09.2026, M4.04): { lords = {nr -> {...}}, haltTreffer, haltTod, alle, naechste }
+local lordWacht    = nil
 
 -- Einheiten befehligen (05.09.2026). Blosses Schreiben der Ziel-Felder bewegt
 -- eine Einheit NICHT (gemessen) - der Wegplan wird in setDestinationForUnit
@@ -1114,6 +1116,94 @@ local function einzelbefehl(cmd)
 
   -- Einheit auf eine Kachel schicken: { "einheit_ziel": { "nr": N, "x": X, "y": Y } }
   -- Koordinaten 0..399; ungueltiges Ziel -> Rueckgabe FALSE (Gueltigkeitskarte).
+  --==========================================================================
+  -- Lords (30.09.2026, Selfaware M4.04 Lord-Duell)
+  --   { "lords": true }                     alle Lords (Typ 55): Nummer, Spieler, Ort, Leben
+  --   { "lordwacht": true, "halt": ["treffer", "tod"], "alle": 50 }   /   { "lordwacht": false }
+  -- Die Wacht prueft jeden Tick die Leben (+0x3C8) aller Lords und meldet: alle "alle"
+  -- Ticks Ort und Leben beider Lords samt Abstand, das erste Treffen (Abstand <= 3),
+  -- den ersten Treffer (mit Angreifer +0x3AE), jede 10-%-Stufe und den Tod
+  -- (Leben <= 0, Platz frei oder Typ nicht mehr 55). "halt" pausiert dort.
+  --==========================================================================
+  local function lordListe()
+    local liste = {}
+    local grenze = math.min(core.readInteger(0x01387F38) or 0, 2500)
+    -- ab Platz 1: Platz 0 ist ein Sonderplatz des Spiels (belegt, aber keine echte
+    -- Einheit) - am 01.10., 00:05 stand dort eine Kopie eines Lords (Typ 55).
+    for i = 1, grenze - 1 do
+      local b = 0x0138854C + i * 1168
+      if (core.readSmallInteger(b + 0x8C) or 0) ~= 0 and (core.readSmallInteger(b + 0x8E) or -1) == 55 then
+        -- Ort = Mikro-Position / 8 (+0xB6/+0xB8) - dasselbe System wie einheit_ziel und das Ziel
+        -- (+0xC8/+0xCA). Die Kachel (+0xD4) ist NICHT y*400+x (gemessen 01.10., 00:02).
+        table.insert(liste, { nr = i, sp = core.readSmallInteger(b + 0x96) or -1,
+          x = math.floor((core.readSmallInteger(b + 0xB6) or 0) / 8), y = math.floor((core.readSmallInteger(b + 0xB8) or 0) / 8),
+          hp = core.readInteger(b + 0x3C8) or 0, max = core.readInteger(b + 0x3CC) or 0 })
+      end
+    end
+    return liste
+  end
+
+  if cmd.lords ~= nil then
+    local liste = lordListe()
+    for _, l in ipairs(liste) do
+      log(INFO, string.format("LORD %d: Spieler %d bei (%d,%d), Leben %d von %d", l.nr, l.sp, l.x, l.y, l.hp, l.max))
+    end
+    log(INFO, string.format("LORDS: %d gefunden (Tick %d).", #liste, tick()))
+    return true
+  end
+
+  if cmd.lordwacht ~= nil then
+    if cmd.lordwacht == false then
+      lordWacht = nil
+      log(INFO, "LORDWACHT: aus.")
+      return true
+    end
+    local halt = {}
+    if type(cmd.halt) == "table" then for _, h in ipairs(cmd.halt) do halt[h] = true end
+    elseif type(cmd.halt) == "string" then halt[cmd.halt] = true end
+    -- "ziel": [x, y] - die Wacht haelt dieses Ziel fuer alle Lords fest (die KI holt ihre
+    -- Lords sonst zur Burg zurueck, gemessen 01.10., 00:02), bis sie sich treffen.
+    -- "spaeter": { "137": 20 } - dieser Lord bekommt sein Ziel erst N Ticks spaeter.
+    local ziel = (type(cmd.ziel) == "table" and #cmd.ziel == 2) and { tonumber(cmd.ziel[1]), tonumber(cmd.ziel[2]) } or nil
+    lordWacht = { lords = {}, haltTreffer = halt.treffer, haltTod = halt.tod, ziel = ziel, start = tick(),
+                  alle = tonumber(cmd.alle) or 50, naechste = tick(), getroffen = false, getroffenWo = false }
+    local n = 0
+    for _, l in ipairs(lordListe()) do
+      local spaeter = (type(cmd.spaeter) == "table" and tonumber(cmd.spaeter[tostring(l.nr)])) or 0
+      lordWacht.lords[l.nr] = { sp = l.sp, hp = l.hp, max = l.max, stufe = 10, tot = false,
+                                abTick = tick() + spaeter, gesetzt = 0, angekommen = false }
+      n = n + 1
+    end
+    log(INFO, string.format("LORDWACHT: scharf fuer %d Lords (Tick %d), halt bei%s%s%s.", n, tick(),
+      halt.treffer and " Treffer" or "", halt.tod and " Tod" or (halt.treffer and "" or " nichts"),
+      ziel and string.format(", Ziel (%d,%d) wird gehalten", ziel[1], ziel[2]) or ""))
+    return true
+  end
+
+  -- { "zielsuche": { "nr": 3, "x": 200, "y": 199, "r": 25 } } - naechstes Feld um (x,y), das
+  -- setDestinationForUnit fuer Einheit nr annimmt (Rueckgabe 1), ringweise nach aussen.
+  -- Achtung: setzt dabei das Ziel der Einheit (Probe-Befehl, danach neu laden oder neu setzen).
+  if cmd.zielsuche ~= nil then
+    local z = cmd.zielsuche
+    local nr, x0, y0, r = tonumber(z.nr), tonumber(z.x), tonumber(z.y), tonumber(z.r) or 25
+    _setDest = _setDest or core.exposeCode(ADR_SETDEST, 5, 1)
+    for ring = 0, r do
+      for dx = -ring, ring do
+        for dy = -ring, ring do
+          if math.max(math.abs(dx), math.abs(dy)) == ring then
+            local ok, rv = pcall(_setDest, UNITS_STATE, nr, x0 + dx, y0 + dy, 0)
+            if ok and rv == 1 then
+              log(INFO, string.format("ZIELSUCHE: (%d,%d) gueltig, Ring %d um (%d,%d).", x0 + dx, y0 + dy, ring, x0, y0))
+              return true
+            end
+          end
+        end
+      end
+    end
+    log(INFO, string.format("ZIELSUCHE: kein gueltiges Feld bis Ring %d um (%d,%d).", r, x0, y0))
+    return true
+  end
+
   if cmd.einheit_ziel ~= nil then
     local z = cmd.einheit_ziel
     local nr, x, y = tonumber(z.nr), tonumber(z.x), tonumber(z.y)
@@ -2198,9 +2288,83 @@ local function ladePauseTick()
     (d ~= 0 and d ~= 1) and ("Spielzeit sprang um " .. d) or "Pause aufgehoben", t))
 end
 
+local function lordWachtTick()
+  if lordWacht == nil then return end
+  local t = tick()
+  local orte = {}
+  for nr, l in pairs(lordWacht.lords) do
+    local b = 0x0138854C + nr * 1168
+    local zust = core.readSmallInteger(b + 0x8C) or 0
+    local typ = core.readSmallInteger(b + 0x8E) or -1
+    local hp = core.readInteger(b + 0x3C8) or 0
+    local x = math.floor((core.readSmallInteger(b + 0xB6) or 0) / 8)
+    local y = math.floor((core.readSmallInteger(b + 0xB8) or 0) / 8)
+    if not l.tot then table.insert(orte, { nr = nr, sp = l.sp, x = x, y = y, hp = hp }) end
+    -- Ziel festhalten, bis die Lords sich treffen
+    local z = lordWacht.ziel
+    if z and not lordWacht.getroffenWo and not l.tot and t >= l.abTick then
+      local zx, zy = core.readSmallInteger(b + 0xC8) or -1, core.readSmallInteger(b + 0xCA) or -1
+      -- Nur im laufenden Spiel und hoechstens alle 10 Ticks: das Spiel traegt das Ziel erst
+      -- beim naechsten Tick ein; in der Pause setzte die Wacht sonst in jedem Bild neu
+      -- (gemessen 01.10., 00:05: ueber 1000 Mal bei Tick 1100).
+      local laeuft = (core.readInteger(PAUSE) or 1) == 0
+      if laeuft and (zx ~= z[1] or zy ~= z[2]) and t - (l.letzterSatz or -100) >= 10 then
+        l.letzterSatz = t
+        _setDest = _setDest or core.exposeCode(ADR_SETDEST, 5, 1)
+        pcall(_setDest, UNITS_STATE, nr, z[1], z[2], 0)
+        l.gesetzt = l.gesetzt + 1
+        if l.gesetzt <= 3 or l.gesetzt % 100 == 0 then
+          log(INFO, string.format("LORDWACHT: Tick %d - Ziel fuer Lord %d gesetzt (Nr. %d, KI-Ziel war (%d,%d)).",
+            t, nr, l.gesetzt, zx, zy))
+        end
+      end
+      if not l.angekommen and math.max(math.abs(x - z[1]), math.abs(y - z[2])) <= 1 then
+        l.angekommen = true
+        log(INFO, string.format("LORDWACHT: ANKUNFT Tick %d - Lord %d (Spieler %d) bei (%d,%d), %d Ticks nach Start.",
+          t, nr, l.sp, x, y, t - lordWacht.start))
+      end
+    end
+    if hp ~= l.hp and not l.tot then
+      if not lordWacht.getroffen then
+        lordWacht.getroffen = true
+        log(INFO, string.format("LORDWACHT: ERSTER TREFFER Tick %d - Lord %d (Spieler %d) %d -> %d bei (%d,%d), Angreifer Einheit %d.",
+          t, nr, l.sp, l.hp, hp, x, y, core.readSmallInteger(b + 0x3AE) or -1))
+        if lordWacht.haltTreffer then core.writeInteger(PAUSE, 1) end
+      end
+      local stufe = (l.max > 0) and math.floor(hp * 10 / l.max) or 0
+      if stufe ~= l.stufe then
+        log(INFO, string.format("LORDWACHT: Tick %d - Lord %d (Spieler %d) Leben %d (%d Prozent).",
+          t, nr, l.sp, hp, (l.max > 0) and math.floor(hp * 100 / l.max) or 0))
+        l.stufe = stufe
+      end
+      l.hp = hp
+    end
+    if not l.tot and (hp <= 0 or zust == 0 or typ ~= 55) then
+      l.tot = true
+      log(INFO, string.format("LORDWACHT: LORD TOT Tick %d - Lord %d (Spieler %d), Leben %d, Zustand %d, Typ %d, bei (%d,%d).",
+        t, nr, l.sp, hp, zust, typ, x, y))
+      if lordWacht.haltTod then core.writeInteger(PAUSE, 1) end
+    end
+  end
+  if #orte == 2 then
+    local d = math.max(math.abs(orte[1].x - orte[2].x), math.abs(orte[1].y - orte[2].y))
+    if d <= 3 and not lordWacht.getroffenWo then
+      lordWacht.getroffenWo = true
+      log(INFO, string.format("LORDWACHT: TREFFEN Tick %d - Lord %d bei (%d,%d), Lord %d bei (%d,%d), Abstand %d.",
+        t, orte[1].nr, orte[1].x, orte[1].y, orte[2].nr, orte[2].x, orte[2].y, d))
+    end
+    if t >= lordWacht.naechste then
+      lordWacht.naechste = t + lordWacht.alle
+      log(INFO, string.format("LORDWACHT Tick %d: Lord %d (%d,%d) %d | Lord %d (%d,%d) %d | Abstand %d",
+        t, orte[1].nr, orte[1].x, orte[1].y, orte[1].hp, orte[2].nr, orte[2].x, orte[2].y, orte[2].hp, d))
+    end
+  end
+end
+
 local function everyTick()
   pcall(ladePauseTick)        -- zuerst: die Pause soll vor allem anderen greifen
   pcall(tickPauseTick)
+  pcall(lordWachtTick)
   pcall(mauerwachtTick)
   pcall(gebaeudewachtTick)
   pcall(bauwachtTick)

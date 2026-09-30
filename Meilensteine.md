@@ -45,8 +45,8 @@ Lieferung 1 (30.09.2026): Bloecke M1 Grundlagen, M2 Spiel starten, M3 Gefecht st
 | M4.01 | Die Lords im Gefecht finden | gemessen | abgenommen 30.09.2026 | - |
 | M4.02 | Lord-Tod erkennen | gemessen | abgenommen 30.09.2026 | - |
 | M4.03 | Was nach dem Lord-Tod wirklich passiert | offen | abgenommen 30.09.2026 | - |
-| M4.04 | Der einfachste echte Tod: zwei Lords laufen aufeinander zu | offen | abgenommen 30.09.2026 | - |
-| M4.05 | Den Sieger aus dem Speicher lesen | offen | abgenommen 30.09.2026 | - |
+| M4.04 | Der einfachste echte Tod: zwei Lords laufen aufeinander zu | **gemessen 01.10.** (Lauf 10), Live-Abnahme offen | abgenommen 30.09.2026 | - |
+| M4.05 | Den Sieger aus dem Speicher lesen | **gemessen 01.10., ein Fall** (Lauf 10) | abgenommen 30.09.2026 | - |
 | M4.06 | Den Endbildschirm erkennen | gemessen | abgenommen 30.09.2026 | - |
 | M4.07 | Zeitlimit: die ersten X Ticks | offen | abgenommen 30.09.2026 | - |
 | M5.01 | Was ein Tick ist und wo er steht | belegt | abgenommen 30.09.2026 | - |
@@ -677,3 +677,31 @@ Daniels Bedienung: Tab = Leiste weg; C/X = drehen; Leertaste = abflachen; Rechts
 - Das Speicherbild `{"bild": "menue"}` zeigt im Spiel nur die zuletzt gezeichnete Leiste - als Beleg fuer die Leiste taugt es nicht; das Kartenbild nach einem Kamera-Anstoss schon.
 - Die Kamerafelder 0x021AEC74/78 sind nicht dieselben Koordinaten wie im `kamera`-Befehl (Befehl (162,104) -> Felder (138,133)).
 - **Offen:** Live-Abnahme durch Daniel fuer M9.01-M9.05; Drehrichtung im Bild; ob M9.06 gebraucht wird.
+
+### Lauf 10 - 01.10.2026, 00:00-00:14 - M4.04 Lord-Duell (Daniels Auftrag: beide Lords befehligen, gleichzeitig in der Mitte treffen, kaempfen, Sieg, Schadens-Ausloeser, speichern/laden)
+
+Werkzeug `werkzeug/lordduell.py` (Mitschriften `daten/lordduell_*.txt`), neue Modulbefehle `lords`, `lordwacht`, `zielsuche`. Start immer aus `M7-01 Speichertest Grumpy T1100`.
+
+**Unterwegs gelernt (gemessen):**
+- **Ort einer Einheit = Mikro-Position / 8** (+0xB6/+0xB8) - dasselbe System wie `einheit_ziel` und das Ziel (+0xC8/+0xCA). Das Kachelfeld +0xD4 ist nicht y*400+x (so gelesen "sprang" ein Lord in 50 Ticks um 270 Felder).
+- **Die KI holt ihre Lords heim:** ein einmaliger Befehl haelt nur kurz, dann steht wieder die Burg als Ziel. Die Lord-Wacht haelt das Ziel fest (setzt nach, hoechstens alle 10 Ticks, nur im laufenden Spiel) bis zum Treffen und laesst dann los.
+- **In der Pause trug das Spiel das Ziel nicht ein** - die erste Wacht setzte deshalb ueber 21.000 Mal nach, das Spiel stand bei Tick 1106 still. Seitdem nur im laufenden Spiel.
+- **Platz 0** der Einheitenliste hielt eine Lord-Kopie (Typ 55) - kein echter Lord; die Liste beginnt jetzt bei 1.
+- **Die Kartenmitte (200,199) ist kein gueltiges Ziel** (Oase); `zielsuche` fand das naechste gueltige Feld **(194,193)**.
+- Burgen/Lords: Spieler 2 Lord 3 bei (172,113), Spieler 3 Lord 137 bei (227,284).
+
+**Gleichzeitig ankommen:** Probelaeufe - Lord 137 braucht 1.917 Ticks bis zur Mitte (Ankunft 3017), Lord 3 allein 2.277 (Ankunft 3377, Umweg um Felsen). Echter Lauf mit Lord 137 **360 Ticks spaeter**: Treffen bei Tick 3329, Lord 3 drei Felder und Lord 137 zwei Felder vor dem Ziel.
+
+**Der Kampf:**
+| Tick | Ereignis |
+|---|---|
+| 3329 | Treffen (Abstand 3) |
+| 3354 | **Erster Treffer - beide zugleich**, je 150.000 -> 149.850. Ausloeser haelt an, Bild, **gespeichert als `M4-04 Lordduell Treffer T3354`** (erste Trainingslage "Lord in Gefahr", M7.04) |
+| 3354-4353 | beide verlieren **150 Leben je Tick**, im Gleichschritt |
+| 4353 | **Lord 137 (Spieler 3) tot**; Lord 3 (Spieler 2) lebt mit **150 Leben** - Sieg um genau einen Schlag. Vermutung: Lord 3 ist im selben Tick zuerst dran (kleinere Nummer) - ungeprueft |
+| 11.259 | Ansicht 14 -> **30: Endbildschirm "Maechtigster Fuerst"** (Auswertung beider Rotkaeppchen, Grabplatte, Totenkopf mit Datum Dez. 1181) - **6.906 Ticks nach dem Tod**; warum so spaet, ist offen |
+
+- **Wiederholung aus dem Spielstand (M7.03/M7.04 angewandt):** `M4-04 Lordduell Treffer T3354` geladen, laufen lassen -> Lord 137 stirbt wieder bei **Tick 4353**, dieselben Stufen im selben Tick. Die Lage ist als Trainingsstart brauchbar.
+- **Sieger aus dem Speicher (M4.05, ein Fall):** Sieger = der Spieler, dessen Lord noch lebt (Lord 3: Zustand 2, Typ 55, Leben 150); der Platz des toten Lords wird neu vergeben (spaeter Typ 44).
+- **Beweisbilder** (nicht im Repo, `daten/bilder/`): `m4-04_BEWEIS_lords_kaempfen_t4023.png` (+ `_nah`), `m4-04_BEWEIS_endbildschirm_maechtigster_fuerst.png`.
+- **Offen:** Live-Abnahme durch Daniel; warum der Endbildschirm erst 6.906 Ticks nach dem Tod kommt (M4.03); ob die Reihenfolge der Einheitennummern den Gleichstand entscheidet.

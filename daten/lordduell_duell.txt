@@ -1,0 +1,79 @@
+Eintrag 1 'M7-01 Speichertest Grumpy T1100' -> Scrollstand 0, Zeile 1; Spielzeit vorher 4434
+['[villagestudio]: LADEPAUSE: scharf (jetzt Tick 4434, pausiert).']
+['[villagestudio]: POKE 0x01126628: 0 -> 0', '[villagestudio]: POKE 0x01126624: 0 -> 1', '[villagestudio]: LADEN: Knopf 2 gedrueckt, ok=true', '[villagestudio]: logik: 3 von 3 Befehlen ausgefuehrt, 0 schon erledigt.', '[villagestudio]: LADEPAUSE: Laden erkannt (Spielzeit sprang um -3334) bei Tick 1100 - angehalten.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 1100.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 1100.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 1100.']
+Spielzeit nachher 1100 / 1100, Pause 1
+['[villagestudio]: LORD 3: Spieler 2 bei (172,113), Leben 150000 von 150000', '[villagestudio]: LORD 137: Spieler 3 bei (227,284), Leben 150000 von 150000', '[villagestudio]: LORDS: 2 gefunden (Tick 1100).']
+['[villagestudio]: LORDWACHT: scharf fuer 2 Lords (Tick 1100), halt bei Treffer Tod, Ziel (194,193) wird gehalten.', '[villagestudio]: LORDWACHT Tick 1100: Lord 3 (172,113) 150000 | Lord 137 (227,284) 150000 | Abstand 171']
+    [villagestudio]: LORDWACHT: scharf fuer 2 Lords (Tick 1100), halt bei Treffer Tod, Ziel (194,193) wird gehalten.
+    [villagestudio]: LORDWACHT Tick 1100: Lord 3 (172,113) 150000 | Lord 137 (227,284) 150000 | Abstand 171
+    [villagestudio]: TEMPO: 1000 -> 300 (Ticks je Sekunde = Tempowert).
+    [villagestudio]: LORDWACHT: Tick 1101 - Ziel fuer Lord 3 gesetzt (Nr. 1, KI-Ziel war (172,113)).
+    [villagestudio]: LORDWACHT: Tick 1173 - Ziel fuer Lord 3 gesetzt (Nr. 2, KI-Ziel war (172,108)).
+    [villagestudio]: LORDWACHT Tick 1200: Lord 3 (171,109) 150000 | Lord 137 (227,284) 150000 | Abstand 175
+    [villagestudio]: LORDWACHT Tick 1300: Lord 3 (167,109) 150000 | Lord 137 (227,284) 150000 | Abstand 175
+    [villagestudio]: LORDWACHT Tick 1400: Lord 3 (163,111) 150000 | Lord 137 (227,284) 150000 | Abstand 173
+    [villagestudio]: LORDWACHT: Tick 1460 - Ziel fuer Lord 137 gesetzt (Nr. 1, KI-Ziel war (227,284)).
+    [villagestudio]: LORDWACHT Tick 1500: Lord 3 (165,113) 150000 | Lord 137 (227,286) 150000 | Abstand 173
+    [villagestudio]: LORDWACHT: Tick 1583 - Ziel fuer Lord 137 gesetzt (Nr. 2, KI-Ziel war (227,289)).
+    [villagestudio]: LORDWACHT: Tick 1597 - Ziel fuer Lord 137 gesetzt (Nr. 3, KI-Ziel war (230,287)).
+    [villagestudio]: LORDWACHT Tick 1600: Lord 3 (166,117) 150000 | Lord 137 (226,290) 150000 | Abstand 173
+    [villagestudio]: LORDWACHT Tick 1700: Lord 3 (166,122) 150000 | Lord 137 (220,290) 150000 | Abstand 168
+    [villagestudio]: LORDWACHT Tick 1800: Lord 3 (166,126) 150000 | Lord 137 (218,285) 150000 | Abstand 159
+    [villagestudio]: LORDWACHT Tick 1900: Lord 3 (166,130) 150000 | Lord 137 (217,279) 150000 | Abstand 149
+    [villagestudio]: LORDWACHT Tick 2000: Lord 3 (166,134) 150000 | Lord 137 (217,273) 150000 | Abstand 139
+    [villagestudio]: LORDWACHT Tick 2100: Lord 3 (166,138) 150000 | Lord 137 (217,267) 150000 | Abstand 129
+    [villagestudio]: LORDWACHT Tick 2200: Lord 3 (166,142) 150000 | Lord 137 (217,260) 150000 | Abstand 118
+    [villagestudio]: LORDWACHT Tick 2300: Lord 3 (166,147) 150000 | Lord 137 (217,254) 150000 | Abstand 107
+    [villagestudio]: LORDWACHT Tick 2400: Lord 3 (166,151) 150000 | Lord 137 (217,248) 150000 | Abstand 97
+    [villagestudio]: LORDWACHT Tick 2500: Lord 3 (166,155) 150000 | Lord 137 (217,242) 150000 | Abstand 87
+    [villagestudio]: LORDWACHT Tick 2600: Lord 3 (166,159) 150000 | Lord 137 (217,235) 150000 | Abstand 76
+    [villagestudio]: LORDWACHT Tick 2700: Lord 3 (166,163) 150000 | Lord 137 (214,229) 150000 | Abstand 66
+    [villagestudio]: LORDWACHT Tick 2800: Lord 3 (169,167) 150000 | Lord 137 (208,223) 150000 | Abstand 56
+    [villagestudio]: LORDWACHT Tick 2900: Lord 3 (174,172) 150000 | Lord 137 (202,218) 150000 | Abstand 46
+    [villagestudio]: LORDWACHT Tick 3000: Lord 3 (178,176) 150000 | Lord 137 (195,211) 150000 | Abstand 35
+    [villagestudio]: LORDWACHT Tick 3100: Lord 3 (182,180) 150000 | Lord 137 (192,208) 150000 | Abstand 28
+    [villagestudio]: LORDWACHT Tick 3200: Lord 3 (186,184) 150000 | Lord 137 (188,201) 150000 | Abstand 17
+    [villagestudio]: LORDWACHT Tick 3300: Lord 3 (190,188) 150000 | Lord 137 (190,195) 150000 | Abstand 7
+    [villagestudio]: LORDWACHT: TREFFEN Tick 3329 - Lord 3 bei (191,190), Lord 137 bei (192,193), Abstand 3.
+    [villagestudio]: LORDWACHT: ERSTER TREFFER Tick 3354 - Lord 3 (Spieler 2) 150000 -> 149850 bei (192,191), Angreifer Einheit 0.
+    [villagestudio]: LORDWACHT: Tick 3354 - Lord 3 (Spieler 2) Leben 149850 (99 Prozent).
+    [villagestudio]: LORDWACHT: Tick 3354 - Lord 137 (Spieler 3) Leben 149850 (99 Prozent).
+Halt bei Tick 3354 (Pause 1)
+Ankunft (Lord -> Tick): {}
+['[villagestudio]: OPTIONEN: Knopf 3 gedrueckt, ok=true']
+aktives Textfeld: 2
+Laenge im Feld jetzt: 29
+['[villagestudio]: LADEN: Knopf 3 gedrueckt, ok=true']
+GESCHAFFT: C:\Users\danie\Documents\Stronghold Crusader\Saves\M4-04 Lordduell Treffer T3354.sav (1078629 Byte), Kopie C:\Users\danie\Documents\PC_Affe\Games\Stronghold_Crusader\Stronghold Crusader Modding\Tools\Selfaware-AI\werkzeug\..\daten\spielstaende\M4-04 Lordduell Treffer T3354_20261001-001018.sav
+    [villagestudio]: TEMPO: 300 -> 1000 (Ticks je Sekunde = Tempowert).
+    [villagestudio]: LORDWACHT Tick 3400: Lord 3 (192,191) 142950 | Lord 137 (194,193) 142950 | Abstand 2
+    [villagestudio]: LORDWACHT: Tick 3454 - Lord 3 (Spieler 2) Leben 134850 (89 Prozent).
+    [villagestudio]: LORDWACHT: Tick 3454 - Lord 137 (Spieler 3) Leben 134850 (89 Prozent).
+    [villagestudio]: LORDWACHT Tick 3500: Lord 3 (192,191) 127950 | Lord 137 (194,193) 127950 | Abstand 2
+    [villagestudio]: LORDWACHT: Tick 3554 - Lord 3 (Spieler 2) Leben 119850 (79 Prozent).
+    [villagestudio]: LORDWACHT: Tick 3554 - Lord 137 (Spieler 3) Leben 119850 (79 Prozent).
+    [villagestudio]: LORDWACHT Tick 3600: Lord 3 (192,191) 112950 | Lord 137 (194,193) 112950 | Abstand 2
+    [villagestudio]: LORDWACHT: Tick 3654 - Lord 3 (Spieler 2) Leben 104850 (69 Prozent).
+    [villagestudio]: LORDWACHT: Tick 3654 - Lord 137 (Spieler 3) Leben 104850 (69 Prozent).
+    [villagestudio]: LORDWACHT Tick 3700: Lord 3 (192,191) 97950 | Lord 137 (194,193) 97950 | Abstand 2
+    [villagestudio]: LORDWACHT: Tick 3754 - Lord 3 (Spieler 2) Leben 89850 (59 Prozent).
+    [villagestudio]: LORDWACHT: Tick 3754 - Lord 137 (Spieler 3) Leben 89850 (59 Prozent).
+    [villagestudio]: LORDWACHT Tick 3800: Lord 3 (192,191) 82950 | Lord 137 (194,193) 82950 | Abstand 2
+    [villagestudio]: LORDWACHT: Tick 3854 - Lord 3 (Spieler 2) Leben 74850 (49 Prozent).
+    [villagestudio]: LORDWACHT: Tick 3854 - Lord 137 (Spieler 3) Leben 74850 (49 Prozent).
+    [villagestudio]: LORDWACHT Tick 3900: Lord 3 (192,191) 67950 | Lord 137 (194,193) 67950 | Abstand 2
+    [villagestudio]: LORDWACHT: Tick 3954 - Lord 3 (Spieler 2) Leben 59850 (39 Prozent).
+    [villagestudio]: LORDWACHT: Tick 3954 - Lord 137 (Spieler 3) Leben 59850 (39 Prozent).
+    [villagestudio]: LORDWACHT Tick 4000: Lord 3 (192,191) 52950 | Lord 137 (194,193) 52950 | Abstand 2
+    [villagestudio]: LORDWACHT: Tick 4054 - Lord 3 (Spieler 2) Leben 44850 (29 Prozent).
+    [villagestudio]: LORDWACHT: Tick 4054 - Lord 137 (Spieler 3) Leben 44850 (29 Prozent).
+    [villagestudio]: LORDWACHT Tick 4100: Lord 3 (192,191) 37950 | Lord 137 (194,193) 37950 | Abstand 2
+    [villagestudio]: LORDWACHT: Tick 4154 - Lord 3 (Spieler 2) Leben 29850 (19 Prozent).
+    [villagestudio]: LORDWACHT: Tick 4154 - Lord 137 (Spieler 3) Leben 29850 (19 Prozent).
+    [villagestudio]: LORDWACHT Tick 4200: Lord 3 (192,191) 22950 | Lord 137 (194,193) 22950 | Abstand 2
+    [villagestudio]: LORDWACHT: Tick 4254 - Lord 3 (Spieler 2) Leben 14850 (9 Prozent).
+    [villagestudio]: LORDWACHT: Tick 4254 - Lord 137 (Spieler 3) Leben 14850 (9 Prozent).
+    [villagestudio]: LORDWACHT Tick 4300: Lord 3 (192,191) 7950 | Lord 137 (194,193) 7950 | Abstand 2
+    [villagestudio]: LORDWACHT: LORD TOT Tick 4353 - Lord 137 (Spieler 3), Leben 0, Zustand 2, Typ 55, bei (194,193).
+Tod bei Tick 4353; Ansicht 14
+Ansicht wechselt 14 -> 30 bei Tick 11259

@@ -1,0 +1,43 @@
+Eintrag 1 'M7-01 Speichertest Grumpy T1100' -> Scrollstand 0, Zeile 1; Spielzeit vorher 1106
+['[villagestudio]: LADEPAUSE: scharf (jetzt Tick 1106, pausiert).']
+['[villagestudio]: POKE 0x01126628: 0 -> 0', '[villagestudio]: POKE 0x01126624: 0 -> 1', '[villagestudio]: LADEN: Knopf 2 gedrueckt, ok=true', '[villagestudio]: logik: 3 von 3 Befehlen ausgefuehrt, 0 schon erledigt.', '[villagestudio]: LADEPAUSE: Laden erkannt (Spielzeit sprang um -6) bei Tick 1100 - angehalten.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 1100.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 1100.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 1100.']
+Spielzeit nachher 1100 / 1100, Pause 1
+['[villagestudio]: LORD 3: Spieler 2 bei (172,113), Leben 150000 von 150000', '[villagestudio]: LORD 137: Spieler 3 bei (227,284), Leben 150000 von 150000', '[villagestudio]: LORDS: 2 gefunden (Tick 1100).']
+['[villagestudio]: LORDWACHT: scharf fuer 2 Lords (Tick 1100), halt bei Treffer Tod, Ziel (194,193) wird gehalten.', '[villagestudio]: LORDWACHT Tick 1100: Lord 3 (172,113) 150000 | Lord 137 (227,284) 150000 | Abstand 171']
+    [villagestudio]: LORDWACHT: scharf fuer 2 Lords (Tick 1100), halt bei Treffer Tod, Ziel (194,193) wird gehalten.
+    [villagestudio]: LORDWACHT Tick 1100: Lord 3 (172,113) 150000 | Lord 137 (227,284) 150000 | Abstand 171
+    [villagestudio]: TEMPO: 1000 -> 1000 (Ticks je Sekunde = Tempowert).
+    [villagestudio]: LORDWACHT: Tick 1101 - Ziel fuer Lord 3 gesetzt (Nr. 1, KI-Ziel war (172,113)).
+    [villagestudio]: LORDWACHT: Tick 1101 - Ziel fuer Lord 137 gesetzt (Nr. 1, KI-Ziel war (227,284)).
+    [villagestudio]: LORDWACHT: Tick 1173 - Ziel fuer Lord 3 gesetzt (Nr. 2, KI-Ziel war (172,108)).
+    [villagestudio]: LORDWACHT Tick 1200: Lord 3 (171,109) 150000 | Lord 137 (227,288) 150000 | Abstand 179
+    [villagestudio]: LORDWACHT: Tick 1223 - Ziel fuer Lord 137 gesetzt (Nr. 2, KI-Ziel war (227,289)).
+    [villagestudio]: LORDWACHT: Tick 1237 - Ziel fuer Lord 137 gesetzt (Nr. 3, KI-Ziel war (230,287)).
+    [villagestudio]: LORDWACHT Tick 1300: Lord 3 (167,109) 150000 | Lord 137 (230,290) 150000 | Abstand 181
+    [villagestudio]: LORDWACHT Tick 1400: Lord 3 (163,111) 150000 | Lord 137 (236,288) 150000 | Abstand 177
+    [villagestudio]: LORDWACHT Tick 1500: Lord 3 (165,113) 150000 | Lord 137 (238,284) 150000 | Abstand 171
+    [villagestudio]: LORDWACHT Tick 1600: Lord 3 (166,117) 150000 | Lord 137 (238,278) 150000 | Abstand 161
+    [villagestudio]: LORDWACHT Tick 1700: Lord 3 (166,122) 150000 | Lord 137 (238,271) 150000 | Abstand 149
+    [villagestudio]: LORDWACHT Tick 1800: Lord 3 (166,126) 150000 | Lord 137 (238,265) 150000 | Abstand 139
+    [villagestudio]: LORDWACHT Tick 1900: Lord 3 (166,130) 150000 | Lord 137 (238,259) 150000 | Abstand 129
+    [villagestudio]: LORDWACHT Tick 2000: Lord 3 (166,134) 150000 | Lord 137 (238,253) 150000 | Abstand 119
+    [villagestudio]: LORDWACHT Tick 2100: Lord 3 (166,138) 150000 | Lord 137 (231,246) 150000 | Abstand 108
+    [villagestudio]: LORDWACHT Tick 2200: Lord 3 (166,142) 150000 | Lord 137 (225,240) 150000 | Abstand 98
+    [villagestudio]: LORDWACHT Tick 2300: Lord 3 (166,147) 150000 | Lord 137 (219,234) 150000 | Abstand 87
+    [villagestudio]: LORDWACHT Tick 2400: Lord 3 (166,151) 150000 | Lord 137 (213,228) 150000 | Abstand 77
+    [villagestudio]: LORDWACHT Tick 2500: Lord 3 (166,155) 150000 | Lord 137 (206,221) 150000 | Abstand 66
+    [villagestudio]: LORDWACHT Tick 2600: Lord 3 (166,159) 150000 | Lord 137 (200,216) 150000 | Abstand 57
+    [villagestudio]: LORDWACHT Tick 2700: Lord 3 (166,163) 150000 | Lord 137 (194,210) 150000 | Abstand 47
+    [villagestudio]: LORDWACHT Tick 2800: Lord 3 (169,167) 150000 | Lord 137 (190,206) 150000 | Abstand 39
+    [villagestudio]: LORDWACHT Tick 2900: Lord 3 (174,172) 150000 | Lord 137 (188,200) 150000 | Abstand 28
+    [villagestudio]: LORDWACHT Tick 3000: Lord 3 (178,176) 150000 | Lord 137 (191,194) 150000 | Abstand 18
+    [villagestudio]: LORDWACHT: ANKUNFT Tick 3017 - Lord 137 (Spieler 3) bei (193,193), 1917 Ticks nach Start.
+    [villagestudio]: LORDWACHT Tick 3100: Lord 3 (182,180) 150000 | Lord 137 (194,193) 150000 | Abstand 13
+    [villagestudio]: LORDWACHT Tick 3200: Lord 3 (186,184) 150000 | Lord 137 (194,193) 150000 | Abstand 9
+    [villagestudio]: LORDWACHT Tick 3300: Lord 3 (190,188) 150000 | Lord 137 (194,193) 150000 | Abstand 5
+    [villagestudio]: LORDWACHT: TREFFEN Tick 3329 - Lord 3 bei (191,190), Lord 137 bei (194,193), Abstand 3.
+    [villagestudio]: LORDWACHT: ERSTER TREFFER Tick 3354 - Lord 3 (Spieler 2) 150000 -> 149850 bei (192,191), Angreifer Einheit 0.
+    [villagestudio]: LORDWACHT: Tick 3354 - Lord 3 (Spieler 2) Leben 149850 (99 ).
+    [villagestudio]: LORDWACHT: Tick 3354 - Lord 137 (Spieler 3) Leben 149850 (99 ).
+Halt bei Tick 3354 (Pause 1)
+Ankunft (Tick -> Lord): {'3017': 137}
