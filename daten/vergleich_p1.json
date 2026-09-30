@@ -1,0 +1,6571 @@
+{
+ "a": "p1a",
+ "b": "p1b",
+ "tick_a": 28058,
+ "tick_b": 28160,
+ "bereiche": {
+  "aiv": {
+   "worte": 63127,
+   "geaendert": 676,
+   "felder": [
+    {
+     "art": "Feld",
+     "stelle": "+0x14",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:558->560, KI-Slot2:559->561"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x100",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11862277->11863045, KI-Slot2:11862021->11862789"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x10C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11862533->11862021, KI-Slot2:11862277->11863045"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x118",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11862789->11862277, KI-Slot2:11862533->11862021"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x124",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11928581->11928069, KI-Slot2:11928325->11927813"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x130",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11993093->11993861, KI-Slot2:11994117->11993605"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x13C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12058885->12059653, KI-Slot2:12058629->12059397"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x148",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11862533->11862021, KI-Slot2:11862277->11863045"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x154",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11862789->11862277, KI-Slot2:11862533->11862021"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x160",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11863045->11862533, KI-Slot2:11862789->11862277"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x16C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11927557->11928325, KI-Slot2:11928581->11928069"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x178",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11993349->11994117, KI-Slot2:11993093->11993861"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x184",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059141->12058629, KI-Slot2:12058885->12059653"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x190",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059397->12058885, KI-Slot2:12059141->12058629"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x19C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059653->12059141, KI-Slot2:12059397->12058885"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1A8",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12058629->12059397, KI-Slot2:12059653->12059141"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1B4",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12058885->12059653, KI-Slot2:12058629->12059397"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1C0",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11862533->11862021, KI-Slot2:11862277->11863045"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1CC",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11928325->11927813, KI-Slot2:11928069->11927557"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1D8",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11994117->11993605, KI-Slot2:11993861->11993349"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1E4",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12058629->12059397, KI-Slot2:12059653->12059141"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1F0",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11862277->11863045, KI-Slot2:11862021->11862789"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1FC",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11928069->11927557, KI-Slot2:11927813->11928581"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x208",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11993861->11993349, KI-Slot2:11993605->11993093"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x214",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059653->12059141, KI-Slot2:12059397->12058885"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x268",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12124933->12124421, KI-Slot2:12124933->12124421"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x274",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059653->12059141, KI-Slot2:12059653->12059141"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x280",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12058629->12059397, KI-Slot2:12058629->12059397"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x28C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12058885->12059653, KI-Slot2:12058885->12059653"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x298",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11993605->11993093, KI-Slot2:11993605->11993093"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2A4",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059397->12058885, KI-Slot2:12059397->12058885"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2B0",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059653->12059141, KI-Slot2:12059653->12059141"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2BC",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12058629->12059397, KI-Slot2:12058629->12059397"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2C8",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12058885->12059653, KI-Slot2:12058885->12059653"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2D4",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11993605->11993093, KI-Slot2:11993605->11993093"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2E0",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059397->12058885, KI-Slot2:12059397->12058885"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2EC",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059653->12059141, KI-Slot2:12059653->12059141"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2F8",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11993093->11993861, KI-Slot2:11993093->11993861"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x304",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12058885->12059653, KI-Slot2:12058885->12059653"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x310",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059141->12058629, KI-Slot2:12059141->12058629"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x31C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059397->12058885, KI-Slot2:12059397->12058885"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x328",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059653->12059141, KI-Slot2:12059653->12059141"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x334",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11993093->11993861, KI-Slot2:11993093->11993861"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x340",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12058885->12059653, KI-Slot2:12058885->12059653"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x370",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:1641987->1641475, KI-Slot2:1640195->1639683"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x37C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11862277->11863045, KI-Slot2:11862277->11863045"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x388",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11928069->11927557, KI-Slot2:11928069->11927557"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x394",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11993861->11993349, KI-Slot2:11993861->11993349"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x3A0",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059653->12059141, KI-Slot2:12059653->12059141"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x3AC",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:1641987->1641475, KI-Slot2:1640195->1639683"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x3B8",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11862277->11863045, KI-Slot2:11862277->11863045"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x3C4",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11928069->11927557, KI-Slot2:11928069->11927557"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x3D0",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11993861->11993349, KI-Slot2:11993861->11993349"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x3DC",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059653->12059141, KI-Slot2:12059653->12059141"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x3E8",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189701->12190469, KI-Slot2:12189701->12190469"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x3F4",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189957->12190725, KI-Slot2:12189957->12190725"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x400",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190213->12189701, KI-Slot2:12190213->12189701"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x40C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190469->12189957, KI-Slot2:12190469->12189957"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x418",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190725->12190213, KI-Slot2:12190725->12190213"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x424",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189701->12190469, KI-Slot2:12189701->12190469"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x430",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189957->12190725, KI-Slot2:12189957->12190725"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x43C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190213->12189701, KI-Slot2:12190213->12189701"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x448",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190469->12189957, KI-Slot2:12190469->12189957"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x454",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190725->12190213, KI-Slot2:12190725->12190213"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x460",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189701->12190469, KI-Slot2:12189701->12190469"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x46C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189957->12190725, KI-Slot2:12189957->12190725"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x478",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190213->12189701, KI-Slot2:12190213->12189701"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x484",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190469->12189957, KI-Slot2:12190469->12189957"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x490",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190725->12190213, KI-Slot2:12190725->12190213"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x49C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189701->12190469, KI-Slot2:12189701->12190469"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x4A8",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189957->12190725, KI-Slot2:12189957->12190725"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x4B4",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190213->12189701, KI-Slot2:12190213->12189701"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x4E4",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189957->12190725, KI-Slot2:12189957->12190725"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x4F0",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190213->12189701, KI-Slot2:12190213->12189701"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x4FC",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190469->12189957, KI-Slot2:12190469->12189957"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x508",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190725->12190213, KI-Slot2:12190725->12190213"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x514",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189701->12190469, KI-Slot2:12189701->12190469"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x520",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189957->12190725, KI-Slot2:12189957->12190725"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x52C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190213->12189701, KI-Slot2:12190213->12189701"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x538",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190469->12189957, KI-Slot2:12190469->12189957"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x544",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11863045->11862533, KI-Slot2:11863045->11862533"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x550",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11927557->11928325, KI-Slot2:11927557->11928325"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x55C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11993349->11994117, KI-Slot2:11993349->11994117"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x568",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059141->12058629, KI-Slot2:12059141->12058629"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x574",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059397->12058885, KI-Slot2:12059397->12058885"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x580",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059653->12059141, KI-Slot2:12059653->12059141"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x58C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:1641987->1641475, KI-Slot2:1640195->1639683"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x598",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11862277->11863045, KI-Slot2:11862277->11863045"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x5A4",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11928069->11927557, KI-Slot2:11928069->11927557"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x5B0",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11993861->11993349, KI-Slot2:11993861->11993349"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x5BC",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059653->12059141, KI-Slot2:12059653->12059141"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x5D4",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:1641987->1641475, KI-Slot2:1640195->1639683"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x5E0",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11863045->11862533, KI-Slot2:11862533->11862021"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x5EC",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11928581->11928069, KI-Slot2:11928325->11927813"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x5F8",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11994117->11993605, KI-Slot2:11994117->11993605"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x604",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12058629->12059397, KI-Slot2:12058629->12059397"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x61C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059141->12058629, KI-Slot2:12059141->12058629"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x628",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059397->12058885, KI-Slot2:12059397->12058885"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x634",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059653->12059141, KI-Slot2:12059653->12059141"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x640",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12058629->12059397, KI-Slot2:12058629->12059397"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x6B8",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:3018755->3018243, KI-Slot2:3017475->3016963"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x6C4",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:3018755->3018243, KI-Slot2:3017475->3016963"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x6D0",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:3018755->3018243, KI-Slot2:3017475->3016963"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x6DC",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:3018755->3018243, KI-Slot2:3017475->3016963"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x6E8",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:3018755->3018243, KI-Slot2:3017475->3016963"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x6F4",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:3018755->3018243, KI-Slot2:3017475->3016963"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x700",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:3018755->3018243, KI-Slot2:3017475->3016963"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x70C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:3018755->3018243, KI-Slot2:3017731->3017219"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x718",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:3018755->3018243, KI-Slot2:3017987->3017475"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x724",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:3018755->3018243, KI-Slot2:3018243->3017731"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x730",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:3018755->3018243, KI-Slot2:3018499->3017987"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x73C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:3018755->3018243, KI-Slot2:3018755->3018243"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x748",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:1708035->1707523, KI-Slot2:1708291->1707779"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x754",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:1708035->1707523, KI-Slot2:1708547->1708035"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x76C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:1642499->1641987, KI-Slot2:1643523->1643011"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x778",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:1642499->1641987, KI-Slot2:1638403->1643267"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x79C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:1642499->1641987, KI-Slot2:1639683->1639171"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x7A8",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:1642499->1641987, KI-Slot2:1639939->1639427"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x7B4",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059397->12058885, KI-Slot2:12059653->12059141"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x7C0",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059653->12059141, KI-Slot2:12058629->12059397"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x7CC",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12058629->12059397, KI-Slot2:12058885->12059653"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x7D8",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11993349->11994117, KI-Slot2:11993605->11993093"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x7E4",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059141->12058629, KI-Slot2:12059397->12058885"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x7F0",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059397->12058885, KI-Slot2:12059653->12059141"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x7FC",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059653->12059141, KI-Slot2:12058629->12059397"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x808",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11993093->11993861, KI-Slot2:11993349->11994117"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x814",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12058885->12059653, KI-Slot2:12059141->12058629"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x820",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059141->12058629, KI-Slot2:12059397->12058885"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x82C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11993861->11993349, KI-Slot2:11994117->11993605"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x838",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:3018755->3018243, KI-Slot2:3019267->3018755"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x844",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:3019011->3018499, KI-Slot2:3019523->3019011"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x850",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:3019267->3018755, KI-Slot2:3019779->3019267"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x9C4",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059653->12059141, KI-Slot2:12058629->12059397"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x9D0",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12058629->12059397, KI-Slot2:12058885->12059653"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x9DC",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12058885->12059653, KI-Slot2:12059141->12058629"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x9E8",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11993605->11993093, KI-Slot2:11993861->11993349"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x9F4",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059397->12058885, KI-Slot2:12059653->12059141"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xA00",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059653->12059141, KI-Slot2:12058629->12059397"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xA0C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12058629->12059397, KI-Slot2:12058885->12059653"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xA18",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11993349->11994117, KI-Slot2:11993605->11993093"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xA24",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059141->12058629, KI-Slot2:12059397->12058885"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xA30",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059397->12058885, KI-Slot2:12059653->12059141"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xA3C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059653->12059141, KI-Slot2:12058629->12059397"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xA48",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11993093->11993861, KI-Slot2:11993349->11994117"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xA54",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12058885->12059653, KI-Slot2:12059141->12058629"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xA60",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059141->12058629, KI-Slot2:12059397->12058885"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xA6C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059397->12058885, KI-Slot2:12059653->12059141"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xA78",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11994117->11993605, KI-Slot2:11993093->11993861"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xA84",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12058629->12059397, KI-Slot2:12058885->12059653"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xA90",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12058885->12059653, KI-Slot2:12059141->12058629"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xA9C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059141->12058629, KI-Slot2:12059397->12058885"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xAA8",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11993861->11993349, KI-Slot2:11994117->11993605"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xAB4",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059653->12059141, KI-Slot2:12058629->12059397"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xAC0",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12058629->12059397, KI-Slot2:12058885->12059653"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xACC",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12058885->12059653, KI-Slot2:12059141->12058629"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xAD8",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11993605->11993093, KI-Slot2:11993861->11993349"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xAE4",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12124933->12124421, KI-Slot2:12125189->12124677"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xAF0",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059653->12059141, KI-Slot2:12058629->12059397"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xAFC",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12058629->12059397, KI-Slot2:12058885->12059653"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xB08",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12058885->12059653, KI-Slot2:12059141->12058629"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xB14",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059141->12058629, KI-Slot2:12059397->12058885"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xB20",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11993861->11993349, KI-Slot2:11994117->11993605"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xB2C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059653->12059141, KI-Slot2:12058629->12059397"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xB38",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12058629->12059397, KI-Slot2:12058885->12059653"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xB44",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12058885->12059653, KI-Slot2:12059141->12058629"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xB50",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11993605->11993093, KI-Slot2:11993861->11993349"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xB5C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059397->12058885, KI-Slot2:12059653->12059141"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xB68",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059653->12059141, KI-Slot2:12058629->12059397"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xB74",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12058629->12059397, KI-Slot2:12058885->12059653"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xB80",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11993349->11994117, KI-Slot2:11993605->11993093"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xB8C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059141->12058629, KI-Slot2:12059397->12058885"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xB98",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059397->12058885, KI-Slot2:12059653->12059141"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xBA4",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059653->12059141, KI-Slot2:12058629->12059397"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xBB0",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11993093->11993861, KI-Slot2:11993349->11994117"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xBBC",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12058885->12059653, KI-Slot2:12059141->12058629"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xBC8",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059141->12058629, KI-Slot2:12059397->12058885"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xBD4",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059397->12058885, KI-Slot2:12058629->12059397"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xBE0",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11994117->11993605, KI-Slot2:11993349->11994117"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xBEC",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12058629->12059397, KI-Slot2:12058885->12059653"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xBF8",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12058885->12059653, KI-Slot2:12059141->12058629"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xC04",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059141->12058629, KI-Slot2:12059397->12058885"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xC10",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11993861->11993349, KI-Slot2:11994117->11993605"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xC1C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059653->12059141, KI-Slot2:12058629->12059397"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xC28",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12058629->12059397, KI-Slot2:12058885->12059653"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xC34",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12058885->12059653, KI-Slot2:12059141->12058629"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xC40",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11993605->11993093, KI-Slot2:11993861->11993349"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xC4C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059397->12058885, KI-Slot2:12059653->12059141"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xC58",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11994117->11993605, KI-Slot2:11993093->11993861"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xC64",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12058629->12059397, KI-Slot2:12058885->12059653"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xC70",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12058885->12059653, KI-Slot2:12059141->12058629"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xC7C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059141->12058629, KI-Slot2:12059397->12058885"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xC88",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11993861->11993349, KI-Slot2:11994117->11993605"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xC94",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059653->12059141, KI-Slot2:12058629->12059397"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xCA0",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12058629->12059397, KI-Slot2:12058885->12059653"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xCAC",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12058885->12059653, KI-Slot2:12059141->12058629"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xCB8",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190213->12189701, KI-Slot2:12190469->12189957"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xCC4",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190469->12189957, KI-Slot2:12190725->12190213"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xCD0",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190725->12190213, KI-Slot2:12189701->12190469"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xCDC",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189701->12190469, KI-Slot2:12189957->12190725"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xCE8",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189957->12190725, KI-Slot2:12190213->12189701"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xCF4",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190213->12189701, KI-Slot2:12190469->12189957"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xD00",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190469->12189957, KI-Slot2:12190725->12190213"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xD0C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190725->12190213, KI-Slot2:12189701->12190469"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xD18",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189701->12190469, KI-Slot2:12189957->12190725"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xD24",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189957->12190725, KI-Slot2:12190213->12189701"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xD30",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190213->12189701, KI-Slot2:12190469->12189957"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xD3C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190469->12189957, KI-Slot2:12190725->12190213"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xD48",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190725->12190213, KI-Slot2:12189701->12190469"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xD54",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189701->12190469, KI-Slot2:12189957->12190725"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xD60",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189957->12190725, KI-Slot2:12190213->12189701"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xD6C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190213->12189701, KI-Slot2:12190469->12189957"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xD78",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190469->12189957, KI-Slot2:12190725->12190213"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xD84",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190725->12190213, KI-Slot2:12189701->12190469"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xD90",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189701->12190469, KI-Slot2:12189957->12190725"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xD9C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189957->12190725, KI-Slot2:12190213->12189701"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xDA8",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190213->12189701, KI-Slot2:12190469->12189957"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xDB4",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190469->12189957, KI-Slot2:12190725->12190213"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xDC0",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190725->12190213, KI-Slot2:12189701->12190469"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xDCC",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189701->12190469, KI-Slot2:12189957->12190725"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xDD8",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189957->12190725, KI-Slot2:12190213->12189701"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xDE4",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190213->12189701, KI-Slot2:12190469->12189957"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xDF0",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190469->12189957, KI-Slot2:12190725->12190213"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xDFC",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190725->12190213, KI-Slot2:12189701->12190469"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE08",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189701->12190469, KI-Slot2:12189957->12190725"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE14",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189957->12190725, KI-Slot2:12190213->12189701"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE20",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190213->12189701, KI-Slot2:12190469->12189957"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE2C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190469->12189957, KI-Slot2:12190725->12190213"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE38",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190725->12190213, KI-Slot2:12189701->12190469"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE44",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189701->12190469, KI-Slot2:12189957->12190725"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE50",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189957->12190725, KI-Slot2:12190213->12189701"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE5C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190213->12189701, KI-Slot2:12190469->12189957"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE68",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190469->12189957, KI-Slot2:12190725->12190213"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE74",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190725->12190213, KI-Slot2:12189701->12190469"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE80",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189701->12190469, KI-Slot2:12189957->12190725"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE8C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189957->12190725, KI-Slot2:12190213->12189701"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE98",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190213->12189701, KI-Slot2:12190469->12189957"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xEA4",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190469->12189957, KI-Slot2:12190725->12190213"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xEB0",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190725->12190213, KI-Slot2:12189701->12190469"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xEBC",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189701->12190469, KI-Slot2:12189957->12190725"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xEC8",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189957->12190725, KI-Slot2:12190213->12189701"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xED4",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190213->12189701, KI-Slot2:12190469->12189957"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xEEC",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190725->12190213, KI-Slot2:12189701->12190469"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xEF8",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189701->12190469, KI-Slot2:12189957->12190725"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF04",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189957->12190725, KI-Slot2:12190213->12189701"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF10",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190213->12189701, KI-Slot2:12190469->12189957"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF1C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190469->12189957, KI-Slot2:12190725->12190213"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF28",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190725->12190213, KI-Slot2:12189701->12190469"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF34",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189701->12190469, KI-Slot2:12189957->12190725"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF40",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189957->12190725, KI-Slot2:12190213->12189701"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF4C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190213->12189701, KI-Slot2:12190469->12189957"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF58",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190469->12189957, KI-Slot2:12190725->12190213"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF64",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190725->12190213, KI-Slot2:12189701->12190469"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF70",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189701->12190469, KI-Slot2:12189957->12190725"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF7C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189957->12190725, KI-Slot2:12190213->12189701"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF88",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190213->12189701, KI-Slot2:12190469->12189957"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1300",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190725->12190213, KI-Slot2:12190725->12190213"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x130C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189701->12190469, KI-Slot2:12189701->12190469"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1318",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189957->12190725, KI-Slot2:12189957->12190725"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1324",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190213->12189701, KI-Slot2:12190213->12189701"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1330",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190469->12189957, KI-Slot2:12190469->12189957"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x133C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190725->12190213, KI-Slot2:12190725->12190213"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1348",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189701->12190469, KI-Slot2:12189701->12190469"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1354",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189957->12190725, KI-Slot2:12189957->12190725"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1378",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190725->12190213, KI-Slot2:12190725->12190213"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1384",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189701->12190469, KI-Slot2:12189701->12190469"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1390",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189957->12190725, KI-Slot2:12189957->12190725"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x139C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190213->12189701, KI-Slot2:12190213->12189701"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x13A8",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190469->12189957, KI-Slot2:12190469->12189957"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x13B4",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190725->12190213, KI-Slot2:12190725->12190213"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x13C0",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189701->12190469, KI-Slot2:12189701->12190469"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x13CC",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189957->12190725, KI-Slot2:12189957->12190725"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x13D8",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190213->12189701, KI-Slot2:12190213->12189701"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x13E4",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190469->12189957, KI-Slot2:12190469->12189957"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x13F0",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190725->12190213, KI-Slot2:12190725->12190213"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x13FC",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189701->12190469, KI-Slot2:12189701->12190469"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1408",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189957->12190725, KI-Slot2:12189957->12190725"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1414",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190213->12189701, KI-Slot2:12190213->12189701"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1420",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190469->12189957, KI-Slot2:12190469->12189957"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x142C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190725->12190213, KI-Slot2:12190725->12190213"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1438",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189701->12190469, KI-Slot2:12189701->12190469"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1444",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189957->12190725, KI-Slot2:12189957->12190725"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1468",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190725->12190213, KI-Slot2:12190725->12190213"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1474",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189701->12190469, KI-Slot2:12189701->12190469"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1480",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189957->12190725, KI-Slot2:12189957->12190725"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x148C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190213->12189701, KI-Slot2:12190213->12189701"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1498",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190469->12189957, KI-Slot2:12190469->12189957"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x14A4",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190725->12190213, KI-Slot2:12190725->12190213"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x14B0",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189701->12190469, KI-Slot2:12189701->12190469"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x14BC",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189957->12190725, KI-Slot2:12189957->12190725"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x14C8",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190213->12189701, KI-Slot2:12190213->12189701"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x14D4",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190469->12189957, KI-Slot2:12190469->12189957"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x14E0",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190725->12190213, KI-Slot2:12190725->12190213"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x14EC",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189701->12190469, KI-Slot2:12189701->12190469"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x14F8",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189957->12190725, KI-Slot2:12189957->12190725"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1504",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190213->12189701, KI-Slot2:12190213->12189701"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1510",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190469->12189957, KI-Slot2:12190469->12189957"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x151C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190725->12190213, KI-Slot2:12190725->12190213"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1528",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189701->12190469, KI-Slot2:12189701->12190469"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1534",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189957->12190725, KI-Slot2:12189957->12190725"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1540",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190213->12189701, KI-Slot2:12190213->12189701"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x154C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190469->12189957, KI-Slot2:12190469->12189957"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1558",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190725->12190213, KI-Slot2:12190725->12190213"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1564",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189701->12190469, KI-Slot2:12189701->12190469"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1570",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12124421->12125189, KI-Slot2:12124421->12125189"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x157C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059141->12058629, KI-Slot2:12059141->12058629"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1588",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11993861->11993349, KI-Slot2:11993861->11993349"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1594",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11994117->11993605, KI-Slot2:11994117->11993605"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x15A0",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:2294531->2294019, KI-Slot2:2294531->2294019"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x15AC",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:1704963->1704451, KI-Slot2:1704963->1704451"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x15B8",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190213->12189701, KI-Slot2:12190213->12189701"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x15C4",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059397->12058885, KI-Slot2:12059397->12058885"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x15D0",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059653->12059141, KI-Slot2:12059653->12059141"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x15DC",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12058629->12059397, KI-Slot2:12058629->12059397"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x15E8",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12058885->12059653, KI-Slot2:12058885->12059653"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x15F4",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059141->12058629, KI-Slot2:12059141->12058629"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1600",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059397->12058885, KI-Slot2:12059397->12058885"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x160C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11994117->11993605, KI-Slot2:11994117->11993605"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1618",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12058629->12059397, KI-Slot2:12058629->12059397"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1624",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12058885->12059653, KI-Slot2:12058885->12059653"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1630",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059141->12058629, KI-Slot2:12059141->12058629"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x163C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059397->12058885, KI-Slot2:12059397->12058885"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1648",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059653->12059141, KI-Slot2:12059653->12059141"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1654",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12058629->12059397, KI-Slot2:12058629->12059397"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1660",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12058885->12059653, KI-Slot2:12058885->12059653"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x166C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11993605->11993093, KI-Slot2:11993605->11993093"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1678",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059397->12058885, KI-Slot2:12059397->12058885"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1684",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059653->12059141, KI-Slot2:12059653->12059141"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1690",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12058629->12059397, KI-Slot2:12058629->12059397"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x169C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12058885->12059653, KI-Slot2:12058885->12059653"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x16A8",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059141->12058629, KI-Slot2:12059141->12058629"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x16B4",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059397->12058885, KI-Slot2:12059397->12058885"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x16C0",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12059653->12059141, KI-Slot2:12059653->12059141"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x16CC",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:11993093->11993861, KI-Slot2:11993093->11993861"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x17EC",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190725->12190213, KI-Slot2:12190725->12190213"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x17F8",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189701->12190469, KI-Slot2:12189701->12190469"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1804",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12189957->12190725, KI-Slot2:12189957->12190725"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1810",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190213->12189701, KI-Slot2:12190213->12189701"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x181C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "KI-Slot1:12190469->12189957, KI-Slot2:12190469->12189957"
+    }
+   ]
+  },
+  "einheiten": {
+   "worte": 199144,
+   "geaendert": 10001,
+   "felder": [
+    {
+     "art": "Feld",
+     "stelle": "+0x3C",
+     "saetze": 682,
+     "uhr": true,
+     "beispiele": "Einheit0:3749->22069, Einheit1:28009->28111, Einheit2:28007->28111"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x40",
+     "saetze": 682,
+     "uhr": true,
+     "beispiele": "Einheit0:3749->22071, Einheit1:28009->28111, Einheit2:28009->28111"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x350",
+     "saetze": 682,
+     "uhr": true,
+     "beispiele": "Einheit0:322->21825, Einheit1:27730->27832, Einheit2:4773->4875"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x354",
+     "saetze": 682,
+     "uhr": true,
+     "beispiele": "Einheit0:322->21827, Einheit1:27730->27832, Einheit2:4773->4875"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x440",
+     "saetze": 682,
+     "uhr": false,
+     "beispiele": "Einheit0:1766->6834, Einheit1:13876->13927, Einheit2:13083->13117"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x378",
+     "saetze": 680,
+     "uhr": false,
+     "beispiele": "Einheit0:131074->393216, Einheit1:262148->458762, Einheit2:196608->65536"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2B0",
+     "saetze": 605,
+     "uhr": false,
+     "beispiele": "Einheit0:0->417, Einheit1:289->323, Einheit2:38->64"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x4",
+     "saetze": 513,
+     "uhr": false,
+     "beispiele": "Einheit0:545->324, Einheit1:1061->1088, Einheit2:388->389"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x48",
+     "saetze": 370,
+     "uhr": false,
+     "beispiele": "Einheit2:12->13, Einheit5:16->15, Einheit6:16->15"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF8",
+     "saetze": 174,
+     "uhr": false,
+     "beispiele": "Einheit0:8->1572872, Einheit1:3604481->3997700, Einheit4:1638401->2031620"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x37C",
+     "saetze": 174,
+     "uhr": false,
+     "beispiele": "Einheit0:589824->524300, Einheit1:131084->327682, Einheit4:655362->851974"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xC4",
+     "saetze": 173,
+     "uhr": false,
+     "beispiele": "Einheit0:19005667->7798960, Einheit1:7078051->7340191, Einheit4:10027181->9568422"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xD4",
+     "saetze": 173,
+     "uhr": false,
+     "beispiele": "Einheit0:68327->14376, Einheit1:11844->12728, Einheit4:23689->21575"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE0",
+     "saetze": 172,
+     "uhr": false,
+     "beispiele": "Einheit0:19005667->7798960, Einheit1:7143587->7340191, Einheit4:9961644->9568422"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE4",
+     "saetze": 172,
+     "uhr": false,
+     "beispiele": "Einheit0:68327->14376, Einheit1:12063->12728, Einheit4:23381->21575"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x3C4",
+     "saetze": 172,
+     "uhr": false,
+     "beispiele": "Einheit0:589824->655360, Einheit1:131072->1114112, Einheit4:524288->327680"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x428",
+     "saetze": 172,
+     "uhr": false,
+     "beispiele": "Einheit0:1245193->16, Einheit1:2->5, Einheit4:2->5"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x404",
+     "saetze": 170,
+     "uhr": false,
+     "beispiele": "Einheit0:68547->14136, Einheit1:11844->12956, Einheit4:23689->21871"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x28",
+     "saetze": 149,
+     "uhr": false,
+     "beispiele": "Einheit0:3342344->3473416, Einheit1:3276810->3276814, Einheit4:3276804->3276814"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x24",
+     "saetze": 147,
+     "uhr": false,
+     "beispiele": "Einheit0:917535->917532, Einheit1:655389->917533, Einheit33:1441823->655391"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x50",
+     "saetze": 147,
+     "uhr": false,
+     "beispiele": "Einheit0:1->0, Einheit2:0->1, Einheit5:1->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xB8",
+     "saetze": 143,
+     "uhr": false,
+     "beispiele": "Einheit0:526612->525244, Einheit1:525158->525191, Einheit4:525514->525463"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xB4",
+     "saetze": 139,
+     "uhr": false,
+     "beispiele": "Einheit0:119275520->92536832, Einheit1:85721088->83820544, Einheit4:90832896->87490560"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x54",
+     "saetze": 122,
+     "uhr": false,
+     "beispiele": "Einheit0:131079->458755, Einheit1:131076->131079, Einheit24:131072->131079"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2B4",
+     "saetze": 120,
+     "uhr": false,
+     "beispiele": "Einheit0:7->3, Einheit1:4->7, Einheit24:0->7"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x14",
+     "saetze": 105,
+     "uhr": false,
+     "beispiele": "Einheit0:81921841->0, Einheit24:71043203->66455747, Einheit33:68028345->66717789"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x41C",
+     "saetze": 101,
+     "uhr": false,
+     "beispiele": "Einheit0:1886->0, Einheit24:2222->2286, Einheit33:2022->2186"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x420",
+     "saetze": 100,
+     "uhr": false,
+     "beispiele": "Einheit0:1308->0, Einheit24:1140->1070, Einheit33:1096->1076"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2C8",
+     "saetze": 92,
+     "uhr": false,
+     "beispiele": "Einheit0:1572864->262144, Einheit1:852835->852937, Einheit4:852354->852456"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x380",
+     "saetze": 70,
+     "uhr": false,
+     "beispiele": "Einheit85:1->2, Einheit87:0->100, Einheit89:0->100"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2C0",
+     "saetze": 66,
+     "uhr": false,
+     "beispiele": "Einheit0:0->7, Einheit35:3->8, Einheit45:5->2"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2C4",
+     "saetze": 66,
+     "uhr": false,
+     "beispiele": "Einheit0:2->7, Einheit35:3->8, Einheit45:5->2"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2B8",
+     "saetze": 61,
+     "uhr": false,
+     "beispiele": "Einheit0:65536->0, Einheit207:0->65536, Einheit235:65536->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2A0",
+     "saetze": 52,
+     "uhr": false,
+     "beispiele": "Einheit0:44630016->0, Einheit81:0->44957696, Einheit89:0->44761088"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xFC",
+     "saetze": 50,
+     "uhr": false,
+     "beispiele": "Einheit0:268435456->1996488728, Einheit35:6684674->275775492, Einheit45:1717960726->1144193028"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xCC",
+     "saetze": 48,
+     "uhr": false,
+     "beispiele": "Einheit0:19005667->7995555, Einheit35:12386486->12386484, Einheit45:20119742->20644009"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xDC",
+     "saetze": 48,
+     "uhr": false,
+     "beispiele": "Einheit0:68327->15092, Einheit35:36082->36080, Einheit45:71741->73144"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF4",
+     "saetze": 48,
+     "uhr": false,
+     "beispiele": "Einheit35:0->131072, Einheit83:131072->0, Einheit126:0->131072"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2A4",
+     "saetze": 46,
+     "uhr": false,
+     "beispiele": "Einheit0:20250625->0, Einheit33:26148865->27721729, Einheit168:8716288->5177344"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xEC",
+     "saetze": 44,
+     "uhr": false,
+     "beispiele": "Einheit0:19005666->7602330, Einheit35:12255414->12124340, Einheit45:20644009->20906155"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xC8",
+     "saetze": 41,
+     "uhr": false,
+     "beispiele": "Einheit0:19005667->7798960, Einheit35:12386484->12124340, Einheit45:20644009->20906155"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xD8",
+     "saetze": 41,
+     "uhr": false,
+     "beispiele": "Einheit0:68327->14376, Einheit35:36080->34576, Einheit45:73144->73810"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2E8",
+     "saetze": 36,
+     "uhr": true,
+     "beispiele": "Einheit128:2418->17, Einheit163:2917->3019, Einheit164:4805->4886"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x30",
+     "saetze": 32,
+     "uhr": false,
+     "beispiele": "Einheit0:0->16, Einheit35:0->16, Einheit83:16->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x100",
+     "saetze": 32,
+     "uhr": false,
+     "beispiele": "Einheit0:30465->572588032, Einheit45:1717986918->0, Einheit126:2004316160->571548194"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xBC",
+     "saetze": 31,
+     "uhr": false,
+     "beispiele": "Einheit0:0->4, Einheit128:4->0, Einheit142:139198464->139198468"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2EC",
+     "saetze": 30,
+     "uhr": true,
+     "beispiele": "Einheit0:0->2804, Einheit24:417->519, Einheit45:2105->2206"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x308",
+     "saetze": 25,
+     "uhr": false,
+     "beispiele": "Einheit0:0->1, Einheit128:1->0, Einheit142:0->1"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x104",
+     "saetze": 24,
+     "uhr": false,
+     "beispiele": "Einheit0:0->572732227, Einheit45:1431651670->0, Einheit126:1987540855->572662290"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2F4",
+     "saetze": 23,
+     "uhr": true,
+     "beispiele": "Einheit0:0->2802, Einheit71:382->484, Einheit88:245->347"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x108",
+     "saetze": 20,
+     "uhr": false,
+     "beispiele": "Einheit0:0->12834, Einheit45:101->0, Einheit126:1717986918->572662306"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2F0",
+     "saetze": 18,
+     "uhr": true,
+     "beispiele": "Einheit0:0->2814, Einheit1:2232->2334, Einheit4:1785->1887"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x400",
+     "saetze": 17,
+     "uhr": false,
+     "beispiele": "Einheit0:16777216->0, Einheit218:327680->0, Einheit232:17432576->16777216"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x33C",
+     "saetze": 16,
+     "uhr": false,
+     "beispiele": "Einheit0:293->122, Einheit182:24903973->293, Einheit358:263->293"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x10C",
+     "saetze": 16,
+     "uhr": false,
+     "beispiele": "Einheit126:1717986918->572662306, Einheit128:1431655765->17, Einheit164:0->103"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x32C",
+     "saetze": 16,
+     "uhr": false,
+     "beispiele": "Einheit358:16777216->17301504, Einheit393:16777216->17563648, Einheit585:17301504->16777216"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x8",
+     "saetze": 15,
+     "uhr": false,
+     "beispiele": "Einheit0:1->257, Einheit126:1->129, Einheit128:1041->1"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x444",
+     "saetze": 15,
+     "uhr": true,
+     "beispiele": "Einheit0:65536->0, Einheit204:66573->66675, Einheit205:73866->73968"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x348",
+     "saetze": 14,
+     "uhr": false,
+     "beispiele": "Einheit0:65536->131072, Einheit45:66657->66827, Einheit138:196608->65536"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x110",
+     "saetze": 14,
+     "uhr": false,
+     "beispiele": "Einheit126:1432774246->858993186, Einheit128:1431655765->286331136, Einheit182:2004318071->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x44",
+     "saetze": 13,
+     "uhr": false,
+     "beispiele": "Einheit0:3->2, Einheit160:5->2, Einheit183:3->2"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2D8",
+     "saetze": 13,
+     "uhr": false,
+     "beispiele": "Einheit0:132135->393216, Einheit358:327680->328703, Einheit603:262144->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x338",
+     "saetze": 13,
+     "uhr": false,
+     "beispiele": "Einheit0:14745614->10682512, Einheit358:13172811->14745614, Einheit603:12648568->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x114",
+     "saetze": 13,
+     "uhr": false,
+     "beispiele": "Einheit126:1717986918->876889139, Einheit128:1431655765->286331153, Einheit182:7829367->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x3C8",
+     "saetze": 12,
+     "uhr": false,
+     "beispiele": "Einheit0:12500->2500, Einheit182:8500->8025, Einheit358:10000->2500"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2D4",
+     "saetze": 11,
+     "uhr": false,
+     "beispiele": "Einheit0:22610020->100, Einheit182:11927620->11927616, Einheit358:100->33620068"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x388",
+     "saetze": 11,
+     "uhr": false,
+     "beispiele": "Einheit128:5->0, Einheit164:0->18, Einheit225:1->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x68",
+     "saetze": 11,
+     "uhr": false,
+     "beispiele": "Einheit218:1->0, Einheit232:1->0, Einheit241:0->1"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x370",
+     "saetze": 11,
+     "uhr": false,
+     "beispiele": "Einheit358:0->65536, Einheit585:65536->0, Einheit601:65536->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2A8",
+     "saetze": 10,
+     "uhr": false,
+     "beispiele": "Einheit0:101->1, Einheit35:0->1, Einheit330:1->101"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x3FC",
+     "saetze": 10,
+     "uhr": false,
+     "beispiele": "Einheit0:1->0, Einheit347:16777216->16777217, Einheit431:0->16777216"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x438",
+     "saetze": 10,
+     "uhr": false,
+     "beispiele": "Einheit0:100000->0, Einheit205:376->351, Einheit206:414->404"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x3AC",
+     "saetze": 10,
+     "uhr": false,
+     "beispiele": "Einheit182:65536->0, Einheit301:65534->0, Einheit320:0->65535"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xC",
+     "saetze": 9,
+     "uhr": false,
+     "beispiele": "Einheit0:39->20, Einheit358:19->17, Einheit601:17->39"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x7C",
+     "saetze": 9,
+     "uhr": false,
+     "beispiele": "Einheit0:2555904->1310720, Einheit358:1245184->1114112, Einheit601:1114112->2555904"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x8C",
+     "saetze": 9,
+     "uhr": false,
+     "beispiele": "Einheit0:1572866->262146, Einheit358:196610->65538, Einheit601:65538->1572866"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2AC",
+     "saetze": 9,
+     "uhr": false,
+     "beispiele": "Einheit107:65536->65546, Einheit160:65536->65546, Einheit168:65536->65537"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x368",
+     "saetze": 8,
+     "uhr": false,
+     "beispiele": "Einheit0:518680->521522, Einheit358:519462->518680, Einheit603:520673->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x394",
+     "saetze": 8,
+     "uhr": false,
+     "beispiele": "Einheit35:2->3, Einheit216:4->0, Einheit264:4->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2BC",
+     "saetze": 8,
+     "uhr": false,
+     "beispiele": "Einheit190:2->0, Einheit246:0->7, Einheit286:65536->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x18",
+     "saetze": 7,
+     "uhr": false,
+     "beispiele": "Einheit0:6553700->0, Einheit164:0->6553700, Einheit295:6553700->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x20",
+     "saetze": 7,
+     "uhr": false,
+     "beispiele": "Einheit0:2490410->2621482, Einheit601:2359338->2490410, Einheit603:2424874->2359338"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xA0",
+     "saetze": 7,
+     "uhr": false,
+     "beispiele": "Einheit0:0->518915, Einheit225:519409->519294, Einheit234:519294->519518"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x374",
+     "saetze": 7,
+     "uhr": false,
+     "beispiele": "Einheit0:0->1, Einheit126:1->0, Einheit284:1->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x43C",
+     "saetze": 7,
+     "uhr": false,
+     "beispiele": "Einheit0:127->0, Einheit358:255->0, Einheit601:0->127"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x118",
+     "saetze": 7,
+     "uhr": false,
+     "beispiele": "Einheit126:1986422630->858993459, Einheit128:1414944085->286331153, Einheit216:572662306->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x40C",
+     "saetze": 7,
+     "uhr": false,
+     "beispiele": "Einheit321:0->1, Einheit479:1->0, Einheit506:0->1"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2CC",
+     "saetze": 7,
+     "uhr": false,
+     "beispiele": "Einheit358:65536->196608, Einheit601:0->65536, Einheit603:65536->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x10",
+     "saetze": 6,
+     "uhr": false,
+     "beispiele": "Einheit0:3->2, Einheit358:3->4, Einheit601:4->2"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2E4",
+     "saetze": 6,
+     "uhr": false,
+     "beispiele": "Einheit0:558456->0, Einheit358:0->563706, Einheit630:518495->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x334",
+     "saetze": 6,
+     "uhr": false,
+     "beispiele": "Einheit0:0->2818048, Einheit225:4784128->4456448, Einheit234:4456448->5242880"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x3CC",
+     "saetze": 6,
+     "uhr": false,
+     "beispiele": "Einheit0:12500->2500, Einheit358:10000->2500, Einheit601:2500->12500"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x3D0",
+     "saetze": 6,
+     "uhr": false,
+     "beispiele": "Einheit0:64260->64770, Einheit182:129796->64260, Einheit560:129796->64260"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x11C",
+     "saetze": 6,
+     "uhr": false,
+     "beispiele": "Einheit126:7->841167923, Einheit128:86->17, Einheit216:572662306->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xB0",
+     "saetze": 6,
+     "uhr": false,
+     "beispiele": "Einheit358:0->1, Einheit585:1->0, Einheit642:1->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2C",
+     "saetze": 5,
+     "uhr": false,
+     "beispiele": "Einheit0:70->67, Einheit603:68->70, Einheit630:62->70"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2D0",
+     "saetze": 5,
+     "uhr": false,
+     "beispiele": "Einheit0:1->0, Einheit358:1->0, Einheit601:0->1"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x358",
+     "saetze": 5,
+     "uhr": false,
+     "beispiele": "Einheit164:1->0, Einheit167:0->1, Einheit268:10420224->3735552"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x38",
+     "saetze": 5,
+     "uhr": false,
+     "beispiele": "Einheit380:7->6, Einheit560:10->9, Einheit602:10->9"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x434",
+     "saetze": 5,
+     "uhr": false,
+     "beispiele": "Einheit380:39452672->36700160, Einheit560:0->24903680, Einheit602:0->24903680"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2DC",
+     "saetze": 4,
+     "uhr": false,
+     "beispiele": "Einheit0:19005667->0, Einheit182:6619339->9961684, Einheit560:6684874->10027221"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2F8",
+     "saetze": 4,
+     "uhr": false,
+     "beispiele": "Einheit0:0->2731, Einheit128:2683->2666, Einheit338:2168->2196"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x304",
+     "saetze": 4,
+     "uhr": false,
+     "beispiele": "Einheit0:0->65536, Einheit279:131072->65586, Einheit439:65586->131072"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x34C",
+     "saetze": 4,
+     "uhr": false,
+     "beispiele": "Einheit0:1->2, Einheit138:3->1, Einheit358:2->1"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x360",
+     "saetze": 4,
+     "uhr": false,
+     "beispiele": "Einheit0:1->0, Einheit601:0->1, Einheit643:0->1"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x36C",
+     "saetze": 4,
+     "uhr": false,
+     "beispiele": "Einheit0:65536->0, Einheit601:0->65536, Einheit643:0->65536"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x430",
+     "saetze": 4,
+     "uhr": false,
+     "beispiele": "Einheit0:131072->196608, Einheit603:131072->196608, Einheit630:0->131072"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x340",
+     "saetze": 4,
+     "uhr": false,
+     "beispiele": "Einheit182:521850->0, Einheit380:566025->0, Einheit560:521850->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x80",
+     "saetze": 3,
+     "uhr": false,
+     "beispiele": "Einheit0:3->2, Einheit603:3->2, Einheit630:0->3"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x94",
+     "saetze": 3,
+     "uhr": false,
+     "beispiele": "Einheit0:196608->131072, Einheit603:196608->131072, Einheit630:0->196608"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x98",
+     "saetze": 3,
+     "uhr": false,
+     "beispiele": "Einheit0:565703->521517, Einheit603:565081->571695, Einheit630:567942->571696"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x9C",
+     "saetze": 3,
+     "uhr": false,
+     "beispiele": "Einheit0:24311->6087, Einheit603:24061->28087, Einheit630:25299->28088"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x300",
+     "saetze": 3,
+     "uhr": false,
+     "beispiele": "Einheit0:0->8, Einheit603:1->0, Einheit646:0->1"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x384",
+     "saetze": 3,
+     "uhr": false,
+     "beispiele": "Einheit0:27889->8233, Einheit603:28467->19775, Einheit630:24303->28395"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x398",
+     "saetze": 3,
+     "uhr": false,
+     "beispiele": "Einheit0:102->144, Einheit603:120->0, Einheit646:0->120"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x39C",
+     "saetze": 3,
+     "uhr": false,
+     "beispiele": "Einheit0:3->0, Einheit126:28246016->35782656, Einheit546:15859712->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x3EC",
+     "saetze": 3,
+     "uhr": false,
+     "beispiele": "Einheit0:14895->33555977, Einheit603:10281->818, Einheit630:8718->10539"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x120",
+     "saetze": 3,
+     "uhr": false,
+     "beispiele": "Einheit126:0->858989363, Einheit216:304226850->0, Einheit599:2004318071->6636339"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x124",
+     "saetze": 3,
+     "uhr": false,
+     "beispiele": "Einheit126:0->53687091, Einheit216:1->0, Einheit599:2004318071->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2FC",
+     "saetze": 3,
+     "uhr": false,
+     "beispiele": "Einheit128:3->0, Einheit338:1->2, Einheit342:3->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x58",
+     "saetze": 3,
+     "uhr": false,
+     "beispiele": "Einheit168:0->1, Einheit233:1->0, Einheit332:0->1"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x3A8",
+     "saetze": 3,
+     "uhr": false,
+     "beispiele": "Einheit182:10406->23728, Einheit560:10406->23728, Einheit602:10405->23727"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x3E8",
+     "saetze": 3,
+     "uhr": false,
+     "beispiele": "Einheit182:6619338->10027220, Einheit560:6619338->10027220, Einheit602:6619337->10027219"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x3DC",
+     "saetze": 3,
+     "uhr": false,
+     "beispiele": "Einheit268:38928384->39256064, Einheit594:1->0, Einheit599:0->1"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x294",
+     "saetze": 3,
+     "uhr": false,
+     "beispiele": "Einheit277:200->0, Einheit358:0->200, Einheit504:0->200"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x390",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Einheit0:65537->0, Einheit332:65536->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x3C0",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Einheit476:0->65536, Einheit630:65536->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2E0",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Einheit0:851969->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x408",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Einheit0:65536->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x42C",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Einheit0:1->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x4C",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Einheit175:0->1"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xA8",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Einheit233:461694->463211"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x410",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Einheit234:8->7"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x344",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Einheit268:594->599"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xD0",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Einheit594:36->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x128",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Einheit599:2004318071->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x12C",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Einheit599:2004318071->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x130",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Einheit599:7->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x70",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Einheit630:512->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x310",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Einheit630:13631709->0"
+    }
+   ]
+  },
+  "gebaeude": {
+   "worte": 406005,
+   "geaendert": 993,
+   "felder": [
+    {
+     "art": "Feld",
+     "stelle": "+0xC0",
+     "saetze": 207,
+     "uhr": false,
+     "beispiele": "Gebaeude1:57->59, Gebaeude2:57->59, Gebaeude3:57->59"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x27C",
+     "saetze": 207,
+     "uhr": true,
+     "beispiele": "Gebaeude1:28057->28159, Gebaeude2:28057->28159, Gebaeude3:28057->28159"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x80",
+     "saetze": 130,
+     "uhr": false,
+     "beispiele": "Gebaeude19:37->11, Gebaeude21:51->25, Gebaeude22:50->24"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x84",
+     "saetze": 126,
+     "uhr": false,
+     "beispiele": "Gebaeude19:19->6, Gebaeude21:26->13, Gebaeude22:26->13"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x14",
+     "saetze": 38,
+     "uhr": false,
+     "beispiele": "Gebaeude3:28056->28156, Gebaeude5:26812->26916, Gebaeude12:28056->28156"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x18",
+     "saetze": 38,
+     "uhr": true,
+     "beispiele": "Gebaeude3:28056->28158, Gebaeude5:26814->26916, Gebaeude12:28056->28158"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x20",
+     "saetze": 34,
+     "uhr": false,
+     "beispiele": "Gebaeude5:1441796->1441822, Gebaeude14:1441808->1441800, Gebaeude27:4390947->4390972"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1C",
+     "saetze": 24,
+     "uhr": false,
+     "beispiele": "Gebaeude5:14->27, Gebaeude14:21->16, Gebaeude27:12->14"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2A4",
+     "saetze": 17,
+     "uhr": false,
+     "beispiele": "Gebaeude20:15467264->15401728, Gebaeude54:8454656->8389120, Gebaeude56:9109760->9044224"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x30",
+     "saetze": 12,
+     "uhr": false,
+     "beispiele": "Gebaeude3:1->0, Gebaeude5:0->1, Gebaeude12:1->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x184",
+     "saetze": 10,
+     "uhr": false,
+     "beispiele": "Gebaeude16:43->45, Gebaeude25:2->3, Gebaeude32:81->79"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x38",
+     "saetze": 9,
+     "uhr": false,
+     "beispiele": "Gebaeude5:23->25, Gebaeude14:22->24, Gebaeude25:29032->29033"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x19C",
+     "saetze": 9,
+     "uhr": false,
+     "beispiele": "Gebaeude75:23461888->0, Gebaeude100:0->1, Gebaeude102:0->1"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x48",
+     "saetze": 7,
+     "uhr": false,
+     "beispiele": "Gebaeude5:22->24, Gebaeude14:21->23, Gebaeude67:0->28"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x294",
+     "saetze": 7,
+     "uhr": false,
+     "beispiele": "Gebaeude100:65536->0, Gebaeude102:65536->0, Gebaeude158:65536->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x3C",
+     "saetze": 6,
+     "uhr": false,
+     "beispiele": "Gebaeude24:29036->0, Gebaeude65:104->122, Gebaeude67:122->93"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x4C",
+     "saetze": 6,
+     "uhr": false,
+     "beispiele": "Gebaeude65:7->0, Gebaeude67:0->28, Gebaeude171:262->313"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2D4",
+     "saetze": 6,
+     "uhr": false,
+     "beispiele": "Gebaeude75:32->0, Gebaeude107:165675008->262144000, Gebaeude120:262144000->256311296"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x24",
+     "saetze": 5,
+     "uhr": false,
+     "beispiele": "Gebaeude24:196609->1, Gebaeude25:1->196609, Gebaeude75:1->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2C",
+     "saetze": 4,
+     "uhr": false,
+     "beispiele": "Gebaeude24:1->65536, Gebaeude25:65536->0, Gebaeude75:65536->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x118",
+     "saetze": 4,
+     "uhr": false,
+     "beispiele": "Gebaeude65:327684->0, Gebaeude67:0->196611, Gebaeude177:4->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x78",
+     "saetze": 4,
+     "uhr": false,
+     "beispiele": "Gebaeude97:3->22, Gebaeude98:3->22, Gebaeude181:10->29"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x28",
+     "saetze": 3,
+     "uhr": false,
+     "beispiele": "Gebaeude14:208->209, Gebaeude24:3->0, Gebaeude177:0->1"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x128",
+     "saetze": 3,
+     "uhr": false,
+     "beispiele": "Gebaeude16:43->45, Gebaeude24:3->0, Gebaeude201:1->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xCC",
+     "saetze": 3,
+     "uhr": false,
+     "beispiele": "Gebaeude75:-65536->0, Gebaeude85:24313856->24576000, Gebaeude201:0->65536"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x270",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Gebaeude5:4->131074, Gebaeude14:196622->262157"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x150",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Gebaeude32:28->27, Gebaeude34:59->50"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x154",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Gebaeude32:53->52, Gebaeude34:57->61"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2C4",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Gebaeude52:1046->944, Gebaeude62:1595->1493"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x40",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Gebaeude65:185->139, Gebaeude67:138->175"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x44",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Gebaeude65:193->256, Gebaeude67:274->193"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x50",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Gebaeude65:0->15, Gebaeude67:43->29"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x54",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Gebaeude65:0->89, Gebaeude67:117->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x11C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Gebaeude65:10->65541, Gebaeude67:65542->9"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x0",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Gebaeude75:1->0, Gebaeude85:371->375"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x188",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Gebaeude75:48->0, Gebaeude98:50->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1A8",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Gebaeude75:521724->0, Gebaeude120:565081->569494"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x16C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Gebaeude97:3->2, Gebaeude98:1->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xBC",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Gebaeude177:2031616->0, Gebaeude201:2031616->5"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x164",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Gebaeude181:4->5, Gebaeude183:25->27"
+    },
+    {
+     "art": "Kopf",
+     "stelle": "+0x0",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Gebaeude:207->206"
+    },
+    {
+     "art": "Kopf",
+     "stelle": "+0xC",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Gebaeude:1793->1794"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x124",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Gebaeude25:2->3"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x4",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Gebaeude75:7->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x8",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Gebaeude75:3->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xC",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Gebaeude75:-3866659->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x10",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Gebaeude75:4->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x34",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Gebaeude75:1->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x8C",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Gebaeude75:61358->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x90",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Gebaeude75:9->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xA0",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Gebaeude75:1->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xC8",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Gebaeude75:61080->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xD0",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Gebaeude75:196610->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xD4",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Gebaeude75:196608->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xD8",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Gebaeude75:519462->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE8",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Gebaeude75:136316480->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xEC",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Gebaeude75:13107208->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF0",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Gebaeude75:260->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF4",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Gebaeude75:60800->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF8",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Gebaeude75:3->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xFC",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Gebaeude75:13172742->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x100",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Gebaeude75:983303->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x104",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Gebaeude75:18258->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x108",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Gebaeude75:1->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x10C",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Gebaeude75:3932220->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x18C",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Gebaeude75:2->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x198",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Gebaeude75:65537->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1C8",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Gebaeude75:60800->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1CC",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Gebaeude75:60801->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1D0",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Gebaeude75:60802->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1D4",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Gebaeude75:61079->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1D8",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Gebaeude75:61080->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1DC",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Gebaeude75:61081->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1E0",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Gebaeude75:61356->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1E4",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Gebaeude75:61357->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1E8",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Gebaeude75:61358->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x284",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Gebaeude75:2->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2B8",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Gebaeude75:929234944->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2BC",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Gebaeude75:1->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2DC",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Gebaeude75:10->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x130",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Gebaeude85:4->5"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1B8",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Gebaeude120:0->646"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x290",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Gebaeude171:1310720->1048576"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x9C",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Gebaeude201:0->65536"
+    }
+   ]
+  },
+  "k_gebaeude": {
+   "worte": 40200,
+   "geaendert": 6,
+   "beispiele": [
+    {
+     "stelle": "+0x1DB00",
+     "a": 4915275,
+     "b": 0,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x1DB04",
+     "a": 75,
+     "b": 0,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x1DD2C",
+     "a": 4915200,
+     "b": 0,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x1DD30",
+     "a": 4915275,
+     "b": 0,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x1DF58",
+     "a": 4915275,
+     "b": 0,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x1DF5C",
+     "a": 75,
+     "b": 0,
+     "uhr": false
+    }
+   ]
+  },
+  "k_gfx": {
+   "worte": 40200,
+   "geaendert": 93,
+   "beispiele": [
+    {
+     "stelle": "+0x668C",
+     "a": 1603232345,
+     "b": 1603232377,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x6858",
+     "a": 1650024314,
+     "b": 1651990390,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x6A28",
+     "a": 1650221664,
+     "b": 1658675804,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x6A2C",
+     "a": 1603362683,
+     "b": 1603362703,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x6BFC",
+     "a": 1650483813,
+     "b": 1656185441,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x6C00",
+     "a": 1658413665,
+     "b": 1658413787,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x6DD0",
+     "a": 1582784239,
+     "b": 1582259947,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x6DD4",
+     "a": 1622433670,
+     "b": 1621647234,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x6DD8",
+     "a": 1650025061,
+     "b": 1658348211,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x6FB0",
+     "a": 1582784240,
+     "b": 1581997808,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x6FB4",
+     "a": 1621975225,
+     "b": 1627414786,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x718C",
+     "a": 1582849614,
+     "b": 1582325326,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x7190",
+     "a": 1592745558,
+     "b": 1592221258,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x7194",
+     "a": 1622171376,
+     "b": 1627348793,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x7374",
+     "a": 1582784080,
+     "b": 1583046216,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x7378",
+     "a": 1622171374,
+     "b": 1623613207,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x737C",
+     "a": 1630363853,
+     "b": 1630363817,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x7560",
+     "a": 1592155881,
+     "b": 1591631638,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x7564",
+     "a": 1623679145,
+     "b": 1623679149,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x774C",
+     "a": 1591762709,
+     "b": 1592024853,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x7750",
+     "a": 1593859813,
+     "b": 1591762665,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x7940",
+     "a": 1581669978,
+     "b": 1581932122,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x1506C",
+     "a": 1652843096,
+     "b": 1652843141,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x1536C",
+     "a": 1649959516,
+     "b": 1652777560,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x15668",
+     "a": 1601920896,
+     "b": 1603100540,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x1566C",
+     "a": 1652843100,
+     "b": 1652843141,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x15960",
+     "a": 1602314114,
+     "b": 1603755902,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x15964",
+     "a": 1603297152,
+     "b": 1603297174,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x15C4C",
+     "a": 1650549469,
+     "b": 1650287325,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x15C50",
+     "a": 1651073641,
+     "b": 1650549349,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x15C54",
+     "a": 1602510727,
+     "b": 1603690367,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x15C58",
+     "a": 1601593220,
+     "b": 1603166102,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x15F40",
+     "a": 1651073641,
+     "b": 1650287209,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x15F44",
+     "a": 1651073640,
+     "b": 1651991251,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x15F48",
+     "a": 1602051975,
+     "b": 1603755919,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x1622C",
+     "a": 1651008097,
+     "b": 1650483809,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x16230",
+     "a": 1651008105,
+     "b": 1657823954,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x16234",
+     "a": 1602183784,
+     "b": 1603363446,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x16518",
+     "a": 1651008097,
+     "b": 1657758417,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x1651C",
+     "a": 1602183785,
+     "b": 1603363534,
+     "uhr": false
+    }
+   ]
+  },
+  "k_hoehe": {
+   "worte": 20100,
+   "geaendert": 0
+  },
+  "k_logik": {
+   "worte": 80400,
+   "geaendert": 36,
+   "beispiele": [
+    {
+     "stelle": "+0xDBA0",
+     "a": 40960,
+     "b": 32768,
+     "uhr": false
+    },
+    {
+     "stelle": "+0xDF58",
+     "a": 40960,
+     "b": 32768,
+     "uhr": false
+    },
+    {
+     "stelle": "+0xDF5C",
+     "a": 40960,
+     "b": 32768,
+     "uhr": false
+    },
+    {
+     "stelle": "+0xDF60",
+     "a": 40960,
+     "b": 32768,
+     "uhr": false
+    },
+    {
+     "stelle": "+0xE31C",
+     "a": 40960,
+     "b": 32768,
+     "uhr": false
+    },
+    {
+     "stelle": "+0xE320",
+     "a": 45056,
+     "b": 36864,
+     "uhr": false
+    },
+    {
+     "stelle": "+0xE324",
+     "a": 40960,
+     "b": 32768,
+     "uhr": false
+    },
+    {
+     "stelle": "+0xE328",
+     "a": 40960,
+     "b": 32768,
+     "uhr": false
+    },
+    {
+     "stelle": "+0xE6E8",
+     "a": 40960,
+     "b": 32768,
+     "uhr": false
+    },
+    {
+     "stelle": "+0xE6EC",
+     "a": 40960,
+     "b": 32768,
+     "uhr": false
+    },
+    {
+     "stelle": "+0xE6F0",
+     "a": 40960,
+     "b": 32768,
+     "uhr": false
+    },
+    {
+     "stelle": "+0xEAC0",
+     "a": 40960,
+     "b": 32768,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x2B8A0",
+     "a": 40960,
+     "b": 32768,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x2BE80",
+     "a": 40960,
+     "b": 32768,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x2BE84",
+     "a": 40960,
+     "b": 32768,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x2BE88",
+     "a": 40960,
+     "b": 32768,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x2C45C",
+     "a": 40960,
+     "b": 32768,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x2C460",
+     "a": 45056,
+     "b": 32768,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x2C464",
+     "a": 40960,
+     "b": 32768,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x2C468",
+     "a": 40960,
+     "b": 32768,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x2CA30",
+     "a": 40960,
+     "b": 32768,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x2CA34",
+     "a": 40960,
+     "b": 32768,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x2CA38",
+     "a": 40960,
+     "b": 32768,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x2D000",
+     "a": 40960,
+     "b": 32768,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x2EDDC",
+     "a": 32768,
+     "b": 45056,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x35588",
+     "a": 0,
+     "b": 12288,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x3B600",
+     "a": 33792,
+     "b": 32768,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x3B604",
+     "a": 33792,
+     "b": 32768,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x3B608",
+     "a": 33792,
+     "b": 32768,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x3BA5C",
+     "a": 33792,
+     "b": 32768,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x3BA60",
+     "a": 33792,
+     "b": 32768,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x3BA64",
+     "a": 33792,
+     "b": 32768,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x3BEB0",
+     "a": 33792,
+     "b": 32768,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x3BEB4",
+     "a": 33792,
+     "b": 32768,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x3BEB8",
+     "a": 33792,
+     "b": 32768,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x4C704",
+     "a": 32768,
+     "b": 45056,
+     "uhr": false
+    }
+   ]
+  },
+  "k_schaden": {
+   "worte": 20100,
+   "geaendert": 0
+  },
+  "kern": {
+   "worte": 2048,
+   "geaendert": 9,
+   "beispiele": [
+    {
+     "stelle": "+0x84",
+     "a": 492,
+     "b": 262,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x88",
+     "a": 220,
+     "b": 0,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x8C",
+     "a": 27950,
+     "b": 28151,
+     "uhr": false
+    },
+    {
+     "stelle": "+0x98",
+     "a": 28059,
+     "b": 28161,
+     "uhr": true
+    },
+    {
+     "stelle": "+0xB4",
+     "a": 2,
+     "b": 0,
+     "uhr": false
+    },
+    {
+     "stelle": "+0xB8",
+     "a": 0,
+     "b": 1,
+     "uhr": false
+    },
+    {
+     "stelle": "+0xBC",
+     "a": 11392350,
+     "b": 11402784,
+     "uhr": false
+    },
+    {
+     "stelle": "+0xC4",
+     "a": 571694,
+     "b": 571722,
+     "uhr": false
+    },
+    {
+     "stelle": "+0xC8",
+     "a": 90,
+     "b": 50,
+     "uhr": false
+    }
+   ]
+  },
+  "spieler": {
+   "worte": 33381,
+   "geaendert": 423,
+   "felder": [
+    {
+     "art": "Feld",
+     "stelle": "+0x2AE4",
+     "saetze": 8,
+     "uhr": false,
+     "beispiele": "Spieler1:1->3, Spieler2:1->3, Spieler3:1->3"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x84",
+     "saetze": 3,
+     "uhr": false,
+     "beispiele": "Spieler0:47897239->47924932, Spieler2:190->192, Spieler3:220->221"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2088",
+     "saetze": 3,
+     "uhr": false,
+     "beispiele": "Spieler0:337->339, Spieler2:410->415, Spieler3:387->391"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2148",
+     "saetze": 3,
+     "uhr": false,
+     "beispiele": "Spieler0:187->188, Spieler2:104->105, Spieler3:83->85"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x22DC",
+     "saetze": 3,
+     "uhr": false,
+     "beispiele": "Spieler0:187->188, Spieler2:104->105, Spieler3:83->85"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xDF0",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:18678042->18481431, Spieler2:9306252->9175178"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xDF4",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:18809118->18743581, Spieler2:10092688->9437326"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xDF8",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:18940192->18874655, Spieler2:10223771->10158234"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xDFC",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:19071266->19005729, Spieler2:10354845->10289308"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE00",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:19202340->19136803, Spieler2:10485919->10420382"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE04",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:19661095->19333413, Spieler2:10616993->10551456"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE08",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:19792173->19726636, Spieler2:11010214->10748066"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE0C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:20119858->20054318, Spieler2:11272362->11010214"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE10",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:20316469->20250931, Spieler2:11534510->11272362"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE14",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:20513080->20447542, Spieler2:11665585->11534510"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE18",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:20906298->20578617, Spieler2:11927732->11665585"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE1C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:21037376->20971839, Spieler2:12386488->11927732"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE20",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:21168450->21102913, Spieler2:12714176->12386488"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE24",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:21430598->21365059, Spieler2:12976324->12714176"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE28",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:21823820->21758279, Spieler2:13304010->12976324"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE2C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:22020431->21954893, Spieler2:13762768->13304010"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE30",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:22151505->22085968, Spieler2:13893843->13762768"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE34",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:22413652->22282578, Spieler2:14024917->13893843"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE38",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:22741337->22610262, Spieler2:14549207->14024917"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE3C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:22872412->22806875, Spieler2:14745823->14549207"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE40",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:23134558->22937949, Spieler2:14876898->14745823"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE44",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:23265634->23200097, Spieler2:15007972->14876898"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE48",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:23396708->23331171, Spieler2:15335655->15007972"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE4C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:23527782->23462245, Spieler2:15597804->15335655"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE50",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:23658856->23593319, Spieler2:15728879->15597804"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE54",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:24838518->24510825, Spieler2:16187638->15728879"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE58",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:25166204->24904059, Spieler2:16318712->16187638"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE5C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:25297281->25231744, Spieler2:16515322->16318712"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE60",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:25428355->25362818, Spieler2:16711933->16515322"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE64",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:25821574->25559428, Spieler2:16843008->16711933"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE68",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:25952651->25887114, Spieler2:17236227->16843008"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE6C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:26411410->26345868, Spieler2:17760525->17236227"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE70",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:26608021->26542483, Spieler2:18219283->17760525"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE74",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:26804631->26673558, Spieler2:18415896->18219283"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE78",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:27066780->27001241, Spieler2:18809115->18415896"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE7C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:27197854->27132317, Spieler2:19595555->18809115"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE80",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:27722149->27591071, Spieler2:19792172->19595555"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE84",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:27918760->27787687, Spieler2:19923247->19792172"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE88",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:28049835->27984298, Spieler2:20119858->19923247"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE8C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:28443053->28115372, Spieler2:20316468->20119858"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE90",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:28639668->28574130, Spieler2:20447543->20316468"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE94",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:28836279->28770741, Spieler2:20709690->20447543"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE98",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:29098425->28901816, Spieler2:21233984->20709690"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xE9C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:29491647->29295036, Spieler2:21561672->21233984"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xEA0",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:29688260->29622722, Spieler2:21758283->21561672"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xEA4",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:30278089->29950405, Spieler2:22020430->21758283"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xEA8",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:30802386->30540238, Spieler2:22348114->22020430"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xEAC",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:31064535->30867926, Spieler2:22544727->22348114"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xEB0",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:31261147->31130074, Spieler2:22675801->22544727"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xEB4",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:31457759->31392221, Spieler2:23003484->22675801"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xEB8",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:31654369->31523296, Spieler2:23265632->23003484"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xEBC",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:31850980->31719907, Spieler2:23527782->23265632"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xEC0",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:32309735->31916518, Spieler2:23658856->23527782"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xEC4",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:32899573->32834029, Spieler2:24969582->23658856"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xEC8",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:33161721->33096182, Spieler2:25362816->24969582"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xECC",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:33423868->33292794, Spieler2:25559429->25362816"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xED0",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:33620480->33554942, Spieler2:26018186->25559429"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xED4",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:33882627->33751553, Spieler2:26280336->26018186"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xED8",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:34013702->33948165, Spieler2:26411410->26280336"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xEDC",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:34144776->34079239, Spieler2:26608020->26411410"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xEE0",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:34406924->34341385, Spieler2:26935706->26608020"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xEE4",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:34603535->34537997, Spieler2:27066780->26935706"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xEE8",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:35062294->34996752, Spieler2:27328926->27066780"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xEEC",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:35258905->35193367, Spieler2:27787685->27328926"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xEF0",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:35455516->35389978, Spieler2:28180905->27787685"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xEF4",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:35717664->35652125, Spieler2:28377520->28180905"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xEF8",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:35914275->35848737, Spieler2:28508594->28377520"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xEFC",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:36176422->36045348, Spieler2:28639668->28508594"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF00",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:36307497->36241960, Spieler2:28770742->28705205"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF04",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:36438571->36373034, Spieler2:28901816->28836279"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF08",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:36635182->36569644, Spieler2:29032890->28967353"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF0C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:36766256->36700719, Spieler2:29360572->29098427"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF10",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:36897330->36831793, Spieler2:29622721->29426112"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF14",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:37028404->36962867, Spieler2:30015943->29819332"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF18",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:37356088->37225013, Spieler2:30212556->30147018"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF1C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:37552699->37421626, Spieler2:30343630->30278093"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xFA0",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:679->44565159, Spieler2:37028403->36897330"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xFA4",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler0:0->681, Spieler2:37225014->37093941"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x6C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler2:2880->2960, Spieler3:2840->2920"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x3B8",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler2:84->86, Spieler3:104->106"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x444",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler2:100->99, Spieler3:99->98"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x44C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler2:1->0, Spieler3:1->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x500",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler2:28->27, Spieler3:59->50"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x504",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler2:53->52, Spieler3:57->61"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x50C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler2:1239->1209, Spieler3:183->172"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x514",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler2:25->27, Spieler3:4->5"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x51C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler2:3->2, Spieler3:1->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x53C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler2:84->86, Spieler3:104->106"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xFDC",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler2:40174180->40108643, Spieler3:39977565->39649883"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xFE0",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler2:40698470->40239717, Spieler3:41550446->40764002"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xFE4",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler2:40829550->40764013, Spieler3:42009212->41681530"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xFE8",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler2:41222768->40895087, Spieler3:42271364->42205825"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xFEC",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler2:41419383->41288309, Spieler3:42467975->42402437"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xFF0",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler2:41550457->41419383, Spieler3:42664585->42533512"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xFF4",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler2:41681531->41550457, Spieler3:42926733->42795659"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xFF8",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler2:42074753->41681531, Spieler3:43516566->43385487"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xFFC",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler2:42271363->42074753, Spieler3:43844249->43582104"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1000",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler2:42402438->42271363, Spieler3:44303010->44171933"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1004",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler2:42533512->42402438, Spieler3:678->44434084"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1008",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler2:42664586->42533512, Spieler3:0->44696232"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x100C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler2:42861196->42664586, Spieler3:0->683"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2094",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler2:28->27, Spieler3:59->50"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2098",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler2:53->52, Spieler3:57->61"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x209C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler2:81->79, Spieler3:116->111"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x20B4",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler2:7710->4522, Spieler3:1400->14348"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x20C0",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler2:23->24, Spieler3:38->39"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x20EC",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler2:154566->155076, Spieler3:152474->152882"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2264",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler2:571690->571712, Spieler3:571692->571716"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2A00",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler2:3->4, Spieler3:3->4"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2A08",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler2:2->3, Spieler3:8->9"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2AEC",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler2:10->9, Spieler3:23->22"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2AF0",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler2:8->9, Spieler3:23->22"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2B38",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler2:46->48, Spieler3:162->164"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2B3C",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler2:561->563, Spieler3:561->563"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2B78",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler2:1->3, Spieler3:1->3"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x30F0",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler2:30->32, Spieler3:51->53"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x3860",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler2:3->0, Spieler3:4->1"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x38E8",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler2:470->483, Spieler3:544->558"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x3920",
+     "saetze": 2,
+     "uhr": false,
+     "beispiele": "Spieler2:408->418, Spieler3:508->518"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xD30",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler0:9175179->9109642"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xD34",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler0:9306253->9240716"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xD38",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler0:9502863->9371790"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xD3C",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler0:9633938->9568401"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xD40",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler0:9765012->9699475"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xD44",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler0:9896086->9830549"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xD48",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler0:10027160->9961623"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xD4C",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler0:10158234->10092697"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xD50",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler0:10289308->10223771"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xD54",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler0:10420382->10354845"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xD58",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler0:10551456->10485919"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xD5C",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler0:10682530->10616993"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xD60",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler0:10879141->10813603"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xD64",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler0:11010215->10944678"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xD68",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler0:11272361->11075752"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xD6C",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler0:11403437->11337900"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xD70",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler0:11534511->11468974"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xD74",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler0:11665585->11600048"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xD78",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler0:11796659->11731122"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xD7C",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler0:11927733->11862196"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xD80",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler0:12058807->11993270"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xD84",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler0:12189881->12124344"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xD88",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler0:12320955->12255418"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xD8C",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler0:12517566->12452028"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xD90",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler0:12714176->12583103"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xD94",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler0:13238470->12976322"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xD98",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler0:13435084->13369546"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xD9C",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler0:13566158->13500621"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xDA0",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler0:13697232->13631695"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xDA4",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler0:13893842->13762769"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xDA8",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler0:14024917->13959380"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xDAC",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler0:14155991->14090454"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xDB0",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler0:14614746->14287064"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xDB4",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler0:14745824->14680287"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xDB8",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler0:14942435->14876897"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xDBC",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler0:15073509->15007972"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xDC0",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler0:15270119->15139046"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xDC4",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler0:15401194->15335657"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xDC8",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler0:15532268->15466731"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xDCC",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler0:15728878->15597805"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xDD0",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler0:16122101->16056560"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xDD4",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler0:16580858->16384246"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xDD8",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler0:16908545->16843005"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xDDC",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler0:17105155->16974082"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xDE0",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler0:17301766->17170693"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xDE4",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler0:17563913->17367304"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xDE8",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler0:17760526->17694988"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xDEC",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler0:18284816->17826063"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x48",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:0->524288"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF20",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:30867921->30474703"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF24",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:30999000->30933463"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF28",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:31326684->31195609"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF2C",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:31588832->31457758"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF30",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:31719907->31654370"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF34",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:31850981->31785444"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF38",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:31982055->31916518"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF3C",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:32113129->32047592"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF40",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:32244203->32178666"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF44",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:32440813->32309740"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF48",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:32571888->32506351"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF4C",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:32768498->32637425"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF50",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:32899573->32834036"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF54",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:33096183->32965110"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF58",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:33423868->33292793"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF5C",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:33686017->33620478"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF60",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:34079236->33817090"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF64",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:34210313->34144776"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF68",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:34341387->34275850"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF6C",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:34537998->34472460"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF70",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:34800144->34603535"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF74",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:34931220->34865683"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF78",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:35127830->34996757"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF7C",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:35324442->35258904"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF80",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:35586589->35455515"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF84",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:35914273->35717663"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF88",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:36045349->35979812"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF8C",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:36241959->36110886"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF90",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:36438571->36373033"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF94",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:36569645->36504108"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF98",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:36700719->36635182"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xF9C",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:36831793->36766256"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xFA8",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:37487161->37290552"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xFAC",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:37618237->37618236"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xFC8",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:39453269->39256661"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xFCC",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:39649884->39584346"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xFD0",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:39780958->39715421"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xFD4",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:39912032->39846495"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0xFD8",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:40043106->39977569"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1010",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:43057808->42861196"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1014",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:43188882->43057808"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1018",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:43319956->43188882"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x101C",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:43516567->43319956"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1020",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:43713178->43516567"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1024",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:43909788->43713178"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1028",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:44040863->43909788"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x102C",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:44237473->44040863"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1030",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:44499621->44237473"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1034",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:0->44499621"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x1038",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:0->44696233"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x103C",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:0->683"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x20D4",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:3->4"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2220",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:0->546"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2224",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:0->526546"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2270",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:571370->571702"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2BB8",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:3->4"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2BC8",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:3->4"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x3288",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:0->1000"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x3594",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:0->571713"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x38C4",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:16->12"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x38E0",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:16->12"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x3910",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler2:16->12"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x54",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler3:0->9"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x68",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler3:0->7"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x78",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler3:78->77"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x4D8",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler3:254->256"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x20AC",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler3:2->3"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x20B0",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler3:280->276"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x20B8",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler3:50->51"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2180",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler3:78->77"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2184",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler3:56->55"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x21AC",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler3:16777216->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x21D8",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler3:65536->0"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x223C",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler3:76->75"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2B14",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler3:24->23"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2B1C",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler3:7->6"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2B20",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler3:32->14"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2B24",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler3:75->70"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2BD0",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler3:10->12"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x2C28",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler3:30->31"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x3108",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler3:1->3"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x35E0",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler3:5046347->5111885"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x35E4",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler3:5242958->5439568"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x35E8",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler3:5570643->5767253"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x35EC",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler3:5963864->6160475"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x35F0",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler3:6291550->6422624"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x35F4",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler3:6553698->6684772"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x35F8",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler3:6815846->7012456"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x35FC",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler3:7209067->7274606"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x3600",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler3:7405679->7536753"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x3604",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler3:7667827->7864437"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x3608",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler3:8061048->8257659"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x360C",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler3:8323198->8454271"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x3610",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler3:9109633->9240715"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x3614",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler3:9371789->9502863"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x3618",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler3:9633937->9699475"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x361C",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler3:9896084->10289303"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x3620",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler3:10354845->10420382"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x3624",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler3:10551455->10616993"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x3628",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler3:10748066->10813604"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x362C",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler3:11141285->11403434"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x3630",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler3:11534510->11600048"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x3634",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler3:11731121->11796659"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x3638",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler3:11862196->11927733"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x363C",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler3:12189878->12386490"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x3640",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler3:12648637->12779713"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x3644",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler3:12910787->13041861"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x3648",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler3:13172935->13369545"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x364C",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler3:13500620->206"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x3684",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler3:74->73"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x390C",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler3:94->100"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x3934",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler3:221->193"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x3938",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler3:217->231"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x3940",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler3:18->19"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x3948",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler3:268->564"
+    },
+    {
+     "art": "Feld",
+     "stelle": "+0x394C",
+     "saetze": 1,
+     "uhr": false,
+     "beispiele": "Spieler3:529841->526778"
+    }
+   ]
+  },
+  "sync": {
+   "worte": 512,
+   "geaendert": 0
+  }
+ }
+}

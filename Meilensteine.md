@@ -498,3 +498,25 @@ Aufbau: `werkzeug/config.py eintragen` -> `starte_spiel.py --links` -> `{"eigene
 - **Nur eine Rotkaeppchen ist im Spiel:** Spieler 3 hat Lord, 84 Einheiten, 1467 Gold; Spieler 2 hat KEINEN Lord, 0 Gold, 0 Holz, 4 Einheiten.
 - **Startplaetze zufaellig und vermutlich ungueltig:** Startplatz-Liste `[246, 0, 246, 2, 1, 246, 246, 246]` (246 = frei). Vermutung, ungeprueft: Index = Startplatz auf der Karte, Wert = Spieler. Dann stuende Spieler 2 auf Startplatz 4 - die Karte hat aber nur vier Plaetze. Das wuerde erklaeren, warum er weder Burg noch Lord hat.
 - Startgold nicht gemessen: pausiert wurde erst bei Tick 4691. Naechstes Mal sofort nach dem Start.
+
+### Lauf 2 - 30.09.2026, ab 21:18 - Daniels richtiger Aufbau als Referenz
+
+Daniel hat das Gefecht ueber die Lobby so aufgebaut, wie es sein soll: Liga_Grumpy Neighbors, zwei Rotkaeppchen oben und unten, kein Mensch. `werkzeug/aufbau.py` hat diesen Aufbau aus dem Speicher gelesen - **das Rezept fuer unseren Startbefehl, gemessen statt geraten:**
+
+| Feld | Lobby (richtig) | unser `eigenesGefecht` |
+|---|---|---|
+| Spieler-IDs (fullID) | alle -1 | Platz 1 = Mensch |
+| Mannschaft des Menschen | 255 = nicht dabei (Geist) | 0 = spielt mit |
+| Mannschaft der KIs | 0 und 0 | 1 und 2 |
+| Startplatz-Liste | `[246, 2, 1, 246, ...]` -> Plaetze 1 und 2 | zufaellig, u. a. 4 |
+| KI-Variante | 0 und 1 (Grossmutter / Jaegersmann) | nicht gesetzt |
+| Lords | Spieler 2 und 3 je einer, Spieler 1 nichts | Mensch mit Lord, Spieler 2 ohne |
+
+Beide KIs hatten bei Tick 114 je 1850 Gold. Beobachter-Daten: `daten/lauf2_daniels_aufbau.jsonl` (rund 90 Ticks/s, beide Lords lebten bis mindestens Tick 28.160).
+
+### Sammeln statt raten - das Verfahren (30.09.2026, Daniel: "erst alles sammeln, dann etwas Klares rausfischen und damit testen")
+
+- **M6.01 Schnappschuss** `{ "abzug": "<name>" }` (logik.lua): 11 Speicherbereiche roh in Dateien - Spieler, Einheiten, Gebaeude, Bauplaene, Spielzustand, Kern, fuenf Kartenschichten. **Gemessen: 3,6 MB in 0,2 s** - schnell genug fuer jede Pause.
+- **M6.02 Vergleich** `werkzeug/vergleich.py <A> <B>`: welche Stellen sich bewegt haben, bei Tabellen je Feld zusammengefasst, Uhr-Felder markiert. **Gegenprobe bestanden:** die eigene Tempo-Aenderung 90 -> 50 erscheint genau bei Kern +0xC8 = der bekannten Tempo-Adresse.
+- Erstes Paar (Tick 28.058 -> 28.160): rund 12.000 geaenderte Woerter. Zeitstempel-Felder (Einheit +0x3C/+0x40/+0x350/+0x354, Gebaeude +0x27C, Kern +0x98), bewegte Einheiten (+0xC4/+0xD4 bei 173 von 682), ein gemeinsamer Gebaeude-Zaehler (+0xC0 bei allen 207: 57 -> 59), 36 Kartenkacheln verlieren ein Bit, wachsende Spielerfelder (+0x2088, +0x2148/+0x22DC). Bericht: `daten/vergleich_p1.json`.
+- Naechster Schritt je Kandidat: **Steuerbarkeitstest** - Wert schreiben, laufen lassen, zuruecklesen: gehalten (steuerbar) oder ueberschrieben (vom Spiel berechnet).
