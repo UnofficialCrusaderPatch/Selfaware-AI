@@ -714,3 +714,13 @@ Werkzeug `werkzeug/spielende.py` (Mitschrift `daten/spielende_lauf.txt`, Bericht
 - **Gemessen:** der Endbildschirm (Ansicht 30, "Maechtigster Fuerst") kommt **rund 9-10 s Rechnerzeit** nach "Spiel vorbei" - Tempo 1000: 4.844 Ticks / 9.245 ms; Tempo 300: 1.799 Ticks / 9.698 ms. Die Ticks schrumpfen mit dem Tempo (0,37), die Zeit bleibt - Vermutung "feste Zeit" gehalten. (Tick-Angaben grob: ich habe etwa jede Sekunde nachgefragt; genau ist nur die Spieluhr.) Das erklaert die 6.906 Ticks aus Lauf 10: dort stand das Spiel beim Tod in der Pause, die Uhr lief weiter.
 - **Sieger aus dem Speicher:** `playerIsAlive` = [0, 0, 1, 0, ...] -> Spieler 2. Das Fenster im Spiel sagt dasselbe: "Niederlage - Rotkaeppchen, & die Grossmutter gewinnt" (Niederlage aus Sicht des Geist-Menschen), Meldungen "... toetete Rotkaeppchen, & der Jaegersmann" und "... erhaelt 500 Gold". Bild `daten/bilder/m4-04_BEWEIS_sieg_fenster_im_spiel.png`.
 - **Fuer die Lernschleife:** "gewonnen" ist mit `gameOver` = 1 sofort im Speicher ablesbar - auf den Endbildschirm muss niemand warten.
+
+### Nachtrag 01.10.2026, 00:23 - Daniels Frage: waren die ersten Ticks in den 15 Versuchen gleich?
+
+Ausgewertet aus `daten/wirkung_spieler2.json` (Wirkungstest 30.09.: 15 Laeufe, jeder aus frischem Selbstspiel-Start, Schnappschuss der 11 Speicherbereiche bei Tick 1100; in 13 Laeufen wurde bei Tick 1000 je ein Feld von Spieler 2 veraendert).
+
+- **Kontrolle 1 gegen 2:** gleich bis auf 4 Woerter - Kern +0x8 und +0xBC (laufen wie eine Uhr in Millisekunden), Kern +0x8C (1044 -> 1046), Spieler 1 +0x34.
+- **10 der 13 Laeufe mit Eingriff:** gegen Kontrolle 1 ausser genau diesen Uhr-Feldern (und dem veraenderten Feld selbst) **keine einzige** Abweichung.
+- **+0x50C (Gold):** zusaetzlich nur +0x448 - das Spiegelfeld des Golds, also Folge des Eingriffs.
+- **+0x20AC (Nahrung) und +0x2A54:** weichen ab (11 bzw. 458 Woerter) - Wirkung des Eingriffs; ob der Start gleich war, laesst sich aus diesen zwei nicht ablesen.
+- **Ergebnis:** 13 von 15 Laeufen standen bei Tick 1100 gleich da (ausser Uhr-Feldern); kein Lauf zeigt eine Abweichung, die nicht vom Eingriff kommt. **Grenze:** verglichen wurde nur der Stand bei Tick 1100, nicht jeder fruehe Tick einzeln; und es zeigt nur, dass sich der Anfang wiederholt - nicht, dass das ganze Spiel deterministisch ist (Daniels Schach-Vergleich).
