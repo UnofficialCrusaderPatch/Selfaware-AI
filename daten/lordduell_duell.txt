@@ -44,7 +44,7 @@ Ankunft (Lord -> Tick): {}
 aktives Textfeld: 2
 Laenge im Feld jetzt: 29
 ['[villagestudio]: LADEN: Knopf 3 gedrueckt, ok=true']
-GESCHAFFT: C:\Users\danie\Documents\Stronghold Crusader\Saves\M4-04 Lordduell Treffer T3354.sav (1078629 Byte), Kopie C:\Users\danie\Documents\PC_Affe\Games\Stronghold_Crusader\Stronghold Crusader Modding\Tools\Selfaware-AI\werkzeug\..\daten\spielstaende\M4-04 Lordduell Treffer T3354_20261001-001018.sav
+GESCHAFFT: %USERPROFILE%\Documents\Stronghold Crusader\Saves\M4-04 Lordduell Treffer T3354.sav (1078629 Byte), Kopie %USERPROFILE%\Documents\PC_Affe\Games\Stronghold_Crusader\Stronghold Crusader Modding\Tools\Selfaware-AI\werkzeug\..\daten\spielstaende\M4-04 Lordduell Treffer T3354_20261001-001018.sav
     [villagestudio]: TEMPO: 300 -> 1000 (Ticks je Sekunde = Tempowert).
     [villagestudio]: LORDWACHT Tick 3400: Lord 3 (192,191) 142950 | Lord 137 (194,193) 142950 | Abstand 2
     [villagestudio]: LORDWACHT: Tick 3454 - Lord 3 (Spieler 2) Leben 134850 (89 Prozent).

@@ -54,7 +54,9 @@ def speichere(name):
             kopie = os.path.join(SAMMLUNG, "%s_%s.sav" % (name, time.strftime("%Y%m%d-%H%M%S")))
             os.makedirs(SAMMLUNG, exist_ok=True)
             shutil.copy2(ziel, kopie)                                 # jede Fassung aufheben, auch beim Ueberschreiben
-            print("GESCHAFFT: %s (%d Byte), Kopie %s" % (ziel, os.path.getsize(ziel), kopie))
+            # nur Dateinamen ausgeben: Mitschriften landen im oeffentlichen Repo (keine persoenlichen Pfade)
+            print("GESCHAFFT: %s (%d Byte), Kopie daten/spielstaende/%s" % (
+                os.path.basename(ziel), os.path.getsize(ziel), os.path.basename(kopie)))
             return kopie
         time.sleep(1)
     raise RuntimeError("keine neue Datei %s nach 10 s" % ziel)
