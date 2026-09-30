@@ -544,3 +544,27 @@ Beide KIs hatten bei Tick 114 je 1850 Gold. Beobachter-Daten: `daten/lauf2_danie
   - neu berechnet (18): +0x78, +0x84, +0x88, +0x450, +0x2088, +0x209C, +0x20B0, +0x20B4, +0x2188, +0x2AE4, +0x2AF8, +0x2B08, +0x2B0C, +0x2B50, +0x2B6C, +0x2B70, +0x3100, +0x3860
 - Auffaellig: Holz bleibt stehen, **Fleisch wird zurueckgesetzt** - Nahrung zaehlt das Spiel offenbar aus dem Kornspeicher nach, Holz nicht. Ungeprueft.
 - Was die Felder bedeuten, ist bis auf Holz, Fleisch und Gold **nicht gedeutet** - die Karte sagt nur, WAS steuerbar ist. Rohdaten: `daten/steuerkarte_spieler2.json`.
+
+### Lauf 5 - 30.09.2026, 21:46 - Wirkungstest der 13 steuerbaren Felder
+
+- **M6.05 Wirkungstest** `werkzeug/wirkung.py`: zwei Kontroll-Laeufe ohne Eingriff (Selbstspiel, Tick 1000 -> genau 1100), dann je Feld ein Lauf mit Wert + 5000 bei Tick 1000; Vergleich mit Kontrolle 1 = **Fussabdruck** des Felds.
+- **Rauschen:** auch die zwei Kontrollen unterscheiden sich an 4-5 Stellen (Kern +0x8 und +0xBC - wachsen wie Echtzeit-Zaehler; Kern +0x8C, +0xAC; Spieler 1 +0x34 beim Geist). Diese Stellen gehoeren kuenftig in eine Ausnahmeliste des Vergleichs.
+- **Daniel, 30.09.:** zwei gleiche Kontrollen im Fenster Tick 1000-1100 sagen NICHTS darueber, ob das Spiel deterministisch ist - "wie wenn man bei Schach aus den ersten zwei Zuegen schliesst, das Spiel sei deterministisch". Verschiedene Kontrollen wuerden es dagegen widerlegen.
+- **Fussabdruecke (Rauschen abgezogen):**
+  - **+0x2A54** (4 -> 5004, gehalten): **458 Stellen** - 230 Einheitenfelder, 77 Gebaeudefelder, 100 Kacheln der Logikschicht, Grafik, Holz und Gold von Spieler 2. Der groesste Hebel; Bedeutung offen.
+  - **+0x20AC** (1 -> 5001, nach 100 Ticks 0): Brot und Fleisch (Ware 10 und 12) verschieben sich, dazu ein Gebaeude (+0x148/+0x150). Vermutet: Kornspeicher/Nahrungsverteilung.
+  - **+0x50C Gold** -> **+0x448 zieht mit** (1880 -> 6880): +0x448 ist ein Spiegel des Golds.
+  - +0x444, +0x448, +0x44C, +0x4D8, +0x2AFC, +0x389C, +0x20EC, +0x2B38, +0x2B3C, +0x39D4: **in diesem Fenster keine Wirkung ueber das Rauschen hinaus** - nicht "wirkungslos", manche wirken vielleicht spaeter.
+- Rohdaten: `daten/wirkung_spieler2.json`.
+
+## Leitsatz (Daniel, 30.09.2026)
+
+Das Ziel ist kein wiederholbares Spiel, sondern eine KI, die **jeden Tick auf spontane Entscheidungen reagiert** - spaeter gegen Menschen. Wiederholbarkeit ist ein **Pruefstand** (gleicher Start, eine Aenderung, vergleichen) und ein **Trainingswerkzeug**: ueber Spielstaende laesst sich eine bestimmte Lage beliebig oft laden und gezielt ueben. Immer opportunistisch denken.
+
+## Naechste Kette: Spielstaende als Trainingslagen (M7, Definition offen fuer Daniel)
+
+- **M7.01** Spielstand speichern per Befehl, ohne Maus.
+- **M7.02** Spielstand laden per Befehl.
+- **M7.03** Gegenprobe: Schnappschuss direkt nach dem Speichern und direkt nach dem Laden - gleich bis auf das bekannte Rauschen = verlustfrei.
+- **M7.04** Szenario-Bibliothek: benannte Spielstaende fuer Sonderfaelle (Lord in Gefahr, Belagerung, Wirtschaftskrise); jeder Trainingslauf startet exakt dort.
+- Danach **M8** Ansicht der KI je Tick und erste Reaktions-Regel mit gemessener Reaktionszeit in Ticks.
