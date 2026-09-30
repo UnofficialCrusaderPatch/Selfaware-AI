@@ -1,0 +1,72 @@
+[
+ {
+  "tempo": 1000,
+  "vorher": {
+   "gameOver": 0,
+   "lebt": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  "gameOver_tick": 5271,
+  "gameOver_uhr": 21814578,
+  "gameOverTime": 21813237,
+  "lebt": [
+   0,
+   0,
+   1,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "ende_tick": 10115,
+  "ende_uhr": 21822482,
+  "abstand_ticks": 4844,
+  "abstand_ms": 9245
+ },
+ {
+  "tempo": 300,
+  "vorher": {
+   "gameOver": 0,
+   "lebt": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  "gameOver_tick": 5070,
+  "gameOver_uhr": 21862987,
+  "gameOverTime": 21861150,
+  "lebt": [
+   0,
+   0,
+   1,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "ende_tick": 6869,
+  "ende_uhr": 21870848,
+  "abstand_ticks": 1799,
+  "abstand_ms": 9698
+ }
+]

@@ -44,9 +44,9 @@ Lieferung 1 (30.09.2026): Bloecke M1 Grundlagen, M2 Spiel starten, M3 Gefecht st
 | M3.12 | Tempo erst NACH dem Start setzen | gemessen (Lauf 1) | Lauf 1 | Hintergrund belegt 21:10 |
 | M4.01 | Die Lords im Gefecht finden | gemessen | abgenommen 30.09.2026 | - |
 | M4.02 | Lord-Tod erkennen | gemessen | abgenommen 30.09.2026 | - |
-| M4.03 | Was nach dem Lord-Tod wirklich passiert | offen | abgenommen 30.09.2026 | - |
+| M4.03 | Was nach dem Lord-Tod wirklich passiert | **gemessen 01.10.** (Lauf 11) | abgenommen 30.09.2026 | - |
 | M4.04 | Der einfachste echte Tod: zwei Lords laufen aufeinander zu | **gemessen 01.10.** (Lauf 10), Live-Abnahme offen | abgenommen 30.09.2026 | - |
-| M4.05 | Den Sieger aus dem Speicher lesen | **gemessen 01.10., ein Fall** (Lauf 10) | abgenommen 30.09.2026 | - |
+| M4.05 | Den Sieger aus dem Speicher lesen | **gemessen 01.10.** (Lauf 10/11: `playerIsAlive` 0x0117EF40) | abgenommen 30.09.2026 | - |
 | M4.06 | Den Endbildschirm erkennen | gemessen | abgenommen 30.09.2026 | - |
 | M4.07 | Zeitlimit: die ersten X Ticks | offen | abgenommen 30.09.2026 | - |
 | M5.01 | Was ein Tick ist und wo er steht | belegt | abgenommen 30.09.2026 | - |
@@ -705,3 +705,12 @@ Werkzeug `werkzeug/lordduell.py` (Mitschriften `daten/lordduell_*.txt`), neue Mo
 - **Sieger aus dem Speicher (M4.05, ein Fall):** Sieger = der Spieler, dessen Lord noch lebt (Lord 3: Zustand 2, Typ 55, Leben 150); der Platz des toten Lords wird neu vergeben (spaeter Typ 44).
 - **Beweisbilder** (nicht im Repo, `daten/bilder/`): `m4-04_BEWEIS_lords_kaempfen_t4023.png` (+ `_nah`), `m4-04_BEWEIS_endbildschirm_maechtigster_fuerst.png`.
 - **Offen:** Live-Abnahme durch Daniel; warum der Endbildschirm erst 6.906 Ticks nach dem Tod kommt (M4.03); ob die Reihenfolge der Einheitennummern den Gleichstand entscheidet.
+
+### Lauf 11 - 01.10.2026, 00:16-00:20 - M4.03 Was nach dem Lord-Tod passiert
+
+Werkzeug `werkzeug/spielende.py` (Mitschrift `daten/spielende_lauf.txt`, Bericht `daten/spielende_*.json`), Dekompilat `daten/dekomp_spielende.c`. Start aus `M4-04 Lordduell Treffer T3354`.
+
+- **Abgelesen:** `checkSkirmishGameDefeat` (0x00486600, aus `processGameTick`) zaehlt je Team die toten Lords (`lordKilledByPlayerID`). Lebt hoechstens noch ein Team, setzt es **sofort** `gameOver` (0x0117D500) = 1, `gameOverTime` (0x0117C888) = **Rechneruhr** (`timeGetTime`, ms), `playerIsAlive[9]` (short, ab 0x0117EF40) und blendet das Sieg/Niederlage-Fenster ein.
+- **Gemessen:** der Endbildschirm (Ansicht 30, "Maechtigster Fuerst") kommt **rund 9-10 s Rechnerzeit** nach "Spiel vorbei" - Tempo 1000: 4.844 Ticks / 9.245 ms; Tempo 300: 1.799 Ticks / 9.698 ms. Die Ticks schrumpfen mit dem Tempo (0,37), die Zeit bleibt - Vermutung "feste Zeit" gehalten. (Tick-Angaben grob: ich habe etwa jede Sekunde nachgefragt; genau ist nur die Spieluhr.) Das erklaert die 6.906 Ticks aus Lauf 10: dort stand das Spiel beim Tod in der Pause, die Uhr lief weiter.
+- **Sieger aus dem Speicher:** `playerIsAlive` = [0, 0, 1, 0, ...] -> Spieler 2. Das Fenster im Spiel sagt dasselbe: "Niederlage - Rotkaeppchen, & die Grossmutter gewinnt" (Niederlage aus Sicht des Geist-Menschen), Meldungen "... toetete Rotkaeppchen, & der Jaegersmann" und "... erhaelt 500 Gold". Bild `daten/bilder/m4-04_BEWEIS_sieg_fenster_im_spiel.png`.
+- **Fuer die Lernschleife:** "gewonnen" ist mit `gameOver` = 1 sofort im Speicher ablesbar - auf den Endbildschirm muss niemand warten.

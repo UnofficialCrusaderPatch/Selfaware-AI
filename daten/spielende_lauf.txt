@@ -1,0 +1,14 @@
+Eintrag 0 'M4-04 Lordduell Treffer T3354' -> Scrollstand 0, Zeile 0; Spielzeit vorher 4353
+['[villagestudio]: LADEPAUSE: scharf (jetzt Tick 4353, pausiert).']
+['[villagestudio]: POKE 0x01126628: 0 -> 0', '[villagestudio]: POKE 0x01126624: 0 -> 0', '[villagestudio]: LADEN: Knopf 2 gedrueckt, ok=true', '[villagestudio]: logik: 3 von 3 Befehlen ausgefuehrt, 0 schon erledigt.', '[villagestudio]: LADEPAUSE: Laden erkannt (Spielzeit sprang um -999) bei Tick 3354 - angehalten.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 3354.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 3354.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 3354.']
+Spielzeit nachher 3354 / 3354, Pause 1
+  Spiel vorbei gesetzt: Tick 5271, Spieluhr 21813237, lebt [0, 0, 1, 0, 0, 0, 0, 0, 0]
+  Endbildschirm: Tick 10115 -> 4844 Ticks und 9245 ms nach 'Spiel vorbei'
+Eintrag 0 'M4-04 Lordduell Treffer T3354' -> Scrollstand 0, Zeile 0; Spielzeit vorher 10115
+['[villagestudio]: LADEPAUSE: scharf (jetzt Tick 10115, NICHT pausiert - nur der Zeitsprung zaehlt).']
+['[villagestudio]: POKE 0x01126628: 0 -> 0', '[villagestudio]: POKE 0x01126624: 0 -> 0', '[villagestudio]: LADEN: Knopf 2 gedrueckt, ok=true', '[villagestudio]: logik: 3 von 3 Befehlen ausgefuehrt, 0 schon erledigt.', '[villagestudio]: LADEPAUSE: Laden erkannt (Spielzeit sprang um -6761) bei Tick 3354 - angehalten.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 3354.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 3354.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 3354.']
+Spielzeit nachher 3354 / 3354, Pause 1
+  Spiel vorbei gesetzt: Tick 5070, Spieluhr 21861150, lebt [0, 0, 1, 0, 0, 0, 0, 0, 0]
+  Endbildschirm: Tick 6869 -> 1799 Ticks und 9698 ms nach 'Spiel vorbei'
+Tempo 1000: 4844 Ticks / 9245 ms | Tempo 300: 1799 Ticks / 9698 ms
+URTEIL: feste ZEIT (Ticks schrumpfen auf 0.37)
