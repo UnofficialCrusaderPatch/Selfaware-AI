@@ -568,3 +568,12 @@ Das Ziel ist kein wiederholbares Spiel, sondern eine KI, die **jeden Tick auf sp
 - **M7.03** Gegenprobe: Schnappschuss direkt nach dem Speichern und direkt nach dem Laden - gleich bis auf das bekannte Rauschen = verlustfrei.
 - **M7.04** Szenario-Bibliothek: benannte Spielstaende fuer Sonderfaelle (Lord in Gefahr, Belagerung, Wirtschaftskrise); jeder Trainingslauf startet exakt dort.
 - Danach **M8** Ansicht der KI je Tick und erste Reaktions-Regel mit gemessener Reaktionszeit in Ticks.
+
+### Stand M7 nach Nachsehen (30.09.2026, 21:52 - Daniels Hinweis "schau, ob das schon beantwortet ist")
+
+- **M7.02 Laden: SCHON GELOEST (gemessen 02.09.2026)** - VillageStudio `doku/Menue-Handbuch.md` ("Einen bestimmten Spielstand laden") und `doku/Uebergabe_2026-09-02.md`: Lade-Dialog per Menueknopf, dann in EINEM Auftrag (`befehle`) Scrollstand `0x01126628` und markierte Zeile `0x01126624` setzen und `{"laden": 2}` - 1,5 s. Fallen: Laden hebt die Pause auf (danach pausieren und Flag `0x01FEA054` pruefen); zwei Befehle kurz nacheinander loeschen einander (Poll alle 20 Bilder). **Wird uebernommen, nicht neu gebaut.**
+- **M7.01 Speichern: OFFEN** ("noch nicht angefasst" laut Uebergabe 02.09.). Zwei Wege gefunden, Entschluesselung in `daten/dekomp_speichern_laden.c`:
+  - (a) **Menueweg wie beim Laden** - im Lade-/Speicher-Dialog ist Knopf 3 "Speichern" (bisher nur abgelesen); braucht zusaetzlich den Dateinamen im Eingabefeld.
+  - (b) `AutoSaveTriggered` (0x00489880) ist **kein einfacher Speicherknopf**, sondern ein netzwerk-synchronisierter Spielbefehl (verpackt Parameter, merkt je Spieler die Ankuendigung). Direkt rufen moeglich, aber riskanter.
+  - Vorschlag: (a) zuerst - derselbe, schon belegte Mechanismus wie beim Laden.
+- Nebenbei: `{"kamera": [x, y]}` gibt es schon (Uebergabe 02.09.) - Kamera an eine Kartenstelle, nuetzlich fuers Zuschauen (M12).
