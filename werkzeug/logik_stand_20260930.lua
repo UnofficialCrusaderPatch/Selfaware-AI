@@ -64,6 +64,9 @@ local KOSTENFELD   = { holz = 0, stein = 4, eisen = 8, pech = 12, gold = 16 }
 local TICKZAEHLER  = 0x0117CADC
 local TEMPO        = 0x1FE7DD8
 local PAUSE        = 0x1FEA054
+-- Tick-genaue Pause (30.09.2026, Selfaware-AI, Daniels Idee): { naechster, alle, bis, anzahl }
+-- Oben deklariert, weil einzelbefehl und der Taktgeber beide darauf zugreifen.
+local tickPause    = nil
 
 -- Einheiten befehligen (05.09.2026). Blosses Schreiben der Ziel-Felder bewegt
 -- eine Einheit NICHT (gemessen) - der Wegplan wird in setDestinationForUnit
@@ -695,6 +698,26 @@ end
 local function einzelbefehl(cmd)
   if type(cmd) ~= "table" then return false end
   local spieler = cmd.player
+
+  -- { "tickpause": { "bei": 1, "alle": 100, "bis": 5000 } }  oder  { "tickpause": "aus" }
+  -- Haelt das Spiel an, sobald der Tickzaehler "bei" erreicht; mit "alle" danach
+  -- wiederholt. Im Menue gesetzt, greift es beim naechsten Gefecht ab Tick 1.
+  if cmd.tickpause ~= nil then
+    local tp = cmd.tickpause
+    if tp == "aus" or tp == false then
+      tickPause = nil
+      log(INFO, "TICKPAUSE: aus.")
+      return true
+    end
+    if type(tp) ~= "table" or tonumber(tp.bei) == nil then
+      log(WARNING, "TICKPAUSE: 'bei' fehlt.")
+      return false
+    end
+    tickPause = { naechster = tonumber(tp.bei), alle = tonumber(tp.alle), bis = tonumber(tp.bis), anzahl = 0 }
+    log(INFO, string.format("TICKPAUSE: scharf - Pause bei Tick %d%s (jetzt Tick %d).",
+      tickPause.naechster, tickPause.alle and (", danach alle " .. tickPause.alle) or "", tick()))
+    return true
+  end
 
   if cmd.pause ~= nil then
     core.writeInteger(PAUSE, cmd.pause == true and 1 or 0)
@@ -1597,9 +1620,35 @@ local function einzelbefehl(cmd)
     for i = 1, #karte do core.writeByte(kartName + i - 1, karte:byte(i)) end
     core.writeByte(kartName + #karte, 0)
 
-    for slot = 1, 1 + anzKI do platziereZuf(slot) end
+    -- Selbstspiel (30.09.2026, Selfaware-AI): GEMESSEN an Daniels Lobby-Aufbau
+    -- auf Liga_Grumpy Neighbors - kein Mensch (fullID leer, Mannschaft 255),
+    -- beide KIs Mannschaft 0, feste Startplatz-Liste, Varianten 0/1. Die
+    -- Zufallsplatzierung faellt weg. { "selbstspiel": true } plus optional
+    -- "startliste": [8 Byte] und "varianten": [je KI].
+    if cmd.selbstspiel == true then
+      core.writeInteger(fullID + 4, 0xFFFFFFFF)            -- Platz 1 wieder leer
+      for i = 0, 8 do
+        core.writeByte(gruppe + i, (i >= 2 and i <= 1 + anzKI) and 0 or 0xFF)
+        core.writeInteger(aiVar + i * 4, 0)
+      end
+      local liste = (type(cmd.startliste) == "table") and cmd.startliste
+                    or { 246, 2, 1, 246, 246, 246, 246, 246 }
+      for i = 0, 7 do core.writeByte(posArr + i, tonumber(liste[i + 1]) or 246) end
+      local var = (type(cmd.varianten) == "table") and cmd.varianten or { 0, 1 }
+      for slot = 2, 1 + anzKI do core.writeInteger(aiVar + slot * 4, tonumber(var[slot - 1]) or 0) end
+      log(INFO, "GEFECHT: Selbstspiel-Aufbau (kein Mensch, feste Startplaetze) nach Lobby-Messung 30.09.")
+    else
+      for slot = 1, 1 + anzKI do platziereZuf(slot) end
+    end
 
     log(INFO, string.format("GEFECHT: Karte '%s', %d Gegner vom Typ %d", karte, anzKI, ki))
+    -- "startpause": N haelt das neue Gefecht bei Tick N an (30.09.2026). Eigener
+    -- Name, weil ein Befehl mit "tickpause" schon weiter oben abgefangen wird -
+    -- und weil im Hauptmenue nur Startbefehle durchkommen (gemessen).
+    if tonumber(cmd.startpause) then
+      tickPause = { naechster = tonumber(cmd.startpause), alle = tonumber(cmd.startpauseAlle), anzahl = 0 }
+      log(INFO, "GEFECHT: Startpause scharf bei Tick " .. tickPause.naechster)
+    end
     starteGefecht(0)                                  -- 0 = Burgen selbst waehlen
     zeigeMenue(CORE, 14, 0)                           -- MVT_BUILD_MENU
     log(INFO, "GEFECHT: LaunchSkirmishGame zurueck")
@@ -2034,7 +2083,28 @@ end
 -- 7. Taktgeber
 --============================================================================
 
+local function tickPauseTick()
+  if tickPause == nil then return end
+  local t = tick()
+  -- GEMESSEN 30.09.: waehrend des Gefechtsaufbaus liefert der Tickzaehler kurz
+  -- Unsinn (7.807.163). Werte weit ueber dem Ziel werden deshalb ignoriert.
+  if t > tickPause.naechster + 200000 then return end
+  if t >= tickPause.naechster then
+    core.writeInteger(PAUSE, 1)
+    tickPause.anzahl = tickPause.anzahl + 1
+    log(INFO, string.format("TICKPAUSE: angehalten bei Tick %d (Ziel %d, Nr. %d).",
+      t, tickPause.naechster, tickPause.anzahl))
+    local weiter = tickPause.alle and tickPause.naechster + tickPause.alle
+    if weiter and (tickPause.bis == nil or weiter <= tickPause.bis) then
+      tickPause.naechster = weiter
+    else
+      tickPause = nil
+    end
+  end
+end
+
 local function everyTick()
+  pcall(tickPauseTick)        -- zuerst: die Pause soll vor allem anderen greifen
   pcall(mauerwachtTick)
   pcall(gebaeudewachtTick)
   pcall(bauwachtTick)
