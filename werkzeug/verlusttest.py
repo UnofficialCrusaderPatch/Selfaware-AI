@@ -27,7 +27,8 @@ from wirkung import lade, SAETZE
 
 M701 = "M7-01 Speichertest Grumpy T1100"
 M703 = "M7-03 Verlusttest Grumpy T1200"
-# Bekanntes Rauschen: wich schon zwischen zwei gleichen Kontroll-Laeufen ab (wirkung.py, 30.09.)
+# Bekanntes Rauschen (wirkung.py, 30.09.): +0x8, +0x8C, +0xBC und Spieler 1 +0x34 wichen zwischen zwei
+# gleichen Kontroll-Laeufen ab; +0xAC nur in den Feld-Laeufen - vorsichtshalber mitgezaehlt.
 RAUSCHEN = {("kern", 0x8), ("kern", 0x8C), ("kern", 0xAC), ("kern", 0xBC), ("spieler", 1 * SATZ + 0x34)}
 DATEN = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "daten")
 
