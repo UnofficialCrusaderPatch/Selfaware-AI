@@ -565,7 +565,7 @@ Das Ziel ist kein wiederholbares Spiel, sondern eine KI, die **jeden Tick auf sp
 
 - **M7.01** Spielstand speichern per Befehl, ohne Maus. - **Im Hintergrund belegt 30.09., 22:03** (Lauf 7), Live-Abnahme durch Daniel offen.
 - **M7.02** Spielstand laden per Befehl. - **Abgenommen von Daniel 30.09., 22:23** ("ja nehme ab"; Lauf 8).
-- **M7.03** Gegenprobe: Schnappschuss direkt nach dem Speichern und direkt nach dem Laden - gleich bis auf das bekannte Rauschen = verlustfrei. - **30.09., 23:28-23:33 gemessen (Lauf 9): so wie definiert NICHT erfuellt** - der geladene Stand ist die Welt einen Tick weiter, der Tickzaehler zeigt aber den gespeicherten Wert; wiederholbar ist das Laden dagegen (zweimal laden = gleich). Entscheidung bei Daniel, ob das fuer M7.04 reicht.
+- **M7.03** Gegenprobe: Schnappschuss direkt nach dem Speichern und direkt nach dem Laden - gleich bis auf das bekannte Rauschen = verlustfrei. - **30.09., 23:28-23:33 gemessen (Lauf 9): so wie definiert NICHT erfuellt** - der geladene Stand ist die Welt einen Tick weiter, der Tickzaehler zeigt aber den gespeicherten Wert; wiederholbar ist das Laden dagegen (zweimal laden = gleich). **Abgenommen von Daniel 30.09., 23:40 als "wiederholbar statt verlustfrei"** ("ja passt"): Startpunkt einer Trainingslage ist der geladene Stand.
 - **M7.04** Szenario-Bibliothek: benannte Spielstaende fuer Sonderfaelle (Lord in Gefahr, Belagerung, Wirtschaftskrise); jeder Trainingslauf startet exakt dort.
 - Danach **M8** Ansicht der KI je Tick und erste Reaktions-Regel mit gemessener Reaktionszeit in Ticks.
 
@@ -656,3 +656,24 @@ Vorlauf: Das Spiel war um 22:24 zu (Log endet 8 s nach dem Laden eines Stands mi
 - **Die 60 Reststellen:** Gebaeudeliste-Kopf +0x8 (nach jedem Laden 2000, im Lauf 69) und +0x10; vier Gebaeude (Nr. 3, 5, 12, 14) mit Zaehlern um einen Schritt anders; bei allen Spielern +0x2AE4 (2 statt 1); Spieler 2/3 +0x6C, +0x2AEC, +0x2B08; ein Einheitenfeld; Kern +0x98/+0xA0/+0xB8; 23 Stellen in der Grafikschicht. **Gold, Vorraete und die uebrigen Einheitendaten: gleich.**
 - **Kern +0xA0** = Tick des letzten Ladens + 1 (A: 1101 nach Laden bei 1100; B: 1201 nach Laden bei 1200) - ein Lade-Merker, kein Spielzustand.
 - **Was das fuer das Training heisst (Vorschlag, Daniels Entscheidung):** Fuer die Szenario-Bibliothek zaehlt, dass jeder Trainingslauf aus einem Spielstand **gleich** startet - das ist belegt (B = B2). Der Startpunkt einer Lage ist dann "der geladene Stand", nicht "der Moment des Speicherns".
+
+## M9 Navigation auf der Karte (Daniels Auftrag 30.09.2026, 23:40)
+
+Daniels Bedienung: Tab = Leiste weg; C/X = drehen; Leertaste = abflachen; Rechtsklick gedrueckt halten = Menue (links abflachen, unten abgesenkt mit Gebaeuden offen, rechts zoomen - "die weiter raus Zoomstufe empfohlen" -, oben drehen); Pfeiltasten und Raender = scrollen. "Nichts ist besser, nur so nutze ich das."
+
+**Weg:** keine Tasten druecken (Daniel arbeitet daneben), sondern die Spielfunktionen dahinter per Befehl rufen. Abgelesen aus `WindowMsgProcessingFunc` (Tasten) und `MenuItemActionHandler_InGameMenu_PeasantBuildAndRightClickMenuSelection` (Rechtsklick-Menue), Dekompilate `daten/dekomp_navigation*.c`. Werkzeug `werkzeug/navigation.py` (Bericht `daten/navigation_*.json`, Bilder `daten/bilder/m9_*`).
+
+| Nr | Befehl | Spielfunktion | Stand 30.09., 23:50 |
+|---|---|---|---|
+| M9.01 | `{"kamera": [x, y]}` | `focusOnCoordinate` 0x004E8CA0 | **belegt** - Bild 68 % anders |
+| M9.02 | `{"leiste": true}` (Umschalter) | `hideOrUnhideUI` 0x00471AA0 (Tab) | **belegt** - Menuereiter 48 <-> 60, sichtbare Breite 246 <-> 278 Felder; im Kartenbild verschwindet die Kapuze des Beraters unten und kommt beim Rueckweg wieder (gleicher Ausschnitt: oben 0,0 %, unten 1,7 % anders) |
+| M9.03 | `{"drehen": "rechts" \| "links"}` (auch 0/2/4/6) | `setMapRotation` 0x004F70E0 (Strg+Pfeil, Rechtsklick oben) | **belegt** - Ausrichtung 0 -> 6 -> 0, Bild je ueber 60 % anders. Welche Richtung im Bild "im Uhrzeigersinn" ist: noch nicht bestimmt |
+| M9.04 | `{"grundriss": true \| false}` | `toggleFlatView` 0x004F70B0 (Leertaste, Rechtsklick links) | **belegt** - 0 -> 1 -> 0, Bild je 14 % anders; dabei stellt das Spiel die Absenk-Stufe selbst auf 2 und zurueck auf 4 |
+| M9.05 | `{"zoom": "raus" \| "rein"}` | `resetupViewport` 0x004E7770 (Strg+Hoch, Rechtsklick rechts) | **belegt** - raus = 246 x 130 Felder sichtbar, rein = 123 x 65; das Spiel stand schon auf "raus" |
+| M9.06 | `{"absenken": true \| false}` | `triggerLoweredView` 0x004F6FD0 (Rechtsklick unten, Strg+Runter) | **offen** - greift nur einen Augenblick: das Rechtsklick-Menue setzt die Ansicht in jedem Bild auf normal zurueck, solange nichts gedrueckt gehalten wird (abgelesen); gemessen: Modul las 3, danach wieder 4. Eine Halte-Ansicht wie Daniels Maustaste |
+| M9.07 | Scrollen wie Pfeiltasten | `ScrollingHandler` 0x0112B070 | nicht gebaut - `kamera` springt direkt |
+
+- Gegenlaeufe: Jeder Schalter ging vom **echten** Startzustand ins Gegenteil und zurueck; am Ende stand jedes Feld wieder auf dem Ausgang. (Erster Lauf 23:44 war fehlerhaft: Grundriss und Zoom standen schon auf an/raus, und die Absenk-Stufe las ich am falschen Feld - das Spiel verbraucht 0x01FE7AC0 sofort, der Stand steht in 0x01FE7AC4.)
+- Das Speicherbild `{"bild": "menue"}` zeigt im Spiel nur die zuletzt gezeichnete Leiste - als Beleg fuer die Leiste taugt es nicht; das Kartenbild nach einem Kamera-Anstoss schon.
+- Die Kamerafelder 0x021AEC74/78 sind nicht dieselben Koordinaten wie im `kamera`-Befehl (Befehl (162,104) -> Felder (138,133)).
+- **Offen:** Live-Abnahme durch Daniel fuer M9.01-M9.05; Drehrichtung im Bild; ob M9.06 gebraucht wird.

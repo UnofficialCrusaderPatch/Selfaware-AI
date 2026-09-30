@@ -1,0 +1,386 @@
+{
+ "zeit": "2026-09-30 23:44:51",
+ "schritte": [
+  {
+   "name": "kamera",
+   "befehl": {
+    "kamera": [
+     162,
+     104
+    ]
+   },
+   "feld": "kameraX",
+   "vorher": {
+    "kameraX": 141,
+    "kameraY": 282,
+    "hoehe": 130,
+    "breite": 246,
+    "zoom": 1,
+    "drehung": 0,
+    "grundriss": 1,
+    "absenkung": 0,
+    "menuereiter": 48,
+    "ansicht": 14
+   },
+   "nachher": {
+    "kameraX": 138,
+    "kameraY": 133,
+    "hoehe": 130,
+    "breite": 246,
+    "zoom": 1,
+    "drehung": 0,
+    "grundriss": 1,
+    "absenkung": 0,
+    "menuereiter": 48,
+    "ansicht": 14
+   },
+   "bild_anders": 0.6920628458498024,
+   "gilt": true,
+   "antwort": [
+    "[villagestudio]: KAMERA: auf (162,104), ok=true"
+   ]
+  },
+  {
+   "name": "leiste_weg",
+   "befehl": {
+    "leiste": true
+   },
+   "feld": "hoehe",
+   "vorher": {
+    "kameraX": 138,
+    "kameraY": 133,
+    "hoehe": 130,
+    "breite": 246,
+    "zoom": 1,
+    "drehung": 0,
+    "grundriss": 1,
+    "absenkung": 0,
+    "menuereiter": 48,
+    "ansicht": 14
+   },
+   "nachher": {
+    "kameraX": 138,
+    "kameraY": 133,
+    "hoehe": 130,
+    "breite": 278,
+    "zoom": 1,
+    "drehung": 0,
+    "grundriss": 1,
+    "absenkung": 0,
+    "menuereiter": 60,
+    "ansicht": 14
+   },
+   "bild_anders": 0.002508300395256917,
+   "gilt": false,
+   "antwort": [
+    "[villagestudio]: LEISTE: umgeschaltet, ok=true (Ansichtshoehe vorher 130)"
+   ]
+  },
+  {
+   "name": "leiste_zurueck",
+   "befehl": {
+    "leiste": true
+   },
+   "feld": "hoehe",
+   "vorher": {
+    "kameraX": 138,
+    "kameraY": 133,
+    "hoehe": 130,
+    "breite": 278,
+    "zoom": 1,
+    "drehung": 0,
+    "grundriss": 1,
+    "absenkung": 0,
+    "menuereiter": 60,
+    "ansicht": 14
+   },
+   "nachher": {
+    "kameraX": 138,
+    "kameraY": 133,
+    "hoehe": 130,
+    "breite": 246,
+    "zoom": 1,
+    "drehung": 0,
+    "grundriss": 1,
+    "absenkung": 0,
+    "menuereiter": 48,
+    "ansicht": 14
+   },
+   "bild_anders": 0.002524901185770751,
+   "gilt": false,
+   "antwort": [
+    "[villagestudio]: LEISTE: umgeschaltet, ok=true (Ansichtshoehe vorher 130)"
+   ]
+  },
+  {
+   "name": "drehen_rechts",
+   "befehl": {
+    "drehen": "rechts"
+   },
+   "feld": "drehung",
+   "vorher": {
+    "kameraX": 138,
+    "kameraY": 133,
+    "hoehe": 130,
+    "breite": 246,
+    "zoom": 1,
+    "drehung": 0,
+    "grundriss": 1,
+    "absenkung": 0,
+    "menuereiter": 48,
+    "ansicht": 14
+   },
+   "nachher": {
+    "kameraX": 209,
+    "kameraY": 185,
+    "hoehe": 130,
+    "breite": 246,
+    "zoom": 1,
+    "drehung": 6,
+    "grundriss": 1,
+    "absenkung": 0,
+    "menuereiter": 48,
+    "ansicht": 14
+   },
+   "bild_anders": 0.6142316205533597,
+   "gilt": true,
+   "antwort": [
+    "[villagestudio]: DREHEN: 0 -> Auftrag 6, ok=true"
+   ]
+  },
+  {
+   "name": "drehen_links",
+   "befehl": {
+    "drehen": "links"
+   },
+   "feld": "drehung",
+   "vorher": {
+    "kameraX": 209,
+    "kameraY": 185,
+    "hoehe": 130,
+    "breite": 246,
+    "zoom": 1,
+    "drehung": 6,
+    "grundriss": 1,
+    "absenkung": 0,
+    "menuereiter": 48,
+    "ansicht": 14
+   },
+   "nachher": {
+    "kameraX": 150,
+    "kameraY": 143,
+    "hoehe": 130,
+    "breite": 246,
+    "zoom": 1,
+    "drehung": 0,
+    "grundriss": 1,
+    "absenkung": 0,
+    "menuereiter": 48,
+    "ansicht": 14
+   },
+   "bild_anders": 0.6807367588932807,
+   "gilt": true,
+   "antwort": [
+    "[villagestudio]: DREHEN: 6 -> Auftrag 0, ok=true"
+   ]
+  },
+  {
+   "name": "grundriss_an",
+   "befehl": {
+    "grundriss": true
+   },
+   "feld": "grundriss",
+   "vorher": {
+    "kameraX": 150,
+    "kameraY": 143,
+    "hoehe": 130,
+    "breite": 246,
+    "zoom": 1,
+    "drehung": 0,
+    "grundriss": 1,
+    "absenkung": 0,
+    "menuereiter": 48,
+    "ansicht": 14
+   },
+   "nachher": {
+    "kameraX": 150,
+    "kameraY": 143,
+    "hoehe": 130,
+    "breite": 246,
+    "zoom": 1,
+    "drehung": 0,
+    "grundriss": 1,
+    "absenkung": 0,
+    "menuereiter": 48,
+    "ansicht": 14
+   },
+   "bild_anders": 4.189723320158103e-05,
+   "gilt": false,
+   "antwort": [
+    "[villagestudio]: GRUNDRISS: 1, ok=true"
+   ]
+  },
+  {
+   "name": "grundriss_aus",
+   "befehl": {
+    "grundriss": false
+   },
+   "feld": "grundriss",
+   "vorher": {
+    "kameraX": 150,
+    "kameraY": 143,
+    "hoehe": 130,
+    "breite": 246,
+    "zoom": 1,
+    "drehung": 0,
+    "grundriss": 1,
+    "absenkung": 0,
+    "menuereiter": 48,
+    "ansicht": 14
+   },
+   "nachher": {
+    "kameraX": 150,
+    "kameraY": 143,
+    "hoehe": 130,
+    "breite": 246,
+    "zoom": 1,
+    "drehung": 0,
+    "grundriss": 0,
+    "absenkung": 0,
+    "menuereiter": 48,
+    "ansicht": 14
+   },
+   "bild_anders": 0.14627233201581027,
+   "gilt": true,
+   "antwort": [
+    "[villagestudio]: GRUNDRISS: 0, ok=true"
+   ]
+  },
+  {
+   "name": "absenken_an",
+   "befehl": {
+    "absenken": true
+   },
+   "feld": "absenkung",
+   "vorher": {
+    "kameraX": 150,
+    "kameraY": 143,
+    "hoehe": 130,
+    "breite": 246,
+    "zoom": 1,
+    "drehung": 0,
+    "grundriss": 0,
+    "absenkung": 0,
+    "menuereiter": 48,
+    "ansicht": 14
+   },
+   "nachher": {
+    "kameraX": 150,
+    "kameraY": 143,
+    "hoehe": 130,
+    "breite": 246,
+    "zoom": 1,
+    "drehung": 0,
+    "grundriss": 0,
+    "absenkung": 0,
+    "menuereiter": 48,
+    "ansicht": 14
+   },
+   "bild_anders": 0.0033118577075098815,
+   "gilt": false,
+   "antwort": [
+    "[villagestudio]: ABSENKEN: 3, ok=true (Modus jetzt 3)"
+   ]
+  },
+  {
+   "name": "absenken_aus",
+   "befehl": {
+    "absenken": false
+   },
+   "feld": "absenkung",
+   "vorher": {
+    "kameraX": 150,
+    "kameraY": 143,
+    "hoehe": 130,
+    "breite": 246,
+    "zoom": 1,
+    "drehung": 0,
+    "grundriss": 0,
+    "absenkung": 0,
+    "menuereiter": 48,
+    "ansicht": 14
+   },
+   "nachher": {
+    "kameraX": 150,
+    "kameraY": 143,
+    "hoehe": 130,
+    "breite": 246,
+    "zoom": 1,
+    "drehung": 0,
+    "grundriss": 0,
+    "absenkung": 0,
+    "menuereiter": 48,
+    "ansicht": 14
+   },
+   "bild_anders": 1.383399209486166e-05,
+   "gilt": false,
+   "antwort": [
+    "[villagestudio]: ABSENKEN: 4, ok=true (Modus jetzt 0)"
+   ]
+  },
+  {
+   "name": "zoom_raus",
+   "befehl": {
+    "zoom": "raus"
+   },
+   "feld": "zoom",
+   "vorher": {
+    "kameraX": 150,
+    "kameraY": 143,
+    "hoehe": 130,
+    "breite": 246,
+    "zoom": 1,
+    "drehung": 0,
+    "grundriss": 0,
+    "absenkung": 0,
+    "menuereiter": 48,
+    "ansicht": 14
+   },
+   "nachher": {
+    "kameraX": 150,
+    "kameraY": 143,
+    "hoehe": 130,
+    "breite": 246,
+    "zoom": 1,
+    "drehung": 0,
+    "grundriss": 0,
+    "absenkung": 0,
+    "menuereiter": 48,
+    "ansicht": 14
+   },
+   "bild_anders": 4.505928853754941e-05,
+   "gilt": false,
+   "antwort": [
+    "[villagestudio]: ZOOM: 1 -> 1, ok=true"
+   ]
+  }
+ ],
+ "ausgang": {
+  "kameraX": 141,
+  "kameraY": 282,
+  "hoehe": 130,
+  "breite": 246,
+  "zoom": 1,
+  "drehung": 0,
+  "grundriss": 1,
+  "absenkung": 0,
+  "menuereiter": 48,
+  "ansicht": 14
+ },
+ "nicht_zurueck": {
+  "grundriss": [
+   1,
+   0
+  ]
+ }
+}

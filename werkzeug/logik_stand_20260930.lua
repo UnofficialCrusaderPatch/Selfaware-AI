@@ -1244,14 +1244,62 @@ local function einzelbefehl(cmd)
   end
 
   if cmd.drehen ~= nil then
-    local w = tonumber(cmd.drehen)
-    if w == nil then return false end
     local vorher = core.readInteger(0x01FE7AA4)
+    -- "links"/"rechts" = ein Schritt wie Strg+Pfeil im Spiel (WindowMsgProcessingFunc):
+    -- Strg+Links = Ausrichtung + 2, Strg+Rechts = Ausrichtung + 6 (also - 2), je mod 8.
+    local w = tonumber(cmd.drehen)
+    if cmd.drehen == "links" then w = ((vorher or 0) + 2) % 8
+    elseif cmd.drehen == "rechts" then w = ((vorher or 0) + 6) % 8 end
+    if w == nil then return false end
     local ok, err = pcall(function()
       core.exposeCode(0x004F70E0, 2, 1)(0x01A93208, w)
     end)
     log(INFO, string.format("DREHEN: %s -> Auftrag %d, ok=%s%s",
       tostring(vorher), w, tostring(ok), ok and "" or (" - " .. tostring(err))))
+    return true
+  end
+
+  -- Navigation wie Daniel sie im Spiel bedient (30.09.2026, M9). Abgelesen aus
+  -- WindowMsgProcessingFunc (Tasten) und ..._PeasantBuildAndRightClickMenuSelection
+  -- (Rechtsklick-Menue), Dekompilat: Selfaware-AI/daten/dekomp_navigation*.c
+  --   { "leiste": true }             Leiste unten weg/zurueck (Tab): hideOrUnhideUI
+  --                                  0x00471AA0, thiscall, ECX = GameCore. Umschalter.
+  --   { "zoom": "raus" | "rein" }    wie Strg+Hoch / Rechtsklick rechts: resetupViewport
+  --                                  0x004E7770 (ViewportRenderState, Zoomwert), dann
+  --                                  WindowAndDirectDraw+0xC0 = 2 und MenuView_TriggerInitial = 1.
+  --   { "absenken": true | false }   Rechtsklick unten / Strg+Runter: triggerLoweredView
+  --                                  0x004F6FD0 mit 3 (abgesenkt) bzw. 4 (normal).
+  --                                  Bei eingeschaltetem Grundriss setzt das Spiel selbst 2.
+  if cmd.leiste ~= nil then
+    local h0 = core.readInteger(0x021AEC60)
+    local ok, err = pcall(function()
+      core.exposeCode(0x00471AA0, 1, 1)(0x01FE7D10)
+    end)
+    log(INFO, string.format("LEISTE: umgeschaltet, ok=%s%s (Ansichtshoehe vorher %s)", tostring(ok),
+      ok and "" or (" - " .. tostring(err)), tostring(h0)))
+    return true
+  end
+
+  if cmd.zoom ~= nil then
+    local soll = (cmd.zoom == "raus" or cmd.zoom == 1 or cmd.zoom == true) and 1 or 0
+    local vorher = core.readInteger(0x021AEC68)
+    local ok, err = pcall(function()
+      core.exposeCode(0x004E7770, 2, 1)(0x021AEBD8, soll)
+      core.writeInteger(0x00F983F8, 2)       -- WindowAndDirectDraw.unk_resetViewportRelated
+      core.writeInteger(0x00B48EE4, 1)       -- UIDragDropDefinedData.DAT_MenuView_TriggerInitial
+    end)
+    log(INFO, string.format("ZOOM: %s -> %d, ok=%s%s", tostring(vorher), soll, tostring(ok),
+      ok and "" or (" - " .. tostring(err))))
+    return true
+  end
+
+  if cmd.absenken ~= nil then
+    local w = (cmd.absenken == true) and 3 or 4
+    local ok, err = pcall(function()
+      core.exposeCode(0x004F6FD0, 2, 1)(0x01A93208, w)
+    end)
+    log(INFO, string.format("ABSENKEN: %d, ok=%s%s (Modus jetzt %s)", w, tostring(ok),
+      ok and "" or (" - " .. tostring(err)), tostring(core.readInteger(0x01FE7AC0))))
     return true
   end
 
