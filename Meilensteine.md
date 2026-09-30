@@ -563,7 +563,7 @@ Das Ziel ist kein wiederholbares Spiel, sondern eine KI, die **jeden Tick auf sp
 
 ## Naechste Kette: Spielstaende als Trainingslagen (M7, Definition offen fuer Daniel)
 
-- **M7.01** Spielstand speichern per Befehl, ohne Maus.
+- **M7.01** Spielstand speichern per Befehl, ohne Maus. - **Im Hintergrund belegt 30.09., 22:03** (Lauf 7), Live-Abnahme durch Daniel offen.
 - **M7.02** Spielstand laden per Befehl.
 - **M7.03** Gegenprobe: Schnappschuss direkt nach dem Speichern und direkt nach dem Laden - gleich bis auf das bekannte Rauschen = verlustfrei.
 - **M7.04** Szenario-Bibliothek: benannte Spielstaende fuer Sonderfaelle (Lord in Gefahr, Belagerung, Wirtschaftskrise); jeder Trainingslauf startet exakt dort.
@@ -590,8 +590,22 @@ Das Ziel ist kein wiederholbares Spiel, sondern eine KI, die **jeden Tick auf sp
 **Spur zum Namensfeld (22:00, fuer M7.01):**
 - `MenuTextInputState` beginnt bei **0x011265A8** (Groesse 0x1828): markierte Zeile `0x01126624` = Feld +0x7C, Scrollstand `0x01126628` = +0x80 (aus der Lade-Messung vom 02.09. zurueckgerechnet).
 - Knopf 3 "Speichern" (`MenuItemActionHandler_SaveLoadMap_Buttons` 0x004943B0, case 3) holt den Dateinamen ueber `UserTextHandler::getCurrentText(&DAT_UserTextHandlerState)`; ist `textContentLengthArray[textArrayIndex]` leer, passiert nichts - **deshalb speicherte Lauf 6 nicht** (Dekompilat: `daten/dekomp_speichern_knopf.c`).
-- Beim Oeffnen leert das Spiel das Feld (`activateModalDialogAndClearText`, MMT_SAVE_MAP).
+- Beim Oeffnen leert das Spiel das Feld (`activateModalDialogAndClearText`, MMT_SAVE_MAP). **Korrektur 22:06 - gemessen falsch:** nach einem Speichern stand beim erneuten Oeffnen der alte Name noch im Feld (Laenge 31). Das leere Feld beim allerersten Oeffnen hiess nur: es war noch nie etwas drin.
 - Kandidaten zum Setzen des Namens: `getCurrentText` 0x004697C0, `getTextArrayPointer` 0x004697E0, **`setTextEntryAndUpdateCursor` 0x00469800** (this, p1, p2), `resetToTextIndex` 0x00469790. Naechster Schritt: diese entschluesseln (Adresse von DAT_UserTextHandlerState + Aufbau der Textablage), Namen schreiben, Knopf 3, Beweis = neue .sav im Ordner.
 - **Live gesehen von Daniel (30.09., 21:58, eigener Screenshot):** Speichern-Dialog im laufenden Spiel offen, geoeffnet per `{"optionen": 3}` - Liste der Spielstaende, Knoepfe Speichern/Zurueck, leeres Namensfeld. Teilschritt "Dialog oeffnen per Befehl" damit abgenommen; offen bleibt nur der Name.
 - **Namensregel fuer Spielstaende (Daniel, 30.09., 22:00: "klarerer Name, am besten was du testen willst"):** `<Meilenstein> <Was getestet wird> <Karte> T<Tick>`, Punkte als Bindestrich, hoechstens 32 Zeichen (das Spiel kuerzt Kartennamen auf 33). Erster Test: **`M7-01 Speichertest Grumpy T1100`**. Spaetere Trainingslagen z. B. `M7-04 Lord in Gefahr Grumpy T8000`.
 - **Textablage entschluesselt (22:03, `daten/dekomp_textfeld.c`):** 16 Textfelder zu je 250 Byte ab **0x01652890** (`getTextArrayPointer`: Feld*0xFA + 0x1652890). `setTextEntryAndUpdateCursor` (0x00469800, thiscall, this ungenutzt, Argumente Feld und char*) kopiert einen Text ins Feld und setzt `textContentLengthArray[Feld]` und `textCursorIndexArray[Feld]` - genau die Laenge, die der Speichern-Knopf prueft. `getCurrentText` liefert `textArray[textArrayIndex]` (nur wenn `unknown01` != 0). **Plan:** Name `M7-01 Speichertest Grumpy T1100` ins aktive Feld schreiben (poke), dann `setTextEntryAndUpdateCursor(aktivesFeld, Zeiger auf dieses Feld)` rufen, damit Laenge/Cursor stimmen, dann `{"laden": 3}`. Offen: Adresse von `DAT_UserTextHandlerState` (fuer textArrayIndex).
+
+### Lauf 7 - 30.09.2026, 22:03-22:09 - M7.01 Speichern ohne Klick: GESCHAFFT (im Hintergrund belegt)
+
+Werkzeug: `werkzeug/speichern.py "<Name>"`. Selbstspiel Grumpy, pausiert bei Tick 1100 (Pause-Flag 1, Ansicht 14 - blieb die ganze Zeit so).
+
+- **Weg (gemessen):** `{"optionen": 3}` oeffnet den Speichern-Dialog -> aktives Textfeld lesen (`0x01652740` = 2, also ist **DAT_UserTextHandlerState = 0x01652740 bestaetigt**, nicht mehr nur abgeleitet) -> Name wortweise ins Feld `0x01652890 + Feld*250` schreiben, Laenge nach `0x016527D0 + Feld*4`, Cursor nach `0x01652810 + Feld*4` -> `{"laden": 3}` (Knopf Speichern).
+- **Beweis:** neue Datei `Documents\Stronghold Crusader\Saves\M7-01 Speichertest Grumpy T1100.sav`, 1.056.101 Byte, 22:03. Im Dialog oben in der Liste sichtbar ("M7-01 Speichertest Grump", 30/09/26 20:08 - **das Spiel zeigt Weltzeit**, zwei Stunden hinter der Ortszeit; "Walltest 4" genauso: Datei 21:32, Liste 19:32). Bild: `daten/bilder/m7-01_dialog_liste_t1100.png` (nicht im Repo).
+- **Speichern geht in der Pause:** Der Knopf reicht einen Spielbefehl (`GCT_SAVE`, mit Tick und Pruefsumme der Einheiten) in die Warteschlange - er wird trotz Pause sofort ausgefuehrt, der Tick bleibt 1100.
+- **Gegenlauf (22:07, gueltig):** Name "M7-01 Gegenlauf leer" steht sichtbar im Feld, Laenge aber 0 -> Knopf Speichern -> **keine Datei** (31 Dateien vorher, 31 nachher), Dialog bleibt offen. Damit ist belegt: die Laenge bei `0x016527D0` ist genau die Sperre, die der Knopf prueft - und die neue Datei kam vom Namen, nicht von allein.
+- **Erster Gegenlauf-Versuch war ungueltig (22:05):** Ich wollte "ohne Namen" speichern, aber das Feld hatte noch den alten Namen (siehe Korrektur oben) -> das Spiel fragte **"Datei ueberschreiben?"**. Opportunistisch genutzt:
+- **Ueberschreiben per Befehl (gemessen):** `{"dialogJa": true}` beantwortet die Ueberschreib-Frage - Dateizeit 22:03 -> 22:07. `speichern.py` macht das jetzt selbst, wenn es den Namen schon gibt; im Werkzeug-Durchlauf 22:08 bestaetigt.
+- **Nebenbefund zum Sammeln:** Derselbe pausierte Stand, dreimal gespeichert: 1.056.101 / 1.056.104 / 1.056.104 Byte. Ein gespeicherter Stand ist also nicht Byte fuer Byte immer gleich lang - fuer M7.03 den Vergleich im Speicher machen (Schnappschuss nach Laden), nicht an der Datei.
+- **Verlust bemerkt:** Die erste Fassung (22:03) ist durch das Ueberschreiben weg. Seitdem kopiert `speichern.py` jede gespeicherte Fassung mit Uhrzeit nach `daten/spielstaende/` (nicht im Repo, 1 MB je Stand).
+- **Offen:** Live-Abnahme durch Daniel (Dialog steht offen, Eintrag oben in der Liste).
