@@ -12,9 +12,9 @@ abgelesen / vermutet**.
 ## Das Ziel — in einem Satz
 
 > **Eine KI, die im gemoddeten Stronghold Crusader (UCP3) auf einer festen
-> Karte im 1-gegen-1 die stärkste eingebaute bzw. Liga-KI in mindestens
-> 8 von 10 Gefechten schlägt — und deren Können aus gespielten Partien
-> nachgelernt ist, nicht von Hand gesetzt.**
+> Karte im 1-gegen-1 die stärkste eingebaute bzw. Liga-KI (erster Gegner:
+> der Wolf) in mindestens 8 von 10 Gefechten schlägt — und deren Können aus
+> gespielten Partien nachgelernt ist, nicht von Hand gesetzt.**
 
 Messbar, weil man es zählen kann (8 von 10). Selbstlernend, weil die
 Siegquote über Partien hinweg eine Lernschleife steuert, nicht ein Mensch die
@@ -92,17 +92,24 @@ Menü starten und wieder ins Menü *(belegt)*.
 ### Die vier Grenzen — das „Grundgesetz" der Plattform *(alle belegt)*
 1. **Nur im Prozess.** Von außen ist alles gesperrt. Die KI muss **im Spiel
    selbst** laufen (unser Lua-Modul) oder über den Dateikanal.
-2. **Tempo bis ~16× Echtzeit**, nicht mehr (Ticks/s = Tempo, gedeckelt).
-3. **Keine parallelen Kopien** — eine zweite Spielinstanz hängt.
-4. **Kein folgenloses Headless** — das Zeichnen lässt sich nicht einfach
-   abschalten.
+2. **Hohes Tempo, Obergrenze noch offen.** Ticks/s = Tempowert; die Mod
+   erlaubt bis ~1000 als Einstellung (Daniel). Wie viele Ticks/s daraus
+   **wirklich** werden (der Zeichentakt deckelt), ist zu messen — Schritt 0a.
+3. **Parallelbetrieb offen.** Die Betriebsregeln maßen nur, dass eine zweite
+   Instanz **derselben** Installation im „läuft schon"-Dialog hängt. Ob mehrere
+   SHC nebeneinander laufen (eigene Kopien/Installationen), ist **nicht**
+   geklärt — Daniel hält es für möglich. Prüfen in Schritt 0b. Geht es, wird
+   die Lernschleife um diesen Faktor schneller und ein späterer Weg 6 rückt
+   näher.
+4. **Kein folgenloses Headless bekannt** — das Zeichnen lässt sich nicht
+   einfach abschalten.
 
-**Was das für „selbstlernend" heißt:** ~33 s je Gefecht bei Maximaltempo,
-eines nach dem anderen → grob **~100 Gefechte/Stunde** *(gerechnet aus den
-Grenzen, noch zu messen)*. Tabula-rasa-Selbstspiel braucht Millionen Partien —
-das ist hier um Größenordnungen zu viel. **Also: nicht von null lernen, sondern
-eine vorhandene KI aus wenigen Partien nachlernen.** Genau Daniels zweite
-Lesart.
+**Was das für „selbstlernend" heißt:** Ein Gefecht dauert bei hohem Tempo grob
+eine halbe bis wenige Minuten; wie viele Partien/Stunde wirklich drin sind,
+hängt an Tempo (0a) und Parallelbetrieb (0b) — deshalb sind das die ersten
+Messungen. Selbst im besten Fall bleibt Tabula-rasa-Selbstspiel (Millionen
+Partien) weit weg. **Also: nicht von null lernen, sondern eine vorhandene KI
+aus vergleichsweise wenigen Partien nachlernen.** Genau Daniels zweite Lesart.
 
 ---
 
@@ -112,7 +119,7 @@ Fünf mögliche Wege, für SHC bewertet (aus der Recherche, verifiziert):
 
 | Weg | Für SHC | Warum |
 |---|---|---|
-| **1. Selbstspiel-RL von null** (AlphaStar-Art) | ✗ vorerst | braucht Parallelität + Schneller-als-Echtzeit, die SHC nicht hat; Millionen-Aufwand |
+| **1. Selbstspiel-RL von null** (AlphaStar-Art) | ✗ vorerst | braucht massive Parallelität + Schnelltempo; Tempo/Parallelbetrieb werden erst in Schritt 0 gemessen; selbst dann Millionen-Aufwand |
 | **2. Menschliche Partien nachahmen** | ✗ | SHC zeichnet keine Replays im nötigen Format auf — Datenmangel |
 | **3. Regel-KI behalten, Stellschrauben lernen** | ✅ **empfohlen** | die eingebaute KI **ist** ein Regelsystem mit **169 Zahlen je Lord + Bauplan**; man sucht im exakt richtigen Raum, in der Original-Engine, in Echtzeit; Evolution solcher Parameter hat belegt Bots geschlagen |
 | **4. Suche mit gelerntem Weltmodell** (MuZero-Art) | ✗ | braucht einen schnellen Simulator, den es nicht gibt |
@@ -172,12 +179,16 @@ KI:**
 
 ## Teil 5 — Der Fahrplan (jeder Schritt mit Prüfpunkt)
 
-**Schritt 0 — Durchsatz messen, nicht raten.**
-Wie viele volle KI-gegen-KI-Partien pro Stunde schaffen wir headless/beschleunigt
-über das Modul (Gefecht starten, Maximaltempo, Ergebnis lesen, zurück ins Menü)?
-*Prüfpunkt:* eine gemessene Zahl „N Partien/Stunde, je M Ticks". Sie entscheidet
-die Größe der Lernschleife. (Grund: Grenze 2–4 oben; die ~100/Stunde sind
-gerechnet, nicht gemessen.)
+**Schritt 0a — Echtes Tempo messen.** Tempo live auf das Maximum setzen
+(Einstellung bis ~1000) und über die Uhr zählen, wie viele Ticks/Sekunde
+wirklich herauskommen (der Zeichentakt deckelt). *Prüfpunkt:* gemessene Ticks/s
+und daraus die Dauer eines vollen Gefechts in Sekunden.
+
+**Schritt 0b — Parallelbetrieb prüfen.** Testen, ob mehrere SHC nebeneinander
+laufen (eigene Kopien/Installationen), ohne dass die „läuft schon"-Sperre oder
+die gemeinsame Konfiguration die Messung verdirbt. *Prüfpunkt:* entweder
+„N Instanzen laufen sauber parallel" oder ein belegter Grund, warum nicht.
+0a und 0b zusammen ergeben die Partien/Stunde — die Größe der Lernschleife.
 
 **Schritt 1 — Messgerüst und Fitness.**
 Automatischer Ablauf: unsere AIC/AIV setzen → Gefecht → Sieg/Niederlage plus
@@ -185,15 +196,16 @@ Restleben des Lords und Wirtschaft aus dem Speicher lesen → zurück ins Menü 
 wiederholen. *Prüfpunkt:* 10 Partien ohne einen einzigen Mausklick gelaufen und
 ausgewertet.
 
-**Schritt 2 — Basislinie.**
-Wie oft schlägt die stärkste Werks-/Liga-KI die anderen auf der festen Karte?
-*Prüfpunkt:* eine Siegquote, die wir schlagen wollen.
+**Schritt 2 — Basislinie gegen den Wolf.**
+Wie oft gewinnt unsere ungetunte KI gegen den **Wolf** (Daniels gewählter
+Gegner) auf der festen Karte? *Prüfpunkt:* eine Siegquote als Ausgangswert, den
+die Lernschleife heben muss.
 
 **Schritt 3 — Lernschleife (Strategie).**
 Evolution / stichprobensparende Suche (z. B. N-Tuple-Bandit) über die
-169 AIC-Zahlen und die AIV-Auswahl; Fitness = Siegquote gegen die stärkste
-Werks-KI. *Prüfpunkt:* unsere gelernte KI schlägt die Basislinie in **≥ 8 von
-10** auf der festen Karte. **Hier ist das Ziel formal erreicht.**
+169 AIC-Zahlen und die AIV-Auswahl; Fitness = Siegquote gegen den **Wolf**.
+*Prüfpunkt:* unsere gelernte KI schlägt den Wolf in **≥ 8 von 10** auf der
+festen Karte. **Hier ist das Ziel formal erreicht.**
 
 **Schritt 4 — Reaktive Taktik (Echtzeit).**
 Das Modul greift live ein, mit schon gebauten Handgriffen: Lord-Tod-Kette,
@@ -222,10 +234,9 @@ schnellste Weg zum Ziel, und er nutzt restlos, was wir schon gebaut haben
 (Speicherzugriff, Befehle, Hotswap, AIV/AIC-Editoren). **Nicht** mit Selbstspiel
 von null anfangen.
 
-**Was ich von dir bräuchte, um loszulegen:** dein „ja" zum Weg (Weg 3, Fahrplan
-oben) und die Wahl der **festen Testkarte** und des **Gegners** (welche
-Werks-/Liga-KI ist „die stärkste", die wir schlagen wollen). Gebaut wird erst
-nach deinem Okay.
+**Stand der Freigabe (30.09.2026):** Weg 3 ist freigegeben, der Gegner steht
+(**Wolf**). Schritt 0 (Tempo + Parallelbetrieb messen) läuft an. Offen ist nur
+noch die **feste Testkarte**.
 
 ---
 
