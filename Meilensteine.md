@@ -25,7 +25,9 @@ Lieferung 1 (30.09.2026): Bloecke M1 Grundlagen, M2 Spiel starten, M3 Gefecht st
 | M2.07 | UCP3-GUI schliessen, ohne die Config zu beruehren | gemessen | Daniels Wunsch 30.09.2026 | Hintergrund belegt 30.09., 20:59 - live offen |
 | M2.08 | Wann die GUI die Config schreibt | gemessen | Daniels Wunsch 30.09.2026 | - |
 | M2.09 | UCP3-GUI oeffnen, ohne die Config zu beruehren | Werkzeug gebaut, ungetestet | Daniels Wunsch 30.09.2026 | - |
-| M2.10 | Ein Spiel ohne unser Modul beenden | gemessen: von hier NICHT moeglich | Daniels Wunsch 30.09.2026 | - |
+| M2.10 | Ein Spiel ohne unser Modul beenden | UEBERHOLT durch M2.11/M2.12 | Daniels Wunsch 30.09.2026 | - |
+| M2.11 | Stronghold schliessen - in drei Stufen | gemessen | Daniels Wunsch 30.09.2026 | Hintergrund belegt 30.09., 21:06 - live offen |
+| M2.12 | Hohe Rechte ohne Klick anfordern | gemessen | Daniels Wunsch 30.09.2026 | Hintergrund belegt 30.09., 21:04 - live offen |
 | M3.01 | Zurueck ins Hauptmenue per Befehl | gemessen | abgenommen 30.09.2026 | - |
 | M3.02 | Eigenes Spiel ohne Maus starten | teils gemessen | abgenommen 30.09.2026 | - |
 | M3.03 | Kampagne und eigenes Spiel sicher unterscheiden | offen | abgenommen 30.09.2026 | - |
@@ -193,12 +195,33 @@ WIDERLEGT, WENN: die Pruefsumme sich beim blossen Oeffnen aendert.
 
 ### M2.10 Ein Spiel ohne unser Modul beenden
 
-*Stand: gemessen 30.09.2026 - von hier aus NICHT moeglich.*
+*Stand: UEBERHOLT am 30.09.2026, 21:06 - geloest durch M2.11 und M2.12. Daniel: "das soll kein Blocker sein". Der alte Text bleibt als Sicherung stehen.*
 
 WARUM NICHT: Das aus der GUI gestartete Spiel (PID 15208) laeuft auf hoeherer Rechtestufe - schon sein Programmpfad ist von hier aus nicht lesbar. Von aussen beenden scheitert daran (Betriebsregeln: Fehler 5). Der einzige Weg von innen ist unser Modul (`{ "beenden": true }`, M2.04) - und genau das fehlt in einem Spiel, das aus der GUI kam.  
 ANLEITUNG: Daniel schliesst dieses eine Spiel selbst. Vorbeugung: das Spiel nur ueber `werkzeug/starte_spiel.py` (VillageStudio) bzw. die Entwicklermodus-Verknuepfung starten - dann ist das Modul drin und das Beenden geht per Befehl.  
 TEST: `python werkzeug/gui.py status` meldet "hoehere Rechtestufe, von hier NICHT beendbar" oder "laeuft nicht".  
 WIDERLEGT, WENN: sich ein aus der GUI gestartetes Spiel doch von hier beenden laesst.  
+
+### M2.11 Stronghold schliessen - in drei Stufen
+
+*Stand: gemessen 30.09.2026, 21:06.*
+
+ANLEITUNG: `python werkzeug/spiel.py beenden` (Status vorher/nachher: `python werkzeug/spiel.py status`).  
+ERKLAERUNG: Drei Stufen, von sanft nach hart: (1) ist unser Modul geladen, beendet es das Spiel von innen (`{ "beenden": true }`, M2.04); (2) sonst bittet ein still erhoehter Helfer (M2.12) das Fenster zu schliessen, wie ein Klick aufs X; (3) erst wenn das nach 10 s nichts bewirkt, beendet der Helfer den Prozess hart. Das Werkzeug sagt, welche Stufe gewirkt hat.  
+TEST, EINGEBAUT: geschafft = kein Crusader-Prozess mehr. Nicht geschafft = nach allen drei Stufen laeuft er noch; das Werkzeug nennt die moeglichen Gruende.  
+GEMESSEN 30.09., 21:06: das aus der GUI gestartete Spiel (PID 15208, ohne Modul) - Stufe 1 entfiel, **Stufe 2 hat gewirkt**; Gegenprobe mit `tasklist`: kein Crusader-Prozess mehr.  
+DU SIEHST: das Stronghold-Fenster verschwindet, ohne dass du klickst.  
+WIDERLEGT, WENN: das Spiel weiterlaeuft oder nur mit Stufe 3 zu beenden ist, obwohl es auf Stufe 2 reagieren muesste.  
+
+### M2.12 Hohe Rechte ohne Klick anfordern
+
+*Stand: gemessen 30.09.2026, 21:04.*
+
+ERKLAERUNG: Das Spiel laeuft auf hoher Rechtestufe, diese Sitzung auf mittlerer - daher kam jede Sperre "von aussen" (Fehler 5). Gemessen: Windows ist hier auf **"Erhoehen ohne Nachfrage"** eingestellt (`ConsentPromptBehaviorAdmin = 0`), und Daniels Konto ist in der Gruppe Administratoren. Ein Helfer, der hohe Rechte anfordert (`Start-Process -Verb RunAs`), bekommt sie also still - ohne Dialog, ohne Klick. Es wird dabei **keine Einstellung geaendert**; genutzt werden nur die Rechte, die das Konto ohnehin hat, und nur fuer den einen Befehl.  
+TEST: `scratchpad`-Probe schrieb aus dem erhoehten Helfer "Hohe Verbindlichkeitsstufe (S-1-16-12288)", fertig nach 0,3 s, und konnte den Programmpfad des Spiels lesen - den eine normale Sitzung NICHT lesen kann.  
+FOLGE: Was bisher "von aussen gesperrt" hiess (Spiel beenden, vermutlich auch Fenster verschieben, Tasten schicken, Speicher lesen), ist mit einem erhoehten Helfer erreichbar. Einzeln zu messen, bevor es behauptet wird.  
+OFFEN: Warum das Spiel ueberhaupt hoch laeuft - es hat weder das Kompatibilitaets-Haekchen "Als Administrator ausfuehren" noch ein Manifest, das Rechte verlangt.  
+WIDERLEGT, WENN: der Helfer mit mittlerer Stufe laeuft oder Windows einen Dialog zeigt.  
 
 ### M3.01 Zurueck ins Hauptmenue per Befehl
 
