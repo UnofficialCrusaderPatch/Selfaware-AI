@@ -28,16 +28,20 @@ Lieferung 1 (30.09.2026): Bloecke M1 Grundlagen, M2 Spiel starten, M3 Gefecht st
 | M2.10 | Ein Spiel ohne unser Modul beenden | UEBERHOLT durch M2.11/M2.12 | Daniels Wunsch 30.09.2026 | - |
 | M2.11 | Stronghold schliessen - in drei Stufen | gemessen | Daniels Wunsch 30.09.2026 | Hintergrund belegt 30.09., 21:06 - live offen |
 | M2.12 | Hohe Rechte ohne Klick anfordern | gemessen | Daniels Wunsch 30.09.2026 | Hintergrund belegt 30.09., 21:04 - live offen |
+| M2.13 | Config herrichten: Modul + weiterlaufen ohne Fokus | gemessen | Daniels Wunsch 30.09.2026 | Hintergrund belegt 30.09., 21:10 |
+| M2.14 | Befehle mit Nummern, die nie doppelt vorkommen | gemessen | M2.03 | Hintergrund belegt 30.09., 21:10 |
 | M3.01 | Zurueck ins Hauptmenue per Befehl | gemessen | abgenommen 30.09.2026 | - |
-| M3.02 | Eigenes Spiel ohne Maus starten | teils gemessen | abgenommen 30.09.2026 | - |
-| M3.03 | Kampagne und eigenes Spiel sicher unterscheiden | offen | abgenommen 30.09.2026 | - |
-| M3.04 | Karte waehlen: Liga_Grumpy Neighbors | offen | abgenommen 30.09.2026 | - |
-| M3.05 | Selfaware auf beide KI-Plaetze | abgelesen | abgenommen 30.09.2026 | - |
-| M3.06 | Feste Startplaetze: oben und unten | offen | abgenommen 30.09.2026 | - |
-| M3.07 | Der Mensch auf Platz 1 | entfaellt in TL2 | abgenommen 30.09.2026 | - |
+| M3.02 | Eigenes Spiel ohne Maus starten | gemessen (Lauf 1) | abgenommen 30.09.2026 | Hintergrund belegt 21:10; von Daniel live gesehen 21:14 - Aufbau noch falsch |
+| M3.03 | Kampagne und eigenes Spiel sicher unterscheiden | halb gemessen (Lauf 1) | abgenommen 30.09.2026 | - |
+| M3.04 | Karte waehlen: Liga_Grumpy Neighbors | gemessen (Lauf 1) | abgenommen 30.09.2026 | Hintergrund belegt 21:10; von Daniel live gesehen 21:14 |
+| M3.05 | Selfaware auf beide KI-Plaetze | im Speicher ja, im Spiel NEIN (Lauf 1) | abgenommen 30.09.2026 | - |
+| M3.06 | Feste Startplaetze: oben und unten | offen, Spur gefunden (Lauf 1) | abgenommen 30.09.2026 | - |
+| M3.07 | Kein Mensch im Selbstspiel | offen: unser Startbefehl setzt einen echten Menschen ein (Lauf 1) | abgenommen 30.09.2026 | - |
 | M3.08 | Startgold und Startgueter wie in der Team-Liga | offen | abgenommen 30.09.2026 | - |
 | M3.09 | Tempo setzen | gemessen | abgenommen 30.09.2026 | - |
 | M3.10 | Neues Spiel ohne Neustart des Programms | teils gemessen | abgenommen 30.09.2026 | - |
+| M3.11 | Spiel pausieren und fortsetzen per Befehl | gemessen (Lauf 1) | Daniel 30.09.: "du kannst das Spiel pausieren" | Hintergrund belegt 21:10 |
+| M3.12 | Tempo erst NACH dem Start setzen | gemessen (Lauf 1) | Lauf 1 | Hintergrund belegt 21:10 |
 | M4.01 | Die Lords im Gefecht finden | gemessen | abgenommen 30.09.2026 | - |
 | M4.02 | Lord-Tod erkennen | gemessen | abgenommen 30.09.2026 | - |
 | M4.03 | Was nach dem Lord-Tod wirklich passiert | offen | abgenommen 30.09.2026 | - |
@@ -471,3 +475,26 @@ WIDERLEGT, WENN: sich die Ausgaenge zwischen den Tempi klar unterscheiden.
 - **Frage 1 - Was macht der Mensch auf Platz 1?** Entfaellt - siehe M3.07 (kein Mensch in TL2-Gefechten).
 - **Frage 2 - Wie gross ist X beim Zeitlimit?** Angenommen: X wird gemessen (drei Spiele ohne Limit, X = das Anderthalbfache des laengsten, auf Spieljahre gerundet). Daniel: alle Liga-KIs sind gut ausbalanciert; toetet unsere KI frueher, umso besser.
 - **Frage 3 - Bei welchem Tempo nimmst du ab?** Zuschau-Tempo 90 (Daniel: da sieht man noch, wie die KI einzelne Befehle erteilt). Gelernt wird bei 1000.
+
+## Laufprotokoll
+
+### Lauf 1 - 30.09.2026, 21:10 - erstes eigenes Spiel
+
+Aufbau: `werkzeug/config.py eintragen` -> `starte_spiel.py --links` -> `{"eigenesGefecht": true, "karte": "Liga_Grumpy Neighbors", "ki": 1, "gegner": 2}` -> sofort `{"pause": true}` -> messen -> Tempo 90. Alle Befehle ueber `werkzeug/befehl.py`.
+
+**Was geklappt hat (im Hintergrund belegt, Daniel hat das Spiel live gesehen):**
+- Eigenes Spiel per Befehl, Karte "Liga_Grumpy Neighbors" (Kartenname im Speicher), Kampagnen-Kennzeichen isSkirmishTrail = 0, Spielmodus 99, Ansicht 14 (im Spiel). Fuer M3.03 fehlt noch der Vergleichswert einer Kampagnen-Mission.
+- Beide KI-Plaetze tragen Typ 1 (Rotkaeppchen): KI-Liste `[0, 0, 1, 1, 0, 0, 0, 0, 0]`.
+- Pause per Befehl haelt: Tick 4691 vor und nach dem Messen gleich (M3.11). Fortsetzen ebenso.
+- Einheiten-Array im Spiel erneut bestaetigt (fuenf Totschlagtests gruen, 241 belegte Plaetze).
+
+**Was dabei gelernt wurde (Pannen als Gewinn):**
+- Die GUI hatte `continueOutOfFocus` auf `pause` gesetzt -> im Hintergrund hielt das Spiel an, kein Befehl kam an. Jetzt prueft und repariert `config.py` das mit (M2.13). Hin- und Rueckweg: `pause` = angehalten, `render` = laeuft weiter.
+- Ein Tempo-Befehl VOR dem Start verpufft: nach dem Start stand das Tempo auf 3000 (M3.12). Das Spiel lief damit nur rund 780 Ticks/s - ein weiterer Hinweis auf die Grenze von 11 Ticks je Bild (M5.02).
+- `peek` liefert negative Speicherwoerter 16-stellig statt 8-stellig; beim Auswerten auf 32 Bit kuerzen.
+
+**Was noch nicht stimmt (Daniel, 21:14: "du bist ein Spieler unten, Rotkaeppchen ist rechts statt oben, beide sollten Rotkaeppchen sein"):**
+- **Ein echter Mensch spielt mit:** Spieler 1 hat einen Lord, 12 Einheiten, 4000 Gold und eine Burg unten links. Daniels Weg ueber die Lobby macht den Menschen in der Team-Liga zum Geist - unser nachgebauter Startbefehl `eigenesGefecht` setzt ihn dagegen ausdruecklich ein (M3.07 wieder offen).
+- **Nur eine Rotkaeppchen ist im Spiel:** Spieler 3 hat Lord, 84 Einheiten, 1467 Gold; Spieler 2 hat KEINEN Lord, 0 Gold, 0 Holz, 4 Einheiten.
+- **Startplaetze zufaellig und vermutlich ungueltig:** Startplatz-Liste `[246, 0, 246, 2, 1, 246, 246, 246]` (246 = frei). Vermutung, ungeprueft: Index = Startplatz auf der Karte, Wert = Spieler. Dann stuende Spieler 2 auf Startplatz 4 - die Karte hat aber nur vier Plaetze. Das wuerde erklaeren, warum er weder Burg noch Lord hat.
+- Startgold nicht gemessen: pausiert wurde erst bei Tick 4691. Naechstes Mal sofort nach dem Start.

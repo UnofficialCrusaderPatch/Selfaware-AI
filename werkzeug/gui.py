@@ -56,8 +56,8 @@ def zeige_status():
     if sp is None:
         print("Spiel:  laeuft nicht")
     else:
-        print("Spiel:  laeuft (PID %d) - %s" % (sp[0], "von hier beendbar" if sp[1]
-              else "hoehere Rechtestufe, von hier NICHT beendbar (nur ueber unser Modul)"))
+        print("Spiel:  laeuft (PID %d) - %s" % (sp[0], "gleiche Rechtestufe wie diese Sitzung" if sp[1]
+              else "hoehere Rechtestufe - beenden mit werkzeug/spiel.py (erhoehter Helfer, M2.11)"))
     n, h, t = config_zustand()
     print("Config: %d x villagestudio (soll 3), zuletzt geschrieben %s, Pruefsumme %s" % (n, t, h))
     return pids
