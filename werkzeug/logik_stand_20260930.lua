@@ -728,8 +728,8 @@ local function einzelbefehl(cmd)
   --  2. die Pause ist aufgehoben, obwohl beim Scharfmachen pausiert war -
   --     das Laden hebt die Pause auf (gemessen 02.09.). Zeichen 2 braucht es fuer
   --     das Wiederladen eines Stands mit DERSELBEN Spielzeit (gemessen 30.09.,
-  --     23:36: M7-01 ueber M7-01, kein Sprung, das Spiel lief bis Tick 1564).
-  -- Der Taktgeber laeuft auch in der Pause (gemessen 30.09., 23:38), die
+  --     23:26: M7-01 ueber M7-01, kein Sprung, das Spiel lief bis Tick 1564).
+  -- Der Taktgeber laeuft auch in der Pause (gemessen 30.09., 23:26:48), die
   -- Spielzeit steht dabei - im pausierten Spiel loest also nichts aus.
   -- Die Tick-Pause taugt nicht: sie greift nur, wenn der Stand SPAETER liegt.
   if cmd.ladepause ~= nil then
