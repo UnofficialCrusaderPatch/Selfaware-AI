@@ -1655,14 +1655,36 @@ local function einzelbefehl(cmd)
     local NL = string.char(10)
     local E = 0x0138854C
     local f = io.open("ucp/villagestudio/abzug/lagebild.txt", "w")
-    f:write(string.format("tick %d", tick()) .. NL .. "nr besitzer typ x y leben zustand zielart zieleinheit zieluid zielgebaeude ziel zielx ziely laufx laufy auswahlvon auswahlmarke gruppe gruppenuid" .. NL)
+    f:write(string.format("tick %d", tick()) .. NL .. "nr besitzer typ x y leben zustand zielart zieleinheit zieluid zielgebaeude ziel zielx ziely laufx laufy auswahlvon auswahlmarke gruppe gruppenuid ladung arbeitsplatz erreichbar" .. NL)
+    local WEGNETZ = 0x01DF6FD8
+    local kannHin = core.exposeCode(0x004A5320, 5, 1)
+    local function feld(x, y) return (core.readInteger(0x023372F8 + y * 12 + 8) or 0) + x end
+    local ex, ey = (lagebildVon or {})[1] or 165, (lagebildVon or {})[2] or 111
+    local vonGebiet = core.readSmallInteger(WEGNETZ + feld(ex, ey) * 2) or 0
+    local ich = core.readInteger(0x01A275DC) or 1
     local n, maxN = 0, core.readInteger(0x01387F38) or 0
     for i = 1, math.min(maxN, 2999) do
       local u = E + i * 1168
       local typ = core.readSmallInteger(u + 0x8E) or 0
       if typ > 0 and (core.readSmallInteger(u + 0x8C) or 0) ~= 0 and (core.readSmallInteger(u + 672) or 0) == 0 then
         n = n + 1
-        f:write(string.format("%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d", i, core.readSmallInteger(u + 0x96) or -1, typ,
+        -- erreichbar (05.10., Daniel: "da stehen einfach Bogenschuetzen und farmen unsere Assassinen ab"): liegt das
+        -- Feld einer fremden Einheit in einem Wegnetz-Gebiet, das wir vom Bergfried aus erreichen? Schuetzen auf
+        -- Mauern und Tuermen in einer geschlossenen Burg sind es nicht. Eigene Einheiten: -1 (nicht geprueft).
+        local erreichbarE = -1
+        local besE = core.readSmallInteger(u + 0x96) or -1
+        if besE ~= ich and besE > 0 and vonGebiet > 0 then
+          local ux, uy = (core.readSmallInteger(u + 0xB6) or 0) // 8, (core.readSmallInteger(u + 0xB8) or 0) // 8
+          erreichbarE = 0
+          if ux >= 0 and ux < 400 and uy >= 0 and uy < 400 then
+            local a = core.readSmallInteger(WEGNETZ + feld(ux, uy) * 2) or 0
+            if a > 0 then
+              local ok, r = pcall(kannHin, 0x012BB8C8, ich, vonGebiet, a, 0)
+              if ok and r ~= 0 then erreichbarE = 1 end
+            end
+          end
+        end
+        f:write(string.format("%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d", i, core.readSmallInteger(u + 0x96) or -1, typ,
           (core.readSmallInteger(u + 0xB6) or 0) // 8, (core.readSmallInteger(u + 0xB8) or 0) // 8,
           core.readInteger(u + 968) or -1, core.readSmallInteger(u + 704) or -1, core.readSmallInteger(u + 924) or -1,
           core.readSmallInteger(u + 926) or -1, core.readInteger(u + 928) or -1, core.readSmallInteger(u + 822) or -1,
@@ -1670,7 +1692,9 @@ local function einzelbefehl(cmd)
           core.readSmallInteger(u + 0xC8) or -1, core.readSmallInteger(u + 0xCA) or -1,
           -- Auswahl und Gruppe (04.10. 23:58: alle Assassinen folgten dem letzten Befehl - Gruppe nachsehen)
           core.readSmallInteger(u + 178) or -1, core.readSmallInteger(u + 180) or -1,
-          core.readSmallInteger(u + 728) or -1, core.readInteger(u + 740) or -1) .. NL)
+          core.readSmallInteger(u + 728) or -1, core.readInteger(u + 740) or -1,
+          -- Ladung und Arbeitsplatz (05.10.: Lager erst bauen, wenn der erste Traeger abliefern will; rechtzeitig erweitern)
+          core.readSmallInteger(u + 904) or -1, core.readSmallInteger(u + 824) or -1, erreichbarE) .. NL)
       end
     end
     f:close()
@@ -1681,12 +1705,6 @@ local function einzelbefehl(cmd)
     -- Wegnetz-Gebiet (PathConnectionLayer, TileMapState +0x363DD0 = 0x01DF6FD8, ushort je Feld), das Spieler 1 vom
     -- Gebiet seines Bergfried-Eingangs aus erreichen kann (calculateCanPlayerUnitsNavigateToAreaFromArea 0x004A5320,
     -- thiscall PathFindingState 0x012BB8C8 - dieselbe Pruefung nimmt der Holzfaeller in findTree).
-    local WEGNETZ = 0x01DF6FD8
-    local kannHin = core.exposeCode(0x004A5320, 5, 1)
-    local function feld(x, y) return (core.readInteger(0x023372F8 + y * 12 + 8) or 0) + x end
-    local ex, ey = (lagebildVon or {})[1] or 165, (lagebildVon or {})[2] or 111
-    local vonGebiet = core.readSmallInteger(WEGNETZ + feld(ex, ey) * 2) or 0
-    local ich = core.readInteger(0x01A275DC) or 1
     local ng, anzG = 0, gebaeudeAnzahl() or 0
     for i = 1, anzG - 1 do
       local b = GEBAEUDE + i * G_SCHRITT

@@ -26,6 +26,7 @@ from speichern import speichere
 from waechter import Waechter, lies_lagebild, lies_gebaeude
 from assassinen import Angriffstrupp, Einzeln
 from befehl import sende, neue_id
+from wirtschaft import Wirtschaft, apfel_gruppen
 
 HIER = os.path.dirname(os.path.abspath(__file__))
 D = os.path.join(HIER, "..", "daten")
@@ -48,7 +49,9 @@ def phase1(plan):
     befehl({"eigenerPlatz": SP}, 0.8)
     vorab()
     v0 = vorrat(SP)
-    auftrag = [(3, p) for p in plan["holzfaeller"]] + [(19, plan["kornspeicher"])] + [(32, p) for p in plan["aepfel"]]
+    # Seasoning (Daniel 04.10./05.10.): nur Gruppe A jetzt, B wenn A reif wird (wirtschaft.py); B-Holz bleibt im alten Lager
+    A, B = apfel_gruppen(plan["aepfel"])
+    auftrag = [(3, p) for p in plan["holzfaeller"]] + [(19, plan["kornspeicher"])] + [(32, p) for p in A]
     if plan.get("stein"):
         auftrag += [(20, plan["stein"]["steinbruch"]), (4, plan["stein"]["ochsen"])]
     auftrag += [(1, p) for p in plan["huetten"]]
@@ -62,15 +65,14 @@ def phase1(plan):
     v1 = vorrat(SP)
     schreib("GEBAUT %d von %d; Fehlschlaege: %s; Holz %d -> %d, Gold %d -> %d" % (gebaut, len(auftrag), fehl or "keine",
             v0["holz"], v1["holz"], v0["gold"], v1["gold"]))
-    alt = gebaeude_von(SP, 10)
-    for nr, x, y in alt:
-        befehl({"abreissen": {"nr": nr}}, 0.5)
-    laufe(1)
-    neu = baue_irgendwo(10, [tuple(plan["lager"])], SP)
-    schreib("Lager: alt %d Teile abgerissen (Inhalt: %s), neu bei %s -> %s; jetzt %d Teile" % (
-        len(alt), {k: v1[k] for k in LAGERWAREN if v1.get(k)}, plan["lager"], neu, len(gebaeude_von(SP, 10))))
-    speichere("M14 Eroeffnung Grumpy T%d" % tick())
+    # Lager (Daniel 04.10.): das alte bleibt, bis B steht (haelt dessen Holz); das neue erst, wenn ein Holzfaeller
+    # abliefern will - beides in Phase 2 (wirtschaft.py)
+    schreib("Apfelplantagen A %d jetzt, B %d spaeter %s; altes Lager bleibt mit %s" % (
+        len(A), len(B), B, {k: v1[k] for k in LAGERWAREN if v1.get(k)}))
+    name = "M17 Eroeffnung Saison T%d" % tick()
+    speichere(name)
     befehl({"eigenerPlatz": SP}, 0.8)
+    return name
 
 def lage():
     v = vorrat(SP)
@@ -115,6 +117,26 @@ def baue_lager(plan):
 
 EIGENE_ARTEN = (3, 19, 32, 20, 4, 1, 10, 30, 31, 33, 5)
 
+ROHSTOFFE = r"C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme\ucp\villagestudio\abzug\rohstoffe.txt"
+_KARTE = []
+
+def karte_laden():
+    """Rohstoffkarte (Modulbefehl rohstoffkarte, einmal je Partie bei stehendem Spiel) fuer die Begehbarkeit."""
+    befehl({"rohstoffkarte": {}}, 6.0, bis="ROHSTOFF")
+    _KARTE[:] = open(ROHSTOFFE).read().splitlines()[1:]
+
+def pruefe_begehbar(punkte):
+    """Begehbar = das Feld und seine 8 Nachbarn sind Gruenland (G), Gestruepp (s) oder freier Boden (.) - nicht
+    Wasser, Fluss, Rand, Gebaeude, Stein, Eisen, Pech. 05.10.: die Wegnetz-Pruefung des Spiels taugte dafuer nicht
+    (Gegenprobe: Wasser, Rand und Gebaeudefelder galten als erreichbar). Gebaeude, die nach dem Kartenabzug
+    entstehen, kennt die Karte nicht - dafuer sperrt der Assassinen-Lenker Plaetze, an die keiner hinlaeuft."""
+    gut = set()
+    for x, y in punkte:
+        if all(0 <= y + dy < len(_KARTE) and 0 <= x + dx < len(_KARTE[y + dy]) and _KARTE[y + dy][x + dx] in "Gs."
+               for dx in (-1, 0, 1) for dy in (-1, 0, 1)):
+            gut.add((x, y))
+    return gut
+
 def runde_lesen():
     """EIN Aufruf fuer die ganze Runde (04.10.: einzelne Abfragen kosteten ~20 s = 800 Ticks je Runde):
     Modulbefehle status + lagebild in einer Liste. Gibt (status, einheiten, gebaeude)."""
@@ -155,19 +177,24 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
     import befehl as befehlskanal
     befehlskanal.STRENG = True     # ab hier bricht jeder Modulfehler den Lauf laut ab
     w = Waechter(SP, posten=plan["lager_mitte"]) if mit_waechter else None
-    trupp = Einzeln(SP) if assassinen else None
+    trupp = Einzeln(SP, pruefe_begehbar=pruefe_begehbar) if assassinen else None
+    wirt = Wirtschaft(plan, SP, baue_schnell, [nr for nr, _, _ in gebaeude_von(SP, 10)])
+    karte_laden()        # Begehbarkeit fuer kurze Rueckzuege - jetzt, solange das Spiel noch steht
+    schreib("Wirtschaft: Apfel A %s, B %s; alte Lagerteile %s" % (wirt.A, wirt.B, sorted(wirt.alt)))
     soeldner, geworben = None, 0
     befehl({"kamera": list(plan["lager_mitte"])}, 0.8)
     befehl({"tempo": tempo}, 0.5)
     befehl({"pause": False}, 0.5)
     ende, letzter_tick, stand, runde, t0 = time.time() + 60 * minuten, None, 0, 0, time.time()
     schreib("Tick | Holz Stein Eisen | Aepfel Brot | Beliebt | Leute/Platz (Feuer) | Holzf. Apfelb. | Ereignis")
-    zeiten = {}
+    zeiten, diese_runde = {}, {}
     def uhr(name, t0):
         zeiten[name] = zeiten.get(name, 0.0) + time.time() - t0
+        diese_runde[name] = time.time() - t0
         return time.time()
     while time.time() < ende and not os.path.exists(os.path.join(HIER, "STOP")):
         tz = time.time()
+        befehlskanal.belege()
         st, L, G = runde_lesen()
         tz = uhr("lesen", tz)
         if bis_tick and st.get("t", 0) >= bis_tick:
@@ -178,7 +205,9 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
         if st.get("over") != 0 or st.get("ansicht") != 14:
             schreib("ABBRUCH - Testbedingung weg: %s" % {k: st.get(k) for k in ("ansicht", "over", "pause", "t")}); break
         if letzter_tick is not None and st["t"] - letzter_tick > 400:
-            schreib("WARNUNG: Runde dauerte %d Ticks (%d -> %d) - Waechter war so lange blind" % (st["t"] - letzter_tick, letzter_tick, st["t"]))
+            schreib("WARNUNG: Runde dauerte %d Ticks (%d -> %d) - Waechter war so lange blind; Zeit der Runde davor: %s" % (
+                st["t"] - letzter_tick, letzter_tick, st["t"], ", ".join("%s %.2f s" % kv for kv in sorted(diese_runde.items(), key=lambda kv: -kv[1]))))
+        diese_runde.clear()
         stand = stand + 1 if st["t"] == letzter_tick else 0
         if stand >= 4:
             schreib("ABBRUCH - Spielzeit steht bei %d" % st["t"]); break
@@ -193,7 +222,8 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
             # Soeldnerlager (120 Gold) einmal bauen, dann Assassinen (Typ 73) anwerben bis zur Zahl; Mitglieder = alle eigenen 73er
             posten = [n for n, g in G.items() if g["besitzer"] == SP and g["typ"] == 8]
             if not posten and (soeldner is None or runde % 10 == 0):
-                soeldner = baue_schnell(8, plan["lager_mitte"][0], plan["lager_mitte"][1], 25)
+                # nicht am Lagerplatz (9i: Markt/Soeldnerlager belegten ihn - 14 Holzfaeller warteten Tick 4500-9035)
+                soeldner = baue_schnell(8, 165, 111, 25)
                 ereignis.append("Soeldnerlager gesetzt %s (Gold %d)" % (soeldner, st["gold"]))
             elif posten and st["gold"] >= 70 + GOLD_RESERVE and st["feuer"] >= 1 and (assassinen < 0 or geworben < assassinen):
                 befehl({"werbe": {"typ": 73, "gebaeude": posten[0]}}, 1.0, bis="WERBE")
@@ -201,29 +231,28 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                 if geworben % 5 == 0:
                     ereignis.append("%d Assassinen angeworben (Gold jetzt %d)" % (geworben, st["gold"]))
             if not [n for n, g in G.items() if g["besitzer"] == SP and g["typ"] == 26] and runde % 20 == 2:
-                ereignis.append("Markt gesetzt %s" % (baue_schnell(26, plan["lager_mitte"][0], plan["lager_mitte"][1], 20),))
+                ereignis.append("Markt gesetzt %s" % (baue_schnell(26, 165, 111, 25),))
             elif runde % 3 == 0:
                 v = verkaufen(st)
                 if v:
                     ereignis.append(v)
             tz = uhr("bauen_werben_verkauf", tz)
             trupp.aufnehmen([n for n, e in L.items() if e["besitzer"] == SP and e["typ"] == 73])
-            erg = trupp.schritt(L, G, sichere_orte=gebs + [(165, 111)])
+            # nur begehbare Plaetze (9g: Gebaeudemitten waren nicht begehbar - die Wartenden blieben im Schussfeld)
+            erg = trupp.schritt(L, G, sichere_orte=[tuple(plan["lager_mitte"]), (165, 111)])
             if isinstance(erg, tuple):          # Einzeln: Befehle der Runde gesammelt in EINEM Aufruf
                 erg, liste = erg
                 if liste:
-                    sende({"befehle": [dict(b, player=1, id=neue_id()) for b in liste]}, 1.0, bis="ANGRIFF")
+                    sende({"befehle": [dict(b, player=1, id=neue_id()) for b in liste]}, 1.0,
+                          bis="ANGRIFF" if any("angriff" in b for b in liste) else "HALTEN")
             ereignis += erg
             tz = uhr("assassinen", tz)
         tz = time.time()
+        ereignis += wirt.schritt(st, L, G)
+        tz = uhr("wirtschaft", tz)
         bedarf = sum(ARBEITER_JE[t] * st.get("G%d" % t, 0) for t in ARBEITER_JE)
-        if st["holz"] >= 5 and (bedarf > st["platz"] or (trupp is not None and st["feuer"] == 0 and st["platz"] - st["leute"] <= 2)):
+        if st["holz"] >= 5 + 3 * len(wirt.B_offen) and (bedarf > st["platz"] or (trupp is not None and st["feuer"] == 0 and st["platz"] - st["leute"] <= 2)):
             ereignis.append("Huette %s (Bedarf %d, Platz %d, Leute %d, Feuer %d)" % (baue_haus(), bedarf, st["platz"], st["leute"], st["feuer"]))
-        teile = st.get("G10", 0)
-        menge = sum(st.get(k, 0) for k in LAGERWAREN)
-        sorten = sum(1 for k in LAGERWAREN if st.get(k, 0) > 0)
-        if teile and (menge >= 48 * teile - 60 or sorten >= teile):
-            ereignis.append("Lager angebaut %s (%d Teile)" % (baue_lager(plan), teile))
         zeile = "%5d | %3d %3d %3d | %3d %3d | %6.2f | %d/%d (%d) | %d %d | %s" % (
             st["t"], st["holz"], st["stein"], st["eisen"], st["apfel"], st["brot"], st["beliebt"] / 100.0, st["leute"],
             st["platz"], st["feuer"], st.get("T3", 0), st.get("T13", 0), "; ".join(ereignis) or "-")
@@ -237,6 +266,14 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
     schreib("Ende Phase 2 bei Tick %s nach %d Runden (%.1f s je Runde); Kornspeicher %d, Holzfaeller %d, Apfelplantagen %d%s" % (
         st.get("t"), runde, (time.time() - t0) / max(runde, 1), st.get("G19", 0), st.get("G3", 0), st.get("G32", 0),
         (("; Waechter: " + w.bericht()) if w else "") + (("; Angriff: " + trupp.bericht()) if trupp else "")))
+    schreib("Wirtschaft: " + wirt.bericht())
+
+def fingerabdruck(plan):
+    """Alles, was die Eroeffnung bestimmt: Plan, Phase-1-Code, Gruppenteilung, Bauwerkzeug. Gleich -> gleicher Stand."""
+    import hashlib, inspect, bauen, wirtschaft
+    teile = [json.dumps({k: v for k, v in plan.items() if not k.startswith("_")}, sort_keys=True),
+             inspect.getsource(phase1), inspect.getsource(wirtschaft.apfel_gruppen), inspect.getsource(bauen)]
+    return hashlib.sha1("|".join(teile).encode("utf-8")).hexdigest()
 
 def main():
     arg = dict(a.split("=") for a in sys.argv[1:])
@@ -246,7 +283,19 @@ def main():
         print("Tick", lade_stand(arg["start"], mit_bild=False))
         befehl({"eigenerPlatz": SP}, 0.8)
     elif arg.get("nur_phase2", "nein") != "ja":
-        phase1(plan)
+        # Eroeffnung nur neu bauen, wenn sie sich geaendert hat (Daniel 05.10. 00:18: "wenn du immer den gleichen
+        # Speicherstand nutzt, musst du ihn nicht immer wieder erzeugen lassen")
+        merk = os.path.join(D, "eroeffnung_stand.json")
+        fp = fingerabdruck(plan)
+        alt = json.load(open(merk, encoding="utf-8")) if os.path.exists(merk) else {}
+        if alt.get("fingerabdruck") == fp and arg.get("neu", "nein") != "ja":
+            schreib("Eroeffnung unveraendert (Fingerabdruck %s) - lade %s statt neu zu bauen" % (fp[:10], alt["spielstand"]))
+            print("Tick", lade_stand(alt["spielstand"], mit_bild=False))
+            befehl({"eigenerPlatz": SP}, 0.8)
+        else:
+            name = phase1(plan)
+            json.dump({"fingerabdruck": fp, "spielstand": name, "erstellt": time.strftime("%d.%m.%Y %H:%M")},
+                      open(merk, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     try:
         phase2(plan, int(arg.get("minuten", 10)), int(arg.get("tempo", 40)), arg.get("waechter", "nein") == "ja",
                int(arg["bis_tick"]) if arg.get("bis_tick") else None, int(arg.get("assassinen", 0)))
@@ -259,4 +308,9 @@ def main():
         sys.exit(1)
 
 if __name__ == "__main__":
-    main()
+    import befehl as befehlskanal
+    befehlskanal.belege()
+    try:
+        main()
+    finally:
+        befehlskanal.freigeben()

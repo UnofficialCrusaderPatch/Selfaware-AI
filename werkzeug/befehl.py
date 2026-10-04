@@ -42,10 +42,34 @@ def pruefe(zeilen):
             raise RuntimeError("MODULFEHLER (Antwort des Moduls): " + z[:240])
     return zeilen
 
+LAUF = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".lauf")   # Kanal belegt: "<pid>" - der Lenker frischt sie je Runde auf
+
+def belege():
+    """Der Lenker meldet sich als Besitzer des Kanals (je Runde aufrufen). 05.10.: eine Nebenabfrage aus einem zweiten
+    Prozess lief mitten in Partie 9f in den Kanal - zwei Schreiber auf befehl.json verlieren Befehle."""
+    io.open(LAUF, "w").write(str(os.getpid()))
+
+def freigeben():
+    try:
+        if io.open(LAUF).read().strip() == str(os.getpid()):
+            os.remove(LAUF)
+    except OSError:
+        pass
+
+def _kanal_frei():
+    try:
+        pid = io.open(LAUF).read().strip()
+        alter = time.time() - os.path.getmtime(LAUF)
+    except OSError:
+        return
+    if pid != str(os.getpid()) and alter < 15:
+        raise RuntimeError("KANAL BELEGT: ein Lauf (Prozess %s) benutzt den Befehlskanal gerade (vor %.0f s gemeldet)" % (pid, alter))
+
 def sende(befehl, warte=3.0, bis=None):
     """Schickt den Befehl (dict) und gibt die neuen Modul-Logzeilen zurueck.
     bis = Text, auf den gewartet wird (alle 20 ms nachsehen, hoechstens <warte> s) - statt fest zu warten
     (04.10.2026: feste Wartezeit machte eine Lenker-Runde 1,1 s lang)."""
+    _kanal_frei()
     befehl = dict(befehl)
     befehl["id"] = neue_id()
     vorher = os.path.getsize(LOG)

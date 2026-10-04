@@ -1,0 +1,124 @@
+Eintrag 1 'M14 Eroeffnung Grumpy T608' -> Scrollstand 0, Zeile 1; Spielzeit vorher 28727
+['[villagestudio]: LADEPAUSE: scharf (jetzt Tick 28727, pausiert).']
+['[villagestudio]: POKE 0x01126628: 0 -> 0', '[villagestudio]: POKE 0x01126624: 0 -> 1', '[villagestudio]: LADEN: Knopf 2 gedrueckt, ok=true', '[villagestudio]: logik: 3 von 3 Befehlen ausgefuehrt, 0 schon erledigt.', '[villagestudio]: LADEPAUSE: Laden erkannt (Spielzeit sprang um -28119) bei Tick 608 - angehalten.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 608.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 608.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 608.']
+Spielzeit nachher 608 / 608, Pause 1
+Tick 608
+== Phase 2: Echtzeit, Tempo 1000, 4 Minuten, Waechter an
+Vorab-Kontrolle gut: {'Ansicht': 14, 'gameOver': 0, 'Mensch': 1, 'Platz': 1}
+Wirtschaft: Apfel A [(110, 110), (100, 110), (115, 126), (104, 168), (106, 178), (142, 64)], B [(105, 120), (107, 100), (94, 170), (152, 62)]; alte Lagerteile [6, 7, 8, 9]
+Tick | Holz Stein Eisen | Aepfel Brot | Beliebt | Leute/Platz (Feuer) | Holzf. Apfelb. | Ereignis
+ 1034 |   0   0   0 |  15  15 |  95.00 | 18/34 (2) | 2 10 | Stellung: 14 Truppen zum Posten (121, 123)
+ZEITEN nach 10 Runden: lesen 0.40 s, wirtschaft 0.27 s, waechter 0.03 s, haus_lager_zeile 0.00 s
+ 1477 |   0   0   0 |  14  15 |  98.00 | 27/34 (3) | 10 10 | -
+ 1588 |   0   0   0 |  14  15 |  98.00 | 29/34 (1) | 14 10 | Seasoning: A-Plantagen reif bei Tick 1588 (Baum 349) - setze 4 B-Plantagen; Seasoning: alle 4 B-Plantagen stehen (Tick 1588, 0 Ticks nach A-Reife); Altes Lager abgerissen (4 Teile, leer) bei Tick 1588
+ZEITEN nach 20 Runden: lesen 0.78 s, wirtschaft 0.50 s, waechter 0.04 s, haus_lager_zeile 0.00 s
+ 1848 |   0   0   0 |  14  14 | 100.00 | 34/34 (2) | 14 10 | -
+ZEITEN nach 30 Runden: lesen 1.15 s, wirtschaft 0.50 s, waechter 0.04 s, haus_lager_zeile 0.00 s
+ 2018 |   0   0   0 |  14  14 | 100.00 | 34/34 (6) | 14 10 | -
+ZEITEN nach 40 Runden: lesen 1.53 s, wirtschaft 0.50 s, waechter 0.05 s, haus_lager_zeile 0.00 s
+ 2206 |   0   0   0 |  13  14 | 100.00 | 34/34 (6) | 14 10 | -
+ZEITEN nach 50 Runden: lesen 1.91 s, wirtschaft 0.50 s, waechter 0.05 s, haus_lager_zeile 0.00 s
+ 2392 |   0   0   0 |  21  13 | 100.00 | 34/34 (6) | 14 10 | -
+ZEITEN nach 60 Runden: lesen 2.29 s, wirtschaft 0.50 s, waechter 0.05 s, haus_lager_zeile 0.00 s
+ 2601 |   0   0   0 |  33  13 | 100.00 | 34/34 (6) | 14 10 | -
+ZEITEN nach 70 Runden: lesen 2.66 s, wirtschaft 0.50 s, waechter 0.06 s, haus_lager_zeile 0.00 s
+ 2775 |   0   0   0 |  32  13 | 100.00 | 34/34 (6) | 14 10 | -
+ZEITEN nach 80 Runden: lesen 3.04 s, wirtschaft 0.50 s, waechter 0.06 s, haus_lager_zeile 0.00 s
+ 2977 |   0   0   0 |  42  12 | 100.00 | 34/34 (6) | 14 10 | -
+ZEITEN nach 90 Runden: lesen 3.42 s, wirtschaft 0.50 s, waechter 0.07 s, haus_lager_zeile 0.00 s
+ 3153 |   0   0   0 |  46  12 | 100.00 | 34/34 (6) | 14 10 | -
+ZEITEN nach 100 Runden: lesen 3.79 s, wirtschaft 0.50 s, waechter 0.07 s, haus_lager_zeile 0.00 s
+ 3360 |   0   0   0 |  57  12 | 100.00 | 34/34 (6) | 14 10 | -
+ZEITEN nach 110 Runden: lesen 4.17 s, wirtschaft 0.50 s, waechter 0.07 s, haus_lager_zeile 0.00 s
+ 3570 |   0   0   0 |  57  11 | 100.00 | 34/34 (6) | 14 10 | -
+ZEITEN nach 120 Runden: lesen 4.55 s, wirtschaft 0.50 s, waechter 0.08 s, haus_lager_zeile 0.00 s
+ 3765 |   0   0   0 |  57  11 | 100.00 | 34/34 (6) | 14 10 | -
+ZEITEN nach 130 Runden: lesen 4.93 s, wirtschaft 0.50 s, waechter 0.08 s, haus_lager_zeile 0.00 s
+ 3941 |   0   0   0 |  56  11 | 100.00 | 34/34 (6) | 14 10 | -
+ZEITEN nach 140 Runden: lesen 5.31 s, wirtschaft 0.50 s, waechter 0.08 s, haus_lager_zeile 0.00 s
+ 4145 |   0   0   0 |  56  10 | 100.00 | 34/34 (6) | 14 10 | -
+ZEITEN nach 150 Runden: lesen 5.69 s, wirtschaft 0.50 s, waechter 0.09 s, haus_lager_zeile 0.00 s
+ 4338 |   0   0   0 |  56  10 | 100.00 | 34/34 (6) | 14 10 | -
+ZEITEN nach 160 Runden: lesen 6.07 s, wirtschaft 0.50 s, waechter 0.09 s, haus_lager_zeile 0.00 s
+ 4501 |   0   0   0 |  65  10 | 100.00 | 34/34 (6) | 14 10 | Lager gesetzt bei (117, 120) - 1 Holzfaeller wollen abliefern (Tick 4501)
+ZEITEN nach 170 Runden: lesen 6.45 s, wirtschaft 0.56 s, waechter 0.09 s, haus_lager_zeile 0.00 s
+ 4713 |   0   0   0 |  78   9 | 100.00 | 34/34 (6) | 14 10 | -
+ZEITEN nach 180 Runden: lesen 6.82 s, wirtschaft 0.56 s, waechter 0.09 s, haus_lager_zeile 0.00 s
+ 4892 |   0   0   0 |  78   9 | 100.00 | 34/34 (6) | 14 10 | -
+ZEITEN nach 190 Runden: lesen 7.19 s, wirtschaft 0.56 s, waechter 0.10 s, haus_lager_zeile 0.00 s
+ 5094 |  14   0   0 |  77   9 | 100.00 | 34/34 (6) | 14 10 | -
+ 5240 |  43   0   0 |  77   8 | 100.00 | 34/34 (6) | 14 10 | Lager erweitert (122, 121): Bestand 43, Holz unterwegs 155 + bald 0, Teile 4 -> noetig 5
+ZEITEN nach 200 Runden: lesen 7.58 s, wirtschaft 0.62 s, waechter 0.10 s, haus_lager_zeile 0.00 s
+ 5288 |  48   0   0 |  81   8 | 100.00 | 34/34 (6) | 14 10 | -
+ZEITEN nach 210 Runden: lesen 7.96 s, wirtschaft 0.62 s, waechter 0.11 s, haus_lager_zeile 0.00 s
+ 5478 |  54   0   0 |  87   8 | 100.00 | 34/34 (6) | 14 10 | -
+ZEITEN nach 220 Runden: lesen 8.34 s, wirtschaft 0.62 s, waechter 0.11 s, haus_lager_zeile 0.00 s
+ 5654 |  80   0   0 |  91   8 | 100.00 | 34/34 (6) | 14 10 | -
+ZEITEN nach 230 Runden: lesen 8.73 s, wirtschaft 0.62 s, waechter 0.12 s, haus_lager_zeile 0.00 s
+ 5855 |  99   0   0 |  96   7 | 100.00 | 34/34 (6) | 14 10 | -
+ZEITEN nach 240 Runden: lesen 9.11 s, wirtschaft 0.62 s, waechter 0.13 s, haus_lager_zeile 0.00 s
+ 6058 | 126   0   0 |  96   7 | 100.00 | 34/34 (6) | 14 10 | -
+ZEITEN nach 250 Runden: lesen 9.49 s, wirtschaft 0.62 s, waechter 0.13 s, haus_lager_zeile 0.00 s
+ 6236 | 127  12   0 |  95   7 | 100.00 | 34/34 (6) | 14 10 | -
+ZEITEN nach 260 Runden: lesen 9.88 s, wirtschaft 0.62 s, waechter 0.14 s, haus_lager_zeile 0.00 s
+ 6418 | 144  12   0 |  95   6 | 100.00 | 34/34 (6) | 14 10 | -
+ZEITEN nach 270 Runden: lesen 10.25 s, wirtschaft 0.62 s, waechter 0.15 s, haus_lager_zeile 0.00 s
+ 6610 | 192  12   0 | 103   6 | 100.00 | 34/34 (6) | 14 10 | -
+ 6665 | 192  12   0 | 104   6 | 100.00 | 34/34 (6) | 14 10 | Abfangen: 15 Verteidiger zum Laufziel (124,118) von Feind 288 (noch 107 Felder von uns)
+ZEITEN nach 280 Runden: lesen 10.64 s, wirtschaft 0.63 s, waechter 0.19 s, haus_lager_zeile 0.00 s
+ 6831 | 234  12   0 | 112   6 | 100.00 | 34/34 (6) | 14 10 | -
+ZEITEN nach 290 Runden: lesen 11.02 s, wirtschaft 0.63 s, waechter 0.20 s, haus_lager_zeile 0.00 s
+ 7041 | 240  12   0 | 116   5 | 100.00 | 34/34 (6) | 14 10 | -
+ZEITEN nach 300 Runden: lesen 11.41 s, wirtschaft 0.63 s, waechter 0.20 s, haus_lager_zeile 0.00 s
+ 7232 | 252  12   0 | 116   5 | 100.00 | 34/34 (6) | 14 10 | -
+ZEITEN nach 310 Runden: lesen 11.79 s, wirtschaft 0.63 s, waechter 0.21 s, haus_lager_zeile 0.00 s
+ 7445 | 252  12   0 | 115   5 | 100.00 | 34/34 (6) | 14 10 | -
+ZEITEN nach 320 Runden: lesen 12.17 s, wirtschaft 0.63 s, waechter 0.23 s, haus_lager_zeile 0.00 s
+ 7635 | 252  12   0 | 123   4 | 100.00 | 34/34 (6) | 14 10 | -
+ZEITEN nach 330 Runden: lesen 12.55 s, wirtschaft 0.63 s, waechter 0.24 s, haus_lager_zeile 0.00 s
+ 7823 | 252  12   0 | 127   4 | 100.00 | 34/34 (6) | 14 10 | -
+ZEITEN nach 340 Runden: lesen 12.94 s, wirtschaft 0.63 s, waechter 0.25 s, haus_lager_zeile 0.00 s
+ 8035 | 284  12   0 | 126   4 | 100.00 | 34/34 (6) | 14 10 | -
+ZEITEN nach 350 Runden: lesen 13.32 s, wirtschaft 0.63 s, waechter 0.25 s, haus_lager_zeile 0.00 s
+ 8228 | 288  12   0 | 126   3 | 100.00 | 34/34 (6) | 14 10 | -
+ 8386 | 288  12   0 | 126   3 | 100.00 | 34/34 (6) | 14 10 | Lager erweitert (125, 126): Bestand 300, Holz unterwegs 36 + bald 18, Teile 8 -> noetig 9
+ZEITEN nach 360 Runden: lesen 13.69 s, wirtschaft 0.69 s, waechter 0.26 s, haus_lager_zeile 0.00 s
+ 8468 | 288  12   0 | 126   3 | 100.00 | 34/34 (6) | 14 10 | -
+ZEITEN nach 370 Runden: lesen 14.08 s, wirtschaft 0.69 s, waechter 0.27 s, haus_lager_zeile 0.00 s
+ 8645 | 288  12   0 | 125   3 | 100.00 | 34/34 (6) | 14 10 | -
+ZEITEN nach 380 Runden: lesen 14.45 s, wirtschaft 0.69 s, waechter 0.28 s, haus_lager_zeile 0.00 s
+ 8808 | 288  12   0 | 141   2 | 100.00 | 34/34 (6) | 14 10 | Abwehr gebuendelt: alle 15 (22,24,55) gegen Feind 288 Typ 24 bei (168,162)
+ZEITEN nach 390 Runden: lesen 14.83 s, wirtschaft 0.69 s, waechter 0.35 s, haus_lager_zeile 0.00 s
+ 9036 | 306  24   0 | 148   2 | 100.00 | 34/34 (6) | 14 10 | -
+ZEITEN nach 400 Runden: lesen 15.21 s, wirtschaft 0.69 s, waechter 0.36 s, haus_lager_zeile 0.00 s
+ 9234 | 324  24   0 | 147   2 | 100.00 | 34/34 (5) | 13 10 | Abwehr gebuendelt: alle 15 (22,24,55) gegen Feind 291 Typ 24 bei (132,133)
+ZEITEN nach 410 Runden: lesen 15.59 s, wirtschaft 0.69 s, waechter 0.43 s, haus_lager_zeile 0.00 s
+ 9458 | 324  24   0 | 147   1 | 100.00 | 34/34 (6) | 14 10 | Abwehr gebuendelt: alle 15 (22,24,55) gegen Feind 311 Typ 24 bei (148,141)
+ZEITEN nach 420 Runden: lesen 15.97 s, wirtschaft 0.69 s, waechter 0.50 s, haus_lager_zeile 0.00 s
+ 9700 | 324  24   0 | 151   1 | 100.00 | 34/34 (6) | 14 10 | -
+ZEITEN nach 430 Runden: lesen 16.35 s, wirtschaft 0.69 s, waechter 0.51 s, haus_lager_zeile 0.00 s
+ 9881 | 324  24   0 | 165   1 | 100.00 | 34/34 (6) | 14 10 | -
+ZEITEN nach 440 Runden: lesen 16.73 s, wirtschaft 0.69 s, waechter 0.52 s, haus_lager_zeile 0.00 s
+10065 | 336  24   0 | 164   0 | 100.00 | 34/34 (6) | 14 10 | -
+ZEITEN nach 450 Runden: lesen 17.11 s, wirtschaft 0.69 s, waechter 0.53 s, haus_lager_zeile 0.00 s
+10246 | 342  24   0 | 163   0 | 100.00 | 34/34 (6) | 14 10 | -
+ZEITEN nach 460 Runden: lesen 17.49 s, wirtschaft 0.69 s, waechter 0.55 s, haus_lager_zeile 0.00 s
+10466 | 342  24   0 | 162   0 | 100.00 | 34/34 (6) | 14 10 | -
+ZEITEN nach 470 Runden: lesen 17.87 s, wirtschaft 0.69 s, waechter 0.56 s, haus_lager_zeile 0.00 s
+10656 | 342  24   0 | 160   0 | 100.00 | 34/34 (6) | 14 10 | -
+ZEITEN nach 480 Runden: lesen 18.25 s, wirtschaft 0.69 s, waechter 0.57 s, haus_lager_zeile 0.00 s
+10847 | 359  24   0 | 172   0 | 100.00 | 34/34 (6) | 14 10 | -
+ZEITEN nach 490 Runden: lesen 18.64 s, wirtschaft 0.70 s, waechter 0.58 s, haus_lager_zeile 0.00 s
+11042 | 375  24   0 | 180   0 | 100.00 | 34/34 (6) | 14 10 | -
+ZEITEN nach 500 Runden: lesen 19.02 s, wirtschaft 0.70 s, waechter 0.59 s, haus_lager_zeile 0.00 s
+11254 | 420  24   0 | 178   0 | 100.00 | 34/34 (6) | 14 10 | -
+11416 | 432  24   0 | 177   0 | 100.00 | 34/34 (6) | 14 10 | Abfangen: 15 Verteidiger zum Laufziel (98,133) von Feind 346 (noch 114 Felder von uns)
+ZEITEN nach 510 Runden: lesen 19.41 s, wirtschaft 0.70 s, waechter 0.64 s, haus_lager_zeile 0.00 s
+11462 | 432  24   0 | 177   0 | 100.00 | 34/34 (6) | 14 10 | -
+ZEITEN nach 520 Runden: lesen 19.79 s, wirtschaft 0.70 s, waechter 0.65 s, haus_lager_zeile 0.00 s
+11659 | 455  24   0 | 176   0 | 100.00 | 34/34 (6) | 14 10 | -
+ZEITEN nach 530 Runden: lesen 20.20 s, wirtschaft 0.70 s, waechter 0.66 s, haus_lager_zeile 0.00 s
+11884 | 468  24   0 | 182   0 | 100.00 | 34/34 (6) | 14 10 | -
+11912 | 468  24   0 | 182   0 | 100.00 | 34/34 (6) | 14 10 | Lager erweitert (124, 116): Bestand 492, Holz unterwegs 54 + bald 18, Teile 12 -> noetig 13
+Ende Phase 2 bei Tick 12026 nach 535 Runden (0.0 s je Runde); Kornspeicher 1, Holzfaeller 14, Apfelplantagen 10; Waechter: Bedrohungen 6, davon tot 3, eigene Truppen verloren 0
+Wirtschaft: Seasoning: A 6 / B 4 Plantagen, A reif bei 1588, B gesetzt bei 1588; Apfelbauern untaetig vor B 0 % (13 Messungen), B bis B+1000 13 % (47 Messungen), danach 37 % (475 Messungen); FESTES FENSTER Tick 5000-12000 (zum Vergleich zwischen Partien): 40 % (349 Messungen); Lager gesetzt bei 4501, gemessene Ladung je Gang {3: 18}

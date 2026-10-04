@@ -63,6 +63,14 @@ bis eine Messung es bestaetigt (Marke dahinter).
 - Lord (Daniel 22:43): darf mitkaempfen und abfangen, wenn er frueh weiss wo angegriffen wird; wichtig sind nur seine letzten Lebenspunkte.
 - Assassinen-Raid (Daniel 04.10. 23:14-23:35, 05.10. 00:00): aufteilen, **hoechstens 6 je Gebaeude**; jeder Assassine einzeln befohlen auf das naechste Wirtschaftsgebaeude, ist es voll, sofort das naechste; nach einer Zerstoerung sofort weiter; kein Sammelpunkt noetig.
 
+## Gegner Rotkaeppchen (abgelesen 05.10.2026 aus `ucp/plugins/Mod-KI-Team-Liga-2.0.2/resources/ai/Rotkaeppchen/character.json`)
+- Start: 9 Assassinen, 14 Bogenschuetzen, 5 Speertraeger; arabischer Lord mit Staerke 0,5 (halb so stark).
+- Wirtschaft: NUR Aepfel (8 Plantagen-Plaetze, bis 24 Plantagen, 2 Leute je Plantage), 6 Holzfaeller, 1 Steinbruch, 2 Eisenminen, 2 Pechgruben, bis 5 Ochsen. Steuern 3-11, Beliebtheit 93-99, Essen hoechstens 50, doppelte Rationen ab 50 Essen. Verkauft Weizen, Mehl, Hopfen, Bier, Waffen, Kaese, Brot. -> Ihre Nahrung haengt allein an den Apfelplantagen und dem Kornspeicher.
+- Verteidigung: 42 Verteidiger, davon 22 auf den Mauern (Bogenschuetzen-lastig: DefUnit 1-3 Bogen, 4 Speer); **10 Aussen-Patrouillen, die wandern** (Sammelpause 25) - das sind die Gruppen von 7-10 Bogenschuetzen, an denen unsere Assassinen sterben. Ausfaelle: 8 Speertraeger.
+- Ueberfaelle: 8 Speertraeger in Gruppen zu 4 (das waren die Angreifer auf unseren Kornspeicher, 04.10.).
+- Grossangriff: 30 (+20) Mann, Ziel "Gold", 6 Leitermaenner, 6 Schilde - irgendwann kommt ein Heer von 30-50.
+- Folgerung: Patrouillen sind die Gefahr fuer Assassinen (meiden oder mit Ueberzahl gebuendelt erledigen); ihr Essen kommt nur aus Aepfeln - Plantagen und Kornspeicher sind ihr wunder Punkt; gegen den Grossangriff brauchen wir Mauern/Tuerme und den Lord in Sicherheit.
+
 ## Arbeitsweise beim Testen
 - Bei Fehlern immer den passenden Stand laden; nach vielen Neuerungen lieber ganz neu starten, um eine noch bessere Moeglichkeit zu finden (Daniel 04.10., 22:54).
 

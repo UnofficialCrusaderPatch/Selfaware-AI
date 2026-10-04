@@ -41,7 +41,8 @@ def befehl(cmd, warte=0.8, bis=None):
     return sende({"befehle": [c]}, warte, bis=bis)
 
 def peek(adr, n=1):
-    for z in sende({"player": 1, "peek": adr, "worte": n}, 0.6):
+    # auf die Antwort horchen statt fest 0,6 s zu warten (05.10.: eine Abfrage je Runde machte jede Runde ~600 Ticks lang)
+    for z in sende({"player": 1, "peek": adr, "worte": n}, 0.6, bis="PEEK 0x%08X" % adr):
         if "PEEK" in z:
             return [int(x, 16) & 0xFFFFFFFF for x in z.split(": ", 2)[-1].split()]
     raise RuntimeError("keine Antwort auf peek 0x%08X" % adr)

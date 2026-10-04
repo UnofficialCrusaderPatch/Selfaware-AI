@@ -1,0 +1,584 @@
+== Phase 1: Eroeffnung nach Plan (eroeffnung_plan.json)
+Eintrag 7 'M7-04 Mensch Grumpy T600' -> Scrollstand 0, Zeile 7; Spielzeit vorher 28715
+['[villagestudio]: LADEPAUSE: scharf (jetzt Tick 28715, pausiert).']
+['[villagestudio]: POKE 0x01126628: 0 -> 0', '[villagestudio]: POKE 0x01126624: 0 -> 7', '[villagestudio]: LADEN: Knopf 2 gedrueckt, ok=true', '[villagestudio]: logik: 3 von 3 Befehlen ausgefuehrt, 0 schon erledigt.', '[villagestudio]: LADEPAUSE: Laden erkannt (Spielzeit sprang um -28115) bei Tick 600 - angehalten.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.']
+Spielzeit nachher 600 / 600, Pause 1
+Tick 600
+Vorab-Kontrolle gut: {'Ansicht': 14, 'gameOver': 0, 'Mensch': 1, 'Platz': 1}
+in einem Aufruf gebaut: 30 von 30, einzeln nachgeholt: 0
+GEBAUT 30 von 30; Fehlschlaege: keine; Holz 150 -> 0, Gold 3930 -> 3780
+Lager: alt 4 Teile abgerissen (Inhalt: {}), neu bei [118, 120] -> (6, 118, 120); jetzt 4 Teile
+['[villagestudio]: OPTIONEN: Knopf 3 gedrueckt, ok=true']
+aktives Textfeld: 2
+Laenge im Feld jetzt: 26
+['[villagestudio]: LADEN: Knopf 3 gedrueckt, ok=true']
+['[villagestudio]: DIALOG: Knopf 22 (Ja), hinterlegter Zweck 0', '[villagestudio]: DIALOG: zurueck, ok=true']
+GESCHAFFT: M14 Eroeffnung Grumpy T608.sav (1044496 Byte), Kopie daten/spielstaende/M14 Eroeffnung Grumpy T608_20261005-000856.sav
+== Phase 2: Echtzeit, Tempo 1000, 9 Minuten, Waechter an
+Vorab-Kontrolle gut: {'Ansicht': 14, 'gameOver': 0, 'Mensch': 1, 'Platz': 1}
+Tick | Holz Stein Eisen | Aepfel Brot | Beliebt | Leute/Platz (Feuer) | Holzf. Apfelb. | Ereignis
+ 1036 |   0   0   0 |  15  15 |  95.00 | 18/34 (3) | 2 10 | Stellung: 14 Truppen zum Posten (121, 123); Soeldnerlager gesetzt (125, 119) (Gold 3850)
+ 1111 |   0   0   0 |  15  15 |  95.00 | 20/34 (0) | 2 10 | Markt gesetzt (125, 129)
+ 1254 |   0   0   0 |  15  15 |  96.50 | 22/34 (1) | 6 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+ 1312 |   0   0   0 |  15  15 |  96.50 | 21/34 (1) | 6 10 | 2 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 1 Gebaeude gleichzeitig angelaufen)
+ 1380 |   0   0   0 |  15  15 |  96.50 | 21/34 (1) | 6 10 | 5 Assassinen angeworben (Gold jetzt 3450); 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 1 Gebaeude gleichzeitig angelaufen)
+ 1445 |   0   0   0 |  15  15 |  98.00 | 21/34 (1) | 6 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 1 Gebaeude gleichzeitig angelaufen)
+ 1500 |   0   0   0 |  14  15 |  98.00 | 22/34 (1) | 6 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 1 Gebaeude gleichzeitig angelaufen)
+ 1565 |   0   0   0 |  14  15 |  98.00 | 22/34 (1) | 7 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 1 Gebaeude gleichzeitig angelaufen)
+ZEITEN nach 10 Runden: lesen 0.39 s, bauen_werben_verkauf 0.36 s, assassinen 0.18 s, waechter 0.04 s, haus_lager_zeile 0.00 s
+ 1633 |   0   0   0 |  14  15 |  99.50 | 22/34 (1) | 7 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 2 Gebaeude gleichzeitig angelaufen)
+ 1702 |   0   0   0 |  14  14 |  99.50 | 23/34 (1) | 7 10 | 10 Assassinen angeworben (Gold jetzt 3100); 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 2 Gebaeude gleichzeitig angelaufen)
+ 1774 |   0   0   0 |  14  14 |  99.50 | 23/34 (1) | 8 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 2 Gebaeude gleichzeitig angelaufen)
+ 1848 |   0   0   0 |  14  14 | 100.00 | 24/34 (2) | 8 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 2 Gebaeude gleichzeitig angelaufen)
+ 1920 |   0   0   0 |  14  14 | 100.00 | 24/34 (1) | 8 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 2 Gebaeude gleichzeitig angelaufen)
+ 1994 |   0   0   0 |  14  14 | 100.00 | 24/34 (1) | 9 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 2 Gebaeude gleichzeitig angelaufen)
+ 2059 |   0   0   0 |  14  14 | 100.00 | 25/34 (2) | 9 10 | 15 Assassinen angeworben (Gold jetzt 2750); 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 3 Gebaeude gleichzeitig angelaufen)
+ 2137 |   0   0   0 |  14  14 | 100.00 | 25/34 (1) | 10 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 4 Gebaeude gleichzeitig angelaufen)
+ 2206 |   0   0   0 |  14  14 | 100.00 | 26/34 (2) | 10 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 4 Gebaeude gleichzeitig angelaufen)
+ 2276 |   0   0   0 |  22  14 | 100.00 | 26/34 (2) | 10 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 4 Gebaeude gleichzeitig angelaufen)
+ZEITEN nach 20 Runden: lesen 0.78 s, bauen_werben_verkauf 0.66 s, assassinen 0.48 s, waechter 0.04 s, haus_lager_zeile 0.00 s
+ 2343 |   0   0   0 |  21  14 | 100.00 | 26/34 (1) | 11 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 4 Gebaeude gleichzeitig angelaufen)
+ 2406 |   0   0   0 |  21  14 | 100.00 | 27/34 (2) | 11 10 | 20 Assassinen angeworben (Gold jetzt 2400); 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 4 Gebaeude gleichzeitig angelaufen)
+ 2458 |   0   0   0 |  27  14 | 100.00 | 27/34 (2) | 11 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 4 Gebaeude gleichzeitig angelaufen)
+ 2529 |   0   0   0 |  29  13 | 100.00 | 27/34 (1) | 12 10 | verkauft: apfel; 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 4 Gebaeude gleichzeitig angelaufen)
+ 2623 |   0   0   0 |  28  13 | 100.00 | 28/34 (2) | 12 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 4 Gebaeude gleichzeitig angelaufen)
+ 2682 |   0   0   0 |  28  13 | 100.00 | 28/34 (2) | 12 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 4 Gebaeude gleichzeitig angelaufen)
+ 2746 |   0   0   0 |  28  13 | 100.00 | 29/34 (1) | 14 10 | 25 Assassinen angeworben (Gold jetzt 2065); verkauft: apfel; 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 4 Gebaeude gleichzeitig angelaufen)
+ 2840 |   0   0   0 |  23  13 | 100.00 | 29/34 (1) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 4 Gebaeude gleichzeitig angelaufen)
+ 2908 |   0   0   0 |  28  13 | 100.00 | 30/34 (1) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 5 Gebaeude gleichzeitig angelaufen)
+ 2963 |   0   0   0 |  33  13 | 100.00 | 30/34 (1) | 14 10 | verkauft: apfel; 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 5 Gebaeude gleichzeitig angelaufen)
+ZEITEN nach 30 Runden: lesen 1.16 s, bauen_werben_verkauf 1.05 s, assassinen 0.78 s, waechter 0.04 s, haus_lager_zeile 0.00 s
+ 3063 |   0   0   0 |  27  13 | 100.00 | 31/34 (2) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 5 Gebaeude gleichzeitig angelaufen)
+ 3114 |   0   0   0 |  31  13 | 100.00 | 32/34 (1) | 14 10 | 30 Assassinen angeworben (Gold jetzt 1745)
+ 3160 |   0   0   0 |  31  13 | 100.00 | 32/34 (1) | 14 10 | verkauft: apfel; 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 5 Gebaeude gleichzeitig angelaufen)
+ 3245 |   0   0   0 |  26  12 | 100.00 | 31/34 (1) | 14 10 | 2 Assassinen auf 2 Gebaeude verteilt (im Spiel gemessen: 5 Gebaeude gleichzeitig angelaufen)
+ 3299 |   0   0   0 |  30  12 | 100.00 | 32/34 (1) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 6 Gebaeude gleichzeitig angelaufen)
+ 3370 |   0   0   0 |  34  12 | 100.00 | 32/34 (1) | 14 10 | verkauft: apfel; 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 6 Gebaeude gleichzeitig angelaufen)
+ 3445 |   0   0   0 |  29  12 | 100.00 | 32/34 (1) | 14 10 | 35 Assassinen angeworben (Gold jetzt 1425); 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 7 Gebaeude gleichzeitig angelaufen)
+ 3504 |   0   0   0 |  29  12 | 100.00 | 33/34 (1) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 7 Gebaeude gleichzeitig angelaufen)
+ 3574 |   0   0   0 |  33  12 | 100.00 | 33/34 (1) | 14 10 | verkauft: apfel; 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 7 Gebaeude gleichzeitig angelaufen)
+ 3663 |   0   0   0 |  27  12 | 100.00 | 34/34 (2) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 8 Gebaeude gleichzeitig angelaufen)
+ZEITEN nach 40 Runden: lesen 1.54 s, bauen_werben_verkauf 1.44 s, assassinen 1.06 s, waechter 0.05 s, haus_lager_zeile 0.00 s
+ 3738 |   0   0   0 |  27  12 | 100.00 | 34/34 (2) | 14 10 | Gebaeude 72 (Typ 3) zerstoert; 7 Assassinen auf 3 Gebaeude verteilt (im Spiel gemessen: 7 Gebaeude gleichzeitig angelaufen)
+ 3826 |   0   0   0 |  27  11 | 100.00 | 34/34 (3) | 14 10 | 40 Assassinen angeworben (Gold jetzt 1090); 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 7 Gebaeude gleichzeitig angelaufen)
+ 3882 |   0   0   0 |  27  11 | 100.00 | 34/34 (3) | 14 10 | MESSUNG verletzt 221: leben 12500 -> 12170 | ort (195,257) zustand 106 | naechster Feind Typ 73 in 13 | naechster Fernkaempfer Typ 22 in 28 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 3 in 5 | Ziel 35 in 13; 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 7 Gebaeude gleichzeitig angelaufen)
+ 3952 |   0   0   0 |  27  11 | 100.00 | 34/34 (3) | 14 10 | MESSUNG verletzt 221: leben 12170 -> 12130 | ort (194,259) zustand 101 | naechster Feind Typ 73 in 10 | naechster Fernkaempfer Typ 22 in 29 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 3 in 4 | Ziel 35 in 11; 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 7 Gebaeude gleichzeitig angelaufen)
+ 4022 |   0   0   0 |  27  11 | 100.00 | 34/34 (3) | 14 10 | MESSUNG verletzt 238: leben 12500 -> 200 | ort (201,254) zustand 106 | naechster Feind Typ 73 in 2 | naechster Fernkaempfer Typ 22 in 22 | Fern<=16: 0 | Nah<=8: 1 | naechstes Feindgebaeude Typ 3 in 1 | Ziel 81 in 1; 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 7 Gebaeude gleichzeitig angelaufen)
+ 4077 |   0   0   0 |  27  11 | 100.00 | 34/34 (2) | 14 10 | MESSUNG tot 238: zuletzt ort (201,254) zustand 106 | naechster Feind Typ 73 in 2 | naechster Fernkaempfer Typ 22 in 22 | Fern<=16: 0 | Nah<=8: 1 | naechstes Feindgebaeude Typ 3 in 1 | Ziel 81 in 1; MESSUNG verletzt 240: leben 12500 -> 11750 | ort (201,254) zustand 106 | naechster Feind Typ 22 in 22 | naechster Fernkaempfer Typ 22 in 22 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 3 in 1 | Ziel 81 in 1; Gebaeude 90 (Typ 32) zerstoert; 7 Assassinen auf 2 Gebaeude verteilt (im Spiel gemessen: 6 Gebaeude gleichzeitig angelaufen)
+ 4148 |   0   0   0 |  27  11 | 100.00 | 34/34 (3) | 14 10 | 45 Assassinen angeworben (Gold jetzt 740); 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 7 Gebaeude gleichzeitig angelaufen)
+ 4180 |   0   0   0 |  27  11 | 100.00 | 34/34 (2) | 14 10 | Gebaeude 81 (Typ 3) zerstoert; Gebaeude 35 (Typ 3) zerstoert; Gebaeude 98 (Typ 32) zerstoert; 18 Assassinen auf 4 Gebaeude verteilt (im Spiel gemessen: 5 Gebaeude gleichzeitig angelaufen)
+ 4275 |   0   0   0 |  26  11 | 100.00 | 34/34 (2) | 14 10 | MESSUNG verletzt 217: leben 12500 -> 11300 | ort (186,269) zustand 101 | naechster Feind Typ 73 in 27 | naechster Fernkaempfer Typ 22 in 37 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 32 in 8 | Ziel 71 in 8; 2 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 7 Gebaeude gleichzeitig angelaufen)
+ZEITEN nach 50 Runden: lesen 1.92 s, bauen_werben_verkauf 1.74 s, assassinen 1.43 s, waechter 0.05 s, haus_lager_zeile 0.00 s
+ 4348 |   0   0   0 |  26  11 | 100.00 | 34/34 (2) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 8 Gebaeude gleichzeitig angelaufen)
+ 4407 |   0   0   0 |  26  10 | 100.00 | 33/34 (2) | 14 10 | 50 Assassinen angeworben (Gold jetzt 390); 2 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 9 Gebaeude gleichzeitig angelaufen)
+ 4468 |   0   0   0 |  27  10 | 100.00 | 34/34 (3) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 9 Gebaeude gleichzeitig angelaufen)
+ 4528 |   0   0   0 |  35  10 | 100.00 | 34/34 (2) | 14 10 | Gebaeude 84 (Typ 3) zerstoert; Gebaeude 71 (Typ 32) zerstoert; 13 Assassinen auf 5 Gebaeude verteilt (im Spiel gemessen: 7 Gebaeude gleichzeitig angelaufen)
+ 4618 |   0   0   0 |  35  10 | 100.00 | 34/34 (2) | 14 10 | MESSUNG verletzt 229: leben 12500 -> 12170 | ort (197,257) zustand 101 | naechster Feind Typ 22 in 29 | naechster Fernkaempfer Typ 22 in 29 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 3 in 7 | Ziel 26 in 42; 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 10 Gebaeude gleichzeitig angelaufen)
+ 4721 |   0   0   0 |  49  10 | 100.00 | 34/34 (2) | 14 10 | verkauft: apfel; MESSUNG verletzt 136: leben 12500 -> 11625 | ort (229,254) zustand 106 | naechster Feind Typ 24 in 2 | naechster Fernkaempfer Typ 22 in 28 | Fern<=16: 0 | Nah<=8: 1 | naechstes Feindgebaeude Typ 7 in 6 | Ziel 100 in 6
+ 4756 |   0   0   0 |  44  10 | 100.00 | 34/34 (3) | 14 10 | MESSUNG verletzt 136: leben 11625 -> 11250 | ort (229,254) zustand 101 | naechster Feind Typ 22 in 28 | naechster Fernkaempfer Typ 22 in 28 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 7 in 6 | Ziel 100 in 6; 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 10 Gebaeude gleichzeitig angelaufen)
+ 4814 |   0   0   0 |  43  10 | 100.00 | 34/34 (4) | 14 10 | verkauft: apfel; MESSUNG verletzt 136: leben 11250 -> 8850 | ort (233,258) zustand 101 | naechster Feind Typ 22 in 24 | naechster Fernkaempfer Typ 22 in 24 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 7 in 2 | Ziel 100 in 2; Gebaeude 91 (Typ 26) zerstoert; 6 Assassinen auf 2 Gebaeude verteilt (im Spiel gemessen: 9 Gebaeude gleichzeitig angelaufen)
+ZEITEN nach 60 Runden: lesen 2.30 s, bauen_werben_verkauf 1.98 s, assassinen 1.70 s, waechter 0.06 s, haus_lager_zeile 0.00 s
+ 4884 |   0   0   0 |  38  10 | 100.00 | 34/34 (5) | 14 10 | MESSUNG verletzt 262: leben 12500 -> 8900 | ort (234,259) zustand 107 | naechster Feind Typ 22 in 23 | naechster Fernkaempfer Typ 22 in 23 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 7 in 1 | Ziel 100 in 1; MESSUNG verletzt 136: leben 8850 -> 7650 | ort (234,259) zustand 107 | naechster Feind Typ 22 in 23 | naechster Fernkaempfer Typ 22 in 23 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 7 in 1 | Ziel 100 in 1
+ 4929 |   0   0   0 |  40  10 | 100.00 | 34/34 (6) | 14 10 | verkauft: apfel
+ 4965 |   0   0   0 |  38   9 | 100.00 | 34/34 (6) | 14 10 | MESSUNG tot 136: zuletzt ort (234,259) zustand 107 | naechster Feind Typ 22 in 23 | naechster Fernkaempfer Typ 22 in 23 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 7 in 1 | Ziel 100 in 1; Gebaeude 100 (Typ 7) zerstoert; 5 Assassinen auf 2 Gebaeude verteilt (im Spiel gemessen: 9 Gebaeude gleichzeitig angelaufen)
+ 5007 |   0   0   0 |  38   9 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 262: leben 8900 -> 7700 | ort (234,260) zustand 101 | naechster Feind Typ 22 in 22 | naechster Fernkaempfer Typ 22 in 22 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 7 in 12 | Ziel 24 in 12; Gebaeude 19 (Typ 32) zerstoert; 6 Assassinen auf 2 Gebaeude verteilt (im Spiel gemessen: 8 Gebaeude gleichzeitig angelaufen)
+ 5044 |   0   0   0 |  38   9 | 100.00 | 34/34 (6) | 14 10 | verkauft: apfel
+ 5072 |   0   0   0 |  33   9 | 100.00 | 34/34 (6) | 14 10 | 55 Assassinen angeworben (Gold jetzt 100)
+ 5108 |   2   0   0 |  33   9 | 100.00 | 34/34 (5) | 14 10 | MESSUNG verletzt 229: leben 12170 -> 10970 | ort (228,275) zustand 101 | naechster Feind Typ 22 in 7 | naechster Fernkaempfer Typ 22 in 7 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 41 in 7 | Ziel 26 in 13; MESSUNG verletzt 242: leben 12500 -> 11300 | ort (193,294) zustand 101 | naechster Feind Typ 24 in 29 | naechster Fernkaempfer Typ 22 in 31 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 32 in 21 | Ziel 36 in -1; Gebaeude 36 (Typ 32) zerstoert; 6 Assassinen auf 2 Gebaeude verteilt (im Spiel gemessen: 8 Gebaeude gleichzeitig angelaufen)
+ 5168 |  14   0   0 |  33   9 | 100.00 | 34/34 (5) | 14 10 | MESSUNG verletzt 242: leben 11300 -> 10100 | ort (190,297) zustand 101 | naechster Feind Typ 24 in 32 | naechster Fernkaempfer Typ 22 in 34 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 32 in 2 | Ziel 83 in 25; 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 9 Gebaeude gleichzeitig angelaufen)
+ZEITEN nach 70 Runden: lesen 2.68 s, bauen_werben_verkauf 2.07 s, assassinen 1.86 s, waechter 0.06 s, haus_lager_zeile 0.00 s
+ 5243 |  25   0   0 |  33   9 | 100.00 | 34/34 (5) | 14 10 | MESSUNG verletzt 231: leben 12500 -> 11300 | ort (235,282) zustand 101 | naechster Feind Typ 22 in 5 | naechster Fernkaempfer Typ 22 in 5 | Fern<=16: 10 | Nah<=8: 5 | naechstes Feindgebaeude Typ 10 in 1 | Ziel 26 in 6
+ 5265 |  30   0   0 |  33   9 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; MESSUNG verletzt 270: leben 12500 -> 11300 | ort (234,275) zustand 101 | naechster Feind Typ 22 in 7 | naechster Fernkaempfer Typ 22 in 7 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 10 in 6 | Ziel 26 in 13; MESSUNG verletzt 229: leben 10970 -> 8570 | ort (236,283) zustand 101 | naechster Feind Typ 22 in 6 | naechster Fernkaempfer Typ 22 in 6 | Fern<=16: 10 | Nah<=8: 2 | naechstes Feindgebaeude Typ 10 in 1 | Ziel 26 in 5; MESSUNG verletzt 231: leben 11300 -> 10100 | ort (236,283) zustand 101 | naechster Feind Typ 22 in 6 | naechster Fernkaempfer Typ 22 in 6 | Fern<=16: 10 | Nah<=8: 2 | naechstes Feindgebaeude Typ 10 in 1 | Ziel 26 in 5
+ 5312 |  31   0   0 |  34   9 | 100.00 | 34/34 (5) | 14 10 | MESSUNG verletzt 270: leben 11300 -> 10100 | ort (235,278) zustand 101 | naechster Feind Typ 22 in 5 | naechster Fernkaempfer Typ 22 in 5 | Fern<=16: 10 | Nah<=8: 4 | naechstes Feindgebaeude Typ 10 in 3 | Ziel 26 in 10; MESSUNG verletzt 277: leben 12500 -> 11300 | ort (234,274) zustand 101 | naechster Feind Typ 22 in 8 | naechster Fernkaempfer Typ 22 in 8 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 10 in 7 | Ziel 26 in 14
+ 5336 |  31   0   0 |  38   9 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 264: leben 12500 -> 11300 | ort (237,280) zustand 101 | naechster Feind Typ 22 in 7 | naechster Fernkaempfer Typ 22 in 7 | Fern<=16: 10 | Nah<=8: 1 | naechstes Feindgebaeude Typ 10 in 1 | Ziel 26 in 8
+ 5358 |  31   0   0 |  38   9 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+ 5395 |  26   0   0 |  38   9 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 264: leben 11300 -> 10100 | ort (238,282) zustand 101 | naechster Feind Typ 22 in 8 | naechster Fernkaempfer Typ 22 in 8 | Fern<=16: 10 | Nah<=8: 1 | naechstes Feindgebaeude Typ 10 in 1 | Ziel 26 in 6
+ 5416 |  26   0   0 |  37   9 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 274: leben 12500 -> 11300 | ort (238,282) zustand 101 | naechster Feind Typ 22 in 8 | naechster Fernkaempfer Typ 22 in 8 | Fern<=16: 10 | Nah<=8: 1 | naechstes Feindgebaeude Typ 10 in 1 | Ziel 26 in 6; MESSUNG verletzt 231: leben 10100 -> 8900 | ort (240,287) zustand 107 | naechster Feind Typ 22 in 10 | naechster Fernkaempfer Typ 22 in 10 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 19 in 1 | Ziel 26 in 1
+ 5433 |  26   0   0 |  40   9 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel; Gebaeude 23 (Typ 3) zerstoert; 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 9 Gebaeude gleichzeitig angelaufen)
+ 5535 |  43   0   0 |  37   9 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 262: leben 7700 -> 6500 | ort (244,271) zustand 1 | naechster Feind Typ 22 in 14 | naechster Fernkaempfer Typ 22 in 14 | Fern<=16: 8 | Nah<=8: 0 | naechstes Feindgebaeude Typ 10 in 10 | Ziel 24 in -1; MESSUNG verletzt 270: leben 10100 -> 8900 | ort (240,287) zustand 107 | naechster Feind Typ 22 in 10 | naechster Fernkaempfer Typ 22 in 10 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 19 in 1 | Ziel 26 in 1; MESSUNG verletzt 277: leben 11300 -> 10100 | ort (239,286) zustand 101 | naechster Feind Typ 22 in 9 | naechster Fernkaempfer Typ 22 in 9 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 10 in 2 | Ziel 26 in 2; Gebaeude 24 (Typ 7) zerstoert; Gebaeude 73 (Typ 32) zerstoert; Gebaeude 72 (Typ 32) zerstoert; 18 Assassinen auf 4 Gebaeude verteilt (im Spiel gemessen: 7 Gebaeude gleichzeitig angelaufen)
+ 5606 |  48   0   0 |  41   8 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 229: leben 8570 -> 6170 | ort (240,287) zustand 1 | naechster Feind Typ 22 in 10 | naechster Fernkaempfer Typ 22 in 10 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 10 in 3 | Ziel 26 in -1; Gebaeude 99 (Typ 32) zerstoert; Gebaeude 26 (Typ 19) zerstoert; 12 Assassinen auf 3 Gebaeude verteilt (im Spiel gemessen: 8 Gebaeude gleichzeitig angelaufen)
+ZEITEN nach 80 Runden: lesen 3.07 s, bauen_werben_verkauf 2.19 s, assassinen 2.07 s, waechter 0.06 s, haus_lager_zeile 0.00 s
+ 5626 |  50   0   0 |  42   8 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+ 5655 |  51   0   0 |  37   8 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 264: leben 10100 -> 8900 | ort (242,286) zustand 101 | naechster Feind Typ 22 in 12 | naechster Fernkaempfer Typ 22 in 12 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 10 in 2 | Ziel 20 in 16
+ 5677 |  60   0   0 |  37   8 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 262: leben 6500 -> 5300 | ort (244,276) zustand 101 | naechster Feind Typ 22 in 14 | naechster Fernkaempfer Typ 22 in 14 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 10 in 5 | Ziel 86 in 22; MESSUNG verletzt 270: leben 8900 -> 7700 | ort (243,286) zustand 101 | naechster Feind Typ 22 in 13 | naechster Fernkaempfer Typ 22 in 13 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 10 in 2 | Ziel 20 in 16; MESSUNG verletzt 229: leben 6170 -> 4970 | ort (243,286) zustand 101 | naechster Feind Typ 22 in 13 | naechster Fernkaempfer Typ 22 in 13 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 10 in 2 | Ziel 20 in 16; MESSUNG verletzt 231: leben 8900 -> 8880 | ort (237,287) zustand 101 | naechster Feind Typ 22 in 7 | naechster Fernkaempfer Typ 22 in 7 | Fern<=16: 10 | Nah<=8: 1 | naechstes Feindgebaeude Typ 10 in 3 | Ziel 37 in 15
+ 5698 |  64   0   0 |  37   8 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; MESSUNG verletzt 262: leben 5300 -> 4100 | ort (244,277) zustand 101 | naechster Feind Typ 22 in 14 | naechster Fernkaempfer Typ 22 in 14 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 10 in 4 | Ziel 86 in 21; Gebaeude 83 (Typ 4) zerstoert; 1 Assassinen liefen nicht zu ihrem Ziel - neu befohlen; 4 Assassinen auf 3 Gebaeude verteilt (im Spiel gemessen: 10 Gebaeude gleichzeitig angelaufen)
+ 5741 |  55   0   0 |  37   8 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 274: leben 11300 -> 10100 | ort (244,288) zustand 101 | naechster Feind Typ 22 in 14 | naechster Fernkaempfer Typ 22 in 14 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 10 in 4 | Ziel 20 in 14
+ 5758 |  58   0   0 |  37   8 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; MESSUNG verletzt 229: leben 4970 -> 3770 | ort (244,291) zustand 101 | naechster Feind Typ 22 in 14 | naechster Fernkaempfer Typ 22 in 14 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 27 in 3 | Ziel 20 in 11; MESSUNG verletzt 231: leben 8880 -> 8840 | ort (237,291) zustand 106 | naechster Feind Typ 22 in 7 | naechster Fernkaempfer Typ 22 in 7 | Fern<=16: 10 | Nah<=8: 1 | naechstes Feindgebaeude Typ 10 in 4 | Ziel 37 in 11
+ 5807 |  58   0   0 |  37   8 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 270: leben 7700 -> 6500 | ort (244,292) zustand 101 | naechster Feind Typ 22 in 14 | naechster Fernkaempfer Typ 22 in 14 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 27 in 3 | Ziel 20 in 10; MESSUNG verletzt 231: leben 8840 -> 8490 | ort (237,291) zustand 101 | naechster Feind Typ 22 in 7 | naechster Fernkaempfer Typ 22 in 7 | Fern<=16: 10 | Nah<=8: 1 | naechstes Feindgebaeude Typ 10 in 4 | Ziel 37 in 11; Gebaeude 35 (Typ 3) zerstoert; 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 10 Gebaeude gleichzeitig angelaufen)
+ 5883 |  63   0   0 |  42   8 | 100.00 | 34/34 (5) | 14 10 | MESSUNG verletzt 264: leben 8900 -> 7700 | ort (250,298) zustand 101 | naechster Feind Typ 22 in 20 | naechster Fernkaempfer Typ 22 in 20 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 1 in 4 | Ziel 20 in 4; MESSUNG verletzt 231: leben 8490 -> 7290 | ort (240,296) zustand 106 | naechster Feind Typ 22 in 10 | naechster Fernkaempfer Typ 22 in 10 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 27 in 3 | Ziel 37 in 7; 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 11 Gebaeude gleichzeitig angelaufen)
+ 5919 |  63   0   0 |  42   8 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; MESSUNG verletzt 264: leben 7700 -> 6500 | ort (252,300) zustand 101 | naechster Feind Typ 22 in 22 | naechster Fernkaempfer Typ 22 in 22 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 3 in 2 | Ziel 20 in 2; MESSUNG verletzt 270: leben 6500 -> 5300 | ort (251,299) zustand 101 | naechster Feind Typ 22 in 21 | naechster Fernkaempfer Typ 22 in 21 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 3 in 3 | Ziel 20 in 3; MESSUNG verletzt 277: leben 10100 -> 8900 | ort (249,297) zustand 101 | naechster Feind Typ 22 in 19 | naechster Fernkaempfer Typ 22 in 19 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 1 in 5 | Ziel 20 in 5; MESSUNG verletzt 231: leben 7290 -> 6090 | ort (240,296) zustand 106 | naechster Feind Typ 22 in 10 | naechster Fernkaempfer Typ 22 in 10 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 27 in 3 | Ziel 37 in 7
+ZEITEN nach 90 Runden: lesen 3.46 s, bauen_werben_verkauf 2.37 s, assassinen 2.20 s, waechter 0.07 s, haus_lager_zeile 0.00 s
+ 5945 |  53   0   0 |  42   8 | 100.00 | 34/34 (5) | 14 10 | Gebaeude 36 (Typ 32) zerstoert; 6 Assassinen auf 2 Gebaeude verteilt (im Spiel gemessen: 10 Gebaeude gleichzeitig angelaufen)
+ 5985 |  53   0   0 |  42   8 | 100.00 | 34/34 (5) | 14 10 | MESSUNG verletzt 229: leben 3770 -> 2570 | ort (253,301) zustand 107 | naechster Feind Typ 22 in 23 | naechster Fernkaempfer Typ 22 in 23 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 3 in 1 | Ziel 20 in 1; MESSUNG verletzt 231: leben 6090 -> 5870 | ort (242,298) zustand 106 | naechster Feind Typ 22 in 12 | naechster Fernkaempfer Typ 22 in 12 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 1 in 5 | Ziel 37 in 5; Gebaeude 19 (Typ 32) zerstoert; 6 Assassinen auf 3 Gebaeude verteilt (im Spiel gemessen: 10 Gebaeude gleichzeitig angelaufen)
+ 6013 |  53   0   0 |  41   8 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; MESSUNG verletzt 229: leben 2570 -> 1370 | ort (253,301) zustand 1 | naechster Feind Typ 22 in 23 | naechster Fernkaempfer Typ 22 in 23 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 1 in 5 | Ziel 20 in -1; MESSUNG verletzt 231: leben 5870 -> 5690 | ort (242,298) zustand 106 | naechster Feind Typ 22 in 12 | naechster Fernkaempfer Typ 22 in 12 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 1 in 5 | Ziel 37 in 5; Gebaeude 20 (Typ 3) zerstoert; 6 Assassinen auf 2 Gebaeude verteilt (im Spiel gemessen: 10 Gebaeude gleichzeitig angelaufen)
+ 6083 |  43   0   0 |  41   8 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 262: leben 4100 -> 1700 | ort (259,297) zustand 107 | naechster Feind Typ 22 in 29 | naechster Fernkaempfer Typ 22 in 29 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 1 in 1 | Ziel 86 in 1; MESSUNG verletzt 231: leben 5690 -> 3290 | ort (245,301) zustand 101 | naechster Feind Typ 22 in 15 | naechster Fernkaempfer Typ 22 in 15 | Fern<=16: 7 | Nah<=8: 0 | naechstes Feindgebaeude Typ 1 in 2 | Ziel 37 in 2; Gebaeude 89 (Typ 4) zerstoert; Gebaeude 87 (Typ 4) zerstoert; Gebaeude 23 (Typ 3) zerstoert; 14 Assassinen auf 5 Gebaeude verteilt (im Spiel gemessen: 8 Gebaeude gleichzeitig angelaufen)
+ 6146 |  43   0   0 |  41   7 | 100.00 | 34/34 (6) | 14 10 | MESSUNG tot 231: zuletzt ort (245,301) zustand 101 | naechster Feind Typ 22 in 15 | naechster Fernkaempfer Typ 22 in 15 | Fern<=16: 7 | Nah<=8: 0 | naechstes Feindgebaeude Typ 1 in 2 | Ziel 37 in 2
+ 6155 |  43   0   0 |  41   7 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+ 6202 |  38   0   0 |  41   7 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 304: leben 12500 -> 10100 | ort (229,280) zustand 101 | naechster Feind Typ 22 in 2 | naechster Fernkaempfer Typ 22 in 2 | Fern<=16: 10 | Nah<=8: 5 | naechstes Feindgebaeude Typ 10 in 4 | Ziel 37 in 22; MESSUNG verletzt 306: leben 12500 -> 11300 | ort (225,276) zustand 101 | naechster Feind Typ 22 in 6 | naechster Fernkaempfer Typ 22 in 6 | Fern<=16: 10 | Nah<=8: 1 | naechstes Feindgebaeude Typ 41 in 6 | Ziel 37 in 26
+ 6223 |  38   0   0 |  41   7 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 304: leben 10100 -> 8900 | ort (230,281) zustand 101 | naechster Feind Typ 22 in 1 | naechster Fernkaempfer Typ 22 in 1 | Fern<=16: 10 | Nah<=8: 7 | naechstes Feindgebaeude Typ 10 in 3 | Ziel 37 in 21; MESSUNG verletzt 306: leben 11300 -> 10100 | ort (226,277) zustand 101 | naechster Feind Typ 22 in 5 | naechster Fernkaempfer Typ 22 in 5 | Fern<=16: 10 | Nah<=8: 2 | naechstes Feindgebaeude Typ 41 in 5 | Ziel 37 in 25; Gebaeude 22 (Typ 3) zerstoert; 5 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 10 Gebaeude gleichzeitig angelaufen)
+ 6274 |  38   0   0 |  41   7 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; MESSUNG verletzt 304: leben 8900 -> 7700 | ort (233,284) zustand 101 | naechster Feind Typ 22 in 3 | naechster Fernkaempfer Typ 22 in 3 | Fern<=16: 10 | Nah<=8: 5 | naechstes Feindgebaeude Typ 10 in 1 | Ziel 37 in 18
+ 6310 |  33   0   0 |  41   7 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 306: leben 10100 -> 8900 | ort (232,283) zustand 101 | naechster Feind Typ 22 in 2 | naechster Fernkaempfer Typ 22 in 2 | Fern<=16: 10 | Nah<=8: 5 | naechstes Feindgebaeude Typ 10 in 1 | Ziel 37 in 19; Gebaeude 86 (Typ 1) zerstoert; 6 Assassinen auf 2 Gebaeude verteilt (im Spiel gemessen: 10 Gebaeude gleichzeitig angelaufen)
+ZEITEN nach 100 Runden: lesen 3.86 s, assassinen 2.51 s, bauen_werben_verkauf 2.46 s, waechter 0.07 s, haus_lager_zeile 0.00 s
+ 6360 |  33   0   0 |  41   7 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 304: leben 7700 -> 6500 | ort (236,287) zustand 101 | naechster Feind Typ 22 in 6 | naechster Fernkaempfer Typ 22 in 6 | Fern<=16: 10 | Nah<=8: 2 | naechstes Feindgebaeude Typ 10 in 2 | Ziel 37 in 15
+ 6383 |  33   0   0 |  41   7 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; MESSUNG verletzt 306: leben 8900 -> 7700 | ort (233,285) zustand 101 | naechster Feind Typ 22 in 3 | naechster Fernkaempfer Typ 22 in 3 | Fern<=16: 10 | Nah<=8: 4 | naechstes Feindgebaeude Typ 10 in 1 | Ziel 37 in 17
+ 6421 |  28   0   0 |  41   7 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 304: leben 6500 -> 2900 | ort (236,291) zustand 101 | naechster Feind Typ 22 in 6 | naechster Fernkaempfer Typ 22 in 6 | Fern<=16: 10 | Nah<=8: 4 | naechstes Feindgebaeude Typ 19 in 3 | Ziel 37 in 11; MESSUNG verletzt 306: leben 7700 -> 5300 | ort (236,287) zustand 101 | naechster Feind Typ 22 in 6 | naechster Fernkaempfer Typ 22 in 6 | Fern<=16: 10 | Nah<=8: 4 | naechstes Feindgebaeude Typ 10 in 2 | Ziel 37 in 15; Gebaeude 24 (Typ 32) zerstoert; Gebaeude 21 (Typ 3) zerstoert; 11 Assassinen auf 2 Gebaeude verteilt (im Spiel gemessen: 10 Gebaeude gleichzeitig angelaufen)
+ 6476 |  28   0   0 |  41   7 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 306: leben 5300 -> 2900 | ort (236,290) zustand 101 | naechster Feind Typ 22 in 6 | naechster Fernkaempfer Typ 22 in 6 | Fern<=16: 10 | Nah<=8: 1 | naechstes Feindgebaeude Typ 10 in 3 | Ziel 37 in 12; Gebaeude 26 (Typ 4) zerstoert; Gebaeude 78 (Typ 20) zerstoert; 12 Assassinen auf 5 Gebaeude verteilt (im Spiel gemessen: 10 Gebaeude gleichzeitig angelaufen)
+ 6531 |  28   0   0 |  41   7 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; MESSUNG verletzt 309: leben 12500 -> 11300 | ort (235,278) zustand 101 | naechster Feind Typ 22 in 5 | naechster Fernkaempfer Typ 22 in 5 | Fern<=16: 10 | Nah<=8: 4 | naechstes Feindgebaeude Typ 10 in 3 | Ziel 19 in 10; MESSUNG verletzt 310: leben 12500 -> 11300 | ort (234,277) zustand 101 | naechster Feind Typ 22 in 5 | naechster Fernkaempfer Typ 22 in 5 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 10 in 4 | Ziel 19 in 11; MESSUNG verletzt 312: leben 12500 -> 11300 | ort (232,275) zustand 101 | naechster Feind Typ 22 in 7 | naechster Fernkaempfer Typ 22 in 7 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 10 in 6 | Ziel 19 in 13; MESSUNG verletzt 313: leben 12500 -> 11300 | ort (231,274) zustand 101 | naechster Feind Typ 22 in 8 | naechster Fernkaempfer Typ 22 in 8 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 10 in 7 | Ziel 19 in 14; Gebaeude 88 (Typ 32) zerstoert; Gebaeude 25 (Typ 32) zerstoert; 12 Assassinen auf 4 Gebaeude verteilt (im Spiel gemessen: 9 Gebaeude gleichzeitig angelaufen)
+ 6607 |  23   0   0 |  48   7 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 288: leben 12500 -> 12220 | ort (217,293) zustand 106 | naechster Feind Typ 24 in 5 | naechster Fernkaempfer Typ 22 in 9 | Fern<=16: 10 | Nah<=8: 2 | naechstes Feindgebaeude Typ 12 in 3 | Ziel 37 in 30; MESSUNG verletzt 309: leben 11300 -> 10100 | ort (238,281) zustand 101 | naechster Feind Typ 22 in 8 | naechster Fernkaempfer Typ 22 in 8 | Fern<=16: 10 | Nah<=8: 1 | naechstes Feindgebaeude Typ 10 in 1 | Ziel 19 in 7; MESSUNG verletzt 311: leben 12500 -> 11300 | ort (238,281) zustand 101 | naechster Feind Typ 22 in 8 | naechster Fernkaempfer Typ 22 in 8 | Fern<=16: 10 | Nah<=8: 1 | naechstes Feindgebaeude Typ 10 in 1 | Ziel 19 in 7
+ 6631 |  23   0   0 |  48   7 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 304: leben 2900 -> 1700 | ort (241,297) zustand 101 | naechster Feind Typ 55 in 11 | naechster Fernkaempfer Typ 22 in 12 | Fern<=16: 7 | Nah<=8: 0 | naechstes Feindgebaeude Typ 27 in 4 | Ziel 37 in 6; MESSUNG verletzt 310: leben 11300 -> 10100 | ort (238,282) zustand 101 | naechster Feind Typ 22 in 8 | naechster Fernkaempfer Typ 22 in 8 | Fern<=16: 10 | Nah<=8: 1 | naechstes Feindgebaeude Typ 10 in 1 | Ziel 19 in 6; MESSUNG verletzt 316: leben 12500 -> 11300 | ort (240,278) zustand 101 | naechster Feind Typ 22 in 10 | naechster Fernkaempfer Typ 22 in 10 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 10 in 3 | Ziel 37 in 24
+ 6651 |  23   0   0 |  48   7 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel; MESSUNG verletzt 306: leben 2900 -> 1700 | ort (241,297) zustand 101 | naechster Feind Typ 55 in 11 | naechster Fernkaempfer Typ 22 in 12 | Fern<=16: 7 | Nah<=8: 0 | naechstes Feindgebaeude Typ 27 in 4 | Ziel 37 in 6; MESSUNG verletzt 311: leben 11300 -> 10100 | ort (238,282) zustand 101 | naechster Feind Typ 22 in 8 | naechster Fernkaempfer Typ 22 in 8 | Fern<=16: 10 | Nah<=8: 1 | naechstes Feindgebaeude Typ 10 in 1 | Ziel 19 in 6
+ 6711 |  18   0   0 |  43   7 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 309: leben 10100 -> 8900 | ort (240,287) zustand 107 | naechster Feind Typ 22 in 10 | naechster Fernkaempfer Typ 22 in 10 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 19 in 1 | Ziel 19 in 1; MESSUNG verletzt 313: leben 11300 -> 10100 | ort (238,283) zustand 101 | naechster Feind Typ 22 in 8 | naechster Fernkaempfer Typ 22 in 8 | Fern<=16: 10 | Nah<=8: 1 | naechstes Feindgebaeude Typ 10 in 1 | Ziel 19 in 5; Gebaeude 70 (Typ 1) zerstoert; 2 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 8 Gebaeude gleichzeitig angelaufen)
+ 6734 |  23   0   0 |  43   7 | 100.00 | 34/34 (6) | 14 10 | Gebaeude 102 (Typ 1) zerstoert
+ZEITEN nach 110 Runden: lesen 4.26 s, assassinen 2.75 s, bauen_werben_verkauf 2.58 s, waechter 0.07 s, haus_lager_zeile 0.00 s
+ 6749 |  26   0   0 |  43   6 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+ 6805 |  31   0   0 |  48   6 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 293: leben 12500 -> 11300 | ort (224,296) zustand 106 | naechster Feind Typ 24 in 7 | naechster Fernkaempfer Typ 22 in 8 | Fern<=16: 10 | Nah<=8: 2 | naechstes Feindgebaeude Typ 12 in 6 | Ziel 37 in 23; MESSUNG verletzt 312: leben 11300 -> 10100 | ort (240,287) zustand 107 | naechster Feind Typ 22 in 10 | naechster Fernkaempfer Typ 22 in 10 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 19 in 1 | Ziel 19 in 1; MESSUNG verletzt 313: leben 10100 -> 7700 | ort (240,287) zustand 107 | naechster Feind Typ 22 in 10 | naechster Fernkaempfer Typ 22 in 10 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 19 in 1 | Ziel 19 in 1
+ 6849 |  38   0   0 |  56   6 | 100.00 | 34/34 (5) | 14 10 | MESSUNG verletzt 309: leben 8900 -> 7700 | ort (240,287) zustand 107 | naechster Feind Typ 22 in 10 | naechster Fernkaempfer Typ 22 in 10 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 19 in 1 | Ziel 19 in 1
+ 6870 |  43   0   0 |  56   6 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,apfel; Gebaeude 19 (Typ 19) zerstoert
+ 6945 |  48   0   0 |  46   6 | 100.00 | 34/34 (5) | 14 10 | MESSUNG verletzt 297: leben 12500 -> 11300 | ort (231,304) zustand 101 | naechster Feind Typ 24 in 15 | naechster Fernkaempfer Typ 22 in 16 | Fern<=16: 3 | Nah<=8: 0 | naechstes Feindgebaeude Typ 27 in 11 | Ziel 101 in 17; MESSUNG verletzt 309: leben 7700 -> 4100 | ort (240,287) zustand 1 | naechster Feind Typ 22 in 10 | naechster Fernkaempfer Typ 22 in 10 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 10 in 3 | Ziel None in -1; MESSUNG verletzt 316: leben 11300 -> 10100 | ort (244,296) zustand 101 | naechster Feind Typ 22 in 14 | naechster Fernkaempfer Typ 22 in 14 | Fern<=16: 7 | Nah<=8: 0 | naechstes Feindgebaeude Typ 27 in 3 | Ziel 37 in -1; Gebaeude 82 (Typ 32) zerstoert; Gebaeude 37 (Typ 1) zerstoert
+ 6960 |  51   0   0 |  46   6 | 100.00 | 34/34 (5) | 14 10 | MESSUNG verletzt 288: leben 12220 -> 11020 | ort (230,302) zustand 101 | naechster Feind Typ 24 in 13 | naechster Fernkaempfer Typ 22 in 14 | Fern<=16: 7 | Nah<=8: 0 | naechstes Feindgebaeude Typ 27 in 11 | Ziel None in -1; MESSUNG verletzt 290: leben 12500 -> 11300 | ort (215,297) zustand 101 | naechster Feind Typ 24 in 8 | naechster Fernkaempfer Typ 22 in 9 | Fern<=16: 10 | Nah<=8: 2 | naechstes Feindgebaeude Typ 12 in 7 | Ziel 85 in 35
+ 6980 |  55   0   0 |  46   6 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; MESSUNG verletzt 288: leben 11020 -> 9820 | ort (231,303) zustand 101 | naechster Feind Typ 24 in 14 | naechster Fernkaempfer Typ 22 in 15 | Fern<=16: 7 | Nah<=8: 0 | naechstes Feindgebaeude Typ 27 in 10 | Ziel None in -1; Gebaeude 85 (Typ 32) zerstoert
+ 7031 |  55   0   0 |  51   6 | 100.00 | 34/34 (5) | 14 10 | MESSUNG verletzt 287: leben 12500 -> 11300 | ort (220,302) zustand 101 | naechster Feind Typ 24 in 13 | naechster Fernkaempfer Typ 22 in 14 | Fern<=16: 7 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 12 | Ziel None in -1
+ 7056 |  62   0   0 |  51   6 | 100.00 | 34/34 (5) | 14 10 | MESSUNG verletzt 297: leben 11300 -> 10100 | ort (238,310) zustand 101 | naechster Feind Typ 24 in 21 | naechster Fernkaempfer Typ 22 in 22 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 1 in 10 | Ziel 101 in 10
+ 7068 |  68   0   0 |  51   6 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+ZEITEN nach 120 Runden: lesen 4.66 s, bauen_werben_verkauf 2.80 s, assassinen 2.76 s, waechter 0.07 s, haus_lager_zeile 0.00 s
+ 7146 |  74   0   0 |  41   6 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 292: leben 12500 -> 11300 | ort (225,307) zustand 101 | naechster Feind Typ 24 in 18 | naechster Fernkaempfer Typ 22 in 19 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 27 in 16 | Ziel None in -1; MESSUNG verletzt 293: leben 11300 -> 10100 | ort (240,305) zustand 101 | naechster Feind Typ 22 in 17 | naechster Fernkaempfer Typ 22 in 17 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 1 in 8 | Ziel None in -1; MESSUNG verletzt 310: leben 10100 -> 8900 | ort (240,288) zustand 1 | naechster Feind Typ 22 in 10 | naechster Fernkaempfer Typ 22 in 10 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 10 in 4 | Ziel None in -1; MESSUNG verletzt 311: leben 10100 -> 8900 | ort (237,289) zustand 101 | naechster Feind Typ 22 in 7 | naechster Fernkaempfer Typ 22 in 7 | Fern<=16: 10 | Nah<=8: 1 | naechstes Feindgebaeude Typ 10 in 3 | Ziel None in -1; MESSUNG verletzt 312: leben 10100 -> 8900 | ort (241,287) zustand 1 | naechster Feind Typ 22 in 11 | naechster Fernkaempfer Typ 22 in 11 | Fern<=16: 9 | Nah<=8: 0 | naechstes Feindgebaeude Typ 10 in 3 | Ziel None in -1; MESSUNG verletzt 313: leben 7700 -> 6500 | ort (240,286) zustand 1 | naechster Feind Typ 22 in 10 | naechster Fernkaempfer Typ 22 in 10 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 10 in 2 | Ziel None in -1; Gebaeude 20 (Typ 3) zerstoert
+ 7192 |  83   0   0 |  40   6 | 100.00 | 34/34 (5) | 14 10 | MESSUNG verletzt 287: leben 11300 -> 10100 | ort (230,312) zustand 101 | naechster Feind Typ 24 in 23 | naechster Fernkaempfer Typ 22 in 24 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 27 in 19 | Ziel None in -1; MESSUNG verletzt 288: leben 9820 -> 8620 | ort (245,305) zustand 101 | naechster Feind Typ 22 in 17 | naechster Fernkaempfer Typ 22 in 17 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 27 in 12 | Ziel None in -1; MESSUNG verletzt 316: leben 10100 -> 8900 | ort (248,301) zustand 1 | naechster Feind Typ 22 in 18 | naechster Fernkaempfer Typ 22 in 18 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 27 in 8 | Ziel None in -1; Gebaeude 97 (Typ 32) zerstoert; Gebaeude 101 (Typ 1) zerstoert
+ 7216 |  86   0   0 |  40   6 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+ 7282 |  78   0   0 |  40   6 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; MESSUNG verletzt 278: leben 12500 -> 11300 | ort (240,287) zustand 1 | naechster Feind Typ 22 in 10 | naechster Fernkaempfer Typ 22 in 10 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 10 in 3 | Ziel None in -1
+ 7330 |  76   0   0 |  40   5 | 100.00 | 34/34 (5) | 14 10 | MESSUNG verletzt 309: leben 4100 -> 1700 | ort (237,290) zustand 101 | naechster Feind Typ 22 in 7 | naechster Fernkaempfer Typ 22 in 7 | Fern<=16: 10 | Nah<=8: 1 | naechstes Feindgebaeude Typ 10 in 3 | Ziel None in -1; MESSUNG verletzt 310: leben 8900 -> 7700 | ort (240,288) zustand 1 | naechster Feind Typ 22 in 10 | naechster Fernkaempfer Typ 22 in 10 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 10 in 4 | Ziel None in -1; MESSUNG verletzt 312: leben 8900 -> 7700 | ort (241,287) zustand 1 | naechster Feind Typ 22 in 11 | naechster Fernkaempfer Typ 22 in 11 | Fern<=16: 9 | Nah<=8: 0 | naechstes Feindgebaeude Typ 10 in 3 | Ziel None in -1; MESSUNG verletzt 313: leben 6500 -> 4100 | ort (240,286) zustand 1 | naechster Feind Typ 22 in 10 | naechster Fernkaempfer Typ 22 in 10 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 10 in 2 | Ziel None in -1
+ 7353 |  76   0   0 |  40   5 | 100.00 | 34/34 (5) | 14 10 | MESSUNG verletzt 278: leben 11300 -> 10100 | ort (240,287) zustand 1 | naechster Feind Typ 22 in 10 | naechster Fernkaempfer Typ 22 in 10 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 10 in 3 | Ziel None in -1; MESSUNG verletzt 310: leben 7700 -> 6500 | ort (240,288) zustand 1 | naechster Feind Typ 22 in 10 | naechster Fernkaempfer Typ 22 in 10 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 10 in 4 | Ziel None in -1
+ 7373 |  80   0   0 |  40   5 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+ 7427 |  81   0   0 |  40   5 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 278: leben 10100 -> 8900 | ort (240,287) zustand 1 | naechster Feind Typ 22 in 10 | naechster Fernkaempfer Typ 22 in 10 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 10 in 3 | Ziel None in -1
+ZEITEN nach 130 Runden: lesen 5.05 s, bauen_werben_verkauf 2.92 s, assassinen 2.78 s, waechter 0.08 s, haus_lager_zeile 0.00 s
+ 7448 |  84   0   0 |  40   5 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 311: leben 8900 -> 7700 | ort (239,287) zustand 1 | naechster Feind Typ 22 in 9 | naechster Fernkaempfer Typ 22 in 9 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 10 in 3 | Ziel None in -1
+ 7471 |  84   0   0 |  40   5 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; MESSUNG verletzt 311: leben 7700 -> 4100 | ort (239,287) zustand 1 | naechster Feind Typ 22 in 9 | naechster Fernkaempfer Typ 22 in 9 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 10 in 3 | Ziel None in -1; 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+ 7555 |  74   0   0 |  44   5 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 309: leben 1700 -> 500 | ort (239,287) zustand 0 | naechster Feind Typ 22 in 9 | naechster Fernkaempfer Typ 22 in 9 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 10 in 3 | Ziel None in -1; MESSUNG verletzt 310: leben 6500 -> 5300 | ort (240,288) zustand 1 | naechster Feind Typ 22 in 10 | naechster Fernkaempfer Typ 22 in 10 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 10 in 4 | Ziel None in -1; MESSUNG verletzt 313: leben 4100 -> 2900 | ort (240,286) zustand 1 | naechster Feind Typ 22 in 10 | naechster Fernkaempfer Typ 22 in 10 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 10 in 2 | Ziel None in -1
+ 7577 |  74   0   0 |  44   5 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 310: leben 5300 -> 4100 | ort (240,288) zustand 1 | naechster Feind Typ 22 in 10 | naechster Fernkaempfer Typ 22 in 10 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 10 in 4 | Ziel None in -1
+ 7595 |  74   0   0 |  45   5 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; MESSUNG verletzt 312: leben 7700 -> 6500 | ort (241,287) zustand 1 | naechster Feind Typ 22 in 11 | naechster Fernkaempfer Typ 22 in 11 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 10 in 3 | Ziel None in -1
+ 7639 |  64   0   0 |  48   5 | 100.00 | 34/34 (6) | 14 10 | MESSUNG tot 309: zuletzt ort (239,287) zustand 1 | naechster Feind Typ 22 in 9 | naechster Fernkaempfer Typ 22 in 9 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 10 in 3 | Ziel None in -1; MESSUNG tot 311: zuletzt ort (239,287) zustand 1 | naechster Feind Typ 22 in 9 | naechster Fernkaempfer Typ 22 in 9 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 10 in 3 | Ziel None in -1; MESSUNG verletzt 313: leben 2900 -> 1700 | ort (240,286) zustand 1 | naechster Feind Typ 22 in 10 | naechster Fernkaempfer Typ 22 in 10 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 10 in 2 | Ziel None in -1
+ 7663 |  64   0   0 |  48   5 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 278: leben 8900 -> 7700 | ort (240,287) zustand 1 | naechster Feind Typ 22 in 10 | naechster Fernkaempfer Typ 22 in 10 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 10 in 3 | Ziel None in -1; MESSUNG verletzt 313: leben 1700 -> 500 | ort (240,286) zustand 1 | naechster Feind Typ 22 in 10 | naechster Fernkaempfer Typ 22 in 10 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 10 in 2 | Ziel None in -1
+ 7686 |  64   0   0 |  48   5 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+ 7731 |  54  12   0 |  48   5 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 278: leben 7700 -> 5300 | ort (240,287) zustand 1 | naechster Feind Typ 22 in 10 | naechster Fernkaempfer Typ 22 in 10 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 10 in 3 | Ziel None in -1
+ 7783 |  60  12   0 |  51   5 | 100.00 | 34/34 (5) | 14 10 | MESSUNG tot 313: zuletzt ort (240,286) zustand 1 | naechster Feind Typ 22 in 10 | naechster Fernkaempfer Typ 22 in 10 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 10 in 2 | Ziel None in -1; MESSUNG verletzt 310: leben 4100 -> 500 | ort (240,288) zustand 1 | naechster Feind Typ 22 in 10 | naechster Fernkaempfer Typ 22 in 10 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 10 in 4 | Ziel None in -1; MESSUNG verletzt 312: leben 6500 -> 4100 | ort (241,287) zustand 1 | naechster Feind Typ 22 in 11 | naechster Fernkaempfer Typ 22 in 11 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 10 in 3 | Ziel None in -1
+ZEITEN nach 140 Runden: lesen 5.43 s, bauen_werben_verkauf 3.04 s, assassinen 2.84 s, waechter 0.08 s, haus_lager_zeile 0.01 s
+ 7802 |  64  12   0 |  51   5 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,stein
+ 7878 |  62   7   0 |  51   5 | 100.00 | 34/34 (5) | 14 10 | MESSUNG tot 310: zuletzt ort (240,288) zustand 1 | naechster Feind Typ 22 in 10 | naechster Fernkaempfer Typ 22 in 10 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 10 in 4 | Ziel None in -1
+ 7902 |  62   7   0 |  51   5 | 100.00 | 34/34 (5) | 14 10 | MESSUNG verletzt 278: leben 5300 -> 1700 | ort (240,287) zustand 1 | naechster Feind Typ 22 in 10 | naechster Fernkaempfer Typ 22 in 10 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 10 in 3 | Ziel None in -1
+ 7924 |  62   7   0 |  51   4 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,stein; MESSUNG verletzt 312: leben 4100 -> 2900 | ort (241,287) zustand 1 | naechster Feind Typ 22 in 11 | naechster Fernkaempfer Typ 22 in 11 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 10 in 3 | Ziel None in -1
+ 7991 |  52   2   0 |  51   4 | 100.00 | 34/34 (5) | 14 10 | 60 Assassinen angeworben (Gold jetzt 105); MESSUNG tot 278: zuletzt ort (240,287) zustand 1 | naechster Feind Typ 22 in 10 | naechster Fernkaempfer Typ 22 in 10 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 10 in 3 | Ziel None in -1; MESSUNG tot 312: zuletzt ort (241,287) zustand 1 | naechster Feind Typ 22 in 11 | naechster Fernkaempfer Typ 22 in 11 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 10 in 3 | Ziel None in -1; Gebaeude 19 (Typ 26) zerstoert
+ 8041 |  60   2   0 |  51   4 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+ 8114 |  60   2   0 |  51   4 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+ZEITEN nach 150 Runden: lesen 5.81 s, bauen_werben_verkauf 3.25 s, assassinen 2.85 s, waechter 0.08 s, haus_lager_zeile 0.01 s
+ 8132 |  50   2   0 |  51   4 | 100.00 | 34/34 (5) | 14 10 | -
+ 8166 |  50   2   0 |  51   4 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+ 8213 |  40   2   0 |  51   4 | 100.00 | 34/34 (5) | 14 10 | MESSUNG verletzt 262: leben 1700 -> 500 | ort (222,298) zustand 101 | naechster Feind Typ 24 in 9 | naechster Fernkaempfer Typ 22 in 10 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 8 | Ziel None in -1
+ 8230 |  40   2   0 |  51   4 | 100.00 | 34/34 (5) | 14 10 | MESSUNG verletzt 264: leben 6500 -> 5300 | ort (219,295) zustand 101 | naechster Feind Typ 24 in 6 | naechster Fernkaempfer Typ 22 in 10 | Fern<=16: 10 | Nah<=8: 2 | naechstes Feindgebaeude Typ 12 in 5 | Ziel None in -1
+ 8238 |  40   2   0 |  51   4 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+ 8291 |  35   2   0 |  51   4 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 269: leben 12500 -> 11300 | ort (236,280) zustand 101 | naechster Feind Typ 22 in 6 | naechster Fernkaempfer Typ 22 in 6 | Fern<=16: 10 | Nah<=8: 2 | naechstes Feindgebaeude Typ 10 in 1 | Ziel None in -1
+ 8324 |  35   2   0 |  51   4 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+ 8364 |  30   2   0 |  50   4 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 258: leben 12500 -> 10100 | ort (233,280) zustand 101 | naechster Feind Typ 22 in 3 | naechster Fernkaempfer Typ 22 in 3 | Fern<=16: 10 | Nah<=8: 5 | naechstes Feindgebaeude Typ 10 in 3 | Ziel None in -1
+ZEITEN nach 160 Runden: lesen 6.17 s, bauen_werben_verkauf 3.34 s, assassinen 2.86 s, waechter 0.09 s, haus_lager_zeile 0.01 s
+ 8388 |  30   2   0 |  50   4 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 264: leben 5300 -> 4100 | ort (210,285) zustand 101 | naechster Feind Typ 24 in 12 | naechster Fernkaempfer Typ 22 in 15 | Fern<=16: 3 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 9 | Ziel None in -1
+ 8411 |  30   2   0 |  50   4 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; MESSUNG verletzt 270: leben 5300 -> 2900 | ort (212,287) zustand 101 | naechster Feind Typ 24 in 10 | naechster Fernkaempfer Typ 22 in 13 | Fern<=16: 4 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 7 | Ziel None in -1
+ 8449 |  25   2   0 |  50   4 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 258: leben 10100 -> 8900 | ort (228,280) zustand 101 | naechster Feind Typ 22 in 2 | naechster Fernkaempfer Typ 22 in 2 | Fern<=16: 10 | Nah<=8: 5 | naechstes Feindgebaeude Typ 10 in 4 | Ziel None in -1; MESSUNG verletzt 264: leben 4100 -> 2900 | ort (206,281) zustand 101 | naechster Feind Typ 24 in 16 | naechster Fernkaempfer Typ 22 in 18 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 13 | Ziel None in -1; MESSUNG verletzt 269: leben 11300 -> 10100 | ort (226,280) zustand 101 | naechster Feind Typ 22 in 3 | naechster Fernkaempfer Typ 22 in 3 | Fern<=16: 10 | Nah<=8: 5 | naechstes Feindgebaeude Typ 41 in 2 | Ziel None in -1; MESSUNG verletzt 270: leben 2900 -> 1700 | ort (209,284) zustand 101 | naechster Feind Typ 24 in 13 | naechster Fernkaempfer Typ 22 in 15 | Fern<=16: 3 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 10 | Ziel None in -1
+ 8496 |  25   2   0 |  50   4 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+ 8533 |  20   2   0 |  50   3 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 258: leben 8900 -> 6500 | ort (223,280) zustand 101 | naechster Feind Typ 22 in 2 | naechster Fernkaempfer Typ 22 in 2 | Fern<=16: 10 | Nah<=8: 3 | naechstes Feindgebaeude Typ 41 in 2 | Ziel None in -1
+ 8557 |  20   2   0 |  50   3 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 258: leben 6500 -> 5300 | ort (221,280) zustand 101 | naechster Feind Typ 22 in 3 | naechster Fernkaempfer Typ 22 in 3 | Fern<=16: 10 | Nah<=8: 2 | naechstes Feindgebaeude Typ 41 in 3 | Ziel None in -1
+ 8574 |  22   2   0 |  50   3 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; MESSUNG verletzt 258: leben 5300 -> 4100 | ort (220,280) zustand 101 | naechster Feind Typ 22 in 4 | naechster Fernkaempfer Typ 22 in 4 | Fern<=16: 10 | Nah<=8: 2 | naechstes Feindgebaeude Typ 41 in 4 | Ziel None in -1
+ 8604 |  23   2   0 |  50   3 | 100.00 | 34/34 (6) | 14 10 | MESSUNG tot 262: zuletzt ort (206,281) zustand 1 | naechster Feind Typ 24 in 16 | naechster Fernkaempfer Typ 22 in 18 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 13 | Ziel None in -1; MESSUNG verletzt 264: leben 2900 -> 500 | ort (206,281) zustand 1 | naechster Feind Typ 24 in 16 | naechster Fernkaempfer Typ 22 in 18 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 13 | Ziel None in -1
+ZEITEN nach 170 Runden: lesen 6.55 s, bauen_werben_verkauf 3.43 s, assassinen 2.87 s, waechter 0.09 s, haus_lager_zeile 0.01 s
+ 8651 |  32   2   0 |  59   3 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel; MESSUNG tot 264: zuletzt ort (206,281) zustand 1 | naechster Feind Typ 24 in 16 | naechster Fernkaempfer Typ 22 in 18 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 13 | Ziel None in -1; MESSUNG verletzt 258: leben 4100 -> 2900 | ort (215,280) zustand 101 | naechster Feind Typ 22 in 9 | naechster Fernkaempfer Typ 22 in 9 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 11 in 5 | Ziel None in -1
+ 8722 |  28   2   0 |  49   3 | 100.00 | 34/34 (6) | 14 10 | MESSUNG tot 270: zuletzt ort (206,281) zustand 1 | naechster Feind Typ 24 in 16 | naechster Fernkaempfer Typ 22 in 18 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 13 | Ziel None in -1; MESSUNG verletzt 286: leben 12500 -> 12190 | ort (196,258) zustand 106 | naechster Feind Typ 22 in 28 | naechster Fernkaempfer Typ 22 in 28 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 3 in 6 | Ziel None in -1
+ 8775 |  28   2   0 |  51   3 | 100.00 | 34/34 (5) | 14 10 | MESSUNG tot 258: zuletzt ort (211,280) zustand 101 | naechster Feind Typ 24 in 11 | naechster Fernkaempfer Typ 22 in 13 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 11 in 9 | Ziel None in -1; MESSUNG verletzt 269: leben 10100 -> 8900 | ort (206,281) zustand 101 | naechster Feind Typ 24 in 16 | naechster Fernkaempfer Typ 22 in 18 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 13 | Ziel None in -1; MESSUNG verletzt 286: leben 12190 -> 12100 | ort (196,258) zustand 1 | naechster Feind Typ 22 in 28 | naechster Fernkaempfer Typ 22 in 28 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 3 in 6 | Ziel None in -1
+ 8797 |  28   2   0 |  55   3 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+ 8831 |  23   2   0 |  59   3 | 100.00 | 34/34 (5) | 14 10 | MESSUNG verletzt 269: leben 8900 -> 4100 | ort (206,281) zustand 1 | naechster Feind Typ 24 in 16 | naechster Fernkaempfer Typ 22 in 18 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 13 | Ziel None in -1
+ 8854 |  23   2   0 |  59   3 | 100.00 | 34/34 (5) | 14 10 | MESSUNG verletzt 269: leben 4100 -> 1700 | ort (206,281) zustand 1 | naechster Feind Typ 24 in 16 | naechster Fernkaempfer Typ 22 in 18 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 13 | Ziel None in -1
+ 8877 |  23   2   0 |  63   3 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,apfel; MESSUNG verletzt 269: leben 1700 -> 500 | ort (206,281) zustand 1 | naechster Feind Typ 24 in 16 | naechster Fernkaempfer Typ 22 in 18 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 13 | Ziel None in -1
+ 8928 |  19   2   0 |  53   3 | 100.00 | 34/34 (5) | 14 10 | MESSUNG tot 269: zuletzt ort (206,281) zustand 1 | naechster Feind Typ 24 in 16 | naechster Fernkaempfer Typ 22 in 18 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 13 | Ziel None in -1
+ 8976 |  29   2   0 |  52   3 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+ZEITEN nach 180 Runden: lesen 6.92 s, bauen_werben_verkauf 3.64 s, assassinen 2.88 s, waechter 0.09 s, haus_lager_zeile 0.01 s
+ 9021 |  32   2   0 |  52   3 | 100.00 | 34/34 (6) | 14 10 | -
+ 9098 |  48   2   0 |  52   3 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+ 9146 |  43   2   0 |  52   2 | 100.00 | 34/34 (5) | 14 10 | 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+ 9196 |  54   2   0 |  52   2 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+ 9267 |  52   2   0 |  52   2 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+ZEITEN nach 190 Runden: lesen 7.30 s, bauen_werben_verkauf 3.76 s, assassinen 2.94 s, waechter 0.10 s, haus_lager_zeile 0.01 s
+ 9327 |  42   2   0 |  52   2 | 100.00 | 34/34 (6) | 14 10 | -
+ 9350 |  42   2   0 |  52   2 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+ 9397 |  37   2   0 |  52   2 | 100.00 | 34/34 (6) | 14 10 | Gebaeude 19 (Typ 3) zerstoert
+ 9441 |  37   2   0 |  52   2 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+ 9489 |  32   2   0 |  52   2 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+ZEITEN nach 200 Runden: lesen 7.67 s, bauen_werben_verkauf 3.85 s, assassinen 2.95 s, waechter 0.10 s, haus_lager_zeile 0.01 s
+ 9559 |  27   2   0 |  51   2 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+ 9626 |  22   2   0 |  55   2 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 277: leben 8900 -> 7700 | ort (238,288) zustand 128 | naechster Feind Typ 22 in 8 | naechster Fernkaempfer Typ 22 in 8 | Fern<=16: 10 | Nah<=8: 1 | naechstes Feindgebaeude Typ 10 in 4 | Ziel None in -1
+ 9649 |  22   2   0 |  55   2 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; MESSUNG verletzt 277: leben 7700 -> 6500 | ort (237,288) zustand 101 | naechster Feind Typ 22 in 7 | naechster Fernkaempfer Typ 22 in 7 | Fern<=16: 10 | Nah<=8: 1 | naechstes Feindgebaeude Typ 10 in 3 | Ziel None in -1
+ 9695 |  17   2   0 |  55   2 | 100.00 | 34/34 (6) | 14 10 | 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+ 9741 |  17   2   0 |  60   1 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 274: leben 10100 -> 8900 | ort (233,284) zustand 101 | naechster Feind Typ 22 in 3 | naechster Fernkaempfer Typ 22 in 3 | Fern<=16: 10 | Nah<=8: 5 | naechstes Feindgebaeude Typ 10 in 1 | Ziel 19 in 38
+ 9762 |  17   2   0 |  64   1 | 100.00 | 34/34 (6) | 14 10 | verkauft: apfel; MESSUNG verletzt 274: leben 8900 -> 6500 | ort (232,282) zustand 101 | naechster Feind Typ 22 in 2 | naechster Fernkaempfer Typ 22 in 2 | Fern<=16: 10 | Nah<=8: 5 | naechstes Feindgebaeude Typ 10 in 2 | Ziel 19 in 37; MESSUNG verletzt 277: leben 6500 -> 4100 | ort (233,284) zustand 101 | naechster Feind Typ 22 in 3 | naechster Fernkaempfer Typ 22 in 3 | Fern<=16: 10 | Nah<=8: 5 | naechstes Feindgebaeude Typ 10 in 1 | Ziel 19 in 38
+ 9809 |  27   2   0 |  55   1 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 274: leben 6500 -> 4100 | ort (229,280) zustand 101 | naechster Feind Typ 22 in 2 | naechster Fernkaempfer Typ 22 in 2 | Fern<=16: 10 | Nah<=8: 5 | naechstes Feindgebaeude Typ 10 in 4 | Ziel 19 in 34; MESSUNG verletzt 277: leben 4100 -> 1700 | ort (230,281) zustand 101 | naechster Feind Typ 22 in 1 | naechster Fernkaempfer Typ 22 in 1 | Fern<=16: 10 | Nah<=8: 7 | naechstes Feindgebaeude Typ 10 in 3 | Ziel 19 in 35
+ 9851 |  35   2   0 |  55   1 | 100.00 | 34/34 (5) | 14 10 | Gebaeude 19 (Typ 3) zerstoert
+ 9875 |  35   2   0 |  55   1 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+ZEITEN nach 210 Runden: lesen 8.05 s, bauen_werben_verkauf 4.00 s, assassinen 3.01 s, waechter 0.10 s, haus_lager_zeile 0.01 s
+ 9921 |  30   2   0 |  60   1 | 100.00 | 34/34 (5) | 14 10 | MESSUNG tot 277: zuletzt ort (226,281) zustand 101 | naechster Feind Typ 22 in 2 | naechster Fernkaempfer Typ 22 in 2 | Fern<=16: 10 | Nah<=8: 7 | naechstes Feindgebaeude Typ 41 in 2 | Ziel None in -1; MESSUNG verletzt 274: leben 4100 -> 1700 | ort (225,280) zustand 106 | naechster Feind Typ 22 in 2 | naechster Fernkaempfer Typ 22 in 2 | Fern<=16: 10 | Nah<=8: 4 | naechstes Feindgebaeude Typ 41 in 2 | Ziel None in -1
+ 9967 |  30   2   0 |  60   1 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; MESSUNG verletzt 279: leben 12500 -> 11300 | ort (211,282) zustand 101 | naechster Feind Typ 24 in 11 | naechster Fernkaempfer Typ 22 in 13 | Fern<=16: 6 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 8 | Ziel None in -1; 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+10051 |  41   2   0 |  60   1 | 100.00 | 34/34 (5) | 14 10 | MESSUNG tot 274: zuletzt ort (223,280) zustand 101 | naechster Feind Typ 22 in 4 | naechster Fernkaempfer Typ 22 in 4 | Fern<=16: 10 | Nah<=8: 3 | naechstes Feindgebaeude Typ 41 in 2 | Ziel None in -1; MESSUNG tot 306: zuletzt ort (246,301) zustand 1 | naechster Feind Typ 73 in 15 | naechster Fernkaempfer Typ 22 in 18 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 27 in 8 | Ziel None in -1; 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 1 Gebaeude gleichzeitig angelaufen)
+10088 |  43   2   0 |  60   1 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 279: leben 11300 -> 10100 | ort (204,277) zustand 101 | naechster Feind Typ 24 in 18 | naechster Fernkaempfer Typ 22 in 20 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 15 | Ziel 19 in 19
+10111 |  43   2   0 |  60   1 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; MESSUNG verletzt 279: leben 10100 -> 8900 | ort (202,277) zustand 101 | naechster Feind Typ 73 in 19 | naechster Fernkaempfer Typ 22 in 22 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 3 in 17 | Ziel 19 in 17
+10149 |  38   2   0 |  59   1 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 279: leben 8900 -> 7700 | ort (200,277) zustand 101 | naechster Feind Typ 24 in 22 | naechster Fernkaempfer Typ 22 in 24 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 3 in 15 | Ziel 19 in 15; MESSUNG verletzt 304: leben 1700 -> 500 | ort (246,302) zustand 1 | naechster Feind Typ 22 in 16 | naechster Fernkaempfer Typ 22 in 16 | Fern<=16: 1 | Nah<=8: 0 | naechstes Feindgebaeude Typ 27 in 9 | Ziel None in -1; MESSUNG verletzt 217: leben 11300 -> 10100 | ort (246,305) zustand 1 | naechster Feind Typ 22 in 17 | naechster Fernkaempfer Typ 22 in 17 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 27 in 12 | Ziel None in -1
+10172 |  38   2   0 |  59   1 | 100.00 | 34/34 (6) | 14 10 | MESSUNG tot 304: zuletzt ort (246,302) zustand 1 | naechster Feind Typ 22 in 16 | naechster Fernkaempfer Typ 22 in 16 | Fern<=16: 1 | Nah<=8: 0 | naechstes Feindgebaeude Typ 27 in 9 | Ziel None in -1
+10195 |  38   2   0 |  59   1 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+10231 |  33   2   0 |  59   1 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 217: leben 10100 -> 7700 | ort (246,305) zustand 1 | naechster Feind Typ 22 in 18 | naechster Fernkaempfer Typ 22 in 18 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 27 in 12 | Ziel None in -1
+ZEITEN nach 220 Runden: lesen 8.43 s, bauen_werben_verkauf 4.09 s, assassinen 3.09 s, waechter 0.11 s, haus_lager_zeile 0.01 s
+10256 |  33   2   0 |  59   1 | 100.00 | 34/34 (6) | 14 10 | -
+10279 |  33   2   0 |  59   1 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; MESSUNG verletzt 279: leben 7700 -> 6500 | ort (192,274) zustand 101 | naechster Feind Typ 24 in 30 | naechster Fernkaempfer Typ 22 in 32 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 27 | Ziel 19 in -1; Gebaeude 19 (Typ 3) zerstoert
+10325 |  28   2   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 279: leben 6500 -> 5300 | ort (189,271) zustand 101 | naechster Feind Typ 24 in 33 | naechster Fernkaempfer Typ 22 in 35 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 30 | Ziel None in -1
+10367 |  28   2   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+10460 |  23   2   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+10518 |  18   2   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+ZEITEN nach 230 Runden: lesen 8.81 s, bauen_werben_verkauf 4.18 s, assassinen 3.14 s, waechter 0.11 s, haus_lager_zeile 0.01 s
+10567 |  18   2   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | -
+10629 |  18  14   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: stein
+10743 |  18   9   0 |  64   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: stein
+10789 |  18   4   0 |  69   0 | 100.00 | 34/34 (5) | 14 10 | Gebaeude 19 (Typ 3) zerstoert
+10806 |  18   4   0 |  69   0 | 100.00 | 34/34 (5) | 14 10 | 12 Assassinen auf 2 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+10869 |  18   4   0 |  73   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: apfel
+ZEITEN nach 240 Runden: lesen 9.19 s, bauen_werben_verkauf 4.30 s, assassinen 3.22 s, waechter 0.12 s, haus_lager_zeile 0.01 s
+10915 |  24   4   0 |  62   0 | 100.00 | 34/34 (5) | 14 10 | -
+10957 |  32   4   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+11044 |  32   4   0 |  66   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+11115 |  42   4   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | 65 Assassinen angeworben (Gold jetzt 125); Gebaeude 19 (Typ 3) zerstoert
+11181 |  44   4   0 |  55   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+ZEITEN nach 250 Runden: lesen 9.57 s, bauen_werben_verkauf 4.45 s, assassinen 3.23 s, waechter 0.12 s, haus_lager_zeile 0.01 s
+11250 |  39   4   0 |  55   0 | 100.00 | 34/34 (5) | 14 10 | -
+11274 |  39   4   0 |  55   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+11320 |  34   4   0 |  55   0 | 100.00 | 34/34 (5) | 14 10 | Gebaeude 20 (Typ 26) zerstoert
+11367 |  34   4   0 |  54   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+11414 |  29   4   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 293: leben 10100 -> 8900 | ort (214,289) zustand 101 | naechster Feind Typ 24 in 8 | naechster Fernkaempfer Typ 22 in 10 | Fern<=16: 10 | Nah<=8: 1 | naechstes Feindgebaeude Typ 12 in 5 | Ziel None in -1; 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+11468 |  29   4   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 287: leben 10100 -> 8900 | ort (212,293) zustand 101 | naechster Feind Typ 24 in 10 | naechster Fernkaempfer Typ 22 in 12 | Fern<=16: 9 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 7 | Ziel None in -1; MESSUNG verletzt 290: leben 11300 -> 10100 | ort (213,294) zustand 101 | naechster Feind Typ 24 in 9 | naechster Fernkaempfer Typ 22 in 11 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 6 | Ziel None in -1
+11491 |  29   4   0 |  53   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; MESSUNG verletzt 288: leben 8620 -> 6220 | ort (212,287) zustand 101 | naechster Feind Typ 24 in 10 | naechster Fernkaempfer Typ 22 in 12 | Fern<=16: 9 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 7 | Ziel None in -1
+11537 |  24   4   0 |  53   0 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 293: leben 8900 -> 7700 | ort (206,281) zustand 101 | naechster Feind Typ 24 in 16 | naechster Fernkaempfer Typ 22 in 18 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 13 | Ziel None in -1
+ZEITEN nach 260 Runden: lesen 9.96 s, bauen_werben_verkauf 4.55 s, assassinen 3.28 s, waechter 0.12 s, haus_lager_zeile 0.01 s
+11586 |  24   4   0 |  53   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; MESSUNG verletzt 293: leben 7700 -> 6500 | ort (206,281) zustand 1 | naechster Feind Typ 24 in 16 | naechster Fernkaempfer Typ 22 in 18 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 13 | Ziel None in -1
+11632 |  25   4   0 |  52   0 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 287: leben 8900 -> 6500 | ort (205,286) zustand 1 | naechster Feind Typ 24 in 17 | naechster Fernkaempfer Typ 22 in 19 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 14 | Ziel None in -1; MESSUNG verletzt 292: leben 11300 -> 10100 | ort (205,286) zustand 1 | naechster Feind Typ 24 in 17 | naechster Fernkaempfer Typ 22 in 19 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 14 | Ziel None in -1
+11649 |  29   4   0 |  52   0 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 287: leben 6500 -> 4100 | ort (205,286) zustand 1 | naechster Feind Typ 24 in 17 | naechster Fernkaempfer Typ 22 in 19 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 14 | Ziel None in -1; Gebaeude 19 (Typ 3) zerstoert
+11666 |  32   4   0 |  52   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; MESSUNG verletzt 287: leben 4100 -> 2900 | ort (205,286) zustand 1 | naechster Feind Typ 24 in 17 | naechster Fernkaempfer Typ 22 in 19 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 14 | Ziel None in -1
+11710 |  32   4   0 |  52   0 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 287: leben 2900 -> 1700 | ort (205,286) zustand 1 | naechster Feind Typ 24 in 17 | naechster Fernkaempfer Typ 22 in 19 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 14 | Ziel None in -1; MESSUNG verletzt 288: leben 6220 -> 5020 | ort (206,281) zustand 1 | naechster Feind Typ 24 in 16 | naechster Fernkaempfer Typ 22 in 18 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 13 | Ziel None in -1; 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+11769 |  32   4   0 |  51   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; MESSUNG verletzt 287: leben 1700 -> 500 | ort (205,286) zustand 1 | naechster Feind Typ 24 in 17 | naechster Fernkaempfer Typ 22 in 19 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 14 | Ziel None in -1; MESSUNG verletzt 288: leben 5020 -> 1420 | ort (206,281) zustand 1 | naechster Feind Typ 24 in 16 | naechster Fernkaempfer Typ 22 in 18 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 13 | Ziel None in -1
+11814 |  27   4   0 |  52   0 | 100.00 | 34/34 (6) | 14 10 | MESSUNG tot 287: zuletzt ort (205,286) zustand 1 | naechster Feind Typ 24 in 17 | naechster Fernkaempfer Typ 22 in 19 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 14 | Ziel None in -1; MESSUNG tot 288: zuletzt ort (206,281) zustand 1 | naechster Feind Typ 24 in 16 | naechster Fernkaempfer Typ 22 in 18 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 13 | Ziel None in -1; MESSUNG verletzt 290: leben 10100 -> 8900 | ort (205,286) zustand 1 | naechster Feind Typ 24 in 17 | naechster Fernkaempfer Typ 22 in 19 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 14 | Ziel None in -1
+11836 |  27   4   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 290: leben 8900 -> 7700 | ort (205,286) zustand 1 | naechster Feind Typ 24 in 17 | naechster Fernkaempfer Typ 22 in 19 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 14 | Ziel None in -1
+11858 |  27   4   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+ZEITEN nach 270 Runden: lesen 10.33 s, bauen_werben_verkauf 4.67 s, assassinen 3.34 s, waechter 0.13 s, haus_lager_zeile 0.01 s
+11910 |  28   4   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 292: leben 10100 -> 5300 | ort (205,285) zustand 1 | naechster Feind Typ 24 in 17 | naechster Fernkaempfer Typ 22 in 19 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 14 | Ziel None in -1; MESSUNG verletzt 293: leben 6500 -> 4100 | ort (206,280) zustand 1 | naechster Feind Typ 24 in 16 | naechster Fernkaempfer Typ 22 in 18 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 13 | Ziel None in -1
+11933 |  35   4   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 293: leben 4100 -> 1700 | ort (206,280) zustand 1 | naechster Feind Typ 24 in 16 | naechster Fernkaempfer Typ 22 in 18 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 13 | Ziel None in -1
+11958 |  45   4   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; MESSUNG verletzt 290: leben 7700 -> 6500 | ort (206,286) zustand 1 | naechster Feind Typ 24 in 16 | naechster Fernkaempfer Typ 22 in 18 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 13 | Ziel None in -1; Gebaeude 19 (Typ 3) zerstoert
+12004 |  46   4   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 290: leben 6500 -> 4100 | ort (206,286) zustand 1 | naechster Feind Typ 24 in 16 | naechster Fernkaempfer Typ 22 in 18 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 13 | Ziel None in -1; MESSUNG verletzt 292: leben 5300 -> 4100 | ort (205,285) zustand 1 | naechster Feind Typ 24 in 17 | naechster Fernkaempfer Typ 22 in 19 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 14 | Ziel None in -1
+12051 |  50   4   0 |  64   0 | 100.00 | 34/34 (5) | 14 10 | MESSUNG tot 292: zuletzt ort (205,285) zustand 1 | naechster Feind Typ 24 in 17 | naechster Fernkaempfer Typ 22 in 19 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 14 | Ziel None in -1; MESSUNG verletzt 290: leben 4100 -> 2900 | ort (206,286) zustand 1 | naechster Feind Typ 24 in 16 | naechster Fernkaempfer Typ 22 in 18 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 13 | Ziel None in -1; MESSUNG verletzt 293: leben 1700 -> 500 | ort (206,280) zustand 1 | naechster Feind Typ 24 in 16 | naechster Fernkaempfer Typ 22 in 18 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 13 | Ziel None in -1
+12076 |  55   4   0 |  66   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,apfel
+12150 |  68   4   0 |  56   0 | 100.00 | 34/34 (5) | 14 10 | MESSUNG tot 290: zuletzt ort (206,286) zustand 1 | naechster Feind Typ 24 in 16 | naechster Fernkaempfer Typ 22 in 18 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 13 | Ziel None in -1; MESSUNG tot 293: zuletzt ort (206,280) zustand 1 | naechster Feind Typ 24 in 16 | naechster Fernkaempfer Typ 22 in 18 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 13 | Ziel None in -1
+12190 |  76   4   0 |  56   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+ZEITEN nach 280 Runden: lesen 10.72 s, bauen_werben_verkauf 4.82 s, assassinen 3.35 s, waechter 0.13 s, haus_lager_zeile 0.01 s
+12220 |  69   4   0 |  55   0 | 100.00 | 34/34 (5) | 14 10 | -
+12243 |  69   4   0 |  55   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+12292 |  59   4   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+12342 |  59   4   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+12439 |  73   4   0 |  54   0 | 100.00 | 34/34 (5) | 14 10 | 1 Assassinen liefen nicht zu ihrem Ziel - neu befohlen; 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 1 Gebaeude gleichzeitig angelaufen)
+12478 |  83   4   0 |  54   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+12518 |  75   4   0 |  53   0 | 100.00 | 34/34 (5) | 14 10 | Gebaeude 19 (Typ 3) zerstoert
+ZEITEN nach 290 Runden: lesen 11.10 s, bauen_werben_verkauf 4.95 s, assassinen 3.43 s, waechter 0.14 s, haus_lager_zeile 0.01 s
+12564 |  79   4   0 |  53   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+12659 |  83   4   0 |  52   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+12756 |  82   4   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+12810 |  81   4   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+12876 |  87   4   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+ZEITEN nach 300 Runden: lesen 11.48 s, bauen_werben_verkauf 5.07 s, assassinen 3.49 s, waechter 0.14 s, haus_lager_zeile 0.01 s
+12926 |  87   4   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | -
+12945 |  89   4   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+13033 |  79   4   0 |  68   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+13105 |  69   4   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | 2 Assassinen liefen nicht zu ihrem Ziel - neu befohlen; 2 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 1 Gebaeude gleichzeitig angelaufen)
+13193 |  69   4   0 |  62   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+ZEITEN nach 310 Runden: lesen 11.89 s, bauen_werben_verkauf 5.22 s, assassinen 3.53 s, waechter 0.14 s, haus_lager_zeile 0.01 s
+13257 |  59   4   0 |  61   0 | 100.00 | 34/34 (5) | 14 10 | -
+13279 |  59   4   0 |  61   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+13365 |  49   4   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+13430 |  51   4   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+ZEITEN nach 320 Runden: lesen 12.26 s, bauen_werben_verkauf 5.31 s, assassinen 3.54 s, waechter 0.15 s, haus_lager_zeile 0.01 s
+13521 |  63   4   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+13638 |  60  16   0 |  59   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,stein
+13748 |  50  11   0 |  58   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,stein
+13821 |  40   6   0 |  58   0 | 100.00 | 34/34 (5) | 14 10 | 70 Assassinen angeworben (Gold jetzt 105)
+13882 |  40   6   0 |  57   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,stein
+ZEITEN nach 330 Runden: lesen 12.65 s, bauen_werben_verkauf 5.58 s, assassinen 3.55 s, waechter 0.15 s, haus_lager_zeile 0.01 s
+13952 |  35   1   0 |  62   0 | 100.00 | 34/34 (5) | 14 10 | -
+13992 |  35   1   0 |  63   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+14085 |  30   1   0 |  71   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+14228 |  25   1   0 |  60   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+ZEITEN nach 340 Runden: lesen 13.03 s, bauen_werben_verkauf 5.73 s, assassinen 3.57 s, waechter 0.15 s, haus_lager_zeile 0.01 s
+14300 |  20   1   0 |  59   0 | 100.00 | 34/34 (5) | 14 10 | -
+14317 |  20   1   0 |  59   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+ZEITEN nach 350 Runden: lesen 13.40 s, bauen_werben_verkauf 5.76 s, assassinen 3.57 s, waechter 0.15 s, haus_lager_zeile 0.01 s
+14524 |  15   1   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | -
+14595 |  28   1   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+14687 |  28   1   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+14789 |  23   1   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+ZEITEN nach 360 Runden: lesen 13.77 s, bauen_werben_verkauf 5.85 s, assassinen 3.58 s, waechter 0.15 s, haus_lager_zeile 0.01 s
+14828 |  18   1   0 |  63   0 | 100.00 | 34/34 (6) | 14 10 | -
+14946 |  18   1   0 |  73   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: apfel
+15014 |  18   1   0 |  64   0 | 100.00 | 34/34 (6) | 14 10 | Gebaeude 19 (Typ 3) zerstoert
+15030 |  18   1   0 |  66   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: apfel
+ZEITEN nach 370 Runden: lesen 14.15 s, bauen_werben_verkauf 5.94 s, assassinen 3.60 s, waechter 0.16 s, haus_lager_zeile 0.01 s
+15091 |  18   1   0 |  56   0 | 100.00 | 34/34 (5) | 14 10 | -
+15171 |  23   1   0 |  56   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+15256 |  31   1   0 |  55   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+ZEITEN nach 380 Runden: lesen 14.52 s, bauen_werben_verkauf 6.00 s, assassinen 3.61 s, waechter 0.16 s, haus_lager_zeile 0.01 s
+15339 |  26   1   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+15407 |  21   1   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+15458 |  21   1   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+ZEITEN nach 390 Runden: lesen 14.90 s, bauen_werben_verkauf 6.06 s, assassinen 3.66 s, waechter 0.16 s, haus_lager_zeile 0.01 s
+15634 |  16   1   0 |  52   0 | 100.00 | 34/34 (6) | 14 10 | -
+15821 |  16   1   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 2: leben 12500 -> 11300 | ort (212,293) zustand 101 | naechster Feind Typ 24 in 10 | naechster Fernkaempfer Typ 22 in 12 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 7 | Ziel 19 in 43; MESSUNG verletzt 259: leben 12500 -> 10100 | ort (211,292) zustand 101 | naechster Feind Typ 24 in 11 | naechster Fernkaempfer Typ 22 in 13 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 8 | Ziel 19 in 44
+ZEITEN nach 400 Runden: lesen 15.28 s, bauen_werben_verkauf 6.06 s, assassinen 3.67 s, waechter 0.16 s, haus_lager_zeile 0.01 s
+15844 |  16   1   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 2: leben 11300 -> 10100 | ort (213,294) zustand 101 | naechster Feind Typ 24 in 9 | naechster Fernkaempfer Typ 22 in 11 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 6 | Ziel 19 in 42; MESSUNG verletzt 259: leben 10100 -> 8900 | ort (212,293) zustand 101 | naechster Feind Typ 24 in 10 | naechster Fernkaempfer Typ 22 in 12 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 7 | Ziel 19 in 43
+15867 |  16   1   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 260: leben 12500 -> 11300 | ort (212,293) zustand 101 | naechster Feind Typ 24 in 10 | naechster Fernkaempfer Typ 22 in 12 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 7 | Ziel 19 in 43
+15913 |  16   1   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 273: leben 12500 -> 11300 | ort (216,292) zustand 106 | naechster Feind Typ 24 in 6 | naechster Fernkaempfer Typ 22 in 8 | Fern<=16: 10 | Nah<=8: 2 | naechstes Feindgebaeude Typ 12 in 3 | Ziel 19 in 39
+15946 |  16   1   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 279: leben 5300 -> 4100 | ort (216,297) zustand 101 | naechster Feind Typ 24 in 8 | naechster Fernkaempfer Typ 22 in 9 | Fern<=16: 10 | Nah<=8: 2 | naechstes Feindgebaeude Typ 12 in 7 | Ziel 19 in 39
+15962 |  16   1   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 279: leben 4100 -> 2900 | ort (217,298) zustand 101 | naechster Feind Typ 24 in 9 | naechster Fernkaempfer Typ 22 in 10 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 8 | Ziel 19 in 38
+15977 |  16   1   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 279: leben 2900 -> 1700 | ort (218,299) zustand 101 | naechster Feind Typ 24 in 10 | naechster Fernkaempfer Typ 22 in 11 | Fern<=16: 9 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 9 | Ziel 19 in 37
+ZEITEN nach 410 Runden: lesen 15.66 s, bauen_werben_verkauf 6.06 s, assassinen 3.68 s, waechter 0.17 s, haus_lager_zeile 0.01 s
+16044 |  16   1   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | -
+16106 |  16   1   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 259: leben 8900 -> 7700 | ort (228,306) zustand 101 | naechster Feind Typ 24 in 17 | naechster Fernkaempfer Typ 22 in 18 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 27 in 13 | Ziel 19 in 27; MESSUNG verletzt 279: leben 1700 -> 500 | ort (226,304) zustand 101 | naechster Feind Typ 24 in 15 | naechster Fernkaempfer Typ 22 in 16 | Fern<=16: 3 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 14 | Ziel 19 in 29
+16129 |  16   1   0 |  65   0 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 2: leben 10100 -> 8900 | ort (231,309) zustand 101 | naechster Feind Typ 24 in 20 | naechster Fernkaempfer Typ 22 in 21 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 27 in 16 | Ziel 19 in 24
+16149 |  16   1   0 |  65   0 | 100.00 | 34/34 (6) | 14 10 | MESSUNG tot 279: zuletzt ort (228,306) zustand 101 | naechster Feind Typ 24 in 17 | naechster Fernkaempfer Typ 22 in 18 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 27 in 13 | Ziel 19 in 27; 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 1 Gebaeude gleichzeitig angelaufen)
+16191 |  16   1   0 |  65   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: apfel; MESSUNG verletzt 273: leben 11300 -> 10100 | ort (231,305) zustand 101 | naechster Feind Typ 24 in 16 | naechster Fernkaempfer Typ 22 in 17 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 27 in 12 | Ziel 19 in 25
+16287 |  23   1   0 |  54   0 | 100.00 | 34/34 (5) | 14 10 | MESSUNG verletzt 259: leben 7700 -> 6500 | ort (240,318) zustand 101 | naechster Feind Typ 24 in 29 | naechster Fernkaempfer Typ 22 in 30 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 3 in 15 | Ziel 19 in 15; MESSUNG verletzt 260: leben 11300 -> 8900 | ort (239,317) zustand 101 | naechster Feind Typ 24 in 28 | naechster Fernkaempfer Typ 22 in 29 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 3 in 16 | Ziel 19 in 16
+16311 |  28   1   0 |  54   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; MESSUNG verletzt 260: leben 8900 -> 7700 | ort (240,318) zustand 101 | naechster Feind Typ 24 in 29 | naechster Fernkaempfer Typ 22 in 30 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 3 in 15 | Ziel 19 in 15
+ZEITEN nach 420 Runden: lesen 16.04 s, bauen_werben_verkauf 6.15 s, assassinen 3.72 s, waechter 0.17 s, haus_lager_zeile 0.01 s
+16348 |  32   1   0 |  54   0 | 100.00 | 34/34 (5) | 14 10 | -
+16372 |  37   1   0 |  53   0 | 100.00 | 34/34 (5) | 14 10 | MESSUNG verletzt 259: leben 6500 -> 5300 | ort (245,323) zustand 101 | naechster Feind Typ 24 in 34 | naechster Fernkaempfer Typ 22 in 35 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 3 in 10 | Ziel 19 in 10
+16394 |  45   1   0 |  53   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; MESSUNG verletzt 2: leben 8900 -> 7700 | ort (247,325) zustand 101 | naechster Feind Typ 24 in 36 | naechster Fernkaempfer Typ 22 in 37 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 3 in 8 | Ziel 19 in 8; MESSUNG verletzt 273: leben 10100 -> 8900 | ort (244,318) zustand 101 | naechster Feind Typ 24 in 29 | naechster Fernkaempfer Typ 22 in 30 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 3 in 12 | Ziel 19 in 12
+16442 |  43   1   0 |  53   0 | 100.00 | 34/34 (5) | 14 10 | MESSUNG verletzt 273: leben 8900 -> 7700 | ort (247,321) zustand 101 | naechster Feind Typ 24 in 32 | naechster Fernkaempfer Typ 22 in 33 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 3 in 9 | Ziel 19 in 9
+16488 |  46  13   0 |  53   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,stein
+16612 |  68   8   0 |  52   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,stein; Gebaeude 19 (Typ 3) zerstoert
+ZEITEN nach 430 Runden: lesen 16.43 s, bauen_werben_verkauf 6.33 s, assassinen 3.73 s, waechter 0.18 s, haus_lager_zeile 0.01 s
+16737 |  58   3   0 |  51   0 | 100.00 | 34/34 (5) | 14 10 | -
+16771 |  58   3   0 |  51   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+16857 |  48   3   0 |  50   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+16928 |  43   3   0 |  50   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+16973 |  43   3   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 281: leben 12500 -> 8900 | ort (238,312) zustand 101 | naechster Feind Typ 24 in 23 | naechster Fernkaempfer Typ 22 in 24 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 3 in 17 | Ziel None in -1
+ZEITEN nach 440 Runden: lesen 16.80 s, bauen_werben_verkauf 6.42 s, assassinen 3.74 s, waechter 0.19 s, haus_lager_zeile 0.01 s
+17020 |  48   3   0 |  63   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+17066 |  43   3   0 |  67   0 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 281: leben 8900 -> 7700 | ort (244,318) zustand 101 | naechster Feind Typ 24 in 29 | naechster Fernkaempfer Typ 22 in 30 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 3 in 11 | Ziel None in -1
+17112 |  51   3   0 |  71   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+17178 |  42   3   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | 75 Assassinen angeworben (Gold jetzt 105)
+17260 |  58   3   0 |  60   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+17356 |  56   3   0 |  60   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+ZEITEN nach 450 Runden: lesen 17.17 s, bauen_werben_verkauf 6.60 s, assassinen 3.75 s, waechter 0.19 s, haus_lager_zeile 0.01 s
+17393 |  50   3   0 |  59   0 | 100.00 | 34/34 (5) | 14 10 | -
+17432 |  57   3   0 |  59   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+17508 |  49   3   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+17593 |  55   3   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+ZEITEN nach 460 Runden: lesen 17.55 s, bauen_werben_verkauf 6.69 s, assassinen 3.76 s, waechter 0.20 s, haus_lager_zeile 0.01 s
+17655 |  54   3   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | -
+17680 |  55   3   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+17748 |  68   3   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 281: leben 7700 -> 7650 | ort (255,328) zustand 106 | naechster Feind Typ 24 in 39 | naechster Fernkaempfer Typ 22 in 40 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 3 in 3 | Ziel None in -1
+17769 |  76   3   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; MESSUNG verletzt 281: leben 7650 -> 7440 | ort (255,328) zustand 106 | naechster Feind Typ 24 in 39 | naechster Fernkaempfer Typ 22 in 40 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 3 in 3 | Ziel None in -1
+17812 |  66   3   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 281: leben 7440 -> 7310 | ort (255,328) zustand 1 | naechster Feind Typ 24 in 39 | naechster Fernkaempfer Typ 22 in 40 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 3 in 3 | Ziel None in -1
+17883 |  76   3   0 |  56   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+ZEITEN nach 470 Runden: lesen 17.93 s, bauen_werben_verkauf 6.81 s, assassinen 3.77 s, waechter 0.20 s, haus_lager_zeile 0.01 s
+17958 |  74   3   0 |  56   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+18051 |  64   3   0 |  55   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+18146 |  54   3   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+18245 |  47   3   0 |  69   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+ZEITEN nach 480 Runden: lesen 18.31 s, bauen_werben_verkauf 6.96 s, assassinen 3.78 s, waechter 0.21 s, haus_lager_zeile 0.01 s
+18316 |  52   3   0 |  63   0 | 100.00 | 34/34 (6) | 14 10 | -
+18365 |  52   3   0 |  63   0 | 100.00 | 34/34 (5) | 14 10 | MESSUNG verletzt 271: leben 12500 -> 11300 | ort (246,288) zustand 101 | naechster Feind Typ 22 in 16 | naechster Fernkaempfer Typ 22 in 16 | Fern<=16: 3 | Nah<=8: 0 | naechstes Feindgebaeude Typ 10 in 4 | Ziel None in -1
+18380 |  52   3   0 |  63   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+18460 |  42   3   0 |  62   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+18507 |  37   3   0 |  62   0 | 100.00 | 34/34 (5) | 14 10 | MESSUNG verletzt 271: leben 11300 -> 10100 | ort (246,297) zustand 101 | naechster Feind Typ 22 in 16 | naechster Fernkaempfer Typ 22 in 16 | Fern<=16: 7 | Nah<=8: 0 | naechstes Feindgebaeude Typ 27 in 5 | Ziel None in -1
+18549 |  37   3   0 |  62   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; MESSUNG verletzt 271: leben 10100 -> 7700 | ort (246,299) zustand 101 | naechster Feind Typ 22 in 16 | naechster Fernkaempfer Typ 22 in 16 | Fern<=16: 7 | Nah<=8: 0 | naechstes Feindgebaeude Typ 27 in 6 | Ziel None in -1
+18602 |  32   3   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 271: leben 7700 -> 2900 | ort (246,303) zustand 101 | naechster Feind Typ 22 in 16 | naechster Fernkaempfer Typ 22 in 16 | Fern<=16: 1 | Nah<=8: 0 | naechstes Feindgebaeude Typ 27 in 10 | Ziel None in -1
+ZEITEN nach 490 Runden: lesen 18.69 s, bauen_werben_verkauf 7.08 s, assassinen 3.79 s, waechter 0.21 s, haus_lager_zeile 0.01 s
+18625 |  32   3   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | -
+18647 |  32   3   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; MESSUNG verletzt 217: leben 7700 -> 5300 | ort (246,305) zustand 1 | naechster Feind Typ 22 in 17 | naechster Fernkaempfer Typ 22 in 17 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 27 in 12 | Ziel None in -1
+18706 |  27   3   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | MESSUNG tot 271: zuletzt ort (246,306) zustand 101 | naechster Feind Typ 22 in 18 | naechster Fernkaempfer Typ 22 in 18 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 27 in 13 | Ziel None in -1
+18730 |  27   3   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 297: leben 10100 -> 8900 | ort (247,310) zustand 1 | naechster Feind Typ 22 in 22 | naechster Fernkaempfer Typ 22 in 22 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 27 in 12 | Ziel None in -1
+18751 |  27   3   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+18839 |  29   3   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+ZEITEN nach 500 Runden: lesen 19.07 s, bauen_werben_verkauf 7.17 s, assassinen 3.80 s, waechter 0.22 s, haus_lager_zeile 0.01 s
+18907 |  35   3   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+18953 |  30   3   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 281: leben 7310 -> 7220 | ort (255,328) zustand 106 | naechster Feind Typ 24 in 39 | naechster Fernkaempfer Typ 22 in 40 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 3 in 3 | Ziel None in -1
+18977 |  30   3   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 281: leben 7220 -> 6980 | ort (255,328) zustand 106 | naechster Feind Typ 24 in 39 | naechster Fernkaempfer Typ 22 in 40 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 3 in 3 | Ziel None in -1
+19000 |  30   3   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; MESSUNG verletzt 281: leben 6980 -> 6920 | ort (255,328) zustand 106 | naechster Feind Typ 24 in 39 | naechster Fernkaempfer Typ 22 in 40 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 3 in 3 | Ziel None in -1
+19099 |  25   3   0 |  63   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+19196 |  20   3   0 |  67   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+ZEITEN nach 510 Runden: lesen 19.45 s, bauen_werben_verkauf 7.33 s, assassinen 3.81 s, waechter 0.22 s, haus_lager_zeile 0.01 s
+19264 |  15   3   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | -
+19327 |  15   3   0 |  68   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: apfel
+19416 |  15  15   0 |  58   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: stein
+19527 |  15  10   0 |  57   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: stein
+ZEITEN nach 520 Runden: lesen 19.82 s, bauen_werben_verkauf 7.48 s, assassinen 3.82 s, waechter 0.23 s, haus_lager_zeile 0.01 s
+19576 |  15   5   0 |  57   0 | 100.00 | 34/34 (5) | 14 10 | -
+19599 |  15   5   0 |  57   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: stein
+19680 |  27   0   0 |  56   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+19730 |  32   0   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+19796 |  46   0   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+19851 |  41   0   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | 80 Assassinen angeworben (Gold jetzt 100)
+ZEITEN nach 530 Runden: lesen 20.20 s, bauen_werben_verkauf 7.59 s, assassinen 3.88 s, waechter 0.23 s, haus_lager_zeile 0.01 s
+19925 |  41   0   0 |  54   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+19974 |  36   0   0 |  54   0 | 100.00 | 34/34 (5) | 14 10 | Gebaeude 19 (Typ 3) zerstoert
+20024 |  36   0   0 |  54   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+20113 |  46   0   0 |  53   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+20198 |  46   0   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+ZEITEN nach 540 Runden: lesen 20.58 s, bauen_werben_verkauf 7.71 s, assassinen 3.89 s, waechter 0.24 s, haus_lager_zeile 0.01 s
+20244 |  43   0   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | -
+20271 |  43   0   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+20316 |  50   0   0 |  64   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; MESSUNG verletzt 282: leben 12500 -> 10100 | ort (225,295) zustand 101 | naechster Feind Typ 24 in 6 | naechster Fernkaempfer Typ 22 in 7 | Fern<=16: 10 | Nah<=8: 4 | naechstes Feindgebaeude Typ 55 in 5 | Ziel 19 in 35
+20355 |  47   0   0 |  63   0 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 282: leben 10100 -> 8900 | ort (225,298) zustand 101 | naechster Feind Typ 24 in 9 | naechster Fernkaempfer Typ 22 in 10 | Fern<=16: 10 | Nah<=8: 0 | naechstes Feindgebaeude Typ 12 in 8 | Ziel 19 in 32
+20402 |  47   0   0 |  63   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+20481 |  42   0   0 |  63   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+20517 |  37   0   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | Gebaeude 19 (Typ 3) zerstoert
+ZEITEN nach 550 Runden: lesen 20.98 s, bauen_werben_verkauf 7.81 s, assassinen 3.95 s, waechter 0.24 s, haus_lager_zeile 0.01 s
+20540 |  37   0   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 282: leben 8900 -> 6500 | ort (236,309) zustand 101 | naechster Feind Typ 24 in 20 | naechster Fernkaempfer Typ 22 in 21 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 27 in 16 | Ziel None in -1
+20560 |  37   0   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+20687 |  32   0   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+20733 |  27   0   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 282: leben 6500 -> 5300 | ort (248,315) zustand 101 | naechster Feind Typ 24 in 26 | naechster Fernkaempfer Typ 22 in 27 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 27 in 11 | Ziel 19 in 12
+20757 |  31   0   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; MESSUNG verletzt 282: leben 5300 -> 4100 | ort (250,315) zustand 101 | naechster Feind Typ 22 in 27 | naechster Fernkaempfer Typ 22 in 27 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 27 in 9 | Ziel 19 in 10
+20804 |  35   0   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | MESSUNG verletzt 282: leben 4100 -> 2900 | ort (253,315) zustand 101 | naechster Feind Typ 22 in 27 | naechster Fernkaempfer Typ 22 in 27 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 27 in 6 | Ziel 19 in -1; Gebaeude 19 (Typ 3) zerstoert
+ZEITEN nach 560 Runden: lesen 21.36 s, bauen_werben_verkauf 7.90 s, assassinen 4.00 s, waechter 0.24 s, haus_lager_zeile 0.01 s
+20849 |  40   0   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+20896 |  35   0   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+20972 |  42   0   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+21056 |  48   0   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+21138 |  43   0   0 |  62   0 | 100.00 | 34/34 (5) | 14 10 | Gebaeude 19 (Typ 3) zerstoert
+21162 |  43   0   0 |  64   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+ZEITEN nach 570 Runden: lesen 21.73 s, bauen_werben_verkauf 8.05 s, assassinen 4.06 s, waechter 0.24 s, haus_lager_zeile 0.01 s
+21200 |  38   0   0 |  67   0 | 100.00 | 34/34 (5) | 14 10 | -
+21242 |  38   0   0 |  69   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,apfel
+21342 |  33   0   0 |  65   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,apfel
+21416 |  28   0   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+21516 |  28   0   0 |  59   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+ZEITEN nach 580 Runden: lesen 22.12 s, bauen_werben_verkauf 8.22 s, assassinen 4.11 s, waechter 0.25 s, haus_lager_zeile 0.01 s
+21588 |  23   0   0 |  58   0 | 100.00 | 34/34 (5) | 14 10 | -
+21605 |  23   0   0 |  58   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+21660 |  28   0   0 |  58   0 | 100.00 | 34/34 (5) | 14 10 | Gebaeude 19 (Typ 3) zerstoert
+21682 |  33   0   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+21722 |  31   0   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+21787 |  31   0   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+ZEITEN nach 590 Runden: lesen 22.49 s, bauen_werben_verkauf 8.31 s, assassinen 4.17 s, waechter 0.25 s, haus_lager_zeile 0.01 s
+21843 |  26   0   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+21937 |  21   0   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+21988 |  16   0   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | Gebaeude 19 (Typ 3) zerstoert
+22015 |  16   0   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+ZEITEN nach 600 Runden: lesen 22.88 s, bauen_werben_verkauf 8.38 s, assassinen 4.23 s, waechter 0.25 s, haus_lager_zeile 0.01 s
+22167 |  16   0   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | -
+22269 |  31   0   0 |  63   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+22316 |  29   0   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | Gebaeude 19 (Typ 3) zerstoert
+22364 |  29  12   0 |  69   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,stein,apfel
+ZEITEN nach 610 Runden: lesen 23.26 s, bauen_werben_verkauf 8.52 s, assassinen 4.24 s, waechter 0.25 s, haus_lager_zeile 0.01 s
+22505 |  38   7   0 |  61   0 | 100.00 | 34/34 (5) | 14 10 | -
+22526 |  42   7   0 |  61   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,stein
+22592 |  37   2   0 |  60   0 | 100.00 | 34/34 (5) | 14 10 | 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+22656 |  37   2   0 |  60   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+22750 |  32   2   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+22842 |  33   2   0 |  59   0 | 100.00 | 34/34 (5) | 14 10 | Gebaeude 19 (Typ 3) zerstoert
+ZEITEN nach 620 Runden: lesen 23.64 s, bauen_werben_verkauf 8.67 s, assassinen 4.29 s, waechter 0.26 s, haus_lager_zeile 0.01 s
+22864 |  41   2   0 |  59   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+22958 |  58   2   0 |  58   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23052 |  48   2   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23123 |  43   2   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+23176 |  43   2   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+ZEITEN nach 630 Runden: lesen 24.02 s, bauen_werben_verkauf 8.80 s, assassinen 4.35 s, waechter 0.26 s, haus_lager_zeile 0.01 s
+23213 |  38   2   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | -
+23259 |  38   2   0 |  65   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+23343 |  33   2   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | Gebaeude 19 (Typ 3) zerstoert
+23351 |  33   2   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23426 |  43   2   0 |  63   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+23496 |  41   2   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | 85 Assassinen angeworben (Gold jetzt 100)
+ZEITEN nach 640 Runden: lesen 24.40 s, bauen_werben_verkauf 8.94 s, assassinen 4.40 s, waechter 0.26 s, haus_lager_zeile 0.01 s
+23526 |  41   2   0 |  62   0 | 100.00 | 34/34 (5) | 14 10 | -
+23549 |  41   2   0 |  62   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23633 |  36   2   0 |  65   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,apfel
+23697 |  31   2   0 |  55   0 | 100.00 | 34/34 (5) | 14 10 | Gebaeude 19 (Typ 3) zerstoert
+23734 |  31   2   0 |  55   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+ZEITEN nach 650 Runden: lesen 24.77 s, bauen_werben_verkauf 9.06 s, assassinen 4.42 s, waechter 0.27 s, haus_lager_zeile 0.01 s
+23814 |  26   2   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23896 |  21   2   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23970 |  30   2   0 |  53   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+24088 |  48   2   0 |  52   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+ZEITEN nach 660 Runden: lesen 25.15 s, bauen_werben_verkauf 9.18 s, assassinen 4.47 s, waechter 0.27 s, haus_lager_zeile 0.01 s
+24137 |  48   2   0 |  52   0 | 100.00 | 34/34 (6) | 14 10 | -
+24208 |  60   2   0 |  51   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+24263 |  55   2   0 |  51   0 | 100.00 | 34/34 (5) | 14 10 | Gebaeude 19 (Typ 3) zerstoert
+24297 |  55   2   0 |  51   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+24350 |  60   2   0 |  54   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+ZEITEN nach 670 Runden: lesen 25.53 s, bauen_werben_verkauf 9.30 s, assassinen 4.48 s, waechter 0.28 s, haus_lager_zeile 0.01 s
+24417 |  61   2   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | -
+24440 |  61   2   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+24525 |  51   2   0 |  64   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+24627 |  41   2   0 |  66   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+ZEITEN nach 680 Runden: lesen 25.91 s, bauen_werben_verkauf 9.45 s, assassinen 4.54 s, waechter 0.28 s, haus_lager_zeile 0.01 s
+24764 |  36   2   0 |  55   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+24800 |  31   2   0 |  54   0 | 100.00 | 34/34 (5) | 14 10 | Gebaeude 19 (Typ 3) zerstoert
+24846 |  31   2   0 |  54   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+24937 |  26   2   0 |  54   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+25031 |  21   2   0 |  53   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+ZEITEN nach 690 Runden: lesen 26.28 s, bauen_werben_verkauf 9.57 s, assassinen 4.55 s, waechter 0.29 s, haus_lager_zeile 0.01 s
+25077 |  18   2   0 |  53   0 | 100.00 | 34/34 (6) | 14 10 | -
+25123 |  27   2   0 |  52   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+25202 |  29   2   0 |  52   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+25294 |  24   7   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,stein
+25366 |  26   9   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+ZEITEN nach 700 Runden: lesen 26.66 s, bauen_werben_verkauf 9.72 s, assassinen 4.61 s, waechter 0.29 s, haus_lager_zeile 0.01 s
+25443 |  37   9   0 |  64   0 | 100.00 | 34/34 (5) | 14 10 | -
+25477 |  37   9   0 |  67   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,stein,apfel
+25610 |  38   4   0 |  62   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; Gebaeude 19 (Typ 3) zerstoert
+25712 |  45   4   0 |  61   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+ZEITEN nach 710 Runden: lesen 27.04 s, bauen_werben_verkauf 9.90 s, assassinen 4.62 s, waechter 0.30 s, haus_lager_zeile 0.01 s
+25775 |  47   4   0 |  61   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+25842 |  48   4   0 |  60   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+25888 |  43   4   0 |  60   0 | 100.00 | 34/34 (5) | 14 10 | 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+25960 |  43   4   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+26042 |  38   4   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+ZEITEN nach 720 Runden: lesen 27.42 s, bauen_werben_verkauf 10.03 s, assassinen 4.68 s, waechter 0.30 s, haus_lager_zeile 0.01 s
+26088 |  33   4   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | -
+26127 |  33   4   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; Gebaeude 19 (Typ 3) zerstoert
+26218 |  28   4   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+26307 |  23   4   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+ZEITEN nach 730 Runden: lesen 27.80 s, bauen_werben_verkauf 10.12 s, assassinen 4.69 s, waechter 0.31 s, haus_lager_zeile 0.01 s
+26367 |  18   4   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | -
+26407 |  18   4   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+26524 |  18   4   0 |  67   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: apfel
+26575 |  18   4   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | 90 Assassinen angeworben (Gold jetzt 105)
+ZEITEN nach 740 Runden: lesen 28.18 s, bauen_werben_verkauf 10.17 s, assassinen 4.74 s, waechter 0.31 s, haus_lager_zeile 0.01 s
+26633 |  18   4   0 |  60   0 | 100.00 | 34/34 (5) | 14 10 | Gebaeude 19 (Typ 3) zerstoert
+26716 |  18   4   0 |  59   0 | 100.00 | 34/34 (5) | 14 10 | 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+ZEITEN nach 750 Runden: lesen 28.56 s, bauen_werben_verkauf 10.17 s, assassinen 4.80 s, waechter 0.32 s, haus_lager_zeile 0.01 s
+26863 |  18   4   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | -
+26971 |  18   4   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | Gebaeude 19 (Typ 3) zerstoert
+27008 |  18   4   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+ZEITEN nach 760 Runden: lesen 28.96 s, bauen_werben_verkauf 10.17 s, assassinen 4.86 s, waechter 0.32 s, haus_lager_zeile 0.01 s
+27109 |  18   4   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | -
+27198 |  31   4   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+27287 |  31   4   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | Gebaeude 19 (Typ 3) zerstoert
+27303 |  31   4   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+ZEITEN nach 770 Runden: lesen 29.34 s, bauen_werben_verkauf 10.23 s, assassinen 4.87 s, waechter 0.32 s, haus_lager_zeile 0.01 s
+27395 |  26   4   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+27491 |  29   4   0 |  63   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+27561 |  34   4   0 |  67   0 | 100.00 | 34/34 (6) | 14 10 | 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+27614 |  34   4   0 |  75   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+27716 |  29   4   0 |  65   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+ZEITEN nach 780 Runden: lesen 29.73 s, bauen_werben_verkauf 10.41 s, assassinen 4.93 s, waechter 0.33 s, haus_lager_zeile 0.01 s
+27788 |  24   4   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | -
+27837 |  24   4   0 |  54   0 | 100.00 | 34/34 (5) | 14 10 | Gebaeude 19 (Typ 3) zerstoert
+27851 |  24   4   0 |  54   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+27941 |  29   4   0 |  53   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+28021 |  32   4   0 |  53   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+ZEITEN nach 790 Runden: lesen 30.10 s, bauen_werben_verkauf 10.53 s, assassinen 4.94 s, waechter 0.34 s, haus_lager_zeile 0.01 s
+28100 |  27   4   0 |  52   0 | 100.00 | 34/34 (6) | 14 10 | -
+28123 |  27   4   0 |  52   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+28213 |  22   4   0 |  51   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+28291 |  29  16   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,stein
+ZEITEN nach 800 Runden: lesen 30.48 s, bauen_werben_verkauf 10.68 s, assassinen 4.95 s, waechter 0.34 s, haus_lager_zeile 0.01 s
+28436 |  30  11   0 |  54   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,stein
+28543 |  25   6   0 |  57   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,stein
+28682 |  38   1   0 |  64   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+Ende Phase 2 bei Tick 28743 nach 807 Runden (0.1 s je Runde); Kornspeicher 1, Holzfaeller 14, Apfelplantagen 10; Waechter: Bedrohungen 0, davon tot 0, eigene Truppen verloren 0; Angriff: zerstoert 72 Gebaeude {3: 39, 32: 16, 26: 3, 7: 2, 19: 2, 4: 4, 1: 5, 20: 1}, eigene Verluste 25, im Spiel gleichzeitig angelaufen zuletzt 0, neu befohlen 4

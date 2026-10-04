@@ -42,7 +42,9 @@ def lies_lagebild(neu_holen=True):
         w = z.split()
         if len(w) >= 16:
             L[int(w[0])] = {"besitzer": int(w[1]), "typ": int(w[2]), "x": int(w[3]), "y": int(w[4]), "leben": int(w[5]),
-                            "zustand": int(w[6]), "zielart": int(w[7]), "laufx": int(w[14]), "laufy": int(w[15])}
+                            "zustand": int(w[6]), "zielart": int(w[7]), "laufx": int(w[14]), "laufy": int(w[15]),
+                            "ladung": int(w[20]) if len(w) >= 22 else 0, "arbeitsplatz": int(w[21]) if len(w) >= 22 else 0,
+                            "erreichbar": int(w[22]) if len(w) >= 23 else -1}
     return L
 
 def schach(a, b):

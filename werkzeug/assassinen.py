@@ -14,6 +14,7 @@ Je Runde (Lagebild + Gebaeudeliste aus EINEM Aufruf, siehe erstes_spiel.runde_le
     Gefahr, und nicht schon Ziel eines anderen Trupps. Alle Mitglieder des Trupps gebuendelt auf dieses Gebaeude.
 Grenzen (offen): Reichweiten FERN/NAH sind Startwerte, nicht gemessen; Tuerme nicht beruecksichtigt.
 """
+import math
 from laden import befehl
 from waechter import sicherster_ort
 
@@ -196,31 +197,160 @@ class Angriffstrupp:
 
 
 class Einzeln:
-    """Jeder Assassine einzeln (Daniel 23:35): Befehl auf das NAECHSTE erreichbare feindliche Wirtschaftsgebaeude;
-    ist es schon von JE_GEBAEUDE anderen belegt, sofort das naechste. Kein Sammelpunkt, keine Bereitstellung.
-    schritt() gibt (ereignisse, befehle) - die Befehle einer Runde gehen gesammelt in EINEM Aufruf ans Spiel
-    (Partie 8: einzeln geschickt kostete eine Runde 0,7 s).
-    Gegenprobe je Runde (05.10.): laeuft ein Assassine nicht zu seinem Gebaeude (Laufziel im Lagebild weiter als
-    ZIEL_NAH Felder weg), bekommt er den Befehl neu - der Plan im Kopf zaehlt nicht, nur das Laufziel im Spiel."""
-    JE_GEBAEUDE = 6        # Daniel 05.10. 00:00: hoechstens 6 Assassinen auf ein Gebaeude
-    ZIEL_NAH = 8           # gemessen 05.10.: Gebaeudeangriff -> Laufziel 1-2 Felder neben dem Gebaeude; 8 laesst grossen Gebaeuden Platz
-    NEU_NACH = 4           # Runden (je ~30 Ticks bei Tempo 1000), bis ein Befehl im Spiel sichtbar sein muss
+    """Jeder Assassine einzeln (Daniel 04.10. 23:35): Befehl auf das NAECHSTE erreichbare feindliche
+    Wirtschaftsgebaeude; hoechstens JE_GEBAEUDE auf eines (Daniel 05.10. 00:00), sonst sofort das naechste.
+    schritt() gibt (ereignisse, befehle) - alle Befehle einer Runde gehen gesammelt in EINEM Aufruf ans Spiel,
+    das Modul setzt sie nacheinander ab.
 
-    def __init__(self, sp=1):
-        self.sp, self.ziel, self.bilanz = sp, {}, {"gebaeude": {}, "verluste": set()}
-        self.mitglieder, self.ziel_typ = set(), {}
-        self.runde, self.befohlen, self.gemessen = 0, {}, 0
-        self.bilanz["neu_befohlen"] = 0
+    Gefahr (05.10., gemessen in Partie 9e: 21 von 25 Toten hatten KEIN Ziel und standen untaetig im Schussfeld,
+    meist ~10 Bogenschuetzen 9-19 Felder weg; bei 223 Verletzungen stand der naechste Fernkaempfer meist 9-30 Felder weg):
+      1. Ohne Ziel wartet ein Assassine ausser Reichweite (eigener Ort ohne Fernkaempfer bis SICHER_FERN).
+      2. Verletzt und Fernkaempfer bis RUECKZUG_FERN: Rueckzug - ausser ein Fernkaempfer steht direkt daneben
+         (bis ZUSCHLAGEN Felder) und hoechstens 1 Nahkaempfer im Umkreis 5: dann ihn angreifen (Daniel 04.10. 23:4x).
+      3. Zielwahl: Gebaeude mit mehr als ZIEL_FERN_MAX Fernkaempfern im Umkreis ZIEL_FERN auslassen; wer unter
+         SCHWACH Leben hat, nimmt nur Ziele ganz ohne Fernkaempfer bis SCHWACH_FERN.
+    Die Zahlen sind STARTWERTE aus dieser Messung, nicht geeicht - jede Zielwahl schreibt ihre Gefahrenzahlen mit
+    (ZIELWAHL-Zeilen), jede Verletzung und jeder Tod ihr Umfeld (MESSUNG-Zeilen), damit die naechste Partie sie eicht.
+    Gegenprobe je Runde: laeuft ein Assassine nicht zu seinem Gebaeude (Laufziel im Lagebild weiter als ZIEL_NAH),
+    bekommt er den Befehl neu - der Plan im Kopf zaehlt nicht, nur das Laufziel im Spiel."""
+    JE_GEBAEUDE = 6
+    ZIEL_NAH = 8           # gemessen 05.10.: Gebaeudeangriff -> Laufziel 1-2 Felder neben dem Gebaeude
+    NEU_NACH = 4           # Runden (je ~30 Ticks bei Tempo 1000), bis ein Befehl im Spiel sichtbar sein muss
+    VOLL = 12500           # gemessen 05.10.: Leben eines frisch angeworbenen Assassinen
+    SICHER_FERN, SICHER_NAH = 30, 10
+    RUECKZUG_FERN = 20
+    ZUSCHLAGEN = 3
+    ZIEL_FERN, ZIEL_FERN_MAX = 20, 2
+    SCHWACH, SCHWACH_FERN = 0.6, 25
+    VORAUS_FERN, VORAUS_ANZAHL = 10, 3   # Startwert aus Partie 9f: Tote standen 2-9 Felder neben ~7 Bogenschuetzen
+    STAPEL_AB = 12         # Daniel 05.10. 00:30: "oben stehen noch so 30 Assassinen, die nichts machen" - ab so vielen
+                           # Wartenden greifen ALLE gebuendelt einen erreichbaren Fernkaempfer am Boden an (perfekt stapeln)
+    STAPEL_RUECKZUG = 0.3  # im Stapel erst unter 30 % Leben zurueck (Daniel: manchmal ist kein Rueckzug besser)
+
+    def __init__(self, sp=1, pruefe_begehbar=None):
+        self.sp = sp
+        self.pruefe_begehbar = pruefe_begehbar     # Funktion(punkte) -> Menge begehbarer Punkte (Modulbefehl "begehbar")
+        self._kand, self._begehbar = {}, set()
+        self.mitglieder = set()
+        self.ziel, self.ziel_typ, self.jagd, self.warte, self.befohlen = {}, {}, {}, {}, {}
+        self.warte_seit = {}
+        self.schlechte_orte = set()          # Warteplaetze, an die keiner hinlief (9g: Gebaeudemitten)
+        self.stapel = {"ziel": None, "mitglieder": set()}
+        self.leben, self.umfeld = {}, {}
+        self.runde, self.gemessen, self.ohne_ziel_zuletzt = 0, 0, None
+        self.bilanz = {"gebaeude": {}, "verluste": set(), "neu_befohlen": 0, "rueckzug": 0, "zuschlagen": 0}
 
     def aufnehmen(self, nummern):
         self.mitglieder |= set(n for n in nummern if n not in self.bilanz["verluste"])
 
+    # --- Hilfen ---------------------------------------------------------------------------------------------------
+    def _feinde(self, L):
+        fern, nah = [], []
+        for nr, e in L.items():
+            if e["besitzer"] in (0, self.sp) or e["typ"] not in TRUPPE:
+                continue
+            (fern if e["typ"] in FERNKAMPF else nah).append((nr, (e["x"], e["y"]), e["typ"]))
+        return fern, nah
+
+    @staticmethod
+    def _naechster(ort, liste):
+        return min(((schach(ort, p), nr, typ) for nr, p, typ in liste), default=(999, 0, 0))
+
+    @staticmethod
+    def _anzahl(ort, liste, r):
+        return sum(1 for _, p, _ in liste if schach(ort, p) <= r)
+
+    def _sicherer_ort(self, ort, orte, fern, nah, n=None):
+        """Zuerst KURZ weg vom Feind (begehbar laut Modul, der Punkt mit dem groessten Abstand zum naechsten Fernkaempfer);
+        nur wenn das nicht geht: naechster begehbarer eigener Ort ohne Fernkaempfer bis SICHER_FERN und Nahkaempfer bis
+        SICHER_NAH, sonst der Ort mit dem groessten Abstand zum naechsten Feind. Gesperrte Orte nie."""
+        kurz = [p for p in self._kand.get(n, []) if p in self._begehbar and p not in self.schlechte_orte]
+        if kurz:
+            return max(kurz, key=lambda p: (self._naechster(p, fern)[0], -schach(ort, p)))
+        orte = [o for o in orte if o not in self.schlechte_orte]
+        gut = [o for o in orte if self._naechster(o, fern)[0] > self.SICHER_FERN and self._naechster(o, nah)[0] > self.SICHER_NAH]
+        if gut:
+            return min(gut, key=lambda o: schach(ort, o))
+        return max(orte, key=lambda o: min(self._naechster(o, fern)[0], self._naechster(o, nah)[0])) if orte else None
+
+    def _weg_vom_feind(self, ort, fern, nah):
+        """Kandidaten fuer einen KURZEN Rueckzug: 15/20/25 Felder weg vom Schwerpunkt der nahen Feinde, geradeaus und
+        30 Grad links/rechts (Partie 9h: 210 Rueckzuege quer ueber die Karte nach Hause, 37 Assassinen starben im Laufen;
+        Partie 2/5: kurz vom Angreifer weg war das Beste)."""
+        nahe = [p for _, p, _ in fern if schach(ort, p) <= self.RUECKZUG_FERN] + [p for _, p, _ in nah if schach(ort, p) <= self.SICHER_NAH]
+        if not nahe:
+            return []
+        cx, cy = sum(p[0] for p in nahe) / len(nahe), sum(p[1] for p in nahe) / len(nahe)
+        dx, dy = ort[0] - cx, ort[1] - cy
+        lang = math.hypot(dx, dy) or 1.0
+        dx, dy = dx / lang, dy / lang
+        aus = []
+        for k in (20, 15, 25):
+            for w in (0.0, 0.52, -0.52):
+                rx = dx * math.cos(w) - dy * math.sin(w)
+                ry = dx * math.sin(w) + dy * math.cos(w)
+                x, y = int(round(ort[0] + rx * k)), int(round(ort[1] + ry * k))
+                if 2 <= x <= 397 and 2 <= y <= 397:
+                    aus.append((x, y))
+        return aus
+
+    def umgebung(self, n, L, G, fern, nah):
+        """Umfeld fuer die MESSUNG-Zeilen."""
+        ort = (L[n]["x"], L[n]["y"])
+        nf, nn = self._naechster(ort, fern), self._naechster(ort, nah)
+        feind = min(nf, nn)
+        gb = min(((schach(ort, (g["x"], g["y"])), g["typ"]) for g in G.values() if g["besitzer"] not in (0, self.sp)),
+                 default=(999, 0))
+        z = self.ziel.get(n)
+        zd = schach(ort, (G[z]["x"], G[z]["y"])) if z in G else -1
+        return ("ort (%d,%d) zustand %d | naechster Feind Typ %d in %d | naechster Fernkaempfer Typ %d in %d | "
+                "Fern<=%d: %d | Nah<=%d: %d | naechstes Feindgebaeude Typ %d in %d | Ziel %s in %d" % (
+                    ort[0], ort[1], L[n]["zustand"], feind[2], feind[0], nf[2], nf[0],
+                    FERN, self._anzahl(ort, fern, FERN), NAH, self._anzahl(ort, nah, NAH), gb[1], gb[0], z, zd))
+
+    def _vergessen(self, n):
+        self.ziel.pop(n, None); self.jagd.pop(n, None); self.warte.pop(n, None); self.warte_seit.pop(n, None)
+
+    def _warten(self, n, ort_sicher, halten):
+        self.warte[n] = ort_sicher
+        self.warte_seit[n] = self.runde
+        halten.setdefault(ort_sicher, []).append(n)
+
+    # --- eine Runde -----------------------------------------------------------------------------------------------
     def schritt(self, L, G, sichere_orte=None):
-        ereignis, neu = [], {}
+        ereignis, angriffe, jagen, halten = [], [], [], {}
         self.runde += 1
+        # begehbare Warteplaetze: wo gerade eine eigene Nicht-Kampfeinheit steht, ist begehbarer Boden
+        orte = list(sichere_orte or []) + sorted({(e["x"], e["y"]) for e in L.values()
+                                                  if e["besitzer"] == self.sp and e["typ"] not in TRUPPE and e["typ"] != ASSASSINE})
+        if self.pruefe_begehbar and orte:
+            gut = self.pruefe_begehbar(orte)
+            orte = [o for o in orte if o in gut] or orte
+        fern, nah = self._feinde(L)
+        # Rueckzugs-Kandidaten fuer alle, die Feinde nah haben - EIN Modulaufruf prueft, welche begehbar sind
+        self._kand = {}
+        for n in self.mitglieder:
+            if n in L:
+                c = self._weg_vom_feind((L[n]["x"], L[n]["y"]), fern, nah)
+                if c:
+                    self._kand[n] = c
+        punkte = sorted({p for c in self._kand.values() for p in c})
+        self._begehbar = (self.pruefe_begehbar(punkte) if self.pruefe_begehbar else set(punkte)) if punkte else set()
+        # 1. Verluste und Verletzungen messen
         for n in list(self.mitglieder):
             if n not in L or L[n]["besitzer"] != self.sp:
-                self.bilanz["verluste"].add(n); self.mitglieder.discard(n); self.ziel.pop(n, None)
+                self.bilanz["verluste"].add(n); self.mitglieder.discard(n); self._vergessen(n)
+                ereignis.append("MESSUNG tot %d: zuletzt %s" % (n, self.umfeld.pop(n, "unbekannt")))
+                self.leben.pop(n, None)
+        verletzt = set()
+        for n in self.mitglieder:
+            u = self.umgebung(n, L, G, fern, nah)
+            alt = self.leben.get(n)
+            if alt is not None and L[n]["leben"] < alt:
+                verletzt.add(n)
+                ereignis.append("MESSUNG verletzt %d: leben %d -> %d | %s" % (n, alt, L[n]["leben"], u))
+            self.leben[n], self.umfeld[n] = L[n]["leben"], u
+        # 2. Erledigte Ziele, erledigte Jagd
         for n, z in list(self.ziel.items()):
             if z not in G:
                 typ = self.ziel_typ.pop(z, None)
@@ -228,45 +358,163 @@ class Einzeln:
                     self.bilanz["gebaeude"][typ] = self.bilanz["gebaeude"].get(typ, 0) + 1
                     ereignis.append("Gebaeude %d (Typ %d) zerstoert" % (z, typ))
                 del self.ziel[n]
-        # Gegenprobe: wer laut Plan ein Ziel hat, im Spiel aber woanders hinlaeuft, verliert das Ziel und wird neu verteilt
-        wirklich, abweichler = set(), []
+        for n, f in list(self.jagd.items()):
+            if f not in L or L[f]["besitzer"] in (0, self.sp):
+                del self.jagd[n]
+        # 3. Gegenprobe: laeuft er wirklich zu seinem Gebaeude?
+        wirklich, abweichler = set(), 0
         for n, z in list(self.ziel.items()):
-            if n not in L or z not in G:
-                continue
-            lauf = (L[n]["laufx"], L[n]["laufy"])
-            if schach(lauf, (G[z]["x"], G[z]["y"])) <= self.ZIEL_NAH:
+            if schach((L[n]["laufx"], L[n]["laufy"]), (G[z]["x"], G[z]["y"])) <= self.ZIEL_NAH:
                 wirklich.add(z)
             elif self.runde - self.befohlen.get(n, 0) >= self.NEU_NACH:
-                abweichler.append(n)
+                abweichler += 1
                 del self.ziel[n]
         self.gemessen = len(wirklich)
         if abweichler:
-            self.bilanz["neu_befohlen"] += len(abweichler)
-            ereignis.append("%d Assassinen liefen nicht zu ihrem Ziel - neu befohlen" % len(abweichler))
+            self.bilanz["neu_befohlen"] += abweichler
+            ereignis.append("%d Assassinen liefen nicht zu ihrem Ziel - neu befohlen" % abweichler)
+        # 4. Verletzt im Schussfeld: Rueckzug oder zuschlagen
+        for n in verletzt:
+            ort = (L[n]["x"], L[n]["y"])
+            nf = self._naechster(ort, fern)
+            if nf[0] > self.RUECKZUG_FERN:
+                continue
+            if n in self.stapel["mitglieder"]:
+                if L[n]["leben"] >= self.STAPEL_RUECKZUG * self.VOLL:
+                    continue
+                self.stapel["mitglieder"].discard(n)
+            if nf[0] <= self.ZUSCHLAGEN and self._anzahl(ort, nah, 5) <= 1:
+                if self.jagd.get(n) != nf[1]:
+                    self.ziel.pop(n, None); self.warte.pop(n, None)
+                    self.jagd[n] = nf[1]
+                    jagen.append((n, nf[1]))
+                    self.bilanz["zuschlagen"] += 1
+                continue
+            sicher = self._sicherer_ort(ort, orte, fern, nah, n)
+            if sicher and self.warte.get(n) != sicher:
+                self._vergessen(n)
+                self._warten(n, sicher, halten)
+                self.bilanz["rueckzug"] += 1
+        # 4b. Ausweichen, bevor es weh tut: rueckt eine Gruppe Fernkaempfer heran, Ziel aufgeben
+        for n in self.mitglieder:
+            if n in verletzt or n in self.jagd or n in self.warte or n in self.stapel["mitglieder"]:
+                continue
+            ort = (L[n]["x"], L[n]["y"])
+            if self._anzahl(ort, fern, self.VORAUS_FERN) >= self.VORAUS_ANZAHL:
+                sicher = self._sicherer_ort(ort, orte, fern, nah, n)
+                if sicher:
+                    self._vergessen(n)
+                    self._warten(n, sicher, halten)
+                    self.bilanz["ausgewichen"] = self.bilanz.get("ausgewichen", 0) + 1
+        # 4c. Gegenprobe Warten: laeuft er nach NEU_NACH Runden nicht zu seinem sicheren Ort, neu schicken (mit Messzeile)
+        for n, o in list(self.warte.items()):
+            if self.runde - self.warte_seit.get(n, self.runde) < self.NEU_NACH or n in halten.get(o, []):
+                continue
+            ort, lauf = (L[n]["x"], L[n]["y"]), (L[n]["laufx"], L[n]["laufy"])
+            if schach(ort, o) > 4 and schach(lauf, o) > 4:
+                ereignis.append("MESSUNG warten klappt nicht %d: ort %s lauf %s Platz %s zustand %d zielart %d - Platz gesperrt" % (
+                    n, ort, lauf, o, L[n]["zustand"], L[n]["zielart"]))
+                self.schlechte_orte.add(o)
+                neu_o = self._sicherer_ort(ort, orte, fern, nah, n)
+                if neu_o:
+                    self._warten(n, neu_o, halten)
+                self.bilanz["warten_neu"] = self.bilanz.get("warten_neu", 0) + 1
+        # 5. Ziele verteilen (Gefahr am Gebaeude beachten); wer keins bekommt, wartet ausser Reichweite
         zahl = {}
         for z in self.ziel.values():
             zahl[z] = zahl.get(z, 0) + 1
-        gebs = [(n, (g["x"], g["y"]), g["typ"]) for n, g in G.items()
-                if g["besitzer"] not in (0, self.sp) and g["typ"] in WERT and g.get("erreichbar", 1)]
-        for n in self.mitglieder:
-            if n in self.ziel or not gebs:
+        kand = []
+        for gn, g in G.items():
+            if g["besitzer"] in (0, self.sp) or g["typ"] not in WERT:
+                continue
+            p = (g["x"], g["y"])
+            kand.append((gn, p, g["typ"], g.get("erreichbar", 1), self._anzahl(p, fern, 10),
+                         self._anzahl(p, fern, self.ZIEL_FERN), self._anzahl(p, fern, 30), self._anzahl(p, fern, self.SCHWACH_FERN)))
+        gruende = {"keins erreichbar": 0, "alle voll": 0, "alle gefaehrlich": 0}
+        ohne = 0
+        for n in sorted(self.mitglieder):
+            if n in self.ziel or n in self.jagd or n in self.stapel["mitglieder"] or (n in self.warte and n in verletzt):
                 continue
             ort = (L[n]["x"], L[n]["y"])
-            frei = [(schach(ort, p), gn, typ) for gn, p, typ in gebs if zahl.get(gn, 0) < self.JE_GEBAEUDE]
-            if not frei:
+            schwach = L[n]["leben"] < self.SCHWACH * self.VOLL
+            erreichbar = [k for k in kand if k[3]]
+            frei = [k for k in erreichbar if zahl.get(k[0], 0) < self.JE_GEBAEUDE]
+            sicher = [k for k in frei if (k[7] == 0 if schwach else k[5] <= self.ZIEL_FERN_MAX)]
+            if sicher:
+                gn, p, typ, _, f10, f20, f30, _ = min(sicher, key=lambda k: schach(ort, k[1]))
+                self.ziel[n] = gn
+                self.ziel_typ[gn] = typ
+                zahl[gn] = zahl.get(gn, 0) + 1
+                self.befohlen[n] = self.runde
+                self.warte.pop(n, None); self.warte_seit.pop(n, None)
+                angriffe.append((n, gn))
+                ereignis.append("ZIELWAHL %d -> %d Typ %d in %d: Fern<=10 %d, <=20 %d, <=30 %d, Leben %d" % (
+                    n, gn, typ, schach(ort, p), f10, f20, f30, L[n]["leben"]))
                 continue
-            d, gn, typ = min(frei)
-            self.ziel[n] = gn; self.ziel_typ[gn] = typ; zahl[gn] = zahl.get(gn, 0) + 1
-            self.befohlen[n] = self.runde
-            neu.setdefault(gn, []).append(n)
-        # je Assassine ein eigener Befehl (Daniel 23:40: einzeln parallel befehlen; das Modul setzt sie nacheinander ab)
-        befehle = [{"angriff": {"einheiten": [n], "gebaeude": gn}} for gn, ns in neu.items() for n in ns]
-        if befehle:
+            ohne += 1
+            gruende["keins erreichbar" if not erreichbar else "alle voll" if not frei else "alle gefaehrlich"] += 1
+            nf, nn = self._naechster(ort, fern)[0], self._naechster(ort, nah)[0]
+            if nf <= self.SICHER_FERN or nn <= self.SICHER_NAH:
+                sicher_ort = self._sicherer_ort(ort, orte, fern, nah, n)
+                if sicher_ort and self.warte.get(n) != sicher_ort:
+                    self._warten(n, sicher_ort, halten)
+        # 6. Stapel: viele Wartende -> alle gebuendelt auf EINEN erreichbaren Fernkaempfer am Boden, dann den naechsten
+        stapel_befehl = None
+        stp = self.stapel
+        stp["mitglieder"] = {n for n in stp["mitglieder"] if n in self.mitglieder}
+        ziel_lebt = stp["ziel"] in L and L[stp["ziel"]]["besitzer"] not in (0, self.sp)
+        wartende = [n for n in self.mitglieder if n not in self.ziel and n not in self.jagd and n not in stp["mitglieder"]
+                    and L[n]["leben"] >= self.SCHWACH * self.VOLL]
+        if stp["mitglieder"] or len(wartende) >= self.STAPEL_AB:
+            if not stp["mitglieder"]:
+                stp["mitglieder"] = set(wartende)
+                for n in wartende:
+                    self.warte.pop(n, None)
+                    self.warte_seit.pop(n, None)
+            if not ziel_lebt:
+                # 9h: der naechste Schuetze stand inmitten von 17 weiteren - jetzt nur Schuetzen, um die hoechstens
+                # (Stapelgroesse - 4) / 2 weitere Fernkaempfer im Umkreis 10 stehen; davon der einsamste, dann der naechste
+                mx = sum(L[n]["x"] for n in stp["mitglieder"]) / len(stp["mitglieder"])
+                my = sum(L[n]["y"] for n in stp["mitglieder"]) / len(stp["mitglieder"])
+                erreichbar = []
+                for f in fern:
+                    if L[f[0]].get("erreichbar", -1) != 1:
+                        continue
+                    um = self._anzahl(f[1], fern, 10) - 1
+                    if len(stp["mitglieder"]) >= 2 * um + 4:
+                        erreichbar.append((um, schach((mx, my), f[1]), f))
+                if erreichbar:
+                    um, d, (f, _, typ) = min(erreichbar)
+                    stp["ziel"] = f
+                    stapel_befehl = {"angriff": {"einheiten": sorted(stp["mitglieder"]), "ziel": f}}
+                    self.bilanz["stapel_ziele"] = self.bilanz.get("stapel_ziele", 0) + 1
+                    ereignis.append("STAPEL: %d Assassinen gebuendelt auf Fernkaempfer %d (Typ %d, %d Felder vom Stapel, Fern<=10 dort %d)" % (
+                        len(stp["mitglieder"]), f, typ, d, self._anzahl((L[f]["x"], L[f]["y"]), fern, 10)))
+                else:
+                    ereignis.append("STAPEL aufgeloest: kein erreichbarer Fernkaempfer, den %d schlagen koennen (zurueck ins Warten)" % len(stp["mitglieder"]))
+                    stp["mitglieder"], stp["ziel"] = set(), None
+        if ohne != self.ohne_ziel_zuletzt:
+            self.ohne_ziel_zuletzt = ohne
+            ereignis.append("%d Assassinen ohne Ziel (%s)" % (ohne, ", ".join("%s %d" % kv for kv in gruende.items() if kv[1])))
+        befehle = [{"angriff": {"einheiten": [n], "gebaeude": gn}} for n, gn in angriffe]
+        befehle += [{"angriff": {"einheiten": [n], "ziel": f}} for n, f in jagen]
+        befehle += [{"halten": {"nr": ns, "x": o[0], "y": o[1]}} for o, ns in halten.items()]
+        if stapel_befehl:
+            befehle.append(stapel_befehl)
+        if angriffe:
             ereignis.append("%d Assassinen auf %d Gebaeude verteilt (im Spiel gemessen: %d Gebaeude gleichzeitig angelaufen)" % (
-                len(befehle), len(neu), self.gemessen))
+                len(angriffe), len(set(g for _, g in angriffe)), self.gemessen))
+        if jagen:
+            ereignis.append("%d Assassinen greifen Fernkaempfer direkt daneben an" % len(jagen))
+        if halten:
+            ereignis.append("%d Assassinen warten/ziehen sich zurueck ausser Reichweite" % sum(len(v) for v in halten.values()))
         return ereignis, befehle
 
     def bericht(self):
         b = self.bilanz
-        return "zerstoert %d Gebaeude %s, eigene Verluste %d, im Spiel gleichzeitig angelaufen zuletzt %d, neu befohlen %d" % (
-            sum(b["gebaeude"].values()), b["gebaeude"], len(b["verluste"]), self.gemessen, b["neu_befohlen"])
+        return ("zerstoert %d Gebaeude %s, eigene Verluste %d, im Spiel gleichzeitig angelaufen zuletzt %d, neu befohlen %d, "
+                "Rueckzuege %d, ausgewichen %d, Fernkaempfer angegriffen %d, Warten neu geschickt %d, Stapel-Ziele %d, "
+                "gesperrte Warteplaetze %d" % (
+                    sum(b["gebaeude"].values()), b["gebaeude"], len(b["verluste"]), self.gemessen, b["neu_befohlen"],
+                    b["rueckzug"], b.get("ausgewichen", 0), b["zuschlagen"], b.get("warten_neu", 0),
+                    b.get("stapel_ziele", 0), len(self.schlechte_orte)))
