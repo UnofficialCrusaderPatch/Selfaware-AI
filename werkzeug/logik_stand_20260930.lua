@@ -1467,6 +1467,67 @@ local function einzelbefehl(cmd)
     return true
   end
 
+  --==========================================================================
+  -- Bauen und Anwerben wie ein Klick des Menschen (04.10.2026, Selfaware M11/M12)
+  -- Weg: Parameter in DAT_GameCommandParam0..5 (GameSynchronyState + 0x7A850, je 4 Byte),
+  -- dann queueCommand (0x00489100, thiscall GameSynchronyState, 1 Argument). Das Spiel fuehrt
+  -- den Befehl als Handlung des eigenen Spielers aus - mit Platz- und Kostenpruefung.
+  --   { "baue": { "mapper": 51, "x": 175, "y": 108, "groesse": 3, "richtung": 0 } }
+  --     GCT_PLACE_BUILDING = 28 -> ClickPlaceBuilding: P0 x, P1 y, P2 Mapper, P3 Groesse,
+  --     P4 Drehung, P5 Trupp (abgelesen, daten/dekomp_bauen_anwerben.c). Mapper und Groesse
+  --     je Gebaeude: VillageStudio lib/gebaeude.json.
+  --   { "werbe": { "typ": 22, "gebaeude": 12 } }
+  --     GCT_RECRUIT_UNIT = 31 -> ClickRecruitUnit -> ProcessRecruitUnit(Spieler, P0 Typ, P1 Gebaeude)
+  --   { "vorrat": 1 }   Gold und Waren des Spielers (PlayerData + 0x4D0 + Ware*4)
+  --==========================================================================
+  local PARAM = 0x0191D768 + 0x7A850
+  local function befehlAbsetzen(nr, werte)
+    for i = 0, 5 do core.writeInteger(PARAM + i * 4, tonumber(werte[i + 1]) or 0) end
+    local ok, err = pcall(function() core.exposeCode(0x00489100, 2, 1)(0x0191D768, nr) end)
+    return ok, err
+  end
+
+  --   { "eigenerPlatz": 1 }  welcher Spieler "ich" bin (GameSynchronyState + 0x109E74). Gemessen
+  --   04.10.: nach unserem eigenen Gefecht (Mensch auf Platz 1) stand hier 0 - jeder Bau- und
+  --   Anwerbebefehl lief dann still fuer den neutralen Spieler 0 und tat nichts.
+  if cmd.eigenerPlatz ~= nil then
+    local alt = core.readInteger(0x0191D768 + 0x109E74)
+    core.writeInteger(0x0191D768 + 0x109E74, tonumber(cmd.eigenerPlatz) or 1)
+    log(INFO, string.format("EIGENER PLATZ: %s -> %s", tostring(alt), tostring(core.readInteger(0x0191D768 + 0x109E74))))
+    return true
+  end
+
+  if cmd.baue ~= nil and type(cmd.baue) == "table" then
+    local b = cmd.baue
+    local ok, err = befehlAbsetzen(28, { b.x, b.y, b.mapper, b.groesse, b.richtung or 0, b.trupp or 0 })
+    log(INFO, string.format("BAUE Tick %d: Mapper %s bei (%s,%s), Groesse %s, Drehung %s - abgesetzt=%s%s",
+      tick(), tostring(b.mapper), tostring(b.x), tostring(b.y), tostring(b.groesse), tostring(b.richtung or 0),
+      tostring(ok), ok and "" or (" - " .. tostring(err))))
+    return true
+  end
+
+  if cmd.werbe ~= nil and type(cmd.werbe) == "table" then
+    local w = cmd.werbe
+    local ok, err = befehlAbsetzen(31, { w.typ, w.gebaeude })
+    log(INFO, string.format("WERBE Tick %d: Typ %s in Gebaeude %s - abgesetzt=%s%s", tick(), tostring(w.typ),
+      tostring(w.gebaeude), tostring(ok), ok and "" or (" - " .. tostring(err))))
+    return true
+  end
+
+  if cmd.vorrat ~= nil then
+    local sp = tonumber(cmd.vorrat) or 1
+    local namen = { [2] = "Holz", [3] = "Hopfen", [4] = "Stein", [6] = "Eisen", [7] = "Pech", [9] = "Weizen",
+      [10] = "Brot", [11] = "Kaese", [12] = "Fleisch", [13] = "Apfel", [14] = "Bier", [15] = "Gold", [16] = "Mehl",
+      [17] = "Bogen", [18] = "Armbrust", [19] = "Speer", [20] = "Pike", [21] = "Keule", [22] = "Schwert",
+      [23] = "Leder", [24] = "Ruestung" }
+    local teile = {}
+    for w = 2, 24 do
+      if namen[w] then table.insert(teile, string.format("%s=%d", namen[w], ware(sp, w) or -1)) end
+    end
+    log(INFO, string.format("VORRAT Spieler %d Tick %d: %s", sp, tick(), table.concat(teile, " ")))
+    return true
+  end
+
   if cmd.typen ~= nil and type(cmd.typen) == "table" then
     local sp = tonumber(cmd.typen.spieler)
     local zaehl, schluessel = {}, {}

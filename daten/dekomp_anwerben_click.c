@@ -1,0 +1,38 @@
+// ================= ClickRecruitUnit @ 0x004821e0 =================
+
+/* WARNING: Enum "DPSEND_EnumInt": Some values do not have unique names */
+/* WARNING: Enum "DPERRInt": Some values do not have unique names */
+/* decompilerscript: committed: 2025-01-30 21:57:43.216000 */
+
+void _HoldStrong::Commands::ClickRecruitUnit(void)
+
+{
+  DAT_GameSynchronyState.DAT_CommandSize = 3;
+  if (DAT_GameSynchronyState.DAT_CommandActionPlan == GCS_SCHEDULE_AND_SEND) {
+    Synchrony::GameSynchronyState::serializeOrDeserializeCommandParameter
+              (&DAT_GameSynchronyState,&DAT_GameSynchronyState.DAT_GameCommandParam0,1,
+               GCPL_DYNAMIC_COMMAND_DATA_ADDRESS,GCPRW_SERIALIZE_INTO_PARAM_1);
+    Synchrony::GameSynchronyState::serializeOrDeserializeCommandParameter
+              (&DAT_GameSynchronyState,&DAT_GameSynchronyState.DAT_GameCommandParam1,2,
+               GCPL_DYNAMIC_COMMAND_DATA_ADDRESS,GCPRW_SERIALIZE_INTO_PARAM_1);
+    return;
+  }
+  if (DAT_GameSynchronyState.DAT_CommandActionPlan == GCS_EXECUTE) {
+    DAT_GameSynchronyState.DAT_GameCommandParam0 = DAT_GameSynchronyState.DAT_CommandActionPlan;
+    Synchrony::GameSynchronyState::serializeOrDeserializeCommandParameter
+              (&DAT_GameSynchronyState,&DAT_GameSynchronyState.DAT_GameCommandParam0,1,
+               GCPL_DYNAMIC_COMMAND_DATA_ADDRESS,GCPRW_DESERIALIZE_FROM_PARAM1);
+    DAT_GameSynchronyState.DAT_GameCommandParam1 = 0;
+    Synchrony::GameSynchronyState::serializeOrDeserializeCommandParameter
+              (&DAT_GameSynchronyState,&DAT_GameSynchronyState.DAT_GameCommandParam1,2,
+               GCPL_DYNAMIC_COMMAND_DATA_ADDRESS,GCPRW_DESERIALIZE_FROM_PARAM1);
+    Global::ProcessRecruitUnit
+              (DAT_GameSynchronyState.protocolInvokerPlayerID,
+               DAT_GameSynchronyState.DAT_GameCommandParam0,
+               DAT_GameSynchronyState.DAT_GameCommandParam1);
+  }
+  return;
+}
+
+
+

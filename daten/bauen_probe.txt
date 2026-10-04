@@ -1,0 +1,9 @@
+Eintrag 0 'M7-04 Mensch Grumpy T600' -> Scrollstand 0, Zeile 0; Spielzeit vorher 805
+['[villagestudio]: LADEPAUSE: scharf (jetzt Tick 805, pausiert).']
+['[villagestudio]: POKE 0x01126628: 0 -> 0', '[villagestudio]: POKE 0x01126624: 0 -> 0', '[villagestudio]: LADEN: Knopf 2 gedrueckt, ok=true', '[villagestudio]: logik: 3 von 3 Befehlen ausgefuehrt, 0 schon erledigt.', '[villagestudio]: LADEPAUSE: Laden erkannt (Spielzeit sprang um -205) bei Tick 600 - angehalten.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.']
+Spielzeit nachher 600 / 600, Pause 1
+Holzfaellerhuette kostet {'holz': 5, 'stein': 0, 'eisen': 0, 'pech': 0, 'gold': 0}; Holz vorher 150
+GEGENLAUF (auf dem Lager): Holz 150 -> 150, Huetten 0 -> 0
+BAUEN: Huette (38, 186, 116); Holz 150 -> 145 (Soll -5) -> GILT
+SOELDNERPOSTEN: (39, 195, 100), Gold 3934 -> 3815
+ANWERBEN: arabische Bogenschuetzen 0 -> 1 -> GILT

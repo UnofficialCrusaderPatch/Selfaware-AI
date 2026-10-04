@@ -742,3 +742,17 @@ Neue Modulbefehle: `gruppe`, `gebaeude`, `typen`, `einheitwacht` (Zielwechsel je
 **Daniels Vorschlag (04.10., 19:31):** "warum laesst du die KI ueberhaupt was machen? ... live AIC bearbeiten, sodass nichts mehr produziert wird ... alternativ ein Spiel, wo du den Spieler 1 kontrollierst ... eigentlich musst du gar keine AIV/AIC haben ... im besten Fall schreibst du dir deine eigene AIV/AIC live oder du lernst, was am besten funktioniert, in dem du Notizzettel machst, in dem du als Spieler gegen eine echte KI im Spiel antrittst." -> **Vorschlag zur Umsetzung:** unsere KI spielt auf dem Menschenplatz (ohne AIV/AIC, nur Befehle), Gegner ist eine echte KI; wo deren Reaktionen eine Messung verfaelschen, ihre Produktion gezielt stilllegen. Das aendert die Grundbedingung vom 30.09. (zwei Selfaware-KIs auf Platz 1) - Daniels Entscheidung.
 
 **Offen:** Lord-Wacht und `halten` halten beide Ziele fest (zwei Wege zum selben Ziel) - zusammenlegen. Bewegungsbeginn erst 50 Ticks nach dem Laden. Ausweichen/Hit-and-run: an die Feldgrenzen-Regel gebunden (ein Richtungswechsel je Feld).
+
+## Grundbedingung geaendert (Daniel, 04.10.2026, 19:45): unsere KI spielt auf dem MENSCHENPLATZ
+"ja gerne. dann bauen und anwerben lernen" - ohne AIV/AIC, nur ueber unsere Befehle, gegen eine echte KI (Ziel: gegen das Rotkaeppchen gewinnen). Daniels Tipps stehen in `Spielwissen.md` (Notizzettel der KI).
+
+## M11 Bauen / M12 Anwerben (04.10.2026, 19:45-19:55)
+
+Werkzeug `werkzeug/bauen.py` (Bausteine `baue_irgendwo`, `werbe`, `vorrat`, `kosten` + Probe). Modulbefehle `baue`, `werbe`, `vorrat`, `eigenerPlatz`. Dekompilate `daten/dekomp_bauen_anwerben.c`, `dekomp_anwerben_click.c`, `dekomp_queuecommand.c`; Bau-Nummern `daten/enum_mapper.txt`.
+
+- **Weg (abgelesen):** wie ein Klick des Menschen - Parameter nach `GameCommandParam0..5` (GameSynchronyState + 0x7A850, je 4 Byte), dann `queueCommand` (0x00489100). Bauen = Befehl 28 (`ClickPlaceBuilding`: x, y, Bau-Nummer, Groesse, Drehung, Trupp), Anwerben = Befehl 31 (`ClickRecruitUnit` -> `ProcessRecruitUnit(Spieler, Typ, Gebaeude)`). Das Spiel prueft Platz und Kosten selbst - nichts geschummelt.
+- **Die Falle (gemessen):** Nach unserem eigenen Gefecht steht "eigener Spieler" (`currentPlayerSlotID`, GameSynchronyState + 0x109E74) auf **0** - jeder Bau-/Anwerbebefehl lief still fuer den neutralen Spieler 0. Mit `{"eigenerPlatz": 1}` laeuft er als Spieler 1. Nach jedem Laden/Start setzen.
+- **M11 Bauen gilt:** 5 Holzfaellerhuetten -> Holz 150 -> 125 (genau 5 x 5 laut Kostentabelle); Huetten sofort mit Holzfaellern besetzt (5 Bauern wurden Typ 3). Eingang = (x+1, y+3). Gegenlauf: auf belegtem Platz (Lager) nichts gebaut, nichts abgezogen.
+- **M12 Anwerben gilt:** Soeldnerposten (120 Gold) gebaut, 1 arabischer Bogenschuetze (Typ 70) angeworben (0 -> 1). Genauer Einheitenpreis noch aus der Balance nachzulesen (Gold sank in 50 Ticks um 48, Steuern liefen mit).
+- Probe wiederholbar: `python werkzeug/bauen.py "M7-04 Mensch Grumpy T600"` - alle Urteile GILT (daten/bauen_probe.txt).
+- **Offen / naechste Schritte:** Kaserne (12 Stein) + Waffen fuer europaeische Truppen; Plaetze finden statt probieren (freie Flaeche, Baeume neben Holzfaeller, Steinbruch/Ochsen, Wild fuer Jaeger); Gold-Buch (Einnahmen/Ausgaben je Tick); Steuern/Rationen/Verkaufen steuern; dann der erste eigene Spielplan gegen das Rotkaeppchen.
