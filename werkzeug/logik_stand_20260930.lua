@@ -1548,6 +1548,17 @@ local function einzelbefehl(cmd)
     return true
   end
 
+  --   { "spielbefehl": { "nr": 38, "werte": [13, 0] } }  beliebiger Spielbefehl wie ein Klick.
+  --   Belegte Nummern (Handler-Tabelle 0x00B38E10 + 4*Nr, abgelesen 04.10.): 28 Bauen, 31 Anwerben,
+  --   34 Steuern (Stufe), 35 Rationen (Stufe), 38 Kaufen/Verkaufen (Ware, zweiter Wert).
+  if cmd.spielbefehl ~= nil and type(cmd.spielbefehl) == "table" then
+    local s = cmd.spielbefehl
+    local ok, err = befehlAbsetzen(tonumber(s.nr), s.werte or {})
+    log(INFO, string.format("SPIELBEFEHL Tick %d: Nr %s Werte [%s] - abgesetzt=%s%s", tick(), tostring(s.nr),
+      table.concat(s.werte or {}, ","), tostring(ok), ok and "" or (" - " .. tostring(err))))
+    return true
+  end
+
   if cmd.werbe ~= nil and type(cmd.werbe) == "table" then
     local w = cmd.werbe
     local ok, err = befehlAbsetzen(31, { w.typ, w.gebaeude })
