@@ -42,6 +42,10 @@ bis eine Messung es bestaetigt (Marke dahinter).
   - Hopfen braucht viel laenger als Aepfel: erster Hopfen gut 7.000 Ticks nach dem Bau (Aepfel gut 2.000). Fuer Bier frueh anfangen. (gemessen 04.10., 3 Hopfenfarmen)
   - Werkzeug fuer jede Karte: Platzkarten holen (je < 1 s), dann `farmen_mischen.py` - beste Mischung nachweislich in unter 3 s, auch fuer die ganze Karte.
   - Auf Grumpy liegt das naechste Gruenland 37 Felder vom Kornspeicher am Bergfried - bis 30 Felder passt keine einzige Farm. Darum Kornspeicher naeher ans Gruenland (Daniels Tipp, durch die Rechnung bestaetigt).
+- **Lager verlegen (Daniel 04.10., 21:58/22:04):** Das Lager steht beim Start automatisch. Erst die Startrohstoffe (150 Holz) moeglichst wirksam verbauen, dann das leere Lager abreissen (kostet dann nichts) und neu setzen - zuerst moeglichst nah am Holz, spaeter naeher an Stein/Eisen, bis es fest steht; dort die Wirtschaft bauen. Grund: Holz kaufen ist viel teurer als es zu machen, und beim Optimieren zaehlt jedes Gold.
+  - Gemessen 04.10.: Abreissen vernichtet alles im Lager (150 Holz -> 0; Gold bleibt, es liegt nicht im Lager). Ohne Lager darf das erste neue ueberall stehen (47.019 Plaetze) und kommt als Block aus 4 Teilen; jedes weitere Lagerteil und jeder weitere Kornspeicher muss am vorhandenen anliegen. Lagerteile kosten nichts.
+  - Gemessen 04.10.: Holz verkaufen 1 Gold je Stueck, kaufen 3 Gold je Stueck. Verkaufen-Abreissen-Zurueckkaufen kostete 88 Gold und 70 Holz - darum lieber erst verbauen.
+- Huette: 5 Holz, +8 Wohnplaetze (gemessen: 10 -> 18; 450 Ticks spaeter 18 Leute). Bergfried allein: 10 Plaetze.
 - Logisch noetige Gebaeude fuer Truppen kennen (Kaserne, Waffenwerkstaetten, Waffenkammer). (Daniel 04.10.)
 
 ## Vorteil der KI

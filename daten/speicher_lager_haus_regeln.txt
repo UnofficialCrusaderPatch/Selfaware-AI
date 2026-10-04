@@ -1,0 +1,21 @@
+Huette: Huette Mapper 54 Groesse 4 {'holz': 5, 'stein': 0, 'eisen': 0, 'pech': 0, 'gold': 0}
+Lager: Lagerplatz Mapper 52 Groesse 5 {'holz': 0, 'stein': 0, 'eisen': 0, 'pech': 0, 'gold': 0}
+Kornspeicher: 80 4 {'holz': 5, 'stein': 0, 'eisen': 0, 'pech': 0, 'gold': 0}
+
+== M7-04 Mensch Grumpy T600 Tick 600
+Ansicht 14, Pause 1, gameOver 0, Spielerplatz 1
+speicher (50378, 160000, 0.5)
+lager (16, 160000, 1.5)
+Lager-Teile: [(6, 169, 106), (7, 172, 106), (8, 169, 109), (9, 172, 109)] Speicher: []
+Bevoelkerung: {'Cap': 10, 'Bev2': 10, 'amFeuer': 7, 'frei_od_wohnend': 10, 'Bev': 10, 'Huetten<=8': 0, 'untaetig': 7}
+
+== M13b Basis Speicher Grumpy T610 Tick 610
+Ansicht 14, Pause 1, gameOver 0, Spielerplatz 1
+speicher (12, 160000, 1.5)
+lager (10, 160000, 1.5)
+Lager-Teile: [(6, 169, 106), (7, 172, 106), (8, 169, 109), (9, 172, 109)] Speicher: [(38, 169, 116)]
+Bevoelkerung: {'Cap': 10, 'Bev2': 10, 'amFeuer': 8, 'frei_od_wohnend': 10, 'Bev': 10, 'Huetten<=8': 0, 'untaetig': 8}
+vor Huette: {'Cap': 10, 'Bev2': 10, 'amFeuer': 8, 'frei_od_wohnend': 10, 'Bev': 10, 'Huetten<=8': 0, 'untaetig': 8}
+Huette gebaut: (40, 158, 120)
+50 Ticks nach Huette: {'Cap': 18, 'Bev2': 11, 'amFeuer': 9, 'frei_od_wohnend': 11, 'Bev': 11, 'Huetten<=8': 1, 'untaetig': 9}
+450 Ticks nach Huette: {'Cap': 18, 'Bev2': 18, 'amFeuer': 15, 'frei_od_wohnend': 18, 'Bev': 18, 'Huetten<=8': 1, 'untaetig': 15}

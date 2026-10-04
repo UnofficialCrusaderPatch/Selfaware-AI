@@ -1582,6 +1582,64 @@ local function einzelbefehl(cmd)
     return true
   end
 
+  --   { "rohstoffkarte": { "x0": 0, "y0": 0, "x1": 399, "y1": 399 } }  (04.10.2026)
+  --   abzug/rohstoffe.txt: je Feld b Stein (LogicLayer 0x20000), i Eisen (0x80000), o Pech (Vorzeichenbit),
+  --   x Fluss (0x100000), # Rand (0x30), w Wasser (0x01), B Gebaeude (BuildingLayer), G Gruenland, s Gestruepp, . sonst.
+  --   abzug/baeume.txt: jeder Baum aus LandscapeState.trees (0x00F2CC38 + 28 + i*156): Nummer, Art (+70),
+  --   Zustand (+68), x (+98), y (+100), Stufe (+128). Felder abgelesen aus OpenSHC-Strukturen.
+  if cmd.rohstoffkarte ~= nil and type(cmd.rohstoffkarte) == "table" then
+    local g = cmd.rohstoffkarte
+    local x0, y0, x1, y1 = tonumber(g.x0) or 0, tonumber(g.y0) or 0, tonumber(g.x1) or 399, tonumber(g.y1) or 399
+    local NL = string.char(10)
+    local f = io.open("ucp/villagestudio/abzug/rohstoffe.txt", "w")
+    local n = {}
+    f:write(string.format("x0=%d y0=%d x1=%d y1=%d", x0, y0, x1, y1) .. NL)
+    for y = y0, y1 do
+      local zeile = {}
+      local basis = core.readInteger(0x023372F8 + y * 12 + 8) or 0
+      for x = x0, x1 do
+        local k = basis + x
+        local l = core.readInteger(0x01BF8368 + k * 4) or 0
+        local l2 = core.readByte(0x01C471E8 + k) or 0
+        local geb = core.readSmallInteger(0x01C95BB8 + k * 2) or 0
+        local c = "."
+        if (l & 0x30) ~= 0 then c = "#"
+        elseif geb ~= 0 then c = "B"
+        elseif (l & 0x20000) ~= 0 then c = "b"
+        elseif (l & 0x80000) ~= 0 then c = "i"
+        elseif l < 0 or (l & 0x80000000) ~= 0 then c = "o"
+        elseif (l & 0x100000) ~= 0 then c = "x"
+        elseif (l & 0x01) ~= 0 then c = "w"
+        elseif (l2 & 0x90) ~= 0 then c = "G"
+        elseif (l2 & 0x01) ~= 0 then c = "s" end
+        n[c] = (n[c] or 0) + 1
+        zeile[#zeile + 1] = c
+      end
+      f:write(table.concat(zeile) .. NL)
+    end
+    f:close()
+    local LS = 0x00F2CC38
+    local anzahl = core.readInteger(LS + 16) or 0
+    local fb = io.open("ucp/villagestudio/abzug/baeume.txt", "w")
+    fb:write("nr art zustand x y stufe" .. NL)
+    local lebend = 0
+    for i = 1, math.min(anzahl, 1999) do
+      local t = LS + 28 + i * 156
+      local zust = core.readSmallInteger(t + 68) or 0
+      if zust ~= 0 then
+        lebend = lebend + 1
+        fb:write(string.format("%d %d %d %d %d %d", i, core.readSmallInteger(t + 70) or -1, zust,
+          core.readSmallInteger(t + 98) or -1, core.readSmallInteger(t + 100) or -1, core.readInteger(t + 128) or -1) .. NL)
+      end
+    end
+    fb:close()
+    local teile = {}
+    for c, z in pairs(n) do teile[#teile + 1] = c .. "=" .. z end
+    log(INFO, string.format("ROHSTOFFKARTE (%d,%d)-(%d,%d): %s; Baeume %d von maxTreeCount %d -> abzug/rohstoffe.txt, baeume.txt",
+      x0, y0, x1, y1, table.concat(teile, " "), lebend, anzahl))
+    return true
+  end
+
   --   { "gruenland": { "x0": 140, "y0": 80, "x1": 220, "y1": 160 } }  Textkarte nach
   --   ucp/villagestudio/abzug/gruenland.txt: G Gruenland (Logic2Layer 0x10/0x80), s nur Gestruepp
   --   (0x01), # blockiert (LogicLayer 0x30), x unfruchtbar (LogicLayer 0x100000), . sonst.
@@ -1613,6 +1671,28 @@ local function einzelbefehl(cmd)
     f:close()
     log(INFO, string.format("GRUENLAND (%d,%d)-(%d,%d): G=%d s=%d #=%d x=%d .=%d -> abzug/gruenland.txt",
       x0, y0, x1, y1, n.G, n.s, n["#"], n.x, n["."]))
+    return true
+  end
+
+  --   { "abreissen": { "nr": 6 } }   Gebaeude abreissen wie der Mensch per Klick: Spielbefehl 29
+  --   (ClickDestroyBuilding: Nummer, Rueckgabe in Prozent, uid). Das Spiel prueft den Besitzer NICHT -
+  --   darum hier: nur Gebaeude des eigenen Platzes (Fairness-Regel). Rueckgabe 0 %: welchen Wert der
+  --   Mensch-Klick schickt, ist nicht gefunden (04.10.) - so bekommen wir nie mehr als ein Mensch.
+  --   uid = Referenz +0xD8 -> hier +0xEC (siehe Kopf: alle Gebaeude-Offsets + 0x14).
+  if cmd.abreissen ~= nil and type(cmd.abreissen) == "table" then
+    local nr = tonumber(cmd.abreissen.nr) or 0
+    local b = GEBAEUDE + nr * G_SCHRITT
+    local ich = core.readInteger(0x01A275DC) or -1
+    local besitzer = core.readSmallInteger(b + G_BESITZER) or -1
+    local typ = core.readSmallInteger(b + G_TYP) or -1
+    local uid = core.readInteger(b + 0xEC) or 0
+    if nr < 1 or (core.readSmallInteger(b + G_ZUSTAND) or 0) == 0 or besitzer ~= ich then
+      log(INFO, string.format("ABREISSEN Nr %d abgelehnt: Besitzer %d, ich %d, Zustand %s", nr, besitzer, ich,
+        tostring(core.readSmallInteger(b + G_ZUSTAND))))
+      return true
+    end
+    local ok = befehlAbsetzen(29, { nr, tonumber(cmd.abreissen.rueckgabe) or 0, uid })
+    log(INFO, string.format("ABREISSEN Tick %d: Nr %d (Typ %d, uid %d) - abgesetzt=%s", tick(), nr, typ, uid, tostring(ok)))
     return true
   end
 

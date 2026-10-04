@@ -1,0 +1,31 @@
+Ansicht 14, Pause 1, gameOver 0, Spielerplatz 1
+Holzfaellerhuette Mapper 51 Groesse 3
+freie Stellen: [(129, 91), (130, 91), (131, 91), (131, 92), (131, 93), (128, 90)]
+[villagestudio]: GEBAEUDE 38: Typ 3, Spieler 1, Ort (129,91), Eingang (129,94) [villagestudio]: GEBAEUDE: 1 gefunden.
+Baeume im Umkreis 20 der Huette: [(2, 116, 93, 2), (2, 124, 78, 2), (2, 127, 91, 2), (2, 130, 94, 2), (3, 110, 96, 2), (3, 113, 94, 2), (3, 114, 90, 2), (3, 123, 86, 2), (3, 127, 76, 2), (3, 131, 74, 2), (3, 140, 75, 2), (9, 122, 94, 2), (10, 124, 88, 2), (10, 126, 86, 2), (10, 128, 74, 2), (18, 110, 92, 4), (18, 121, 80, 4), (18, 121, 80, 4), (18, 121, 85, 4), (18, 129, 74, 4), (18, 129, 97, 4), (18, 132, 73, 4)]
+Tick 1105: Holz 145 (Start 145) | veraenderte Baeume: []
+Tick 1605: Holz 145 (Start 145) | veraenderte Baeume: []
+Tick 2105: Holz 145 (Start 145) | veraenderte Baeume: []
+Tick 2605: Holz 145 (Start 145) | veraenderte Baeume: []
+Tick 3105: Holz 145 (Start 145) | veraenderte Baeume: []
+Tick 3605: Holz 145 (Start 145) | veraenderte Baeume: []
+['[villagestudio]: ARBEITSPLATZ Tick 3605 (1): 1:Z5/U3/W0/G38(T3@129,94)']
+Ansicht 14, Pause 1, gameOver 0, Spielerplatz 1
+
+-- Verlauf ab Tick 4005
+Tick 4005 | Holz 145 | Holzfaeller (133, 95) Z8 W18 | Baum (130,94): Art 2 Zustand 2 Stufe 3
+Tick 4255 | Holz 145 | Holzfaeller (144, 95) Z8 W18 | Baum (130,94): Art 2 Zustand 2 Stufe 3
+Tick 4505 | Holz 145 | Holzfaeller (154, 95) Z8 W18 | Baum (130,94): Art 2 Zustand 2 Stufe 3
+Tick 4755 | Holz 145 | Holzfaeller (165, 100) Z8 W18 | Baum (130,94): Art 2 Zustand 2 Stufe 3
+Tick 5005 | Holz 145 | Holzfaeller (169, 108) Z8 W18 | Baum (130,94): Art 2 Zustand 2 Stufe 3
+Tick 5255 | Holz 163 | Holzfaeller (170, 111) Z9 W0 | Baum (130,94): Art 2 Zustand 2 Stufe 3
+Tick 5505 | Holz 163 | Holzfaeller (159, 112) Z9 W0 | Baum (130,94): Art 2 Zustand 2 Stufe 3
+Tick 5755 | Holz 163 | Holzfaeller (149, 112) Z9 W0 | Baum (130,94): Art 2 Zustand 2 Stufe 3
+Tick 6005 | Holz 163 | Holzfaeller (139, 104) Z9 W0 | Baum (130,94): Art 2 Zustand 2 Stufe 3
+Tick 6255 | Holz 163 | Holzfaeller (129, 94) Z10 W0 | Baum (130,94): Art 2 Zustand 2 Stufe 3
+Tick 6505 | Holz 163 | Holzfaeller (129, 94) Z3 W0 | Baum (130,94): Art 2 Zustand 2 Stufe 3
+Tick 6755 | Holz 163 | Holzfaeller (129, 94) Z3 W0 | Baum (130,94): Art 2 Zustand 2 Stufe 3
+Tick 7005 | Holz 163 | Holzfaeller (129, 94) Z5 W0 | Baum (130,94): Art 2 Zustand 2 Stufe 3
+Tick 7255 | Holz 163 | Holzfaeller (129, 94) Z5 W0 | Baum (130,94): Art 2 Zustand 2 Stufe 3
+Tick 7505 | Holz 163 | Holzfaeller (129, 94) Z5 W0 | Baum (130,94): Art 2 Zustand 2 Stufe 3
+Tick 7755 | Holz 163 | Holzfaeller (129, 94) Z5 W0 | Baum (130,94): Art 2 Zustand 2 Stufe 3

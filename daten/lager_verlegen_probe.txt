@@ -1,0 +1,27 @@
+Tick 600
+Ansicht 14, Pause 1, gameOver 0, Spielerplatz 1
+Vorrat vorher: {'holz': 150, 'gold': 3930}
+NEGATIVLAUF fremdes Lager (15, 231, 284) -> ['[villagestudio]: ABREISSEN Nr 15 abgelehnt: Besitzer 2, ich 1, Zustand 2']
+  fremdes Lager danach noch da: True
+eigene Lagerteile: [(6, 169, 106), (7, 172, 106), (8, 169, 109), (9, 172, 109)]
+['[villagestudio]: ABREISSEN Tick 602: Nr 6 (Typ 10, uid 518671) - abgesetzt=true']
+['[villagestudio]: ABREISSEN Tick 602: Nr 7 (Typ 10, uid 518672) - abgesetzt=true']
+['[villagestudio]: ABREISSEN Tick 602: Nr 8 (Typ 10, uid 518673) - abgesetzt=true']
+['[villagestudio]: ABREISSEN Tick 602: Nr 9 (Typ 10, uid 518674) - abgesetzt=true']
+Lagerteile danach: [] | Vorrat danach: {'gold': 3931}
+Platzkarte Lager ohne Lager: (47019, 160000, 1.5)
+neues Lager: (6, 190, 112)
+Lagerteile: [(6, 190, 112), (7, 193, 112), (8, 190, 115), (9, 193, 115)] | Vorrat: {'gold': 3933} | Ansicht 14, Pause 1, gameOver 0, Spielerplatz 1
+Platzkarte Lager neben neuem: (36, 160000, 1.5)
+
+== Rezept: verkaufen - abreissen - neu setzen - zurueckkaufen
+Tick 600
+Start: {'holz': 150, 'gold': 3930}
+Markt: (38, 172, 111)
+nach Markt: {'holz': 150, 'gold': 3931}
+nach 16 Verkaeufen Holz: {'gold': 4081} -> Erloes 150 Gold fuer 150 Holz
+neues Lager: (6, 190, 112)
+nach Umzug: {'gold': 4083}
+nach 16 Kaeufen: {'holz': 80, 'gold': 3843} -> Preis 240 Gold fuer 80 Holz
+UNTERM STRICH: Holz 150 -> 80, Gold 3930 -> 3843 (Markt -1, Umzug-Verlust 88), Ticks 605 -> 613
+Ansicht 14, Pause 1, gameOver 0, Spielerplatz 1

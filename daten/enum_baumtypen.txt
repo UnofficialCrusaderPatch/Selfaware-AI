@@ -1,0 +1,4 @@
+ENUM TreeType TT_DEFAULT = 0  
+ENUM TreeType TT_APPLEUnk = 15  
+ENUM TreeTypeShort TT_DEFAULT = 0  
+ENUM TreeTypeShort TT_APPLEUnk = 15  
