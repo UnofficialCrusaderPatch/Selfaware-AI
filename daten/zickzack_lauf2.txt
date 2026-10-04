@@ -1,0 +1,15 @@
+Eintrag 0 'M7-04 Mensch Grumpy T600' -> Scrollstand 0, Zeile 0; Spielzeit vorher 805
+['[villagestudio]: LADEPAUSE: scharf (jetzt Tick 805, pausiert).']
+['[villagestudio]: POKE 0x01126628: 0 -> 0', '[villagestudio]: POKE 0x01126624: 0 -> 0', '[villagestudio]: LADEN: Knopf 2 gedrueckt, ok=true', '[villagestudio]: logik: 3 von 3 Befehlen ausgefuehrt, 0 schon erledigt.', '[villagestudio]: LADEPAUSE: Laden erkannt (Spielzeit sprang um -205) bei Tick 600 - angehalten.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.']
+Spielzeit nachher 600 / 600, Pause 1
+K=8   Befehle  25 | Reaktion min/median/max 2/2/50 Ticks | folgt binnen K: 6 von 25 | bewegt in 48 von 201 Ticks
+Eintrag 0 'M7-04 Mensch Grumpy T600' -> Scrollstand 0, Zeile 0; Spielzeit vorher 805
+['[villagestudio]: LADEPAUSE: scharf (jetzt Tick 805, pausiert).']
+['[villagestudio]: POKE 0x01126628: 0 -> 0', '[villagestudio]: POKE 0x01126624: 0 -> 0', '[villagestudio]: LADEN: Knopf 2 gedrueckt, ok=true', '[villagestudio]: logik: 3 von 3 Befehlen ausgefuehrt, 0 schon erledigt.', '[villagestudio]: LADEPAUSE: Laden erkannt (Spielzeit sprang um -205) bei Tick 600 - angehalten.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.']
+Spielzeit nachher 600 / 600, Pause 1
+K=16  Befehle  13 | Reaktion min/median/max 2/2/66 Ticks | folgt binnen K: 10 von 13 | bewegt in 76 von 201 Ticks
+Eintrag 0 'M7-04 Mensch Grumpy T600' -> Scrollstand 0, Zeile 0; Spielzeit vorher 805
+['[villagestudio]: LADEPAUSE: scharf (jetzt Tick 805, pausiert).']
+['[villagestudio]: POKE 0x01126628: 0 -> 0', '[villagestudio]: POKE 0x01126624: 0 -> 0', '[villagestudio]: LADEN: Knopf 2 gedrueckt, ok=true', '[villagestudio]: logik: 3 von 3 Befehlen ausgefuehrt, 0 schon erledigt.', '[villagestudio]: LADEPAUSE: Laden erkannt (Spielzeit sprang um -205) bei Tick 600 - angehalten.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.']
+Spielzeit nachher 600 / 600, Pause 1
+K=3   Befehle  67 | Reaktion min/median/max 1/9/63 Ticks | folgt binnen K: 29 von 67 | bewegt in 76 von 201 Ticks

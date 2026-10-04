@@ -1,0 +1,25 @@
+Eintrag 0 'M7-04 Mensch Grumpy T600' -> Scrollstand 0, Zeile 0; Spielzeit vorher 19288
+['[villagestudio]: LADEPAUSE: scharf (jetzt Tick 19288, pausiert).']
+['[villagestudio]: POKE 0x01126628: 0 -> 0', '[villagestudio]: POKE 0x01126624: 0 -> 0', '[villagestudio]: LADEN: Knopf 2 gedrueckt, ok=true', '[villagestudio]: logik: 3 von 3 Befehlen ausgefuehrt, 0 schon erledigt.', '[villagestudio]: LADEPAUSE: Laden erkannt (Spielzeit sprang um -18688) bei Tick 600 - angehalten.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.']
+Spielzeit nachher 600 / 600, Pause 1
+K=50  Befehle   4 | Reaktion min/median/max 14/16/50 Ticks | folgt binnen K: 4 von 4 | bewegt in 75 von 201 Ticks
+Eintrag 0 'M7-04 Mensch Grumpy T600' -> Scrollstand 0, Zeile 0; Spielzeit vorher 805
+['[villagestudio]: LADEPAUSE: scharf (jetzt Tick 805, pausiert).']
+['[villagestudio]: POKE 0x01126628: 0 -> 0', '[villagestudio]: POKE 0x01126624: 0 -> 0', '[villagestudio]: LADEN: Knopf 2 gedrueckt, ok=true', '[villagestudio]: logik: 3 von 3 Befehlen ausgefuehrt, 0 schon erledigt.', '[villagestudio]: LADEPAUSE: Laden erkannt (Spielzeit sprang um -205) bei Tick 600 - angehalten.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.']
+Spielzeit nachher 600 / 600, Pause 1
+K=10  Befehle  20 | Reaktion min/median/max 1/10/68 Ticks | folgt binnen K: 11 von 20 | bewegt in 62 von 201 Ticks
+Eintrag 0 'M7-04 Mensch Grumpy T600' -> Scrollstand 0, Zeile 0; Spielzeit vorher 805
+['[villagestudio]: LADEPAUSE: scharf (jetzt Tick 805, pausiert).']
+['[villagestudio]: POKE 0x01126628: 0 -> 0', '[villagestudio]: POKE 0x01126624: 0 -> 0', '[villagestudio]: LADEN: Knopf 2 gedrueckt, ok=true', '[villagestudio]: logik: 3 von 3 Befehlen ausgefuehrt, 0 schon erledigt.', '[villagestudio]: LADEPAUSE: Laden erkannt (Spielzeit sprang um -205) bei Tick 600 - angehalten.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.']
+Spielzeit nachher 600 / 600, Pause 1
+K=5   Befehle  40 | Reaktion min/median/max 1/5/62 Ticks | folgt binnen K: 19 von 40 | bewegt in 76 von 201 Ticks
+Eintrag 0 'M7-04 Mensch Grumpy T600' -> Scrollstand 0, Zeile 0; Spielzeit vorher 805
+['[villagestudio]: LADEPAUSE: scharf (jetzt Tick 805, pausiert).']
+['[villagestudio]: POKE 0x01126628: 0 -> 0', '[villagestudio]: POKE 0x01126624: 0 -> 0', '[villagestudio]: LADEN: Knopf 2 gedrueckt, ok=true', '[villagestudio]: logik: 3 von 3 Befehlen ausgefuehrt, 0 schon erledigt.', '[villagestudio]: LADEPAUSE: Laden erkannt (Spielzeit sprang um -205) bei Tick 600 - angehalten.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.']
+Spielzeit nachher 600 / 600, Pause 1
+K=2   Befehle 100 | Reaktion min/median/max 2/2/50 Ticks | folgt binnen K: 24 von 100 | bewegt in 48 von 201 Ticks
+Eintrag 0 'M7-04 Mensch Grumpy T600' -> Scrollstand 0, Zeile 0; Spielzeit vorher 805
+['[villagestudio]: LADEPAUSE: scharf (jetzt Tick 805, pausiert).']
+['[villagestudio]: POKE 0x01126628: 0 -> 0', '[villagestudio]: POKE 0x01126624: 0 -> 0', '[villagestudio]: LADEN: Knopf 2 gedrueckt, ok=true', '[villagestudio]: logik: 3 von 3 Befehlen ausgefuehrt, 0 schon erledigt.', '[villagestudio]: LADEPAUSE: Laden erkannt (Spielzeit sprang um -205) bei Tick 600 - angehalten.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.']
+Spielzeit nachher 600 / 600, Pause 1
+K=1   Befehle 200 | Reaktion min/median/max 1/1/49 Ticks | folgt binnen K: 45 von 200 | bewegt in 45 von 201 Ticks

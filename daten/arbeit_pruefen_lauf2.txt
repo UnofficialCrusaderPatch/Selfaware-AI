@@ -1,0 +1,14 @@
+Eintrag 4 'Walltest 4' -> Scrollstand 0, Zeile 4; Spielzeit vorher 21388
+['[villagestudio]: LADEPAUSE: scharf (jetzt Tick 21388, pausiert).']
+['[villagestudio]: POKE 0x01126628: 0 -> 0', '[villagestudio]: POKE 0x01126624: 0 -> 4', '[villagestudio]: LADEN: Knopf 2 gedrueckt, ok=true', '[villagestudio]: logik: 3 von 3 Befehlen ausgefuehrt, 0 schon erledigt.', '[villagestudio]: LADEPAUSE: Laden erkannt (Spielzeit sprang um -2400) bei Tick 18988 - angehalten.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 18988.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 18988.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 18988.']
+Spielzeit nachher 18988 / 18988, Pause 1
+Eintrag 4 'Walltest 4' -> Scrollstand 0, Zeile 4; Spielzeit vorher 21388
+['[villagestudio]: LADEPAUSE: scharf (jetzt Tick 21388, pausiert).']
+['[villagestudio]: POKE 0x01126628: 0 -> 0', '[villagestudio]: POKE 0x01126624: 0 -> 4', '[villagestudio]: LADEN: Knopf 2 gedrueckt, ok=true', '[villagestudio]: logik: 3 von 3 Befehlen ausgefuehrt, 0 schon erledigt.', '[villagestudio]: LADEPAUSE: Laden erkannt (Spielzeit sprang um -2400) bei Tick 18988 - angehalten.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 18988.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 18988.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 18988.']
+Spielzeit nachher 18988 / 18988, Pause 1
+['[villagestudio]: HALTEN Tick 18988: 24 Einheiten festgehalten bei (159,112), Befehl angenommen 24.']
+['[villagestudio]: HALTEN: alle 24 losgelassen, 24 zum Arbeitsgebaeude, angenommen 24 (Tick 20188).']
+KREISLAUF: Kontrolle 23 von 24, nach Loslassen 23 von 24
+ABLIEFERN: Kontrolle 11, nach Loslassen 1 (in 1200 Ticks, Aufnahme alle 100)
+VORRAT Ware 13 alle 100 Ticks: Kontrolle [54, 53, 52, 52, 49, 49, 55, 60, 50, 56, 55, 54, 50] | nach Loslassen [54, 53, 49, 49, 48, 47, 46, 45, 44, 43, 42, 42, 43]
+URTEIL: NICHT erfuellt

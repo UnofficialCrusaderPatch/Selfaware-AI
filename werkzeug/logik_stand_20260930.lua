@@ -72,6 +72,12 @@ local tickPause    = nil
 local ladePause    = nil
 -- Lord-Wacht (30.09.2026, M4.04): { lords = {nr -> {...}}, haltTreffer, haltTod, alle, naechste }
 local lordWacht    = nil
+-- Einheiten-Wacht (04.10.2026): { e = {nr -> {zx, zy}}, alle, naechste } - jede Zielaenderung je Tick
+local einheitWacht = nil
+-- Festhalten (04.10.2026): nr -> { x, y, gesetzt, letzter } - Ziel gegen KI/Arbeit/Lord-Logik halten
+local festhalten   = {}
+-- Zickzack (04.10.2026): { nr, a, b, alle, bis, t0, n } - Richtungswechsel je K Ticks, Feinposition je Tick
+local zickzack     = nil
 
 -- Einheiten befehligen (05.09.2026). Blosses Schreiben der Ziel-Felder bewegt
 -- eine Einheit NICHT (gemessen) - der Wegplan wird in setDestinationForUnit
@@ -1177,6 +1183,309 @@ local function einzelbefehl(cmd)
     log(INFO, string.format("LORDWACHT: scharf fuer %d Lords (Tick %d), halt bei%s%s%s.", n, tick(),
       halt.treffer and " Treffer" or "", halt.tod and " Tod" or (halt.treffer and "" or " nichts"),
       ziel and string.format(", Ziel (%d,%d) wird gehalten", ziel[1], ziel[2]) or ""))
+    return true
+  end
+
+  --==========================================================================
+  -- Gruppen befehligen (01.10.2026, Selfaware): alle Einheiten eines Spielers und Typs
+  --   { "gruppe": { "spieler": 2, "typ": 13, "x": 180, "y": 120 } }   alle dorthin
+  --   { "gruppe": { "spieler": 2, "typ": 13, "zu": 19 } }             zum Eingang des 1. Gebaeudes Typ 19
+  --   { "gruppe": { "spieler": 2, "typ": 13, "halt": true } }         auf der Stelle anhalten (Ziel = eigener Ort)
+  --   { "gruppe": { "spieler": 2, "typ": 13 } }                       nur auflisten
+  --   "nr": [5, 9]  statt typ/spieler: genau diese Einheiten
+  -- Ort = Mikro-Position / 8 (+0xB6/+0xB8). Gebaeude: Referenz-Offsets + 0x14 (siehe
+  -- Kopf), Eingang buildingEntryX/Y = Referenz +0xFE/+0x100 -> hier +0x112/+0x114.
+  --   { "gebaeude": { "spieler": 2, "typ": 19 } }   Gebaeude dieses Typs: Nummer, Ort, Eingang
+  --==========================================================================
+  local function gebaeudeVon(sp, typ)
+    local liste = {}
+    local n = gebaeudeAnzahl() or 0
+    for i = 1, n - 1 do
+      local b = GEBAEUDE + i * G_SCHRITT
+      if (core.readSmallInteger(b + G_ZUSTAND) or 0) ~= 0 and core.readSmallInteger(b + G_TYP) == typ
+         and (sp == nil or core.readSmallInteger(b + G_BESITZER) == sp) then
+        table.insert(liste, { nr = i, sp = core.readSmallInteger(b + G_BESITZER),
+          x = core.readSmallInteger(b + 0x102) or -1, y = core.readSmallInteger(b + 0x104) or -1,
+          ex = core.readSmallInteger(b + 0x112) or -1, ey = core.readSmallInteger(b + 0x114) or -1 })
+      end
+    end
+    return liste
+  end
+
+  if cmd.gebaeude ~= nil and type(cmd.gebaeude) == "table" then
+    local g = cmd.gebaeude
+    local liste = gebaeudeVon(tonumber(g.spieler), tonumber(g.typ))
+    for _, e in ipairs(liste) do
+      log(INFO, string.format("GEBAEUDE %d: Typ %d, Spieler %d, Ort (%d,%d), Eingang (%d,%d)",
+        e.nr, tonumber(g.typ), e.sp, e.x, e.y, e.ex, e.ey))
+    end
+    log(INFO, string.format("GEBAEUDE: %d gefunden.", #liste))
+    return true
+  end
+
+  if cmd.gruppe ~= nil and type(cmd.gruppe) == "table" then
+    local g = cmd.gruppe
+    local sp, typ = tonumber(g.spieler), tonumber(g.typ)
+    local nummern = {}
+    if type(g.nr) == "table" then
+      for _, n in ipairs(g.nr) do table.insert(nummern, tonumber(n)) end
+    else
+      local grenze = math.min(core.readInteger(0x01387F38) or 0, 2500)
+      for i = 1, grenze - 1 do
+        local b = 0x0138854C + i * 1168
+        if (core.readSmallInteger(b + 0x8C) or 0) ~= 0
+           and (typ == nil or core.readSmallInteger(b + 0x8E) == typ)
+           and (sp == nil or core.readSmallInteger(b + 0x96) == sp) then
+          table.insert(nummern, i)
+        end
+      end
+    end
+    local zx, zy = tonumber(g.x), tonumber(g.y)
+    if g.zu ~= nil then
+      local geb = gebaeudeVon(sp, tonumber(g.zu))[1]
+      if geb == nil then log(WARNING, "GRUPPE: kein Gebaeude Typ " .. tostring(g.zu)) return false end
+      zx, zy = geb.ex, geb.ey
+      log(INFO, string.format("GRUPPE: Ziel = Eingang Gebaeude %d (Typ %d) bei (%d,%d).", geb.nr, g.zu, zx, zy))
+    end
+    _setDest = _setDest or core.exposeCode(ADR_SETDEST, 5, 1)
+    local ok, teile = 0, {}
+    for _, nr in ipairs(nummern) do
+      local b = 0x0138854C + nr * 1168
+      local x = math.floor((core.readSmallInteger(b + 0xB6) or 0) / 8)
+      local y = math.floor((core.readSmallInteger(b + 0xB8) or 0) / 8)
+      local tx, ty = zx, zy
+      if g.halt == true then tx, ty = x, y end
+      local rv = "-"
+      if tx ~= nil and ty ~= nil then
+        local gut, r = pcall(_setDest, UNITS_STATE, nr, tx, ty, 0)
+        rv = gut and tostring(r) or "Fehler"
+        if gut and r == 1 then ok = ok + 1 end
+      end
+      if #teile < 30 then
+        table.insert(teile, string.format("%d:T%d@(%d,%d)%s", nr, core.readSmallInteger(b + 0x8E) or -1, x, y,
+          rv ~= "-" and ("=" .. rv) or ""))
+      end
+    end
+    log(INFO, string.format("GRUPPE Tick %d: %d Einheiten%s%s, angenommen %d: %s", tick(), #nummern,
+      typ and (" Typ " .. typ) or "", sp and (" Spieler " .. sp) or "", ok, table.concat(teile, " ")))
+    return true
+  end
+
+  --==========================================================================
+  -- Einheiten-Wacht (04.10.2026): gehorcht eine Einheit, und wer ueberschreibt ihr Ziel?
+  --   { "einheitwacht": { "nr": [3, 137], "alle": 10 } }   /   { "einheitwacht": false }
+  -- Nur im laufenden Spiel (in der Pause laeuft der Taktgeber weiter, die Zeit nicht):
+  -- jede Aenderung des Ziels (+0xC8/+0xCA) mit Tick und Ort, alle "alle" Ticks die Orte.
+  --   { "typen": { "spieler": 2 } }   Anzahl Einheiten je Typ (ohne spieler: je Spieler und Typ)
+  --==========================================================================
+  if cmd.einheitwacht ~= nil then
+    if cmd.einheitwacht == false then
+      einheitWacht = nil
+      log(INFO, "EINHEITWACHT: aus.")
+      return true
+    end
+    local w = cmd.einheitwacht
+    einheitWacht = { e = {}, alle = tonumber(w.alle) or 10, naechste = tick() }
+    local n = 0
+    for _, nr in ipairs(w.nr or {}) do einheitWacht.e[tonumber(nr)] = {}; n = n + 1 end
+    log(INFO, string.format("EINHEITWACHT: scharf fuer %d Einheiten (Tick %d), Orte alle %d Ticks.", n, tick(), einheitWacht.alle))
+    return true
+  end
+
+  --   { "halten": { "spieler": 2, "typ": 13, "zu": 19 } }       Gruppe zum Gebaeude-Eingang, festhalten
+  --   { "halten": { "spieler": 2, "typ": 13, "hier": true } }   Gruppe auf der Stelle einfrieren
+  --   { "halten": { "nr": [3], "x": 180, "y": 109 } }           einzelne Einheiten auf ein Feld
+  --   { "halten": false }  alle loslassen   /   { "halten": { "los": [3, 5] } }  diese loslassen
+  --   { "halten": { "zurueck": true } }  alle loslassen UND ihr altes Ziel wiederherstellen
+  --     (gemessen 04.10.: nach blossem Loslassen nahmen 18 von 24 Apfelbauern 600 Ticks lang
+  --     keine Arbeit wieder auf - sie blieben am Kornspeicher stehen)
+  -- Die Wacht setzt das Ziel nach, sobald KI, Arbeit oder Lord-Logik es aendern - nur im
+  -- laufenden Spiel und hoechstens alle 10 Ticks je Einheit (wie die Lord-Wacht, 01.10.).
+  if cmd.halten ~= nil then
+    local h = cmd.halten
+    if h == false then
+      local n = 0
+      for _ in pairs(festhalten) do n = n + 1 end
+      festhalten = {}
+      log(INFO, string.format("HALTEN: alle %d losgelassen (Tick %d).", n, tick()))
+      return true
+    end
+    if h.zurueck == true or h.zurueck == "arbeit" then
+      -- "arbeit": zum Eingang des eigenen Arbeitsgebaeudes (+0x338, gemessen 04.10.: zeigt bei
+      -- Apfelbauern auf Apfelplantagen, bei Milchbauern auf Milchhoefe). Ohne Arbeitsgebaeude:
+      -- altes Ziel. Anlass: 7 von 24 Apfelbauern waren beim Zurueckrufen mit Ware zum Kornspeicher
+      -- unterwegs (Zustand 7) - ihr "altes Ziel" war der Kornspeicher, dort blieben sie stehen.
+      _setDest = _setDest or core.exposeCode(ADR_SETDEST, 5, 1)
+      local n, ok, arbeit = 0, 0, 0
+      for nr, f in pairs(festhalten) do
+        n = n + 1
+        local tx, ty = f.altx, f.alty
+        if h.zurueck == "arbeit" then
+          local w = core.readSmallInteger(0x0138854C + nr * 1168 + 0x338) or 0
+          if w > 0 and w < 2000 then
+            local g = GEBAEUDE + w * G_SCHRITT
+            if (core.readSmallInteger(g + G_ZUSTAND) or 0) ~= 0 then
+              tx, ty = core.readSmallInteger(g + 0x112), core.readSmallInteger(g + 0x114)
+              arbeit = arbeit + 1
+            end
+          end
+        end
+        if tx and tx > 0 then
+          local gut, r = pcall(_setDest, UNITS_STATE, nr, tx, ty, 0)
+          if gut and r == 1 then ok = ok + 1 end
+        end
+      end
+      if h.zurueck == "arbeit" then
+        festhalten = {}
+        log(INFO, string.format("HALTEN: alle %d losgelassen, %d zum Arbeitsgebaeude, angenommen %d (Tick %d).", n, arbeit, ok, tick()))
+        return true
+      end
+      festhalten = {}
+      log(INFO, string.format("HALTEN: alle %d losgelassen, altes Ziel bei %d wiederhergestellt (Tick %d).", n, ok, tick()))
+      return true
+    end
+    if type(h.los) == "table" then
+      for _, nr in ipairs(h.los) do festhalten[tonumber(nr)] = nil end
+      log(INFO, string.format("HALTEN: %d losgelassen (Tick %d).", #h.los, tick()))
+      return true
+    end
+    local sp, typ = tonumber(h.spieler), tonumber(h.typ)
+    local nummern = {}
+    if type(h.nr) == "table" then
+      for _, n in ipairs(h.nr) do table.insert(nummern, tonumber(n)) end
+    else
+      local grenze = math.min(core.readInteger(0x01387F38) or 0, 2500)
+      for i = 1, grenze - 1 do
+        local b = 0x0138854C + i * 1168
+        if (core.readSmallInteger(b + 0x8C) or 0) ~= 0 and (typ == nil or core.readSmallInteger(b + 0x8E) == typ)
+           and (sp == nil or core.readSmallInteger(b + 0x96) == sp) then
+          table.insert(nummern, i)
+        end
+      end
+    end
+    local zx, zy = tonumber(h.x), tonumber(h.y)
+    if h.zu ~= nil then
+      local geb = gebaeudeVon(sp, tonumber(h.zu))[1]
+      if geb == nil then log(WARNING, "HALTEN: kein Gebaeude Typ " .. tostring(h.zu)) return false end
+      zx, zy = geb.ex, geb.ey
+    end
+    _setDest = _setDest or core.exposeCode(ADR_SETDEST, 5, 1)
+    local ok = 0
+    for _, nr in ipairs(nummern) do
+      local b = 0x0138854C + nr * 1168
+      local tx, ty = zx, zy
+      if h.hier == true then
+        tx = math.floor((core.readSmallInteger(b + 0xB6) or 0) / 8)
+        ty = math.floor((core.readSmallInteger(b + 0xB8) or 0) / 8)
+      end
+      if tx ~= nil and ty ~= nil then
+        -- altes Ziel ZUERST lesen: setDestinationForUnit schreibt +0xC8/+0xCA sofort
+        -- (gemessen 04.10., 19:03 - so gemerkt war das "alte" Ziel schon der Kornspeicher)
+        local vorher = festhalten[nr]       -- schon gehalten: das urspruengliche alte Ziel behalten
+        local ax = vorher and vorher.altx or core.readSmallInteger(b + 0xC8)
+        local ay = vorher and vorher.alty or core.readSmallInteger(b + 0xCA)
+        local gut, r = pcall(_setDest, UNITS_STATE, nr, tx, ty, 0)
+        if gut and r == 1 then ok = ok + 1 end
+        festhalten[nr] = { x = tx, y = ty, gesetzt = 0, letzter = -100, uid = core.readInteger(b + 0x98),
+          altx = ax, alty = ay }
+      end
+    end
+    log(INFO, string.format("HALTEN Tick %d: %d Einheiten festgehalten%s, Befehl angenommen %d.", tick(), #nummern,
+      (zx and not h.hier) and string.format(" bei (%d,%d)", zx, zy) or (h.hier and " auf der Stelle" or ""), ok))
+    return true
+  end
+
+  --   { "arbeitsplatz": { "spieler": 2, "typ": 13 } }  je Einheit: Zustand (+0x2C0), Unterzustand
+  --   (+0x380), abzuliefernde Ware (+0x388), Arbeitsgebaeude (+0x338) mit Typ und Eingang.
+  --   Felder aus der Strukturliste (Unit), Deutung ungeprueft - genau das soll das hier pruefen.
+  if cmd.arbeitsplatz ~= nil and type(cmd.arbeitsplatz) == "table" then
+    local sp, typ = tonumber(cmd.arbeitsplatz.spieler), tonumber(cmd.arbeitsplatz.typ)
+    local teile = {}
+    local grenze = math.min(core.readInteger(0x01387F38) or 0, 2500)
+    for i = 1, grenze - 1 do
+      local b = 0x0138854C + i * 1168
+      if (core.readSmallInteger(b + 0x8C) or 0) ~= 0 and (typ == nil or core.readSmallInteger(b + 0x8E) == typ)
+         and (sp == nil or core.readSmallInteger(b + 0x96) == sp) then
+        local w = core.readSmallInteger(b + 0x338) or -1
+        local gt, ex, ey = -1, -1, -1
+        if w > 0 and w < 2000 then
+          local g = GEBAEUDE + w * G_SCHRITT
+          gt, ex, ey = core.readSmallInteger(g + G_TYP) or -1, core.readSmallInteger(g + 0x112) or -1, core.readSmallInteger(g + 0x114) or -1
+        end
+        table.insert(teile, string.format("%d:Z%d/U%d/W%d/G%d(T%d@%d,%d)", i, core.readSmallInteger(b + 0x2C0) or -1,
+          core.readSmallInteger(b + 0x380) or -1, core.readSmallInteger(b + 0x388) or -1, w, gt, ex, ey))
+      end
+    end
+    log(INFO, string.format("ARBEITSPLATZ Tick %d (%d): %s", tick(), #teile, table.concat(teile, " ")))
+    return true
+  end
+
+  --   { "aufloesen": { "nr": [154, 155] } }  oder  { "aufloesen": { "spieler": 2, "typ": 22, "anzahl": 3 } }
+  --   Ruft disbandUnit (0x0052EDC0, thiscall UnitsState, 1 Argument) - der Weg des Spiels:
+  --   mit Lagerfeuer wird die Einheit Bauer und geht dorthin, ohne Lagerfeuer verschwindet sie
+  --   (abgelesen 04.10., daten/dekomp_aufloesen.c).
+  if cmd.aufloesen ~= nil and type(cmd.aufloesen) == "table" then
+    local a = cmd.aufloesen
+    local sp, typ, anzahl = tonumber(a.spieler), tonumber(a.typ), tonumber(a.anzahl) or 9999
+    local nummern = {}
+    if type(a.nr) == "table" then
+      for _, n in ipairs(a.nr) do table.insert(nummern, tonumber(n)) end
+    else
+      local grenze = math.min(core.readInteger(0x01387F38) or 0, 2500)
+      for i = 1, grenze - 1 do
+        if #nummern >= anzahl then break end
+        local b = 0x0138854C + i * 1168
+        if (core.readSmallInteger(b + 0x8C) or 0) ~= 0 and core.readSmallInteger(b + 0x8E) == typ
+           and (sp == nil or core.readSmallInteger(b + 0x96) == sp) then
+          table.insert(nummern, i)
+        end
+      end
+    end
+    local auf = core.exposeCode(0x0052EDC0, 2, 1)
+    local teile = {}
+    for _, nr in ipairs(nummern) do
+      local ok, r = pcall(auf, UNITS_STATE, nr)
+      table.insert(teile, string.format("%d=%s", nr, ok and tostring(r) or "Fehler"))
+    end
+    log(INFO, string.format("AUFLOESEN Tick %d: %d Einheiten (Rueckgabe 1 = mit Lagerfeuer zum Bauern): %s",
+      tick(), #nummern, table.concat(teile, " ")))
+    return true
+  end
+
+  --   { "zickzack": { "nr": 147, "a": [159, 108], "b": [171, 108], "alle": 5, "ticks": 200 } }
+  --   Schickt die Einheit ab dem naechsten laufenden Tick abwechselnd nach a und b, alle "alle"
+  --   Ticks (1 = jeden Tick), und schreibt JEDEN Tick ihre Feinposition (+0xB6/+0xB8, 8 je Feld)
+  --   und ihr Ziel: "ZZ t dx/dy x y ziel". Befehle je Tick gehen nur so - der Weg ueber die
+  --   Befehlsdatei liest alle ~20 Bilder.
+  if cmd.zickzack ~= nil then
+    if cmd.zickzack == false then zickzack = nil; log(INFO, "ZICKZACK: aus.") return true end
+    local z = cmd.zickzack
+    zickzack = { nr = tonumber(z.nr), a = z.a, b = z.b, alle = math.max(1, tonumber(z.alle) or 10),
+                 ticks = tonumber(z.ticks) or 200, t0 = nil, n = 0 }
+    log(INFO, string.format("ZICKZACK: Einheit %d zwischen (%d,%d) und (%d,%d), Wechsel alle %d Ticks, %d Ticks lang.",
+      zickzack.nr, z.a[1], z.a[2], z.b[1], z.b[2], zickzack.alle, zickzack.ticks))
+    return true
+  end
+
+  if cmd.typen ~= nil and type(cmd.typen) == "table" then
+    local sp = tonumber(cmd.typen.spieler)
+    local zaehl, schluessel = {}, {}
+    local grenze = math.min(core.readInteger(0x01387F38) or 0, 2500)
+    for i = 1, grenze - 1 do
+      local b = 0x0138854C + i * 1168
+      if (core.readSmallInteger(b + 0x8C) or 0) ~= 0 then
+        local bes = core.readSmallInteger(b + 0x96) or -1
+        if sp == nil or bes == sp then
+          local k = string.format("S%d:T%d", bes, core.readSmallInteger(b + 0x8E) or -1)
+          if zaehl[k] == nil then table.insert(schluessel, k) end
+          zaehl[k] = (zaehl[k] or 0) + 1
+        end
+      end
+    end
+    table.sort(schluessel)
+    local teile = {}
+    for _, k in ipairs(schluessel) do table.insert(teile, k .. "=" .. zaehl[k]) end
+    log(INFO, "TYPEN: " .. table.concat(teile, " "))
     return true
   end
 
@@ -2361,10 +2670,92 @@ local function lordWachtTick()
   end
 end
 
+local function einheitWachtTick()
+  if einheitWacht == nil then return end
+  if (core.readInteger(PAUSE) or 1) ~= 0 then return end
+  local t = tick()
+  local alle = t >= einheitWacht.naechste
+  if alle then einheitWacht.naechste = t + einheitWacht.alle end
+  local teile = {}
+  for nr, e in pairs(einheitWacht.e) do
+    local b = 0x0138854C + nr * 1168
+    local zx, zy = core.readSmallInteger(b + 0xC8) or -1, core.readSmallInteger(b + 0xCA) or -1
+    local x = math.floor((core.readSmallInteger(b + 0xB6) or 0) / 8)
+    local y = math.floor((core.readSmallInteger(b + 0xB8) or 0) / 8)
+    -- Kennnummer (+0x98): wechselt sie, ist es eine ANDERE Einheit auf demselben Platz
+    -- (gemessen 04.10.: ein Huhn verschwand, sein Platz wurde spaeter neu vergeben).
+    local uid = core.readInteger(b + 0x98) or 0
+    local leer = (core.readSmallInteger(b + 0x8C) or 0) == 0
+    if e.uid ~= nil and (uid ~= e.uid or leer) and not e.weg then
+      e.weg = true
+      log(INFO, string.format("EW Tick %d: %d WEG (Kennung %d -> %d, Platz %s)", t, nr, e.uid, uid,
+        leer and "frei" or "neu belegt"))
+    end
+    e.uid = e.uid or uid
+    if (zx ~= e.zx or zy ~= e.zy) and not e.weg then
+      log(INFO, string.format("EW Tick %d: %d Ziel (%s,%s)->(%d,%d) bei (%d,%d)",
+        t, nr, tostring(e.zx), tostring(e.zy), zx, zy, x, y))
+      e.zx, e.zy = zx, zy
+    end
+    if alle then table.insert(teile, string.format("%d@(%d,%d)", nr, x, y)) end
+  end
+  if alle then log(INFO, "EW Orte Tick " .. t .. ": " .. table.concat(teile, " ")) end
+end
+
+local function festhaltenTick()
+  if next(festhalten) == nil then return end
+  if (core.readInteger(PAUSE) or 1) ~= 0 then return end
+  local t = tick()
+  for nr, f in pairs(festhalten) do
+    local b = 0x0138854C + nr * 1168
+    if (core.readSmallInteger(b + 0x8C) or 0) == 0 or core.readInteger(b + 0x98) ~= f.uid then
+      festhalten[nr] = nil                      -- Einheit weg oder Platz neu belegt
+      log(INFO, string.format("HALTEN Tick %d: %d ist weg - losgelassen.", t, nr))
+    else
+      local zx, zy = core.readSmallInteger(b + 0xC8) or -1, core.readSmallInteger(b + 0xCA) or -1
+      if (zx ~= f.x or zy ~= f.y) and t - f.letzter >= 10 then
+        f.letzter = t
+        _setDest = _setDest or core.exposeCode(ADR_SETDEST, 5, 1)
+        pcall(_setDest, UNITS_STATE, nr, f.x, f.y, 0)
+        f.gesetzt = f.gesetzt + 1
+        if f.gesetzt <= 2 then
+          log(INFO, string.format("HALTEN Tick %d: %d nachgesetzt (Nr. %d, fremdes Ziel war (%d,%d)).", t, nr, f.gesetzt, zx, zy))
+        end
+      end
+    end
+  end
+end
+
+local function zickzackTick()
+  local z = zickzack
+  if z == nil then return end
+  if (core.readInteger(PAUSE) or 1) ~= 0 then return end
+  local t = tick()
+  if z.letzterTick == t then return end            -- je Tick genau einmal
+  z.letzterTick = t
+  z.t0 = z.t0 or t
+  local i = t - z.t0
+  local b = 0x0138854C + z.nr * 1168
+  local befohlen = ""
+  if i < z.ticks and i % z.alle == 0 then
+    local ziel = (math.floor(i / z.alle) % 2 == 0) and z.b or z.a
+    _setDest = _setDest or core.exposeCode(ADR_SETDEST, 5, 1)
+    local ok, r = pcall(_setDest, UNITS_STATE, z.nr, ziel[1], ziel[2], 0)
+    befohlen = string.format(" BEFEHL->(%d,%d)=%s", ziel[1], ziel[2], ok and tostring(r) or "Fehler")
+  end
+  log(INFO, string.format("ZZ %d %d %d %d %d%s", t, core.readSmallInteger(b + 0xB6) or -1,
+    core.readSmallInteger(b + 0xB8) or -1, core.readSmallInteger(b + 0xC8) or -1,
+    core.readSmallInteger(b + 0xCA) or -1, befohlen))
+  if i >= z.ticks then zickzack = nil; log(INFO, "ZICKZACK: fertig.") end
+end
+
 local function everyTick()
   pcall(ladePauseTick)        -- zuerst: die Pause soll vor allem anderen greifen
+  pcall(zickzackTick)
   pcall(tickPauseTick)
   pcall(lordWachtTick)
+  pcall(einheitWachtTick)
+  pcall(festhaltenTick)
   pcall(mauerwachtTick)
   pcall(gebaeudewachtTick)
   pcall(bauwachtTick)

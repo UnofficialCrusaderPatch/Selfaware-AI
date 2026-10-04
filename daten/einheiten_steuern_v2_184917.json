@@ -1,0 +1,1187 @@
+{
+ "stand": "Walltest 4",
+ "lauf": 300,
+ "proben": [
+  {
+   "spieler": 0,
+   "typ": 44,
+   "nr": 5,
+   "start": [
+    90,
+    287
+   ],
+   "ziel": [
+    102,
+    287
+   ],
+   "kontrolle_zielwechsel": 0,
+   "versuch_ziele": [
+    [
+     18989,
+     [
+      102,
+      287
+     ],
+     [
+      90,
+      287
+     ]
+    ]
+   ],
+   "angenommen": true,
+   "ankunft": 19159,
+   "umgelenkt": null,
+   "urteil": "GEHORCHT"
+  },
+  {
+   "spieler": 0,
+   "typ": 67,
+   "nr": 96,
+   "start": [
+    160,
+    123
+   ],
+   "ziel": [
+    169,
+    120
+   ],
+   "kontrolle_zielwechsel": 0,
+   "versuch_ziele": [
+    [
+     18989,
+     [
+      169,
+      120
+     ],
+     [
+      160,
+      123
+     ]
+    ]
+   ],
+   "angenommen": true,
+   "ankunft": null,
+   "umgelenkt": null,
+   "urteil": "LANGSAM"
+  },
+  {
+   "spieler": 1,
+   "typ": 14,
+   "nr": 1,
+   "start": [
+    192,
+    292
+   ],
+   "ziel": [
+    204,
+    292
+   ],
+   "kontrolle_zielwechsel": 0,
+   "versuch_ziele": [
+    [
+     18989,
+     [
+      204,
+      292
+     ],
+     [
+      192,
+      292
+     ]
+    ]
+   ],
+   "angenommen": true,
+   "ankunft": 19159,
+   "umgelenkt": null,
+   "urteil": "GEHORCHT"
+  },
+  {
+   "spieler": 1,
+   "typ": 3,
+   "nr": 141,
+   "start": [
+    196,
+    268
+   ],
+   "ziel": [
+    208,
+    268
+   ],
+   "kontrolle_zielwechsel": 0,
+   "versuch_ziele": [
+    [
+     18989,
+     [
+      208,
+      268
+     ],
+     [
+      196,
+      268
+     ]
+    ]
+   ],
+   "angenommen": true,
+   "ankunft": 19249,
+   "umgelenkt": null,
+   "urteil": "GEHORCHT"
+  },
+  {
+   "spieler": 1,
+   "typ": 51,
+   "nr": 253,
+   "start": [
+    193,
+    296
+   ],
+   "ziel": [
+    205,
+    296
+   ],
+   "kontrolle_zielwechsel": 0,
+   "versuch_ziele": [
+    [
+     18989,
+     [
+      205,
+      296
+     ],
+     [
+      193,
+      296
+     ]
+    ]
+   ],
+   "angenommen": true,
+   "ankunft": 19239,
+   "umgelenkt": null,
+   "urteil": "GEHORCHT"
+  },
+  {
+   "spieler": 1,
+   "typ": 55,
+   "nr": 3,
+   "start": [
+    227,
+    284
+   ],
+   "ziel": [
+    236,
+    281
+   ],
+   "kontrolle_zielwechsel": 0,
+   "versuch_ziele": [
+    [
+     18989,
+     [
+      236,
+      281
+     ],
+     [
+      227,
+      284
+     ]
+    ],
+    [
+     19124,
+     [
+      227,
+      289
+     ],
+     [
+      227,
+      289
+     ]
+    ],
+    [
+     19138,
+     [
+      229,
+      286
+     ],
+     [
+      227,
+      289
+     ]
+    ]
+   ],
+   "angenommen": true,
+   "ankunft": null,
+   "umgelenkt": [
+    19124,
+    [
+     227,
+     289
+    ]
+   ],
+   "urteil": "UMGELENKT"
+  },
+  {
+   "spieler": 1,
+   "typ": 57,
+   "nr": 4,
+   "start": [
+    261,
+    300
+   ],
+   "ziel": [
+    273,
+    300
+   ],
+   "kontrolle_zielwechsel": 0,
+   "versuch_ziele": [
+    [
+     18989,
+     [
+      273,
+      300
+     ],
+     [
+      261,
+      300
+     ]
+    ]
+   ],
+   "angenommen": true,
+   "ankunft": null,
+   "umgelenkt": null,
+   "urteil": "LANGSAM"
+  },
+  {
+   "spieler": 1,
+   "typ": 62,
+   "nr": 194,
+   "start": [
+    237,
+    283
+   ],
+   "ziel": [
+    237,
+    295
+   ],
+   "kontrolle_zielwechsel": 1,
+   "versuch_ziele": [
+    [
+     18989,
+     [
+      237,
+      295
+     ],
+     [
+      237,
+      283
+     ]
+    ],
+    [
+     19006,
+     [
+      0,
+      0
+     ],
+     [
+      0,
+      0
+     ]
+    ]
+   ],
+   "angenommen": true,
+   "ankunft": null,
+   "umgelenkt": [
+    19006,
+    [
+     0,
+     0
+    ]
+   ],
+   "urteil": "UMGELENKT"
+  },
+  {
+   "spieler": 1,
+   "typ": 7,
+   "nr": 143,
+   "start": [
+    219,
+    342
+   ],
+   "ziel": [
+    231,
+    342
+   ],
+   "kontrolle_zielwechsel": 0,
+   "versuch_ziele": [
+    [
+     18989,
+     [
+      231,
+      342
+     ],
+     [
+      219,
+      342
+     ]
+    ]
+   ],
+   "angenommen": true,
+   "ankunft": 19159,
+   "umgelenkt": null,
+   "urteil": "GEHORCHT"
+  },
+  {
+   "spieler": 1,
+   "typ": 72,
+   "nr": 145,
+   "start": [
+    231,
+    290
+   ],
+   "ziel": [
+    228,
+    299
+   ],
+   "kontrolle_zielwechsel": 0,
+   "versuch_ziele": [
+    [
+     18989,
+     [
+      228,
+      299
+     ],
+     [
+      231,
+      290
+     ]
+    ],
+    [
+     19189,
+     [
+      227,
+      290
+     ],
+     [
+      228,
+      299
+     ]
+    ]
+   ],
+   "angenommen": true,
+   "ankunft": 19119,
+   "umgelenkt": null,
+   "urteil": "GEHORCHT"
+  },
+  {
+   "spieler": 1,
+   "typ": 8,
+   "nr": 191,
+   "start": [
+    227,
+    335
+   ],
+   "ziel": [
+    239,
+    335
+   ],
+   "kontrolle_zielwechsel": 0,
+   "versuch_ziele": [
+    [
+     18989,
+     [
+      239,
+      335
+     ],
+     [
+      227,
+      335
+     ]
+    ]
+   ],
+   "angenommen": true,
+   "ankunft": 19159,
+   "umgelenkt": null,
+   "urteil": "GEHORCHT"
+  },
+  {
+   "spieler": 1,
+   "typ": 9,
+   "nr": 235,
+   "start": [
+    225,
+    338
+   ],
+   "ziel": [
+    237,
+    338
+   ],
+   "kontrolle_zielwechsel": 0,
+   "versuch_ziele": [
+    [
+     18989,
+     [
+      237,
+      338
+     ],
+     [
+      225,
+      338
+     ]
+    ],
+    [
+     19070,
+     [
+      225,
+      338
+     ],
+     [
+      230,
+      338
+     ]
+    ]
+   ],
+   "angenommen": true,
+   "ankunft": null,
+   "umgelenkt": [
+    19070,
+    [
+     225,
+     338
+    ]
+   ],
+   "urteil": "UMGELENKT"
+  },
+  {
+   "spieler": 2,
+   "typ": 1,
+   "nr": 390,
+   "start": [
+    170,
+    106
+   ],
+   "ziel": [
+    182,
+    106
+   ],
+   "kontrolle_zielwechsel": 0,
+   "versuch_ziele": [
+    [
+     18989,
+     [
+      182,
+      106
+     ],
+     [
+      170,
+      106
+     ]
+    ]
+   ],
+   "angenommen": true,
+   "ankunft": null,
+   "umgelenkt": null,
+   "urteil": "LANGSAM"
+  },
+  {
+   "spieler": 2,
+   "typ": 10,
+   "nr": 380,
+   "start": [
+    211,
+    90
+   ],
+   "ziel": [
+    223,
+    90
+   ],
+   "kontrolle_zielwechsel": 0,
+   "versuch_ziele": [
+    [
+     18989,
+     [
+      223,
+      90
+     ],
+     [
+      211,
+      90
+     ]
+    ]
+   ],
+   "angenommen": true,
+   "ankunft": 19139,
+   "umgelenkt": null,
+   "urteil": "GEHORCHT"
+  },
+  {
+   "spieler": 2,
+   "typ": 13,
+   "nr": 2,
+   "start": [
+    201,
+    110
+   ],
+   "ziel": [
+    213,
+    110
+   ],
+   "kontrolle_zielwechsel": 0,
+   "versuch_ziele": [
+    [
+     18989,
+     [
+      213,
+      110
+     ],
+     [
+      201,
+      110
+     ]
+    ],
+    [
+     19211,
+     [
+      201,
+      102
+     ],
+     [
+      212,
+      110
+     ]
+    ]
+   ],
+   "angenommen": true,
+   "ankunft": 19189,
+   "umgelenkt": null,
+   "urteil": "GEHORCHT"
+  },
+  {
+   "spieler": 2,
+   "typ": 22,
+   "nr": 154,
+   "start": [
+    168,
+    125
+   ],
+   "ziel": [
+    179,
+    124
+   ],
+   "kontrolle_zielwechsel": 0,
+   "versuch_ziele": [
+    [
+     18989,
+     [
+      179,
+      124
+     ],
+     [
+      168,
+      125
+     ]
+    ],
+    [
+     19190,
+     [
+      168,
+      125
+     ],
+     [
+      179,
+      124
+     ]
+    ]
+   ],
+   "angenommen": true,
+   "ankunft": 19139,
+   "umgelenkt": null,
+   "urteil": "GEHORCHT"
+  },
+  {
+   "spieler": 2,
+   "typ": 24,
+   "nr": 205,
+   "start": [
+    152,
+    116
+   ],
+   "ziel": [
+    163,
+    116
+   ],
+   "kontrolle_zielwechsel": 0,
+   "versuch_ziele": [
+    [
+     18989,
+     [
+      163,
+      116
+     ],
+     [
+      152,
+      116
+     ]
+    ],
+    [
+     19190,
+     [
+      152,
+      116
+     ],
+     [
+      163,
+      116
+     ]
+    ]
+   ],
+   "angenommen": true,
+   "ankunft": 19179,
+   "umgelenkt": null,
+   "urteil": "GEHORCHT"
+  },
+  {
+   "spieler": 2,
+   "typ": 3,
+   "nr": 144,
+   "start": [
+    153,
+    110
+   ],
+   "ziel": [
+    166,
+    111
+   ],
+   "kontrolle_zielwechsel": 0,
+   "versuch_ziele": [
+    [
+     18989,
+     [
+      166,
+      111
+     ],
+     [
+      153,
+      110
+     ]
+    ]
+   ],
+   "angenommen": true,
+   "ankunft": null,
+   "umgelenkt": null,
+   "urteil": "LANGSAM"
+  },
+  {
+   "spieler": 2,
+   "typ": 31,
+   "nr": 376,
+   "start": [
+    197,
+    74
+   ],
+   "ziel": [
+    209,
+    74
+   ],
+   "kontrolle_zielwechsel": 0,
+   "versuch_ziele": [
+    [
+     18989,
+     [
+      209,
+      74
+     ],
+     [
+      197,
+      74
+     ]
+    ]
+   ],
+   "angenommen": true,
+   "ankunft": 19279,
+   "umgelenkt": null,
+   "urteil": "GEHORCHT"
+  },
+  {
+   "spieler": 2,
+   "typ": 32,
+   "nr": 379,
+   "start": [
+    196,
+    74
+   ],
+   "ziel": [
+    208,
+    74
+   ],
+   "kontrolle_zielwechsel": 0,
+   "versuch_ziele": [
+    [
+     18989,
+     [
+      208,
+      74
+     ],
+     [
+      196,
+      74
+     ]
+    ],
+    [
+     19197,
+     [
+      197,
+      74
+     ],
+     [
+      208,
+      74
+     ]
+    ]
+   ],
+   "angenommen": true,
+   "ankunft": 19119,
+   "umgelenkt": null,
+   "urteil": "GEHORCHT"
+  },
+  {
+   "spieler": 2,
+   "typ": 4,
+   "nr": 86,
+   "start": [
+    163,
+    113
+   ],
+   "ziel": [
+    175,
+    113
+   ],
+   "kontrolle_zielwechsel": 1,
+   "versuch_ziele": [
+    [
+     18989,
+     [
+      175,
+      113
+     ],
+     [
+      163,
+      113
+     ]
+    ]
+   ],
+   "angenommen": true,
+   "ankunft": null,
+   "umgelenkt": null,
+   "urteil": "LANGSAM"
+  },
+  {
+   "spieler": 2,
+   "typ": 52,
+   "nr": 189,
+   "start": [
+    160,
+    140
+   ],
+   "ziel": [
+    172,
+    140
+   ],
+   "kontrolle_zielwechsel": 0,
+   "versuch_ziele": [
+    [
+     18989,
+     [
+      172,
+      140
+     ],
+     [
+      160,
+      140
+     ]
+    ]
+   ],
+   "angenommen": true,
+   "ankunft": 19239,
+   "umgelenkt": null,
+   "urteil": "GEHORCHT"
+  },
+  {
+   "spieler": 2,
+   "typ": 55,
+   "nr": 137,
+   "start": [
+    172,
+    113
+   ],
+   "ziel": [
+    183,
+    112
+   ],
+   "kontrolle_zielwechsel": 0,
+   "versuch_ziele": [
+    [
+     18989,
+     [
+      183,
+      112
+     ],
+     [
+      172,
+      113
+     ]
+    ],
+    [
+     19054,
+     [
+      172,
+      108
+     ],
+     [
+      172,
+      111
+     ]
+    ],
+    [
+     19123,
+     [
+      175,
+      116
+     ],
+     [
+      172,
+      108
+     ]
+    ]
+   ],
+   "angenommen": true,
+   "ankunft": null,
+   "umgelenkt": [
+    19054,
+    [
+     172,
+     108
+    ]
+   ],
+   "urteil": "UMGELENKT"
+  },
+  {
+   "spieler": 2,
+   "typ": 57,
+   "nr": 138,
+   "start": [
+    174,
+    103
+   ],
+   "ziel": [
+    186,
+    103
+   ],
+   "kontrolle_zielwechsel": 0,
+   "versuch_ziele": [
+    [
+     18989,
+     [
+      186,
+      103
+     ],
+     [
+      174,
+      103
+     ]
+    ]
+   ],
+   "angenommen": true,
+   "ankunft": null,
+   "umgelenkt": null,
+   "urteil": "LANGSAM"
+  },
+  {
+   "spieler": 2,
+   "typ": 6,
+   "nr": 142,
+   "start": [
+    153,
+    130
+   ],
+   "ziel": [
+    165,
+    130
+   ],
+   "kontrolle_zielwechsel": 0,
+   "versuch_ziele": [
+    [
+     18989,
+     [
+      165,
+      130
+     ],
+     [
+      153,
+      130
+     ]
+    ]
+   ],
+   "angenommen": true,
+   "ankunft": null,
+   "umgelenkt": null,
+   "urteil": "LANGSAM"
+  },
+  {
+   "spieler": 2,
+   "typ": 62,
+   "nr": 248,
+   "start": [
+    163,
+    109
+   ],
+   "ziel": [
+    175,
+    109
+   ],
+   "kontrolle_zielwechsel": 0,
+   "versuch_ziele": [
+    [
+     18989,
+     [
+      175,
+      109
+     ],
+     [
+      163,
+      109
+     ]
+    ]
+   ],
+   "angenommen": true,
+   "ankunft": null,
+   "umgelenkt": null,
+   "urteil": "LANGSAM"
+  },
+  {
+   "spieler": 2,
+   "typ": 63,
+   "nr": 212,
+   "start": [
+    190,
+    113
+   ],
+   "ziel": [
+    202,
+    113
+   ],
+   "kontrolle_zielwechsel": 0,
+   "versuch_ziele": [
+    [
+     18989,
+     [
+      202,
+      113
+     ],
+     [
+      190,
+      113
+     ]
+    ]
+   ],
+   "angenommen": true,
+   "ankunft": 19259,
+   "umgelenkt": null,
+   "urteil": "GEHORCHT"
+  },
+  {
+   "spieler": 2,
+   "typ": 64,
+   "nr": 238,
+   "start": [
+    147,
+    102
+   ],
+   "ziel": [
+    158,
+    101
+   ],
+   "kontrolle_zielwechsel": 1,
+   "versuch_ziele": [
+    [
+     18989,
+     [
+      158,
+      101
+     ],
+     [
+      147,
+      102
+     ]
+    ],
+    [
+     19285,
+     [
+      152,
+      100
+     ],
+     [
+      158,
+      101
+     ]
+    ]
+   ],
+   "angenommen": true,
+   "ankunft": 19229,
+   "umgelenkt": null,
+   "urteil": "GEHORCHT"
+  },
+  {
+   "spieler": 2,
+   "typ": 7,
+   "nr": 211,
+   "start": [
+    184,
+    67
+   ],
+   "ziel": [
+    195,
+    66
+   ],
+   "kontrolle_zielwechsel": 0,
+   "versuch_ziele": [
+    [
+     18989,
+     [
+      195,
+      66
+     ],
+     [
+      184,
+      67
+     ]
+    ]
+   ],
+   "angenommen": true,
+   "ankunft": null,
+   "umgelenkt": null,
+   "urteil": "LANGSAM"
+  },
+  {
+   "spieler": 2,
+   "typ": 73,
+   "nr": 223,
+   "start": [
+    142,
+    92
+   ],
+   "ziel": [
+    154,
+    92
+   ],
+   "kontrolle_zielwechsel": 0,
+   "versuch_ziele": [
+    [
+     18989,
+     [
+      154,
+      92
+     ],
+     [
+      142,
+      92
+     ]
+    ],
+    [
+     19190,
+     [
+      142,
+      92
+     ],
+     [
+      154,
+      92
+     ]
+    ]
+   ],
+   "angenommen": true,
+   "ankunft": 19159,
+   "umgelenkt": null,
+   "urteil": "GEHORCHT"
+  },
+  {
+   "spieler": 2,
+   "typ": 8,
+   "nr": 234,
+   "start": [
+    182,
+    60
+   ],
+   "ziel": [
+    193,
+    59
+   ],
+   "kontrolle_zielwechsel": 1,
+   "versuch_ziele": [
+    [
+     18989,
+     [
+      193,
+      59
+     ],
+     [
+      182,
+      60
+     ]
+    ],
+    [
+     19280,
+     [
+      164,
+      113
+     ],
+     [
+      193,
+      59
+     ]
+    ]
+   ],
+   "angenommen": true,
+   "ankunft": 19219,
+   "umgelenkt": null,
+   "urteil": "GEHORCHT"
+  },
+  {
+   "spieler": 2,
+   "typ": 9,
+   "nr": 254,
+   "start": [
+    177,
+    60
+   ],
+   "ziel": [
+    189,
+    60
+   ],
+   "kontrolle_zielwechsel": 1,
+   "versuch_ziele": [
+    [
+     18989,
+     [
+      189,
+      60
+     ],
+     [
+      177,
+      60
+     ]
+    ],
+    [
+     19281,
+     [
+      164,
+      113
+     ],
+     [
+      187,
+      60
+     ]
+    ]
+   ],
+   "angenommen": true,
+   "ankunft": 19209,
+   "umgelenkt": null,
+   "urteil": "GEHORCHT"
+  }
+ ]
+}

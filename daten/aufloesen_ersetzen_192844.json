@@ -1,0 +1,92 @@
+{
+ "stand": "Walltest 4",
+ "aufloesen": {
+  "vorher": 23,
+  "nachher": 22,
+  "plaetze": {
+   "154": {
+    "zustand": 2,
+    "typ": 1,
+    "kennung": 518747,
+    "leben": 2500,
+    "max": 2500
+   },
+   "155": {
+    "zustand": 2,
+    "typ": 1,
+    "kennung": 518748,
+    "leben": 2500,
+    "max": 2500
+   },
+   "156": {
+    "zustand": 2,
+    "typ": 1,
+    "kennung": 518749,
+    "leben": 2500,
+    "max": 2500
+   }
+  },
+  "gilt": false
+ },
+ "ersetzen": {
+  "von": [
+   32,
+   0
+  ],
+  "nach": [
+   0,
+   32
+  ],
+  "einheiten": {
+   "145": [
+    {
+     "zustand": 2,
+     "typ": 72,
+     "kennung": 518737,
+     "leben": 9000,
+     "max": 9000
+    },
+    {
+     "zustand": 2,
+     "typ": 27,
+     "kennung": 518737,
+     "leben": 40000,
+     "max": 40000
+    }
+   ],
+   "146": [
+    {
+     "zustand": 2,
+     "typ": 72,
+     "kennung": 518738,
+     "leben": 9000,
+     "max": 9000
+    },
+    {
+     "zustand": 2,
+     "typ": 27,
+     "kennung": 518738,
+     "leben": 40000,
+     "max": 40000
+    }
+   ],
+   "147": [
+    {
+     "zustand": 2,
+     "typ": 72,
+     "kennung": 518739,
+     "leben": 9000,
+     "max": 9000
+    },
+    {
+     "zustand": 2,
+     "typ": 27,
+     "kennung": 518739,
+     "leben": 40000,
+     "max": 40000
+    }
+   ]
+  },
+  "gilt": true
+ }
+}

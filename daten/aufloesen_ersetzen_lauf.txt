@@ -1,0 +1,8 @@
+Eintrag 4 'Walltest 4' -> Scrollstand 0, Zeile 4; Spielzeit vorher 23788
+['[villagestudio]: LADEPAUSE: scharf (jetzt Tick 23788, pausiert).']
+['[villagestudio]: POKE 0x01126628: 0 -> 0', '[villagestudio]: POKE 0x01126624: 0 -> 4', '[villagestudio]: LADEN: Knopf 2 gedrueckt, ok=true', '[villagestudio]: logik: 3 von 3 Befehlen ausgefuehrt, 0 schon erledigt.', '[villagestudio]: LADEPAUSE: Laden erkannt (Spielzeit sprang um -4800) bei Tick 18988 - angehalten.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 18988.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 18988.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 18988.']
+Spielzeit nachher 18988 / 18988, Pause 1
+['[villagestudio]: AUFLOESEN Tick 18988: 3 Einheiten (Rueckgabe 1 = mit Lagerfeuer zum Bauern): 154=1 155=1 156=1']
+['[villagestudio]: WANDLE: Typ 72 -> 27 bei Spieler 1 | 32 Einheiten angestossen']
+AUFLOESEN: Typ 22 bei Spieler 2 23 -> 22 (soll -3); Plaetze danach [(154, 1, 2), (155, 1, 2), (156, 1, 2)] -> NICHT
+ERSETZEN: Typ 72 32 -> 0, Typ 27 0 -> 32; Hoechstleben vorher/nachher [(9000, 40000), (9000, 40000), (9000, 40000)] -> GILT

@@ -1,0 +1,19 @@
+Eintrag 4 'Walltest 4' -> Scrollstand 0, Zeile 4; Spielzeit vorher 1200
+['[villagestudio]: LADEPAUSE: scharf (jetzt Tick 1200, pausiert).']
+['[villagestudio]: POKE 0x01126628: 0 -> 0', '[villagestudio]: POKE 0x01126624: 0 -> 4', '[villagestudio]: LADEN: Knopf 2 gedrueckt, ok=true', '[villagestudio]: logik: 3 von 3 Befehlen ausgefuehrt, 0 schon erledigt.', '[villagestudio]: LADEPAUSE: Laden erkannt (Spielzeit sprang um 17788) bei Tick 18988 - angehalten.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 18988.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 18988.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 18988.']
+Spielzeit nachher 18988 / 18988, Pause 1
+Gruppe: 24 Einheiten Typ 13 von Spieler 2; Eingang Gebaeude Typ 19 bei (159, 112)
+Eintrag 4 'Walltest 4' -> Scrollstand 0, Zeile 4; Spielzeit vorher 19288
+['[villagestudio]: LADEPAUSE: scharf (jetzt Tick 19288, pausiert).']
+['[villagestudio]: POKE 0x01126628: 0 -> 0', '[villagestudio]: POKE 0x01126624: 0 -> 4', '[villagestudio]: LADEN: Knopf 2 gedrueckt, ok=true', '[villagestudio]: logik: 3 von 3 Befehlen ausgefuehrt, 0 schon erledigt.', '[villagestudio]: LADEPAUSE: Laden erkannt (Spielzeit sprang um -300) bei Tick 18988 - angehalten.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 18988.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 18988.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 18988.']
+Spielzeit nachher 18988 / 18988, Pause 1
+['[villagestudio]: HALTEN Tick 18988: 24 Einheiten festgehalten auf der Stelle, Befehl angenommen 24.']
+EINFRIEREN: mit Halten 23 von 24 hoechstens 1 Feld bewegt; ohne Halten 24 mehr als 1 Feld -> GILT
+Eintrag 4 'Walltest 4' -> Scrollstand 0, Zeile 4; Spielzeit vorher 19288
+['[villagestudio]: LADEPAUSE: scharf (jetzt Tick 19288, pausiert).']
+['[villagestudio]: POKE 0x01126628: 0 -> 0', '[villagestudio]: POKE 0x01126624: 0 -> 4', '[villagestudio]: LADEN: Knopf 2 gedrueckt, ok=true', '[villagestudio]: logik: 3 von 3 Befehlen ausgefuehrt, 0 schon erledigt.', '[villagestudio]: LADEPAUSE: Laden erkannt (Spielzeit sprang um -300) bei Tick 18988 - angehalten.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 18988.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 18988.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 18988.']
+Spielzeit nachher 18988 / 18988, Pause 1
+['[villagestudio]: HALTEN Tick 18988: 24 Einheiten festgehalten bei (159,112), Befehl angenommen 24.']
+ZURUECKRUFEN: 14 von 24 binnen 600 Ticks <= 3 Felder vom Eingang (spaetester bei Tick 19549) -> NICHT
+HALTEN: am Ende der Haltezeit 14 von 24 noch dort -> GILT
+LOSLASSEN: 6 von 24 bekamen binnen 600 Ticks ein neues Ziel (erstes nach 78 Ticks) -> NICHT

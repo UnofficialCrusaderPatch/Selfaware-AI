@@ -1,0 +1,20 @@
+Eintrag 3 'Walltest 4' -> Scrollstand 0, Zeile 3; Spielzeit vorher 19288
+['[villagestudio]: LADEPAUSE: scharf (jetzt Tick 19288, pausiert).']
+['[villagestudio]: POKE 0x01126628: 0 -> 0', '[villagestudio]: POKE 0x01126624: 0 -> 3', '[villagestudio]: LADEN: Knopf 2 gedrueckt, ok=true', '[villagestudio]: logik: 3 von 3 Befehlen ausgefuehrt, 0 schon erledigt.', '[villagestudio]: LADEPAUSE: Laden erkannt (Spielzeit sprang um -300) bei Tick 18988 - angehalten.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 18988.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 18988.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 18988.']
+Spielzeit nachher 18988 / 18988, Pause 1
+Typen: [(0, 67), (1, 57), (2, 1), (2, 3), (2, 4), (2, 6), (2, 62), (2, 7), (2, 57), (1, 62)]
+Eintrag 3 'Walltest 4' -> Scrollstand 0, Zeile 3; Spielzeit vorher 19588
+['[villagestudio]: LADEPAUSE: scharf (jetzt Tick 19588, pausiert).']
+['[villagestudio]: POKE 0x01126628: 0 -> 0', '[villagestudio]: POKE 0x01126624: 0 -> 3', '[villagestudio]: LADEN: Knopf 2 gedrueckt, ok=true', '[villagestudio]: logik: 3 von 3 Befehlen ausgefuehrt, 0 schon erledigt.', '[villagestudio]: LADEPAUSE: Laden erkannt (Spielzeit sprang um -600) bei Tick 18988 - angehalten.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 18988.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 18988.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 18988.']
+Spielzeit nachher 18988 / 18988, Pause 1
+Sp  Typ  Nr    Start       Ziel        Kontrolle  Versuch: Zielwechsel               Ankunft  Weg    Rest   Urteil
+0   67   96    (160, 123)  (169, 120)  0 Wechsel  T18989->(169, 120)                 19509    10     0      GEHORCHT
+1   57   4     (261, 300)  (273, 300)  0 Wechsel  T18989->(273, 300)                 None     6      6      LANGSAM
+2   1    390   (170, 106)  (182, 106)  1 Wechsel  T18989->(182, 106); T19506->(172,  19359    12     0      GEHORCHT
+2   3    144   (153, 110)  (166, 111)  1 Wechsel  T18989->(166, 111); T19455->(146,  19339    13     0      GEHORCHT
+2   4    86    (163, 113)  (175, 113)  1 Wechsel  T18989->(175, 113)                 None     17     3      LANGSAM
+2   6    142   (153, 130)  (165, 130)  1 Wechsel  T18989->(165, 130)                 None     7      10     LANGSAM
+2   62   248   (163, 109)  (175, 109)  0 Wechsel  T18989->(175, 109)                 19479    13     0      GEHORCHT
+2   7    211   (184, 67)   (195, 66)   0 Wechsel  T18989->(195, 66)                  19429    11     0      GEHORCHT
+2   57   138   (174, 103)  (186, 103)  0 Wechsel  T18989->(186, 103)                 None     9      3      LANGSAM
+1   62   194   (237, 283)  (237, 295)  1 Wechsel  T18989->(237, 295); T19006->(0, 0) None     283    11     UMGELENKT

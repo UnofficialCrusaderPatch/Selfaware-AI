@@ -1,0 +1,13 @@
+Eintrag 4 'Walltest 4' -> Scrollstand 0, Zeile 4; Spielzeit vorher 21388
+['[villagestudio]: LADEPAUSE: scharf (jetzt Tick 21388, pausiert).']
+['[villagestudio]: POKE 0x01126628: 0 -> 0', '[villagestudio]: POKE 0x01126624: 0 -> 4', '[villagestudio]: LADEN: Knopf 2 gedrueckt, ok=true', '[villagestudio]: logik: 3 von 3 Befehlen ausgefuehrt, 0 schon erledigt.', '[villagestudio]: LADEPAUSE: Laden erkannt (Spielzeit sprang um -2400) bei Tick 18988 - angehalten.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 18988.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 18988.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 18988.']
+Spielzeit nachher 18988 / 18988, Pause 1
+Gruppe: 24 Einheiten Typ 13 von Spieler 2; Eingang Gebaeude Typ 19 bei (159, 112); Entfernung 3-85 Felder
+Eintrag 4 'Walltest 4' -> Scrollstand 0, Zeile 4; Spielzeit vorher 18988
+['[villagestudio]: LADEPAUSE: scharf (jetzt Tick 18988, pausiert).']
+['[villagestudio]: POKE 0x01126628: 0 -> 0', '[villagestudio]: POKE 0x01126624: 0 -> 4', '[villagestudio]: LADEN: Knopf 2 gedrueckt, ok=true', '[villagestudio]: logik: 3 von 3 Befehlen ausgefuehrt, 0 schon erledigt.', '[villagestudio]: LADEPAUSE: Laden erkannt (Pause aufgehoben) bei Tick 18988 - angehalten.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 18988.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 18988.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 18988.']
+Spielzeit nachher 18988 / 18988, Pause 1
+['[villagestudio]: HALTEN Tick 18988: 24 Einheiten festgehalten bei (159,112), Befehl angenommen 24.']
+[arbeit] ZURUECKRUFEN: 23 von 24 binnen 1200 Ticks <= 3 Felder vom Eingang -> GILT; HALTEN: am Ende 23 von 24 dort -> GILT
+  [villagestudio]: HALTEN: alle 24 losgelassen, 24 zum Arbeitsgebaeude, angenommen 24 (Tick 20188).
+[arbeit] ARBEITET WIEDER nach 1200 Ticks: 24 von 24 -> GILT

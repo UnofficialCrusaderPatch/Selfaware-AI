@@ -1,0 +1,23 @@
+Eintrag 0 'M7-04 Mensch Grumpy T600' -> Scrollstand 0, Zeile 0; Spielzeit vorher 600
+['[villagestudio]: LADEPAUSE: scharf (jetzt Tick 600, pausiert).']
+['[villagestudio]: POKE 0x01126628: 0 -> 0', '[villagestudio]: POKE 0x01126624: 0 -> 0', '[villagestudio]: LADEN: Knopf 2 gedrueckt, ok=true', '[villagestudio]: logik: 3 von 3 Befehlen ausgefuehrt, 0 schon erledigt.', '[villagestudio]: LADEPAUSE: Laden erkannt (Pause aufgehoben) bei Tick 600 - angehalten.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.']
+Spielzeit nachher 600 / 600, Pause 1
+Typen: [(1, 1), (1, 22), (1, 24), (1, 55), (1, 57), (2, 1), (2, 13), (2, 22), (2, 3), (2, 52), (2, 55), (2, 6), (2, 62)]
+Eintrag 0 'M7-04 Mensch Grumpy T600' -> Scrollstand 0, Zeile 0; Spielzeit vorher 1200
+['[villagestudio]: LADEPAUSE: scharf (jetzt Tick 1200, pausiert).']
+['[villagestudio]: POKE 0x01126628: 0 -> 0', '[villagestudio]: POKE 0x01126624: 0 -> 0', '[villagestudio]: LADEN: Knopf 2 gedrueckt, ok=true', '[villagestudio]: logik: 3 von 3 Befehlen ausgefuehrt, 0 schon erledigt.', '[villagestudio]: LADEPAUSE: Laden erkannt (Spielzeit sprang um -600) bei Tick 600 - angehalten.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.']
+Spielzeit nachher 600 / 600, Pause 1
+Sp  Typ  Nr    Start       Ziel        Kontrolle  Versuch: Zielwechsel               Ankunft  Weg    Rest   Urteil
+1   1    1     (163, 115)  (175, 115)  0 Wechsel  T601->(175, 115)                   781      12     1      GEHORCHT
+1   22   147   (165, 108)  (177, 108)  0 Wechsel  T601->(177, 108)                   821      12     0      GEHORCHT
+1   24   171   (169, 112)  (181, 112)  0 Wechsel  T601->(181, 112)                   771      12     0      GEHORCHT
+1   55   3     (168, 109)  (180, 109)  0 Wechsel  T601->(180, 109); T702->(165, 111) None     3      12     UMGELENKT
+1   57   4     (167, 113)  (179, 113)  0 Wechsel  T601->(179, 113)                   941      17     0      GEHORCHT
+2   1    165   (225, 293)  (237, 293)  1 Wechsel  T601->(237, 293); T763->(188, 303) 771      15     1      UMGELENKT
+2   13   2     (210, 292)  (222, 292)  0 Wechsel  T601->(222, 292); T1194->(201, 292 771      12     0      GEHORCHT
+2   22   153   (233, 276)  (245, 276)  0 Wechsel  T601->(245, 276)                   731      12     1      GEHORCHT
+2   3    145   (229, 295)  (241, 295)  0 Wechsel  T601->(241, 295); T964->(268, 306) 861      21     0      GEHORCHT
+2   52   182   (243, 275)  (255, 275)  2 Wechsel  T601->(255, 275); T806->(245, 291) 771      16     0      GEHORCHT
+2   55   137   (230, 287)  (242, 287)  0 Wechsel  T601->(242, 287); T704->(227, 289) None     3      12     UMGELENKT
+2   6    143   (231, 293)  (243, 293)  1 Wechsel  T601->(243, 293); T806->(285, 306) 771      34     1      GEHORCHT
+2   62   138   (241, 292)  (253, 292)  0 Wechsel  T601->(253, 292)                   None     7      5      LANGSAM
