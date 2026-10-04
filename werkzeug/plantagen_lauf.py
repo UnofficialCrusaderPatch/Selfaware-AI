@@ -9,6 +9,8 @@ Kauft NICHTS dazu - die Plantagen allein sollen das Essen bringen.
 
 Aufruf:  python plantagen_lauf.py <typ> <ware> <ticks> x,y x,y ...
          z.B. python plantagen_lauf.py 32 13 6000 203,112 201,102
+         python plantagen_lauf.py --plan <ergebnis.json> <ticks>   (Mischung aus farmen_mischen.py;
+         schreibt Aepfel, Hopfen und die Bauern aller vier Sorten mit)
 """
 import os, re, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -46,9 +48,7 @@ def baue_alle(typ, stellen, sp=SP):
             fehl.append((x, y)); print("  NICHT gebaut (%d,%d) nach 5 Versuchen" % (x, y))
     return gebaut, fehl
 
-def main():
-    typ, ware, ticks = int(sys.argv[1]), int(sys.argv[2]), int(sys.argv[3])
-    stellen = [tuple(int(v) for v in a.split(",")) for a in sys.argv[4:]]
+def vorab():
     befehl({"tempo": 1000}, 0.5)
     # Fehlerkontrolle vorab (Daniel 04.10.): laeuft das Gefecht, ist der Mensch eingetragen?
     zustand = {"Ansicht": peek(0x01FE7D1C)[0], "gameOver": peek(0x0117D500)[0],
@@ -56,6 +56,35 @@ def main():
     if zustand != {"Ansicht": 14, "gameOver": 0, "Mensch": 1, "Platz": SP}:
         raise SystemExit("TESTBEDINGUNG FEHLT: %s - erst laden und eigenerPlatz schicken" % zustand)
     print("Vorab-Kontrolle gut: %s" % zustand)
+
+def plan(datei, ticks):
+    import json
+    farmen = json.load(open(datei, encoding="utf-8"))["farmen"]
+    vorab()
+    v0 = vorrat(SP)
+    gebaut, fehl = [], []
+    for f in farmen:
+        g, x = baue_alle(f["typ"], [(f["x"], f["y"])])
+        gebaut += [(f["sorte"],) + e[1:] for e in g]; fehl += [(f["sorte"],) + e for e in x]
+    v1 = vorrat(SP)
+    print("GEBAUT %d von %d (Fehlschlaege: %s); Holz %d -> %d, Gold %d -> %d" % (
+        len(gebaut), len(farmen), fehl or "keine", v0["holz"], v1["holz"], v0["gold"], v1["gold"]))
+    print("Tick | Aepfel | Hopfen | Beliebtheit | Bauern W/H/A/K | freie Leute")
+    for i in range(ticks // 200 + 1):
+        l = lage(SP, 13)
+        t = l["typen"]
+        print("%5d | %4d | %4d | %6.2f | %d/%d/%d/%d | %3d" % (l["tick"], l["ware"], peek(0x0115BDF8 + SP * 0x39F4 + 0x4D0 + 3 * 4)[0],
+              l["beliebt"], t.get(11, 0), t.get(12, 0), t.get(13, 0), t.get(14, 0), t.get(1, 0)))
+        if i < ticks // 200:
+            laufe(200)
+    befehl({"pause": True}, 0.5)
+
+def main():
+    if sys.argv[1] == "--plan":
+        return plan(sys.argv[2], int(sys.argv[3]))
+    typ, ware, ticks = int(sys.argv[1]), int(sys.argv[2]), int(sys.argv[3])
+    stellen = [tuple(int(v) for v in a.split(",")) for a in sys.argv[4:]]
+    vorab()
     v0 = vorrat(SP)
     print("%s x %d, Kosten je Stueck %s; Vorrat vorher Holz %d Gold %d" % (
         NACH_TYP[typ]["name"], len(stellen), kosten(typ), v0["holz"], v0["gold"]))

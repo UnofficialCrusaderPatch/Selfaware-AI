@@ -1,0 +1,6 @@
+Gegenprobe: nur Apfel, Mitte Kornspeicher (170.5,117.5) - CP-SAT gegen die eigene Suche (farmen_packen.py)
+Umkreis 45: CP-SAT 7 Farmen, Weg 302, OPTIMAL / OPTIMAL, 0.13 s | eigene Suche 7 Farmen, Weg 302 -> GLEICH
+Umkreis 50: CP-SAT 10 Farmen, Weg 474, OPTIMAL / OPTIMAL, 0.17 s | eigene Suche 10 Farmen, Weg 474 -> GLEICH
+Umkreis 60: CP-SAT 21 Farmen, Weg 1131, OPTIMAL / OPTIMAL, 0.30 s | eigene Suche 21 Farmen, Weg 1131 -> GLEICH
+Umkreis 70: CP-SAT 25 Farmen, Weg 1441, OPTIMAL / OPTIMAL, 0.38 s | eigene Suche 25 Farmen, Weg 1441 -> GLEICH
+Umkreis 80: CP-SAT 27 Farmen, Weg 1612, OPTIMAL / OPTIMAL, 0.38 s | eigene Suche 27 Farmen, Weg 1612 -> GLEICH

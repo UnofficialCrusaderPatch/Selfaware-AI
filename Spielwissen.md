@@ -38,6 +38,9 @@ bis eine Messung es bestaetigt (Marke dahinter).
   - Farmen duerfen sich lueckenlos beruehren (9 von 9 gebaut, 04.10.).
   - Baeume, Hang, Wasser und **jede stehende Einheit** (ausser Huehnern) sperren den Bau - auch auf dem Feldteil. Nur in der Definitive Edition darf man ueber Arbeiter bauen. (gemessen + Daniel 04.10., 20:44)
   - Apfelplantage: erste Aepfel gut 2.000 Ticks nach dem Bau; 9 Plantagen fuellten den Kornspeicher in 4.000 Ticks von 14 auf 93 Aepfel und hielten die Beliebtheit bei 100 (Grumpy, 04.10.).
+  - 9er-Farmen (Weizen, Hopfen) und 10er-Farmen (Apfel, Kuehe) duerfen lueckenlos nebeneinander (13 von 13 gebaut, 04.10.). 9er-Farmen passen in mehr Luecken: Umkreis 50 um den Kornspeicher auf Grumpy 14 Farmen gemischt statt 10 Apfelplantagen.
+  - Hopfen braucht viel laenger als Aepfel: erster Hopfen gut 7.000 Ticks nach dem Bau (Aepfel gut 2.000). Fuer Bier frueh anfangen. (gemessen 04.10., 3 Hopfenfarmen)
+  - Werkzeug fuer jede Karte: Platzkarten holen (je < 1 s), dann `farmen_mischen.py` - beste Mischung nachweislich in unter 3 s, auch fuer die ganze Karte.
   - Auf Grumpy liegt das naechste Gruenland 37 Felder vom Kornspeicher am Bergfried - bis 30 Felder passt keine einzige Farm. Darum Kornspeicher naeher ans Gruenland (Daniels Tipp, durch die Rechnung bestaetigt).
 - Logisch noetige Gebaeude fuer Truppen kennen (Kaserne, Waffenwerkstaetten, Waffenkammer). (Daniel 04.10.)
 

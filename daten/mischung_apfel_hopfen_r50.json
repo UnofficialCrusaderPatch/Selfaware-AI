@@ -1,0 +1,111 @@
+{
+ "status": "OPTIMAL / OPTIMAL",
+ "kandidaten": 1159,
+ "felder_mit_konflikt": 1721,
+ "wert": 11.8,
+ "wert_grenze": 11.8,
+ "anzahl": {
+  "apfel": 10,
+  "hopfen": 3
+ },
+ "weg_summe": 647.3,
+ "weg_grenze": 647.1,
+ "sekunden": {
+  "stufe1": 0.19,
+  "stufe2": 0.29,
+  "gesamt": 0.53
+ },
+ "farmen": [
+  {
+   "sorte": "hopfen",
+   "typ": 31,
+   "x": 195,
+   "y": 92,
+   "abstand": 30.2
+  },
+  {
+   "sorte": "apfel",
+   "typ": 32,
+   "x": 199,
+   "y": 101,
+   "abstand": 35.1
+  },
+  {
+   "sorte": "apfel",
+   "typ": 32,
+   "x": 203,
+   "y": 112,
+   "abstand": 37.0
+  },
+  {
+   "sorte": "apfel",
+   "typ": 32,
+   "x": 199,
+   "y": 139,
+   "abstand": 42.0
+  },
+  {
+   "sorte": "apfel",
+   "typ": 32,
+   "x": 204,
+   "y": 91,
+   "abstand": 43.9
+  },
+  {
+   "sorte": "apfel",
+   "typ": 32,
+   "x": 197,
+   "y": 152,
+   "abstand": 49.8
+  },
+  {
+   "sorte": "apfel",
+   "typ": 32,
+   "x": 214,
+   "y": 94,
+   "abstand": 51.6
+  },
+  {
+   "sorte": "apfel",
+   "typ": 32,
+   "x": 144,
+   "y": 64,
+   "abstand": 53.7
+  },
+  {
+   "sorte": "apfel",
+   "typ": 32,
+   "x": 193,
+   "y": 162,
+   "abstand": 55.9
+  },
+  {
+   "sorte": "apfel",
+   "typ": 32,
+   "x": 207,
+   "y": 152,
+   "abstand": 56.6
+  },
+  {
+   "sorte": "hopfen",
+   "typ": 31,
+   "x": 209,
+   "y": 143,
+   "abstand": 56.6
+  },
+  {
+   "sorte": "apfel",
+   "typ": 32,
+   "x": 203,
+   "y": 162,
+   "abstand": 61.4
+  },
+  {
+   "sorte": "hopfen",
+   "typ": 31,
+   "x": 213,
+   "y": 162,
+   "abstand": 73.3
+  }
+ ]
+}

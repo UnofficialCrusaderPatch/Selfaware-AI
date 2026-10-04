@@ -1,0 +1,47 @@
+Vorab-Kontrolle gut: {'Ansicht': 14, 'gameOver': 0, 'Mensch': 1, 'Platz': 1}
+  gebaut (195,92) als Nr 40, Versuch 1
+  gebaut (199,101) als Nr 41, Versuch 1
+  gebaut (203,112) als Nr 42, Versuch 1
+  gebaut (199,139) als Nr 43, Versuch 1
+  gebaut (204,91) als Nr 44, Versuch 1
+  gebaut (197,152) als Nr 45, Versuch 1
+  gebaut (214,94) als Nr 46, Versuch 1
+  gebaut (144,64) als Nr 47, Versuch 1
+  gebaut (193,162) als Nr 48, Versuch 1
+  gebaut (207,152) als Nr 49, Versuch 1
+  gebaut (209,143) als Nr 50, Versuch 1
+  gebaut (203,162) als Nr 51, Versuch 1
+  gebaut (213,162) als Nr 52, Versuch 1
+GEBAUT 13 von 13 (Fehlschlaege: keine); Holz 145 -> 85, Gold 3932 -> 3694
+Tick | Aepfel | Hopfen | Beliebtheit | Bauern W/H/A/K | freie Leute
+  675 |   15 |    0 |  93.25 | 0/0/0/0 |  12
+  875 |   15 |    0 |  93.50 | 0/0/10/0 |   3
+ 1075 |   15 |    0 |  95.00 | 0/2/10/0 |   1
+ 1275 |   15 |    0 |  96.50 | 0/3/10/0 |   0
+ 1475 |   15 |    0 |  98.00 | 0/3/10/0 |   0
+ 1675 |   15 |    0 |  99.50 | 0/3/10/0 |   0
+ 1875 |   14 |    0 | 100.00 | 0/3/10/0 |   0
+ 2075 |   14 |    0 | 100.00 | 0/3/10/0 |   0
+ 2275 |   14 |    0 | 100.00 | 0/3/10/0 |   0
+ 2475 |   14 |    0 | 100.00 | 0/3/10/0 |   0
+ 2675 |   18 |    0 | 100.00 | 0/3/10/0 |   0
+ 2875 |   30 |    0 | 100.00 | 0/3/10/0 |   0
+ 3075 |   41 |    0 | 100.00 | 0/3/10/0 |   0
+ 3275 |   54 |    0 | 100.00 | 0/3/10/0 |   0
+ 3475 |   53 |    0 | 100.00 | 0/3/10/0 |   0
+ 3675 |   53 |    0 | 100.00 | 0/3/10/0 |   0
+ 3875 |   53 |    0 | 100.00 | 0/3/10/0 |   0
+ 4075 |   53 |    0 | 100.00 | 0/3/10/0 |   0
+ 4275 |   53 |    0 | 100.00 | 0/3/10/0 |   0
+ 4475 |   53 |    0 | 100.00 | 0/3/10/0 |   0
+ 4675 |   53 |    0 | 100.00 | 0/3/10/0 |   0
+Tick ? | Hopfen 0 Aepfel 53 | Ansicht 14, Pause 1, gameOver 0, Spielerplatz 1
+Tick ? | Hopfen 0 Aepfel 102 | 
+Tick ? | Hopfen 0 Aepfel 101 | 
+Tick ? | Hopfen 0 Aepfel 141 | 
+Tick ? | Hopfen 3 Aepfel 140 | 
+Tick ? | Hopfen 9 Aepfel 184 | 
+Tick ? | Hopfen 12 Aepfel 189 | 
+Tick ? | Hopfen 15 Aepfel 224 | 
+Tick ? | Hopfen 16 Aepfel 226 | Ansicht 14, Pause 1, gameOver 0, Spielerplatz 1
+['[villagestudio]: ARBEITSPLATZ Tick 12675 (3): 190:Z6/U0/W2/G40(T31@196,95) 192:Z5/U0/W4/G50(T31@210,146) 196:Z5/U0/W0/G52(T31@214,165)']
