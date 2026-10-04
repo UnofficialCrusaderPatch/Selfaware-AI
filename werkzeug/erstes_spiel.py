@@ -160,8 +160,14 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
     befehl({"pause": False}, 0.5)
     ende, letzter_tick, stand, runde, t0 = time.time() + 60 * minuten, None, 0, 0, time.time()
     schreib("Tick | Holz Stein Eisen | Aepfel Brot | Beliebt | Leute/Platz (Feuer) | Holzf. Apfelb. | Ereignis")
+    zeiten = {}
+    def uhr(name, t0):
+        zeiten[name] = zeiten.get(name, 0.0) + time.time() - t0
+        return time.time()
     while time.time() < ende and not os.path.exists(os.path.join(HIER, "STOP")):
+        tz = time.time()
         st, L, G = runde_lesen()
+        tz = uhr("lesen", tz)
         if bis_tick and st.get("t", 0) >= bis_tick:
             break
         runde += 1
@@ -178,7 +184,9 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
         eig = [g for g in G.values() if g["besitzer"] == SP]
         gebs = [(g["x"] + NACH_TYP.get(g["typ"], {"b": 2})["b"] // 2, g["y"] + NACH_TYP.get(g["typ"], {"b": 2})["b"] // 2)
                 for g in eig if g["typ"] in EIGENE_ARTEN]
+        tz = time.time()
         ereignis = w.schritt(L, gebs, ausgenommen=trupp.mitglieder if trupp else ()) if w is not None else []
+        tz = uhr("waechter", tz)
         if trupp is not None:
             # Soeldnerlager (120 Gold) einmal bauen, dann Assassinen (Typ 73) anwerben bis zur Zahl; Mitglieder = alle eigenen 73er
             posten = [n for n, g in G.items() if g["besitzer"] == SP and g["typ"] == 8]
@@ -196,6 +204,7 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                 v = verkaufen(st)
                 if v:
                     ereignis.append(v)
+            tz = uhr("bauen_werben_verkauf", tz)
             trupp.aufnehmen([n for n, e in L.items() if e["besitzer"] == SP and e["typ"] == 73])
             erg = trupp.schritt(L, G, sichere_orte=gebs + [(165, 111)])
             if isinstance(erg, tuple):          # Einzeln: Befehle der Runde gesammelt in EINEM Aufruf
@@ -203,6 +212,8 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                 if liste:
                     sende({"befehle": [dict(b, player=1, id=neue_id()) for b in liste]}, 1.0, bis="ANGRIFF")
             ereignis += erg
+            tz = uhr("assassinen", tz)
+        tz = time.time()
         bedarf = sum(ARBEITER_JE[t] * st.get("G%d" % t, 0) for t in ARBEITER_JE)
         if st["holz"] >= 5 and (bedarf > st["platz"] or (trupp is not None and st["feuer"] == 0 and st["platz"] - st["leute"] <= 2)):
             ereignis.append("Huette %s (Bedarf %d, Platz %d, Leute %d, Feuer %d)" % (baue_haus(), bedarf, st["platz"], st["leute"], st["feuer"]))
@@ -214,8 +225,11 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
         zeile = "%5d | %3d %3d %3d | %3d %3d | %6.2f | %d/%d (%d) | %d %d | %s" % (
             st["t"], st["holz"], st["stein"], st["eisen"], st["apfel"], st["brot"], st["beliebt"] / 100.0, st["leute"],
             st["platz"], st["feuer"], st.get("T3", 0), st.get("T13", 0), "; ".join(ereignis) or "-")
+        tz = uhr("haus_lager_zeile", tz)
         if ereignis or runde % 10 == 1:
             schreib(zeile)
+        if runde % 10 == 0:
+            schreib("ZEITEN nach %d Runden: %s" % (runde, ", ".join("%s %.2f s" % kv for kv in sorted(zeiten.items(), key=lambda kv: -kv[1]))))
     befehl({"pause": True}, 0.5)
     st, L, G = runde_lesen()
     schreib("Ende Phase 2 bei Tick %s nach %d Runden (%.1f s je Runde); Kornspeicher %d, Holzfaeller %d, Apfelplantagen %d%s" % (

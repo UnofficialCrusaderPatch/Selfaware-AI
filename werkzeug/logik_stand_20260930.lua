@@ -76,6 +76,7 @@ local lordWacht    = nil
 local einheitWacht = nil
 -- Festhalten (04.10.2026): nr -> { x, y, gesetzt, letzter } - Ziel gegen KI/Arbeit/Lord-Logik halten
 local festhalten   = {}
+local angriffReserve = nil   -- Gruppen je Takt reserviert (modul-lokal: UCP verbietet globale Variablen - 04.10.)
 -- Zickzack (04.10.2026): { nr, a, b, alle, bis, t0, n } - Richtungswechsel je K Ticks, Feinposition je Tick
 local zickzack     = nil
 
@@ -1787,6 +1788,7 @@ local function einzelbefehl(cmd)
       nr = tonumber(nr) or 0
       local u = 0x0138854C + nr * 1168
       if nr > 0 and core.readSmallInteger(u + 0x96) == ich and (core.readSmallInteger(u + 672) or 0) == 0 then
+        festhalten[nr] = nil                    -- ein Angriffsbefehl hebt das Festhalten auf
         local b = BITS + (nr // 8)
         core.writeByte(b, (core.readByte(b) or 0) | (1 << (nr % 8)))
         n = n + 1
@@ -3148,7 +3150,11 @@ local function festhaltenTick()
       log(INFO, string.format("HALTEN Tick %d: %d ist weg - losgelassen.", t, nr))
     else
       local zx, zy = core.readSmallInteger(b + 0xC8) or -1, core.readSmallInteger(b + 0xCA) or -1
-      if (zx ~= f.x or zy ~= f.y) and t - f.letzter >= 10 then
+      if (core.readSmallInteger(b + 924) or 0) ~= 0 then
+        -- Einheit hat einen Angriffsbefehl (Zielart +924) - loslassen statt zurueckziehen (04.10.: die Wache holte
+        -- Assassinen von ihren Zielen zurueck, "sie sammeln sich nur und machen nichts")
+        festhalten[nr] = nil
+      elseif (zx ~= f.x or zy ~= f.y) and t - f.letzter >= 10 then
         f.letzter = t
         _setDest = _setDest or core.exposeCode(ADR_SETDEST, 5, 1)
         pcall(_setDest, UNITS_STATE, nr, f.x, f.y, 0)
