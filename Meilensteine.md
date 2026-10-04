@@ -888,6 +888,8 @@ Auftraege (21:54), gezaehlt: 1 Kornspeicher und Lager mitrechnen, 2 erstes Spiel
 >
 > "außerdem auch nahrung optimal verkaufne, momentan haben wir noch zu  viel äpfel dabei sollen versucht werden maximal viele sorten zu haben, außerdem fehlen noch hunter UND es fehlt noch steuern das wird besonders wichtig bei bier und besserer narhcungversorgung"
 
+**Entschieden (Daniel 05.10. 00:53: "ja, morgen damit anfangen"): ZUERST Punkt 13, der Lord-Trupp** - Schritt 0 ist eine Pruefung, die zugebaute Stellen wirklich erkennt (die Wegnetz-Pruefung ist widerlegt).
+
 Als Liste (Reihenfolge noch offen, Daniel entscheidet morgen):
 1. Holzfaeller optimieren (3 je Baum, Clusterung - siehe M14).
 2. Apfelplantagen seasonen (Grundlage steht seit 05.10., `werkzeug/wirtschaft.py`).
