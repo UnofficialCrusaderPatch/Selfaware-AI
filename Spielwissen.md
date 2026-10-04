@@ -34,6 +34,11 @@ bis eine Messung es bestaetigt (Marke dahinter).
 - Abreissen und naeher an Rohstoffen neu bauen (z. B. wenn das Holz in der Naehe weg ist) lohnt erst im Mittel-/Endspiel, dann aber richtig. (Daniel 04.10.)
 - Gebaeude, die nicht fuer die Wirtschaft wichtig sind, ruhig weiter weg bauen (z. B. Markt - den kann man ueberall bauen); das spart Platz am Lager. Der Kornspeicher kann auch weiter weg stehen: naeher am Gruenland hilft bei Aepfeln (die Apfelbauern liefern direkt in den Kornspeicher); spaeter bei Brot naeher an Lager und Baeckereien, von denen das Essen kommt. (Daniel 04.10., 20:13)
 - Farmen brauchen Gruenland: messen, wo es ist; daraus rechnen, wie viele Farmen maximal und platzsparend moeglichst nah an Bergfried/Kornspeicher gehen. (Daniel 04.10., 20:13)
+  - Gemessen/abgelesen 04.10.: Jedes Feld der Farm muss fruchtbar sein (Gras, dichtes oder duennes Gestruepp) und mindestens 50 der Felder Gruenland (Gras/dichtes Gestruepp). Groessen laut gebaeude.json: Weizen 9x9, Hopfen 9x9, Apfel 10x10, Kuehe 10x10 (Apfel im Spiel gemessen). Die Bau-Stelle ist die obere linke Ecke (Apfel gemessen).
+  - Farmen duerfen sich lueckenlos beruehren (9 von 9 gebaut, 04.10.).
+  - Baeume, Hang, Wasser und **jede stehende Einheit** (ausser Huehnern) sperren den Bau - auch auf dem Feldteil. Nur in der Definitive Edition darf man ueber Arbeiter bauen. (gemessen + Daniel 04.10., 20:44)
+  - Apfelplantage: erste Aepfel gut 2.000 Ticks nach dem Bau; 9 Plantagen fuellten den Kornspeicher in 4.000 Ticks von 14 auf 93 Aepfel und hielten die Beliebtheit bei 100 (Grumpy, 04.10.).
+  - Auf Grumpy liegt das naechste Gruenland 37 Felder vom Kornspeicher am Bergfried - bis 30 Felder passt keine einzige Farm. Darum Kornspeicher naeher ans Gruenland (Daniels Tipp, durch die Rechnung bestaetigt).
 - Logisch noetige Gebaeude fuer Truppen kennen (Kaserne, Waffenwerkstaetten, Waffenkammer). (Daniel 04.10.)
 
 ## Vorteil der KI

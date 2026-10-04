@@ -1,0 +1,7 @@
+Speertraeger [(171, 24, 169, 112), (172, 24, 168, 111), (173, 24, 170, 111)]
+['[villagestudio]: HALTEN Tick 610: 1 Einheiten festgehalten bei (207,116), Befehl angenommen 1.']
+Tick 2110 Einheit (171, 24, 207, 116)
+['[villagestudio]: PLATZ (203,112) Mapper 72 Groesse 10: geht nicht (Fehler 1, Grund 22)']
+['[villagestudio]: PLATZ (199,108) Mapper 72 Groesse 10: geht nicht (Fehler 1, Grund 22)']
+['[villagestudio]: BAUE Tick 2110: Mapper 72 bei (203,112), Groesse 10, Drehung 0 - abgesetzt=true']
+nach Bau: Apfelfarmen [] vorher [] | Einheit (171, 24, 207, 116)

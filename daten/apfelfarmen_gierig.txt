@@ -1,0 +1,11 @@
+Farm 1 bei (197, 92) Abstand 28
+Farm 2 bei (199, 139) Abstand 30
+Farm 3 bei (201, 102) Abstand 32
+Farm 4 bei (200, 149) Abstand 33
+Farm 5 bei (203, 112) Abstand 34
+Farm 6 bei (207, 90) Abstand 38
+Farm 7 bei (210, 150) Abstand 41
+Farm 8 bei (194, 159) Abstand 43
+Farm 9 bei (204, 160) Abstand 44
+keine gueltige Stelle mehr im Umkreis 45
+Summe: 9 Apfelplantagen | Holz 118 Gold 3465

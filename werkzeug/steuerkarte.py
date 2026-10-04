@@ -39,7 +39,22 @@ def laufe(ticks):
         if tick() == t + ticks:
             return t + ticks
         time.sleep(0.3)
-    return tick()
+    jetzt = tick()
+    if jetzt is None or jetzt <= t:
+        # Fehlerkontrolle (Daniel 04.10.): steht die Zeit, ist der Lauf ungueltig - laut abbrechen.
+        raise RuntimeError("SPIELZEIT STEHT bei %s (Ziel %d): %s" % (jetzt, t + ticks, spielzustand()))
+    return jetzt
+
+def spielzustand():
+    """Ansicht 14 = Gefecht, 30 = Endbildschirm, 41 = Hauptmenue; gameOver 0x0117D500."""
+    werte = {}
+    for name, adr in (("Ansicht", 0x01FE7D1C), ("Pause", 0x01FEA054), ("gameOver", 0x0117D500),
+                      ("Spielerplatz", 0x01A275DC)):
+        try:
+            werte[name] = lies(adr)
+        except Exception:
+            werte[name] = "?"
+    return ", ".join("%s %s" % kv for kv in werte.items())
 
 def abzug(name):
     sende({"player": 1, "abzug": name}, 1.0)

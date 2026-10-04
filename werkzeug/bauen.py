@@ -43,6 +43,25 @@ def baue_irgendwo(typ, kandidaten, sp=1):
             return neu[0]
     return None
 
+def platzkarte(typ, x0, y0, x1, y1, ziel, sp=1, hoechstens=900):
+    """Spielpruefung fuer jede Stelle im Rechteck (Modulbefehl "platzkarte"); wartet auf die
+    Fertig-Zeile im Log statt einer festen Zeit, kopiert die Karte nach ziel. Gibt (gut, alle, sekunden)."""
+    import shutil, time
+    from befehl import LOG, SPIEL
+    g = NACH_TYP[typ]
+    vorher, t0 = os.path.getsize(LOG), time.time()
+    befehl({"platzkarte": {"spieler": sp, "mapper": g["mapper"], "groesse": g["b"],
+                           "x0": x0, "y0": y0, "x1": x1, "y1": y1}}, 0.5)
+    while time.time() - t0 < hoechstens:
+        with io.open(LOG, encoding="utf-8", errors="replace") as f:
+            f.seek(vorher)
+            m = re.search(r"PLATZKARTE .*?: (\d+) von (\d+) gehen", f.read())
+        if m:
+            shutil.copy(os.path.join(SPIEL, "ucp", "villagestudio", "abzug", "platzkarte.txt"), ziel)
+            return int(m.group(1)), int(m.group(2)), round(time.time() - t0, 1)
+        time.sleep(1.0)
+    raise RuntimeError("platzkarte: keine Fertig-Zeile nach %d s" % hoechstens)
+
 def werbe(einheitentyp, gebaeude_nr):
     befehl({"werbe": {"typ": einheitentyp, "gebaeude": gebaeude_nr}}, 0.8)
 

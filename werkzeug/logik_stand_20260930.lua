@@ -1490,10 +1490,22 @@ local function einzelbefehl(cmd)
   --   { "eigenerPlatz": 1 }  welcher Spieler "ich" bin (GameSynchronyState + 0x109E74). Gemessen
   --   04.10.: nach unserem eigenen Gefecht (Mensch auf Platz 1) stand hier 0 - jeder Bau- und
   --   Anwerbebefehl lief dann still fuer den neutralen Spieler 0 und tat nichts.
+  --   Zweiter Teil (gemessen 04.10., 21:20): Ein geladener Spielstand traegt den Menschen NICHT in
+  --   currentPlayerFullIDArray (0x0191DE10) ein - alles steht auf -1. Der Platz gilt dann weder als
+  --   Mensch noch als KI; checkSkirmishGameDefeat sieht nur noch Rotkaeppchens Mannschaft und beendet
+  --   das Spiel im ersten Takt (gameOver 1, Endbildschirm). Darum hier wie in eigenesGefecht:
+  --   Platz ohne KI -> fullID = 1 ("Mensch da").
   if cmd.eigenerPlatz ~= nil then
+    local sp = tonumber(cmd.eigenerPlatz) or 1
     local alt = core.readInteger(0x0191D768 + 0x109E74)
-    core.writeInteger(0x0191D768 + 0x109E74, tonumber(cmd.eigenerPlatz) or 1)
-    log(INFO, string.format("EIGENER PLATZ: %s -> %s", tostring(alt), tostring(core.readInteger(0x0191D768 + 0x109E74))))
+    core.writeInteger(0x0191D768 + 0x109E74, sp)
+    local fullAlt = core.readInteger(0x0191DE10 + sp * 4)
+    if sp >= 1 and sp <= 8 and (core.readInteger(0x0191DE7C + sp * 4) or 0) == 0 then
+      core.writeInteger(0x0191DE10 + sp * 4, 1)
+    end
+    log(INFO, string.format("EIGENER PLATZ: %s -> %s; Mensch-Eintrag Platz %d: %s -> %s; gameOver %s",
+      tostring(alt), tostring(core.readInteger(0x0191D768 + 0x109E74)), sp, tostring(fullAlt),
+      tostring(core.readInteger(0x0191DE10 + sp * 4)), tostring(core.readInteger(0x0117D500))))
     return true
   end
 
@@ -1536,6 +1548,37 @@ local function einzelbefehl(cmd)
     end
     log(INFO, string.format("PLATZSUCHE Mapper %d Groesse %d um (%d,%d): %d frei von %d geprueft: %s", m, g, cx, cy,
       #frei, geprueft, table.concat(frei, " ")))
+    return true
+  end
+
+  --   { "platzkarte": { "spieler": 1, "mapper": 72, "groesse": 10, "x0": 130, "y0": 70, "x1": 230, "y1": 170 } }
+  --   Fragt die Spielpruefung fuer JEDE Stelle im Rechteck und schreibt nach
+  --   ucp/villagestudio/abzug/platzkarte.txt: "+" geht, sonst der Grund als Zeichen (0-9, a-z = Grund
+  --   0-35, "?" groesser). Baut nichts, kostet nichts.
+  if cmd.platzkarte ~= nil and type(cmd.platzkarte) == "table" then
+    local p = cmd.platzkarte
+    local sp, m, g = tonumber(p.spieler) or 1, tonumber(p.mapper), tonumber(p.groesse)
+    local x0, y0, x1, y1 = tonumber(p.x0), tonumber(p.y0), tonumber(p.x1), tonumber(p.y1)
+    local zeichen = "0123456789abcdefghijklmnopqrstuvwxyz"
+    local f = io.open("ucp/villagestudio/abzug/platzkarte.txt", "w")
+    f:write(string.format("mapper=%d groesse=%d x0=%d y0=%d x1=%d y1=%d" .. string.char(10), m, g, x0, y0, x1, y1))
+    local gut, alle = 0, 0
+    for y = y0, y1 do
+      local zeile = {}
+      for x = x0, x1 do
+        alle = alle + 1
+        local geht, _, grund = platzGeht(sp, m, g, x, y)
+        if geht then gut = gut + 1; zeile[#zeile + 1] = "+"
+        else
+          local gr = tonumber(grund) or -1
+          zeile[#zeile + 1] = (gr >= 0 and gr < 36) and zeichen:sub(gr + 1, gr + 1) or "?"
+        end
+      end
+      f:write(table.concat(zeile) .. string.char(10))
+    end
+    f:close()
+    log(INFO, string.format("PLATZKARTE Mapper %d Groesse %d (%d,%d)-(%d,%d): %d von %d gehen -> abzug/platzkarte.txt",
+      m, g, x0, y0, x1, y1, gut, alle))
     return true
   end
 
