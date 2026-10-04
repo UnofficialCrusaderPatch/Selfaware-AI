@@ -12,7 +12,7 @@ Phase 2 (Echtzeit): Tempo 40, laeuft. Alle paar Sekunden: Lage mitschreiben und 
 Fehlerkontrolle (Daniel): vorab Gefecht/Mensch/gameOver; laufend: steht die Spielzeit oder ist gameOver 1 -> Abbruch.
 
 Waechter (M15, Daniel 22:42): mit waechter=ja liest jede Runde das Lagebild und schickt Verteidiger (waechter.py).
-Aufruf:  python erstes_spiel.py [minuten=10] [tempo=40] [nur_phase2=nein] [waechter=nein] [start=<Spielstand>] [bis_tick=N] [assassinen=N]
+Aufruf:  python erstes_spiel.py [minuten=10] [tempo=40] [nur_phase2=nein] [waechter=nein] [start=<Spielstand>] [bis_tick=N] [assassinen=N; -1 = ohne Grenze]
          Tests mit Hoechstgeschwindigkeit (Daniel 22:55): tempo=1000 bis_tick=...
 Stop von aussen: Datei werkzeug/STOP anlegen.
 """
@@ -52,10 +52,13 @@ def phase1(plan):
     if plan.get("stein"):
         auftrag += [(20, plan["stein"]["steinbruch"]), (4, plan["stein"]["ochsen"])]
     auftrag += [(1, p) for p in plan["huetten"]]
-    gebaut, fehl = 0, []
-    for typ, (x, y) in auftrag:
+    from bauen import baue_viele
+    g1, f1 = baue_viele([(typ, x, y) for typ, (x, y) in auftrag], SP)
+    gebaut, fehl = len(g1), []
+    for typ, x, y in f1:                      # Rest einzeln (z. B. stand gerade eine Einheit auf der Flaeche)
         g, f = baue_alle(typ, [(x, y)])
         gebaut += len(g); fehl += [(NACH_TYP[typ]["name"], x, y) for (x, y) in f]
+    schreib("in einem Aufruf gebaut: %d von %d, einzeln nachgeholt: %d" % (len(g1), len(auftrag), len(f1)))
     v1 = vorrat(SP)
     schreib("GEBAUT %d von %d; Fehlschlaege: %s; Holz %d -> %d, Gold %d -> %d" % (gebaut, len(auftrag), fehl or "keine",
             v0["holz"], v1["holz"], v0["gold"], v1["gold"]))
@@ -127,6 +130,22 @@ def eigene_gebaeude():
         orte += [(x + NACH_TYP[t]["b"] // 2, y + NACH_TYP[t]["b"] // 2) for _, x, y in gebaeude_von(SP, t)]
     return orte
 
+ESSEN_RESERVE, HOLZ_RESERVE, STEIN_RESERVE, GOLD_RESERVE = 60, 15, 0, 30   # Daniel 23:06: alles ueber dem Minimum verkaufen
+WAREN_NR = {"holz": 2, "stein": 4, "eisen": 6, "pech": 7, "apfel": 13, "brot": 10, "kaese": 11, "fleisch": 12, "weizen": 9, "hopfen": 3, "mehl": 16}
+
+def verkaufen(st):
+    """Je Runde hoechstens ein Verkauf je Ware (Spielbefehl 38, verkaufen=1). Gibt Text oder None."""
+    teile = []
+    essen = sum(st.get(k, 0) for k in ("apfel", "brot", "kaese", "fleisch"))
+    for ware, reserve in (("holz", HOLZ_RESERVE), ("stein", STEIN_RESERVE), ("eisen", 0), ("pech", 0),
+                          ("weizen", 0), ("hopfen", 0), ("mehl", 0)):
+        if st.get(ware, 0) > reserve + 4:
+            befehl({"spielbefehl": {"nr": 38, "werte": [1, WAREN_NR[ware]]}}, 1.0, bis="SPIELBEFEHL"); teile.append(ware)
+    if essen > ESSEN_RESERVE + 4:
+        ware = max(("apfel", "brot", "kaese", "fleisch"), key=lambda k: st.get(k, 0))
+        befehl({"spielbefehl": {"nr": 38, "werte": [1, WAREN_NR[ware]]}}, 1.0, bis="SPIELBEFEHL"); teile.append(ware)
+    return ("verkauft: " + ",".join(teile)) if teile else None
+
 def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0):
     schreib("== Phase 2: Echtzeit, Tempo %d, %d Minuten, Waechter %s" % (tempo, minuten, "an" if mit_waechter else "aus"))
     vorab()
@@ -160,19 +179,25 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
         if trupp is not None:
             # Soeldnerlager (120 Gold) einmal bauen, dann Assassinen (Typ 73) anwerben bis zur Zahl; Mitglieder = alle eigenen 73er
             posten = [n for n, g in G.items() if g["besitzer"] == SP and g["typ"] == 8]
-            if not posten and soeldner is None:
-                soeldner = baue_schnell(8, plan["lager_mitte"][0], plan["lager_mitte"][1], 12)
+            if not posten and (soeldner is None or runde % 10 == 0):
+                soeldner = baue_schnell(8, plan["lager_mitte"][0], plan["lager_mitte"][1], 25)
                 ereignis.append("Soeldnerlager gesetzt %s (Gold %d)" % (soeldner, st["gold"]))
-            elif posten and geworben < assassinen:
+            elif posten and st["gold"] >= 70 + GOLD_RESERVE and st["feuer"] >= 1 and (assassinen < 0 or geworben < assassinen):
                 befehl({"werbe": {"typ": 73, "gebaeude": posten[0]}}, 1.0, bis="WERBE")
                 geworben += 1
-                if geworben == assassinen:
+                if geworben % 5 == 0:
                     ereignis.append("%d Assassinen angeworben (Gold jetzt %d)" % (geworben, st["gold"]))
+            if not [n for n, g in G.items() if g["besitzer"] == SP and g["typ"] == 26] and runde % 20 == 2:
+                ereignis.append("Markt gesetzt %s" % (baue_schnell(26, plan["lager_mitte"][0], plan["lager_mitte"][1], 20),))
+            elif runde % 3 == 0:
+                v = verkaufen(st)
+                if v:
+                    ereignis.append(v)
             trupp.aufnehmen([n for n, e in L.items() if e["besitzer"] == SP and e["typ"] == 73])
-            ereignis += trupp.schritt(L, G)
+            ereignis += trupp.schritt(L, G, sichere_orte=gebs + [(165, 111)])
         bedarf = sum(ARBEITER_JE[t] * st.get("G%d" % t, 0) for t in ARBEITER_JE)
-        if bedarf > st["platz"] and st["holz"] >= 5:
-            ereignis.append("Huette %s (Bedarf %d > Platz %d)" % (baue_haus(), bedarf, st["platz"]))
+        if st["holz"] >= 5 and (bedarf > st["platz"] or (trupp is not None and st["feuer"] == 0 and st["platz"] - st["leute"] <= 2)):
+            ereignis.append("Huette %s (Bedarf %d, Platz %d, Leute %d, Feuer %d)" % (baue_haus(), bedarf, st["platz"], st["leute"], st["feuer"]))
         teile = st.get("G10", 0)
         menge = sum(st.get(k, 0) for k in LAGERWAREN)
         sorten = sum(1 for k in LAGERWAREN if st.get(k, 0) > 0)

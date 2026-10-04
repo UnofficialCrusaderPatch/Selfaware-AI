@@ -1,94 +1,140 @@
 # -*- coding: utf-8 -*-
-"""Angriffstrupp (Assassinen + Speertraeger) - moeglichst viel beim Gegner zerstoeren, ohne Verluste
-(M16, Daniel 04.10.2026 21:54 und 22:54).
+"""Angriff mit Assassinen: in kleine Trupps aufteilen, moeglichst viele Gebaeude zerstoeren, ohne Verluste
+(M16, Daniel 04.10.2026 21:54, 22:54, 23:13: "wirklich splitten und maximale Gebaeude kaputt machen, besonders auf
+die Bogenschuetzen aufpassen").
+
+Gelernt aus Partie 2 (23:12): ein grosser Trupp zerstoerte 11 Gebaeude, verlor aber 76 von 90 Assassinen - fast alle
+nach Zielen 90-212 Felder tief im Feindgebiet und beim Rueckzug quer durch das Feindheer.
 
 Je Runde (Lagebild + Gebaeudeliste aus EINEM Aufruf, siehe erstes_spiel.runde_lesen):
-  1. Verletzte Mitglieder (Leben unter ihrem Hoechstwert) gehen allein zum Rueckzugsort und bleiben dort.
-  2. Kommt eine feindliche Truppe naeher als GEFAHR an ein Mitglied: der ganze Trupp zieht sich zurueck.
-  3. Sonst, ohne Ziel: Ziel = feindliches Gebaeude mit dem besten Wert / (Abstand + 20), an dem im Umkreis
-     SICHER keine feindliche Truppe steht. Werte nach Daniel (22:54): Kornspeicher am meisten (meist viel drin),
-     dann Steinbruch, Holzfaeller, Ochsenjoch, Eisenmine. Alle Mitglieder gebuendelt auf dieses eine Ziel
-     ("angriff", Spielbefehl 36 Art 9) - perfektes Stacken (Daniel 22:52).
-  4. Bilanz: zerstoerte Gebaeude (nach Typ), eigene Verluste.
-Grenzen (offen): Sichtweite der Gegner, Reichweite von Bogenschuetzen und Tuermen nicht gemessen; GEFAHR/SICHER
-sind Startwerte. Einheiten heilen vermutlich nicht von selbst (nicht gemessen).
+  - Mitglieder werden auf Trupps zu GROESSE verteilt (neue Anwerbungen fuellen den kleinsten Trupp auf).
+  - Gefahr je Feind nach Art: Fernkaempfer (Bogen, Armbrust, Schleuder, Pferdebogen) FERN Felder, sonst NAH.
+  - Jeder Trupp: Feind zu nah oder ein Mitglied verletzt -> ganzer Trupp zum NAECHSTEN sicheren Ort.
+    Sonst ohne Ziel: Gebaeude mit bestem Wert / (Abstand + 20), hoechstens MAX_WEG Felder weg, Ziel und Weg frei von
+    Gefahr, und nicht schon Ziel eines anderen Trupps. Alle Mitglieder des Trupps gebuendelt auf dieses Gebaeude.
+Grenzen (offen): Reichweiten FERN/NAH sind Startwerte, nicht gemessen; Tuerme nicht beruecksichtigt.
 """
 from laden import befehl
+from waechter import sicherster_ort
 
 ASSASSINE = 73
 TRUPPE = {22, 23, 24, 25, 26, 27, 28, 37, 55, 70, 71, 72, 73, 74, 75, 76}
+FERNKAMPF = {22, 23, 70, 72, 74, 76}
 WERT = {19: 100, 20: 60, 3: 50, 4: 40, 5: 40, 6: 30, 30: 30, 31: 30, 32: 25, 33: 25,
         17: 20, 18: 20, 34: 20, 1: 10, 7: 10, 26: 5}
-GEFAHR, SICHER = 12, 18
+GROESSE, FERN, NAH, MAX_WEG = 6, 16, 8, 30
 
 def schach(a, b):
     return max(abs(a[0] - b[0]), abs(a[1] - b[1]))
 
+def feinde(L, sp):
+    return [((e["x"], e["y"]), FERN if e["typ"] in FERNKAMPF else NAH)
+            for e in L.values() if e["besitzer"] not in (0, sp) and e["typ"] in TRUPPE]
+
+def gefaehrdet(p, fe, zuschlag=0):
+    return any(schach(p, f) < r + zuschlag for f, r in fe)
+
+def weg_sicher(von, nach, fe):
+    n = max(1, int(schach(von, nach) // 4))
+    return not any(gefaehrdet((von[0] + (nach[0] - von[0]) * i / n, von[1] + (nach[1] - von[1]) * i / n), fe)
+                   for i in range(n + 1))
+
+def naechster_sicherer(L, orte, von, fe, sp=1):
+    gut = [o for o in orte if not gefaehrdet(o, fe, 4)]
+    return min(gut, key=lambda o: schach(o, von)) if gut else sicherster_ort(L, orte, sp)
+
+class Trupp:
+    def __init__(self, nr):
+        self.nr, self.mitglieder, self.ziel, self.ziel_typ, self.zurueck, self.daheim = nr, set(), None, None, False, set()
+
 class Angriffstrupp:
     def __init__(self, sp=1, mitglieder=(), rueckzug=(125, 155)):
         self.sp, self.rueckzug = sp, tuple(rueckzug)
-        self.mitglieder = set(mitglieder)      # Einheitennummern; Assassinen kommen beim Anwerben dazu
-        self.leben_max, self.daheim = {}, set()
-        self.ziel, self.zurueck = None, False
+        self.trupps, self.leben_max = [], {}
         self.bilanz = {"gebaeude": {}, "verluste": set()}
+        self.aufnehmen(mitglieder)
+
+    @property
+    def mitglieder(self):
+        return set().union(*[t.mitglieder for t in self.trupps]) if self.trupps else set()
 
     def aufnehmen(self, nummern):
-        self.mitglieder |= set(nummern)
+        schon = self.mitglieder
+        for n in nummern:
+            if n in schon or n in self.bilanz["verluste"]:
+                continue
+            frei = [t for t in self.trupps if len(t.mitglieder) < GROESSE]
+            if not frei:
+                self.trupps.append(Trupp(len(self.trupps) + 1)); frei = [self.trupps[-1]]
+            min(frei, key=lambda t: len(t.mitglieder)).mitglieder.add(n)
+            schon.add(n)
 
-    def schritt(self, L, G):
+    def schritt(self, L, G, sichere_orte=None):
         ereignis = []
-        for n in list(self.mitglieder):
-            if n not in L or L[n]["besitzer"] != self.sp:
-                self.bilanz["verluste"].add(n); self.mitglieder.discard(n); self.daheim.discard(n)
-                ereignis.append("VERLUST: Mitglied %d" % n)
-        for n in self.mitglieder:
-            self.leben_max[n] = max(self.leben_max.get(n, 0), L[n]["leben"])
-        verletzt = [n for n in self.mitglieder if L[n]["leben"] < self.leben_max[n] and n not in self.daheim]
-        if verletzt:
-            befehl({"halten": {"nr": verletzt, "x": self.rueckzug[0], "y": self.rueckzug[1]}}, 1.0, bis="HALTEN")
-            self.daheim |= set(verletzt)
-            ereignis.append("verletzt heim: %s" % verletzt)
-        aktiv = [n for n in self.mitglieder if n not in self.daheim]
-        if self.ziel is not None and self.ziel not in G:
-            typ = self.ziel_typ
-            self.bilanz["gebaeude"][typ] = self.bilanz["gebaeude"].get(typ, 0) + 1
-            ereignis.append("Gebaeude %d (Typ %d) zerstoert" % (self.ziel, typ)); self.ziel = None
-        if not aktiv:
-            return ereignis
-        feind = [(e["x"], e["y"]) for e in L.values() if e["besitzer"] not in (0, self.sp) and e["typ"] in TRUPPE]
-        gefahr = min((schach((L[n]["x"], L[n]["y"]), t) for n in aktiv for t in feind), default=999)
-        mitte = (sum(L[n]["x"] for n in aktiv) / len(aktiv), sum(L[n]["y"] for n in aktiv) / len(aktiv))
-        if gefahr < GEFAHR:
-            if not self.zurueck:
-                befehl({"halten": {"nr": aktiv, "x": self.rueckzug[0], "y": self.rueckzug[1]}}, 1.0, bis="HALTEN")
-                self.zurueck, self.ziel = True, None
-                ereignis.append("RUECKZUG: Feind %d Felder vom Trupp" % gefahr)
-            return ereignis
-        if self.zurueck:
-            if gefahr >= SICHER:
-                befehl({"halten": {"los": aktiv}}, 1.0, bis="HALTEN")
-                self.zurueck = False
-                ereignis.append("Trupp wieder bereit (%d)" % len(aktiv))
-            else:
-                return ereignis
-        if self.ziel is None:
-            kand = []
-            for n, g in G.items():
-                if g["besitzer"] in (0, self.sp) or g["typ"] not in WERT:
+        fe = feinde(L, self.sp)
+        orte = list(sichere_orte or [self.rueckzug])
+        belegt = {t.ziel for t in self.trupps if t.ziel is not None}
+        for t in self.trupps:
+            for n in list(t.mitglieder):
+                if n not in L or L[n]["besitzer"] != self.sp:
+                    self.bilanz["verluste"].add(n); t.mitglieder.discard(n); t.daheim.discard(n)
+                    ereignis.append("VERLUST: Trupp %d Mitglied %d" % (t.nr, n))
+            for n in t.mitglieder:
+                self.leben_max[n] = max(self.leben_max.get(n, 0), L[n]["leben"])
+            if t.ziel is not None and t.ziel not in G:
+                self.bilanz["gebaeude"][t.ziel_typ] = self.bilanz["gebaeude"].get(t.ziel_typ, 0) + 1
+                ereignis.append("Trupp %d: Gebaeude %d (Typ %d) zerstoert" % (t.nr, t.ziel, t.ziel_typ))
+                belegt.discard(t.ziel); t.ziel = None
+            aktiv = [n for n in t.mitglieder if n not in t.daheim]
+            if not aktiv:
+                continue
+            mitte = (sum(L[n]["x"] for n in aktiv) / len(aktiv), sum(L[n]["y"] for n in aktiv) / len(aktiv))
+            verletzt = [n for n in aktiv if L[n]["leben"] < self.leben_max[n]]
+            in_gefahr = any(gefaehrdet((L[n]["x"], L[n]["y"]), fe) for n in aktiv)
+            if (verletzt or in_gefahr) and not t.zurueck:
+                ort = naechster_sicherer(L, orte, mitte, fe, self.sp)
+                befehl({"halten": {"nr": list(t.mitglieder), "x": ort[0], "y": ort[1]}}, 1.0, bis="HALTEN")
+                t.daheim |= set(verletzt); t.zurueck = True
+                belegt.discard(t.ziel); t.ziel = None
+                ereignis.append("Trupp %d zurueck nach %s (%s)" % (t.nr, tuple(ort), ("verletzt %s" % verletzt) if verletzt else "Feind nah"))
+                continue
+            if t.zurueck:
+                if in_gefahr:
                     continue
-                if min((schach((g["x"], g["y"]), t) for t in feind), default=999) < SICHER:
+                aktiv = [n for n in t.mitglieder if n not in t.daheim]
+                if not aktiv:
                     continue
-                d = schach(mitte, (g["x"], g["y"]))
-                kand.append((WERT[g["typ"]] / (d + 20.0), n, g, d))
-            if kand:
-                w, n, g, d = max(kand)
                 befehl({"halten": {"los": aktiv}}, 1.0, bis="HALTEN")
-                befehl({"angriff": {"einheiten": aktiv, "gebaeude": n}}, 1.0, bis="ANGRIFF")
-                self.ziel, self.ziel_typ = n, g["typ"]
-                ereignis.append("Ziel: Gebaeude %d Typ %d bei (%d,%d), %d Felder, Wert %d - %d Mitglieder gebuendelt" % (
-                    n, g["typ"], g["x"], g["y"], d, WERT[g["typ"]], len(aktiv)))
+                t.zurueck = False
+            if t.ziel is None:
+                # sofort das naechste Ziel (Daniel 23:14: nicht stehenbleiben) - Suchkreis stufenweise 30 / 45 / 60
+                kand = []
+                for weite in (MAX_WEG, 45, 60):
+                    for n, g in G.items():
+                        if g["besitzer"] in (0, self.sp) or g["typ"] not in WERT or n in belegt:
+                            continue
+                        ort = (g["x"], g["y"])
+                        d = schach(mitte, ort)
+                        if d > weite or gefaehrdet(ort, fe, 2) or not weg_sicher(mitte, ort, fe):
+                            continue
+                        kand.append((WERT[g["typ"]] / (d + 20.0), n, g, d))
+                    if kand:
+                        break
+                if not kand:
+                    # nichts Freies und Sicheres: beim naechsten anderen Trupp mithelfen statt stehenzubleiben
+                    for n in belegt:
+                        if n in G:
+                            ort = (G[n]["x"], G[n]["y"]); d = schach(mitte, ort)
+                            if d <= 60 and not gefaehrdet(ort, fe, 2) and weg_sicher(mitte, ort, fe):
+                                kand.append((1.0 / (d + 1.0), n, G[n], d))
+                if kand:
+                    w, n, g, d = max(kand)
+                    befehl({"angriff": {"einheiten": aktiv, "gebaeude": n}}, 1.0, bis="ANGRIFF")
+                    t.ziel, t.ziel_typ = n, g["typ"]; belegt.add(n)
+                    ereignis.append("Trupp %d (%d) -> Gebaeude %d Typ %d bei (%d,%d), %d Felder" % (t.nr, len(aktiv), n, g["typ"], g["x"], g["y"], d))
         return ereignis
 
     def bericht(self):
         b = self.bilanz
-        return "zerstoert %d Gebaeude %s, eigene Verluste %d" % (sum(b["gebaeude"].values()), b["gebaeude"], len(b["verluste"]))
+        return "zerstoert %d Gebaeude %s, eigene Verluste %d, Trupps %d" % (
+            sum(b["gebaeude"].values()), b["gebaeude"], len(b["verluste"]), len(self.trupps))

@@ -1,0 +1,11 @@
+Tick 20024
+Start: Gold 3850 Holz 839 Stein 96 Aepfel 247, Feuer 5
+Markt (125, 147)
+Soeldnerlager (137, 143)
+nach Markt+Lager: Gold 3730 (-120), G26=1 G8=1
+Assassine (Typ 73): Gold -70, am Feuer 5 -> 4, Einheiten T73 0 -> 0
+arab. Bogenschuetze (Typ 70): Gold -60, am Feuer 4 -> 3, Einheiten T70 0 -> 0
+arab. Schwertkaempfer (Typ 75): Gold -100, am Feuer 3 -> 2, Einheiten T75 0 -> 0
+Verkauf apfel: apfel 247 -> 197, Gold +150
+Verkauf holz: holz 841 -> 792, Gold +50
+Verkauf stein: stein 96 -> 86, Gold +50

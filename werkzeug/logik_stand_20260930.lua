@@ -1670,15 +1670,42 @@ local function einzelbefehl(cmd)
     f:close()
     -- dazu alle Gebaeude (eigene UND fremde): nr besitzer typ x y leben uid -> abzug/gebaeude.txt
     local fg = io.open("ucp/villagestudio/abzug/gebaeude.txt", "w")
-    fg:write("nr besitzer typ x y leben uid" .. NL)
+    fg:write("nr besitzer typ x y leben uid erreichbar" .. NL)
+    -- erreichbar (04.10., Daniel: zugebaute Gebaeude erkennen): irgendein Feld rund um den Grundriss liegt in einem
+    -- Wegnetz-Gebiet (PathConnectionLayer, TileMapState +0x363DD0 = 0x01DF6FD8, ushort je Feld), das Spieler 1 vom
+    -- Gebiet seines Bergfried-Eingangs aus erreichen kann (calculateCanPlayerUnitsNavigateToAreaFromArea 0x004A5320,
+    -- thiscall PathFindingState 0x012BB8C8 - dieselbe Pruefung nimmt der Holzfaeller in findTree).
+    local WEGNETZ = 0x01DF6FD8
+    local kannHin = core.exposeCode(0x004A5320, 5, 1)
+    local function feld(x, y) return (core.readInteger(0x023372F8 + y * 12 + 8) or 0) + x end
+    local ex, ey = (lagebildVon or {})[1] or 165, (lagebildVon or {})[2] or 111
+    local vonGebiet = core.readSmallInteger(WEGNETZ + feld(ex, ey) * 2) or 0
+    local ich = core.readInteger(0x01A275DC) or 1
     local ng, anzG = 0, gebaeudeAnzahl() or 0
     for i = 1, anzG - 1 do
       local b = GEBAEUDE + i * G_SCHRITT
       if (core.readSmallInteger(b + G_ZUSTAND) or 0) ~= 0 then
         ng = ng + 1
-        fg:write(string.format("%d %d %d %d %d %d %d", i, core.readSmallInteger(b + G_BESITZER) or -1,
-          core.readSmallInteger(b + G_TYP) or -1, core.readSmallInteger(b + 0x102) or -1, core.readSmallInteger(b + 0x104) or -1,
-          core.readSmallInteger(b + G_LEBEN) or -1, core.readInteger(b + 0xEC) or 0) .. NL)
+        local bx, by = core.readSmallInteger(b + 0x102) or -1, core.readSmallInteger(b + 0x104) or -1
+        local gr = core.readInteger(b + 0x10C) or 1
+        if gr < 1 or gr > 12 then gr = 3 end
+        local erreichbar = 0
+        if vonGebiet > 0 and bx >= 1 and by >= 1 then
+          for d = -1, gr do
+            for _, xy in ipairs({ { bx + d, by - 1 }, { bx + d, by + gr }, { bx - 1, by + d }, { bx + gr, by + d } }) do
+              if erreichbar == 0 and xy[1] >= 0 and xy[1] < 400 and xy[2] >= 0 and xy[2] < 400 then
+                local a = core.readSmallInteger(WEGNETZ + feld(xy[1], xy[2]) * 2) or 0
+                if a > 0 then
+                  local ok, r = pcall(kannHin, 0x012BB8C8, ich, vonGebiet, a, 0)
+                  if ok and r ~= 0 then erreichbar = 1 end
+                end
+              end
+            end
+          end
+        end
+        fg:write(string.format("%d %d %d %d %d %d %d %d", i, core.readSmallInteger(b + G_BESITZER) or -1,
+          core.readSmallInteger(b + G_TYP) or -1, bx, by, core.readSmallInteger(b + G_LEBEN) or -1,
+          core.readInteger(b + 0xEC) or 0, erreichbar) .. NL)
       end
     end
     fg:close()

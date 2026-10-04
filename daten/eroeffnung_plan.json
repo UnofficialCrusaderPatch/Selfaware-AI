@@ -1,188 +1,97 @@
 {
  "lager": [
-  122,
-  152
+  118,
+  120
  ],
  "lager_mitte": [
-  125,
-  155
+  121,
+  123
  ],
- "holz_je_1000_ticks": 69.9,
- "holz_in_20000_ticks": 1368,
+ "holz_je_1000_ticks": 65.2,
+ "holz_in_20000_ticks": 1303,
  "holzfaeller": [
   [
-   122,
-   147
-  ],
-  [
-   139,
-   164
-  ],
-  [
    109,
-   132
-  ],
-  [
-   140,
-   170
-  ],
-  [
-   99,
-   145
-  ],
-  [
-   106,
    130
   ],
   [
-   112,
-   163
-  ],
-  [
-   134,
-   183
-  ],
-  [
-   101,
-   180
+   104,
+   130
   ],
   [
    95,
    117
   ],
   [
-   98,
-   184
-  ],
-  [
-   110,
-   204
+   100,
+   141
   ],
   [
    109,
    93
   ],
   [
+   112,
+   91
+  ],
+  [
    129,
    91
+  ],
+  [
+   93,
+   150
+  ],
+  [
+   139,
+   164
+  ],
+  [
+   128,
+   73
+  ],
+  [
+   142,
+   166
+  ],
+  [
+   136,
+   167
+  ],
+  [
+   132,
+   71
+  ],
+  [
+   139,
+   66
   ]
  ],
  "holz_lebensdauer": [
   {
    "stelle": [
-    122,
-    147
-   ],
-   "eingang": [
-    123,
-    150
-   ],
-   "holz_je_1000_ticks": 7.9,
-   "geliefert_in_20000_ticks": 157,
-   "baeume_leer_nach_ticks": null
-  },
-  {
-   "stelle": [
-    139,
-    164
-   ],
-   "eingang": [
-    140,
-    167
-   ],
-   "holz_je_1000_ticks": 5.9,
-   "geliefert_in_20000_ticks": 117,
-   "baeume_leer_nach_ticks": null
-  },
-  {
-   "stelle": [
     109,
-    132
-   ],
-   "eingang": [
-    110,
-    135
-   ],
-   "holz_je_1000_ticks": 5.5,
-   "geliefert_in_20000_ticks": 109,
-   "baeume_leer_nach_ticks": null
-  },
-  {
-   "stelle": [
-    140,
-    170
-   ],
-   "eingang": [
-    141,
-    173
-   ],
-   "holz_je_1000_ticks": 5.4,
-   "geliefert_in_20000_ticks": 108,
-   "baeume_leer_nach_ticks": 19825
-  },
-  {
-   "stelle": [
-    99,
-    145
-   ],
-   "eingang": [
-    100,
-    148
-   ],
-   "holz_je_1000_ticks": 5.4,
-   "geliefert_in_20000_ticks": 107,
-   "baeume_leer_nach_ticks": null
-  },
-  {
-   "stelle": [
-    106,
     130
    ],
    "eingang": [
-    107,
+    110,
     133
    ],
-   "holz_je_1000_ticks": 5.2,
-   "geliefert_in_20000_ticks": 103,
+   "holz_je_1000_ticks": 6.3,
+   "geliefert_in_20000_ticks": 125,
    "baeume_leer_nach_ticks": null
   },
   {
    "stelle": [
-    112,
-    163
+    104,
+    130
    ],
    "eingang": [
-    113,
-    166
+    105,
+    133
    ],
-   "holz_je_1000_ticks": 6.2,
-   "geliefert_in_20000_ticks": 102,
-   "baeume_leer_nach_ticks": 16424
-  },
-  {
-   "stelle": [
-    134,
-    183
-   ],
-   "eingang": [
-    135,
-    186
-   ],
-   "holz_je_1000_ticks": 4.9,
-   "geliefert_in_20000_ticks": 97,
-   "baeume_leer_nach_ticks": null
-  },
-  {
-   "stelle": [
-    101,
-    180
-   ],
-   "eingang": [
-    102,
-    183
-   ],
-   "holz_je_1000_ticks": 4.6,
-   "geliefert_in_20000_ticks": 92,
+   "holz_je_1000_ticks": 5.9,
+   "geliefert_in_20000_ticks": 118,
    "baeume_leer_nach_ticks": null
   },
   {
@@ -194,34 +103,21 @@
     96,
     120
    ],
-   "holz_je_1000_ticks": 4.1,
-   "geliefert_in_20000_ticks": 81,
+   "holz_je_1000_ticks": 5.4,
+   "geliefert_in_20000_ticks": 107,
    "baeume_leer_nach_ticks": null
   },
   {
    "stelle": [
-    98,
-    184
+    100,
+    141
    ],
    "eingang": [
-    99,
-    187
+    101,
+    144
    ],
-   "holz_je_1000_ticks": 4.3,
-   "geliefert_in_20000_ticks": 78,
-   "baeume_leer_nach_ticks": 18276
-  },
-  {
-   "stelle": [
-    110,
-    204
-   ],
-   "eingang": [
-    111,
-    207
-   ],
-   "holz_je_1000_ticks": 3.7,
-   "geliefert_in_20000_ticks": 74,
+   "holz_je_1000_ticks": 5.1,
+   "geliefert_in_20000_ticks": 102,
    "baeume_leer_nach_ticks": null
   },
   {
@@ -233,8 +129,21 @@
     110,
     96
    ],
-   "holz_je_1000_ticks": 3.5,
-   "geliefert_in_20000_ticks": 69,
+   "holz_je_1000_ticks": 5.1,
+   "geliefert_in_20000_ticks": 102,
+   "baeume_leer_nach_ticks": null
+  },
+  {
+   "stelle": [
+    112,
+    91
+   ],
+   "eingang": [
+    113,
+    94
+   ],
+   "holz_je_1000_ticks": 5.1,
+   "geliefert_in_20000_ticks": 101,
    "baeume_leer_nach_ticks": null
   },
   {
@@ -246,59 +155,150 @@
     130,
     94
    ],
-   "holz_je_1000_ticks": 3.5,
-   "geliefert_in_20000_ticks": 69,
+   "holz_je_1000_ticks": 5.0,
+   "geliefert_in_20000_ticks": 100,
+   "baeume_leer_nach_ticks": null
+  },
+  {
+   "stelle": [
+    93,
+    150
+   ],
+   "eingang": [
+    94,
+    153
+   ],
+   "holz_je_1000_ticks": 4.3,
+   "geliefert_in_20000_ticks": 85,
+   "baeume_leer_nach_ticks": null
+  },
+  {
+   "stelle": [
+    139,
+    164
+   ],
+   "eingang": [
+    140,
+    167
+   ],
+   "holz_je_1000_ticks": 3.9,
+   "geliefert_in_20000_ticks": 78,
+   "baeume_leer_nach_ticks": null
+  },
+  {
+   "stelle": [
+    128,
+    73
+   ],
+   "eingang": [
+    129,
+    76
+   ],
+   "holz_je_1000_ticks": 3.9,
+   "geliefert_in_20000_ticks": 78,
+   "baeume_leer_nach_ticks": null
+  },
+  {
+   "stelle": [
+    142,
+    166
+   ],
+   "eingang": [
+    143,
+    169
+   ],
+   "holz_je_1000_ticks": 3.9,
+   "geliefert_in_20000_ticks": 77,
+   "baeume_leer_nach_ticks": null
+  },
+  {
+   "stelle": [
+    136,
+    167
+   ],
+   "eingang": [
+    137,
+    170
+   ],
+   "holz_je_1000_ticks": 3.9,
+   "geliefert_in_20000_ticks": 77,
+   "baeume_leer_nach_ticks": null
+  },
+  {
+   "stelle": [
+    132,
+    71
+   ],
+   "eingang": [
+    133,
+    74
+   ],
+   "holz_je_1000_ticks": 3.8,
+   "geliefert_in_20000_ticks": 76,
+   "baeume_leer_nach_ticks": null
+  },
+  {
+   "stelle": [
+    139,
+    66
+   ],
+   "eingang": [
+    140,
+    69
+   ],
+   "holz_je_1000_ticks": 3.6,
+   "geliefert_in_20000_ticks": 71,
    "baeume_leer_nach_ticks": null
   }
  ],
  "kornspeicher": [
-  106,
-  151
+  120,
+  115
  ],
  "aepfel": [
   [
+   110,
+   110
+  ],
+  [
+   115,
+   126
+  ],
+  [
+   105,
+   120
+  ],
+  [
+   107,
+   100
+  ],
+  [
+   100,
+   110
+  ],
+  [
    104,
    168
+  ],
+  [
+   142,
+   64
   ],
   [
    94,
    170
   ],
   [
-   112,
-   128
+   152,
+   62
   ],
   [
-   105,
+   106,
    178
-  ],
-  [
-   101,
-   120
-  ],
-  [
-   111,
-   118
-  ],
-  [
-   103,
-   188
-  ],
-  [
-   99,
-   110
-  ],
-  [
-   109,
-   108
-  ],
-  [
-   100,
-   198
   ]
  ],
  "aepfel_status": "OPTIMAL / OPTIMAL",
- "aepfel_weg_summe": 323.5,
+ "aepfel_weg_summe": 369.1,
  "huetten": [
   [
    158,
@@ -315,17 +315,17 @@
  ],
  "stein": {
   "steinbruch": [
-   93,
-   130
+   94,
+   127
   ],
   "ochsen": [
-   100,
-   137
+   101,
+   124
   ]
  },
  "arbeiter": 28,
  "holz_kosten": 150,
  "holz_rest": 0,
  "gold_kosten": 150,
- "sekunden": 71.0
+ "sekunden": 54.9
 }

@@ -47,6 +47,23 @@ def lies_lagebild(neu_holen=True):
 def schach(a, b):
     return max(abs(a[0] - b[0]), abs(a[1] - b[1]))
 
+def sicherster_ort(L, kandidaten, sp=1):
+    """Der Ort aus kandidaten, der am weitesten von jeder feindlichen Truppe weg ist (Schachbrett-Abstand)."""
+    feind = [(e["x"], e["y"]) for e in L.values() if e["besitzer"] not in (0, sp) and e["typ"] in TRUPPE]
+    if not feind or not kandidaten:
+        return kandidaten[0] if kandidaten else None
+    return max(kandidaten, key=lambda k: min(schach(k, f) for f in feind))
+
+def hauptheer(L, orte, sp=1, umkreis=35, schwelle=8):
+    """Kommt das Hauptheer? = mindestens <schwelle> feindliche Truppen mit Ort oder Laufziel nahe an unseren Orten."""
+    n = 0
+    for e in L.values():
+        if e["besitzer"] in (0, sp) or e["typ"] not in TRUPPE:
+            continue
+        if any(schach((e["x"], e["y"]), o) <= umkreis or (e["laufx"] > 0 and schach((e["laufx"], e["laufy"]), o) <= umkreis) for o in orte):
+            n += 1
+    return n >= schwelle, n
+
 class Waechter:
     def __init__(self, sp=1, posten=None):
         self.sp, self.posten = sp, posten
@@ -84,7 +101,7 @@ class Waechter:
                     self.bilanz["tote_feinde"].add(n)
                 del self.bekannt[n]
         for n, e in L.items():
-            if e["typ"] in TRUPPE and e["besitzer"] not in (0,):
+            if e["typ"] in TRUPPE and e["besitzer"] not in (0,) and n not in ausgenommen and e["typ"] != 73:
                 self.bekannt[n] = (e["besitzer"], e["typ"])
         feinde = {}
         for n, e in L.items():
@@ -103,11 +120,13 @@ class Waechter:
             ln = lord[0]; le = eigene[ln]
             self.lord_max = max(self.lord_max or 0, le["leben"])
             anteil = le["leben"] / float(self.lord_max or 1)
-            if anteil < 0.5 and not self.lord_zurueck:
-                befehl({"halten": {"nr": [ln], "x": BERGFRIED_EINGANG[0], "y": BERGFRIED_EINGANG[1]}}, 1.0, bis="HALTEN")
+            heer, anzahl = hauptheer(L, gebaeude + [BERGFRIED_EINGANG], self.sp)
+            if (anteil < 0.5 or heer) and not self.lord_zurueck:
+                ort = sicherster_ort(L, gebaeude + [BERGFRIED_EINGANG], self.sp)
+                befehl({"halten": {"nr": [ln], "x": ort[0], "y": ort[1]}}, 1.0, bis="HALTEN")
                 self.lord_zurueck = True; self.auftrag.pop(ln, None)
-                ereignis.append("Lord zurueck zum Bergfried (Leben %.0f %%)" % (100 * anteil))
-            elif anteil > 0.6 and self.lord_zurueck:
+                ereignis.append("Lord in Sicherheit nach %s (Leben %.0f %%, Feinde nahe %d)" % (tuple(ort), 100 * anteil, anzahl))
+            elif self.lord_zurueck and anteil > 0.6 and not heer:
                 befehl({"halten": {"los": [ln]}}, 1.0, bis="HALTEN")
                 self.lord_zurueck = False
         # Buendeln (Daniel 22:52: perfektes Stacken ist fuer Abwehr und Angriff unglaublich wichtig):
