@@ -13,6 +13,7 @@ bis eine Messung es bestaetigt (Marke dahinter).
 - Keine anderen Schummeleien (Gold/Waren setzen, Leben aendern, Einheiten wandeln) im echten Spiel - diese Befehle bleiben Werkzeuge fuer Tests und Trainingslagen.
 
 ## Geld
+- Liga-Bedingung (Daniel 05.10. 00:55): Start mit **0 Gold**, nicht mit 2.000-4.000. Unsere bisherigen Testpartien hatten ~3.930 Gold - ihre Ergebnisse gelten nur fuer diesen Start.
 - Immer wissen: wie viel Gold da ist, was hereinkommt, was jede Sache kostet. Passend sparen, genau ausgeben. (Daniel 04.10.)
 - Moeglichst viel Geld in Wirtschaft stecken - sie hat den hoechsten Hebel auf Geld und damit Waffen und Truppen. (Daniel 04.10.)
 - Beliebtheit erlaubt Steuern = Geld. Rohstoffe verkaufen bringt ebenfalls Geld. (Daniel 04.10.)
