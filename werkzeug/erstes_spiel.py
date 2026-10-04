@@ -187,7 +187,7 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
     befehl({"pause": False}, 0.5)
     ende, letzter_tick, stand, runde, t0 = time.time() + 60 * minuten, None, 0, 0, time.time()
     schreib("Tick | Holz Stein Eisen | Aepfel Brot | Beliebt | Leute/Platz (Feuer) | Holzf. Apfelb. | Ereignis")
-    zeiten, diese_runde = {}, {}
+    zeiten, diese_runde, feindlord = {}, {}, {}
     def uhr(name, t0):
         zeiten[name] = zeiten.get(name, 0.0) + time.time() - t0
         diese_runde[name] = time.time() - t0
@@ -203,6 +203,13 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
         if not st:
             continue
         if st.get("over") != 0 or st.get("ansicht") != 14:
+            # Spielende deutlich melden (Daniel 05.10. 00:44): wer hat wessen Lord getoetet? (PlayerData +8720)
+            if st.get("over") == 1:
+                getoetet = {sp: s32(peek(0x0115BDF8 + sp * 0x39F4 + 8720)[0]) for sp in (1, 2)}
+                if getoetet[2] == SP:
+                    schreib("SIEG bei Tick %d: Lord von Spieler 2 getoetet durch Spieler %d" % (st["t"], getoetet[2])); break
+                if getoetet[1] > 0:
+                    schreib("NIEDERLAGE bei Tick %d: unser Lord getoetet durch Spieler %d" % (st["t"], getoetet[1])); break
             schreib("ABBRUCH - Testbedingung weg: %s" % {k: st.get(k) for k in ("ansicht", "over", "pause", "t")}); break
         if letzter_tick is not None and st["t"] - letzter_tick > 400:
             schreib("WARNUNG: Runde dauerte %d Ticks (%d -> %d) - Waechter war so lange blind; Zeit der Runde davor: %s" % (
@@ -247,6 +254,18 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                           bis="ANGRIFF" if any("angriff" in b for b in liste) else "HALTEN")
             ereignis += erg
             tz = uhr("assassinen", tz)
+        # Feindlicher Lord: jede Runde mit Lebensverlust mitschreiben - wer steht bei ihm? (9i/9j: Sieg ohne Befehl auf ihn)
+        for n, e in L.items():
+            if e["typ"] == 55 and e["besitzer"] not in (0, SP):
+                alt = feindlord.get(n)
+                if alt is not None and e["leben"] < alt:
+                    bei = {}
+                    for m, u in L.items():
+                        if u["besitzer"] == SP and max(abs(u["x"] - e["x"]), abs(u["y"] - e["y"])) <= 5:
+                            bei[u["typ"]] = bei.get(u["typ"], 0) + 1
+                    ereignis.append("MESSUNG Feindlord %d: leben %d -> %d bei (%d,%d), eigene in 5 Feldern %s" % (
+                        n, alt, e["leben"], e["x"], e["y"], bei or "keine"))
+                feindlord[n] = e["leben"]
         tz = time.time()
         ereignis += wirt.schritt(st, L, G)
         tz = uhr("wirtschaft", tz)
