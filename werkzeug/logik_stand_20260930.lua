@@ -1586,7 +1586,8 @@ local function einzelbefehl(cmd)
   --   abzug/rohstoffe.txt: je Feld b Stein (LogicLayer 0x20000), i Eisen (0x80000), o Pech (Vorzeichenbit),
   --   x Fluss (0x100000), # Rand (0x30), w Wasser (0x01), B Gebaeude (BuildingLayer), G Gruenland, s Gestruepp, . sonst.
   --   abzug/baeume.txt: jeder Baum aus LandscapeState.trees (0x00F2CC38 + 28 + i*156): Nummer, Art (+70),
-  --   Zustand (+68), x (+98), y (+100), Stufe (+128). Felder abgelesen aus OpenSHC-Strukturen.
+  --   Zustand (+68), x (+98), y (+100), Stufe (+128), rest (+120, zaehlt beim Hacken herunter - gemessen 04.10.),
+  --   voll (+122), groesse (+108). Felder abgelesen aus OpenSHC-Strukturen.
   if cmd.rohstoffkarte ~= nil and type(cmd.rohstoffkarte) == "table" then
     local g = cmd.rohstoffkarte
     local x0, y0, x1, y1 = tonumber(g.x0) or 0, tonumber(g.y0) or 0, tonumber(g.x1) or 399, tonumber(g.y1) or 399
@@ -1621,15 +1622,16 @@ local function einzelbefehl(cmd)
     local LS = 0x00F2CC38
     local anzahl = core.readInteger(LS + 16) or 0
     local fb = io.open("ucp/villagestudio/abzug/baeume.txt", "w")
-    fb:write("nr art zustand x y stufe" .. NL)
+    fb:write("nr art zustand x y stufe rest voll groesse" .. NL)
     local lebend = 0
     for i = 1, math.min(anzahl, 1999) do
       local t = LS + 28 + i * 156
       local zust = core.readSmallInteger(t + 68) or 0
       if zust ~= 0 then
         lebend = lebend + 1
-        fb:write(string.format("%d %d %d %d %d %d", i, core.readSmallInteger(t + 70) or -1, zust,
-          core.readSmallInteger(t + 98) or -1, core.readSmallInteger(t + 100) or -1, core.readInteger(t + 128) or -1) .. NL)
+        fb:write(string.format("%d %d %d %d %d %d %d %d %d", i, core.readSmallInteger(t + 70) or -1, zust,
+          core.readSmallInteger(t + 98) or -1, core.readSmallInteger(t + 100) or -1, core.readInteger(t + 128) or -1,
+          core.readSmallInteger(t + 120) or -1, core.readSmallInteger(t + 122) or -1, core.readSmallInteger(t + 108) or -1) .. NL)
       end
     end
     fb:close()
@@ -1637,6 +1639,36 @@ local function einzelbefehl(cmd)
     for c, z in pairs(n) do teile[#teile + 1] = c .. "=" .. z end
     log(INFO, string.format("ROHSTOFFKARTE (%d,%d)-(%d,%d): %s; Baeume %d von maxTreeCount %d -> abzug/rohstoffe.txt, baeume.txt",
       x0, y0, x1, y1, table.concat(teile, " "), lebend, anzahl))
+    return true
+  end
+
+  --   { "lagebild": true }  (04.10.2026, Daniel: ALLE Einheiten verfolgen, besonders wer uns angreift)
+  --   abzug/lagebild.txt: je lebende Einheit nr besitzer typ x y leben zustand zielart zieleinheit zieluid
+  --   zielgebaeude ziel zielx ziely. Felder (Unit, 1168 Byte, Referenz = unsere Basis 0x0138854C):
+  --   +924 targetingType, +926 targetedUnitID, +928 targetedUID/buildingUID, +822 targetID_OR_targetBuildingID,
+  --   +782 target, +784/+786 targetX/Y, +968 health, +704 state, +672 dying, Laufziel +0xC8/+0xCA (KI-Angriffe stehen
+  --   hier, nicht in den Befehlsfeldern - gemessen 04.10.). Ort = Mikro +0xB6/+0xB8 / 8.
+  if cmd.lagebild ~= nil then
+    local NL = string.char(10)
+    local E = 0x0138854C
+    local f = io.open("ucp/villagestudio/abzug/lagebild.txt", "w")
+    f:write(string.format("tick %d", tick()) .. NL .. "nr besitzer typ x y leben zustand zielart zieleinheit zieluid zielgebaeude ziel zielx ziely laufx laufy" .. NL)
+    local n, maxN = 0, core.readInteger(0x01387F38) or 0
+    for i = 1, math.min(maxN, 2999) do
+      local u = E + i * 1168
+      local typ = core.readSmallInteger(u + 0x8E) or 0
+      if typ > 0 and (core.readSmallInteger(u + 0x8C) or 0) ~= 0 and (core.readSmallInteger(u + 672) or 0) == 0 then
+        n = n + 1
+        f:write(string.format("%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d", i, core.readSmallInteger(u + 0x96) or -1, typ,
+          (core.readSmallInteger(u + 0xB6) or 0) // 8, (core.readSmallInteger(u + 0xB8) or 0) // 8,
+          core.readInteger(u + 968) or -1, core.readSmallInteger(u + 704) or -1, core.readSmallInteger(u + 924) or -1,
+          core.readSmallInteger(u + 926) or -1, core.readInteger(u + 928) or -1, core.readSmallInteger(u + 822) or -1,
+          core.readSmallInteger(u + 782) or -1, core.readSmallInteger(u + 784) or -1, core.readSmallInteger(u + 786) or -1,
+          core.readSmallInteger(u + 0xC8) or -1, core.readSmallInteger(u + 0xCA) or -1) .. NL)
+      end
+    end
+    f:close()
+    log(INFO, string.format("LAGEBILD Tick %d: %d Einheiten -> abzug/lagebild.txt", tick(), n))
     return true
   end
 

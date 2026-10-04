@@ -43,6 +43,24 @@ def baue_irgendwo(typ, kandidaten, sp=1):
             return neu[0]
     return None
 
+def baue_viele(auftraege, sp=1):
+    """Viele Bauten in EINER Befehlsliste (das Modul arbeitet eine Liste in einem Takt ab), dann eine Kontrolle
+    je Gebaeudeart: gebaut = neues Gebaeude dieser Art genau an der Stelle. auftraege: [(typ, x, y), ...].
+    Gibt (gebaut, fehl) - fehl z. B. weil gerade eine Einheit auf der Flaeche steht oder Holz fehlt."""
+    from befehl import sende, neue_id
+    arten = sorted({t for t, _, _ in auftraege})
+    vorher = {t: {n for n, _, _ in gebaeude_von(sp, t)} for t in arten}
+    liste = []
+    for t, x, y in auftraege:
+        g = NACH_TYP[t]
+        liste.append({"player": 1, "id": neue_id(), "baue": {"mapper": g["mapper"], "x": x, "y": y, "groesse": g["b"], "richtung": 0}})
+    sende({"befehle": liste}, 1.0)
+    laufe(2)
+    neu = {t: {(x, y): n for n, x, y in gebaeude_von(sp, t) if n not in vorher[t]} for t in arten}
+    gebaut = [(t, x, y, neu[t][(x, y)]) for t, x, y in auftraege if (x, y) in neu[t]]
+    fehl = [(t, x, y) for t, x, y in auftraege if (x, y) not in neu[t]]
+    return gebaut, fehl
+
 def platzkarte(typ, x0, y0, x1, y1, ziel, sp=1, hoechstens=900):
     """Spielpruefung fuer jede Stelle im Rechteck (Modulbefehl "platzkarte"); wartet auf die
     Fertig-Zeile im Log statt einer festen Zeit, kopiert die Karte nach ziel. Gibt (gut, alle, sekunden)."""

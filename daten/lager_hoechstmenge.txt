@@ -1,0 +1,10 @@
+Tick 600
+Markt (38, 172, 111)
+Lagerteile: 4 [(6, 169, 106), (7, 172, 106), (8, 169, 109), (9, 172, 109)]
+4 Teile, nur Holz gekauft bis nichts mehr passt: holz = 190, Gold 3812
+  danach Stein dazu (alle Teile mit Holz belegt?): stein = 0, Gold 3813
+Lagerteil anbauen: (39, 174, 105) -> Teile 8
+5 Teile, Holz nachgekauft: holz = 380, Gold 3247
+  Stein nachgekauft: stein = 0, Gold 3247
+Holz je Teil (abgeleitet): 47.5 | 5. Teil nahm Holz 190, Stein 0
+Ansicht 14, Pause 1, gameOver 0, Spielerplatz 1

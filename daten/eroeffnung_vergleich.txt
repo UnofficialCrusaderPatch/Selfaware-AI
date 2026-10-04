@@ -1,0 +1,4 @@
+Holz, das in 20.000 Ticks im Lager ankommt (eigene Baeume je Huette, Wege gemessen) - Grumpy, Start
+K= 6 | altes Lager (169,106):  495 Holz, 24.8 je 1000 Ticks | neues Lager (124, 146):  703 Holz, 35.2 je 1000 | Gewinn +208 Holz (31 s)
+K=10 | altes Lager (169,106):  783 Holz, 39.2 je 1000 Ticks | neues Lager (122, 152): 1076 Holz, 55.0 je 1000 | Gewinn +293 Holz (52 s)
+K=14 | altes Lager (169,106): 1053 Holz, 52.8 je 1000 Ticks | neues Lager (122, 152): 1368 Holz, 69.9 je 1000 | Gewinn +314 Holz (73 s)
