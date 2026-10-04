@@ -901,3 +901,4 @@ Als Liste (Reihenfolge noch offen, Daniel entscheidet morgen):
 10. Nahrung optimal verkaufen - heute zu viele Aepfel; moeglichst viele Sorten (Beliebtheit).
 11. Jaeger fehlen.
 12. Steuern fehlen - besonders wichtig mit Bier und besserer Nahrungsversorgung.
+13. Lord-Trupp (Daniel 05.10. 00:52, Regel im Spielwissen): nebenher pruefen, freie Raid-Assassinen gestapelt auf den Lord - 5 wenn er allein steht, ~10 normal, bei Bogenschuetzen und vielen Feinden mehr; zugebaut -> erst freilegen. Messgrundlage steht: Lord-Zeilen in der Konsole (Partie 9k: 3-11 Assassinen trafen ihn nebenbei, 150.000 -> 108.600).
