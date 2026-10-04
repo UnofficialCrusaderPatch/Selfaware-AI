@@ -758,3 +758,10 @@ Werkzeug `werkzeug/bauen.py` (Bausteine `baue_irgendwo`, `werbe`, `vorrat`, `kos
 - **Offen / naechste Schritte:** Kaserne (12 Stein) + Waffen fuer europaeische Truppen; Plaetze finden statt probieren (freie Flaeche, Baeume neben Holzfaeller, Steinbruch/Ochsen, Wild fuer Jaeger); Gold-Buch (Einnahmen/Ausgaben je Tick); Steuern/Rationen/Verkaufen steuern; dann der erste eigene Spielplan gegen das Rotkaeppchen.
 
 **Spielregeln fuer unsere KI (Daniel, 04.10.2026, 19:56):** keine kostenlosen Mauern (alles kostet wie beim Menschen); Kaufen/Verkaufen in beliebiger Menge auf einmal erlaubt (Menschen: mindestens 5). Stehen ausfuehrlich in `Spielwissen.md`.
+
+## M13 Freie Bauplaetze finden (begonnen 04.10.2026, 19:58) - Stand: Pruefung noch NICHT verlaesslich
+
+- Daniel: "ja gerne. bitte kornspeicher nicht vergessen. beliebtheit ist das wichtigste, wenn deine beliebtheit unter 95 faellt reduziert sich deine bauernspawnrate bis sie bei 50 fast steht und unter 50 leute AUS deinem dorf gehen" (in `Spielwissen.md` uebernommen).
+- **Beliebtheit** steht bei PlayerData + 0x60 in Hundertsteln (abgelesen + plausibel: Mensch in M7-04 9325 = 93,25 - also schon unter 95; Rotkaeppchen 98,25). Gegen die Anzeige im Spiel noch nicht verglichen.
+- **Platzpruefung des Spiels** gefunden: `checkBuildingCanBePlacedHere` (0x005037B0, thiscall TileMapState, Spieler, x, y, Bau-Nummer, Groesse) -> `buildingPlacementFail` (0x01FE7B3C), Grund (0x01FE7B40). Modulbefehle `platz` (eine Stelle) und `platzsuche` (ringweise, naechste freie Stellen) - bauen nichts, kosten nichts.
+- **Gegenprobe NICHT bestanden (19:59):** Die Pruefung meldet (178,112) als frei - dort hat das Spiel um 19:51 als Spieler 1 nicht gebaut; und sie meldet Stellen direkt am Lager (172,111), (174,109) als frei fuer einen Kornspeicher. Der Grund bleibt bei jeder Abfrage 22 (vermutlich ein Rest). Ich lese das Ergebnis falsch/unvollstaendig, oder `placeBuilding` prueft mehr bzw. rechnet x/y anders (Mitte statt Ecke). **Nicht verwenden, bis die Gegenprobe gilt.** Naechster Schritt: `placeBuilding` (0x005162D0) lesen - wie entscheidet es selbst?

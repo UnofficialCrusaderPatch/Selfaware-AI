@@ -1497,6 +1497,46 @@ local function einzelbefehl(cmd)
     return true
   end
 
+  --   { "platz": { "spieler": 1, "mapper": 51, "groesse": 3, "x": 186, "y": 116 } }
+  --   { "platzsuche": { "spieler": 1, "mapper": 51, "groesse": 3, "x": 172, "y": 109, "r": 15, "max": 8 } }
+  -- Fragt die Pruefung des Spiels (checkBuildingCanBePlacedHere 0x005037B0, thiscall TileMapState,
+  -- 5 Argumente) - baut nichts, kostet nichts. Ergebnis: TileMapState.buildingPlacementFail
+  -- (0x01FE7B3C; 0 = geht) und ...FailReason (0x01FE7B40). Die Suche geht ringweise nach aussen
+  -- und meldet die naechsten freien Stellen (Abstand = Schachbrett-Abstand zum Mittelpunkt).
+  local function platzGeht(sp, mapper, groesse, x, y)
+    local ok = pcall(core.exposeCode(0x005037B0, 6, 1), 0x01A93208, sp, x, y, mapper, groesse)
+    return ok and (core.readInteger(0x01FE7B3C) or 1) == 0, core.readInteger(0x01FE7B3C), core.readInteger(0x01FE7B40)
+  end
+
+  if cmd.platz ~= nil and type(cmd.platz) == "table" then
+    local p = cmd.platz
+    local geht, f, grund = platzGeht(tonumber(p.spieler) or 1, tonumber(p.mapper), tonumber(p.groesse), tonumber(p.x), tonumber(p.y))
+    log(INFO, string.format("PLATZ (%d,%d) Mapper %d Groesse %d: %s (Fehler %s, Grund %s)", p.x, p.y, p.mapper,
+      p.groesse, geht and "GEHT" or "geht nicht", tostring(f), tostring(grund)))
+    return true
+  end
+
+  if cmd.platzsuche ~= nil and type(cmd.platzsuche) == "table" then
+    local p = cmd.platzsuche
+    local sp, m, g = tonumber(p.spieler) or 1, tonumber(p.mapper), tonumber(p.groesse)
+    local cx, cy, r, max = tonumber(p.x), tonumber(p.y), tonumber(p.r) or 15, tonumber(p.max) or 8
+    local frei, geprueft = {}, 0
+    for ring = 0, r do
+      for dx = -ring, ring do
+        for dy = -ring, ring do
+          if math.max(math.abs(dx), math.abs(dy)) == ring and #frei < max then
+            geprueft = geprueft + 1
+            if platzGeht(sp, m, g, cx + dx, cy + dy) then table.insert(frei, string.format("(%d,%d)", cx + dx, cy + dy)) end
+          end
+        end
+      end
+      if #frei >= max then break end
+    end
+    log(INFO, string.format("PLATZSUCHE Mapper %d Groesse %d um (%d,%d): %d frei von %d geprueft: %s", m, g, cx, cy,
+      #frei, geprueft, table.concat(frei, " ")))
+    return true
+  end
+
   if cmd.baue ~= nil and type(cmd.baue) == "table" then
     local b = cmd.baue
     local ok, err = befehlAbsetzen(28, { b.x, b.y, b.mapper, b.groesse, b.richtung or 0, b.trupp or 0 })
