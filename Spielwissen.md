@@ -32,6 +32,8 @@ bis eine Messung es bestaetigt (Marke dahinter).
 - Ausnahmen, deren Arbeiter erst zur Produktion laufen: Holzfaeller mit dem Eingang direkt neben einem Baum (sie holen erst drei Holzscheite); Ochsenjoche direkt neben den Steinbruch (der Ochse bringt dann 12 Stein zum Lager). (Daniel 04.10.)
 - **Gebaeude lassen sich nicht drehen** (keine Ausnahme). Den Ausgang/Eingang kann man nur indirekt lenken: den ueblichen Platz zustellen oder dort bauen, wo etwas anderes ihn blockiert - z. B. beim Steinbruch, wohin der Ochse den Stein bringt; jede Produktion (Baecker usw.) laesst sich ueber Nachbargebaeude/Gelaende am Eingang beeinflussen - aber nur fein abgestimmt. (Daniel 04.10., 20:04)
 - Abreissen und naeher an Rohstoffen neu bauen (z. B. wenn das Holz in der Naehe weg ist) lohnt erst im Mittel-/Endspiel, dann aber richtig. (Daniel 04.10.)
+- Gebaeude, die nicht fuer die Wirtschaft wichtig sind, ruhig weiter weg bauen (z. B. Markt - den kann man ueberall bauen); das spart Platz am Lager. Der Kornspeicher kann auch weiter weg stehen: naeher am Gruenland hilft bei Aepfeln (die Apfelbauern liefern direkt in den Kornspeicher); spaeter bei Brot naeher an Lager und Baeckereien, von denen das Essen kommt. (Daniel 04.10., 20:13)
+- Farmen brauchen Gruenland: messen, wo es ist; daraus rechnen, wie viele Farmen maximal und platzsparend moeglichst nah an Bergfried/Kornspeicher gehen. (Daniel 04.10., 20:13)
 - Logisch noetige Gebaeude fuer Truppen kennen (Kaserne, Waffenwerkstaetten, Waffenkammer). (Daniel 04.10.)
 
 ## Vorteil der KI
