@@ -11,7 +11,9 @@ Phase 2 (Echtzeit): Tempo 40, laeuft. Alle paar Sekunden: Lage mitschreiben und 
     (kostet nichts), damit kein Traeger warten muss oder seine Ware verliert.
 Fehlerkontrolle (Daniel): vorab Gefecht/Mensch/gameOver; laufend: steht die Spielzeit oder ist gameOver 1 -> Abbruch.
 
-Aufruf:  python erstes_spiel.py [minuten=10] [tempo=40] [nur_phase2=nein]
+Waechter (M15, Daniel 22:42): mit waechter=ja liest jede Runde das Lagebild und schickt Verteidiger (waechter.py).
+Aufruf:  python erstes_spiel.py [minuten=10] [tempo=40] [nur_phase2=nein] [waechter=nein] [start=<Spielstand>] [bis_tick=N] [assassinen=N]
+         Tests mit Hoechstgeschwindigkeit (Daniel 22:55): tempo=1000 bis_tick=...
 Stop von aussen: Datei werkzeug/STOP anlegen.
 """
 import json, math, os, re, sys, time
@@ -21,6 +23,9 @@ from steuerkarte import laufe, tick, spielzustand
 from bauen import NACH_TYP, gebaeude_von, vorrat, baue_irgendwo
 from plantagen_lauf import baue_alle, vorab
 from speichern import speichere
+from waechter import Waechter, lies_lagebild, lies_gebaeude
+from assassinen import Angriffstrupp
+from befehl import sende, neue_id
 
 HIER = os.path.dirname(os.path.abspath(__file__))
 D = os.path.join(HIER, "..", "daten")
@@ -80,10 +85,21 @@ def haus_noetig(l, b):
     bedarf = sum(ARBEITER_JE[t] * k for t, k in b.items())
     return bedarf, bedarf > l["platz"]
 
-def baue_haus():
-    z = " ".join(befehl({"platzsuche": {"spieler": SP, "mapper": NACH_TYP[1]["mapper"], "groesse": 4, "x": 158, "y": 109, "r": 20, "max": 4}}, 1.5))
+def baue_schnell(typ, x, y, r, mapper=None):
+    """Im laufenden Spiel: Platz suchen und bauen OHNE zu blockieren (04.10.: das alte Bauwerkzeug wartete fest und
+    auf einen genauen Tick - bei Tempo 1000 hing die Schleife ~20.000 Ticks, der Waechter kam nie dran).
+    Ob es steht, zeigt die naechste Runde (Gebaeudeliste)."""
+    g = NACH_TYP[typ]
+    z = " ".join(befehl({"platzsuche": {"spieler": SP, "mapper": g["mapper"], "groesse": g["b"], "x": x, "y": y, "r": r, "max": 1}},
+                        1.0, bis="PLATZSUCHE"))
     frei = [tuple(map(int, p)) for p in re.findall(r"\((\d+),(\d+)\)", z.split("geprueft:")[-1])]
-    return baue_irgendwo(1, frei, SP) if frei else None
+    if not frei:
+        return None
+    befehl({"baue": {"mapper": g["mapper"], "x": frei[0][0], "y": frei[0][1], "groesse": g["b"], "richtung": 0}}, 1.0, bis="BAUE")
+    return frei[0]
+
+def baue_haus():
+    return baue_schnell(1, 158, 109, 20)
 
 def lager_knapp(l, teile):
     menge = sum(l["v"].get(k, 0) for k in LAGERWAREN)
@@ -92,53 +108,98 @@ def lager_knapp(l, teile):
 
 def baue_lager(plan):
     lx, ly = plan["lager_mitte"]
-    z = " ".join(befehl({"platzsuche": {"spieler": SP, "mapper": NACH_TYP[10]["mapper"], "groesse": 5, "x": lx, "y": ly, "r": 10, "max": 6}}, 1.5))
-    frei = [tuple(map(int, p)) for p in re.findall(r"\((\d+),(\d+)\)", z.split("geprueft:")[-1])]
-    return baue_irgendwo(10, frei, SP) if frei else None
+    return baue_schnell(10, lx, ly, 10)
 
-def phase2(plan, minuten, tempo):
-    schreib("== Phase 2: Echtzeit, Tempo %d, %d Minuten" % (tempo, minuten))
+EIGENE_ARTEN = (3, 19, 32, 20, 4, 1, 10, 30, 31, 33, 5)
+
+def runde_lesen():
+    """EIN Aufruf fuer die ganze Runde (04.10.: einzelne Abfragen kosteten ~20 s = 800 Ticks je Runde):
+    Modulbefehle status + lagebild in einer Liste. Gibt (status, einheiten, gebaeude)."""
+    z = " ".join(sende({"befehle": [{"player": 1, "id": neue_id(), "status": SP},
+                                    {"player": 1, "id": neue_id(), "lagebild": True}]}, 1.5, bis="LAGEBILD Tick"))
+    m = re.search(r"STATUS (.*?)(?:\[villagestudio\]|$)", z)
+    st = {k: int(v) for k, v in re.findall(r"(\w+)=(-?\d+)", m.group(1))} if m else {}
+    return st, lies_lagebild(neu_holen=False), lies_gebaeude()
+
+def eigene_gebaeude():
+    orte = []
+    for t in EIGENE_ARTEN:
+        orte += [(x + NACH_TYP[t]["b"] // 2, y + NACH_TYP[t]["b"] // 2) for _, x, y in gebaeude_von(SP, t)]
+    return orte
+
+def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0):
+    schreib("== Phase 2: Echtzeit, Tempo %d, %d Minuten, Waechter %s" % (tempo, minuten, "an" if mit_waechter else "aus"))
     vorab()
+    w = Waechter(SP, posten=plan["lager_mitte"]) if mit_waechter else None
+    trupp = Angriffstrupp(SP, rueckzug=plan["lager_mitte"]) if assassinen else None
+    soeldner, geworben = None, 0
     befehl({"kamera": list(plan["lager_mitte"])}, 0.8)
     befehl({"tempo": tempo}, 0.5)
     befehl({"pause": False}, 0.5)
-    ende, letzter_tick, stand = time.time() + 60 * minuten, None, None
+    ende, letzter_tick, stand, runde, t0 = time.time() + 60 * minuten, None, 0, 0, time.time()
     schreib("Tick | Holz Stein Eisen | Aepfel Brot | Beliebt | Leute/Platz (Feuer) | Holzf. Apfelb. | Ereignis")
     while time.time() < ende and not os.path.exists(os.path.join(HIER, "STOP")):
-        l = lage()
-        z = spielzustand()
-        if "gameOver 1" in z or "Ansicht 14" not in z:
-            schreib("ABBRUCH - Testbedingung weg: %s" % z); break
-        if l["tick"] == letzter_tick:
-            stand = (stand or 0) + 1
-            if stand >= 3:
-                schreib("ABBRUCH - Spielzeit steht bei %s: %s" % (l["tick"], z)); break
-        else:
-            stand = 0
-        letzter_tick = l["tick"]
-        ereignis = []
-        b = betriebe()
-        bedarf, noetig = haus_noetig(l, b)
-        if noetig and l["v"]["holz"] >= 5:
-            ereignis.append("Huette %s (Bedarf %d > Platz %d)" % (baue_haus(), bedarf, l["platz"]))
-        teile = len(gebaeude_von(SP, 10))
-        if lager_knapp(l, teile):
+        st, L, G = runde_lesen()
+        if bis_tick and st.get("t", 0) >= bis_tick:
+            break
+        runde += 1
+        if not st:
+            continue
+        if st.get("over") != 0 or st.get("ansicht") != 14:
+            schreib("ABBRUCH - Testbedingung weg: %s" % {k: st.get(k) for k in ("ansicht", "over", "pause", "t")}); break
+        if letzter_tick is not None and st["t"] - letzter_tick > 400:
+            schreib("WARNUNG: Runde dauerte %d Ticks (%d -> %d) - Waechter war so lange blind" % (st["t"] - letzter_tick, letzter_tick, st["t"]))
+        stand = stand + 1 if st["t"] == letzter_tick else 0
+        if stand >= 4:
+            schreib("ABBRUCH - Spielzeit steht bei %d" % st["t"]); break
+        letzter_tick = st["t"]
+        eig = [g for g in G.values() if g["besitzer"] == SP]
+        gebs = [(g["x"] + NACH_TYP.get(g["typ"], {"b": 2})["b"] // 2, g["y"] + NACH_TYP.get(g["typ"], {"b": 2})["b"] // 2)
+                for g in eig if g["typ"] in EIGENE_ARTEN]
+        ereignis = w.schritt(L, gebs, ausgenommen=trupp.mitglieder if trupp else ()) if w is not None else []
+        if trupp is not None:
+            # Soeldnerlager (120 Gold) einmal bauen, dann Assassinen (Typ 73) anwerben bis zur Zahl; Mitglieder = alle eigenen 73er
+            posten = [n for n, g in G.items() if g["besitzer"] == SP and g["typ"] == 8]
+            if not posten and soeldner is None:
+                soeldner = baue_schnell(8, plan["lager_mitte"][0], plan["lager_mitte"][1], 12)
+                ereignis.append("Soeldnerlager gesetzt %s (Gold %d)" % (soeldner, st["gold"]))
+            elif posten and geworben < assassinen:
+                befehl({"werbe": {"typ": 73, "gebaeude": posten[0]}}, 1.0, bis="WERBE")
+                geworben += 1
+                if geworben == assassinen:
+                    ereignis.append("%d Assassinen angeworben (Gold jetzt %d)" % (geworben, st["gold"]))
+            trupp.aufnehmen([n for n, e in L.items() if e["besitzer"] == SP and e["typ"] == 73])
+            ereignis += trupp.schritt(L, G)
+        bedarf = sum(ARBEITER_JE[t] * st.get("G%d" % t, 0) for t in ARBEITER_JE)
+        if bedarf > st["platz"] and st["holz"] >= 5:
+            ereignis.append("Huette %s (Bedarf %d > Platz %d)" % (baue_haus(), bedarf, st["platz"]))
+        teile = st.get("G10", 0)
+        menge = sum(st.get(k, 0) for k in LAGERWAREN)
+        sorten = sum(1 for k in LAGERWAREN if st.get(k, 0) > 0)
+        if teile and (menge >= 48 * teile - 60 or sorten >= teile):
             ereignis.append("Lager angebaut %s (%d Teile)" % (baue_lager(plan), teile))
-        v = l["v"]
-        schreib("%5d | %3d %3d %3d | %3d %3d | %6.2f | %d/%d (%d) | %d %d | %s" % (
-            l["tick"], v["holz"], v["stein"], v["eisen"], v["apfel"], v["brot"], l["beliebt"], l["leute"], l["platz"],
-            l["feuer"], l["t"].get(3, 0), l["t"].get(13, 0), "; ".join(ereignis) or "-"))
-        time.sleep(1.0)
+        zeile = "%5d | %3d %3d %3d | %3d %3d | %6.2f | %d/%d (%d) | %d %d | %s" % (
+            st["t"], st["holz"], st["stein"], st["eisen"], st["apfel"], st["brot"], st["beliebt"] / 100.0, st["leute"],
+            st["platz"], st["feuer"], st.get("T3", 0), st.get("T13", 0), "; ".join(ereignis) or "-")
+        if ereignis or runde % 10 == 1:
+            schreib(zeile)
     befehl({"pause": True}, 0.5)
-    schreib("Ende Phase 2 bei Tick %s, %s" % (tick(), spielzustand()))
+    st, L, G = runde_lesen()
+    schreib("Ende Phase 2 bei Tick %s nach %d Runden (%.1f s je Runde); Kornspeicher %d, Holzfaeller %d, Apfelplantagen %d%s" % (
+        st.get("t"), runde, (time.time() - t0) / max(runde, 1), st.get("G19", 0), st.get("G3", 0), st.get("G32", 0),
+        (("; Waechter: " + w.bericht()) if w else "") + (("; Angriff: " + trupp.bericht()) if trupp else "")))
 
 def main():
     arg = dict(a.split("=") for a in sys.argv[1:])
     datei = os.path.join(D, "eroeffnung_plan.json")
     plan = json.load(open(datei, encoding="utf-8")); plan["_datei"] = datei
-    if arg.get("nur_phase2", "nein") != "ja":
+    if arg.get("start"):
+        print("Tick", lade_stand(arg["start"], mit_bild=False))
+        befehl({"eigenerPlatz": SP}, 0.8)
+    elif arg.get("nur_phase2", "nein") != "ja":
         phase1(plan)
-    phase2(plan, int(arg.get("minuten", 10)), int(arg.get("tempo", 40)))
+    phase2(plan, int(arg.get("minuten", 10)), int(arg.get("tempo", 40)), arg.get("waechter", "nein") == "ja",
+           int(arg["bis_tick"]) if arg.get("bis_tick") else None, int(arg.get("assassinen", 0)))
 
 if __name__ == "__main__":
     main()

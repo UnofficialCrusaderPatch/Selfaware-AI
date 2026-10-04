@@ -1668,7 +1668,21 @@ local function einzelbefehl(cmd)
       end
     end
     f:close()
-    log(INFO, string.format("LAGEBILD Tick %d: %d Einheiten -> abzug/lagebild.txt", tick(), n))
+    -- dazu alle Gebaeude (eigene UND fremde): nr besitzer typ x y leben uid -> abzug/gebaeude.txt
+    local fg = io.open("ucp/villagestudio/abzug/gebaeude.txt", "w")
+    fg:write("nr besitzer typ x y leben uid" .. NL)
+    local ng, anzG = 0, gebaeudeAnzahl() or 0
+    for i = 1, anzG - 1 do
+      local b = GEBAEUDE + i * G_SCHRITT
+      if (core.readSmallInteger(b + G_ZUSTAND) or 0) ~= 0 then
+        ng = ng + 1
+        fg:write(string.format("%d %d %d %d %d %d %d", i, core.readSmallInteger(b + G_BESITZER) or -1,
+          core.readSmallInteger(b + G_TYP) or -1, core.readSmallInteger(b + 0x102) or -1, core.readSmallInteger(b + 0x104) or -1,
+          core.readSmallInteger(b + G_LEBEN) or -1, core.readInteger(b + 0xEC) or 0) .. NL)
+      end
+    end
+    fg:close()
+    log(INFO, string.format("LAGEBILD Tick %d: %d Einheiten, %d Gebaeude -> abzug/lagebild.txt, gebaeude.txt", tick(), n, ng))
     return true
   end
 
@@ -1728,6 +1742,53 @@ local function einzelbefehl(cmd)
     return true
   end
 
+  --   { "angriff": { "einheiten": [nr, ...], "ziel": nr } }       Einheit angreifen  (Art 4)
+  --   { "angriff": { "einheiten": [nr, ...], "gebaeude": nr } }   Gebaeude angreifen (Art 9)
+  --   { "angriff": { "einheiten": [nr, ...], "halt": true } }     anhalten           (Art 31)
+  --   Wie der Mensch (gelesen 04.10.): Auswahl-Bits (UnitsState 0x01387F38 +116, 400 Byte, Bit je
+  --   Einheitennummer) setzen, Spielbefehl 16 MakeUnitSelection mit einer freien Gruppennummer
+  --   (createPlayerTribe legt die Gruppe genau unter dieser Nummer an; frei = tribeState +24 == 0,
+  --   Gruppen ab 0x01667F78 + 40, je 0x334 Byte), dann Spielbefehl 36 ClickGiveUnitsInstruction
+  --   (Gruppe, Art, Ziel-Nr, Ziel-uid, 0). Nur eigene Einheiten werden ausgewaehlt (Fairness).
+  if cmd.angriff ~= nil and type(cmd.angriff) == "table" then
+    local a = cmd.angriff
+    local ich = core.readInteger(0x01A275DC) or -1
+    local BITS = 0x01387F38 + 116
+    for k = 0, 99 do core.writeInteger(BITS + k * 4, 0) end
+    local n = 0
+    for _, nr in ipairs(a.einheiten or {}) do
+      nr = tonumber(nr) or 0
+      local u = 0x0138854C + nr * 1168
+      if nr > 0 and core.readSmallInteger(u + 0x96) == ich and (core.readSmallInteger(u + 672) or 0) == 0 then
+        local b = BITS + (nr // 8)
+        core.writeByte(b, (core.readByte(b) or 0) | (1 << (nr % 8)))
+        n = n + 1
+      end
+    end
+    local TR = 0x01667F78 + 40
+    local gruppe = nil
+    for g = 1249, 1, -1 do
+      if (core.readSmallInteger(TR + g * 0x334 + 24) or 1) == 0 then gruppe = g; break end
+    end
+    if n == 0 or gruppe == nil then
+      log(INFO, string.format("ANGRIFF abgelehnt: %d eigene Einheiten, Gruppe %s", n, tostring(gruppe)))
+      return true
+    end
+    local art, zielNr, zielUid = 31, 0, 0
+    if a.ziel then
+      art, zielNr = 4, tonumber(a.ziel)
+      zielUid = core.readInteger(0x0138854C + zielNr * 1168 + 0x98) or 0
+    elseif a.gebaeude then
+      art, zielNr = 9, tonumber(a.gebaeude)
+      zielUid = core.readInteger(GEBAEUDE + zielNr * G_SCHRITT + 0xEC) or 0
+    end
+    local ok1 = befehlAbsetzen(16, { gruppe })
+    local ok2 = befehlAbsetzen(36, { gruppe, art, zielNr, zielUid, 0 })
+    log(INFO, string.format("ANGRIFF Tick %d: %d Einheiten, Gruppe %d, Art %d, Ziel %d (uid %d) - Auswahl=%s Befehl=%s",
+      tick(), n, gruppe, art, zielNr, zielUid, tostring(ok1), tostring(ok2)))
+    return true
+  end
+
   if cmd.baue ~= nil and type(cmd.baue) == "table" then
     local b = cmd.baue
     local ok, err = befehlAbsetzen(28, { b.x, b.y, b.mapper, b.groesse, b.richtung or 0, b.trupp or 0 })
@@ -1767,6 +1828,45 @@ local function einzelbefehl(cmd)
       if namen[w] then table.insert(teile, string.format("%s=%d", namen[w], ware(sp, w) or -1)) end
     end
     log(INFO, string.format("VORRAT Spieler %d Tick %d: %s", sp, tick(), table.concat(teile, " ")))
+    return true
+  end
+
+  --   { "status": 1 }  ALLES fuer eine Lenker-Runde in EINER Logzeile (04.10.2026: einzelne Abfragen kosteten
+  --   je ~1 s, eine Runde ~20 s). STATUS t= ansicht= pause= over= mensch= beliebt= leute= platz= feuer=
+  --   Waren (wie vorrat) G<typ>=<anzahl eigener Gebaeude> T<typ>=<anzahl eigener Einheiten>.
+  if cmd.status ~= nil then
+    local sp = tonumber(cmd.status) or 1
+    local PDs = 0x0115BDF8 + sp * 0x39F4
+    local function s32(v) v = v or 0; if v > 0x7FFFFFFF then return v - 0x100000000 end return v end
+    local teile = { string.format("t=%d ansicht=%d pause=%d over=%d mensch=%d beliebt=%d leute=%d platz=%d feuer=%d",
+      tick(), core.readInteger(0x01FE7D1C) or -1, core.readInteger(0x01FEA054) or -1, core.readInteger(0x0117D500) or -1,
+      s32(core.readInteger(0x0191DE10 + sp * 4)), s32(core.readInteger(PDs + 0x60)), s32(core.readInteger(PDs + 8576)),
+      s32(core.readInteger(PDs + 116)), s32(core.readInteger(PDs + 136))) }
+    local namen = { [2] = "holz", [3] = "hopfen", [4] = "stein", [6] = "eisen", [7] = "pech", [9] = "weizen",
+      [10] = "brot", [11] = "kaese", [12] = "fleisch", [13] = "apfel", [14] = "bier", [15] = "gold", [16] = "mehl" }
+    for w = 2, 16 do
+      if namen[w] then table.insert(teile, string.format("%s=%d", namen[w], ware(sp, w) or -1)) end
+    end
+    local gz, ez = {}, {}
+    local n = gebaeudeAnzahl() or 0
+    for i = 1, n - 1 do
+      local b = GEBAEUDE + i * G_SCHRITT
+      if (core.readSmallInteger(b + G_ZUSTAND) or 0) ~= 0 and core.readSmallInteger(b + G_BESITZER) == sp then
+        local t = core.readSmallInteger(b + G_TYP) or -1
+        gz[t] = (gz[t] or 0) + 1
+      end
+    end
+    local grenze = math.min(core.readInteger(0x01387F38) or 0, 2999)
+    for i = 1, grenze - 1 do
+      local u = 0x0138854C + i * 1168
+      if (core.readSmallInteger(u + 0x8C) or 0) ~= 0 and core.readSmallInteger(u + 0x96) == sp then
+        local t = core.readSmallInteger(u + 0x8E) or -1
+        ez[t] = (ez[t] or 0) + 1
+      end
+    end
+    for t, z in pairs(gz) do table.insert(teile, string.format("G%d=%d", t, z)) end
+    for t, z in pairs(ez) do table.insert(teile, string.format("T%d=%d", t, z)) end
+    log(INFO, "STATUS " .. table.concat(teile, " "))
     return true
   end
 

@@ -1,0 +1,20 @@
+Eintrag 0 'M14 Eroeffnung Grumpy T756' -> Scrollstand 0, Zeile 0; Spielzeit vorher 15720
+['[villagestudio]: LADEPAUSE: scharf (jetzt Tick 15720, pausiert).']
+['[villagestudio]: POKE 0x01126628: 0 -> 0', '[villagestudio]: POKE 0x01126624: 0 -> 0', '[villagestudio]: LADEN: Knopf 2 gedrueckt, ok=true', '[villagestudio]: logik: 3 von 3 Befehlen ausgefuehrt, 0 schon erledigt.', '[villagestudio]: LADEPAUSE: Laden erkannt (Spielzeit sprang um -14964) bei Tick 756 - angehalten.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 756.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 756.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 756.']
+Spielzeit nachher 756 / 756, Pause 1
+Tick 756
+== Phase 2: Echtzeit, Tempo 40, 10 Minuten, Waechter an
+Vorab-Kontrolle gut: {'Ansicht': 14, 'gameOver': 0, 'Mensch': 1, 'Platz': 1}
+Tick | Holz Stein Eisen | Aepfel Brot | Beliebt | Leute/Platz (Feuer) | Holzf. Apfelb. | Ereignis
+  849 |   0   0   0 |  15  15 |  93.25 | 14/34 (1) | 5 4 | Stellung: 14 Truppen zum Posten (125, 155)
+ 1707 |   0   0   0 |  14  15 |  98.00 | 30/34 (3) | 10 10 | -
+ 2540 |   0   0   0 |  13  13 | 100.00 | 34/34 (6) | 14 10 | -
+ 3373 |   0   0   0 |  32  12 | 100.00 | 34/34 (6) | 14 10 | -
+ 4206 |   0   0   0 |  38  10 | 100.00 | 34/34 (6) | 14 10 | -
+ 5040 |  18   0   0 |  62   9 | 100.00 | 34/34 (6) | 14 10 | -
+ 5873 |  88  12   0 |  74   8 | 100.00 | 34/34 (6) | 14 10 | -
+ 6707 | 144  12   0 |  73   6 | 100.00 | 34/34 (6) | 14 10 | Abwehr: 2 (24,24) gegen Feind 310 Typ 24 bei (200,275), Laufziel (107,170); Abwehr: 2 (24,24) gegen Feind 311 Typ 24 bei (204,278), Laufziel (106,171); Abwehr: 2 (24,24) gegen Feind 312 Typ 24 bei (206,279), Laufziel (107,169); Lager angebaut (121, 126, 157) (4 Teile)
+ 9078 | 224  24   0 | 112   2 | 100.00 | 34/34 (6) | 14 10 | Abwehr: 1 (24) gegen Feind 310 Typ 24 bei (108,171), Laufziel (107,170)
+ 9952 | 288  36   0 | 140   1 | 100.00 | 34/34 (6) | 14 10 | Lager angebaut (135, 127, 152) (8 Teile)
+11757 | 324  48   0 | 157   0 | 100.00 | 34/34 (6) | 14 10 | Abwehr: 2 (24,24) gegen Feind 333 Typ 24 bei (200,244), Laufziel (99,135); Abwehr: 2 (24,24) gegen Feind 337 Typ 24 bei (195,239), Laufziel (98,136); Abwehr: 2 (24,24) gegen Feind 340 Typ 24 bei (196,240), Laufziel (99,134)
+Ende Phase 2 bei Tick 12636, Ansicht 14, Pause 1, gameOver 0, Spielerplatz 1; Kornspeicher 1, Holzfaeller 14, Apfelplantagen 10; Waechter: Bedrohungen 6, davon tot 2, eigene Truppen verloren 1

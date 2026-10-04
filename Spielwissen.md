@@ -48,11 +48,20 @@ bis eine Messung es bestaetigt (Marke dahinter).
 - **Lager fasst nicht unendlich (Daniel 04.10., 22:17):** Jeder Lagerplatz nimmt je Rohstoff hoechstens eine Menge auf (Holz ~48); jeder Rohstoff braucht eigene Plaetze (150 Holz = 3 x 48 + 6). Ist das Lager voll, wenn ein Traeger abliefern will, bleibt er stehen; wird es voll, WAEHREND er unterwegs ist, ist die Ware weg. Kniff: Plaetze mit einem Rohstoff vollmachen und anderswo einen neuen setzen - neue Plaetze muessen anliegen, also Kette bauen und Rest abreissen; hoechstens etwa 8 neue, wenn alle voll sind.
   - Gemessen 04.10.: 4 Lagerteile fassen 190 Holz (Kauf in 5er-Schritten; ~48 je Teil). Sind alle Teile mit Holz belegt, passt kein Stein mehr. Ein neues Lager (anliegend) kommt als 4er-Block und fasst weitere 190 Holz. Holz kaufen ~3 Gold je Stueck.
 - **Baeume (gemessen 04.10.):** Faellbar sind nur die Arten 1-4. Ausgewachsen 9 Einheiten (Baum +120), jung 1-4; Arten 5-19 haben 0 (Straeucher). Ein Holzfaeller nimmt 3 Einheiten je Gang und liefert 18 Holz -> etwa 54 Holz je grossem Baum (abgeleitet aus 2 Gaengen). Bei 0 verschwindet der Baum. Darum rechnen: wann lohnt der Holzfaeller noch, wann versetzen oder abreissen (Daniel 22:12).
+- **Lager erst bei der ersten Lieferung (Daniel 22:49):** Ein Lager zu frueh zu bauen kostet - Arbeiter werden beim Ueberqueren langsamer. Maximal optimiert: das Lager (und jeden Anbau) genau dann setzen, wenn der erste Traeger abliefern WILL (sich auf den Weg zum Lager macht, Arbeiterzustand 8) - steht dann noch keins, kann er nicht abliefern (Daniel 22:51). Dafuer die Lieferzeitpunkte der Traeger vorhersagen.
 - **Welche Baeume der Holzfaeller nimmt (abgelesen 04.10., findTree 0x004F3B90):** nur Zustand 2, Stufe < 4 und Holz (+120) > 0, dazu erreichbar; davon der naechste. Baeume in Stufe 4 werden uebersprungen - darum lief ein Holzfaeller am neuen Lager an vier grossen Baeumen vorbei "nach oben" (Daniels Beobachtung 22:34). Grumpy-Start: 351 faellbare Baeume.
 - **Mehrere Holzfaeller um einen Baum (Daniel 22:35):** ein Baum gibt bis zu 3 Lieferungen (passt zur Messung: 9 Einheiten, 3 je Gang). Drei Huetten dicht um einen Baum sind besser als verstreut.
 - **Apfelplantagen-Kniff (Daniel 22:36, nicht gemessen):** Plantagen direkt nebeneinander genau dann setzen, wenn eine gerade vom Fruehling in den Sommer wechselt - dann holen sie sich gegenseitig Aepfel, fast doppelt so produktiv. Braucht: Jahreszeit je Plantage auslesen.
 - Huette: 5 Holz, +8 Wohnplaetze (gemessen: 10 -> 18; 450 Ticks spaeter 18 Leute). Bergfried allein: 10 Plaetze.
 - Logisch noetige Gebaeude fuer Truppen kennen (Kaserne, Waffenwerkstaetten, Waffenkammer). (Daniel 04.10.)
+
+## Angriff
+- Ziele mit Wert (Daniel 04.10., 22:54): Bonus fuer den gegnerischen Kornspeicher (meist viel drin), wertvoll auch Steinbrueche, Holzfaeller, Ochsenjoche. Auch ein paar Speertraeger koennen angreifen, nicht nur Assassinen.
+- Perfektes Stacken (Daniel 22:52): alle Einheiten gebuendelt auf ein Ziel - in Abwehr und Angriff unglaublich wichtig.
+- Lord (Daniel 22:43): darf mitkaempfen und abfangen, wenn er frueh weiss wo angegriffen wird; wichtig sind nur seine letzten Lebenspunkte.
+
+## Arbeitsweise beim Testen
+- Bei Fehlern immer den passenden Stand laden; nach vielen Neuerungen lieber ganz neu starten, um eine noch bessere Moeglichkeit zu finden (Daniel 04.10., 22:54).
 
 ## Vorteil der KI
 - Menschen koennen so schnell nicht handeln - eine perfekte KI ist damit effektiver. (Daniel 04.10.)

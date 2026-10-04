@@ -1,0 +1,33 @@
+Eintrag 0 'M14 Eroeffnung Grumpy T756' -> Scrollstand 0, Zeile 0; Spielzeit vorher 4702
+['[villagestudio]: LADEPAUSE: scharf (jetzt Tick 4702, pausiert).']
+['[villagestudio]: POKE 0x01126628: 0 -> 0', '[villagestudio]: POKE 0x01126624: 0 -> 0', '[villagestudio]: LADEN: Knopf 2 gedrueckt, ok=true', '[villagestudio]: logik: 3 von 3 Befehlen ausgefuehrt, 0 schon erledigt.', '[villagestudio]: LADEPAUSE: Laden erkannt (Spielzeit sprang um -3946) bei Tick 756 - angehalten.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 756.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 756.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 756.']
+Spielzeit nachher 756 / 756, Pause 1
+Tick 756
+== Phase 2: Echtzeit, Tempo 1000, 8 Minuten, Waechter an
+Vorab-Kontrolle gut: {'Ansicht': 14, 'gameOver': 0, 'Mensch': 1, 'Platz': 1}
+Tick | Holz Stein Eisen | Aepfel Brot | Beliebt | Leute/Platz (Feuer) | Holzf. Apfelb. | Ereignis
+ 1177 |   0   0   0 |  15  15 |  95.00 | 18/34 (2) | 5 8 | Stellung: 14 Truppen zum Posten (125, 155)
+ 1478 |   0   0   0 |  15  15 |  96.50 | 24/34 (0) | 6 10 | -
+ 1746 |   0   0   0 |  14  14 |  98.00 | 30/34 (2) | 14 10 | -
+ 1973 |   0   0   0 |  14  14 | 100.00 | 34/34 (2) | 14 10 | -
+ 2192 |   0   0   0 |  13  14 | 100.00 | 34/34 (6) | 14 10 | -
+ 2432 |   0   0   0 |  13  13 | 100.00 | 34/34 (6) | 14 10 | -
+ 2644 |   0   0   0 |  17  13 | 100.00 | 34/34 (6) | 14 10 | -
+ 2882 |   0   0   0 |  29  13 | 100.00 | 34/34 (6) | 14 10 | -
+ 3125 |   0   0   0 |  32  12 | 100.00 | 34/34 (6) | 14 10 | -
+ 3360 |   0   0   0 |  36  12 | 100.00 | 34/34 (6) | 14 10 | -
+ 3602 |   0   0   0 |  39  11 | 100.00 | 34/34 (6) | 14 10 | -
+ 3847 |   0   0   0 |  39  11 | 100.00 | 34/34 (6) | 14 10 | -
+ 4066 |   0   0   0 |  38  11 | 100.00 | 34/34 (6) | 14 10 | -
+ 4274 |   0   0   0 |  38  10 | 100.00 | 34/34 (6) | 14 10 | -
+ 4501 |   0   0   0 |  38  10 | 100.00 | 34/34 (6) | 14 10 | -
+ 4733 |   0   0   0 |  47   9 | 100.00 | 34/34 (6) | 14 10 | -
+ 4945 |  18   0   0 |  62   9 | 100.00 | 34/34 (6) | 14 10 | -
+ 5180 |  20   0   0 |  67   9 | 100.00 | 34/34 (6) | 14 10 | -
+ 5411 |  62   0   0 |  75   8 | 100.00 | 34/34 (6) | 14 10 | -
+ 5634 |  72   0   0 |  75   8 | 100.00 | 34/34 (6) | 14 10 | -
+ 5834 |  90  12   0 |  74   8 | 100.00 | 34/34 (6) | 14 10 | -
+ 6074 | 108  12   0 |  74   7 | 100.00 | 34/34 (6) | 14 10 | -
+ 6326 | 108  12   0 |  74   7 | 100.00 | 34/34 (6) | 14 10 | -
+ 6515 | 120  12   0 |  73   6 | 100.00 | 34/34 (6) | 14 10 | Lager angebaut (124, 126, 157) (4 Teile)
+Ende Phase 2 bei Tick 26441 nach 229 Runden (0.1 s je Runde); Kornspeicher 0, Holzfaeller 11, Apfelplantagen 1; Waechter: Bedrohungen 0, davon tot 0, eigene Truppen verloren 0

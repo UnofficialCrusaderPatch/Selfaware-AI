@@ -1,0 +1,18 @@
+Eintrag 0 'M14 Eroeffnung Grumpy T756' -> Scrollstand 0, Zeile 0; Spielzeit vorher 12636
+['[villagestudio]: LADEPAUSE: scharf (jetzt Tick 12636, pausiert).']
+['[villagestudio]: POKE 0x01126628: 0 -> 0', '[villagestudio]: POKE 0x01126624: 0 -> 0', '[villagestudio]: LADEN: Knopf 2 gedrueckt, ok=true', '[villagestudio]: logik: 3 von 3 Befehlen ausgefuehrt, 0 schon erledigt.', '[villagestudio]: LADEPAUSE: Laden erkannt (Spielzeit sprang um -11880) bei Tick 756 - angehalten.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 756.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 756.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 756.']
+Spielzeit nachher 756 / 756, Pause 1
+Tick 756
+== Phase 2: Echtzeit, Tempo 40, 10 Minuten, Waechter an
+Vorab-Kontrolle gut: {'Ansicht': 14, 'gameOver': 0, 'Mensch': 1, 'Platz': 1}
+Tick | Holz Stein Eisen | Aepfel Brot | Beliebt | Leute/Platz (Feuer) | Holzf. Apfelb. | Ereignis
+  777 |   0   0   0 |  15  15 |  93.25 | 11/34 (1) | 5 4 | Stellung: 14 Truppen zum Posten (125, 155)
+ 1250 |   0   0   0 |  15  15 |  95.00 | 20/34 (3) | 5 8 | -
+ 1698 |   0   0   0 |  14  15 |  98.00 | 29/34 (1) | 14 10 | -
+ 2147 |   0   0   0 |  14  14 | 100.00 | 34/34 (6) | 14 10 | -
+ 2595 |   0   0   0 |  17  13 | 100.00 | 34/34 (6) | 14 10 | -
+ 3044 |   0   0   0 |  32  12 | 100.00 | 34/34 (6) | 14 10 | -
+ 3491 |   0   0   0 |  39  12 | 100.00 | 34/34 (6) | 14 10 | -
+ 3940 |   0   0   0 |  39  11 | 100.00 | 34/34 (6) | 14 10 | -
+ 4389 |   0   0   0 |  38  10 | 100.00 | 34/34 (6) | 14 10 | -
+Ende Phase 2 bei Tick 4702 nach 87 Runden (1.1 s je Runde); Kornspeicher 1, Holzfaeller 14, Apfelplantagen 10; Waechter: Bedrohungen 0, davon tot 0, eigene Truppen verloren 0

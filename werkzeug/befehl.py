@@ -28,13 +28,25 @@ def neue_id():
     return nummer
 
 
-def sende(befehl, warte=3.0):
-    """Schickt den Befehl (dict) und gibt die neuen Modul-Logzeilen zurueck."""
+def sende(befehl, warte=3.0, bis=None):
+    """Schickt den Befehl (dict) und gibt die neuen Modul-Logzeilen zurueck.
+    bis = Text, auf den gewartet wird (alle 20 ms nachsehen, hoechstens <warte> s) - statt fest zu warten
+    (04.10.2026: feste Wartezeit machte eine Lenker-Runde 1,1 s lang)."""
     befehl = dict(befehl)
     befehl["id"] = neue_id()
     vorher = os.path.getsize(LOG)
     io.open(BEFEHL, "wb").write(json.dumps(befehl).encode("utf-8"))
-    time.sleep(warte)
+    if bis is None:
+        time.sleep(warte)
+    else:
+        ende = time.time() + warte
+        while time.time() < ende:
+            time.sleep(0.02)
+            if os.path.getsize(LOG) > vorher:
+                with io.open(LOG, encoding="utf-8", errors="replace") as f:
+                    f.seek(vorher)
+                    if bis in f.read():
+                        break
     with io.open(LOG, encoding="utf-8", errors="replace") as f:
         f.seek(vorher)
         neu = f.read()

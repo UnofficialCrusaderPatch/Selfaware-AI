@@ -1,0 +1,108 @@
+Eintrag 0 'M15 Waechter Grumpy T20024' -> Scrollstand 0, Zeile 0; Spielzeit vorher 20024
+['[villagestudio]: LADEPAUSE: scharf (jetzt Tick 20024, pausiert).']
+['[villagestudio]: POKE 0x01126628: 0 -> 0', '[villagestudio]: POKE 0x01126624: 0 -> 0', '[villagestudio]: LADEN: Knopf 2 gedrueckt, ok=true', '[villagestudio]: logik: 3 von 3 Befehlen ausgefuehrt, 0 schon erledigt.', '[villagestudio]: LADEPAUSE: Laden erkannt (Pause aufgehoben) bei Tick 20024 - angehalten.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 20024.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 20024.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 20024.']
+Spielzeit nachher 20024 / 20024, Pause 1
+Tick 20024
+== Phase 2: Echtzeit, Tempo 1000, 12 Minuten, Waechter an
+Vorab-Kontrolle gut: {'Ansicht': 14, 'gameOver': 0, 'Mensch': 1, 'Platz': 1}
+Tick | Holz Stein Eisen | Aepfel Brot | Beliebt | Leute/Platz (Feuer) | Holzf. Apfelb. | Ereignis
+20434 | 864  96   0 | 244   0 | 100.00 | 34/34 (4) | 14 10 | Stellung: 6 Truppen zum Posten (125, 155); Abwehr gebuendelt: alle 7 (22,55) gegen Feind 366 Typ 22 bei (143,175); Soeldnerlager gesetzt None (Gold 3850)
+20537 | 864  96   0 | 243   0 | 100.00 | 34/34 (6) | 14 10 | Soeldnerlager gesetzt None (Gold 3850)
+20577 | 864  96   0 | 243   0 | 100.00 | 34/34 (5) | 14 10 | Soeldnerlager gesetzt None (Gold 3850)
+20599 | 864  96   0 | 243   0 | 100.00 | 34/34 (5) | 14 10 | Soeldnerlager gesetzt None (Gold 3850)
+20619 | 864  96   0 | 243   0 | 100.00 | 34/34 (5) | 14 10 | Soeldnerlager gesetzt None (Gold 3850)
+20655 | 864  96   0 | 243   0 | 100.00 | 33/34 (5) | 13 10 | Soeldnerlager gesetzt None (Gold 3850)
+20686 | 864  96   0 | 242   0 | 100.00 | 34/34 (5) | 13 10 | Soeldnerlager gesetzt None (Gold 3850)
+20722 | 864  96   0 | 242   0 | 100.00 | 34/34 (4) | 13 10 | Soeldnerlager gesetzt None (Gold 3850)
+20753 | 864  96   0 | 242   0 | 100.00 | 34/34 (3) | 14 10 | Soeldnerlager gesetzt None (Gold 3850)
+20788 | 864  96   0 | 242   0 | 100.00 | 34/34 (3) | 14 10 | Soeldnerlager gesetzt None (Gold 3850)
+20823 | 864  96   0 | 242   0 | 100.00 | 34/34 (3) | 14 10 | Soeldnerlager gesetzt None (Gold 3850)
+20844 | 864  96   0 | 241   0 | 100.00 | 34/34 (4) | 14 10 | Soeldnerlager gesetzt None (Gold 3850)
+20894 | 864  96   0 | 241   0 | 100.00 | 32/34 (5) | 12 10 | Soeldnerlager gesetzt None (Gold 3850)
+20934 | 864  96   0 | 241   0 | 100.00 | 33/34 (3) | 12 10 | Soeldnerlager gesetzt None (Gold 3850)
+20970 | 864  96   0 | 241   0 | 100.00 | 34/34 (3) | 13 10 | Soeldnerlager gesetzt None (Gold 3850)
+21007 | 864  96   0 | 240   0 | 100.00 | 34/34 (3) | 13 10 | Soeldnerlager gesetzt None (Gold 3850)
+21023 | 864  96   0 | 240   0 | 100.00 | 34/34 (3) | 13 10 | Soeldnerlager gesetzt None (Gold 3850)
+21058 | 873  96   0 | 240   0 | 100.00 | 34/34 (4) | 13 10 | Soeldnerlager gesetzt None (Gold 3850)
+21094 | 887  96   0 | 240   0 | 100.00 | 34/34 (4) | 13 10 | Soeldnerlager gesetzt None (Gold 3850)
+21129 | 898  96   0 | 240   0 | 100.00 | 34/34 (4) | 13 10 | Soeldnerlager gesetzt None (Gold 3850)
+21165 | 900  96   0 | 243   0 | 100.00 | 34/34 (4) | 14 10 | Soeldnerlager gesetzt None (Gold 3850)
+21179 | 900  96   0 | 245   0 | 100.00 | 34/34 (4) | 14 10 | Soeldnerlager gesetzt None (Gold 3850)
+21212 | 900  96   0 | 249   0 | 100.00 | 34/34 (4) | 14 10 | Soeldnerlager gesetzt None (Gold 3850)
+21253 | 900  96   0 | 249   0 | 100.00 | 33/34 (4) | 13 10 | Soeldnerlager gesetzt None (Gold 3850)
+21293 | 900  96   0 | 248   0 | 100.00 | 34/34 (5) | 13 10 | Soeldnerlager gesetzt None (Gold 3850)
+21329 | 900  96   0 | 248   0 | 100.00 | 34/34 (4) | 13 10 | Soeldnerlager gesetzt None (Gold 3850)
+21357 | 900  96   0 | 248   0 | 100.00 | 34/34 (3) | 14 10 | Soeldnerlager gesetzt None (Gold 3850)
+21397 | 900  96   0 | 248   0 | 100.00 | 34/34 (3) | 14 10 | Abwehr gebuendelt: alle 7 (22,55) gegen Feind 329 Typ 22 bei (141,167); Soeldnerlager gesetzt None (Gold 3850)
+21470 | 911  96   0 | 250   0 | 100.00 | 31/34 (4) | 11 10 | Soeldnerlager gesetzt None (Gold 3850)
+21505 | 912  96   0 | 250   0 | 100.00 | 32/34 (5) | 11 10 | Abwehr gebuendelt: alle 7 (22,55) gegen Feind 394 Typ 22 bei (141,163); Soeldnerlager gesetzt None (Gold 3850)
+21587 | 918  96   0 | 249   0 | 100.00 | 34/34 (2) | 13 10 | Abwehr gebuendelt: alle 7 (22,55) gegen Feind 360 Typ 22 bei (139,157); Soeldnerlager gesetzt None (Gold 3850)
+21661 | 918  96   0 | 249   0 | 100.00 | 34/34 (3) | 13 10 | Soeldnerlager gesetzt None (Gold 3850)
+21701 | 918  96   0 | 249   0 | 100.00 | 34/34 (4) | 13 10 | Soeldnerlager gesetzt None (Gold 3850)
+21736 | 923  96   0 | 248   0 | 100.00 | 34/34 (4) | 13 10 | Abwehr gebuendelt: alle 7 (22,55) gegen Feind 344 Typ 22 bei (141,159); Soeldnerlager gesetzt None (Gold 3850)
+21797 | 936  96   0 | 248   0 | 100.00 | 34/34 (5) | 14 10 | Soeldnerlager gesetzt None (Gold 3850)
+21843 | 936  96   0 | 250   0 | 100.00 | 34/34 (5) | 14 10 | Soeldnerlager gesetzt None (Gold 3850)
+21877 | 936  96   0 | 249   0 | 100.00 | 34/34 (6) | 14 10 | Soeldnerlager gesetzt (137, 143) (Gold 3850)
+22004 | 936 108   0 | 250   0 | 100.00 | 34/34 (4) | 14 10 | RUECKZUG: Feind 8 Felder vom Trupp
+22058 | 936 108   0 | 249   0 | 100.00 | 34/34 (3) | 14 10 | -
+22121 | 936 108   0 | 249   0 | 100.00 | 34/34 (1) | 14 10 | 6 Assassinen angeworben (Gold jetzt 3380)
+22306 | 954 108   0 | 248   0 | 100.00 | 34/34 (3) | 14 10 | -
+22488 | 954 108   0 | 246   0 | 100.00 | 34/34 (6) | 14 10 | -
+22559 | 954 108   0 | 246   0 | 100.00 | 34/34 (6) | 14 10 | Trupp wieder bereit (6); Ziel: Gebaeude 124 Typ 32 bei (184,184), 42 Felder, Wert 25 - 6 Mitglieder gebuendelt
+22637 | 954 108   0 | 245   0 | 100.00 | 34/34 (6) | 14 10 | verletzt heim: [235, 268, 252]
+22777 | 954 108   0 | 244   0 | 100.00 | 34/34 (6) | 14 10 | -
+22846 | 954 108   0 | 244   0 | 100.00 | 34/34 (6) | 14 10 | RUECKZUG: Feind 11 Felder vom Trupp
+22888 | 954 108   0 | 244   0 | 100.00 | 34/34 (6) | 14 10 | Abfangen: 7 Verteidiger zum Laufziel (107,170) von Feind 290 (noch 112 Felder von uns)
+23002 | 954 108   0 | 243   0 | 100.00 | 34/34 (6) | 14 10 | verletzt heim: [177]
+23219 | 954 108   0 | 241   0 | 100.00 | 34/34 (5) | 14 10 | -
+23383 | 964 108   0 | 244   0 | 100.00 | 34/34 (6) | 14 10 | verletzt heim: [175]
+23428 | 972 108   0 | 244   0 | 100.00 | 34/34 (6) | 14 10 | Trupp wieder bereit (1); Ziel: Gebaeude 124 Typ 32 bei (184,184), 7 Felder, Wert 25 - 1 Mitglieder gebuendelt
+23545 | 972 108   0 | 250   0 | 100.00 | 34/34 (6) | 14 10 | -
+23712 | 972 120   0 | 250   0 | 100.00 | 34/34 (6) | 14 10 | Gebaeude 124 (Typ 32) zerstoert; Ziel: Gebaeude 138 Typ 6 bei (210,190), 27 Felder, Wert 30 - 1 Mitglieder gebuendelt; Lager angebaut (117, 160) (24 Teile)
+23830 | 975 120   0 | 249   0 | 100.00 | 34/34 (6) | 14 10 | -
+23977 | 977 120   0 | 249   0 | 100.00 | 34/34 (5) | 14 10 | VERLUST: Mitglied 268
+24033 | 977 120   0 | 249   0 | 100.00 | 34/34 (5) | 14 10 | RUECKZUG: Feind 11 Felder vom Trupp
+24208 | 977 120   0 | 248   0 | 100.00 | 34/34 (5) | 13 10 | verletzt heim: [258]
+24268 | 977 120   0 | 247   0 | 100.00 | 34/34 (6) | 13 10 | -
+24477 | 977 120   0 | 246   0 | 100.00 | 34/34 (6) | 13 10 | -
+24585 | 977 120   0 | 245   0 | 100.00 | 34/34 (5) | 14 10 | Abwehr gebuendelt: alle 7 (22,55) gegen Feind 290 Typ 24 bei (138,209)
+24693 | 993 120   0 | 244   0 | 100.00 | 34/34 (6) | 14 10 | -
+24887 | 995 120   0 | 243   0 | 100.00 | 34/34 (6) | 13 10 | -
+25057 | 999 120   0 | 242   0 | 100.00 | 34/34 (6) | 14 10 | -
+25187 | 1008 120   0 | 241   0 | 100.00 | 34/34 (6) | 14 10 | Abwehr gebuendelt: alle 7 (22,55) gegen Feind 335 Typ 24 bei (118,190); VERLUST: Mitglied 235
+25283 | 1013 120   0 | 240   0 | 100.00 | 34/34 (6) | 14 10 | Abwehr gebuendelt: alle 7 (22,55) gegen Feind 344 Typ 24 bei (115,188)
+25351 | 1013 120   0 | 245   0 | 100.00 | 34/34 (6) | 14 10 | -
+25560 | 1013 132   0 | 245   0 | 100.00 | 34/34 (6) | 14 10 | -
+25593 | 1013 132   0 | 249   0 | 100.00 | 34/34 (6) | 14 10 | VERLUST: Mitglied 177
+25743 | 1013 132   0 | 249   0 | 100.00 | 34/34 (5) | 13 10 | -
+25939 | 1031 132   0 | 250   0 | 100.00 | 34/34 (6) | 14 10 | -
+26151 | 1049 132   0 | 249   0 | 100.00 | 34/34 (6) | 14 10 | -
+26193 | 1049 132   0 | 248   0 | 100.00 | 34/34 (6) | 14 10 | Abfangen: 7 Verteidiger zum Laufziel (110,154) von Feind 177 (noch 110 Felder von uns)
+26376 | 1056 132   0 | 247   0 | 100.00 | 34/34 (6) | 14 10 | -
+26476 | 1067 132   0 | 246   0 | 100.00 | 34/34 (6) | 14 10 | VERLUST: Mitglied 258
+26590 | 1067 132   0 | 246   0 | 100.00 | 34/34 (6) | 14 10 | -
+26785 | 1085 132   0 | 244   0 | 100.00 | 34/34 (6) | 14 10 | -
+26973 | 1085 132   0 | 243   0 | 100.00 | 34/34 (6) | 14 10 | -
+27206 | 1094 132   0 | 242   0 | 100.00 | 34/34 (5) | 14 10 | -
+27414 | 1104 144   0 | 244   0 | 100.00 | 34/34 (6) | 13 10 | -
+27594 | 1121 144   0 | 244   0 | 100.00 | 34/34 (5) | 14 10 | -
+27801 | 1136 144   0 | 249   0 | 100.00 | 34/34 (6) | 14 10 | -
+27905 | 1139 144   0 | 250   0 | 100.00 | 34/34 (6) | 14 10 | Abwehr gebuendelt: alle 7 (22,55) gegen Feind 177 Typ 24 bei (154,209)
+28043 | 1139 144   0 | 250   0 | 100.00 | 34/34 (6) | 14 10 | -
+28242 | 1139 144   0 | 250   0 | 100.00 | 34/34 (6) | 14 10 | -
+28464 | 1139 144   0 | 248   0 | 100.00 | 34/34 (6) | 14 10 | -
+28503 | 1139 144   0 | 248   0 | 100.00 | 34/34 (6) | 14 10 | Abwehr gebuendelt: alle 7 (22,55) gegen Feind 290 Typ 24 bei (124,176)
+28605 | 1139 144   0 | 247   0 | 100.00 | 34/34 (6) | 13 10 | Abwehr gebuendelt: alle 7 (22,55) gegen Feind 268 Typ 24 bei (124,168)
+28663 | 1139 144   0 | 247   0 | 100.00 | 34/34 (6) | 13 10 | VERLUST: Mitglied 252
+28730 | 1139 144   0 | 246   0 | 100.00 | 34/34 (5) | 13 10 | Abwehr gebuendelt: alle 7 (22,55) gegen Feind 361 Typ 24 bei (133,186); VERLUST: Mitglied 175
+28784 | 1139 144   0 | 246   0 | 100.00 | 34/34 (6) | 14 10 | -
+28881 | 1139 144   0 | 245   0 | 100.00 | 34/34 (6) | 13 10 | Lord zurueck zum Bergfried (Leben 49 %)
+28917 | 1141 144   0 | 245   0 | 100.00 | 34/34 (6) | 13 10 | Lager angebaut (125, 147) (28 Teile)
+28999 | 1152 144   0 | 244   0 | 100.00 | 34/34 (5) | 14 10 | Abwehr gebuendelt: alle 6 (22) gegen Feind 435 Typ 22 bei (131,186)
+29083 | 1157 144   0 | 244   0 | 100.00 | 34/34 (6) | 13 10 | -
+29272 | 1190 156   0 | 243   0 | 100.00 | 34/34 (6) | 14 10 | -
+29399 | 1190 156   0 | 242   0 | 100.00 | 34/34 (6) | 14 10 | -
+29613 | 1200 156   0 | 249   0 | 100.00 | 34/34 (6) | 13 10 | -
+29626 | 1200 156   0 | 249   0 | 100.00 | 34/34 (6) | 13 10 | Abwehr gebuendelt: alle 5 (22) gegen Feind 220 Typ 24 bei (128,162)
+ABBRUCH - Testbedingung weg: {'ansicht': 14, 'over': 1, 'pause': 0, 't': 29820}
+Ende Phase 2 bei Tick 29841 nach 389 Runden (0.0 s je Runde); Kornspeicher 0, Holzfaeller 0, Apfelplantagen 0; Waechter: Bedrohungen 41, davon tot 30, eigene Truppen verloren 8; Angriff: zerstoert 1 Gebaeude {32: 1}, eigene Verluste 6

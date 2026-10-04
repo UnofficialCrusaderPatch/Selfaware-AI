@@ -32,12 +32,13 @@ HAUPTMENUE = 41
 SPIEL = r"C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme"
 BILDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "daten", "bilder")
 
-def befehl(cmd, warte=0.8):
-    """Ein Befehl, in eine Liste verpackt - so kommt er auch im Hauptmenue an."""
+def befehl(cmd, warte=0.8, bis=None):
+    """Ein Befehl, in eine Liste verpackt - so kommt er auch im Hauptmenue an.
+    bis = Text der Antwortzeile: dann nur so lange warten, bis sie da ist (hoechstens warte s)."""
     c = dict(cmd)
     c.setdefault("player", 1)
     c["id"] = neue_id()
-    return sende({"befehle": [c]}, warte)
+    return sende({"befehle": [c]}, warte, bis=bis)
 
 def peek(adr, n=1):
     for z in sende({"player": 1, "peek": adr, "worte": n}, 0.6):

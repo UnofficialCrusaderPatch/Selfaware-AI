@@ -36,8 +36,9 @@ def laufe(ticks):
     sende({"player": 1, "tickpause": {"bei": t + ticks}}, 0.5)
     sende({"player": 1, "pause": False}, 0.6)
     for _ in range(20):
-        if tick() == t + ticks:
-            return t + ticks
+        jetzt = tick()
+        if jetzt is not None and jetzt >= t + ticks:   # >= statt == (04.10.: bei Tempo 1000 wird der Tick uebersprungen)
+            return jetzt
         time.sleep(0.3)
     jetzt = tick()
     if jetzt is None or jetzt <= t:

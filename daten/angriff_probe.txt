@@ -1,0 +1,18 @@
+Ansicht 14, Pause 1, gameOver 0, Spielerplatz 1
+unsere Speertraeger: [171, 172, 173, 174, 175, 176, 177, 178] | Ziel 290 [290, 2, 24, 97, 153, 8020, 101, 0, 0, 0, 0, 0, 0, 0, 100, 122]
+['[villagestudio]: ANGRIFF Tick 14719: 8 Einheiten, Gruppe 1249, Art 4, Ziel 290 (uid 519907) - Auswahl=true Befehl=true']
+Tick 14720 | Ziel bei (97,153) Leben 8020 Zustand 101 | unsere: 8 da, Zielart [4], Zustaende [101], mittlerer Abstand 83.2, Leben [12500, 12500, 12500, 12500, 12500, 12500, 12500, 12500]
+Tick 14820 | Ziel bei (96,147) Leben 8020 Zustand 101 | unsere: 8 da, Zielart [4], Zustaende [101], mittlerer Abstand 72.9, Leben [12500, 12500, 12500, 12500, 12500, 12500, 12500, 12500]
+Tick 14920 | Ziel bei (96,141) Leben 8020 Zustand 101 | unsere: 8 da, Zielart [4], Zustaende [101], mittlerer Abstand 62.6, Leben [12500, 12500, 12500, 12500, 12500, 12500, 12500, 12500]
+Tick 15020 | Ziel bei (96,134) Leben 8020 Zustand 101 | unsere: 8 da, Zielart [4], Zustaende [101], mittlerer Abstand 52.7, Leben [12500, 12500, 12500, 12500, 12500, 12500, 12500, 12500]
+Tick 15120 | Ziel bei (96,128) Leben 8020 Zustand 101 | unsere: 8 da, Zielart [4], Zustaende [101], mittlerer Abstand 42.3, Leben [12500, 12500, 12500, 12500, 12500, 12500, 12500, 12500]
+Tick 15220 | Ziel bei (100,122) Leben 8020 Zustand 106 | unsere: 8 da, Zielart [4], Zustaende [101], mittlerer Abstand 28.8, Leben [12500, 12500, 12500, 12500, 12500, 12500, 12500, 12500]
+Tick 15320 | Ziel bei (100,122) Leben 8020 Zustand 107 | unsere: 8 da, Zielart [4], Zustaende [101], mittlerer Abstand 21.0, Leben [12500, 12500, 12500, 12500, 12500, 12500, 12500, 12500]
+Tick 15420 | Ziel bei (100,122) Leben 8020 Zustand 107 | unsere: 8 da, Zielart [4], Zustaende [101], mittlerer Abstand 13.1, Leben [12500, 12500, 12500, 12500, 12500, 12500, 12500, 12500]
+Ansicht 14, Pause 1, gameOver 0, Spielerplatz 1
+Tick 15480 | Feinde in unserer Wirtschaft: {282: (101, 123, 12460, 107), 290: (100, 122, 8020, 107)} | unsere 8: Zustaende [101] Leben [12500, 12500, 12500, 12500, 12500, 12500, 12500, 12500] Ort (108, 121)
+Tick 15540 | Feinde in unserer Wirtschaft: {282: (101, 123, 10660, 106), 290: (100, 122, 8020, 107)} | unsere 8: Zustaende [101, 106] Leben [12500, 12500, 12500, 12500, 11975, 11875, 12500, 12500] Ort (104, 122)
+Tick 15600 | Feinde in unserer Wirtschaft: {282: (101, 123, 2785, 106), 290: (101, 123, 7370, 106)} | unsere 8: Zustaende [106] Leben [12125, 12500, 11075, 11900, 11925, 11875, 12500, 12500] Ort (102, 123)
+Tick 15660 | Feinde in unserer Wirtschaft: {290: (101, 123, 1170, 106)} | unsere 8: Zustaende [2, 106] Leben [12125, 12500, 10625, 10400, 11925, 11875, 12500, 12500] Ort (102, 123)
+Tick 15720 | Feinde in unserer Wirtschaft: {} | unsere 8: Zustaende [2, 101] Leben [12125, 12500, 10625, 10225, 11925, 11875, 12500, 12500] Ort (102, 123)
+Ansicht 14, Pause 1, gameOver 0, Spielerplatz 1
