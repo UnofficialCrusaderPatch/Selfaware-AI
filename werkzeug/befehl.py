@@ -10,7 +10,7 @@ Aufruf:    python befehl.py '<json>' [wartesekunden]
 Beispiel:  python befehl.py '{"player": 1, "tempo": 90}' 3
 Als Baustein:  from befehl import sende; zeilen = sende({"zeit": True})
 """
-import io, json, os, sys, time
+import io, json, os, re, sys, time
 
 SPIEL  = r"C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme"
 BEFEHL = os.path.join(SPIEL, "ucp", "villagestudio", "befehl.json")
@@ -27,6 +27,20 @@ def neue_id():
     io.open(MERKER, "w").write(str(nummer))
     return nummer
 
+
+STRENG = False   # True (z. B. im Lenker): Modulfehler in der Antwort brechen sofort laut ab (Daniel 23:48)
+# Lua-Fehler meldet das Modul als "logik: <ort>:<zeile>: <text>" (pcall), eine Befehlsliste mit
+# "logik: <gut> von <alle> Befehlen ausgefuehrt" - weniger gut als alle heisst: mindestens einer ist gescheitert.
+# Anlass 04.10.2026: eine globale Variable liess jeden Angriffsbefehl scheitern, vier Partien lang unbemerkt.
+LUA_FEHLER = re.compile(r"logik: .*:\d+: ")
+BILANZ = re.compile(r"logik: (\d+) von (\d+) Befehlen ausgefuehrt")
+
+def pruefe(zeilen):
+    for z in zeilen:
+        b = BILANZ.search(z)
+        if LUA_FEHLER.search(z) or (b and int(b.group(1)) < int(b.group(2))):
+            raise RuntimeError("MODULFEHLER (Antwort des Moduls): " + z[:240])
+    return zeilen
 
 def sende(befehl, warte=3.0, bis=None):
     """Schickt den Befehl (dict) und gibt die neuen Modul-Logzeilen zurueck.
@@ -50,8 +64,9 @@ def sende(befehl, warte=3.0, bis=None):
     with io.open(LOG, encoding="utf-8", errors="replace") as f:
         f.seek(vorher)
         neu = f.read()
-    return [z.split("| ", 1)[-1].strip() for z in neu.splitlines()
-            if "villagestudio" in z and "ZUSTAND" not in z]
+    zeilen = [z.split("| ", 1)[-1].strip() for z in neu.splitlines()
+              if "villagestudio" in z and "ZUSTAND" not in z]
+    return pruefe(zeilen) if STRENG else zeilen
 
 
 if __name__ == "__main__":

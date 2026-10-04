@@ -114,7 +114,10 @@ class Waechter:
             if nah_ziel <= 6 or nah_ort <= 8:
                 feinde[n] = (min(nah_ort, nah_ziel), e)
         self.bilanz["bedrohungen"] |= set(feinde)
-        eigene = {n: e for n, e in L.items() if e["besitzer"] == self.sp and e["typ"] in TRUPPE and n not in ausgenommen}
+        # Assassinen (73) nie zur Abwehr - wie in stellung(); sonst griff der Waechter frisch Angeworbene ab, bevor der
+        # Angriffslenker sie aufnahm (Partie 9c: "Abwehr gebuendelt: alle 16 (22,24,55,73)")
+        eigene = {n: e for n, e in L.items() if e["besitzer"] == self.sp and e["typ"] in TRUPPE and e["typ"] != 73
+                  and n not in ausgenommen}
         # Lord
         lord = [n for n, e in eigene.items() if e["typ"] == LORD]
         if lord:

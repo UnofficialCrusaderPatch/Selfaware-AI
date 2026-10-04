@@ -77,6 +77,8 @@ local einheitWacht = nil
 -- Festhalten (04.10.2026): nr -> { x, y, gesetzt, letzter } - Ziel gegen KI/Arbeit/Lord-Logik halten
 local festhalten   = {}
 local angriffReserve = nil   -- Gruppen je Takt reserviert (modul-lokal: UCP verbietet globale Variablen - 04.10.)
+local angriffSchlange = {}   -- Angriffsbefehle, die nacheinander abgesetzt werden (je einer, bis seine Gruppe steht)
+local angriffWarten = nil    -- { gruppe, einheiten, tick } des zuletzt abgesetzten Angriffs
 -- Zickzack (04.10.2026): { nr, a, b, alle, bis, t0, n } - Richtungswechsel je K Ticks, Feinposition je Tick
 local zickzack     = nil
 
@@ -1653,19 +1655,22 @@ local function einzelbefehl(cmd)
     local NL = string.char(10)
     local E = 0x0138854C
     local f = io.open("ucp/villagestudio/abzug/lagebild.txt", "w")
-    f:write(string.format("tick %d", tick()) .. NL .. "nr besitzer typ x y leben zustand zielart zieleinheit zieluid zielgebaeude ziel zielx ziely laufx laufy" .. NL)
+    f:write(string.format("tick %d", tick()) .. NL .. "nr besitzer typ x y leben zustand zielart zieleinheit zieluid zielgebaeude ziel zielx ziely laufx laufy auswahlvon auswahlmarke gruppe gruppenuid" .. NL)
     local n, maxN = 0, core.readInteger(0x01387F38) or 0
     for i = 1, math.min(maxN, 2999) do
       local u = E + i * 1168
       local typ = core.readSmallInteger(u + 0x8E) or 0
       if typ > 0 and (core.readSmallInteger(u + 0x8C) or 0) ~= 0 and (core.readSmallInteger(u + 672) or 0) == 0 then
         n = n + 1
-        f:write(string.format("%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d", i, core.readSmallInteger(u + 0x96) or -1, typ,
+        f:write(string.format("%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d", i, core.readSmallInteger(u + 0x96) or -1, typ,
           (core.readSmallInteger(u + 0xB6) or 0) // 8, (core.readSmallInteger(u + 0xB8) or 0) // 8,
           core.readInteger(u + 968) or -1, core.readSmallInteger(u + 704) or -1, core.readSmallInteger(u + 924) or -1,
           core.readSmallInteger(u + 926) or -1, core.readInteger(u + 928) or -1, core.readSmallInteger(u + 822) or -1,
           core.readSmallInteger(u + 782) or -1, core.readSmallInteger(u + 784) or -1, core.readSmallInteger(u + 786) or -1,
-          core.readSmallInteger(u + 0xC8) or -1, core.readSmallInteger(u + 0xCA) or -1) .. NL)
+          core.readSmallInteger(u + 0xC8) or -1, core.readSmallInteger(u + 0xCA) or -1,
+          -- Auswahl und Gruppe (04.10. 23:58: alle Assassinen folgten dem letzten Befehl - Gruppe nachsehen)
+          core.readSmallInteger(u + 178) or -1, core.readSmallInteger(u + 180) or -1,
+          core.readSmallInteger(u + 728) or -1, core.readInteger(u + 740) or -1) .. NL)
       end
     end
     f:close()
@@ -1780,10 +1785,32 @@ local function einzelbefehl(cmd)
   --   (Gruppe, Art, Ziel-Nr, Ziel-uid, 0). Nur eigene Einheiten werden ausgewaehlt (Fairness).
   if cmd.angriff ~= nil and type(cmd.angriff) == "table" then
     local a = cmd.angriff
+    if not cmd.ausSchlange then
+      -- Warteschlange (gemessen 04.10. nachts, pruefe_einzelbefehl.py): drei Angriffe im selben Takt landeten alle
+      -- in der letzten Gruppe und liefen zum letzten Ziel - das Spiel arbeitet die Auswahl (Befehl 16) erst spaeter
+      -- ab und liest dann die Auswahl-Bits des letzten Befehls. Darum setzt angriffSchlangeTick je Befehl ab und
+      -- wartet, bis dessen Einheiten in ihrer Gruppe stehen (Einheit +728 tribeID), bevor der naechste kommt.
+      table.insert(angriffSchlange, a)
+      log(INFO, string.format("ANGRIFF eingereiht Tick %d: %d Einheiten, Schlange %d", tick(), #(a.einheiten or {}),
+        #angriffSchlange))
+      return true
+    end
     local ich = core.readInteger(0x01A275DC) or -1
     local BITS = 0x01387F38 + 116
+    -- Auswahlmarken aller eigenen Einheiten loeschen (gemessen 04.10. 23:58): playerMakeUnitSelection setzt bei jeder
+    -- ausgewaehlten Einheit ifSelectedThenPlayerID (+178) und selectionRelatedFlag (+180), und diese Marken blieben
+    -- stehen. Jede Einheit, die je einen Befehl bekam, rutschte in jede neue Gruppe - am Ende steckten 78 Assassinen,
+    -- alle Bogenschuetzen, Speertraeger und der Lord in Gruppe 1249 und folgten einem Befehl fuer EINEN Assassinen.
+    local maxN = core.readInteger(0x01387F38) or 0
+    for i = 1, math.min(maxN, 2999) do
+      local u = 0x0138854C + i * 1168
+      if core.readSmallInteger(u + 0x96) == ich and (core.readSmallInteger(u + 178) or 0) ~= 0 then
+        core.writeSmallInteger(u + 178, 0)
+        core.writeSmallInteger(u + 180, 0)
+      end
+    end
     for k = 0, 99 do core.writeInteger(BITS + k * 4, 0) end
-    local n = 0
+    local n, gewaehlt = 0, {}
     for _, nr in ipairs(a.einheiten or {}) do
       nr = tonumber(nr) or 0
       local u = 0x0138854C + nr * 1168
@@ -1792,6 +1819,7 @@ local function einzelbefehl(cmd)
         local b = BITS + (nr // 8)
         core.writeByte(b, (core.readByte(b) or 0) | (1 << (nr % 8)))
         n = n + 1
+        gewaehlt[n] = nr
       end
     end
     local TR = 0x01667F78 + 40
@@ -1818,6 +1846,7 @@ local function einzelbefehl(cmd)
     end
     local ok1 = befehlAbsetzen(16, { gruppe })
     local ok2 = befehlAbsetzen(36, { gruppe, art, zielNr, zielUid, 0 })
+    angriffWarten = { gruppe = gruppe, einheiten = gewaehlt, tick = tick() }
     log(INFO, string.format("ANGRIFF Tick %d: %d Einheiten, Gruppe %d, Art %d, Ziel %d (uid %d) - Auswahl=%s Befehl=%s",
       tick(), n, gruppe, art, zielNr, zielUid, tostring(ok1), tostring(ok2)))
     return true
@@ -3167,6 +3196,29 @@ local function festhaltenTick()
   end
 end
 
+local function angriffSchlangeTick()
+  if (core.readInteger(PAUSE) or 1) ~= 0 then return end
+  local t = tick()
+  local w = angriffWarten
+  if w ~= nil then
+    local fertig = true
+    for _, nr in ipairs(w.einheiten) do
+      local u = 0x0138854C + nr * 1168
+      if (core.readSmallInteger(u + 0x8C) or 0) ~= 0 and (core.readSmallInteger(u + 672) or 0) == 0
+         and core.readSmallInteger(u + 728) ~= w.gruppe then fertig = false; break end
+    end
+    if not fertig and t - w.tick < 20 then return end
+    if not fertig then
+      log(WARNING, string.format("ANGRIFF Tick %d: Gruppe %d stand nach 20 Ticks nicht - naechster Befehl trotzdem.", t, w.gruppe))
+    end
+    angriffWarten = nil
+  end
+  if #angriffSchlange == 0 then return end
+  local a = table.remove(angriffSchlange, 1)
+  local gut, err = pcall(einzelbefehl, { angriff = a, ausSchlange = true })
+  if not gut then log(WARNING, "logik: " .. tostring(err)) end
+end
+
 local function zickzackTick()
   local z = zickzack
   if z == nil then return end
@@ -3197,6 +3249,7 @@ local function everyTick()
   pcall(lordWachtTick)
   pcall(einheitWachtTick)
   pcall(festhaltenTick)
+  pcall(angriffSchlangeTick)
   pcall(mauerwachtTick)
   pcall(gebaeudewachtTick)
   pcall(bauwachtTick)

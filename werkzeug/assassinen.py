@@ -199,18 +199,25 @@ class Einzeln:
     """Jeder Assassine einzeln (Daniel 23:35): Befehl auf das NAECHSTE erreichbare feindliche Wirtschaftsgebaeude;
     ist es schon von JE_GEBAEUDE anderen belegt, sofort das naechste. Kein Sammelpunkt, keine Bereitstellung.
     schritt() gibt (ereignisse, befehle) - die Befehle einer Runde gehen gesammelt in EINEM Aufruf ans Spiel
-    (Partie 8: einzeln geschickt kostete eine Runde 0,7 s)."""
-    JE_GEBAEUDE = 3
+    (Partie 8: einzeln geschickt kostete eine Runde 0,7 s).
+    Gegenprobe je Runde (05.10.): laeuft ein Assassine nicht zu seinem Gebaeude (Laufziel im Lagebild weiter als
+    ZIEL_NAH Felder weg), bekommt er den Befehl neu - der Plan im Kopf zaehlt nicht, nur das Laufziel im Spiel."""
+    JE_GEBAEUDE = 6        # Daniel 05.10. 00:00: hoechstens 6 Assassinen auf ein Gebaeude
+    ZIEL_NAH = 8           # gemessen 05.10.: Gebaeudeangriff -> Laufziel 1-2 Felder neben dem Gebaeude; 8 laesst grossen Gebaeuden Platz
+    NEU_NACH = 4           # Runden (je ~30 Ticks bei Tempo 1000), bis ein Befehl im Spiel sichtbar sein muss
 
     def __init__(self, sp=1):
         self.sp, self.ziel, self.bilanz = sp, {}, {"gebaeude": {}, "verluste": set()}
         self.mitglieder, self.ziel_typ = set(), {}
+        self.runde, self.befohlen, self.gemessen = 0, {}, 0
+        self.bilanz["neu_befohlen"] = 0
 
     def aufnehmen(self, nummern):
         self.mitglieder |= set(n for n in nummern if n not in self.bilanz["verluste"])
 
     def schritt(self, L, G, sichere_orte=None):
         ereignis, neu = [], {}
+        self.runde += 1
         for n in list(self.mitglieder):
             if n not in L or L[n]["besitzer"] != self.sp:
                 self.bilanz["verluste"].add(n); self.mitglieder.discard(n); self.ziel.pop(n, None)
@@ -221,6 +228,21 @@ class Einzeln:
                     self.bilanz["gebaeude"][typ] = self.bilanz["gebaeude"].get(typ, 0) + 1
                     ereignis.append("Gebaeude %d (Typ %d) zerstoert" % (z, typ))
                 del self.ziel[n]
+        # Gegenprobe: wer laut Plan ein Ziel hat, im Spiel aber woanders hinlaeuft, verliert das Ziel und wird neu verteilt
+        wirklich, abweichler = set(), []
+        for n, z in list(self.ziel.items()):
+            if n not in L or z not in G:
+                continue
+            lauf = (L[n]["laufx"], L[n]["laufy"])
+            if schach(lauf, (G[z]["x"], G[z]["y"])) <= self.ZIEL_NAH:
+                wirklich.add(z)
+            elif self.runde - self.befohlen.get(n, 0) >= self.NEU_NACH:
+                abweichler.append(n)
+                del self.ziel[n]
+        self.gemessen = len(wirklich)
+        if abweichler:
+            self.bilanz["neu_befohlen"] += len(abweichler)
+            ereignis.append("%d Assassinen liefen nicht zu ihrem Ziel - neu befohlen" % len(abweichler))
         zahl = {}
         for z in self.ziel.values():
             zahl[z] = zahl.get(z, 0) + 1
@@ -235,14 +257,16 @@ class Einzeln:
                 continue
             d, gn, typ = min(frei)
             self.ziel[n] = gn; self.ziel_typ[gn] = typ; zahl[gn] = zahl.get(gn, 0) + 1
+            self.befohlen[n] = self.runde
             neu.setdefault(gn, []).append(n)
-        befehle = [{"angriff": {"einheiten": ns, "gebaeude": gn}} for gn, ns in neu.items()]
+        # je Assassine ein eigener Befehl (Daniel 23:40: einzeln parallel befehlen; das Modul setzt sie nacheinander ab)
+        befehle = [{"angriff": {"einheiten": [n], "gebaeude": gn}} for gn, ns in neu.items() for n in ns]
         if befehle:
-            ereignis.append("%d Assassinen auf %d Gebaeude verteilt (gleichzeitig angegriffen: %d)" % (
-                sum(len(v) for v in neu.values()), len(neu), len(set(self.ziel.values()))))
+            ereignis.append("%d Assassinen auf %d Gebaeude verteilt (im Spiel gemessen: %d Gebaeude gleichzeitig angelaufen)" % (
+                len(befehle), len(neu), self.gemessen))
         return ereignis, befehle
 
     def bericht(self):
         b = self.bilanz
-        return "zerstoert %d Gebaeude %s, eigene Verluste %d, gleichzeitige Ziele zuletzt %d" % (
-            sum(b["gebaeude"].values()), b["gebaeude"], len(b["verluste"]), len(set(self.ziel.values())))
+        return "zerstoert %d Gebaeude %s, eigene Verluste %d, im Spiel gleichzeitig angelaufen zuletzt %d, neu befohlen %d" % (
+            sum(b["gebaeude"].values()), b["gebaeude"], len(b["verluste"]), self.gemessen, b["neu_befohlen"])

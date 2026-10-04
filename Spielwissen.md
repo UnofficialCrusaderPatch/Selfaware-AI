@@ -61,6 +61,7 @@ bis eine Messung es bestaetigt (Marke dahinter).
 - Ziele mit Wert (Daniel 04.10., 22:54): Bonus fuer den gegnerischen Kornspeicher (meist viel drin), wertvoll auch Steinbrueche, Holzfaeller, Ochsenjoche. Auch ein paar Speertraeger koennen angreifen, nicht nur Assassinen.
 - Perfektes Stacken (Daniel 22:52): alle Einheiten gebuendelt auf ein Ziel - in Abwehr und Angriff unglaublich wichtig.
 - Lord (Daniel 22:43): darf mitkaempfen und abfangen, wenn er frueh weiss wo angegriffen wird; wichtig sind nur seine letzten Lebenspunkte.
+- Assassinen-Raid (Daniel 04.10. 23:14-23:35, 05.10. 00:00): aufteilen, **hoechstens 6 je Gebaeude**; jeder Assassine einzeln befohlen auf das naechste Wirtschaftsgebaeude, ist es voll, sofort das naechste; nach einer Zerstoerung sofort weiter; kein Sammelpunkt noetig.
 
 ## Arbeitsweise beim Testen
 - Bei Fehlern immer den passenden Stand laden; nach vielen Neuerungen lieber ganz neu starten, um eine noch bessere Moeglichkeit zu finden (Daniel 04.10., 22:54).

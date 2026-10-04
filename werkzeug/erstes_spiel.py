@@ -152,6 +152,8 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
     # Halte-Liste des Moduls ueberlebt das Laden einer Partie (04.10.: alte Eintraege zogen neue Assassinen mit
     # gleicher Nummer an fremde Plaetze zurueck - "sie sammeln sich nur und machen nichts")
     befehl({"halten": False}, 1.0, bis="HALTEN")
+    import befehl as befehlskanal
+    befehlskanal.STRENG = True     # ab hier bricht jeder Modulfehler den Lauf laut ab
     w = Waechter(SP, posten=plan["lager_mitte"]) if mit_waechter else None
     trupp = Einzeln(SP) if assassinen else None
     soeldner, geworben = None, 0
@@ -245,8 +247,16 @@ def main():
         befehl({"eigenerPlatz": SP}, 0.8)
     elif arg.get("nur_phase2", "nein") != "ja":
         phase1(plan)
-    phase2(plan, int(arg.get("minuten", 10)), int(arg.get("tempo", 40)), arg.get("waechter", "nein") == "ja",
-           int(arg["bis_tick"]) if arg.get("bis_tick") else None, int(arg.get("assassinen", 0)))
+    try:
+        phase2(plan, int(arg.get("minuten", 10)), int(arg.get("tempo", 40)), arg.get("waechter", "nein") == "ja",
+               int(arg["bis_tick"]) if arg.get("bis_tick") else None, int(arg.get("assassinen", 0)))
+    except RuntimeError as e:
+        # Modulfehler (befehl.pruefe): Spiel anhalten, damit der Zustand fuer die Ursachensuche stehen bleibt
+        import befehl as befehlskanal
+        befehlskanal.STRENG = False
+        befehl({"pause": True}, 0.8)
+        print("ABBRUCH -", e, flush=True)
+        sys.exit(1)
 
 if __name__ == "__main__":
     main()

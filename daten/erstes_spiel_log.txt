@@ -1,328 +1,1062 @@
-23:15:16 == Phase 1: Eroeffnung nach Plan (eroeffnung_plan.json)
-23:16:14 in einem Aufruf gebaut: 30 von 30, einzeln nachgeholt: 0
-23:16:15 GEBAUT 30 von 30; Fehlschlaege: keine; Holz 150 -> 0, Gold 3930 -> 3780
-23:16:26 Lager: alt 4 Teile abgerissen (Inhalt: {}), neu bei [118, 120] -> (6, 118, 120); jetzt 4 Teile
-23:16:42 == Phase 2: Echtzeit, Tempo 1000, 15 Minuten, Waechter an
-23:16:47 Tick | Holz Stein Eisen | Aepfel Brot | Beliebt | Leute/Platz (Feuer) | Holzf. Apfelb. | Ereignis
-23:16:47  1033 |   0   0   0 |  15  15 |  95.00 | 18/34 (2) | 2 10 | Stellung: 14 Truppen zum Posten (121, 123); Soeldnerlager gesetzt (125, 119) (Gold 3850)
-23:16:47  1135 |   0   0   0 |  15  15 |  95.00 | 20/34 (0) | 6 10 | Markt gesetzt (125, 129)
-23:16:47  1424 |   0   0   0 |  15  15 |  98.00 | 23/34 (1) | 7 10 | 5 Assassinen angeworben (Gold jetzt 3450)
-23:16:47  1568 |   0   0   0 |  14  15 |  98.00 | 23/34 (1) | 7 10 | -
-23:16:48  1675 |   0   0   0 |  14  14 |  99.50 | 23/34 (1) | 7 10 | 10 Assassinen angeworben (Gold jetzt 3100)
-23:16:48  1957 |   0   0   0 |  14  14 | 100.00 | 24/34 (1) | 8 10 | 15 Assassinen angeworben (Gold jetzt 2750)
-23:16:48  2014 |   0   0   0 |  14  14 | 100.00 | 24/34 (1) | 8 10 | -
-23:16:48  2229 |   0   0   0 |  15  14 | 100.00 | 24/34 (1) | 8 10 | 20 Assassinen angeworben (Gold jetzt 2400)
-23:16:49  2470 |   0   0   0 |  29  14 | 100.00 | 25/34 (1) | 9 10 | 25 Assassinen angeworben (Gold jetzt 2120)
-23:16:49  2580 |   0   0   0 |  33  13 | 100.00 | 25/34 (1) | 9 10 | verkauft: apfel
-23:16:49  2751 |   0   0   0 |  28  13 | 100.00 | 26/34 (1) | 10 10 | 30 Assassinen angeworben (Gold jetzt 1785); verkauft: apfel
-23:16:49  2923 |   0   0   0 |  28  13 | 100.00 | 26/34 (1) | 10 10 | verkauft: apfel
-23:16:50  3022 |   0   0   0 |  28  13 | 100.00 | 26/34 (1) | 10 10 | 35 Assassinen angeworben (Gold jetzt 1465)
-23:16:50  3071 |   0   0   0 |  28  13 | 100.00 | 26/34 (1) | 10 10 | verkauft: apfel
-23:16:50  3311 |   0   0   0 |  31  12 | 100.00 | 27/34 (1) | 11 10 | 40 Assassinen angeworben (Gold jetzt 1130)
-23:16:50  3358 |   0   0   0 |  34  12 | 100.00 | 27/34 (1) | 11 10 | verkauft: apfel
-23:16:50  3531 |   0   0   0 |  29  12 | 100.00 | 27/34 (0) | 12 10 | -
-23:16:50  3601 |   0   0   0 |  33  12 | 100.00 | 28/34 (1) | 12 10 | 45 Assassinen angeworben (Gold jetzt 795)
-23:16:50  3623 |   0   0   0 |  33  12 | 100.00 | 27/34 (0) | 12 10 | verkauft: apfel
-23:16:51  3869 |   0   0   0 |  27  12 | 100.00 | 28/34 (1) | 12 10 | 50 Assassinen angeworben (Gold jetzt 460)
-23:16:51  3924 |   0   0   0 |  27  12 | 100.00 | 28/34 (1) | 12 10 | -
-23:16:51  4104 |   0   0   0 |  27  11 | 100.00 | 28/34 (1) | 12 10 | 55 Assassinen angeworben (Gold jetzt 110)
-23:16:51  4240 |   0   0   0 |  27  11 | 100.00 | 28/34 (2) | 12 10 | -
-23:16:52  4424 |   0   0   0 |  27  11 | 100.00 | 32/34 (3) | 14 10 | -
-23:16:52  4550 |   0   0   0 |  35  11 | 100.00 | 34/34 (3) | 14 10 | verkauft: apfel
-23:16:52  4668 |   0   0   0 |  39  11 | 100.00 | 34/34 (5) | 14 10 | -
-23:16:52  4722 |   0   0   0 |  44  10 | 100.00 | 34/34 (6) | 14 10 | verkauft: apfel
-23:16:53  4809 |   0   0   0 |  39  10 | 100.00 | 34/34 (6) | 14 10 | verkauft: apfel
-23:16:53  4951 |   0   0   0 |  39  10 | 100.00 | 34/34 (6) | 14 10 | -
-23:16:53  4974 |   0   0   0 |  39  10 | 100.00 | 34/34 (6) | 14 10 | verkauft: apfel
-23:16:53  5228 |  34   0   0 |  33  10 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:16:53  5307 |  31   0   0 |  33   9 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:16:54  5405 |  44   0   0 |  38   9 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
-23:16:54  5511 |  47   0   0 |  38   9 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:16:54  5560 |  43   0   0 |  38   9 | 100.00 | 34/34 (6) | 14 10 | -
-23:16:54  5605 |  51   0   0 |  41   9 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
-23:16:54  5718 |  59   0   0 |  38   9 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:16:54  5844 |  68   0   0 |  38   9 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:16:54  5916 |  67   0   0 |  42   8 | 100.00 | 34/34 (5) | 14 10 | -
-23:16:54  5941 |  70   0   0 |  42   8 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,apfel
-23:16:55  6058 |  66   0   0 |  37   8 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:16:55  6174 |  56   0   0 |  37   8 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:16:55  6267 |  46   0   0 |  37   8 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:16:55  6352 |  41   0   0 |  36   8 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:16:55  6423 |  36   0   0 |  36   8 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:16:55  6552 |  31   0   0 |  39   7 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:16:55  6593 |  26   0   0 |  44   7 | 100.00 | 34/34 (5) | 14 10 | -
-23:16:56  6636 |  26   0   0 |  44   7 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:16:56  6753 |  21   0   0 |  45   7 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
-23:16:56  6856 |  16   0   0 |  52   7 | 100.00 | 34/34 (6) | 14 10 | verkauft: apfel
-23:16:56  6930 |  16   0   0 |  41   7 | 100.00 | 34/34 (6) | 14 10 | -
-23:16:56  7026 |  16   0   0 |  46   7 | 100.00 | 34/34 (6) | 14 10 | verkauft: apfel
-23:16:56  7234 |  28   0   0 |  41   6 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:16:57  7318 |  29   0   0 |  41   6 | 100.00 | 34/34 (5) | 14 10 | Abfangen: 15 Verteidiger zum Laufziel (98,133) von Feind 243 (noch 118 Felder von uns); verkauft: holz
-23:16:57  7429 |  24   0   0 |  41   6 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:16:57  7542 |  19   0   0 |  43   6 | 100.00 | 34/34 (6) | 14 10 | -
-23:16:57  7591 |  27   0   0 |  45   6 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:16:57  7681 |  41   0   0 |  48   5 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:16:57  7772 |  45   0   0 |  52   5 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
-23:16:57  7875 |  40   0   0 |  42   5 | 100.00 | 34/34 (6) | 14 10 | -
-23:16:58  7899 |  40   0   0 |  42   5 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:16:58  7932 |  45   0   0 |  42   5 | 100.00 | 34/34 (6) | 14 10 | 60 Assassinen angeworben (Gold jetzt 100)
-23:16:58  8003 |  82   0   0 |  42   5 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; Trupp 10 (5) -> Gebaeude 124 Typ 32 bei (197,170), 59 Felder
-23:16:58  8104 |  77   0   0 |  41   5 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:16:58  8166 |  69   0   0 |  41   5 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:16:58  8257 |  59   0   0 |  41   4 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:16:58  8330 |  49   0   0 |  41   4 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:16:59  8414 |  44   0   0 |  41   4 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:16:59  8453 |  39   0   0 |  41   4 | 100.00 | 34/34 (6) | 14 10 | -
-23:16:59  8499 |  39   0   0 |  41   4 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:16:59  8587 |  40   0   0 |  41   4 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:16:59  8677 |  47   0   0 |  50   4 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:16:59  8751 |  42   0   0 |  49   4 | 100.00 | 34/34 (6) | 14 10 | -
-23:16:59  8774 |  46   0   0 |  50   4 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:16:59  8884 |  68  10   0 |  63   3 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,stein,apfel
-23:17:00  9026 |  82   7   0 |  53   3 | 100.00 | 34/34 (4) | 14 10 | verkauft: holz,stein; Trupp 11 (1) -> Gebaeude 121 Typ 32 bei (210,167), 52 Felder
-23:17:00  9106 |  84   2   0 |  53   3 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:17:00  9148 |  75   2   0 |  53   3 | 100.00 | 34/34 (5) | 14 10 | Trupp 10: Gebaeude 124 (Typ 32) zerstoert; Trupp 10 (6) -> Gebaeude 105 Typ 32 bei (216,201), 39 Felder
-23:17:00  9192 |  76   2   0 |  53   3 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:17:00  9281 |  77   2   0 |  52   3 | 100.00 | 34/34 (6) | 14 10 | Abwehr gebuendelt: alle 15 (22,24,55) gegen Feind 243 Typ 24 bei (151,192); verkauft: holz
-23:17:00  9414 |  89   2   0 |  52   3 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:00  9444 |  80   2   0 |  52   2 | 100.00 | 34/34 (6) | 14 10 | -
-23:17:01  9491 |  80   2   0 |  52   2 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:17:01  9520 |  70   2   0 |  52   2 | 100.00 | 34/34 (5) | 14 10 | Abwehr gebuendelt: alle 16 (22,24,55,73) gegen Feind 243 Typ 24 bei (137,178)
-23:17:01  9613 |  70   2   0 |  56   2 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:17:01  9702 |  60   2   0 |  57   2 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:01  9773 |  50   2   0 |  66   2 | 100.00 | 34/34 (6) | 14 10 | -
-23:17:01  9799 |  50   2   0 |  66   2 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
-23:17:01  9925 |  40   2   0 |  60   2 | 100.00 | 34/34 (5) | 14 10 | Abwehr gebuendelt: alle 16 (22,24,55,73) gegen Feind 243 Typ 24 bei (124,163); verkauft: holz
-23:17:01 10046 |  46   2   0 |  60   1 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:17:02 10110 |  48   2   0 |  60   1 | 100.00 | 34/34 (4) | 13 10 | verkauft: holz
-23:17:02 10196 |  43   2   0 |  60   1 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:17:02 10270 |  38   2   0 |  60   1 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:02 10338 |  33   2   0 |  60   1 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:02 10370 |  28   2   0 |  60   1 | 100.00 | 34/34 (6) | 14 10 | -
-23:17:02 10395 |  28   2   0 |  60   1 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:02 10485 |  23   2   0 |  59   1 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:03 10606 |  18   2   0 |  59   1 | 100.00 | 34/34 (6) | 14 10 | -
-23:17:03 10775 |  18   2   0 |  70   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: apfel
-23:17:03 10819 |  18   2   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | 65 Assassinen angeworben (Gold jetzt 105)
-23:17:03 10889 |  18   2   0 |  65   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: apfel
-23:17:03 10976 |  24   2   0 |  57   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:17:03 11051 |  45   2   0 |  59   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:17:03 11085 |  44   2   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | -
-23:17:04 11127 |  44   2   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:04 11215 |  39   2   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:04 11288 |  35   2   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:04 11340 |  41   2   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | -
-23:17:04 11360 |  45   2   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:04 11438 |  42   2   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:04 11528 |  37   2   0 |  55   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:17:05 11613 |  32   2   0 |  55   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:17:05 11693 |  27   2   0 |  54   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:17:05 11778 |  22   2   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:05 11859 |  17  14   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: stein
-23:17:05 11897 |  17   9   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | -
-23:17:05 11941 |  17   9   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: stein
-23:17:05 12080 |  17   4   0 |  69   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: apfel
-23:17:05 12135 |  17   4   0 |  58   0 | 100.00 | 34/34 (5) | 14 10 | -
-23:17:06 12337 |  29   4   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:06 12426 |  48   4   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:06 12486 |  58   4   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:06 12572 |  80   4   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:06 12615 |  77   4   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | -
-23:17:07 12655 |  77   4   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:07 12759 |  67   4   0 |  58   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; Trupp 12 (1) -> Gebaeude 121 Typ 32 bei (210,167), 52 Felder
-23:17:07 12846 |  73   4   0 |  61   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:17:07 12898 |  65   4   0 |  61   0 | 100.00 | 34/34 (5) | 14 10 | -
-23:17:07 12918 |  65   4   0 |  61   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:17:07 13015 |  64   4   0 |  67   0 | 100.00 | 34/34 (6) | 14 10 | Abfangen: 15 Verteidiger zum Laufziel (98,133) von Feind 431 (noch 116 Felder von uns); verkauft: holz,apfel
-23:17:07 13147 |  63   4   0 |  64   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:17:08 13231 |  53   4   0 |  64   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:17:08 13308 |  43   4   0 |  63   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:17:08 13386 |  38   4   0 |  63   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:08 13465 |  33   4   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:08 13496 |  28   4   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | -
-23:17:08 13538 |  28   4   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:08 13623 |  23   4   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:08 13737 |  18   4   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | -
-23:17:09 13802 |  21   4   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:09 13875 |  31   4   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:09 13939 |  26   4   0 |  64   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:09 14001 |  21   4   0 |  68   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
-23:17:09 14049 |  16   4   0 |  63   0 | 100.00 | 34/34 (6) | 14 10 | 70 Assassinen angeworben (Gold jetzt 125)
-23:17:09 14189 |  16   4   0 |  62   0 | 100.00 | 34/34 (5) | 14 10 | -
-23:17:10 14273 |  25   4   0 |  62   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:17:10 14349 |  29   4   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:10 14399 |  24   4   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | -
-23:17:10 14423 |  24   4   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:10 14476 |  26   4   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:10 14560 |  32   4   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:10 14646 |  27   4   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:11 14747 |  22  16   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,stein
-23:17:11 14863 |  37  11   0 |  66   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,stein,apfel
-23:17:11 14956 |  48   6   0 |  65   0 | 100.00 | 34/34 (5) | 14 10 | Abwehr gebuendelt: alle 16 (22,24,55,73) gegen Feind 431 Typ 24 bei (156,192)
-23:17:11 15050 |  48   6   0 |  69   0 | 100.00 | 34/34 (4) | 14 10 | Abwehr gebuendelt: alle 16 (22,24,55,73) gegen Feind 431 Typ 24 bei (150,186); verkauft: holz,stein,apfel
-23:17:11 15144 |  43   1   0 |  58   0 | 100.00 | 34/34 (5) | 14 10 | -
-23:17:11 15181 |  43   1   0 |  58   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:17:12 15272 |  38   1   0 |  57   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:17:12 15303 |  33   1   0 |  57   0 | 100.00 | 34/34 (5) | 14 10 | Abwehr gebuendelt: alle 16 (22,24,55,73) gegen Feind 431 Typ 24 bei (139,175)
-23:17:12 15374 |  33   1   0 |  56   0 | 100.00 | 34/34 (5) | 14 10 | Trupp 11 zurueck nach (120, 131) (Feind nah)
-23:17:12 15418 |  41   1   0 |  56   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; Trupp 10 zurueck nach (109, 173) (Feind nah)
-23:17:12 15500 |  46   1   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | -
-23:17:12 15567 |  46   1   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; Trupp 11 zurueck nach (120, 131) (verletzt [350])
-23:17:12 15622 |  41   1   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | Trupp 10 zurueck nach (109, 173) (Feind nah)
-23:17:12 15671 |  41   1   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | Trupp 11 zurueck nach (120, 131) (Feind nah)
-23:17:12 15714 |  41   1   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:12 15804 |  36   1   0 |  57   0 | 100.00 | 34/34 (6) | 13 10 | verkauft: holz
-23:17:13 15890 |  46   1   0 |  57   0 | 100.00 | 34/34 (6) | 13 10 | Abwehr gebuendelt: alle 15 (22,24,55) gegen Feind 433 Typ 24 bei (132,169); verkauft: holz
-23:17:13 16022 |  44   1   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:13 16110 |  39   1   0 |  65   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
-23:17:13 16229 |  34   1   0 |  57   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:17:13 16276 |  29   1   0 |  56   0 | 100.00 | 34/34 (5) | 14 10 | -
-23:17:13 16316 |  29   1   0 |  56   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:17:14 16402 |  24   1   0 |  55   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:17:14 16528 |  19   1   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | -
-23:17:14 16725 |  19   1   0 |  53   0 | 100.00 | 34/34 (6) | 14 10 | -
-23:17:14 16812 |  19   1   0 |  53   0 | 100.00 | 34/34 (6) | 14 10 | Abfangen: 15 Verteidiger zum Laufziel (98,133) von Feind 453 (noch 132 Felder von uns)
-23:17:15 16902 |  19   1   0 |  52   0 | 100.00 | 34/34 (6) | 14 10 | -
-23:17:15 17006 |  30   1   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:15 17079 |  45   1   0 |  72   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
-23:17:15 17164 |  47   1   0 |  63   0 | 100.00 | 34/34 (6) | 14 10 | -
-23:17:15 17185 |  50   1   0 |  63   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:15 17259 |  44   1   0 |  63   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:15 17309 |  54   1   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | 75 Assassinen angeworben (Gold jetzt 105)
-23:17:16 17365 |  61   1   0 |  62   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:17:16 17448 |  51   1   0 |  61   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:17:16 17523 |  49   1   0 |  61   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:17:16 17614 |  54   1   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:16 17707 |  76  13   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,stein
-23:17:16 17768 |  70   8   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | -
-23:17:16 17835 |  70   8   0 |  59   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,stein
-23:17:17 17947 |  78   3   0 |  58   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:17:17 18026 |  72   3   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:17 18093 |  71   3   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | -
-23:17:17 18114 |  75   3   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:17 18211 |  66   3   0 |  71   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,apfel
-23:17:17 18316 |  56   3   0 |  65   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,apfel
-23:17:17 18439 |  46   3   0 |  55   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:17:18 18512 |  41   3   0 |  54   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:17:18 18597 |  36   3   0 |  54   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:17:18 18655 |  31   3   0 |  53   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:18 18693 |  26   3   0 |  53   0 | 100.00 | 34/34 (6) | 14 10 | -
-23:17:18 18742 |  26   3   0 |  53   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:18 18794 |  21   3   0 |  52   0 | 100.00 | 34/34 (6) | 14 10 | Abwehr gebuendelt: alle 15 (22,24,55) gegen Feind 453 Typ 24 bei (151,192); verkauft: holz
-23:17:18 18960 |  16   3   0 |  51   0 | 100.00 | 34/34 (6) | 14 10 | -
-23:17:19 19137 |  16   3   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | Trupp 10 zurueck nach (109, 173) (Feind nah)
-23:17:19 19181 |  16   3   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | Trupp 11 zurueck nach (120, 131) (Feind nah)
-23:17:19 19282 |  16   3   0 |  63   0 | 100.00 | 34/34 (6) | 14 10 | Abwehr gebuendelt: alle 15 (22,24,55) gegen Feind 456 Typ 24 bei (135,165)
-23:17:19 19423 |  16   3   0 |  70   0 | 100.00 | 34/34 (6) | 14 10 | Lord in Sicherheit nach (140, 67) (Leben 100 %, Feinde nahe 8); verkauft: apfel; Trupp 10 zurueck nach (143, 167) (verletzt [349]); Trupp 11 zurueck nach (120, 131) (Feind nah); Trupp 12 zurueck nach (110, 131) (Feind nah)
-23:17:20 19602 |  16   3   0 |  59   0 | 100.00 | 34/34 (5) | 14 10 | Abfangen: 14 Verteidiger zum Laufziel (166,117) von Feind 461 (noch 59 Felder von uns)
-23:17:20 19709 |  16   3   0 |  58   0 | 100.00 | 34/34 (5) | 14 10 | -
-23:17:20 19906 |  20   3   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | -
-23:17:20 19919 |  22   3   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:20 20000 |  32   3   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:21 20076 |  48   3   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:21 20121 |  43   3   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | Abwehr gebuendelt: alle 14 (22,24) gegen Feind 461 Typ 22 bei (166,190); Trupp 10 zurueck nach (109, 173) (Feind nah)
-23:17:21 20214 |  55   3   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | Trupp 11 zurueck nach (120, 131) (Feind nah)
-23:17:21 20255 |  55   3   0 |  59   0 | 100.00 | 34/34 (6) | 13 10 | verkauft: holz; Trupp 12 zurueck nach (110, 131) (Feind nah)
-23:17:21 20323 |  45   3   0 |  66   0 | 100.00 | 34/34 (5) | 13 10 | verkauft: holz,apfel
-23:17:21 20429 |  40   3   0 |  55   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:17:21 20506 |  35   3   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:21 20556 |  32   3   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | 80 Assassinen angeworben (Gold jetzt 100)
-23:17:22 20626 |  46  15   0 |  54   0 | 100.00 | 34/34 (5) | 14 10 | Abwehr gebuendelt: alle 14 (22,24,73) gegen Feind 461 Typ 22 bei (166,174); verkauft: holz,stein; Trupp 14 (1) -> Gebaeude 121 Typ 32 bei (210,167), 52 Felder
-23:17:22 20747 |  43  10   0 |  53   0 | 100.00 | 34/34 (5) | 14 10 | VERLUST: Trupp 12 Mitglied 448
-23:17:22 20798 |  43  10   0 |  53   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,stein
-23:17:22 20914 |  48   5   0 |  52   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,stein
-23:17:22 21011 |  51   0   0 |  51   0 | 100.00 | 34/34 (5) | 14 10 | -
-23:17:22 21019 |  54   0   0 |  51   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:17:22 21064 |  57   0   0 |  51   0 | 100.00 | 34/34 (5) | 14 10 | Abwehr gebuendelt: alle 10 (22,24,73) gegen Feind 461 Typ 22 bei (166,170)
-23:17:22 21154 |  72   0   0 |  55   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:17:23 21274 |  67   0   0 |  67   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
-23:17:23 21407 |  57   0   0 |  61   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; Trupp 14 zurueck nach (160, 116) (Feind nah)
-23:17:23 21489 |  48   0   0 |  61   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:17:23 21579 |  55   0   0 |  60   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:17:23 21656 |  61   0   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:23 21690 |  53   0   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | -
-23:17:23 21732 |  53   0   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:24 21810 |  43   0   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:24 21893 |  38   0   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:24 21967 |  45   0   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | Trupp 10 zurueck nach (109, 173) (verletzt [202, 346]); VERLUST: Trupp 14 Mitglied 300
-23:17:24 22045 |  48   0   0 |  61   0 | 100.00 | 34/34 (5) | 14 10 | -
-23:17:24 22094 |  51   0   0 |  61   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:17:24 22174 |  45   0   0 |  60   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:17:24 22241 |  63   0   0 |  65   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
-23:17:24 22319 |  62   0   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:25 22396 |  52   0   0 |  64   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:25 22490 |  42   0   0 |  63   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:17:25 22575 |  37   0   0 |  63   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:17:25 22613 |  32   0   0 |  62   0 | 100.00 | 34/34 (5) | 14 10 | -
-23:17:25 22649 |  32   0   0 |  62   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:17:25 22731 |  29   0   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:25 22803 |  39   0   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:25 22853 |  35   0   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | Abwehr gebuendelt: alle 6 (22) gegen Feind 478 Typ 22 bei (168,115)
-23:17:26 22917 |  35   0   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | -
-23:17:26 22934 |  35   0   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:26 23022 |  30   0   0 |  60   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:17:26 23105 |  25   0   0 |  59   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:17:26 23188 |  20   0   0 |  60   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:17:26 23259 |  15   0   0 |  67   0 | 100.00 | 34/34 (4) | 14 10 | verkauft: apfel
-23:17:26 23289 |  15   0   0 |  57   0 | 100.00 | 34/34 (5) | 14 10 | 85 Assassinen angeworben (Gold jetzt 110)
-23:17:27 23353 |  15   0   0 |  56   0 | 100.00 | 33/34 (4) | 14 10 | Abwehr gebuendelt: alle 7 (22,73) gegen Feind 478 Typ 22 bei (168,115)
-23:17:27 23401 |  15   0   0 |  63   0 | 100.00 | 34/34 (4) | 14 10 | -
-23:17:27 23434 |  15   0   0 |  65   0 | 100.00 | 34/34 (4) | 14 10 | verkauft: apfel
-23:17:27 23576 |  15  12   0 |  56   0 | 100.00 | 34/34 (5) | 14 10 | -
-23:17:27 23596 |  15  12   0 |  58   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: stein
-23:17:27 23667 |  15   7   0 |  57   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: stein
-23:17:28 23768 |  15   2   0 |  57   0 | 100.00 | 34/34 (4) | 14 10 | Abwehr gebuendelt: alle 7 (22,73) gegen Feind 478 Typ 22 bei (168,115); Trupp 12 zurueck nach (120, 131) (Feind nah)
-23:17:28 23912 |  15   2   0 |  56   0 | 100.00 | 34/34 (4) | 14 10 | -
-23:17:28 24093 |  15   2   0 |  54   0 | 100.00 | 34/34 (5) | 14 10 | -
-23:17:29 24252 |  15   2   0 |  53   0 | 100.00 | 34/34 (6) | 14 10 | Abfangen: 6 Verteidiger zum Laufziel (113,112) von Feind 170 (noch 116 Felder von uns)
-23:17:29 24333 |  23   2   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | Trupp 14 zurueck nach (160, 111) (verletzt [359, 472])
-23:17:29 24378 |  32   2   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:29 24475 |  28   2   0 |  64   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:29 24552 |  30   2   0 |  68   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
-23:17:29 24658 |  36   2   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:29 24756 |  31   2   0 |  57   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:17:30 24834 |  26   2   0 |  56   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:17:30 24922 |  21   2   0 |  56   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:17:30 24957 |  16   2   0 |  56   0 | 100.00 | 34/34 (5) | 14 10 | -
-23:17:30 25061 |  23   2   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:30 25153 |  29   2   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:30 25215 |  24   2   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | -
-23:17:30 25230 |  24   2   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:30 25306 |  34   2   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:31 25371 |  48   2   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:31 25451 |  43   2   0 |  66   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
-23:17:31 25568 |  58   2   0 |  64   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:17:31 25608 |  48   2   0 |  64   0 | 100.00 | 34/34 (5) | 14 10 | Trupp 15 zurueck nach (160, 106) (Feind nah)
-23:17:31 25648 |  48   2   0 |  64   0 | 100.00 | 34/34 (5) | 14 10 | Trupp 12 zurueck nach (120, 131) (Feind nah)
-23:17:31 25675 |  48   2   0 |  64   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:17:31 25757 |  43   2   0 |  63   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:17:31 25805 |  38   2   0 |  63   0 | 100.00 | 34/34 (6) | 14 10 | -
-23:17:31 25846 |  38   2   0 |  63   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:32 25930 |  33   2   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:32 26022 |  29   2   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:32 26087 |  37   2   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | -
-23:17:32 26104 |  41   2   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:32 26168 |  36   2   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:32 26247 |  31   2   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:32 26328 |  26   2   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:33 26402 |  21   2   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:33 26494 |  32   2   0 |  63   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:33 26538 |  29  14   0 |  71   0 | 100.00 | 34/34 (6) | 14 10 | Abwehr gebuendelt: alle 6 (22) gegen Feind 170 Typ 24 bei (166,175)
-23:17:33 26626 |  29  14   0 |  72   0 | 100.00 | 34/34 (5) | 14 10 | Trupp 5 zurueck nach (122, 117) (Feind nah); Trupp 6 zurueck nach (122, 117) (Feind nah); Trupp 7 zurueck nach (122, 117) (Feind nah); Trupp 9 zurueck nach (122, 117) (Feind nah); Trupp 13 zurueck nach (122, 117) (Feind nah); Trupp 14 zurueck nach (122, 117) (Feind nah)
-23:17:33 26772 |  47  14   0 |  71   0 | 100.00 | 34/34 (5) | 14 10 | Abwehr gebuendelt: alle 7 (22,73) gegen Feind 170 Typ 24 bei (152,161); verkauft: holz,stein,apfel; Trupp 3 zurueck nach (122, 117) (Feind nah); Trupp 4 zurueck nach (122, 117) (Feind nah); Trupp 8 zurueck nach (122, 117) (Feind nah); Trupp 15 zurueck nach (122, 117) (Feind nah)
-23:17:34 26989 |  42   9   0 |  60   0 | 100.00 | 34/34 (4) | 14 10 | -
-23:17:34 27135 |  42   9   0 |  59   0 | 100.00 | 34/34 (4) | 14 10 | Trupp 7 zurueck nach (123, 125) (verletzt [305]); Trupp 14 zurueck nach (123, 122) (verletzt [175])
-23:17:34 27220 |  42   9   0 |  58   0 | 100.00 | 34/34 (3) | 14 10 | verkauft: holz,stein; Trupp 5 zurueck nach (122, 117) (Feind nah); Trupp 6 zurueck nach (122, 117) (Feind nah); Trupp 9 zurueck nach (122, 117) (Feind nah); Trupp 12 zurueck nach (110, 131) (Feind nah); Trupp 13 zurueck nach (122, 117) (Feind nah); Trupp 15 zurueck nach (122, 117) (verletzt [428])
-23:17:35 27433 |  37   4   0 |  62   0 | 100.00 | 34/34 (5) | 14 10 | Abwehr gebuendelt: alle 6 (22) gegen Feind 380 Typ 22 bei (159,119); 90 Assassinen angeworben (Gold jetzt 120)
-23:17:35 27688 |  37   4   0 |  77   0 | 100.00 | 33/34 (3) | 14 10 | Abwehr gebuendelt: alle 7 (22,73) gegen Feind 380 Typ 22 bei (157,117); Trupp 12 zurueck nach (120, 131) (Feind nah); Trupp 14 zurueck nach (123, 122) (verletzt [421]); Trupp 15 zurueck nach (123, 122) (Feind nah)
-23:17:35 27822 |  37   4   0 |  76   0 | 100.00 | 34/34 (4) | 14 10 | verkauft: holz,apfel
-23:17:35 27917 |  32   4   0 |  66   0 | 100.00 | 34/34 (6) | 14 10 | Abwehr gebuendelt: alle 6 (22) gegen Feind 397 Typ 22 bei (157,117)
-23:17:35 27999 |  32   4   0 |  65   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
-23:17:35 28071 |  27   4   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | Abwehr gebuendelt: alle 6 (22) gegen Feind 420 Typ 22 bei (155,119)
-23:17:35 28162 |  27   4   0 |  54   0 | 100.00 | 34/34 (5) | 14 10 | -
-23:17:35 28196 |  27   4   0 |  54   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
-23:17:35 28285 |  22   4   0 |  57   0 | 100.00 | 34/34 (5) | 14 10 | Trupp 12 zurueck nach (120, 131) (verletzt [376]); Trupp 15 zurueck nach (123, 122) (verletzt [354])
-23:17:36 28401 |  22   4   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
-23:17:36 28533 |  17   4   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | -
-23:17:36 28648 |  17   4   0 |  67   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: apfel
-23:17:37 Ende Phase 2 bei Tick 28730 nach 868 Runden (0.1 s je Runde); Kornspeicher 1, Holzfaeller 14, Apfelplantagen 10; Waechter: Bedrohungen 33, davon tot 33, eigene Truppen verloren 8; Angriff: zerstoert 1 Gebaeude {32: 1}, eigene Verluste 2, Trupps 15
+23:41:47 == Phase 1: Eroeffnung nach Plan (eroeffnung_plan.json)
+23:42:45 in einem Aufruf gebaut: 30 von 30, einzeln nachgeholt: 0
+23:42:46 GEBAUT 30 von 30; Fehlschlaege: keine; Holz 150 -> 0, Gold 3930 -> 3780
+23:42:58 Lager: alt 4 Teile abgerissen (Inhalt: {}), neu bei [118, 120] -> (6, 118, 120); jetzt 4 Teile
+23:43:13 == Phase 2: Echtzeit, Tempo 1000, 9 Minuten, Waechter an
+23:43:18 Tick | Holz Stein Eisen | Aepfel Brot | Beliebt | Leute/Platz (Feuer) | Holzf. Apfelb. | Ereignis
+23:43:18  1028 |   0   0   0 |  15  15 |  95.00 | 18/34 (2) | 2 10 | Stellung: 14 Truppen zum Posten (121, 123); Soeldnerlager gesetzt (125, 119) (Gold 3850)
+23:43:18  1128 |   0   0   0 |  15  15 |  95.00 | 20/34 (0) | 2 10 | Markt gesetzt (125, 129)
+23:43:20  1318 |   0   0   0 |  15  15 |  96.50 | 23/34 (1) | 6 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 1)
+23:43:20 WARNUNG: Runde dauerte 891 Ticks (1318 -> 2209) - Waechter war so lange blind
+23:43:21  2209 |   0   0   0 |  13  14 | 100.00 | 34/34 (6) | 14 10 | 2 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 1)
+23:43:21 WARNUNG: Runde dauerte 875 Ticks (2209 -> 3084) - Waechter war so lange blind
+23:43:22  3084 |   0   0   0 |  42  12 | 100.00 | 34/34 (6) | 14 10 | 5 Assassinen angeworben (Gold jetzt 3450); 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 2)
+23:43:22 WARNUNG: Runde dauerte 883 Ticks (3084 -> 3967) - Waechter war so lange blind
+23:43:23  3967 |   0   0   0 |  56  11 | 100.00 | 34/34 (6) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 3)
+23:43:23 WARNUNG: Runde dauerte 883 Ticks (3967 -> 4850) - Waechter war so lange blind
+23:43:24  4850 |   0   0   0 |  78   9 | 100.00 | 34/34 (6) | 14 10 | verkauft: apfel; 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 4)
+23:43:24 WARNUNG: Runde dauerte 911 Ticks (4850 -> 5761) - Waechter war so lange blind
+23:43:25  5761 |  90   0   0 |  86   8 | 100.00 | 34/34 (6) | 14 10 | Abfangen: 16 Verteidiger zum Laufziel (113,112) von Feind 239 (noch 122 Felder von uns); 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 4)
+23:43:25 WARNUNG: Runde dauerte 916 Ticks (5761 -> 6677) - Waechter war so lange blind
+23:43:26  6677 | 144  12   0 |  98   6 | 100.00 | 34/34 (6) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 4); Lager angebaut None (4 Teile)
+23:43:26 WARNUNG: Runde dauerte 901 Ticks (6677 -> 7578) - Waechter war so lange blind
+23:43:27  7578 | 144  12   0 | 113   5 | 100.00 | 34/34 (6) | 14 10 | 10 Assassinen angeworben (Gold jetzt 3130); verkauft: holz,stein,apfel; 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 5); Lager angebaut None (4 Teile)
+23:43:27 WARNUNG: Runde dauerte 968 Ticks (7578 -> 8546) - Waechter war so lange blind
+23:43:30  8546 | 144   7   0 | 100   3 | 100.00 | 34/34 (6) | 14 10 | Abwehr gebuendelt: alle 16 (22,24,55,73) gegen Feind 239 Typ 24 bei (129,140); 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 5); Lager angebaut None (4 Teile)
+23:43:30 WARNUNG: Runde dauerte 1759 Ticks (8546 -> 10305) - Waechter war so lange blind
+23:43:31 10305 | 144  19   0 | 138   0 | 100.00 | 34/34 (6) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 5); Lager angebaut None (4 Teile)
+23:43:31 WARNUNG: Runde dauerte 892 Ticks (10305 -> 11197) - Waechter war so lange blind
+23:43:32 11197 | 144  19   0 | 153   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,stein,apfel; 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 6); Lager angebaut None (4 Teile)
+23:43:32 WARNUNG: Runde dauerte 953 Ticks (11197 -> 12150) - Waechter war so lange blind
+23:43:33 12150 | 144  14   0 | 144   0 | 100.00 | 34/34 (6) | 14 10 | Abfangen: 16 Verteidiger zum Laufziel (123,119) von Feind 303 (noch 89 Felder von uns); 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 6); Lager angebaut None (4 Teile)
+23:43:33 WARNUNG: Runde dauerte 909 Ticks (12150 -> 13059) - Waechter war so lange blind
+23:43:34 13059 | 144  26   0 | 157   0 | 100.00 | 34/34 (6) | 14 10 | 15 Assassinen angeworben (Gold jetzt 2990); 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 6); Lager angebaut None (4 Teile)
+23:43:34 WARNUNG: Runde dauerte 880 Ticks (13059 -> 13939) - Waechter war so lange blind
+23:43:36 13939 | 144  26   0 | 161   0 | 100.00 | 34/34 (6) | 14 10 | Abwehr gebuendelt: alle 16 (22,24,55,73) gegen Feind 303 Typ 24 bei (139,152); verkauft: holz,stein,apfel; 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 7); Lager angebaut None (4 Teile)
+23:43:36 WARNUNG: Runde dauerte 1779 Ticks (13939 -> 15718) - Waechter war so lange blind
+23:43:38 15718 | 144  33   0 | 160   0 | 100.00 | 34/34 (6) | 14 10 | Abfangen: 16 Verteidiger zum Laufziel (98,133) von Feind 413 (noch 113 Felder von uns); 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 7); Lager angebaut None (4 Teile)
+23:43:38 WARNUNG: Runde dauerte 926 Ticks (15718 -> 16644) - Waechter war so lange blind
+23:43:39 16644 | 144  33   0 | 161   0 | 100.00 | 34/34 (6) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 7); Lager angebaut None (4 Teile)
+23:43:39 WARNUNG: Runde dauerte 876 Ticks (16644 -> 17520) - Waechter war so lange blind
+23:43:41 17520 | 144  33   0 | 179   0 | 100.00 | 34/34 (6) | 14 10 | Abwehr gebuendelt: alle 16 (22,24,55,73) gegen Feind 413 Typ 24 bei (143,184); verkauft: holz,stein,apfel; 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 8); Lager angebaut None (4 Teile)
+23:43:41 WARNUNG: Runde dauerte 1809 Ticks (17520 -> 19329) - Waechter war so lange blind
+23:43:42 19329 | 144  40   0 | 181   0 | 100.00 | 34/34 (6) | 14 10 | Lord in Sicherheit nach (140, 67) (Leben 100 %, Feinde nahe 32); Abfangen: 15 Verteidiger zum Laufziel (123,119) von Feind 430 (noch 101 Felder von uns); 20 Assassinen angeworben (Gold jetzt 2850); 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 8); Lager angebaut None (4 Teile)
+23:43:42 WARNUNG: Runde dauerte 864 Ticks (19329 -> 20193) - Waechter war so lange blind
+23:43:43 20193 | 144  40   0 | 194   0 | 100.00 | 34/34 (4) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 8); Lager angebaut None (4 Teile)
+23:43:43 WARNUNG: Runde dauerte 879 Ticks (20193 -> 21072) - Waechter war so lange blind
+23:43:44 21072 | 144  40   0 | 194   0 | 100.00 | 28/34 (0) | 11 10 | verkauft: holz,stein,apfel; 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 9); Lager angebaut (117, 127) (4 Teile)
+23:43:45 ABBRUCH - Testbedingung weg: {'ansicht': 14, 'over': 1, 'pause': 0, 't': 21996}
+23:43:45 Ende Phase 2 bei Tick 22008 nach 25 Runden (1.1 s je Runde); Kornspeicher 0, Holzfaeller 0, Apfelplantagen 0; Waechter: Bedrohungen 28, davon tot 8, eigene Truppen verloren 0; Angriff: zerstoert 0 Gebaeude {}, eigene Verluste 0, gleichzeitige Ziele zuletzt 9
+23:44:26 == Phase 1: Eroeffnung nach Plan (eroeffnung_plan.json)
+23:45:24 in einem Aufruf gebaut: 30 von 30, einzeln nachgeholt: 0
+23:45:25 GEBAUT 30 von 30; Fehlschlaege: keine; Holz 150 -> 0, Gold 3930 -> 3780
+23:45:37 Lager: alt 4 Teile abgerissen (Inhalt: {}), neu bei [118, 120] -> (6, 118, 120); jetzt 4 Teile
+23:45:52 == Phase 2: Echtzeit, Tempo 1000, 2 Minuten, Waechter an
+23:45:57 Tick | Holz Stein Eisen | Aepfel Brot | Beliebt | Leute/Platz (Feuer) | Holzf. Apfelb. | Ereignis
+23:45:57  1011 |   0   0   0 |  15  15 |  95.00 | 18/34 (2) | 2 10 | Stellung: 14 Truppen zum Posten (121, 123); Soeldnerlager gesetzt (125, 119) (Gold 3850)
+23:45:57  1110 |   0   0   0 |  15  15 |  95.00 | 20/34 (0) | 2 10 | Markt gesetzt (125, 129)
+23:45:59  1284 |   0   0   0 |  15  15 |  96.50 | 22/34 (1) | 6 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 1)
+23:45:59 WARNUNG: Runde dauerte 889 Ticks (1284 -> 2173) - Waechter war so lange blind
+23:46:00  2173 |   0   0   0 |  13  14 | 100.00 | 34/34 (6) | 14 10 | 2 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 1)
+23:46:00 WARNUNG: Runde dauerte 875 Ticks (2173 -> 3048) - Waechter war so lange blind
+23:46:01  3048 |   0   0   0 |  42  12 | 100.00 | 34/34 (6) | 14 10 | 5 Assassinen angeworben (Gold jetzt 3450); 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 2)
+23:46:01 WARNUNG: Runde dauerte 886 Ticks (3048 -> 3934) - Waechter war so lange blind
+23:46:02  3934 |   0   0   0 |  56  11 | 100.00 | 34/34 (6) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 3)
+23:46:02 WARNUNG: Runde dauerte 882 Ticks (3934 -> 4816) - Waechter war so lange blind
+23:46:03  4816 |   0   0   0 |  78   9 | 100.00 | 34/34 (6) | 14 10 | verkauft: apfel; 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 4)
+23:46:03 WARNUNG: Runde dauerte 911 Ticks (4816 -> 5727) - Waechter war so lange blind
+23:46:04  5727 |  87   0   0 |  86   8 | 100.00 | 34/34 (6) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 4)
+23:46:04 ZEITEN nach 10 Runden: assassinen 6.08 s, lesen 0.42 s, bauen_werben_verkauf 0.39 s, waechter 0.03 s, haus_lager_zeile 0.00 s
+23:46:04 WARNUNG: Runde dauerte 887 Ticks (5727 -> 6614) - Waechter war so lange blind
+23:46:05  6614 | 144  12   0 |  98   6 | 100.00 | 34/34 (6) | 14 10 | Abfangen: 16 Verteidiger zum Laufziel (98,133) von Feind 295 (noch 94 Felder von uns); 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 4); Lager angebaut None (4 Teile)
+23:46:05 WARNUNG: Runde dauerte 919 Ticks (6614 -> 7533) - Waechter war so lange blind
+23:46:06  7533 | 144  12   0 | 110   5 | 100.00 | 34/34 (6) | 14 10 | 10 Assassinen angeworben (Gold jetzt 3130); verkauft: holz,stein,apfel; 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 5); Lager angebaut None (4 Teile)
+23:46:06 WARNUNG: Runde dauerte 937 Ticks (7533 -> 8470) - Waechter war so lange blind
+23:46:09  8470 | 144   7   0 | 100   3 | 100.00 | 34/34 (6) | 14 10 | Abwehr gebuendelt: alle 16 (22,24,55,73) gegen Feind 295 Typ 24 bei (136,170); 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 6); Lager angebaut None (4 Teile)
+23:46:09 WARNUNG: Runde dauerte 1749 Ticks (8470 -> 10219) - Waechter war so lange blind
+23:46:10 10219 | 144  19   0 | 139   0 | 100.00 | 34/34 (7) | 13 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 6); Lager angebaut None (4 Teile)
+23:46:10 WARNUNG: Runde dauerte 888 Ticks (10219 -> 11107) - Waechter war so lange blind
+23:46:11 11107 | 144  19   0 | 154   0 | 100.00 | 34/34 (7) | 13 10 | verkauft: holz,stein,apfel; 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 6); Lager angebaut None (4 Teile)
+23:46:11 WARNUNG: Runde dauerte 848 Ticks (11107 -> 11955) - Waechter war so lange blind
+23:46:12 11955 | 144  14   0 | 140   0 | 100.00 | 34/34 (7) | 13 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 6); Lager angebaut None (4 Teile)
+23:46:12 WARNUNG: Runde dauerte 896 Ticks (11955 -> 12851) - Waechter war so lange blind
+23:46:13 12851 | 144  26   0 | 143   0 | 100.00 | 34/34 (7) | 13 10 | 15 Assassinen angeworben (Gold jetzt 2990); 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 6); Lager angebaut None (4 Teile)
+23:46:13 WARNUNG: Runde dauerte 873 Ticks (12851 -> 13724) - Waechter war so lange blind
+23:46:14 13724 | 144  26   0 | 157   0 | 100.00 | 34/34 (7) | 13 10 | verkauft: holz,stein,apfel; 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 7); Lager angebaut None (4 Teile)
+23:46:14 WARNUNG: Runde dauerte 953 Ticks (13724 -> 14677) - Waechter war so lange blind
+23:46:15 14677 | 124  21   0 | 146   0 | 100.00 | 34/34 (7) | 13 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 7); Lager angebaut None (4 Teile)
+23:46:16 Ende Phase 2 bei Tick 15523 nach 19 Runden (1.0 s je Runde); Kornspeicher 1, Holzfaeller 13, Apfelplantagen 10; Waechter: Bedrohungen 3, davon tot 0, eigene Truppen verloren 0; Angriff: zerstoert 0 Gebaeude {}, eigene Verluste 0, gleichzeitige Ziele zuletzt 7
+23:52:01 == Phase 1: Eroeffnung nach Plan (eroeffnung_plan.json)
+23:52:59 in einem Aufruf gebaut: 30 von 30, einzeln nachgeholt: 0
+23:53:00 GEBAUT 30 von 30; Fehlschlaege: keine; Holz 150 -> 0, Gold 3930 -> 3780
+23:53:12 Lager: alt 4 Teile abgerissen (Inhalt: {}), neu bei [118, 120] -> (6, 118, 120); jetzt 4 Teile
+23:53:27 == Phase 2: Echtzeit, Tempo 1000, 9 Minuten, Waechter an
+23:53:32 Tick | Holz Stein Eisen | Aepfel Brot | Beliebt | Leute/Platz (Feuer) | Holzf. Apfelb. | Ereignis
+23:53:32  1031 |   0   0   0 |  15  15 |  95.00 | 18/34 (2) | 2 10 | Stellung: 14 Truppen zum Posten (121, 123); Soeldnerlager gesetzt (125, 119) (Gold 3850)
+23:53:33  1127 |   0   0   0 |  15  15 |  95.00 | 20/34 (0) | 2 10 | Markt gesetzt (125, 129)
+23:53:33  1295 |   0   0   0 |  15  15 |  96.50 | 22/34 (1) | 6 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 1)
+23:53:33  1362 |   0   0   0 |  15  15 |  96.50 | 22/34 (1) | 7 10 | 2 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 1)
+23:53:33  1430 |   0   0   0 |  15  15 |  98.00 | 22/34 (1) | 7 10 | 5 Assassinen angeworben (Gold jetzt 3450); 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 2)
+23:53:33  1492 |   0   0   0 |  14  15 |  98.00 | 22/34 (1) | 7 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 2)
+23:53:33  1560 |   0   0   0 |  14  15 |  98.00 | 23/34 (1) | 8 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 2)
+23:53:33  1628 |   0   0   0 |  14  15 |  99.50 | 23/34 (1) | 8 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 3)
+23:53:33 ZEITEN nach 10 Runden: lesen 0.41 s, bauen_werben_verkauf 0.36 s, assassinen 0.18 s, waechter 0.04 s, haus_lager_zeile 0.00 s
+23:53:33  1689 |   0   0   0 |  14  14 |  99.50 | 23/34 (1) | 8 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 3)
+23:53:33  1750 |   0   0   0 |  14  14 |  99.50 | 24/34 (1) | 9 10 | 10 Assassinen angeworben (Gold jetzt 3100); 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 3)
+23:53:34  1827 |   0   0   0 |  14  14 | 100.00 | 24/34 (1) | 9 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 4)
+23:53:34  1884 |   0   0   0 |  14  14 | 100.00 | 24/34 (1) | 9 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 4)
+23:53:34  1957 |   0   0   0 |  14  14 | 100.00 | 25/34 (1) | 10 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 4)
+23:53:34  2021 |   0   0   0 |  14  14 | 100.00 | 25/34 (1) | 10 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 5)
+23:53:34  2076 |   0   0   0 |  14  14 | 100.00 | 25/34 (1) | 10 10 | 15 Assassinen angeworben (Gold jetzt 2750); 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 6)
+23:53:34  2144 |   0   0   0 |  14  14 | 100.00 | 25/34 (0) | 11 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 6)
+23:53:34 ZEITEN nach 20 Runden: lesen 0.80 s, bauen_werben_verkauf 0.57 s, assassinen 0.42 s, waechter 0.04 s, haus_lager_zeile 0.00 s
+23:53:34  2182 |   0   0   0 |  14  14 | 100.00 | 26/34 (1) | 11 10 | -
+23:53:34  2278 |   0   0   0 |  21  14 | 100.00 | 27/34 (1) | 11 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 6)
+23:53:34  2334 |   0   0   0 |  21  14 | 100.00 | 26/34 (1) | 11 10 | 2 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 6)
+23:53:35  2394 |   0   0   0 |  21  14 | 100.00 | 26/34 (1) | 11 10 | 20 Assassinen angeworben (Gold jetzt 2400); 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 7)
+23:53:35  2446 |   0   0   0 |  24  14 | 100.00 | 27/34 (2) | 11 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 7)
+23:53:35  2473 |   0   0   0 |  29  13 | 100.00 | 27/34 (1) | 11 10 | verkauft: apfel
+23:53:35  2544 |   0   0   0 |  24  13 | 100.00 | 26/34 (1) | 11 10 | 2 Assassinen auf 2 Gebaeude verteilt (gleichzeitig angegriffen: 8)
+23:53:35  2606 |   0   0   0 |  28  13 | 100.00 | 27/34 (2) | 11 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 8)
+23:53:35  2665 |   0   0   0 |  28  13 | 100.00 | 27/34 (2) | 11 10 | 25 Assassinen angeworben (Gold jetzt 2065); verkauft: apfel; 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 8)
+23:53:35 ZEITEN nach 30 Runden: lesen 1.20 s, bauen_werben_verkauf 0.93 s, assassinen 0.63 s, waechter 0.04 s, haus_lager_zeile 0.00 s
+23:53:35  2751 |   0   0   0 |  23  13 | 100.00 | 28/34 (1) | 12 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 9)
+23:53:35  2810 |   0   0   0 |  23  13 | 100.00 | 28/34 (2) | 12 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 10)
+23:53:35  2869 |   0   0   0 |  28  13 | 100.00 | 28/34 (2) | 12 10 | verkauft: apfel; 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 10)
+23:53:36  2955 |   0   0   0 |  27  13 | 100.00 | 29/34 (1) | 13 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 10)
+23:53:36  2990 |   0   0   0 |  28  13 | 100.00 | 29/34 (1) | 13 10 | 30 Assassinen angeworben (Gold jetzt 1745)
+23:53:36  3026 |   0   0   0 |  27  13 | 100.00 | 29/34 (1) | 13 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 10)
+23:53:36  3079 |   0   0   0 |  27  13 | 100.00 | 29/34 (1) | 13 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 10)
+23:53:36  3138 |   0   0   0 |  31  13 | 100.00 | 29/34 (1) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 11)
+23:53:36  3190 |   0   0   0 |  31  12 | 100.00 | 29/34 (1) | 14 10 | verkauft: apfel; 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 11)
+23:53:36  3268 |   0   0   0 |  30  12 | 100.00 | 30/34 (2) | 14 10 | 35 Assassinen angeworben (Gold jetzt 1480); 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 11)
+23:53:36 ZEITEN nach 40 Runden: lesen 1.59 s, bauen_werben_verkauf 1.29 s, assassinen 0.89 s, waechter 0.05 s, haus_lager_zeile 0.00 s
+23:53:36  3315 |   0   0   0 |  31  12 | 100.00 | 31/34 (1) | 14 10 | -
+23:53:36  3360 |   0   0   0 |  34  12 | 100.00 | 31/34 (1) | 14 10 | verkauft: apfel; 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 12)
+23:53:36  3447 |   0   0   0 |  29  12 | 100.00 | 31/34 (1) | 14 10 | 2 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 12)
+23:53:37  3511 |   0   0   0 |  29  12 | 100.00 | 31/34 (1) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 13)
+23:53:37  3557 |   0   0   0 |  32  12 | 100.00 | 31/34 (0) | 14 10 | verkauft: apfel; 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 14)
+23:53:37  3607 |   0   0   0 |  28  12 | 100.00 | 32/34 (1) | 14 10 | 40 Assassinen angeworben (Gold jetzt 1160)
+23:53:37  3691 |   0   0   0 |  27  12 | 100.00 | 32/34 (1) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 14)
+23:53:37  3753 |   0   0   0 |  27  12 | 100.00 | 32/34 (0) | 14 10 | 2 Assassinen auf 2 Gebaeude verteilt (gleichzeitig angegriffen: 14)
+23:53:37 ZEITEN nach 50 Runden: lesen 1.99 s, bauen_werben_verkauf 1.59 s, assassinen 1.07 s, waechter 0.05 s, haus_lager_zeile 0.00 s
+23:53:37  3828 |   0   0   0 |  27  11 | 100.00 | 33/34 (1) | 14 10 | -
+23:53:37  3884 |   0   0   0 |  27  11 | 100.00 | 33/34 (1) | 14 10 | 45 Assassinen angeworben (Gold jetzt 810); 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 14)
+23:53:37  3949 |   0   0   0 |  27  11 | 100.00 | 33/34 (0) | 14 10 | 2 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 15)
+23:53:37  4065 |   0   0   0 |  27  11 | 100.00 | 34/34 (1) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 15)
+23:53:38  4118 |   0   0   0 |  27  11 | 100.00 | 33/34 (1) | 14 10 | 2 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 16)
+23:53:38  4170 |   0   0   0 |  27  11 | 100.00 | 33/34 (1) | 14 10 | 50 Assassinen angeworben (Gold jetzt 460); 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 16)
+23:53:38  4228 |   0   0   0 |  27  11 | 100.00 | 33/34 (1) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 17)
+23:53:38 ZEITEN nach 60 Runden: lesen 2.37 s, bauen_werben_verkauf 1.83 s, assassinen 1.25 s, waechter 0.05 s, haus_lager_zeile 0.00 s
+23:53:38  4276 |   0   0   0 |  26  11 | 100.00 | 33/34 (1) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 17)
+23:53:38  4335 |   0   0   0 |  26  11 | 100.00 | 33/34 (1) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 18)
+23:53:38  4393 |   0   0   0 |  26  11 | 100.00 | 33/34 (1) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 18)
+23:53:38  4448 |   0   0   0 |  26  10 | 100.00 | 34/34 (1) | 14 10 | 55 Assassinen angeworben (Gold jetzt 110); 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 18)
+23:53:38  4519 |   0   0   0 |  35  10 | 100.00 | 34/34 (2) | 14 10 | verkauft: apfel; 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 18)
+23:53:39 ZEITEN nach 70 Runden: lesen 2.76 s, bauen_werben_verkauf 1.98 s, assassinen 1.40 s, waechter 0.06 s, haus_lager_zeile 0.00 s
+23:53:39  4650 |   0   0   0 |  35  10 | 100.00 | 34/34 (5) | 14 10 | -
+23:53:39  4671 |   0   0   0 |  39  10 | 100.00 | 34/34 (5) | 14 10 | verkauft: apfel
+23:53:39  4751 |   0   0   0 |  39  10 | 100.00 | 34/34 (6) | 14 10 | verkauft: apfel
+23:53:39 ZEITEN nach 80 Runden: lesen 3.15 s, bauen_werben_verkauf 2.04 s, assassinen 1.40 s, waechter 0.07 s, haus_lager_zeile 0.00 s
+23:53:39  4904 |   0   0   0 |  33  10 | 100.00 | 34/34 (6) | 14 10 | -
+23:53:39  4960 |   0   0   0 |  38  10 | 100.00 | 34/34 (6) | 14 10 | verkauft: apfel
+23:53:39  5061 |   0   0   0 |  33   9 | 100.00 | 34/34 (5) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 19)
+23:53:39 ZEITEN nach 90 Runden: lesen 3.53 s, bauen_werben_verkauf 2.11 s, assassinen 1.43 s, waechter 0.07 s, haus_lager_zeile 0.00 s
+23:53:39  5103 |   5   0   0 |  33   9 | 100.00 | 34/34 (5) | 14 10 | -
+23:53:40  5205 |  29   0   0 |  33   9 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23:53:40  5300 |  37   0   0 |  33   9 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:53:40 ZEITEN nach 100 Runden: lesen 3.92 s, bauen_werben_verkauf 2.17 s, assassinen 1.43 s, waechter 0.07 s, haus_lager_zeile 0.00 s
+23:53:40  5366 |  44   0   0 |  38   9 | 100.00 | 34/34 (6) | 14 10 | -
+23:53:40  5389 |  44   0   0 |  38   9 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:53:40  5471 |  39   0   0 |  42   9 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+23:53:40  5580 |  48   0   0 |  37   9 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:53:40 ZEITEN nach 110 Runden: lesen 4.31 s, bauen_werben_verkauf 2.29 s, assassinen 1.43 s, waechter 0.07 s, haus_lager_zeile 0.00 s
+23:53:41  5658 |  49   0   0 |  42   8 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+23:53:41  5778 |  70   0   0 |  37   8 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:53:41  5814 |  61   0   0 |  37   8 | 100.00 | 34/34 (6) | 14 10 | Gebaeude 105 (Typ 32) zerstoert; 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 19)
+23:53:41  5881 |  67   0   0 |  42   8 | 100.00 | 34/34 (5) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 19)
+23:53:41  5920 |  73   0   0 |  42   8 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23:53:41  6009 |  67   0   0 |  42   8 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23:53:41 ZEITEN nach 120 Runden: lesen 4.71 s, bauen_werben_verkauf 2.46 s, assassinen 1.49 s, waechter 0.08 s, haus_lager_zeile 0.00 s
+23:53:41  6054 |  61   0   0 |  41   8 | 100.00 | 34/34 (5) | 14 10 | -
+23:53:41  6097 |  61   0   0 |  41   8 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:53:41  6194 |  51   0   0 |  41   7 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:53:42  6260 |  41   0   0 |  41   7 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:53:42 ZEITEN nach 130 Runden: lesen 5.10 s, bauen_werben_verkauf 2.55 s, assassinen 1.49 s, waechter 0.08 s, haus_lager_zeile 0.00 s
+23:53:42  6320 |  36   0   0 |  41   7 | 100.00 | 34/34 (6) | 14 10 | -
+23:53:42  6344 |  36   0   0 |  41   7 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; Gebaeude 106 (Typ 32) zerstoert; 2 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 19)
+23:53:42  6438 |  31   0   0 |  41   7 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:53:42  6516 |  26   0   0 |  41   7 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:53:42 ZEITEN nach 140 Runden: lesen 5.49 s, bauen_werben_verkauf 2.64 s, assassinen 1.52 s, waechter 0.09 s, haus_lager_zeile 0.00 s
+23:53:42  6577 |  21   0   0 |  49   7 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+23:53:42  6701 |  16   0   0 |  43   7 | 100.00 | 34/34 (5) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 19)
+23:53:43  6773 |  25   0   0 |  48   7 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,apfel
+23:53:43  6838 |  41   0   0 |  49   6 | 100.00 | 34/34 (5) | 14 10 | Gebaeude 105 (Typ 32) zerstoert; 3 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 19)
+23:53:43  6879 |  57   0   0 |  51   6 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,apfel
+23:53:43 ZEITEN nach 150 Runden: lesen 5.90 s, bauen_werben_verkauf 2.85 s, assassinen 1.58 s, waechter 0.09 s, haus_lager_zeile 0.00 s
+23:53:43  6946 |  55   0   0 |  41   6 | 100.00 | 34/34 (6) | 14 10 | -
+23:53:43  6992 |  55   0   0 |  41   6 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23:53:43  7027 |  45   0   0 |  46   6 | 100.00 | 34/34 (5) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 20)
+23:53:43  7063 |  45   0   0 |  46   6 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23:53:43  7143 |  53   0   0 |  46   6 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23:53:43 ZEITEN nach 160 Runden: lesen 6.29 s, bauen_werben_verkauf 2.98 s, assassinen 1.61 s, waechter 0.09 s, haus_lager_zeile 0.00 s
+23:53:43  7205 |  48   0   0 |  46   6 | 100.00 | 34/34 (6) | 14 10 | -
+23:53:43  7218 |  48   0   0 |  46   6 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:53:44  7304 |  43   0   0 |  45   6 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:53:44  7389 |  38   0   0 |  45   5 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:53:44 ZEITEN nach 170 Runden: lesen 6.69 s, bauen_werben_verkauf 3.07 s, assassinen 1.61 s, waechter 0.10 s, haus_lager_zeile 0.00 s
+23:53:44  7456 |  36   0   0 |  45   5 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:53:44  7537 |  46   0   0 |  47   5 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:53:44  7620 |  41   0   0 |  53   5 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+23:53:44  7687 |  36   0   0 |  43   5 | 100.00 | 34/34 (6) | 14 10 | 60 Assassinen angeworben (Gold jetzt 120)
+23:53:44  7763 |  43   0   0 |  47   5 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 21)
+23:53:44 ZEITEN nach 180 Runden: lesen 7.09 s, bauen_werben_verkauf 3.25 s, assassinen 1.64 s, waechter 0.10 s, haus_lager_zeile 0.00 s
+23:53:44  7828 |  49   0   0 |  46   5 | 100.00 | 34/34 (5) | 14 10 | -
+23:53:45  7867 |  49   0   0 |  46   5 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23:53:45  7922 |  47   0   0 |  46   5 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23:53:45  8007 |  72   0   0 |  46   4 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:53:45 ZEITEN nach 190 Runden: lesen 7.47 s, bauen_werben_verkauf 3.34 s, assassinen 1.64 s, waechter 0.10 s, haus_lager_zeile 0.00 s
+23:53:45  8068 |  65   2   0 |  46   4 | 100.00 | 34/34 (6) | 14 10 | -
+23:53:45  8091 |  65  12   0 |  46   4 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,stein; Gebaeude 110 (Typ 32) zerstoert; 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 21)
+23:53:45  8241 |  71   7   0 |  46   4 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,stein; 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 21)
+23:53:45  8365 |  63   2   0 |  46   4 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23:53:46 ZEITEN nach 200 Runden: lesen 7.87 s, bauen_werben_verkauf 3.52 s, assassinen 1.70 s, waechter 0.11 s, haus_lager_zeile 0.00 s
+23:53:46  8435 |  53   2   0 |  45   4 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:53:46  8517 |  43   2   0 |  45   4 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:53:46  8561 |  38   2   0 |  45   3 | 100.00 | 34/34 (6) | 14 10 | Gebaeude 112 (Typ 32) zerstoert; 2 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 21)
+23:53:46  8623 |  38   2   0 |  47   3 | 100.00 | 34/34 (5) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 21)
+23:53:46  8659 |  38   2   0 |  54   3 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23:53:46  8744 |  33   2   0 |  54   3 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23:53:46 ZEITEN nach 210 Runden: lesen 8.27 s, bauen_werben_verkauf 3.67 s, assassinen 1.77 s, waechter 0.12 s, haus_lager_zeile 0.00 s
+23:53:46  8792 |  37   2   0 |  59   3 | 100.00 | 34/34 (5) | 14 10 | -
+23:53:46  8835 |  45   2   0 |  64   3 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+23:53:47  8944 |  43   2   0 |  58   3 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+23:53:47  9055 |  65   2   0 |  47   3 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23:53:47  9090 |  62   2   0 |  47   3 | 100.00 | 34/34 (5) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 22)
+23:53:47 ZEITEN nach 220 Runden: lesen 8.65 s, bauen_werben_verkauf 3.85 s, assassinen 1.80 s, waechter 0.12 s, haus_lager_zeile 0.00 s
+23:53:47  9117 |  62   2   0 |  47   3 | 100.00 | 34/34 (5) | 14 10 | -
+23:53:47  9137 |  64   2   0 |  47   3 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23:53:47  9222 |  70   2   0 |  47   2 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23:53:47  9306 |  60   2   0 |  47   2 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:53:47 ZEITEN nach 230 Runden: lesen 9.04 s, bauen_werben_verkauf 3.94 s, assassinen 1.80 s, waechter 0.13 s, haus_lager_zeile 0.00 s
+23:53:47  9367 |  50   2   0 |  47   2 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:53:47  9446 |  40   2   0 |  47   2 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:53:48  9536 |  35   2   0 |  47   2 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:53:48  9650 |  30   2   0 |  50   2 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 22)
+23:53:48 ZEITEN nach 240 Runden: lesen 9.43 s, bauen_werben_verkauf 4.09 s, assassinen 1.83 s, waechter 0.13 s, haus_lager_zeile 0.00 s
+23:53:48  9693 |  25   2   0 |  50   2 | 100.00 | 34/34 (5) | 14 10 | Gebaeude 112 (Typ 32) zerstoert; 2 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 22)
+23:53:48  9745 |  25   2   0 |  56   1 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23:53:48  9822 |  20   2   0 |  60   1 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23:53:48 ZEITEN nach 250 Runden: lesen 9.81 s, bauen_werben_verkauf 4.15 s, assassinen 1.86 s, waechter 0.13 s, haus_lager_zeile 0.00 s
+23:53:48  9925 |  15   2   0 |  65   1 | 100.00 | 34/34 (6) | 14 10 | -
+23:53:48  9946 |  15   2   0 |  65   1 | 100.00 | 34/34 (6) | 14 10 | verkauft: apfel
+23:53:49 10068 |  28   2   0 |  55   1 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:53:49 ZEITEN nach 260 Runden: lesen 10.19 s, bauen_werben_verkauf 4.21 s, assassinen 1.86 s, waechter 0.14 s, haus_lager_zeile 0.00 s
+23:53:49 10151 |  28   2   0 |  55   1 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; Gebaeude 113 (Typ 32) zerstoert; 2 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 22)
+23:53:49 10229 |  23   2   0 |  54   1 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:53:49 ZEITEN nach 270 Runden: lesen 10.57 s, bauen_werben_verkauf 4.27 s, assassinen 1.89 s, waechter 0.14 s, haus_lager_zeile 0.00 s
+23:53:49 10380 |  18   2   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | -
+23:53:50 ZEITEN nach 280 Runden: lesen 10.95 s, bauen_werben_verkauf 4.27 s, assassinen 1.89 s, waechter 0.15 s, haus_lager_zeile 0.00 s
+23:53:50 10590 |  18   2   0 |  53   0 | 100.00 | 34/34 (6) | 14 10 | -
+23:53:50 ZEITEN nach 290 Runden: lesen 11.32 s, bauen_werben_verkauf 4.27 s, assassinen 1.89 s, waechter 0.15 s, haus_lager_zeile 0.00 s
+23:53:50 10751 |  24   2   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:53:50 10830 |  43   2   0 |  66   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+23:53:50 10900 |  47   2   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | 65 Assassinen angeworben (Gold jetzt 130)
+23:53:50 10963 |  60   2   0 |  58   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 22)
+23:53:51 11015 |  52  14   0 |  62   0 | 100.00 | 34/34 (5) | 14 10 | Gebaeude 112 (Typ 32) zerstoert; 3 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 22)
+23:53:51 11071 |  52  14   0 |  62   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,stein
+23:53:51 ZEITEN nach 300 Runden: lesen 11.70 s, bauen_werben_verkauf 4.48 s, assassinen 1.95 s, waechter 0.15 s, haus_lager_zeile 0.01 s
+23:53:51 11144 |  42   9   0 |  61   0 | 100.00 | 34/34 (5) | 14 10 | -
+23:53:51 11203 |  42   9   0 |  61   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,stein; 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 23)
+23:53:51 11319 |  37   4   0 |  60   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23:53:51 11385 |  32   4   0 |  59   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23:53:51 ZEITEN nach 310 Runden: lesen 12.08 s, bauen_werben_verkauf 4.63 s, assassinen 1.98 s, waechter 0.15 s, haus_lager_zeile 0.01 s
+23:53:51 11432 |  27   4   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | -
+23:53:51 11449 |  29   4   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:53:51 11535 |  40   4   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:53:52 11609 |  35   4   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:53:52 ZEITEN nach 320 Runden: lesen 12.46 s, bauen_werben_verkauf 4.72 s, assassinen 1.98 s, waechter 0.16 s, haus_lager_zeile 0.01 s
+23:53:52 11664 |  38   4   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:53:52 11739 |  43   4   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:53:52 11799 |  38   4   0 |  57   0 | 100.00 | 34/34 (5) | 14 10 | Gebaeude 112 (Typ 32) zerstoert; 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 23)
+23:53:52 11816 |  38   4   0 |  59   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 23)
+23:53:52 11875 |  33   4   0 |  60   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23:53:52 ZEITEN nach 330 Runden: lesen 12.85 s, bauen_werben_verkauf 4.87 s, assassinen 2.04 s, waechter 0.16 s, haus_lager_zeile 0.01 s
+23:53:52 11909 |  28   4   0 |  62   0 | 100.00 | 34/34 (5) | 14 10 | -
+23:53:52 11947 |  28   4   0 |  66   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,apfel
+23:53:53 12035 |  23   4   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:53:53 12125 |  32   4   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:53:53 ZEITEN nach 340 Runden: lesen 13.23 s, bauen_werben_verkauf 4.99 s, assassinen 2.05 s, waechter 0.17 s, haus_lager_zeile 0.01 s
+23:53:53 12182 |  31   4   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | -
+23:53:53 12202 |  32   4   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:53:53 12287 |  56   4   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:53:53 12409 |  63   4   0 |  59   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 24)
+23:53:53 ZEITEN nach 350 Runden: lesen 13.64 s, bauen_werben_verkauf 5.11 s, assassinen 2.07 s, waechter 0.17 s, haus_lager_zeile 0.01 s
+23:53:53 12502 |  73   4   0 |  59   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23:53:54 12571 |  68   4   0 |  58   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23:53:54 12641 |  64   4   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:53:54 12726 |  66   4   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:53:54 ZEITEN nach 360 Runden: lesen 14.01 s, bauen_werben_verkauf 5.24 s, assassinen 2.07 s, waechter 0.18 s, haus_lager_zeile 0.01 s
+23:53:54 12774 |  57   4   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | -
+23:53:54 12818 |  65   4   0 |  65   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+23:53:54 12878 |  64   4   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | Gebaeude 112 (Typ 32) zerstoert; 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 23)
+23:53:54 12937 |  64   4   0 |  54   0 | 100.00 | 34/34 (5) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 23)
+23:53:54 12961 |  64   4   0 |  55   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23:53:54 13028 |  54   4   0 |  62   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23:53:54 ZEITEN nach 370 Runden: lesen 14.40 s, bauen_werben_verkauf 5.39 s, assassinen 2.13 s, waechter 0.18 s, haus_lager_zeile 0.01 s
+23:53:55 13093 |  44   4   0 |  68   0 | 100.00 | 34/34 (5) | 14 10 | -
+23:53:55 13115 |  44   4   0 |  68   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,apfel
+23:53:55 13185 |  39   4   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | 70 Assassinen angeworben (Gold jetzt 105)
+23:53:55 13236 |  39   4   0 |  57   0 | 100.00 | 33/34 (5) | 14 10 | verkauft: holz; 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 24)
+23:53:55 13314 |  34   4   0 |  56   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23:53:55 ZEITEN nach 380 Runden: lesen 14.78 s, bauen_werben_verkauf 5.54 s, assassinen 2.16 s, waechter 0.19 s, haus_lager_zeile 0.01 s
+23:53:55 13384 |  29   4   0 |  56   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23:53:55 13467 |  24   4   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:53:56 ZEITEN nach 390 Runden: lesen 15.15 s, bauen_werben_verkauf 5.60 s, assassinen 2.17 s, waechter 0.19 s, haus_lager_zeile 0.01 s
+23:53:56 13630 |  19   4   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | -
+23:53:56 13757 |  19   4   0 |  53   0 | 100.00 | 34/34 (6) | 14 10 | Gebaeude 112 (Typ 32) zerstoert; 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 23)
+23:53:56 ZEITEN nach 400 Runden: lesen 15.54 s, bauen_werben_verkauf 5.60 s, assassinen 2.20 s, waechter 0.20 s, haus_lager_zeile 0.01 s
+23:53:56 13829 |  21   4   0 |  53   0 | 100.00 | 34/34 (6) | 14 10 | -
+23:53:56 13849 |  25   4   0 |  53   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:53:56 13925 |  32  16   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,stein
+23:53:56 14036 |  27  11   0 |  66   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,stein,apfel
+23:53:57 ZEITEN nach 410 Runden: lesen 15.92 s, bauen_werben_verkauf 5.81 s, assassinen 2.20 s, waechter 0.21 s, haus_lager_zeile 0.01 s
+23:53:57 14175 |  40   6   0 |  56   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,stein
+23:53:57 14232 |  47   1   0 |  55   0 | 100.00 | 34/34 (5) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 24)
+23:53:57 14294 |  48   1   0 |  55   0 | 100.00 | 34/34 (4) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 25)
+23:53:57 14331 |  52   1   0 |  55   0 | 100.00 | 34/34 (4) | 14 10 | verkauft: holz
+23:53:57 14417 |  43   1   0 |  54   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23:53:57 14465 |  38   1   0 |  54   0 | 100.00 | 34/34 (5) | 14 10 | Abfangen: 15 Verteidiger zum Laufziel (123,119) von Feind 258 (noch 149 Felder von uns)
+23:53:57 14492 |  38   1   0 |  53   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:53:57 ZEITEN nach 420 Runden: lesen 16.30 s, bauen_werben_verkauf 5.99 s, assassinen 2.26 s, waechter 0.24 s, haus_lager_zeile 0.01 s
+23:53:57 14531 |  36   1   0 |  53   0 | 100.00 | 34/34 (6) | 14 10 | -
+23:53:57 14569 |  44   1   0 |  53   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:53:57 14632 |  46   1   0 |  52   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:53:58 14693 |  41   1   0 |  52   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:53:58 ZEITEN nach 430 Runden: lesen 16.68 s, bauen_werben_verkauf 6.08 s, assassinen 2.26 s, waechter 0.25 s, haus_lager_zeile 0.01 s
+23:53:58 14761 |  36   1   0 |  52   0 | 100.00 | 34/34 (6) | 14 10 | -
+23:53:58 14780 |  36   1   0 |  51   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:53:58 14859 |  31   1   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:53:58 14894 |  26   1   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | Gebaeude 133 (Typ 6) zerstoert; 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 25)
+23:53:58 14941 |  26   1   0 |  67   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+23:53:58 ZEITEN nach 440 Runden: lesen 17.06 s, bauen_werben_verkauf 6.23 s, assassinen 2.29 s, waechter 0.25 s, haus_lager_zeile 0.01 s
+23:53:58 15066 |  39   1   0 |  62   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 25)
+23:53:58 15174 |  34   1   0 |  61   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23:53:59 15251 |  29   1   0 |  60   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23:53:59 15333 |  24   1   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:53:59 ZEITEN nach 450 Runden: lesen 17.45 s, bauen_werben_verkauf 6.35 s, assassinen 2.32 s, waechter 0.26 s, haus_lager_zeile 0.01 s
+23:53:59 15376 |  19   1   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | -
+23:53:59 15399 |  19   1   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | Gebaeude 134 (Typ 32) zerstoert; 2 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 25)
+23:53:59 ZEITEN nach 460 Runden: lesen 17.84 s, bauen_werben_verkauf 6.35 s, assassinen 2.35 s, waechter 0.27 s, haus_lager_zeile 0.01 s
+23:53:59 15580 |  19   1   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | -
+23:54:00 ZEITEN nach 470 Runden: lesen 18.21 s, bauen_werben_verkauf 6.35 s, assassinen 2.35 s, waechter 0.28 s, haus_lager_zeile 0.01 s
+23:54:00 15761 |  19   1   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | -
+23:54:00 ZEITEN nach 480 Runden: lesen 18.60 s, bauen_werben_verkauf 6.35 s, assassinen 2.35 s, waechter 0.28 s, haus_lager_zeile 0.01 s
+23:54:00 15946 |  19   1   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | -
+23:54:00 16082 |  19   1   0 |  65   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: apfel
+23:54:00 16131 |  19   1   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | Gebaeude 133 (Typ 6) zerstoert; 2 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 25)
+23:54:00 ZEITEN nach 490 Runden: lesen 18.98 s, bauen_werben_verkauf 6.41 s, assassinen 2.38 s, waechter 0.29 s, haus_lager_zeile 0.01 s
+23:54:01 16199 |  19   1   0 |  60   0 | 100.00 | 34/34 (5) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 26)
+23:54:01 16235 |  22   1   0 |  60   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23:54:01 16298 |  43   1   0 |  59   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23:54:01 16385 |  53   1   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:01 16454 |  44   1   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | Abfangen: 15 Verteidiger zum Laufziel (122,119) von Feind 381 (noch 58 Felder von uns)
+23:54:01 ZEITEN nach 500 Runden: lesen 19.37 s, bauen_werben_verkauf 6.50 s, assassinen 2.41 s, waechter 0.32 s, haus_lager_zeile 0.01 s
+23:54:01 16486 |  48   1   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:01 16574 |  43   1   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:01 16666 |  38   1   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:02 16741 |  34   1   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:02 ZEITEN nach 510 Runden: lesen 19.76 s, bauen_werben_verkauf 6.62 s, assassinen 2.41 s, waechter 0.32 s, haus_lager_zeile 0.01 s
+23:54:02 16773 |  35   1   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | -
+23:54:02 16805 |  42   1   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; Gebaeude 133 (Typ 6) zerstoert; 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 25)
+23:54:02 16879 |  48  13   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,stein
+23:54:02 16950 |  46   8   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | 75 Assassinen angeworben (Gold jetzt 110)
+23:54:02 17006 |  54   8   0 |  65   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,stein,apfel; 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 25)
+23:54:02 ZEITEN nach 520 Runden: lesen 20.14 s, bauen_werben_verkauf 6.86 s, assassinen 2.47 s, waechter 0.33 s, haus_lager_zeile 0.01 s
+23:54:02 17133 |  44   3   0 |  67   0 | 100.00 | 34/34 (4) | 14 10 | -
+23:54:02 17151 |  44   3   0 |  66   0 | 100.00 | 34/34 (4) | 14 10 | verkauft: holz,apfel
+23:54:02 17220 |  39   3   0 |  56   0 | 100.00 | 34/34 (5) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 26)
+23:54:03 17288 |  39   3   0 |  56   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23:54:03 17356 |  34   3   0 |  55   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23:54:03 ZEITEN nach 530 Runden: lesen 20.52 s, bauen_werben_verkauf 6.98 s, assassinen 2.50 s, waechter 0.33 s, haus_lager_zeile 0.01 s
+23:54:03 17440 |  53   3   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:03 17513 |  55   3   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:03 17616 |  57   3   0 |  53   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 26)
+23:54:03 17670 |  61   3   0 |  53   0 | 100.00 | 34/34 (5) | 14 10 | Gebaeude 136 (Typ 6) zerstoert; 2 Assassinen auf 2 Gebaeude verteilt (gleichzeitig angegriffen: 26)
+23:54:03 17721 |  74   3   0 |  53   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23:54:03 ZEITEN nach 540 Runden: lesen 20.90 s, bauen_werben_verkauf 7.13 s, assassinen 2.56 s, waechter 0.34 s, haus_lager_zeile 0.01 s
+23:54:03 17764 |  64   3   0 |  52   0 | 100.00 | 34/34 (5) | 14 10 | -
+23:54:04 17805 |  69   3   0 |  52   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23:54:04 17885 |  69   3   0 |  51   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:04 17975 |  84   3   0 |  51   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:04 ZEITEN nach 550 Runden: lesen 21.30 s, bauen_werben_verkauf 7.23 s, assassinen 2.57 s, waechter 0.35 s, haus_lager_zeile 0.01 s
+23:54:04 18026 |  85   3   0 |  51   0 | 100.00 | 34/34 (6) | 14 10 | -
+23:54:04 18042 |  85   3   0 |  50   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:04 18115 |  75   3   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:04 18216 |  65   3   0 |  64   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 27)
+23:54:04 ZEITEN nach 560 Runden: lesen 21.68 s, bauen_werben_verkauf 7.35 s, assassinen 2.60 s, waechter 0.35 s, haus_lager_zeile 0.01 s
+23:54:04 18315 |  55   3   0 |  69   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,apfel
+23:54:05 18402 |  45   3   0 |  58   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23:54:05 18456 |  40   3   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:05 18542 |  35   3   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:05 ZEITEN nach 570 Runden: lesen 22.05 s, bauen_werben_verkauf 7.50 s, assassinen 2.60 s, waechter 0.36 s, haus_lager_zeile 0.01 s
+23:54:05 18576 |  30   3   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | -
+23:54:05 18615 |  30   3   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:05 18711 |  25   3   0 |  56   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 27)
+23:54:05 18809 |  20   3   0 |  55   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23:54:05 ZEITEN nach 580 Runden: lesen 22.43 s, bauen_werben_verkauf 7.62 s, assassinen 2.62 s, waechter 0.37 s, haus_lager_zeile 0.01 s
+23:54:05 18855 |  15   3   0 |  55   0 | 100.00 | 34/34 (5) | 14 10 | -
+23:54:06 ZEITEN nach 590 Runden: lesen 22.80 s, bauen_werben_verkauf 7.62 s, assassinen 2.63 s, waechter 0.37 s, haus_lager_zeile 0.01 s
+23:54:06 19050 |  15   3   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | -
+23:54:06 19174 |  15   3   0 |  63   0 | 100.00 | 34/34 (6) | 14 10 | Gebaeude 137 (Typ 6) zerstoert; 2 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 27)
+23:54:06 19223 |  17   3   0 |  66   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: apfel
+23:54:06 ZEITEN nach 600 Runden: lesen 23.20 s, bauen_werben_verkauf 7.65 s, assassinen 2.66 s, waechter 0.38 s, haus_lager_zeile 0.01 s
+23:54:06 19261 |  25   3   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | -
+23:54:06 19298 |  32   3   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:07 19365 |  28   3   0 |  63   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:07 19442 |  23   3   0 |  63   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:07 ZEITEN nach 610 Runden: lesen 23.58 s, bauen_werben_verkauf 7.74 s, assassinen 2.66 s, waechter 0.39 s, haus_lager_zeile 0.01 s
+23:54:07 19498 |  22   3   0 |  63   0 | 100.00 | 34/34 (6) | 14 10 | -
+23:54:07 19519 |  26   3   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:07 19605 |  31   3   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:07 19682 |  26   3   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:07 19726 |  21   3   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | 80 Assassinen angeworben (Gold jetzt 100)
+23:54:07 ZEITEN nach 620 Runden: lesen 23.95 s, bauen_werben_verkauf 7.86 s, assassinen 2.66 s, waechter 0.40 s, haus_lager_zeile 0.01 s
+23:54:07 19783 |  21  15   0 |  61   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,stein; 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 27)
+23:54:08 19895 |  16  10   0 |  60   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: stein
+23:54:08 19969 |  21   5   0 |  59   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,stein
+23:54:08 20075 |  29   0   0 |  59   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 28)
+23:54:08 ZEITEN nach 630 Runden: lesen 24.33 s, bauen_werben_verkauf 8.07 s, assassinen 2.72 s, waechter 0.41 s, haus_lager_zeile 0.01 s
+23:54:08 20127 |  24   0   0 |  58   0 | 100.00 | 34/34 (5) | 14 10 | Abfangen: 15 Verteidiger zum Laufziel (113,112) von Feind 184 (noch 109 Felder von uns)
+23:54:08 20183 |  33   0   0 |  58   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23:54:08 20256 |  37   0   0 |  64   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23:54:08 20345 |  32   0   0 |  69   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+23:54:08 ZEITEN nach 640 Runden: lesen 24.71 s, bauen_werben_verkauf 8.19 s, assassinen 2.72 s, waechter 0.45 s, haus_lager_zeile 0.01 s
+23:54:09 20403 |  27   0   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | -
+23:54:09 20425 |  27   0   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:09 20520 |  25   0   0 |  58   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 28)
+23:54:09 20611 |  35   0   0 |  57   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23:54:09 ZEITEN nach 650 Runden: lesen 25.09 s, bauen_werben_verkauf 8.32 s, assassinen 2.75 s, waechter 0.45 s, haus_lager_zeile 0.01 s
+23:54:09 20691 |  30   0   0 |  57   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23:54:09 20763 |  31   0   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:09 20844 |  40   0   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:10 20919 |  65   0   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:10 ZEITEN nach 660 Runden: lesen 25.48 s, bauen_werben_verkauf 8.44 s, assassinen 2.75 s, waechter 0.46 s, haus_lager_zeile 0.01 s
+23:54:10 20963 |  59   0   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | Gebaeude 110 (Typ 32) zerstoert; 2 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 27)
+23:54:10 21015 |  59   0   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:10 21093 |  49   0   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:10 21165 |  44   0   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:10 ZEITEN nach 670 Runden: lesen 25.85 s, bauen_werben_verkauf 8.53 s, assassinen 2.78 s, waechter 0.47 s, haus_lager_zeile 0.01 s
+23:54:10 21221 |  39   0   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | -
+23:54:10 21241 |  39   0   0 |  63   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:10 21330 |  34   0   0 |  70   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+23:54:11 21438 |  29   0   0 |  64   0 | 100.00 | 33/34 (5) | 14 10 | verkauft: holz; 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 28)
+23:54:11 ZEITEN nach 680 Runden: lesen 26.25 s, bauen_werben_verkauf 8.68 s, assassinen 2.81 s, waechter 0.48 s, haus_lager_zeile 0.01 s
+23:54:11 21493 |  24   0   0 |  64   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23:54:11 21607 |  21   0   0 |  63   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23:54:11 21679 |  30   0   0 |  63   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:11 ZEITEN nach 690 Runden: lesen 26.64 s, bauen_werben_verkauf 8.77 s, assassinen 2.81 s, waechter 0.49 s, haus_lager_zeile 0.01 s
+23:54:11 21727 |  27   0   0 |  63   0 | 100.00 | 34/34 (6) | 14 10 | -
+23:54:11 21766 |  27   0   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:11 21845 |  22   0   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:12 ZEITEN nach 700 Runden: lesen 27.02 s, bauen_werben_verkauf 8.83 s, assassinen 2.81 s, waechter 0.50 s, haus_lager_zeile 0.01 s
+23:54:12 21960 |  17   0   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | -
+23:54:12 22001 |  17   0   0 |  65   0 | 100.00 | 34/34 (6) | 14 10 | Abwehr gebuendelt: alle 15 (22,24,55) gegen Feind 184 Typ 24 bei (168,177)
+23:54:12 22125 |  31   0   0 |  64   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:12 ZEITEN nach 710 Runden: lesen 27.40 s, bauen_werben_verkauf 8.86 s, assassinen 2.81 s, waechter 0.57 s, haus_lager_zeile 0.01 s
+23:54:12 22203 |  32   0   0 |  63   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:12 22282 |  43   0   0 |  68   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+23:54:13 22390 |  38   0   0 |  67   0 | 100.00 | 34/34 (5) | 14 10 | Abwehr gebuendelt: alle 16 (22,24,55,73) gegen Feind 184 Typ 24 bei (144,153); verkauft: holz,apfel; 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 28)
+23:54:13 22505 |  33   0   0 |  56   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23:54:13 ZEITEN nach 720 Runden: lesen 27.78 s, bauen_werben_verkauf 9.07 s, assassinen 2.85 s, waechter 0.64 s, haus_lager_zeile 0.01 s
+23:54:13 22540 |  31   0   0 |  56   0 | 100.00 | 34/34 (5) | 14 10 | 85 Assassinen angeworben (Gold jetzt 100)
+23:54:13 22602 |  44   0   0 |  56   0 | 100.00 | 34/34 (5) | 14 10 | Abwehr gebuendelt: alle 16 (22,24,55,73) gegen Feind 184 Typ 24 bei (133,142); verkauft: holz; 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 28)
+23:54:13 22708 |  41  12   0 |  55   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,stein
+23:54:13 22802 |  47   7   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,stein
+23:54:13 ZEITEN nach 730 Runden: lesen 28.17 s, bauen_werben_verkauf 9.25 s, assassinen 2.88 s, waechter 0.71 s, haus_lager_zeile 0.01 s
+23:54:13 22895 |  46   2   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | -
+23:54:14 22916 |  49   2   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:14 23021 |  44   2   0 |  53   0 | 100.00 | 34/34 (5) | 14 10 | Abwehr gebuendelt: alle 15 (22,24,55,73) gegen Feind 184 Typ 24 bei (130,133); verkauft: holz; 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 29)
+23:54:14 23096 |  39   2   0 |  52   0 | 100.00 | 34/34 (5) | 14 10 | Abwehr gebuendelt: alle 14 (22,24,55) gegen Feind 196 Typ 24 bei (128,136)
+23:54:14 23138 |  39   2   0 |  52   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23:54:14 ZEITEN nach 740 Runden: lesen 28.54 s, bauen_werben_verkauf 9.37 s, assassinen 2.91 s, waechter 0.84 s, haus_lager_zeile 0.01 s
+23:54:14 23209 |  34   2   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:14 23265 |  29   2   0 |  64   0 | 100.00 | 34/34 (6) | 14 10 | Markt gesetzt (124, 114)
+23:54:14 23332 |  29   2   0 |  64   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:15 23400 |  24   2   0 |  68   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+23:54:15 ZEITEN nach 750 Runden: lesen 28.93 s, bauen_werben_verkauf 9.57 s, assassinen 2.91 s, waechter 0.85 s, haus_lager_zeile 0.01 s
+23:54:15 23495 |  19   2   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | -
+23:54:15 23645 |  30   2   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:15 ZEITEN nach 760 Runden: lesen 29.29 s, bauen_werben_verkauf 9.60 s, assassinen 2.91 s, waechter 0.85 s, haus_lager_zeile 0.01 s
+23:54:15 23700 |  40   2   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | -
+23:54:15 23718 |  44   2   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:15 23792 |  45   2   0 |  60   0 | 100.00 | 34/34 (6) | 13 10 | verkauft: holz
+23:54:16 23858 |  41   2   0 |  59   0 | 100.00 | 34/34 (5) | 13 10 | verkauft: holz
+23:54:16 23907 |  47   2   0 |  59   0 | 100.00 | 34/34 (4) | 13 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 29)
+23:54:16 ZEITEN nach 770 Runden: lesen 29.67 s, bauen_werben_verkauf 9.72 s, assassinen 2.94 s, waechter 0.86 s, haus_lager_zeile 0.01 s
+23:54:16 23959 |  65   2   0 |  58   0 | 100.00 | 34/34 (4) | 14 10 | verkauft: holz
+23:54:16 24044 |  66   2   0 |  58   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23:54:16 24134 |  75   2   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:16 24190 |  76   2   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:16 ZEITEN nach 780 Runden: lesen 30.06 s, bauen_werben_verkauf 9.84 s, assassinen 2.94 s, waechter 0.87 s, haus_lager_zeile 0.01 s
+23:54:16 24221 |  67   2   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | -
+23:54:16 24262 |  67   2   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:16 24338 |  57   2   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:17 24393 |  47   2   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:17 ZEITEN nach 790 Runden: lesen 30.44 s, bauen_werben_verkauf 9.96 s, assassinen 2.94 s, waechter 0.88 s, haus_lager_zeile 0.01 s
+23:54:17 24477 |  42   2   0 |  63   0 | 100.00 | 34/34 (5) | 14 10 | -
+23:54:17 24498 |  42   2   0 |  63   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 29)
+23:54:17 24588 |  37   2   0 |  67   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,apfel
+23:54:17 24681 |  44   2   0 |  57   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23:54:17 ZEITEN nach 800 Runden: lesen 30.81 s, bauen_werben_verkauf 10.08 s, assassinen 2.97 s, waechter 0.89 s, haus_lager_zeile 0.01 s
+23:54:17 24766 |  45   2   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:17 24843 |  52   2   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; Gebaeude 110 (Typ 32) zerstoert; 3 Assassinen auf 3 Gebaeude verteilt (gleichzeitig angegriffen: 28)
+23:54:18 24919 |  48   2   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:18 24995 |  43   2   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:18 ZEITEN nach 810 Runden: lesen 31.23 s, bauen_werben_verkauf 10.20 s, assassinen 3.01 s, waechter 0.90 s, haus_lager_zeile 0.01 s
+23:54:18 25028 |  38   2   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | -
+23:54:18 25089 |  38   2   0 |  58   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23:54:18 25171 |  33   2   0 |  57   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23:54:18 25252 |  37   2   0 |  58   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23:54:18 ZEITEN nach 820 Runden: lesen 31.62 s, bauen_werben_verkauf 10.32 s, assassinen 3.01 s, waechter 0.91 s, haus_lager_zeile 0.01 s
+23:54:18 25324 |  41   2   0 |  65   0 | 100.00 | 34/34 (6) | 14 10 | -
+23:54:18 25338 |  41   2   0 |  65   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+23:54:19 25434 |  51   2   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:19 25517 |  44   2   0 |  63   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:19 ZEITEN nach 830 Runden: lesen 32.00 s, bauen_werben_verkauf 10.44 s, assassinen 3.01 s, waechter 0.92 s, haus_lager_zeile 0.01 s
+23:54:19 25586 |  39   2   0 |  67   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+23:54:19 25637 |  34  14   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | 90 Assassinen angeworben (Gold jetzt 130)
+23:54:19 25699 |  34  14   0 |  57   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,stein; 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 29)
+23:54:19 25769 |  29   9   0 |  56   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,stein
+23:54:20 25871 |  24   4   0 |  56   0 | 100.00 | 34/34 (4) | 14 10 | verkauft: holz; 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 29)
+23:54:20 ZEITEN nach 840 Runden: lesen 32.37 s, bauen_werben_verkauf 10.71 s, assassinen 3.06 s, waechter 0.93 s, haus_lager_zeile 0.01 s
+23:54:20 25928 |  19   4   0 |  55   0 | 100.00 | 34/34 (5) | 14 10 | -
+23:54:20 ZEITEN nach 850 Runden: lesen 32.75 s, bauen_werben_verkauf 10.71 s, assassinen 3.07 s, waechter 0.94 s, haus_lager_zeile 0.01 s
+23:54:20 26082 |  19   4   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | -
+23:54:20 ZEITEN nach 860 Runden: lesen 33.13 s, bauen_werben_verkauf 10.71 s, assassinen 3.07 s, waechter 0.95 s, haus_lager_zeile 0.01 s
+23:54:20 26289 |  19   4   0 |  53   0 | 100.00 | 34/34 (6) | 14 10 | -
+23:54:21 ZEITEN nach 870 Runden: lesen 33.51 s, bauen_werben_verkauf 10.71 s, assassinen 3.07 s, waechter 0.96 s, haus_lager_zeile 0.01 s
+23:54:21 26439 |  19   4   0 |  52   0 | 100.00 | 34/34 (6) | 14 10 | -
+23:54:21 ZEITEN nach 880 Runden: lesen 33.88 s, bauen_werben_verkauf 10.71 s, assassinen 3.07 s, waechter 0.96 s, haus_lager_zeile 0.01 s
+23:54:21 26599 |  19   4   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | -
+23:54:21 ZEITEN nach 890 Runden: lesen 34.26 s, bauen_werben_verkauf 10.71 s, assassinen 3.07 s, waechter 0.97 s, haus_lager_zeile 0.01 s
+23:54:22 26784 |  25   4   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:22 26858 |  32   4   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:22 26922 |  27   4   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | Abfangen: 15 Verteidiger zum Laufziel (113,112) von Feind 324 (noch 116 Felder von uns)
+23:54:22 26943 |  27   4   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:22 27027 |  22   4   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:22 ZEITEN nach 900 Runden: lesen 34.65 s, bauen_werben_verkauf 10.83 s, assassinen 3.07 s, waechter 1.01 s, haus_lager_zeile 0.01 s
+23:54:22 27062 |  17   4   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | -
+23:54:22 ZEITEN nach 910 Runden: lesen 35.03 s, bauen_werben_verkauf 10.83 s, assassinen 3.07 s, waechter 1.02 s, haus_lager_zeile 0.01 s
+23:54:22 27237 |  17   4   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | -
+23:54:23 ZEITEN nach 920 Runden: lesen 35.41 s, bauen_werben_verkauf 10.83 s, assassinen 3.07 s, waechter 1.02 s, haus_lager_zeile 0.01 s
+23:54:23 27447 |  17   4   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | -
+23:54:23 27562 |  29   4   0 |  67   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+23:54:23 27671 |  32   4   0 |  65   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,apfel; 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 30)
+23:54:23 ZEITEN nach 930 Runden: lesen 35.79 s, bauen_werben_verkauf 10.97 s, assassinen 3.10 s, waechter 1.03 s, haus_lager_zeile 0.01 s
+23:54:23 27713 |  35   4   0 |  55   0 | 100.00 | 34/34 (5) | 14 10 | Gebaeude 127 (Typ 1) zerstoert; 2 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 29)
+23:54:24 27742 |  41   4   0 |  55   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23:54:24 27808 |  40   4   0 |  54   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23:54:24 27891 |  48   4   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:24 ZEITEN nach 940 Runden: lesen 36.17 s, bauen_werben_verkauf 11.07 s, assassinen 3.13 s, waechter 1.04 s, haus_lager_zeile 0.01 s
+23:54:24 27953 |  44   4   0 |  53   0 | 100.00 | 34/34 (6) | 14 10 | -
+23:54:24 27973 |  46   4   0 |  53   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:24 28055 |  41   4   0 |  53   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:24 28153 |  36   4   0 |  52   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 29)
+23:54:24 ZEITEN nach 950 Runden: lesen 36.54 s, bauen_werben_verkauf 11.18 s, assassinen 3.16 s, waechter 1.04 s, haus_lager_zeile 0.01 s
+23:54:24 28245 |  36   4   0 |  57   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23:54:25 28322 |  44   4   0 |  60   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23:54:25 28363 |  39   4   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:25 28406 |  36   4   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:25 ZEITEN nach 960 Runden: lesen 36.92 s, bauen_werben_verkauf 11.30 s, assassinen 3.16 s, waechter 1.05 s, haus_lager_zeile 0.01 s
+23:54:25 28418 |  33   4   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | -
+23:54:25 28434 |  36   4   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:25 28496 |  42   4   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23:54:25 28577 |  37  16   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,stein
+23:54:25 ZEITEN nach 970 Runden: lesen 37.28 s, bauen_werben_verkauf 11.42 s, assassinen 3.16 s, waechter 1.06 s, haus_lager_zeile 0.01 s
+23:54:25 28661 |  41  11   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | -
+23:54:26 28684 |  45  11   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,stein
+23:54:26 Ende Phase 2 bei Tick 28773 nach 972 Runden (0.1 s je Runde); Kornspeicher 1, Holzfaeller 14, Apfelplantagen 10; Waechter: Bedrohungen 10, davon tot 7, eigene Truppen verloren 3; Angriff: zerstoert 20 Gebaeude {32: 14, 6: 5, 1: 1}, eigene Verluste 13, gleichzeitige Ziele zuletzt 29
+00:01:28 == Phase 1: Eroeffnung nach Plan (eroeffnung_plan.json)
+00:02:26 in einem Aufruf gebaut: 30 von 30, einzeln nachgeholt: 0
+00:02:27 GEBAUT 30 von 30; Fehlschlaege: keine; Holz 150 -> 0, Gold 3930 -> 3780
+00:02:39 Lager: alt 4 Teile abgerissen (Inhalt: {}), neu bei [118, 120] -> (6, 118, 120); jetzt 4 Teile
+00:02:55 == Phase 2: Echtzeit, Tempo 1000, 9 Minuten, Waechter an
+00:02:59 Tick | Holz Stein Eisen | Aepfel Brot | Beliebt | Leute/Platz (Feuer) | Holzf. Apfelb. | Ereignis
+00:03:00  1026 |   0   0   0 |  15  15 |  95.00 | 18/34 (2) | 2 10 | Stellung: 14 Truppen zum Posten (121, 123); Soeldnerlager gesetzt (125, 119) (Gold 3850)
+00:03:00  1135 |   0   0   0 |  15  15 |  95.00 | 20/34 (0) | 6 10 | Markt gesetzt (125, 129)
+00:03:00  1294 |   0   0   0 |  15  15 |  96.50 | 22/34 (1) | 6 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+00:03:00  1361 |   0   0   0 |  15  15 |  96.50 | 22/34 (1) | 7 10 | 2 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 1 Gebaeude gleichzeitig angelaufen)
+00:03:00  1435 |   0   0   0 |  15  15 |  98.00 | 22/34 (1) | 7 10 | 5 Assassinen angeworben (Gold jetzt 3450); 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 1 Gebaeude gleichzeitig angelaufen)
+00:03:00  1500 |   0   0   0 |  14  15 |  98.00 | 23/34 (1) | 7 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 1 Gebaeude gleichzeitig angelaufen)
+00:03:00  1567 |   0   0   0 |  14  15 |  98.00 | 23/34 (1) | 8 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 1 Gebaeude gleichzeitig angelaufen)
+00:03:00  1635 |   0   0   0 |  14  15 |  99.50 | 23/34 (1) | 8 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 1 Gebaeude gleichzeitig angelaufen)
+00:03:00 ZEITEN nach 10 Runden: lesen 0.38 s, bauen_werben_verkauf 0.36 s, assassinen 0.18 s, waechter 0.03 s, haus_lager_zeile 0.00 s
+00:03:00  1703 |   0   0   0 |  14  14 |  99.50 | 24/34 (1) | 8 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 2 Gebaeude gleichzeitig angelaufen)
+00:03:01  1755 |   0   0   0 |  14  14 |  99.50 | 24/34 (1) | 9 10 | 10 Assassinen angeworben (Gold jetzt 3100); 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 2 Gebaeude gleichzeitig angelaufen)
+00:03:01  1814 |   0   0   0 |  14  14 | 100.00 | 24/34 (1) | 9 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 2 Gebaeude gleichzeitig angelaufen)
+00:03:01  1888 |   0   0   0 |  14  14 | 100.00 | 24/34 (1) | 9 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 2 Gebaeude gleichzeitig angelaufen)
+00:03:01  1952 |   0   0   0 |  14  14 | 100.00 | 25/34 (0) | 10 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 2 Gebaeude gleichzeitig angelaufen)
+00:03:01  2086 |   0   0   0 |  14  14 | 100.00 | 26/34 (1) | 10 10 | 15 Assassinen angeworben (Gold jetzt 2750); 1 Assassinen liefen nicht zu ihrem Ziel - neu befohlen; 2 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 2 Gebaeude gleichzeitig angelaufen)
+00:03:01  2150 |   0   0   0 |  14  14 | 100.00 | 26/34 (1) | 11 10 | 2 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 3 Gebaeude gleichzeitig angelaufen)
+00:03:01  2217 |   0   0   0 |  14  14 | 100.00 | 26/34 (1) | 11 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 3 Gebaeude gleichzeitig angelaufen)
+00:03:01 ZEITEN nach 20 Runden: lesen 0.77 s, bauen_werben_verkauf 0.63 s, assassinen 0.42 s, waechter 0.04 s, haus_lager_zeile 0.00 s
+00:03:01  2286 |   0   0   0 |  21  14 | 100.00 | 26/34 (1) | 11 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 3 Gebaeude gleichzeitig angelaufen)
+00:03:01  2345 |   0   0   0 |  21  14 | 100.00 | 26/34 (0) | 12 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 3 Gebaeude gleichzeitig angelaufen)
+00:03:02  2438 |   0   0   0 |  22  14 | 100.00 | 28/34 (1) | 12 10 | 20 Assassinen angeworben (Gold jetzt 2400)
+00:03:02  2481 |   0   0   0 |  29  13 | 100.00 | 28/34 (1) | 12 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 3 Gebaeude gleichzeitig angelaufen)
+00:03:02  2550 |   0   0   0 |  29  13 | 100.00 | 28/34 (1) | 13 10 | 2 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 4 Gebaeude gleichzeitig angelaufen)
+00:03:02  2601 |   0   0   0 |  33  13 | 100.00 | 28/34 (1) | 13 10 | verkauft: apfel; 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 4 Gebaeude gleichzeitig angelaufen)
+00:03:02  2693 |   0   0   0 |  28  13 | 100.00 | 28/34 (1) | 13 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 4 Gebaeude gleichzeitig angelaufen)
+00:03:02  2754 |   0   0   0 |  28  13 | 100.00 | 29/34 (1) | 14 10 | 25 Assassinen angeworben (Gold jetzt 2065); 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 4 Gebaeude gleichzeitig angelaufen)
+00:03:02  2818 |   0   0   0 |  28  13 | 100.00 | 29/34 (1) | 14 10 | verkauft: apfel; 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 4 Gebaeude gleichzeitig angelaufen)
+00:03:02 ZEITEN nach 30 Runden: lesen 1.15 s, bauen_werben_verkauf 0.95 s, assassinen 0.66 s, waechter 0.04 s, haus_lager_zeile 0.00 s
+00:03:02  2905 |   0   0   0 |  28  13 | 100.00 | 30/34 (1) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 5 Gebaeude gleichzeitig angelaufen)
+00:03:02  2978 |   0   0   0 |  32  13 | 100.00 | 30/34 (1) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 5 Gebaeude gleichzeitig angelaufen)
+00:03:03  3050 |   0   0   0 |  32  13 | 100.00 | 31/34 (2) | 14 10 | verkauft: apfel; 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 5 Gebaeude gleichzeitig angelaufen)
+00:03:03  3129 |   0   0   0 |  31  13 | 100.00 | 31/34 (1) | 14 10 | 30 Assassinen angeworben (Gold jetzt 1745); 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 5 Gebaeude gleichzeitig angelaufen)
+00:03:03  3177 |   0   0   0 |  31  12 | 100.00 | 31/34 (1) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 5 Gebaeude gleichzeitig angelaufen)
+00:03:03  3228 |   0   0   0 |  31  12 | 100.00 | 32/34 (1) | 14 10 | verkauft: apfel
+00:03:03  3300 |   0   0   0 |  30  12 | 100.00 | 32/34 (1) | 14 10 | 2 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 5 Gebaeude gleichzeitig angelaufen)
+00:03:03  3359 |   0   0   0 |  34  12 | 100.00 | 32/34 (0) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 6 Gebaeude gleichzeitig angelaufen)
+00:03:03  3406 |   0   0   0 |  34  12 | 100.00 | 33/34 (2) | 14 10 | verkauft: apfel
+00:03:03  3441 |   0   0   0 |  29  12 | 100.00 | 33/34 (1) | 14 10 | 35 Assassinen angeworben (Gold jetzt 1425)
+00:03:03 ZEITEN nach 40 Runden: lesen 1.52 s, bauen_werben_verkauf 1.31 s, assassinen 0.86 s, waechter 0.05 s, haus_lager_zeile 0.00 s
+00:03:03  3486 |   0   0   0 |  29  12 | 100.00 | 33/34 (1) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 7 Gebaeude gleichzeitig angelaufen)
+00:03:03  3544 |   0   0   0 |  29  12 | 100.00 | 32/34 (0) | 14 10 | 2 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 7 Gebaeude gleichzeitig angelaufen)
+00:03:04  3658 |   0   0   0 |  32  12 | 100.00 | 34/34 (1) | 14 10 | verkauft: apfel; 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 7 Gebaeude gleichzeitig angelaufen)
+00:03:04  3756 |   0   0   0 |  27  11 | 100.00 | 34/34 (2) | 14 10 | 40 Assassinen angeworben (Gold jetzt 1090); Gebaeude 72 (Typ 3) zerstoert; 8 Assassinen auf 3 Gebaeude verteilt (im Spiel gemessen: 7 Gebaeude gleichzeitig angelaufen)
+00:03:04  3848 |   0   0   0 |  27  11 | 100.00 | 34/34 (3) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 7 Gebaeude gleichzeitig angelaufen)
+00:03:04  3908 |   0   0   0 |  27  11 | 100.00 | 34/34 (2) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 7 Gebaeude gleichzeitig angelaufen)
+00:03:04  3974 |   0   0   0 |  27  11 | 100.00 | 34/34 (3) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 7 Gebaeude gleichzeitig angelaufen)
+00:03:04  4038 |   0   0   0 |  27  11 | 100.00 | 34/34 (3) | 14 10 | Gebaeude 90 (Typ 32) zerstoert; 7 Assassinen auf 2 Gebaeude verteilt (im Spiel gemessen: 6 Gebaeude gleichzeitig angelaufen)
+00:03:04 ZEITEN nach 50 Runden: lesen 1.91 s, bauen_werben_verkauf 1.62 s, assassinen 1.15 s, waechter 0.05 s, haus_lager_zeile 0.00 s
+00:03:04  4114 |   0   0   0 |  27  11 | 100.00 | 34/34 (3) | 14 10 | 45 Assassinen angeworben (Gold jetzt 740); 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 7 Gebaeude gleichzeitig angelaufen)
+00:03:04  4186 |   0   0   0 |  27  11 | 100.00 | 34/34 (3) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 7 Gebaeude gleichzeitig angelaufen)
+00:03:04  4223 |   0   0   0 |  26  11 | 100.00 | 34/34 (2) | 14 10 | Gebaeude 35 (Typ 3) zerstoert; 6 Assassinen auf 2 Gebaeude verteilt (im Spiel gemessen: 7 Gebaeude gleichzeitig angelaufen)
+00:03:05  4297 |   0   0   0 |  26  11 | 100.00 | 34/34 (3) | 14 10 | Gebaeude 81 (Typ 3) zerstoert; Gebaeude 98 (Typ 32) zerstoert; 14 Assassinen auf 5 Gebaeude verteilt (im Spiel gemessen: 6 Gebaeude gleichzeitig angelaufen)
+00:03:05  4378 |   0   0   0 |  26  10 | 100.00 | 34/34 (3) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 9 Gebaeude gleichzeitig angelaufen)
+00:03:05  4421 |   0   0   0 |  26  10 | 100.00 | 34/34 (3) | 14 10 | 50 Assassinen angeworben (Gold jetzt 390); 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 9 Gebaeude gleichzeitig angelaufen)
+00:03:05  4483 |   0   0   0 |  30  10 | 100.00 | 34/34 (2) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 9 Gebaeude gleichzeitig angelaufen)
+00:03:05  4558 |   0   0   0 |  35  10 | 100.00 | 34/34 (3) | 14 10 | Gebaeude 71 (Typ 32) zerstoert; 7 Assassinen auf 3 Gebaeude verteilt (im Spiel gemessen: 8 Gebaeude gleichzeitig angelaufen)
+00:03:05  4635 |   0   0   0 |  38  10 | 100.00 | 33/34 (3) | 13 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 10 Gebaeude gleichzeitig angelaufen)
+00:03:05  4693 |   0   0   0 |  45  10 | 100.00 | 34/34 (3) | 13 10 | verkauft: apfel
+00:03:05 ZEITEN nach 60 Runden: lesen 2.29 s, bauen_werben_verkauf 1.94 s, assassinen 1.49 s, waechter 0.05 s, haus_lager_zeile 0.00 s
+00:03:05  4761 |   0   0   0 |  44  10 | 100.00 | 34/34 (2) | 14 10 | Gebaeude 72 (Typ 3) zerstoert; 7 Assassinen auf 5 Gebaeude verteilt (im Spiel gemessen: 9 Gebaeude gleichzeitig angelaufen)
+00:03:05  4815 |   0   0   0 |  43  10 | 100.00 | 34/34 (3) | 14 10 | 1 Assassinen liefen nicht zu ihrem Ziel - neu befohlen; 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 10 Gebaeude gleichzeitig angelaufen)
+00:03:05  4852 |   0   0   0 |  43  10 | 100.00 | 34/34 (4) | 14 10 | verkauft: apfel
+00:03:06  4912 |   0   0   0 |  38  10 | 100.00 | 34/34 (5) | 14 10 | verkauft: apfel
+00:03:06  4947 |   0   0   0 |  38   9 | 100.00 | 34/34 (5) | 14 10 | Gebaeude 100 (Typ 7) zerstoert; Gebaeude 19 (Typ 32) zerstoert; 11 Assassinen auf 3 Gebaeude verteilt (im Spiel gemessen: 8 Gebaeude gleichzeitig angelaufen)
+00:03:06  5007 |   0   0   0 |  38   9 | 100.00 | 34/34 (6) | 14 10 | Gebaeude 84 (Typ 3) zerstoert; Gebaeude 91 (Typ 26) zerstoert; 12 Assassinen auf 4 Gebaeude verteilt (im Spiel gemessen: 8 Gebaeude gleichzeitig angelaufen)
+00:03:06  5061 |   0   0   0 |  38   9 | 100.00 | 34/34 (6) | 14 10 | verkauft: apfel
+00:03:06  5106 |   5   0   0 |  33   9 | 100.00 | 34/34 (6) | 14 10 | 55 Assassinen angeworben (Gold jetzt 100)
+00:03:06 ZEITEN nach 70 Runden: lesen 2.67 s, bauen_werben_verkauf 2.06 s, assassinen 1.69 s, waechter 0.06 s, haus_lager_zeile 0.00 s
+00:03:06  5129 |  10   0   0 |  33   9 | 100.00 | 34/34 (5) | 14 10 | -
+00:03:06  5151 |  14   0   0 |  33   9 | 100.00 | 34/34 (6) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 10 Gebaeude gleichzeitig angelaufen)
+00:03:06  5238 |  35   0   0 |  33   9 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:06  5298 |  32   0   0 |  33   9 | 100.00 | 34/34 (5) | 14 10 | Gebaeude 36 (Typ 32) zerstoert; 6 Assassinen auf 3 Gebaeude verteilt (im Spiel gemessen: 9 Gebaeude gleichzeitig angelaufen)
+00:03:06  5354 |  43   0   0 |  38   9 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:06 ZEITEN nach 80 Runden: lesen 3.08 s, bauen_werben_verkauf 2.12 s, assassinen 1.76 s, waechter 0.06 s, haus_lager_zeile 0.00 s
+00:03:07  5422 |  44   0   0 |  38   9 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:07  5491 |  43   0   0 |  42   9 | 100.00 | 34/34 (6) | 14 10 | Gebaeude 23 (Typ 3) zerstoert; 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 10 Gebaeude gleichzeitig angelaufen)
+00:03:07  5534 |  48   0   0 |  42   8 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+00:03:07  5646 |  52   0   0 |  42   8 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel; Gebaeude 26 (Typ 19) zerstoert; 6 Assassinen auf 2 Gebaeude verteilt (im Spiel gemessen: 10 Gebaeude gleichzeitig angelaufen)
+00:03:07  5745 |  75   0   0 |  37   8 | 100.00 | 34/34 (6) | 14 10 | Gebaeude 99 (Typ 32) zerstoert; Gebaeude 73 (Typ 32) zerstoert; Gebaeude 102 (Typ 32) zerstoert; Gebaeude 36 (Typ 3) zerstoert; 24 Assassinen auf 6 Gebaeude verteilt (im Spiel gemessen: 7 Gebaeude gleichzeitig angelaufen)
+00:03:07  5836 |  78   0   0 |  37   8 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:07 ZEITEN nach 90 Runden: lesen 3.47 s, bauen_werben_verkauf 2.30 s, assassinen 1.95 s, waechter 0.06 s, haus_lager_zeile 0.00 s
+00:03:07  5858 |  68   0   0 |  41   8 | 100.00 | 34/34 (6) | 14 10 | -
+00:03:07  5905 |  77   0   0 |  42   8 | 100.00 | 34/34 (5) | 14 10 | Gebaeude 83 (Typ 4) zerstoert; 3 Assassinen auf 2 Gebaeude verteilt (im Spiel gemessen: 11 Gebaeude gleichzeitig angelaufen)
+00:03:07  5937 |  78   0   0 |  42   8 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 12 Gebaeude gleichzeitig angelaufen)
+00:03:08  5999 |  71   0   0 |  41   8 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:08  6078 |  66   0   0 |  41   8 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:08  6114 |  56   0   0 |  41   8 | 100.00 | 34/34 (5) | 14 10 | Gebaeude 19 (Typ 3) zerstoert; 6 Assassinen auf 2 Gebaeude verteilt (im Spiel gemessen: 12 Gebaeude gleichzeitig angelaufen)
+00:03:08 ZEITEN nach 100 Runden: lesen 3.85 s, bauen_werben_verkauf 2.42 s, assassinen 2.05 s, waechter 0.07 s, haus_lager_zeile 0.00 s
+00:03:08  6161 |  56   0   0 |  41   7 | 100.00 | 34/34 (6) | 14 10 | Gebaeude 20 (Typ 3) zerstoert; 2 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 12 Gebaeude gleichzeitig angelaufen)
+00:03:08  6204 |  56   0   0 |  41   7 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:08  6252 |  46   0   0 |  41   7 | 100.00 | 34/34 (6) | 14 10 | Gebaeude 23 (Typ 32) zerstoert; Gebaeude 35 (Typ 32) zerstoert; Gebaeude 89 (Typ 4) zerstoert; Gebaeude 87 (Typ 4) zerstoert; 20 Assassinen auf 4 Gebaeude verteilt (im Spiel gemessen: 9 Gebaeude gleichzeitig angelaufen)
+00:03:08  6332 |  46   0   0 |  41   7 | 100.00 | 34/34 (6) | 14 10 | Gebaeude 24 (Typ 7) zerstoert; 6 Assassinen auf 2 Gebaeude verteilt (im Spiel gemessen: 11 Gebaeude gleichzeitig angelaufen)
+00:03:08  6352 |  46   0   0 |  41   7 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; Gebaeude 22 (Typ 3) zerstoert; 2 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 12 Gebaeude gleichzeitig angelaufen)
+00:03:08  6398 |  41   0   0 |  41   7 | 100.00 | 34/34 (6) | 14 10 | Gebaeude 26 (Typ 3) zerstoert; 6 Assassinen auf 2 Gebaeude verteilt (im Spiel gemessen: 12 Gebaeude gleichzeitig angelaufen)
+00:03:08  6445 |  41   0   0 |  41   7 | 100.00 | 34/34 (6) | 14 10 | 1 Assassinen liefen nicht zu ihrem Ziel - neu befohlen; 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 12 Gebaeude gleichzeitig angelaufen)
+00:03:09  6490 |  41   0   0 |  41   7 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; Gebaeude 71 (Typ 4) zerstoert; 3 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 11 Gebaeude gleichzeitig angelaufen)
+00:03:09  6551 |  36   0   0 |  44   7 | 100.00 | 34/34 (6) | 14 10 | Gebaeude 21 (Typ 3) zerstoert; 2 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 11 Gebaeude gleichzeitig angelaufen)
+00:03:09 ZEITEN nach 110 Runden: lesen 4.24 s, bauen_werben_verkauf 2.51 s, assassinen 2.39 s, waechter 0.07 s, haus_lager_zeile 0.00 s
+00:03:09  6611 |  36   0   0 |  48   7 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+00:03:09  6668 |  31   0   0 |  43   7 | 100.00 | 34/34 (6) | 14 10 | Gebaeude 36 (Typ 32) zerstoert; 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 11 Gebaeude gleichzeitig angelaufen)
+00:03:09  6748 |  43   0   0 |  43   6 | 100.00 | 34/34 (5) | 14 10 | Gebaeude 74 (Typ 20) zerstoert; 7 Assassinen auf 3 Gebaeude verteilt (im Spiel gemessen: 11 Gebaeude gleichzeitig angelaufen)
+00:03:09  6790 |  61   0   0 |  48   6 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,apfel; Gebaeude 72 (Typ 19) zerstoert; 5 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 11 Gebaeude gleichzeitig angelaufen)
+00:03:09  6886 |  57   0   0 |  46   6 | 100.00 | 34/34 (5) | 14 10 | Gebaeude 88 (Typ 32) zerstoert; Gebaeude 20 (Typ 32) zerstoert; Gebaeude 22 (Typ 4) zerstoert; Gebaeude 70 (Typ 1) zerstoert; 20 Assassinen auf 6 Gebaeude verteilt (im Spiel gemessen: 7 Gebaeude gleichzeitig angelaufen)
+00:03:09  6967 |  69   0   0 |  46   6 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:09  7010 |  65   0   0 |  49   6 | 100.00 | 34/34 (6) | 14 10 | Gebaeude 19 (Typ 3) zerstoert; 6 Assassinen auf 2 Gebaeude verteilt (im Spiel gemessen: 9 Gebaeude gleichzeitig angelaufen)
+00:03:10  7086 |  82   0   0 |  51   6 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+00:03:10 ZEITEN nach 120 Runden: lesen 4.64 s, bauen_werben_verkauf 2.75 s, assassinen 2.65 s, waechter 0.08 s, haus_lager_zeile 0.00 s
+00:03:10  7153 |  90   0   0 |  41   6 | 100.00 | 34/34 (6) | 14 10 | Gebaeude 37 (Typ 1) zerstoert; 4 Assassinen auf 2 Gebaeude verteilt (im Spiel gemessen: 8 Gebaeude gleichzeitig angelaufen)
+00:03:10  7245 |  91   0   0 |  40   6 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; Gebaeude 86 (Typ 1) zerstoert
+00:03:10  7296 |  81   0   0 |  40   6 | 100.00 | 34/34 (5) | 14 10 | Gebaeude 82 (Typ 32) zerstoert; Gebaeude 25 (Typ 32) zerstoert; Gebaeude 103 (Typ 1) zerstoert; 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 4 Gebaeude gleichzeitig angelaufen)
+00:03:10  7336 |  81   0   0 |  40   5 | 100.00 | 34/34 (5) | 14 10 | Gebaeude 21 (Typ 3) zerstoert
+00:03:10  7359 |  85   0   0 |  40   5 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:10  7426 |  88   0   0 |  40   5 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:10  7473 |  79   0   0 |  40   5 | 100.00 | 34/34 (6) | 14 10 | Gebaeude 97 (Typ 32) zerstoert; Gebaeude 85 (Typ 32) zerstoert
+00:03:10 ZEITEN nach 130 Runden: lesen 5.02 s, bauen_werben_verkauf 2.87 s, assassinen 2.72 s, waechter 0.08 s, haus_lager_zeile 0.00 s
+00:03:10  7499 |  79   0   0 |  40   5 | 100.00 | 34/34 (6) | 14 10 | -
+00:03:10  7516 |  79   0   0 |  40   5 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; Gebaeude 101 (Typ 1) zerstoert
+00:03:10  7610 |  69  12   0 |  48   5 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,stein
+00:03:11  7737 |  59   7   0 |  48   5 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,stein
+00:03:11 ZEITEN nach 140 Runden: lesen 5.40 s, bauen_werben_verkauf 3.05 s, assassinen 2.72 s, waechter 0.08 s, haus_lager_zeile 0.00 s
+00:03:11  7862 |  49   2   0 |  51   5 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:11  7946 |  53   2   0 |  51   4 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:11  7992 |  63   2   0 |  51   4 | 100.00 | 34/34 (6) | 14 10 | 60 Assassinen angeworben (Gold jetzt 105)
+00:03:11  8052 |  70   2   0 |  51   4 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:11  8141 |  60   2   0 |  51   4 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:11 ZEITEN nach 150 Runden: lesen 5.77 s, bauen_werben_verkauf 3.20 s, assassinen 2.72 s, waechter 0.08 s, haus_lager_zeile 0.00 s
+00:03:11  8184 |  50   2   0 |  51   4 | 100.00 | 34/34 (5) | 14 10 | -
+00:03:11  8229 |  50   2   0 |  51   4 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:11  8317 |  40   2   0 |  51   4 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:12  8368 |  35   2   0 |  50   4 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:12 ZEITEN nach 160 Runden: lesen 6.14 s, bauen_werben_verkauf 3.29 s, assassinen 2.72 s, waechter 0.09 s, haus_lager_zeile 0.00 s
+00:03:12  8446 |  30   2   0 |  50   4 | 100.00 | 34/34 (6) | 14 10 | -
+00:03:12  8470 |  30   2   0 |  50   4 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:12  8564 |  25   2   0 |  50   3 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:12  8657 |  20   2   0 |  59   3 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+00:03:12 ZEITEN nach 170 Runden: lesen 6.51 s, bauen_werben_verkauf 3.44 s, assassinen 2.72 s, waechter 0.09 s, haus_lager_zeile 0.00 s
+00:03:12  8776 |  19   2   0 |  51   3 | 100.00 | 34/34 (5) | 14 10 | -
+00:03:12  8823 |  28   2   0 |  59   3 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,apfel
+00:03:13  8936 |  28   2   0 |  52   3 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:13  9014 |  34   2   0 |  52   3 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:13 ZEITEN nach 180 Runden: lesen 6.88 s, bauen_werben_verkauf 3.56 s, assassinen 2.72 s, waechter 0.09 s, haus_lager_zeile 0.00 s
+00:03:13  9053 |  36   2   0 |  52   3 | 100.00 | 34/34 (6) | 14 10 | -
+00:03:13  9094 |  36   2   0 |  52   2 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:13  9179 |  48   2   0 |  52   2 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:13  9274 |  57   2   0 |  52   2 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:13 ZEITEN nach 190 Runden: lesen 7.25 s, bauen_werben_verkauf 3.68 s, assassinen 2.72 s, waechter 0.10 s, haus_lager_zeile 0.00 s
+00:03:13  9345 |  66   2   0 |  52   2 | 100.00 | 34/34 (5) | 14 10 | -
+00:03:13  9368 |  70   2   0 |  52   2 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:13  9445 |  60   2   0 |  52   2 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:14  9531 |  50   2   0 |  51   2 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:14 ZEITEN nach 200 Runden: lesen 7.62 s, bauen_werben_verkauf 3.77 s, assassinen 2.73 s, waechter 0.10 s, haus_lager_zeile 0.00 s
+00:03:14  9621 |  40   2   0 |  55   2 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:14  9708 |  35   2   0 |  57   1 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:14  9803 |  30   2   0 |  65   1 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+00:03:14  9933 |  25   2   0 |  60   1 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:14 ZEITEN nach 210 Runden: lesen 7.99 s, bauen_werben_verkauf 3.95 s, assassinen 2.73 s, waechter 0.10 s, haus_lager_zeile 0.00 s
+00:03:14  9978 |  20   2   0 |  60   1 | 100.00 | 34/34 (5) | 14 10 | -
+00:03:14 10002 |  20   2   0 |  60   1 | 100.00 | 34/34 (5) | 14 10 | 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+00:03:14 10062 |  32   2   0 |  60   1 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:15 10115 |  33   2   0 |  59   1 | 100.00 | 34/34 (5) | 14 10 | 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 1 Gebaeude gleichzeitig angelaufen)
+00:03:15 10167 |  33   2   0 |  59   1 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:15 10243 |  28   2   0 |  59   1 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:15 ZEITEN nach 220 Runden: lesen 8.37 s, bauen_werben_verkauf 4.04 s, assassinen 2.82 s, waechter 0.11 s, haus_lager_zeile 0.00 s
+00:03:15 10314 |  23   2   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 2 Gebaeude gleichzeitig angelaufen)
+00:03:15 10365 |  23   2   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 3 Gebaeude gleichzeitig angelaufen)
+00:03:15 10562 |  18  14   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: stein
+00:03:15 10645 |  18   9   0 |  57   0 | 100.00 | 34/34 (5) | 14 10 | Gebaeude 20 (Typ 32) zerstoert; Gebaeude 22 (Typ 32) zerstoert
+00:03:15 ZEITEN nach 230 Runden: lesen 8.75 s, bauen_werben_verkauf 4.13 s, assassinen 2.90 s, waechter 0.11 s, haus_lager_zeile 0.00 s
+00:03:15 10662 |  18   9   0 |  57   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: stein
+00:03:16 10731 |  20   4   0 |  63   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:16 10828 |  31   4   0 |  71   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,apfel; Gebaeude 19 (Typ 19) zerstoert
+00:03:16 10934 |  44   4   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:16 ZEITEN nach 240 Runden: lesen 9.12 s, bauen_werben_verkauf 4.28 s, assassinen 2.90 s, waechter 0.11 s, haus_lager_zeile 0.00 s
+00:03:16 10980 |  39   4   0 |  66   0 | 100.00 | 34/34 (6) | 14 10 | 65 Assassinen angeworben (Gold jetzt 100)
+00:03:16 11043 |  51   4   0 |  66   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,apfel
+00:03:16 11152 |  47   4   0 |  55   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:16 11245 |  42   4   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:16 ZEITEN nach 250 Runden: lesen 9.50 s, bauen_werben_verkauf 4.43 s, assassinen 2.91 s, waechter 0.12 s, haus_lager_zeile 0.00 s
+00:03:16 11315 |  37   4   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | -
+00:03:17 11337 |  37   4   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:17 11375 |  32   4   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | Gebaeude 21 (Typ 3) zerstoert
+00:03:17 11425 |  32   4   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:17 11519 |  27   4   0 |  53   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:17 ZEITEN nach 260 Runden: lesen 9.87 s, bauen_werben_verkauf 4.52 s, assassinen 2.91 s, waechter 0.12 s, haus_lager_zeile 0.00 s
+00:03:17 11610 |  22   4   0 |  52   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:17 11716 |  40   4   0 |  52   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:17 11799 |  48   4   0 |  51   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:17 11846 |  43   4   0 |  55   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:17 ZEITEN nach 270 Runden: lesen 10.24 s, bauen_werben_verkauf 4.67 s, assassinen 2.91 s, waechter 0.13 s, haus_lager_zeile 0.00 s
+00:03:17 11883 |  38   4   0 |  55   0 | 100.00 | 34/34 (5) | 14 10 | -
+00:03:18 11928 |  38   4   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:18 12019 |  45   4   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:18 12096 |  54   4   0 |  66   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+00:03:18 ZEITEN nach 280 Runden: lesen 10.62 s, bauen_werben_verkauf 4.79 s, assassinen 2.91 s, waechter 0.13 s, haus_lager_zeile 0.00 s
+00:03:18 12193 |  67   4   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | -
+00:03:18 12215 |  72   4   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:18 12329 |  64   4   0 |  55   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:18 12414 |  91   4   0 |  54   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:18 ZEITEN nach 290 Runden: lesen 10.99 s, bauen_werben_verkauf 4.91 s, assassinen 2.91 s, waechter 0.13 s, haus_lager_zeile 0.00 s
+00:03:18 12502 |  86   4   0 |  53   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:19 12585 |  86   4   0 |  53   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:19 12663 |  76   4   0 |  52   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:19 12738 |  66   4   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:19 ZEITEN nach 300 Runden: lesen 11.36 s, bauen_werben_verkauf 5.03 s, assassinen 2.91 s, waechter 0.14 s, haus_lager_zeile 0.00 s
+00:03:19 12784 |  60   4   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | -
+00:03:19 12824 |  68   4   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:19 12940 |  64   4   0 |  58   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:19 13033 |  54   4   0 |  68   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,apfel
+00:03:19 ZEITEN nach 310 Runden: lesen 11.73 s, bauen_werben_verkauf 5.18 s, assassinen 2.91 s, waechter 0.14 s, haus_lager_zeile 0.00 s
+00:03:19 13125 |  44   4   0 |  62   0 | 100.00 | 34/34 (5) | 14 10 | -
+00:03:20 13145 |  44   4   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:20 13239 |  39   4   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:20 13327 |  34   4   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:20 ZEITEN nach 320 Runden: lesen 12.11 s, bauen_werben_verkauf 5.30 s, assassinen 2.91 s, waechter 0.14 s, haus_lager_zeile 0.00 s
+00:03:20 13428 |  29   4   0 |  60   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:20 13521 |  24  16   0 |  59   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,stein
+00:03:20 13629 |  19  11   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: stein
+00:03:20 13717 |  19   6   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: stein
+00:03:20 ZEITEN nach 330 Runden: lesen 12.48 s, bauen_werben_verkauf 5.44 s, assassinen 2.91 s, waechter 0.15 s, haus_lager_zeile 0.00 s
+00:03:21 13742 |  19   1   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | 70 Assassinen angeworben (Gold jetzt 115)
+00:03:21 ZEITEN nach 340 Runden: lesen 12.85 s, bauen_werben_verkauf 5.47 s, assassinen 2.91 s, waechter 0.15 s, haus_lager_zeile 0.00 s
+00:03:21 13961 |  19   1   0 |  62   0 | 100.00 | 34/34 (5) | 14 10 | -
+00:03:21 14046 |  32   1   0 |  71   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+00:03:21 14152 |  32   1   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:21 ZEITEN nach 350 Runden: lesen 13.23 s, bauen_werben_verkauf 5.56 s, assassinen 2.91 s, waechter 0.15 s, haus_lager_zeile 0.00 s
+00:03:21 14249 |  27   1   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:22 14340 |  27   1   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:22 14429 |  45   1   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:22 14544 |  43   1   0 |  58   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:22 ZEITEN nach 360 Runden: lesen 13.60 s, bauen_werben_verkauf 5.71 s, assassinen 2.91 s, waechter 0.16 s, haus_lager_zeile 0.00 s
+00:03:22 14581 |  38   1   0 |  57   0 | 100.00 | 34/34 (5) | 14 10 | -
+00:03:22 14628 |  38   1   0 |  57   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:22 14709 |  33   1   0 |  56   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+00:03:22 14778 |  28   1   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | 12 Assassinen auf 2 Gebaeude verteilt (im Spiel gemessen: 1 Gebaeude gleichzeitig angelaufen)
+00:03:22 14850 |  28   1   0 |  63   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:22 ZEITEN nach 370 Runden: lesen 13.97 s, bauen_werben_verkauf 5.80 s, assassinen 3.02 s, waechter 0.16 s, haus_lager_zeile 0.00 s
+00:03:22 14910 |  23   1   0 |  63   0 | 100.00 | 34/34 (6) | 14 10 | -
+00:03:23 14934 |  23   1   0 |  70   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+00:03:23 15036 |  36   1   0 |  66   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+00:03:23 15104 |  31   1   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | Gebaeude 20 (Typ 32) zerstoert
+00:03:23 15167 |  44   1   0 |  55   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:23 ZEITEN nach 380 Runden: lesen 14.35 s, bauen_werben_verkauf 5.98 s, assassinen 3.02 s, waechter 0.17 s, haus_lager_zeile 0.00 s
+00:03:23 15245 |  44   1   0 |  55   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:23 15310 |  39   1   0 |  54   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:23 15387 |  34   1   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:24 15457 |  29   1   0 |  53   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:24 ZEITEN nach 390 Runden: lesen 14.73 s, bauen_werben_verkauf 6.10 s, assassinen 3.02 s, waechter 0.17 s, haus_lager_zeile 0.00 s
+00:03:24 15503 |  24   1   0 |  53   0 | 100.00 | 34/34 (6) | 14 10 | -
+00:03:24 15524 |  24   1   0 |  53   0 | 100.00 | 34/34 (6) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 2 Gebaeude gleichzeitig angelaufen)
+00:03:24 15565 |  24   1   0 |  53   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:24 15677 |  19   1   0 |  52   0 | 100.00 | 34/34 (6) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 2 Gebaeude gleichzeitig angelaufen)
+00:03:24 ZEITEN nach 400 Runden: lesen 15.10 s, bauen_werben_verkauf 6.13 s, assassinen 3.08 s, waechter 0.17 s, haus_lager_zeile 0.00 s
+00:03:24 15775 |  19   1   0 |  52   0 | 100.00 | 34/34 (6) | 14 10 | -
+00:03:24 15910 |  19   1   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | Gebaeude 19 (Typ 3) zerstoert
+00:03:24 15957 |  19   1   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 1 Gebaeude gleichzeitig angelaufen)
+00:03:24 ZEITEN nach 410 Runden: lesen 15.48 s, bauen_werben_verkauf 6.13 s, assassinen 3.11 s, waechter 0.18 s, haus_lager_zeile 0.00 s
+00:03:24 16002 |  19   1   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | -
+00:03:25 16150 |  19   1   0 |  65   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: apfel
+00:03:25 16271 |  37   1   0 |  54   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:25 ZEITEN nach 420 Runden: lesen 15.86 s, bauen_werben_verkauf 6.22 s, assassinen 3.11 s, waechter 0.18 s, haus_lager_zeile 0.00 s
+00:03:25 16318 |  32   1   0 |  54   0 | 100.00 | 34/34 (5) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 1 Gebaeude gleichzeitig angelaufen)
+00:03:25 16379 |  32  13   0 |  53   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,stein
+00:03:25 16414 |  31   8   0 |  53   0 | 100.00 | 34/34 (5) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 1 Gebaeude gleichzeitig angelaufen)
+00:03:25 16485 |  45   8   0 |  52   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,stein
+00:03:25 16624 |  47   3   0 |  52   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:25 ZEITEN nach 430 Runden: lesen 16.24 s, bauen_werben_verkauf 6.40 s, assassinen 3.17 s, waechter 0.18 s, haus_lager_zeile 0.00 s
+00:03:26 16694 |  48   3   0 |  51   0 | 100.00 | 34/34 (5) | 14 10 | -
+00:03:26 16708 |  48   3   0 |  51   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:26 16800 |  53   3   0 |  50   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:26 16876 |  51   3   0 |  50   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:26 ZEITEN nach 440 Runden: lesen 16.60 s, bauen_werben_verkauf 6.49 s, assassinen 3.17 s, waechter 0.19 s, haus_lager_zeile 0.00 s
+00:03:26 16947 |  41   3   0 |  52   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:26 17039 |  49   3   0 |  64   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:26 17125 |  58   3   0 |  71   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+00:03:26 17183 |  48   3   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | 75 Assassinen angeworben (Gold jetzt 130)
+00:03:27 17254 |  61   3   0 |  60   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:27 ZEITEN nach 450 Runden: lesen 16.98 s, bauen_werben_verkauf 6.67 s, assassinen 3.17 s, waechter 0.19 s, haus_lager_zeile 0.01 s
+00:03:27 17299 |  52   3   0 |  60   0 | 100.00 | 34/34 (5) | 14 10 | -
+00:03:27 17346 |  55   3   0 |  60   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:27 17398 |  50   3   0 |  59   0 | 100.00 | 34/34 (5) | 14 10 | Gebaeude 21 (Typ 19) zerstoert
+00:03:27 17437 |  50   3   0 |  59   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:27 17518 |  40   3   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:27 ZEITEN nach 460 Runden: lesen 17.37 s, bauen_werben_verkauf 6.76 s, assassinen 3.17 s, waechter 0.19 s, haus_lager_zeile 0.01 s
+00:03:27 17589 |  55   3   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | -
+00:03:27 17606 |  61   3   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:27 17713 |  96   3   0 |  57   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:27 17798 |  91   3   0 |  57   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:27 ZEITEN nach 470 Runden: lesen 17.73 s, bauen_werben_verkauf 6.88 s, assassinen 3.17 s, waechter 0.20 s, haus_lager_zeile 0.01 s
+00:03:28 17866 |  90   3   0 |  56   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:28 17960 |  85   3   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:28 18039 |  75   3   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:28 18131 |  65   3   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:28 ZEITEN nach 480 Runden: lesen 18.10 s, bauen_werben_verkauf 7.00 s, assassinen 3.17 s, waechter 0.20 s, haus_lager_zeile 0.01 s
+00:03:28 18170 |  55   3   0 |  63   0 | 100.00 | 34/34 (6) | 14 10 | -
+00:03:28 18215 |  55   3   0 |  69   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+00:03:28 18353 |  45   3   0 |  63   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+00:03:28 18416 |  40   3   0 |  62   0 | 100.00 | 34/34 (5) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 1 Gebaeude gleichzeitig angelaufen)
+00:03:29 18482 |  40   3   0 |  62   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:29 18532 |  35   3   0 |  62   0 | 100.00 | 34/34 (5) | 14 10 | Gebaeude 19 (Typ 3) zerstoert
+00:03:29 ZEITEN nach 490 Runden: lesen 18.48 s, bauen_werben_verkauf 7.15 s, assassinen 3.24 s, waechter 0.20 s, haus_lager_zeile 0.01 s
+00:03:29 18551 |  35   3   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | -
+00:03:29 18575 |  35   3   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:29 18663 |  30   3   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+00:03:29 18782 |  25   3   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:29 ZEITEN nach 500 Runden: lesen 18.86 s, bauen_werben_verkauf 7.24 s, assassinen 3.29 s, waechter 0.20 s, haus_lager_zeile 0.01 s
+00:03:29 18876 |  20   3   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:29 18944 |  15   3   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | Gebaeude 19 (Typ 3) zerstoert
+00:03:30 ZEITEN nach 510 Runden: lesen 19.24 s, bauen_werben_verkauf 7.27 s, assassinen 3.29 s, waechter 0.21 s, haus_lager_zeile 0.01 s
+00:03:30 19118 |  15   3   0 |  63   0 | 100.00 | 34/34 (6) | 14 10 | -
+00:03:30 19162 |  15   3   0 |  67   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: apfel
+00:03:30 19208 |  15   3   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+00:03:30 19307 |  15  15   0 |  63   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: stein
+00:03:30 19376 |  15  10   0 |  68   0 | 100.00 | 34/34 (5) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 1 Gebaeude gleichzeitig angelaufen)
+00:03:30 19421 |  15  10   0 |  68   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: stein,apfel; Gebaeude 19 (Typ 3) zerstoert
+00:03:30 ZEITEN nach 520 Runden: lesen 19.62 s, bauen_werben_verkauf 7.45 s, assassinen 3.36 s, waechter 0.21 s, haus_lager_zeile 0.01 s
+00:03:30 19525 |  20   5   0 |  57   0 | 100.00 | 34/34 (5) | 14 10 | 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+00:03:30 19576 |  30   5   0 |  57   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,stein
+00:03:30 19656 |  28   0   0 |  56   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:31 19710 |  23   0   0 |  56   0 | 100.00 | 34/34 (5) | 14 10 | 80 Assassinen angeworben (Gold jetzt 100)
+00:03:31 19771 |  23   0   0 |  55   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; Gebaeude 19 (Typ 3) zerstoert
+00:03:31 ZEITEN nach 530 Runden: lesen 20.00 s, bauen_werben_verkauf 7.60 s, assassinen 3.41 s, waechter 0.21 s, haus_lager_zeile 0.01 s
+00:03:31 19850 |  18   0   0 |  55   0 | 100.00 | 34/34 (5) | 14 10 | -
+00:03:31 ZEITEN nach 540 Runden: lesen 20.37 s, bauen_werben_verkauf 7.60 s, assassinen 3.41 s, waechter 0.21 s, haus_lager_zeile 0.01 s
+00:03:31 20057 |  18   0   0 |  53   0 | 100.00 | 34/34 (6) | 14 10 | 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+00:03:31 20186 |  18   0   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | Gebaeude 19 (Typ 3) zerstoert
+00:03:32 20247 |  20   0   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:32 ZEITEN nach 550 Runden: lesen 20.74 s, bauen_werben_verkauf 7.63 s, assassinen 3.45 s, waechter 0.22 s, haus_lager_zeile 0.01 s
+00:03:32 20315 |  29   0   0 |  64   0 | 100.00 | 34/34 (6) | 14 10 | -
+00:03:32 20333 |  31   0   0 |  63   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:32 20387 |  35   0   0 |  63   0 | 100.00 | 34/34 (6) | 14 10 | 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+00:03:32 20462 |  48   0   0 |  63   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:32 20554 |  44   0   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:32 20620 |  52   0   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | Gebaeude 19 (Typ 3) zerstoert
+00:03:32 ZEITEN nach 560 Runden: lesen 21.11 s, bauen_werben_verkauf 7.71 s, assassinen 3.50 s, waechter 0.22 s, haus_lager_zeile 0.01 s
+00:03:32 20643 |  52   0   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:32 20724 |  47   0   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:32 20807 |  48   0   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:33 20897 |  51   0   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:33 ZEITEN nach 570 Runden: lesen 21.48 s, bauen_werben_verkauf 7.83 s, assassinen 3.50 s, waechter 0.23 s, haus_lager_zeile 0.01 s
+00:03:33 20942 |  54   0   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+00:03:33 21010 |  78   0   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:33 21093 |  71   0   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:33 21188 |  71   0   0 |  67   0 | 100.00 | 34/34 (5) | 14 10 | Gebaeude 19 (Typ 3) zerstoert
+00:03:33 21208 |  74   0   0 |  67   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,apfel
+00:03:33 ZEITEN nach 580 Runden: lesen 21.85 s, bauen_werben_verkauf 7.98 s, assassinen 3.54 s, waechter 0.23 s, haus_lager_zeile 0.01 s
+00:03:33 21299 |  64   0   0 |  65   0 | 100.00 | 34/34 (5) | 14 10 | -
+00:03:33 21316 |  64   0   0 |  65   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,apfel
+00:03:33 21423 |  54   0   0 |  59   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:34 21461 |  44   0   0 |  59   0 | 100.00 | 34/34 (5) | 14 10 | 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+00:03:34 21518 |  51   0   0 |  58   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:34 21570 |  52   0   0 |  58   0 | 100.00 | 34/34 (5) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 1 Gebaeude gleichzeitig angelaufen)
+00:03:34 ZEITEN nach 590 Runden: lesen 22.22 s, bauen_werben_verkauf 8.14 s, assassinen 3.62 s, waechter 0.24 s, haus_lager_zeile 0.01 s
+00:03:34 21607 |  52   0   0 |  58   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:34 21677 |  42   0   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; Gebaeude 19 (Typ 3) zerstoert
+00:03:34 21765 |  37   0   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+00:03:34 21873 |  32   0   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:34 ZEITEN nach 600 Runden: lesen 22.59 s, bauen_werben_verkauf 8.26 s, assassinen 3.66 s, waechter 0.24 s, haus_lager_zeile 0.01 s
+00:03:34 21920 |  27   0   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | -
+00:03:34 21957 |  27   0   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:34 21993 |  22   0   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 1 Gebaeude gleichzeitig angelaufen)
+00:03:35 22029 |  22   0   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | Gebaeude 19 (Typ 3) zerstoert
+00:03:35 22044 |  22   0   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:35 22168 |  35   0   0 |  58   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:35 22214 |  34   0   0 |  58   0 | 100.00 | 34/34 (5) | 14 10 | 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+00:03:35 ZEITEN nach 610 Runden: lesen 22.97 s, bauen_werben_verkauf 8.38 s, assassinen 3.74 s, waechter 0.24 s, haus_lager_zeile 0.01 s
+00:03:35 22270 |  45  12   0 |  62   0 | 100.00 | 34/34 (5) | 14 10 | -
+00:03:35 22287 |  48  12   0 |  62   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,stein
+00:03:35 22358 |  43   7   0 |  69   0 | 100.00 | 34/34 (5) | 14 10 | 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 1 Gebaeude gleichzeitig angelaufen)
+00:03:35 22431 |  43   7   0 |  71   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,stein,apfel
+00:03:35 22557 |  69   2   0 |  60   0 | 100.00 | 34/34 (5) | 14 10 | 1 Assassinen liefen nicht zu ihrem Ziel - neu befohlen; 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 2 Gebaeude gleichzeitig angelaufen)
+00:03:35 22604 |  70   2   0 |  60   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:36 ZEITEN nach 620 Runden: lesen 23.35 s, bauen_werben_verkauf 8.60 s, assassinen 3.81 s, waechter 0.25 s, haus_lager_zeile 0.01 s
+00:03:36 22687 |  64   2   0 |  60   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:36 22755 |  54   2   0 |  59   0 | 100.00 | 34/34 (5) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 2 Gebaeude gleichzeitig angelaufen)
+00:03:36 22801 |  54   2   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:36 22840 |  44   2   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | Gebaeude 20 (Typ 3) zerstoert
+00:03:36 22881 |  44   2   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:36 22966 |  39   2   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:36 ZEITEN nach 630 Runden: lesen 23.72 s, bauen_werben_verkauf 8.72 s, assassinen 3.84 s, waechter 0.25 s, haus_lager_zeile 0.01 s
+00:03:36 23012 |  34   2   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | -
+00:03:36 23055 |  34   2   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:36 23079 |  29   2   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | 85 Assassinen angeworben (Gold jetzt 100)
+00:03:36 23127 |  36   2   0 |  57   0 | 100.00 | 34/34 (5) | 14 10 | 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 1 Gebaeude gleichzeitig angelaufen)
+00:03:36 23170 |  44   2   0 |  56   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; Gebaeude 19 (Typ 26) zerstoert
+00:03:37 23263 |  42   2   0 |  65   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,apfel
+00:03:37 ZEITEN nach 640 Runden: lesen 24.10 s, bauen_werben_verkauf 8.87 s, assassinen 3.88 s, waechter 0.25 s, haus_lager_zeile 0.01 s
+00:03:37 23355 |  37   2   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | -
+00:03:37 23378 |  37   2   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; Gebaeude 20 (Typ 3) zerstoert
+00:03:37 23448 |  32   2   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:37 23493 |  27   2   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+00:03:37 23554 |  27   2   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:37 ZEITEN nach 650 Runden: lesen 24.46 s, bauen_werben_verkauf 8.95 s, assassinen 3.93 s, waechter 0.26 s, haus_lager_zeile 0.01 s
+00:03:37 23638 |  22   2   0 |  65   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+00:03:37 23740 |  17   2   0 |  54   0 | 100.00 | 34/34 (5) | 14 10 | Gebaeude 19 (Typ 3) zerstoert
+00:03:38 23826 |  20   2   0 |  54   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:38 23929 |  30   2   0 |  53   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:38 ZEITEN nach 660 Runden: lesen 24.84 s, bauen_werben_verkauf 9.10 s, assassinen 3.93 s, waechter 0.26 s, haus_lager_zeile 0.01 s
+00:03:38 23974 |  25   2   0 |  53   0 | 100.00 | 34/34 (6) | 14 10 | -
+00:03:38 24019 |  25   2   0 |  53   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+00:03:38 24129 |  23   2   0 |  52   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:38 24176 |  27   2   0 |  51   0 | 100.00 | 34/34 (6) | 14 10 | 7 Assassinen auf 2 Gebaeude verteilt (im Spiel gemessen: 1 Gebaeude gleichzeitig angelaufen)
+00:03:38 24246 |  44   2   0 |  51   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:38 ZEITEN nach 670 Runden: lesen 25.22 s, bauen_werben_verkauf 9.20 s, assassinen 4.02 s, waechter 0.27 s, haus_lager_zeile 0.01 s
+00:03:38 24311 |  46   2   0 |  51   0 | 100.00 | 34/34 (6) | 14 10 | -
+00:03:38 24329 |  46   2   0 |  50   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:38 24376 |  41   2   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | Gebaeude 19 (Typ 3) zerstoert
+00:03:38 24423 |  41   2   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:39 24503 |  36   2   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:39 24569 |  31   2   0 |  66   0 | 100.00 | 34/34 (6) | 14 10 | 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 1 Gebaeude gleichzeitig angelaufen)
+00:03:39 ZEITEN nach 680 Runden: lesen 25.60 s, bauen_werben_verkauf 9.29 s, assassinen 4.06 s, waechter 0.27 s, haus_lager_zeile 0.01 s
+00:03:39 24622 |  31   2   0 |  65   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+00:03:39 24760 |  26   2   0 |  55   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; Gebaeude 19 (Typ 3) zerstoert
+00:03:39 24831 |  21   2   0 |  54   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:39 ZEITEN nach 690 Runden: lesen 25.98 s, bauen_werben_verkauf 9.44 s, assassinen 4.06 s, waechter 0.27 s, haus_lager_zeile 0.01 s
+00:03:39 24944 |  16   2   0 |  53   0 | 100.00 | 34/34 (5) | 14 10 | -
+00:03:40 25103 |  18   2   0 |  52   0 | 100.00 | 34/34 (6) | 14 10 | 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 1 Gebaeude gleichzeitig angelaufen)
+00:03:40 ZEITEN nach 700 Runden: lesen 26.36 s, bauen_werben_verkauf 9.44 s, assassinen 4.11 s, waechter 0.28 s, haus_lager_zeile 0.01 s
+00:03:40 25177 |  33   2   0 |  52   0 | 100.00 | 34/34 (6) | 14 10 | -
+00:03:40 25195 |  34   2   0 |  52   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:40 25260 |  29   2   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 2 Gebaeude gleichzeitig angelaufen)
+00:03:40 25315 |  29  14   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,stein
+00:03:40 25376 |  24   9   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | Gebaeude 19 (Typ 3) zerstoert
+00:03:40 25422 |  31   9   0 |  64   0 | 100.00 | 34/34 (5) | 14 10 | 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 1 Gebaeude gleichzeitig angelaufen)
+00:03:40 25477 |  42   9   0 |  67   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,stein,apfel; Gebaeude 20 (Typ 26) zerstoert
+00:03:40 ZEITEN nach 710 Runden: lesen 26.73 s, bauen_werben_verkauf 9.65 s, assassinen 4.18 s, waechter 0.28 s, haus_lager_zeile 0.01 s
+00:03:40 25591 |  37   4   0 |  62   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:41 25605 |  32   4   0 |  62   0 | 100.00 | 34/34 (5) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 1 Gebaeude gleichzeitig angelaufen)
+00:03:41 25626 |  32   4   0 |  62   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:41 25741 |  27   4   0 |  61   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; Gebaeude 19 (Typ 3) zerstoert
+00:03:41 25812 |  36   4   0 |  60   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:41 ZEITEN nach 720 Runden: lesen 27.10 s, bauen_werben_verkauf 9.80 s, assassinen 4.21 s, waechter 0.28 s, haus_lager_zeile 0.01 s
+00:03:41 25855 |  35   4   0 |  60   0 | 100.00 | 34/34 (5) | 14 10 | -
+00:03:41 25897 |  35   4   0 |  60   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:41 25992 |  47   4   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:41 26036 |  48   4   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+00:03:41 26116 |  48   4   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:41 ZEITEN nach 730 Runden: lesen 27.47 s, bauen_werben_verkauf 9.89 s, assassinen 4.26 s, waechter 0.29 s, haus_lager_zeile 0.01 s
+00:03:41 26185 |  50   4   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | -
+00:03:42 26208 |  54   4   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; Gebaeude 19 (Typ 3) zerstoert
+00:03:42 26299 |  46   4   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:42 26391 |  41   4   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:42 ZEITEN nach 740 Runden: lesen 27.85 s, bauen_werben_verkauf 9.98 s, assassinen 4.26 s, waechter 0.29 s, haus_lager_zeile 0.01 s
+00:03:42 26452 |  36   4   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; 6 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+00:03:42 26572 |  31   4   0 |  70   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+00:03:42 26623 |  26   4   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | 90 Assassinen angeworben (Gold jetzt 115)
+00:03:42 26692 |  26   4   0 |  59   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:43 26784 |  21   4   0 |  59   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:43 ZEITEN nach 750 Runden: lesen 28.22 s, bauen_werben_verkauf 10.16 s, assassinen 4.30 s, waechter 0.29 s, haus_lager_zeile 0.01 s
+00:03:43 26821 |  18   4   0 |  59   0 | 100.00 | 34/34 (5) | 14 10 | -
+00:03:43 26878 |  33   4   0 |  58   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 1 Gebaeude gleichzeitig angelaufen)
+00:03:43 26992 |  47   4   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:43 27036 |  42   4   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | Gebaeude 20 (Typ 26) zerstoert
+00:03:43 27074 |  42   4   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:43 ZEITEN nach 760 Runden: lesen 28.59 s, bauen_werben_verkauf 10.25 s, assassinen 4.33 s, waechter 0.30 s, haus_lager_zeile 0.01 s
+00:03:43 27148 |  37   4   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | -
+00:03:43 27168 |  37   4   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:43 27259 |  32   4   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:43 27353 |  40   4   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:44 ZEITEN nach 770 Runden: lesen 28.98 s, bauen_werben_verkauf 10.35 s, assassinen 4.33 s, waechter 0.30 s, haus_lager_zeile 0.01 s
+00:03:44 27421 |  40   4   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+00:03:44 27512 |  35   4   0 |  67   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+00:03:44 27640 |  30   4   0 |  65   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,apfel
+00:03:44 27740 |  25   4   0 |  54   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:44 ZEITEN nach 780 Runden: lesen 29.34 s, bauen_werben_verkauf 10.55 s, assassinen 4.33 s, waechter 0.30 s, haus_lager_zeile 0.01 s
+00:03:44 27776 |  20   4   0 |  54   0 | 100.00 | 34/34 (5) | 14 10 | -
+00:03:44 27808 |  20   4   0 |  54   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:45 ZEITEN nach 790 Runden: lesen 29.73 s, bauen_werben_verkauf 10.62 s, assassinen 4.33 s, waechter 0.31 s, haus_lager_zeile 0.01 s
+00:03:45 28025 |  15   4   0 |  52   0 | 100.00 | 34/34 (5) | 14 10 | -
+00:03:45 ZEITEN nach 800 Runden: lesen 30.10 s, bauen_werben_verkauf 10.62 s, assassinen 4.33 s, waechter 0.31 s, haus_lager_zeile 0.01 s
+00:03:45 28242 |  15   4   0 |  52   0 | 100.00 | 34/34 (6) | 14 10 | -
+00:03:45 28357 |  15  16   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: stein
+00:03:45 28451 |  15  11   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: stein
+00:03:45 ZEITEN nach 810 Runden: lesen 30.46 s, bauen_werben_verkauf 10.68 s, assassinen 4.33 s, waechter 0.31 s, haus_lager_zeile 0.01 s
+00:03:45 28488 |  19   6   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | -
+00:03:46 28534 |  28   6   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,stein
+00:03:46 28652 |  28   1   0 |  64   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+00:03:46 Ende Phase 2 bei Tick 28715 nach 816 Runden (0.1 s je Runde); Kornspeicher 1, Holzfaeller 14, Apfelplantagen 10; Waechter: Bedrohungen 0, davon tot 0, eigene Truppen verloren 0; Angriff: zerstoert 74 Gebaeude {3: 33, 32: 20, 7: 2, 26: 4, 19: 4, 4: 5, 20: 1, 1: 5}, eigene Verluste 53, im Spiel gleichzeitig angelaufen zuletzt 0, neu befohlen 4
