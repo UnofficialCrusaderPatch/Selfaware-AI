@@ -30,7 +30,8 @@ def lies_gebaeude():
     for z in open(GEBAEUDEDATEI).read().splitlines()[1:]:
         w = z.split()
         if len(w) >= 7:
-            G[int(w[0])] = {"besitzer": int(w[1]), "typ": int(w[2]), "x": int(w[3]), "y": int(w[4]), "leben": int(w[5]), "uid": int(w[6])}
+            G[int(w[0])] = {"besitzer": int(w[1]), "typ": int(w[2]), "x": int(w[3]), "y": int(w[4]), "leben": int(w[5]), "uid": int(w[6]),
+                            "erreichbar": int(w[7]) if len(w) >= 8 else 1}
     return G
 
 def lies_lagebild(neu_holen=True):

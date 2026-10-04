@@ -1,0 +1,381 @@
+== Phase 1: Eroeffnung nach Plan (eroeffnung_plan.json)
+Eintrag 7 'M7-04 Mensch Grumpy T600' -> Scrollstand 0, Zeile 7; Spielzeit vorher 28730
+['[villagestudio]: LADEPAUSE: scharf (jetzt Tick 28730, pausiert).']
+['[villagestudio]: POKE 0x01126628: 0 -> 0', '[villagestudio]: POKE 0x01126624: 0 -> 7', '[villagestudio]: LADEN: Knopf 2 gedrueckt, ok=true', '[villagestudio]: logik: 3 von 3 Befehlen ausgefuehrt, 0 schon erledigt.', '[villagestudio]: LADEPAUSE: Laden erkannt (Spielzeit sprang um -28130) bei Tick 600 - angehalten.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.']
+Spielzeit nachher 600 / 600, Pause 1
+Tick 600
+Vorab-Kontrolle gut: {'Ansicht': 14, 'gameOver': 0, 'Mensch': 1, 'Platz': 1}
+in einem Aufruf gebaut: 30 von 30, einzeln nachgeholt: 0
+GEBAUT 30 von 30; Fehlschlaege: keine; Holz 150 -> 0, Gold 3930 -> 3780
+Lager: alt 4 Teile abgerissen (Inhalt: {}), neu bei [118, 120] -> (6, 118, 120); jetzt 4 Teile
+['[villagestudio]: OPTIONEN: Knopf 3 gedrueckt, ok=true']
+aktives Textfeld: 2
+Laenge im Feld jetzt: 26
+['[villagestudio]: LADEN: Knopf 3 gedrueckt, ok=true']
+['[villagestudio]: DIALOG: Knopf 22 (Ja), hinterlegter Zweck 0', '[villagestudio]: DIALOG: zurueck, ok=true']
+GESCHAFFT: M14 Eroeffnung Grumpy T608.sav (1044364 Byte), Kopie daten/spielstaende/M14 Eroeffnung Grumpy T608_20261004-232039.sav
+== Phase 2: Echtzeit, Tempo 1000, 15 Minuten, Waechter an
+Vorab-Kontrolle gut: {'Ansicht': 14, 'gameOver': 0, 'Mensch': 1, 'Platz': 1}
+Tick | Holz Stein Eisen | Aepfel Brot | Beliebt | Leute/Platz (Feuer) | Holzf. Apfelb. | Ereignis
+ 1010 |   0   0   0 |  15  15 |  95.00 | 18/34 (2) | 2 10 | Stellung: 14 Truppen zum Posten (121, 123); Soeldnerlager gesetzt (125, 119) (Gold 3850)
+ 1103 |   0   0   0 |  15  15 |  95.00 | 20/34 (0) | 2 10 | Markt gesetzt (125, 129)
+ 1373 |   0   0   0 |  15  15 |  96.50 | 23/34 (1) | 7 10 | 5 Assassinen angeworben (Gold jetzt 3520)
+ 1513 |   0   0   0 |  14  15 |  98.00 | 23/34 (1) | 7 10 | -
+ 1556 |   0   0   0 |  14  15 |  98.00 | 23/34 (1) | 7 10 | Trupp 1 (6) rueckt vor nach (191, 243) (Ziel-Gebiet (195, 255))
+ 1618 |   0   0   0 |  14  15 |  99.50 | 22/34 (1) | 7 10 | 10 Assassinen angeworben (Gold jetzt 3170)
+ 1861 |   0   0   0 |  14  14 | 100.00 | 23/34 (1) | 7 10 | 15 Assassinen angeworben (Gold jetzt 2820); Trupp 2 (6) rueckt vor nach (191, 243) (Ziel-Gebiet (195, 255))
+ 1970 |   0   0   0 |  14  14 | 100.00 | 23/34 (1) | 7 10 | -
+ 2101 |   0   0   0 |  14  14 | 100.00 | 22/34 (0) | 7 10 | Trupp 3 (6) rueckt vor nach (205, 208) (Ziel-Gebiet (212, 220))
+ 2137 |   0   0   0 |  14  14 | 100.00 | 22/34 (1) | 7 10 | 20 Assassinen angeworben (Gold jetzt 2470)
+ 2365 |   0   0   0 |  21  14 | 100.00 | 24/34 (1) | 8 10 | 25 Assassinen angeworben (Gold jetzt 2190)
+ 2459 |   0   0   0 |  27  14 | 100.00 | 24/34 (1) | 8 10 | verkauft: apfel
+ 2524 |   0   0   0 |  24  14 | 100.00 | 23/34 (1) | 8 10 | Trupp 4 (6) rueckt vor nach (205, 208) (Ziel-Gebiet (212, 220))
+ 2648 |   0   0   0 |  28  13 | 100.00 | 25/34 (1) | 8 10 | 30 Assassinen angeworben (Gold jetzt 1855); verkauft: apfel
+ 2714 |   0   0   0 |  23  13 | 100.00 | 24/34 (1) | 8 10 | Trupp 2 (6) -> Gebaeude 90 Typ 32 bei (212,220), 60 Felder
+ 2868 |   0   0   0 |  28  13 | 100.00 | 25/34 (1) | 9 10 | Trupp 5 (6) rueckt vor nach (205, 208) (Ziel-Gebiet (212, 220))
+ 2936 |   0   0   0 |  28  13 | 100.00 | 24/34 (1) | 9 10 | 35 Assassinen angeworben (Gold jetzt 1520); Trupp 1 (6) -> Gebaeude 81 Typ 3 bei (200,255), 59 Felder; Trupp 3 (6) -> Gebaeude 90 Typ 32 bei (212,220), 55 Felder
+ 3065 |   0   0   0 |  33  13 | 100.00 | 26/34 (3) | 9 10 | verkauft: apfel
+ 3220 |   0   0   0 |  31  13 | 100.00 | 27/34 (1) | 11 10 | verkauft: apfel
+ 3292 |   0   0   0 |  30  13 | 100.00 | 26/34 (1) | 11 10 | 40 Assassinen angeworben (Gold jetzt 1200); Trupp 6 (6) rueckt vor nach (205, 208) (Ziel-Gebiet (212, 220))
+ 3336 |   0   0   0 |  34  13 | 100.00 | 27/34 (0) | 12 10 | verkauft: apfel
+ 3376 |   0   0   0 |  29  12 | 100.00 | 27/34 (1) | 12 10 | Trupp 4 (6) -> Gebaeude 90 Typ 32 bei (212,220), 58 Felder
+ 3502 |   0   0   0 |  29  12 | 100.00 | 29/34 (1) | 12 10 | verkauft: apfel
+ 3619 |   0   0   0 |  28  12 | 100.00 | 29/34 (1) | 13 10 | 45 Assassinen angeworben (Gold jetzt 880)
+ 3655 |   0   0   0 |  28  12 | 100.00 | 29/34 (1) | 13 10 | Trupp 7 (6) rueckt vor nach (205, 208) (Ziel-Gebiet (212, 220))
+ 3723 |   0   0   0 |  28  12 | 100.00 | 28/34 (1) | 13 10 | Trupp 5 (6) -> Gebaeude 90 Typ 32 bei (212,220), 57 Felder
+ 3922 |   0   0   0 |  27  12 | 100.00 | 30/34 (1) | 13 10 | 50 Assassinen angeworben (Gold jetzt 530)
+ 3958 |   0   0   0 |  27  12 | 100.00 | 30/34 (1) | 14 10 | Trupp 2: Gebaeude 90 (Typ 32) zerstoert; Trupp 2 (6) -> Gebaeude 98 Typ 32 bei (195,236), 17 Felder; Trupp 3: Gebaeude 90 (Typ 32) zerstoert; Trupp 3 (6) -> Gebaeude 72 Typ 3 bei (195,255), 35 Felder; Trupp 4: Gebaeude 90 (Typ 32) zerstoert; Trupp 4 (6) -> Gebaeude 98 Typ 32 bei (195,236), 42 Felder; Trupp 5: Gebaeude 90 (Typ 32) zerstoert; Trupp 5 (6) -> Gebaeude 98 Typ 32 bei (195,236), 58 Felder
+ 4062 |   0   0   0 |  27  11 | 100.00 | 30/34 (2) | 14 10 | Trupp 8 (6) rueckt vor nach (190, 224) (Ziel-Gebiet (195, 236))
+ 4125 |   0   0   0 |  27  11 | 100.00 | 30/34 (1) | 14 10 | -
+ 4226 |   0   0   0 |  27  11 | 100.00 | 30/34 (1) | 14 10 | 55 Assassinen angeworben (Gold jetzt 180)
+ 4340 |   0   0   0 |  27  11 | 100.00 | 30/34 (1) | 14 10 | Trupp 9 (6) rueckt vor nach (191, 224) (Ziel-Gebiet (195, 236))
+ 4382 |   0   0   0 |  27  11 | 100.00 | 31/34 (2) | 14 10 | Trupp 6 (6) -> Gebaeude 90 Typ 32 bei (214,221), 43 Felder
+ 4442 |   0   0   0 |  27  11 | 100.00 | 32/34 (3) | 14 10 | Trupp 2: Gebaeude 98 (Typ 32) zerstoert; Trupp 2 (6) -> Gebaeude 84 Typ 3 bei (200,260), 22 Felder; Trupp 4: Gebaeude 98 (Typ 32) zerstoert; Trupp 4 (6) -> Gebaeude 23 Typ 3 bei (195,265), 42 Felder; Trupp 5: Gebaeude 98 (Typ 32) zerstoert; Trupp 5 (6) -> Gebaeude 90 Typ 32 bei (214,221), 26 Felder
+ 4519 |   0   0   0 |  36  11 | 100.00 | 34/34 (2) | 14 10 | Trupp 7 (6) -> Gebaeude 90 Typ 32 bei (214,221), 57 Felder
+ 4594 |   0   0   0 |  35  11 | 100.00 | 34/34 (3) | 14 10 | -
+ 4613 |   0   0   0 |  35  11 | 100.00 | 34/34 (4) | 14 10 | verkauft: apfel
+ 4703 |   0   0   0 |  42  10 | 100.00 | 34/34 (6) | 14 10 | verkauft: apfel
+ 4793 |   0   0   0 |  39  10 | 100.00 | 34/34 (6) | 14 10 | verkauft: apfel
+ 4835 |   0   0   0 |  34  10 | 100.00 | 34/34 (6) | 14 10 | Trupp 5: Gebaeude 90 (Typ 32) zerstoert; Trupp 5 (6) -> Gebaeude 35 Typ 3 bei (185,270), 57 Felder; Trupp 6: Gebaeude 90 (Typ 32) zerstoert; Trupp 6 (6) -> Gebaeude 81 Typ 3 bei (200,255), 53 Felder; Trupp 7: Gebaeude 90 (Typ 32) zerstoert; Trupp 7 (6) rueckt vor nach (195, 243) (Ziel-Gebiet (195, 255))
+ 4905 |   0   0   0 |  34  10 | 100.00 | 34/34 (6) | 14 10 | -
+ 4956 |   0   0   0 |  39  10 | 100.00 | 34/34 (6) | 14 10 | verkauft: apfel; Trupp 7 (6) -> Gebaeude 90 Typ 32 bei (194,235), 45 Felder
+ 5112 |   7   0   0 |  34  10 | 100.00 | 34/34 (5) | 14 10 | Trupp 8 (6) -> Gebaeude 90 Typ 32 bei (194,235), 59 Felder
+ 5206 |  29   0   0 |  33  10 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+ 5243 |  38   0   0 |  33  10 | 100.00 | 34/34 (5) | 14 10 | -
+ 5286 |  47   0   0 |  33   9 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+ 5331 |  43   0   0 |  38   9 | 100.00 | 34/34 (6) | 14 10 | Trupp 6 zurueck nach (143, 167) (Feind nah)
+ 5400 |  44   0   0 |  38   9 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+ 5461 |  40   0   0 |  38   9 | 100.00 | 34/34 (6) | 14 10 | Trupp 3 zurueck nach (137, 168) (Feind nah); Trupp 7: Gebaeude 90 (Typ 32) zerstoert; Trupp 7 (6) -> Gebaeude 98 Typ 32 bei (212,217), 17 Felder; Trupp 8: Gebaeude 90 (Typ 32) zerstoert; Trupp 8 (6) -> Gebaeude 72 Typ 3 bei (195,255), 58 Felder
+ 5542 |  49   0   0 |  38   9 | 100.00 | 34/34 (6) | 14 10 | Trupp 1 zurueck nach (137, 168) (Feind nah); Trupp 2 zurueck nach (137, 168) (Feind nah); Trupp 4 zurueck nach (137, 168) (Feind nah); Trupp 5 zurueck nach (137, 168) (Feind nah)
+ 5630 |  57   0   0 |  43   9 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel; Trupp 1 (6) -> Gebaeude 81 Typ 3 bei (200,255), 14 Felder; Trupp 2 (6) -> Gebaeude 84 Typ 3 bei (200,260), 19 Felder; Trupp 3 (6) -> Gebaeude 23 Typ 3 bei (195,265), 24 Felder; Trupp 4 (6) -> Gebaeude 35 Typ 3 bei (185,270), 28 Felder; Trupp 5 (6) -> Gebaeude 71 Typ 32 bei (185,277), 37 Felder; Trupp 6 (6) -> Gebaeude 91 Typ 26 bei (201,281), 40 Felder
+ 5835 |  77   0   0 |  37   9 | 100.00 | 34/34 (6) | 14 10 | Trupp 3 zurueck nach (137, 168) (verletzt [265]); Trupp 6 zurueck nach (137, 168) (verletzt [291, 296, 300]); Trupp 7 zurueck nach (137, 168) (verletzt [301])
+ 5892 |  83   0   0 |  42   8 | 100.00 | 34/34 (6) | 14 10 | Trupp 3 (5) -> Gebaeude 23 Typ 3 bei (195,265), 8 Felder
+ 5943 |  83   0   0 |  42   8 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel; VERLUST: Trupp 7 Mitglied 301
+ 6018 |  83   0   0 |  37   8 | 100.00 | 34/34 (6) | 14 10 | Trupp 6 (3) -> Gebaeude 19 Typ 32 bei (190,289), 30 Felder; Trupp 7 (5) -> Gebaeude 98 Typ 32 bei (212,217), 24 Felder
+ 6145 |  91   0   0 |  37   8 | 100.00 | 34/34 (5) | 14 10 | Trupp 7 zurueck nach (137, 168) (Feind nah)
+ 6181 |  91   0   0 |  37   8 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; Trupp 7 (5) -> Gebaeude 98 Typ 32 bei (212,217), 30 Felder
+ 6251 |  81   0   0 |  37   8 | 100.00 | 34/34 (5) | 14 10 | Trupp 3 zurueck nach (111, 183) (verletzt [259, 262, 264]); Trupp 6 zurueck nach (111, 183) (verletzt [290]); Trupp 7 zurueck nach (137, 168) (verletzt [303])
+ 6337 |  81   0   0 |  36   8 | 100.00 | 34/34 (6) | 14 10 | Trupp 3 (2) -> Gebaeude 23 Typ 3 bei (195,265), 7 Felder; Trupp 6 (2) -> Gebaeude 19 Typ 32 bei (190,289), 30 Felder; Trupp 7 (4) -> Gebaeude 98 Typ 32 bei (212,217), 18 Felder
+ 6472 |  81   0   0 |  36   7 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+ 6553 |  71   0   0 |  39   7 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+ 6637 |  61   0   0 |  44   7 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+ 6713 |  51   0   0 |  44   7 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+ 6802 |  41   0   0 |  49   7 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+ 6869 |  36   0   0 |  47   7 | 100.00 | 34/34 (6) | 14 10 | -
+ 6929 |  36   0   0 |  46   7 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,apfel
+ 7042 |  31   0   0 |  46   7 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,apfel
+ 7114 |  26   0   0 |  41   6 | 100.00 | 34/34 (5) | 14 10 | Trupp 7: Gebaeude 98 (Typ 32) zerstoert
+ 7151 |  26   0   0 |  41   6 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+ 7192 |  21   0   0 |  41   6 | 100.00 | 34/34 (6) | 14 10 | 60 Assassinen angeworben (Gold jetzt 100)
+ 7226 |  21   0   0 |  41   6 | 100.00 | 34/34 (5) | 14 10 | -
+ 7243 |  21   0   0 |  41   6 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+ 7440 |  16   0   0 |  41   6 | 100.00 | 34/34 (6) | 14 10 | -
+ 7640 |  16   0   0 |  48   5 | 100.00 | 34/34 (6) | 14 10 | -
+ 7729 |  31   0   0 |  48   5 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+ 7810 |  47   0   0 |  52   5 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+ 7896 |  42   0   0 |  42   5 | 100.00 | 34/34 (6) | 14 10 | -
+ 7916 |  42   0   0 |  42   5 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+ 7999 |  41   0   0 |  42   5 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+ 8093 |  48   0   0 |  41   5 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+ 8181 |  76   0   0 |  41   5 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+ 8272 |  91   0   0 |  41   4 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+ 8361 |  86   0   0 |  41   4 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+ 8444 |  91   0   0 |  41   4 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+ 8479 |  88   0   0 |  41   4 | 100.00 | 34/34 (6) | 14 10 | -
+ 8529 |  95   0   0 |  41   4 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+ 8612 |  85   0   0 |  41   4 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+ 8689 |  75   0   0 |  49   4 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+ 8760 |  68   0   0 |  49   4 | 100.00 | 34/34 (6) | 14 10 | -
+ 8785 |  73   0   0 |  53   4 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+ 8884 |  73  12   0 |  63   3 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,stein,apfel; Trupp 7 (5) -> Gebaeude 109 Typ 32 bei (222,205), 20 Felder
+ 9019 |  65   7   0 |  53   3 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,stein
+ 9143 |  96   2   0 |  53   3 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; Trupp 10 (6) rueckt vor nach (210, 193) (Ziel-Gebiet (222, 205))
+ 9255 |  88   2   0 |  53   3 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+ 9300 |  93   2   0 |  52   3 | 100.00 | 34/34 (5) | 14 10 | Trupp 7: Gebaeude 109 (Typ 32) zerstoert; Trupp 7 (5) rueckt vor nach (197, 243) (Ziel-Gebiet (195, 255))
+ 9347 | 104   2   0 |  52   3 | 100.00 | 34/34 (6) | 14 10 | Trupp 7 (5) -> Gebaeude 81 Typ 3 bei (200,255), 58 Felder
+ 9404 | 105   2   0 |  52   3 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+ 9490 |  85   2   0 |  52   2 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+ 9534 |  75   2   0 |  52   2 | 100.00 | 34/34 (5) | 14 10 | -
+ 9573 |  75   2   0 |  53   2 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+ 9663 |  65   2   0 |  56   2 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+ 9753 |  55   2   0 |  64   2 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+ 9822 |  45   2   0 |  56   2 | 100.00 | 34/34 (6) | 14 10 | 65 Assassinen angeworben (Gold jetzt 100)
+ 9869 |  45   2   0 |  55   2 | 100.00 | 34/34 (5) | 14 10 | -
+ 9893 |  45   2   0 |  56   2 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+ 9967 |  40   2   0 |  60   2 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+10048 |  36   2   0 |  60   1 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+10092 |  40   2   0 |  60   1 | 100.00 | 34/34 (6) | 14 10 | Trupp 7 zurueck nach (137, 168) (verletzt [305])
+10140 |  48   2   0 |  60   1 | 100.00 | 34/34 (6) | 14 10 | Trupp 7 (4) -> Gebaeude 100 Typ 7 bei (233,260), 43 Felder
+10202 |  48   2   0 |  60   1 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+10261 |  43   2   0 |  60   1 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+10348 |  38   2   0 |  60   1 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+10395 |  33   2   0 |  60   1 | 100.00 | 34/34 (6) | 14 10 | Trupp 10 (6) rueckt vor nach (197, 243) (Ziel-Gebiet (195, 255))
+10454 |  33   2   0 |  59   1 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+10501 |  28   2   0 |  59   1 | 100.00 | 34/34 (6) | 14 10 | Trupp 10 (6) -> Gebaeude 81 Typ 3 bei (200,255), 58 Felder
+10582 |  28   2   0 |  59   1 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+10630 |  23   2   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+10760 |  18   2   0 |  67   0 | 100.00 | 34/34 (6) | 14 10 | -
+10782 |  18   2   0 |  71   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: apfel
+10865 |  18   2   0 |  65   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: apfel
+10931 |  32   2   0 |  54   0 | 100.00 | 34/34 (5) | 14 10 | Trupp 1 zurueck nach (137, 168) (verletzt [221]); Trupp 4 zurueck nach (137, 168) (verletzt [270]); Trupp 7 zurueck nach (137, 168) (verletzt [304])
+11013 |  48   2   0 |  59   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; Trupp 1 (5) -> Gebaeude 100 Typ 7 bei (233,260), 32 Felder; Trupp 3 zurueck nach (137, 168) (verletzt [256]); Trupp 4 (5) -> Gebaeude 72 Typ 3 bei (195,255), 5 Felder; VERLUST: Trupp 6 Mitglied 296; Trupp 7 (3) -> Gebaeude 72 Typ 3 bei (195,255), 7 Felder; Trupp 10: Gebaeude 81 (Typ 3) zerstoert; Trupp 10 (6) -> Gebaeude 72 Typ 3 bei (195,255), 26 Felder
+11217 |  49   2   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | Trupp 1 zurueck nach (137, 168) (verletzt [227, 229]); Trupp 2 zurueck nach (137, 168) (verletzt [238, 243]); Trupp 4 zurueck nach (137, 168) (Feind nah); Trupp 5 zurueck nach (137, 168) (verletzt [288, 287]); Trupp 6 zurueck nach (137, 168) (verletzt [293]); Trupp 7 zurueck nach (137, 168) (Feind nah); Trupp 8 zurueck nach (137, 168) (Feind nah)
+11385 |  49   2   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | Trupp 1 (3) -> Gebaeude 84 Typ 3 bei (200,260), 4 Felder; Trupp 2 (4) -> Gebaeude 23 Typ 3 bei (195,265), 10 Felder; Trupp 3 (1) -> Gebaeude 35 Typ 3 bei (185,270), 15 Felder; Trupp 4 (5) -> Gebaeude 71 Typ 32 bei (185,277), 19 Felder; Trupp 5 (4) -> Gebaeude 81 Typ 32 bei (214,220), 34 Felder; Trupp 6 (1) -> Gebaeude 100 Typ 7 bei (233,260), 33 Felder; Trupp 7 (3) -> Gebaeude 72 Typ 3 bei (195,255), 1 Felder; Trupp 8 (6) -> Gebaeude 72 Typ 3 bei (195,255), 1 Felder
+11672 |  49   2   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; Trupp 1 zurueck nach (111, 183) (verletzt [231]); Trupp 2 zurueck nach (111, 183) (verletzt [241]); Trupp 3 zurueck nach (111, 183) (verletzt [253]); Trupp 4 zurueck nach (111, 183) (verletzt [136, 278]); Trupp 6 zurueck nach (111, 183) (verletzt [289]); Trupp 7 zurueck nach (111, 183) (verletzt [307, 345]); Trupp 8 zurueck nach (111, 183) (verletzt [310, 314, 315])
+11879 |  49  14   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | Trupp 1 (2) -> Gebaeude 84 Typ 3 bei (200,260), 13 Felder; Trupp 2 (3) -> Gebaeude 23 Typ 3 bei (195,265), 20 Felder; Trupp 4 (3) -> Gebaeude 35 Typ 3 bei (185,270), 21 Felder; Trupp 7 (1) -> Gebaeude 71 Typ 32 bei (185,277), 28 Felder; Trupp 8 (3) -> Gebaeude 100 Typ 7 bei (233,260), 37 Felder
+12035 |  57  14   0 |  64   0 | 100.00 | 34/34 (6) | 14 10 | Trupp 4 zurueck nach (111, 183) (verletzt [277])
+12072 |  57  14   0 |  69   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,stein,apfel; Trupp 4 (2) -> Gebaeude 72 Typ 32 bei (195,237), 16 Felder; Trupp 5 zurueck nach (137, 168) (Feind nah)
+12219 |  47   9   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | Trupp 5 (4) -> Gebaeude 81 Typ 32 bei (214,220), 30 Felder; Trupp 10 zurueck nach (137, 168) (Feind nah)
+12314 |  65   9   0 |  57   0 | 100.00 | 34/34 (5) | 14 10 | Trupp 5 zurueck nach (137, 168) (verletzt [281]); Trupp 10 (6) -> Gebaeude 81 Typ 32 bei (214,220), 26 Felder
+12372 |  65   9   0 |  57   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,stein; Trupp 5 (3) -> Gebaeude 72 Typ 32 bei (195,237), 10 Felder; Trupp 7 zurueck nach (137, 168) (verletzt [309]); Trupp 10 zurueck nach (137, 168) (verletzt [202, 343, 346])
+12500 |  87   4   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | Trupp 5 zurueck nach (137, 168) (verletzt [282]); VERLUST: Trupp 7 Mitglied 303; Trupp 10 (3) -> Gebaeude 72 Typ 32 bei (195,237), 10 Felder
+12609 |  94   4   0 |  55   0 | 100.00 | 34/34 (5) | 14 10 | Trupp 5 (2) -> Gebaeude 81 Typ 32 bei (214,220), 16 Felder
+12667 |  95   4   0 |  55   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+12696 |  85   4   0 |  58   0 | 100.00 | 34/34 (5) | 14 10 | -
+12738 |  86   4   0 |  58   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+12824 |  76   4   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+12916 |  79   4   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+12984 |  69   4   0 |  65   0 | 100.00 | 34/34 (6) | 14 10 | -
+13002 |  70   4   0 |  65   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+13078 |  92   4   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | Trupp 5: Gebaeude 81 (Typ 32) zerstoert; Trupp 5 (2) -> Gebaeude 72 Typ 32 bei (195,237), 19 Felder
+13150 |  96   4   0 |  64   0 | 100.00 | 34/34 (5) | 14 10 | Trupp 6 (1) rueckt vor nach (191, 225) (Ziel-Gebiet (195, 237))
+13220 | 116   4   0 |  64   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+13305 | 111   4   0 |  63   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+13385 |  91   4   0 |  63   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+13418 |  81   4   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | 70 Assassinen angeworben (Gold jetzt 100)
+13460 |  87   4   0 |  62   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+13504 |  86   4   0 |  62   0 | 100.00 | 34/34 (5) | 14 10 | Trupp 4: Gebaeude 72 (Typ 32) zerstoert; Trupp 5: Gebaeude 72 (Typ 32) zerstoert; Trupp 5 (2) -> Gebaeude 100 Typ 7 bei (233,260), 35 Felder; Trupp 7 (1) rueckt vor nach (227, 248) (Ziel-Gebiet (233, 260)); Trupp 10: Gebaeude 72 (Typ 32) zerstoert; Trupp 10 (3) -> Gebaeude 100 Typ 7 bei (233,260), 34 Felder
+13637 |  89   4   0 |  61   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+13673 |  79   4   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | Trupp 4 (2) rueckt vor nach (221, 252) (Ziel-Gebiet (233, 260))
+13730 |  79   4   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; Trupp 4 zurueck nach (137, 168) (Feind nah)
+13798 |  69   4   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | -
+13814 |  69   4   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | Trupp 4 (2) -> Gebaeude 100 Typ 7 bei (233,260), 25 Felder
+13897 |  78   4   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+13956 |  77   4   0 |  64   0 | 100.00 | 34/34 (6) | 14 10 | Trupp 4 zurueck nach (137, 168) (verletzt [273])
+14002 |  77   4   0 |  68   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel; Trupp 4 (1) -> Gebaeude 100 Typ 7 bei (233,260), 15 Felder; Trupp 5 zurueck nach (143, 167) (verletzt [285])
+14130 |  67   4   0 |  63   0 | 100.00 | 34/34 (6) | 14 10 | Trupp 4 zurueck nach (143, 167) (verletzt [279]); Trupp 5 (1) -> Gebaeude 100 Typ 7 bei (233,260), 13 Felder
+14226 |  67   4   0 |  62   0 | 100.00 | 34/34 (5) | 14 10 | Trupp 11 (6) rueckt vor nach (224, 248) (Ziel-Gebiet (233, 260))
+14249 |  69   4   0 |  62   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+14290 |  67   4   0 |  62   0 | 100.00 | 34/34 (5) | 14 10 | -
+14311 |  71   4   0 |  61   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; Trupp 5: Gebaeude 100 (Typ 7) zerstoert; Trupp 8: Gebaeude 100 (Typ 7) zerstoert; Trupp 10: Gebaeude 100 (Typ 7) zerstoert
+14377 |  65   4   0 |  61   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+14445 |  55   4   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+14508 |  45   4   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | VERLUST: Trupp 7 Mitglied 345
+14530 |  45   4   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+14597 |  40   4   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+14649 |  35   4   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | VERLUST: Trupp 6 Mitglied 289
+14670 |  35   4   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+14744 |  30  16   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,stein
+14775 |  25  11   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | -
+14788 |  25  11   0 |  58   0 | 100.00 | 34/34 (5) | 14 10 | VERLUST: Trupp 10 Mitglied 343
+14805 |  25  11   0 |  59   0 | 100.00 | 33/34 (5) | 13 10 | verkauft: holz,stein
+14874 |  20   6   0 |  66   0 | 100.00 | 34/34 (5) | 13 10 | VERLUST: Trupp 3 Mitglied 259; VERLUST: Trupp 5 Mitglied 287; VERLUST: Trupp 6 Mitglied 291
+14892 |  20   6   0 |  66   0 | 100.00 | 34/34 (5) | 13 10 | VERLUST: Trupp 3 Mitglied 253; VERLUST: Trupp 6 Mitglied 290; VERLUST: Trupp 10 Mitglied 346
+14911 |  23   6   0 |  65   0 | 100.00 | 34/34 (4) | 13 10 | verkauft: holz,stein,apfel
+14991 |  33   1   0 |  65   0 | 100.00 | 34/34 (3) | 14 10 | VERLUST: Trupp 3 Mitglied 262
+15007 |  33   1   0 |  65   0 | 100.00 | 34/34 (3) | 14 10 | verkauft: holz,apfel
+15048 |  34   1   0 |  58   0 | 100.00 | 34/34 (4) | 14 10 | VERLUST: Trupp 5 Mitglied 288; VERLUST: Trupp 6 Mitglied 293
+15116 |  46   1   0 |  58   0 | 100.00 | 34/34 (4) | 14 10 | VERLUST: Trupp 3 Mitglied 256; VERLUST: Trupp 5 Mitglied 285
+15133 |  46   1   0 |  58   0 | 100.00 | 34/34 (4) | 14 10 | verkauft: holz
+15180 |  41   1   0 |  58   0 | 100.00 | 34/34 (4) | 14 10 | VERLUST: Trupp 1 Mitglied 231
+15220 |  41   1   0 |  57   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; VERLUST: Trupp 10 Mitglied 341
+15303 |  36   1   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+15386 |  31   1   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+15465 |  26   1   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+15551 |  21   1   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+15648 |  16   1   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | -
+15866 |  16   1   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | Trupp 7 (1) -> Gebaeude 72 Typ 32 bei (214,219), 29 Felder; Trupp 8 (3) -> Gebaeude 72 Typ 32 bei (214,219), 41 Felder; Trupp 11 (6) -> Gebaeude 72 Typ 32 bei (214,219), 18 Felder
+15967 |  23   1   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+16054 |  29   1   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+16121 |  24   1   0 |  67   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+16163 |  19   1   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | 75 Assassinen angeworben (Gold jetzt 115)
+16206 |  19   1   0 |  57   0 | 100.00 | 34/34 (5) | 14 10 | -
+16403 |  19   1   0 |  55   0 | 100.00 | 34/34 (5) | 14 10 | -
+16418 |  20   1   0 |  55   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+16495 |  30   1   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+16578 |  27   1   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+16629 |  22   1   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | Trupp 7: Gebaeude 72 (Typ 32) zerstoert; Trupp 8: Gebaeude 72 (Typ 32) zerstoert; Trupp 11: Gebaeude 72 (Typ 32) zerstoert
+16656 |  22   1   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+16869 |  17   1   0 |  52   0 | 100.00 | 34/34 (6) | 14 10 | -
+16914 |  17   1   0 |  52   0 | 100.00 | 34/34 (6) | 14 10 | Trupp 8 (3) -> Gebaeude 72 Typ 32 bei (195,234), 23 Felder; Trupp 11 (6) -> Gebaeude 72 Typ 32 bei (195,234), 19 Felder
+17015 |  30   1   0 |  64   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+17097 |  30   1   0 |  74   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+17130 |  25   1   0 |  63   0 | 100.00 | 34/34 (6) | 14 10 | -
+17194 |  25   1   0 |  63   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+17272 |  20   1   0 |  62   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+17345 |  15   1   0 |  62   0 | 100.00 | 34/34 (5) | 14 10 | Trupp 8: Gebaeude 72 (Typ 32) zerstoert; Trupp 11: Gebaeude 72 (Typ 32) zerstoert
+17390 |  15   1   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | Trupp 8 zurueck nach (137, 168) (Feind nah); Trupp 11 zurueck nach (137, 168) (Feind nah)
+17442 |  15   1   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | Trupp 1 zurueck nach (137, 168) (Feind nah); Trupp 2 zurueck nach (137, 168) (Feind nah)
+17554 |  66   1   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | Trupp 2 zurueck nach (137, 168) (Feind nah)
+17598 |  66   1   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+17684 |  69  13   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | Trupp 8 zurueck nach (137, 168) (verletzt [319])
+17775 |  79  13   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,stein
+17885 |  85   8   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,stein
+18002 |  75   3   0 |  57   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+18089 |  65   3   0 |  62   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+18156 |  55   3   0 |  62   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+18202 |  54   3   0 |  70   0 | 100.00 | 34/34 (6) | 14 10 | -
+18245 |  63   3   0 |  71   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+18375 |  77   3   0 |  65   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,apfel
+18465 |  79   3   0 |  54   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+18562 |  69   3   0 |  54   0 | 100.00 | 34/34 (4) | 14 10 | -
+18585 |  69   3   0 |  54   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+18655 |  59   3   0 |  53   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+18715 |  51   3   0 |  53   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+18786 |  55   3   0 |  52   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+18859 |  47   3   0 |  52   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+18945 |  42   3   0 |  51   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+19029 |  37   3   0 |  51   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+19079 |  32   3   0 |  51   0 | 100.00 | 34/34 (6) | 14 10 | -
+19121 |  32   3   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+19211 |  27   3   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+19255 |  22   3   0 |  63   0 | 100.00 | 34/34 (6) | 14 10 | 80 Assassinen angeworben (Gold jetzt 100)
+19309 |  22   3   0 |  67   0 | 100.00 | 33/34 (5) | 14 10 | verkauft: holz,apfel
+19376 |  17   3   0 |  60   0 | 100.00 | 34/34 (5) | 14 10 | -
+19452 |  17   3   0 |  60   0 | 100.00 | 34/34 (5) | 14 10 | Trupp 11 zurueck nach (137, 168) (verletzt [347])
+19623 |  17   3   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | -
+19810 |  24   3   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+19837 |  25   3   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | -
+19884 |  30   3   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+19979 |  25   3   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+20068 |  20   3   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+20138 |  15   3   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | -
+20226 |  24   3   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+20315 |  28   3   0 |  66   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+20440 |  41   3   0 |  55   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+20495 |  37   3   0 |  55   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+20582 |  48  15   0 |  54   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,stein
+20662 |  43  10   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,stein
+20736 |  42   5   0 |  53   0 | 100.00 | 34/34 (6) | 14 10 | VERLUST: Trupp 11 Mitglied 347
+20802 |  55   5   0 |  53   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,stein
+20916 |  47   0   0 |  52   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; VERLUST: Trupp 8 Mitglied 319
+20997 |  42   0   0 |  51   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+21088 |  37   0   0 |  51   0 | 100.00 | 34/34 (5) | 14 10 | -
+21107 |  37   0   0 |  55   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+21201 |  32   0   0 |  59   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+21273 |  27   0   0 |  67   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,apfel
+21375 |  41   0   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+21450 |  52   0   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+21529 |  43   0   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+21618 |  38   0   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+21646 |  33   0   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | -
+21714 |  33   0   0 |  59   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+21793 |  28   0   0 |  59   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+21859 |  23   0   0 |  58   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+21886 |  18   0   0 |  58   0 | 100.00 | 34/34 (5) | 14 10 | VERLUST: Trupp 11 Mitglied 371
+21902 |  18   0   0 |  58   0 | 100.00 | 34/34 (5) | 14 10 | VERLUST: Trupp 1 Mitglied 229
+21922 |  18   0   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | VERLUST: Trupp 10 Mitglied 325
+22016 |  18   0   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | Trupp 2 zurueck nach (137, 168) (verletzt [250])
+22053 |  18   0   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | VERLUST: Trupp 7 Mitglied 349
+22137 |  18   0   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | VERLUST: Trupp 6 Mitglied 300
+22158 |  18   0   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | -
+22287 |  30   0   0 |  65   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+22344 |  31   0   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | VERLUST: Trupp 4 Mitglied 279
+22386 |  39   0   0 |  64   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; VERLUST: Trupp 10 Mitglied 226
+22439 |  44   0   0 |  64   0 | 100.00 | 34/34 (6) | 14 10 | -
+22478 |  44   0   0 |  63   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+22561 |  39   0   0 |  63   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+22644 |  34   0   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+22672 |  29   0   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | 85 Assassinen angeworben (Gold jetzt 100)
+22702 |  29   0   0 |  62   0 | 100.00 | 34/34 (5) | 14 10 | -
+22724 |  29   0   0 |  62   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+22802 |  24   0   0 |  61   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+22943 |  19   0   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | -
+23141 |  19   0   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | -
+23152 |  19   0   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | VERLUST: Trupp 11 Mitglied 378
+23238 |  20   0   0 |  64   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23323 |  49   0   0 |  67   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel; VERLUST: Trupp 4 Mitglied 278
+23412 |  51   0   0 |  65   0 | 100.00 | 34/34 (6) | 14 10 | -
+23431 |  51   0   0 |  65   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+23547 |  48  12   0 |  54   0 | 100.00 | 34/34 (5) | 14 10 | VERLUST: Trupp 11 Mitglied 317
+23568 |  48  12   0 |  54   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,stein
+23676 |  59   7   0 |  57   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,stein
+23800 |  51   2   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23880 |  41   2   0 |  56   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23966 |  36   2   0 |  55   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+24063 |  38   2   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+24087 |  43   2   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | -
+24130 |  48   2   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+24198 |  43   2   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+24278 |  52   2   0 |  53   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+24347 |  45   2   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | -
+24369 |  50   2   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+24441 |  40   2   0 |  61   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+24503 |  39   2   0 |  64   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+24583 |  46   2   0 |  68   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,apfel
+24654 |  48   2   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+24704 |  43   2   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+24786 |  47   2   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+24821 |  44   2   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | -
+24892 |  51   2   0 |  56   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+24973 |  41   2   0 |  55   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+25041 |  48   2   0 |  55   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+25116 |  43   2   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | -
+25133 |  44   2   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+25214 |  57   2   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+25290 |  47   2   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | Trupp 2 (2) -> Gebaeude 35 Typ 3 bei (185,270), 36 Felder
+25327 |  47   2   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+25399 |  42   2   0 |  67   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+25463 |  37   2   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | 90 Assassinen angeworben (Gold jetzt 110)
+25534 |  37   2   0 |  65   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,apfel
+25634 |  32   2   0 |  54   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+25712 |  27   2   0 |  53   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+25747 |  22   2   0 |  53   0 | 100.00 | 34/34 (6) | 14 10 | -
+25789 |  22   2   0 |  53   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+25946 |  17   2   0 |  52   0 | 100.00 | 34/34 (6) | 14 10 | Trupp 2: Gebaeude 35 (Typ 3) zerstoert; Trupp 2 (2) -> Gebaeude 71 Typ 32 bei (185,277), 6 Felder
+25982 |  17   2   0 |  52   0 | 100.00 | 34/34 (6) | 14 10 | -
+26118 |  30   2   0 |  51   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+26168 |  30   2   0 |  50   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+26203 |  25   2   0 |  50   0 | 100.00 | 34/34 (6) | 14 10 | Trupp 2: Gebaeude 71 (Typ 32) zerstoert
+26245 |  25   2   0 |  50   0 | 100.00 | 34/34 (5) | 14 10 | Trupp 2 zurueck nach (111, 183) (Feind nah)
+26286 |  25   2   0 |  50   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+26370 |  20   2   0 |  49   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+26476 |  15   7   0 |  53   0 | 100.00 | 34/34 (6) | 14 10 | -
+26516 |  15  14   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: stein
+26597 |  15   9   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: stein
+26705 |  15   4   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | -
+26764 |  15   4   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | VERLUST: Trupp 4 Mitglied 273
+26906 |  15   4   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | -
+27095 |  15   4   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | -
+27183 |  20   4   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+27268 |  28   4   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+27305 |  23   4   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | VERLUST: Trupp 4 Mitglied 277; VERLUST: Trupp 11 Mitglied 384
+27341 |  23   4   0 |  57   0 | 100.00 | 34/34 (5) | 14 10 | -
+27358 |  23   4   0 |  57   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+27402 |  18   4   0 |  60   0 | 100.00 | 34/34 (5) | 14 10 | Trupp 4 (1) rueckt vor nach (171, 291) (Ziel-Gebiet (172, 303))
+27498 |  18   4   0 |  68   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: apfel
+27588 |  18   4   0 |  67   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: apfel
+27665 |  18   4   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | -
+27703 |  18   4   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | VERLUST: Trupp 5 Mitglied 281
+27844 |  18   4   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | -
+28030 |  18   4   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | VERLUST: Trupp 4 Mitglied 270
+28047 |  18   4   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | -
+28164 |  18   4   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | VERLUST: Trupp 1 Mitglied 221
+28221 |  26   4   0 |  53   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+28328 |  31   4   0 |  57   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+28418 |  26   4   0 |  56   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; VERLUST: Trupp 11 Mitglied 383
+28465 |  21   4   0 |  56   0 | 100.00 | 34/34 (5) | 14 10 | VERLUST: Trupp 3 Mitglied 265
+28502 |  21   4   0 |  60   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+28539 |  16   4   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | -
+28617 |  26   4   0 |  65   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+Ende Phase 2 bei Tick 28725 nach 848 Runden (0.1 s je Runde); Kornspeicher 1, Holzfaeller 14, Apfelplantagen 10; Waechter: Bedrohungen 0, davon tot 0, eigene Truppen verloren 0; Angriff: zerstoert 29 Gebaeude {32: 24, 3: 2, 7: 3}, eigene Verluste 39, Trupps 11

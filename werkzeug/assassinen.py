@@ -46,6 +46,7 @@ def naechster_sicherer(L, orte, von, fe, sp=1):
 class Trupp:
     def __init__(self, nr):
         self.nr, self.mitglieder, self.ziel, self.ziel_typ, self.zurueck, self.daheim = nr, set(), None, None, False, set()
+        self.bereit = None     # Bereitstellungsplatz, zu dem der Trupp gerade laeuft
 
 class Angriffstrupp:
     def __init__(self, sp=1, mitglieder=(), rueckzug=(125, 155)):
@@ -86,8 +87,8 @@ class Angriffstrupp:
                 ereignis.append("Trupp %d: Gebaeude %d (Typ %d) zerstoert" % (t.nr, t.ziel, t.ziel_typ))
                 belegt.discard(t.ziel); t.ziel = None
             aktiv = [n for n in t.mitglieder if n not in t.daheim]
-            if not aktiv:
-                continue
+            if not aktiv or (len(t.mitglieder) < GROESSE and t.ziel is None and t.bereit is None and not t.zurueck):
+                continue      # Trupp waechst noch - ab 6 geht er los (Daniel 23:18)
             mitte = (sum(L[n]["x"] for n in aktiv) / len(aktiv), sum(L[n]["y"] for n in aktiv) / len(aktiv))
             verletzt = [n for n in aktiv if L[n]["leben"] < self.leben_max[n]]
             in_gefahr = any(gefaehrdet((L[n]["x"], L[n]["y"]), fe) for n in aktiv)
@@ -111,7 +112,7 @@ class Angriffstrupp:
                 kand = []
                 for weite in (MAX_WEG, 45, 60):
                     for n, g in G.items():
-                        if g["besitzer"] in (0, self.sp) or g["typ"] not in WERT or n in belegt:
+                        if g["besitzer"] in (0, self.sp) or g["typ"] not in WERT or n in belegt or not g.get("erreichbar", 1):
                             continue
                         ort = (g["x"], g["y"])
                         d = schach(mitte, ort)
@@ -127,6 +128,26 @@ class Angriffstrupp:
                             ort = (G[n]["x"], G[n]["y"]); d = schach(mitte, ort)
                             if d <= 60 and not gefaehrdet(ort, fe, 2) and weg_sicher(mitte, ort, fe):
                                 kand.append((1.0 / (d + 1.0), n, G[n], d))
+                if not kand:
+                    # Bereitstellung (Daniel 23:18: ab 6 sofort nach vorne, nicht am Soeldnerlager warten): sicher bis
+                    # 12 Felder vor das naechste ungeschuetzte, erreichbare feindliche Gebaeude laufen
+                    if t.bereit is not None and schach(mitte, t.bereit) > 3:
+                        continue
+                    ziele = sorted(((schach(mitte, (g["x"], g["y"])), (g["x"], g["y"])) for n, g in G.items()
+                                    if g["besitzer"] not in (0, self.sp) and g["typ"] in WERT and g.get("erreichbar", 1)
+                                    and not gefaehrdet((g["x"], g["y"]), fe, 4)))
+                    for d, (gx, gy) in ziele:
+                        f = max(0.0, (d - 12.0) / d) if d else 0.0
+                        platz = (int(mitte[0] + (gx - mitte[0]) * f), int(mitte[1] + (gy - mitte[1]) * f))
+                        if weg_sicher(mitte, platz, fe) and not gefaehrdet(platz, fe, 4):
+                            befehl({"halten": {"nr": aktiv, "x": platz[0], "y": platz[1]}}, 1.0, bis="HALTEN")
+                            t.bereit = platz
+                            ereignis.append("Trupp %d (%d) rueckt vor nach %s (Ziel-Gebiet %s)" % (t.nr, len(aktiv), platz, (gx, gy)))
+                            break
+                    continue
+                if t.bereit is not None:
+                    befehl({"halten": {"los": aktiv}}, 1.0, bis="HALTEN")
+                    t.bereit = None
                 if kand:
                     w, n, g, d = max(kand)
                     befehl({"angriff": {"einheiten": aktiv, "gebaeude": n}}, 1.0, bis="ANGRIFF")
