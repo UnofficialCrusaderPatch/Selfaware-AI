@@ -19,6 +19,8 @@ bis eine Messung es bestaetigt (Marke dahinter).
 - Kosten kommen aus der Balance (Team-Liga): Baukosten int[110][5] (Holz, Stein, Eisen, Pech, Gold) im Spiel bei 0x01124CF4, Index = Gebaeudetyp (VillageStudio lib/kosten.json). (abgelesen)
 
 ## Beliebtheit und Essen
+- **Beliebtheit ist das Wichtigste.** Unter 95 sinkt die Rate, mit der neue Bauern kommen; bei 50 kommen fast keine mehr; unter 50 gehen Leute AUS dem Dorf. (Daniel 04.10., 19:57)
+- Kornspeicher nicht vergessen. (Daniel 04.10., 19:57)
 - Kornspeicher haelt das Essen und ist damit sehr wichtig fuer die Beliebtheit. (Daniel 04.10.)
 - Beliebtheit vor allem ueber Bier. (Daniel 04.10.)
 - Essen anfangs ueber Aepfel. Jagd nur, wenn Wild (Rehe) da ist - erkennen, sonst kein Holz fuer eine Jaegerhuette ausgeben. Jaeger etwa einen Kathedralenabstand vom Wild. (Daniel 04.10.)
