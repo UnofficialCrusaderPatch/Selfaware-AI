@@ -1,0 +1,395 @@
+== Phase 1: Eroeffnung nach Plan (eroeffnung_plan.json)
+Eintrag 7 'M7-04 Mensch Grumpy T600' -> Scrollstand 0, Zeile 7; Spielzeit vorher 28725
+['[villagestudio]: LADEPAUSE: scharf (jetzt Tick 28725, pausiert).']
+['[villagestudio]: POKE 0x01126628: 0 -> 0', '[villagestudio]: POKE 0x01126624: 0 -> 7', '[villagestudio]: LADEN: Knopf 2 gedrueckt, ok=true', '[villagestudio]: logik: 3 von 3 Befehlen ausgefuehrt, 0 schon erledigt.', '[villagestudio]: LADEPAUSE: Laden erkannt (Spielzeit sprang um -28125) bei Tick 600 - angehalten.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.']
+Spielzeit nachher 600 / 600, Pause 1
+Tick 600
+Vorab-Kontrolle gut: {'Ansicht': 14, 'gameOver': 0, 'Mensch': 1, 'Platz': 1}
+in einem Aufruf gebaut: 30 von 30, einzeln nachgeholt: 0
+GEBAUT 30 von 30; Fehlschlaege: keine; Holz 150 -> 0, Gold 3930 -> 3780
+Lager: alt 4 Teile abgerissen (Inhalt: {}), neu bei [118, 120] -> (6, 118, 120); jetzt 4 Teile
+['[villagestudio]: OPTIONEN: Knopf 3 gedrueckt, ok=true']
+aktives Textfeld: 2
+Laenge im Feld jetzt: 26
+['[villagestudio]: LADEN: Knopf 3 gedrueckt, ok=true']
+['[villagestudio]: DIALOG: Knopf 22 (Ja), hinterlegter Zweck 0', '[villagestudio]: DIALOG: zurueck, ok=true']
+GESCHAFFT: M14 Eroeffnung Grumpy T608.sav (1044375 Byte), Kopie daten/spielstaende/M14 Eroeffnung Grumpy T608_20261004-232511.sav
+== Phase 2: Echtzeit, Tempo 1000, 15 Minuten, Waechter an
+Vorab-Kontrolle gut: {'Ansicht': 14, 'gameOver': 0, 'Mensch': 1, 'Platz': 1}
+Tick | Holz Stein Eisen | Aepfel Brot | Beliebt | Leute/Platz (Feuer) | Holzf. Apfelb. | Ereignis
+ 1026 |   0   0   0 |  15  15 |  95.00 | 18/34 (2) | 2 10 | Stellung: 14 Truppen zum Posten (121, 123); Soeldnerlager gesetzt (125, 119) (Gold 3850)
+ 1110 |   0   0   0 |  15  15 |  95.00 | 20/34 (0) | 2 10 | Markt gesetzt (125, 129)
+ 1371 |   0   0   0 |  15  15 |  96.50 | 23/34 (1) | 7 10 | 5 Assassinen angeworben (Gold jetzt 3520)
+ 1482 |   0   0   0 |  14  15 |  98.00 | 23/34 (1) | 7 10 | Trupp 1 (4) rueckt vor nach (191, 243) (Ziel-Gebiet (195, 255))
+ 1604 |   0   0   0 |  14  15 |  99.50 | 24/34 (1) | 8 10 | -
+ 1653 |   0   0   0 |  14  15 |  99.50 | 24/34 (1) | 8 10 | 10 Assassinen angeworben (Gold jetzt 3170)
+ 1699 |   0   0   0 |  14  14 |  99.50 | 24/34 (1) | 8 10 | Trupp 2 (4) rueckt vor nach (182, 258) (Ziel-Gebiet (185, 270))
+ 1916 |   0   0   0 |  14  14 | 100.00 | 24/34 (1) | 8 10 | 15 Assassinen angeworben (Gold jetzt 2820); Trupp 3 (4) rueckt vor nach (269, 259) (Ziel-Gebiet (279, 271))
+ 2065 |   0   0   0 |  14  14 | 100.00 | 23/34 (1) | 8 10 | Trupp 4 (4) rueckt vor nach (206, 208) (Ziel-Gebiet (212, 220))
+ 2183 |   0   0   0 |  14  14 | 100.00 | 24/34 (1) | 8 10 | 20 Assassinen angeworben (Gold jetzt 2470)
+ 2308 |   0   0   0 |  21  14 | 100.00 | 24/34 (1) | 8 10 | Trupp 5 (4) rueckt vor nach (275, 273) (Ziel-Gebiet (284, 285))
+ 2422 |   0   0   0 |  21  14 | 100.00 | 24/34 (1) | 8 10 | 25 Assassinen angeworben (Gold jetzt 2120)
+ 2503 |   0   0   0 |  29  14 | 100.00 | 24/34 (0) | 8 10 | verkauft: apfel; Trupp 6 (4) rueckt vor nach (187, 277) (Ziel-Gebiet (190, 289))
+ 2576 |   0   0   0 |  28  13 | 100.00 | 24/34 (2) | 8 10 | Trupp 2 (4) -> Gebaeude 90 Typ 32 bei (212,220), 57 Felder
+ 2679 |   0   0   0 |  28  13 | 100.00 | 25/34 (2) | 8 10 | verkauft: apfel
+ 2747 |   0   0   0 |  23  13 | 100.00 | 25/34 (1) | 9 10 | 30 Assassinen angeworben (Gold jetzt 1800); Trupp 7 (4) rueckt vor nach (183, 258) (Ziel-Gebiet (185, 270))
+ 2865 |   0   0   0 |  28  13 | 100.00 | 25/34 (1) | 9 10 | Trupp 1 (4) -> Gebaeude 81 Typ 3 bei (200,255), 59 Felder
+ 2943 |   0   0   0 |  29  13 | 100.00 | 24/34 (1) | 9 10 | Trupp 8 (4) rueckt vor nach (192, 243) (Ziel-Gebiet (195, 255))
+ 2993 |   0   0   0 |  33  13 | 100.00 | 24/34 (1) | 9 10 | 35 Assassinen angeworben (Gold jetzt 1450); verkauft: apfel
+ 3094 |   0   0   0 |  28  13 | 100.00 | 25/34 (1) | 9 10 | -
+ 3141 |   0   0   0 |  31  13 | 100.00 | 25/34 (0) | 10 10 | verkauft: apfel
+ 3190 |   0   0   0 |  26  13 | 100.00 | 25/34 (1) | 10 10 | Trupp 9 (4) rueckt vor nach (185, 288) (Ziel-Gebiet (187, 300))
+ 3289 |   0   0   0 |  30  13 | 100.00 | 26/34 (1) | 10 10 | 40 Assassinen angeworben (Gold jetzt 1130); verkauft: apfel; Trupp 3 (4) -> Gebaeude 72 Typ 3 bei (195,255), 59 Felder
+ 3381 |   0   0   0 |  29  12 | 100.00 | 26/34 (1) | 11 10 | Trupp 4 (4) -> Gebaeude 98 Typ 32 bei (195,236), 44 Felder
+ 3469 |   0   0   0 |  29  12 | 100.00 | 27/34 (2) | 11 10 | Trupp 10 (4) rueckt vor nach (269, 259) (Ziel-Gebiet (279, 271))
+ 3599 |   0   0   0 |  33  12 | 100.00 | 28/34 (1) | 12 10 | 45 Assassinen angeworben (Gold jetzt 795)
+ 3644 |   0   0   0 |  33  12 | 100.00 | 27/34 (0) | 12 10 | verkauft: apfel
+ 3680 |   0   0   0 |  28  12 | 100.00 | 27/34 (1) | 12 10 | Trupp 11 (4) rueckt vor nach (171, 291) (Ziel-Gebiet (172, 303))
+ 3803 |   0   0   0 |  28  12 | 100.00 | 29/34 (0) | 13 10 | Trupp 5 (4) -> Gebaeude 84 Typ 3 bei (200,260), 59 Felder
+ 3959 |   0   0   0 |  27  12 | 100.00 | 30/34 (1) | 14 10 | 50 Assassinen angeworben (Gold jetzt 460)
+ 3998 |   0   0   0 |  27  12 | 100.00 | 30/34 (1) | 14 10 | Trupp 12 (4) rueckt vor nach (275, 273) (Ziel-Gebiet (284, 285))
+ 4065 |   0   0   0 |  27  11 | 100.00 | 29/34 (1) | 14 10 | -
+ 4123 |   0   0   0 |  27  11 | 100.00 | 29/34 (0) | 14 10 | MESSUNG Trupp 1: naechster Feind Typ 73 in 18 Feldern, verletzt 1; Trupp 1 zurueck nach (184, 253) (verletzt [229]); Trupp 7 (4) -> Gebaeude 81 Typ 3 bei (200,255), 59 Felder
+ 4177 |   0   0   0 |  27  11 | 100.00 | 29/34 (1) | 14 10 | Trupp 1 (3) -> Gebaeude 23 Typ 3 bei (195,265), 11 Felder; MESSUNG Trupp 3: naechster Feind Typ 73 in 7 Feldern, verletzt 0; Trupp 3 zurueck nach (191, 234) (Feind nah); Trupp 13 (4) rueckt vor nach (183, 258) (Ziel-Gebiet (185, 270))
+ 4301 |   0   0   0 |  27  11 | 100.00 | 31/34 (1) | 14 10 | 55 Assassinen angeworben (Gold jetzt 110); MESSUNG Trupp 1: naechster Feind Typ 24 in 16 Feldern, verletzt 1; Trupp 1 zurueck nach (178, 269) (verletzt [217]); VERLUST: Trupp 4 Mitglied 263; MESSUNG Trupp 4: naechster Feind Typ 73 in 2 Feldern, verletzt 2; Trupp 4 zurueck nach (194, 235) (verletzt [258, 261]); Trupp 8 (4) -> Gebaeude 98 Typ 32 bei (195,236), 38 Felder
+ 4420 |   0   0   0 |  27  11 | 100.00 | 32/34 (2) | 14 10 | Trupp 1 (2) -> Gebaeude 23 Typ 3 bei (195,265), 6 Felder; Trupp 3 (4) -> Gebaeude 72 Typ 3 bei (195,255), 11 Felder; Trupp 4 (1) -> Gebaeude 35 Typ 3 bei (185,270), 18 Felder; MESSUNG Trupp 5: naechster Feind Typ 24 in 8 Feldern, verletzt 0; Trupp 5 zurueck nach (203, 224) (Feind nah)
+ 4571 |   0   0   0 |  35  11 | 100.00 | 34/34 (3) | 14 10 | Trupp 5 (4) -> Gebaeude 84 Typ 3 bei (200,260), 16 Felder
+ 4632 |   0   0   0 |  38  11 | 100.00 | 34/34 (4) | 14 10 | MESSUNG Trupp 2: naechster Feind Typ 24 in 29 Feldern, verletzt 1; Trupp 2 zurueck nach (177, 255) (verletzt [238]); Trupp 9 (4) -> Gebaeude 90 Typ 32 bei (212,220), 55 Felder
+ 4680 |   0   0   0 |  44  11 | 100.00 | 34/34 (5) | 14 10 | verkauft: apfel; Trupp 2 (3) -> Gebaeude 71 Typ 32 bei (185,277), 12 Felder
+ 4768 |   0   0   0 |  44  10 | 100.00 | 34/34 (6) | 14 10 | MESSUNG Trupp 1: naechster Feind Typ 24 in 29 Feldern, verletzt 1; Trupp 1 zurueck nach (178, 250) (verletzt [221])
+ 4813 |   0   0   0 |  44  10 | 100.00 | 34/34 (6) | 14 10 | Trupp 1 (1) -> Gebaeude 23 Typ 3 bei (195,265), 6 Felder
+ 4873 |   0   0   0 |  44  10 | 100.00 | 34/34 (6) | 14 10 | verkauft: apfel
+ 4971 |   0   0   0 |  44  10 | 100.00 | 34/34 (6) | 14 10 | verkauft: apfel
+ 5010 |   0   0   0 |  39  10 | 100.00 | 34/34 (6) | 14 10 | MESSUNG Trupp 5: naechster Feind Typ 24 in 24 Feldern, verletzt 1; Trupp 5 zurueck nach (188, 254) (verletzt [272]); Trupp 10 (4) -> Gebaeude 84 Typ 3 bei (200,260), 53 Felder
+ 5101 |   4   0   0 |  39  10 | 100.00 | 34/34 (6) | 14 10 | Trupp 5 (3) -> Gebaeude 91 Typ 26 bei (201,281), 25 Felder
+ 5162 |  19   0   0 |  38  10 | 100.00 | 34/34 (6) | 14 10 | verkauft: apfel
+ 5276 |  48   0   0 |  33   9 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+ 5308 |  43   0   0 |  33   9 | 100.00 | 34/34 (5) | 14 10 | Trupp 12 (4) -> Gebaeude 104 Typ 32 bei (218,202), 9 Felder
+ 5392 |  49   0   0 |  38   9 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,apfel
+ 5496 |  52   0   0 |  38   9 | 100.00 | 34/34 (6) | 14 10 | MESSUNG Trupp 3: naechster Feind Typ 24 in 23 Feldern, verletzt 1; Trupp 3 zurueck nach (185, 250) (verletzt [253]); Trupp 11 (4) -> Gebaeude 72 Typ 3 bei (195,255), 39 Felder
+ 5590 |  56   0   0 |  38   9 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; Trupp 3 (3) -> Gebaeude 19 Typ 32 bei (190,289), 27 Felder; Trupp 13 (4) -> Gebaeude 105 Typ 32 bei (193,225), 39 Felder
+ 5702 |  68   0   0 |  43   9 | 100.00 | 34/34 (6) | 14 10 | MESSUNG Trupp 2: naechster Feind Typ 22 in 24 Feldern, verletzt 1; Trupp 2 zurueck nach (184, 246) (verletzt [240])
+ 5746 |  80   0   0 |  42   9 | 100.00 | 34/34 (6) | 14 10 | Trupp 2 (2) -> Gebaeude 71 Typ 32 bei (185,277), 20 Felder
+ 5807 |  81   0   0 |  42   9 | 100.00 | 34/34 (6) | 13 10 | verkauft: holz,apfel
+ 5857 |  78   0   0 |  40   9 | 100.00 | 34/34 (6) | 13 10 | -
+ 5911 |  78   0   0 |  42   8 | 100.00 | 34/34 (5) | 13 10 | verkauft: holz,apfel
+ 6022 |  76   0   0 |  37   8 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+ 6095 |  76   0   0 |  37   8 | 100.00 | 34/34 (5) | 14 10 | MESSUNG Trupp 5: naechster Feind Typ 24 in 26 Feldern, verletzt 1; Trupp 5 zurueck nach (181, 255) (verletzt [264])
+ 6142 |  76   0   0 |  37   8 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; Trupp 5 (2) -> Gebaeude 106 Typ 3 bei (200,265), 7 Felder
+ 6252 |  66   0   0 |  37   8 | 100.00 | 34/34 (6) | 14 10 | -
+ 6274 |  66   0   0 |  37   8 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+ 6319 |  56   0   0 |  36   8 | 100.00 | 34/34 (6) | 14 10 | MESSUNG Trupp 10: naechster Feind Typ 24 in 14 Feldern, verletzt 1; Trupp 10 zurueck nach (197, 257) (verletzt [305])
+ 6375 |  56   0   0 |  36   8 | 100.00 | 34/34 (6) | 14 10 | MESSUNG Trupp 9: naechster Feind Typ 24 in 27 Feldern, verletzt 1; Trupp 9 zurueck nach (179, 247) (verletzt [295]); Trupp 10 (3) -> Gebaeude 84 Typ 3 bei (200,260), 12 Felder
+ 6419 |  56   0   0 |  36   8 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; Trupp 9 (3) -> Gebaeude 91 Typ 26 bei (201,281), 19 Felder; MESSUNG Trupp 10: naechster Feind Typ 24 in 17 Feldern, verletzt 1; Trupp 10 zurueck nach (195, 266) (verletzt [302])
+ 6536 |  46   0   0 |  36   7 | 100.00 | 34/34 (6) | 14 10 | MESSUNG Trupp 3: naechster Feind Typ 24 in 21 Feldern, verletzt 1; Trupp 3 zurueck nach (185, 256) (verletzt [247]); MESSUNG Trupp 7: naechster Feind Typ 24 in 21 Feldern, verletzt 1; Trupp 7 zurueck nach (186, 252) (verletzt [278]); Trupp 10 (2) -> Gebaeude 84 Typ 3 bei (200,260), 5 Felder; MESSUNG Trupp 12: naechster Feind Typ 22 in 22 Feldern, verletzt 2; Trupp 12 zurueck nach (188, 245) (verletzt [320, 313])
+ 6667 |  46   0   0 |  44   7 | 100.00 | 34/34 (6) | 14 10 | Trupp 3 (2) -> Gebaeude 19 Typ 32 bei (190,289), 15 Felder; Trupp 7 (3) -> Gebaeude 36 Typ 32 bei (187,300), 33 Felder; MESSUNG Trupp 10: naechster Feind Typ 22 in 19 Feldern, verletzt 1; Trupp 10 zurueck nach (190, 257) (verletzt [306]); Trupp 11: Gebaeude 72 (Typ 3) zerstoert; Trupp 11 (4) -> Gebaeude 84 Typ 3 bei (200,260), 13 Felder; Trupp 12 (2) -> Gebaeude 107 Typ 32 bei (180,229), 34 Felder
+ 6857 |  46   0   0 |  57   7 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel; MESSUNG Trupp 3: naechster Feind Typ 24 in 22 Feldern, verletzt 1; Trupp 3 zurueck nach (184, 265) (verletzt [243]); Trupp 10 (1) -> Gebaeude 72 Typ 3 bei (200,270), 4 Felder; MESSUNG Trupp 12: naechster Feind Typ 22 in 29 Feldern, verletzt 2; Trupp 12 zurueck nach (181, 237) (verletzt [315, 316])
+ 7025 |  57   0   0 |  51   7 | 100.00 | 34/34 (6) | 14 10 | Trupp 3 (1) -> Gebaeude 19 Typ 32 bei (190,289), 27 Felder
+ 7118 |  59   0   0 |  51   6 | 100.00 | 34/34 (5) | 14 10 | Trupp 14 (4) rueckt vor nach (206, 190) (Ziel-Gebiet (218, 202))
+ 7169 |  59   0   0 |  51   6 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,apfel; MESSUNG Trupp 4: naechster Feind Typ 24 in 60 Feldern, verletzt 1; Trupp 4 zurueck nach (153, 181) (verletzt [255])
+ 7253 |  49   0   0 |  41   6 | 100.00 | 34/34 (5) | 14 10 | Trupp 4 (1) rueckt vor nach (202, 208) (Ziel-Gebiet (212, 220))
+ 7344 |  49   0   0 |  41   6 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; Trupp 11: Gebaeude 84 (Typ 3) zerstoert; Trupp 11 (4) -> Gebaeude 35 Typ 3 bei (185,270), 13 Felder
+ 7442 |  44   0   0 |  41   6 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+ 7492 |  39   0   0 |  41   6 | 100.00 | 34/34 (6) | 14 10 | Trupp 1: Gebaeude 23 (Typ 3) zerstoert; Trupp 1 (1) -> Gebaeude 73 Typ 32 bei (172,303), 25 Felder
+ 7563 |  39   0   0 |  44   6 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+ 7605 |  34   0   0 |  47   6 | 100.00 | 34/34 (5) | 14 10 | Trupp 14 (4) -> Gebaeude 104 Typ 32 bei (218,202), 59 Felder
+ 7687 |  34   0   0 |  48   5 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+ 7764 |  29   0   0 |  52   5 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+ 7875 |  31   0   0 |  42   5 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+ 7924 |  36   0   0 |  42   5 | 100.00 | 34/34 (6) | 14 10 | Trupp 4 (1) -> Gebaeude 90 Typ 32 bei (212,220), 59 Felder
+ 7970 |  37   0   0 |  42   5 | 100.00 | 34/34 (6) | 14 10 | -
+ 7987 |  39   0   0 |  42   5 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+ 8043 |  48   0   0 |  42   5 | 100.00 | 34/34 (6) | 14 10 | MESSUNG Trupp 5: naechster Feind Typ 24 in 31 Feldern, verletzt 1; Trupp 5 zurueck nach (176, 250) (verletzt [269])
+ 8088 |  48   0   0 |  41   5 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; Trupp 5 (1) -> Gebaeude 106 Typ 3 bei (200,265), 10 Felder
+ 8193 |  80   0   0 |  41   5 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+ 8232 |  86   0   0 |  41   5 | 100.00 | 34/34 (6) | 14 10 | 60 Assassinen angeworben (Gold jetzt 100)
+ 8283 |  91   0   0 |  41   4 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+ 8360 |  86   0   0 |  41   4 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+ 8435 |  78   0   0 |  41   4 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+ 8482 |  77   0   0 |  41   4 | 100.00 | 34/34 (5) | 14 10 | Trupp 5: Gebaeude 106 (Typ 3) zerstoert; Trupp 5 (1) -> Gebaeude 23 Typ 3 bei (200,275), 11 Felder
+ 8535 |  77   0   0 |  41   4 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+ 8564 |  67   0   0 |  41   4 | 100.00 | 34/34 (6) | 14 10 | MESSUNG Trupp 1: naechster Feind Typ 24 in 23 Feldern, verletzt 1; Trupp 1 zurueck nach (184, 259) (verletzt [227]); MESSUNG Trupp 2: naechster Feind Typ 24 in 22 Feldern, verletzt 1; Trupp 2 zurueck nach (185, 255) (verletzt [231])
+ 8633 |  67   0   0 |  47   4 | 100.00 | 34/34 (6) | 14 10 | Trupp 2 (1) -> Gebaeude 84 Typ 3 bei (180,275), 22 Felder
+ 8690 |  67   0   0 |  49   4 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+ 8780 |  66   0   0 |  52   4 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+ 8857 |  83  12   0 |  59   3 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,stein,apfel; MESSUNG Trupp 5: naechster Feind Typ 24 in 33 Feldern, verletzt 1; Trupp 5 zurueck nach (174, 267) (verletzt [136])
+ 9002 |  73   7   0 |  53   3 | 100.00 | 34/34 (5) | 14 10 | MESSUNG Trupp 9: naechster Feind Typ 24 in 36 Feldern, verletzt 1; Trupp 9 zurueck nach (171, 275) (verletzt [292])
+ 9028 |  73   7   0 |  53   3 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,stein; Trupp 9 (2) -> Gebaeude 69 Typ 3 bei (180,270), 10 Felder
+ 9122 |  96   2   0 |  53   3 | 100.00 | 34/34 (5) | 14 10 | Trupp 2: Gebaeude 84 (Typ 3) zerstoert; Trupp 2 (1) -> Gebaeude 106 Typ 3 bei (180,265), 8 Felder
+ 9184 |  96   2   0 |  53   3 | 100.00 | 34/34 (4) | 14 10 | Trupp 11: Gebaeude 35 (Typ 3) zerstoert; Trupp 11 (4) -> Gebaeude 23 Typ 3 bei (200,275), 20 Felder; Trupp 15 (4) rueckt vor nach (176, 217) (Ziel-Gebiet (180, 229))
+ 9219 |  96   2   0 |  53   3 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+ 9289 |  95   2   0 |  52   3 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+ 9379 |  87   2   0 |  52   3 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+ 9462 |  77   2   0 |  52   2 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+ 9564 |  67   2   0 |  52   2 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; MESSUNG Trupp 9: naechster Feind Typ 24 in 18 Feldern, verletzt 1; Trupp 9 zurueck nach (188, 269) (verletzt [294])
+ 9616 |  57   2   0 |  56   2 | 100.00 | 34/34 (5) | 14 10 | Trupp 9 (1) -> Gebaeude 35 Typ 3 bei (200,265), 15 Felder; Trupp 11: Gebaeude 23 (Typ 3) zerstoert; Trupp 11 (4) -> Gebaeude 84 Typ 3 bei (180,260), 19 Felder
+ 9693 |  57   2   0 |  56   2 | 100.00 | 34/34 (5) | 14 10 | MESSUNG Trupp 9: naechster Feind Typ 24 in 18 Feldern, verletzt 1; Trupp 9 zurueck nach (189, 268) (verletzt [299])
+ 9735 |  57   2   0 |  61   2 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,apfel
+ 9809 |  47   2   0 |  56   2 | 100.00 | 34/34 (6) | 14 10 | -
+ 9830 |  47   2   0 |  56   2 | 100.00 | 34/34 (6) | 14 10 | MESSUNG Trupp 8: naechster Feind Typ 24 in 24 Feldern, verletzt 1; Trupp 8 zurueck nach (182, 258) (verletzt [291])
+ 9857 |  47   2   0 |  56   2 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; Trupp 8 (3) -> Gebaeude 35 Typ 3 bei (200,265), 4 Felder; Trupp 11: Gebaeude 84 (Typ 3) zerstoert; Trupp 11 (4) -> Gebaeude 69 Typ 3 bei (180,270), 12 Felder
+ 9961 |  42   2   0 |  60   2 | 100.00 | 34/34 (6) | 14 10 | Trupp 10: Gebaeude 72 (Typ 3) zerstoert; MESSUNG Trupp 10: naechster Feind Typ 24 in 30 Feldern, verletzt 1; Trupp 10 zurueck nach (177, 265) (verletzt [301])
+10009 |  42   2   0 |  60   2 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+10055 |  45   2   0 |  60   1 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+10084 |  46   2   0 |  60   1 | 100.00 | 34/34 (6) | 14 10 | Trupp 15 (4) -> Gebaeude 107 Typ 32 bei (180,229), 58 Felder
+10143 |  50   2   0 |  60   1 | 100.00 | 34/34 (6) | 14 10 | -
+10164 |  50   2   0 |  60   1 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+10257 |  40   2   0 |  60   1 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+10321 |  35   2   0 |  60   1 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+10401 |  39   2   0 |  60   1 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+10487 |  43   2   0 |  59   1 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+10559 |  38   2   0 |  59   1 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+10632 |  33   2   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+10667 |  28   2   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | -
+10703 |  28   2   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+10782 |  23   2   0 |  71   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+10842 |  18   2   0 |  65   0 | 100.00 | 34/34 (6) | 14 10 | 65 Assassinen angeworben (Gold jetzt 105); Trupp 15: Gebaeude 107 (Typ 32) zerstoert; Trupp 15 (4) -> Gebaeude 98 Typ 32 bei (195,236), 28 Felder
+10926 |  29   2   0 |  64   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+10978 |  45   2   0 |  68   0 | 100.00 | 34/34 (5) | 14 10 | -
+10996 |  48   2   0 |  69   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,apfel
+11105 |  57   2   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+11179 |  52   2   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; Trupp 15: Gebaeude 98 (Typ 32) zerstoert; Trupp 15 (4) -> Gebaeude 84 Typ 3 bei (180,255), 25 Felder
+11252 |  42   2   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+11361 |  37   2   0 |  56   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; Trupp 16 (4) rueckt vor nach (198, 157) (Ziel-Gebiet (210, 166))
+11465 |  32   2   0 |  56   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+11544 |  27   2   0 |  55   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+11583 |  22   2   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | Trupp 15: Gebaeude 84 (Typ 3) zerstoert; Trupp 15 (4) -> Gebaeude 72 Typ 3 bei (180,275), 21 Felder
+11627 |  22   2   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | Trupp 16 (4) -> Gebaeude 107 Typ 32 bei (210,166), 57 Felder
+11661 |  22   2   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+11799 |  17  14   0 |  53   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: stein
+11858 |  17   9   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | -
+11871 |  17   9   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: stein
+12077 |  17   4   0 |  69   0 | 100.00 | 34/34 (5) | 14 10 | Trupp 2: Gebaeude 106 (Typ 3) zerstoert; Trupp 2 (1) -> Gebaeude 23 Typ 3 bei (200,275), 42 Felder
+12114 |  17   4   0 |  68   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: apfel
+12254 |  22   4   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+12334 |  30   4   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+12367 |  25   4   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | -
+12406 |  25   4   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+12459 |  20   4   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+12522 |  24   4   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+12575 |  28   4   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | -
+12590 |  28   4   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+12639 |  23   4   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; MESSUNG Trupp 8: naechster Feind Typ 24 in 26 Feldern, verletzt 1; Trupp 8 zurueck nach (180, 256) (verletzt [289])
+12717 |  22   4   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | Trupp 8 (2) -> Gebaeude 35 Typ 3 bei (200,265), 7 Felder
+12779 |  44   4   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+12884 |  49   4   0 |  61   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+12918 |  44   4   0 |  61   0 | 100.00 | 34/34 (5) | 14 10 | MESSUNG Trupp 7: naechster Feind Typ 22 in 19 Feldern, verletzt 1; Trupp 7 zurueck nach (190, 253) (verletzt [283]); Trupp 8: Gebaeude 35 (Typ 3) zerstoert; Trupp 8 (2) -> Gebaeude 106 Typ 3 bei (195,250), 20 Felder
+12965 |  50   4   0 |  63   0 | 100.00 | 34/34 (5) | 14 10 | Trupp 7 (2) -> Gebaeude 84 Typ 3 bei (180,255), 23 Felder; MESSUNG Trupp 13: naechster Feind Typ 22 in 20 Feldern, verletzt 1; Trupp 13 zurueck nach (188, 254) (verletzt [323])
+13052 |  56   4   0 |  70   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,apfel; Trupp 13 (3) -> Gebaeude 71 Typ 32 bei (185,277), 15 Felder
+13169 |  56   4   0 |  64   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+13206 |  53   4   0 |  64   0 | 100.00 | 34/34 (6) | 14 10 | MESSUNG Trupp 8: naechster Feind Typ 24 in 25 Feldern, verletzt 1; Trupp 8 zurueck nach (182, 259) (verletzt [287]); MESSUNG Trupp 14: naechster Feind Typ 24 in 29 Feldern, verletzt 1; Trupp 14 zurueck nach (178, 255) (verletzt [198])
+13279 |  62   4   0 |  63   0 | 100.00 | 34/34 (6) | 14 10 | Trupp 8 (1) -> Gebaeude 106 Typ 3 bei (195,250), 21 Felder; Trupp 14 (3) -> Gebaeude 91 Typ 26 bei (201,281), 12 Felder
+13378 |  64   4   0 |  63   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+13412 |  64   4   0 |  63   0 | 100.00 | 34/34 (6) | 14 10 | -
+13468 |  84   4   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+13550 |  93   4   0 |  62   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+13606 |  84   4   0 |  61   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+13650 |  74   4   0 |  61   0 | 100.00 | 34/34 (5) | 14 10 | MESSUNG Trupp 11: naechster Feind Typ 24 in 14 Feldern, verletzt 1; Trupp 11 zurueck nach (192, 274) (verletzt [310])
+13693 |  74   4   0 |  61   0 | 100.00 | 34/34 (5) | 14 10 | Trupp 11 (3) -> Gebaeude 69 Typ 3 bei (180,270), 27 Felder; Trupp 14: Gebaeude 91 (Typ 26) zerstoert; Trupp 14 (3) -> Gebaeude 35 Typ 3 bei (200,250), 30 Felder
+13772 |  74   4   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+13794 |  64   4   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | MESSUNG Trupp 11: naechster Feind Typ 24 in 19 Feldern, verletzt 1; Trupp 11 zurueck nach (187, 271) (verletzt [309])
+13820 |  64   4   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | Trupp 11 (2) -> Gebaeude 69 Typ 3 bei (180,270), 22 Felder; MESSUNG Trupp 13: naechster Feind Typ 24 in 20 Feldern, verletzt 1; Trupp 13 zurueck nach (186, 278) (verletzt [325])
+13916 |  64   4   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; MESSUNG Trupp 2: naechster Feind Typ 24 in 19 Feldern, verletzt 1; Trupp 2 zurueck nach (188, 269) (verletzt [242]); Trupp 13 (2) -> Gebaeude 23 Typ 3 bei (200,275), 3 Felder
+14003 |  67   4   0 |  67   0 | 100.00 | 34/34 (6) | 14 10 | MESSUNG Trupp 7: naechster Feind Typ 24 in 27 Feldern, verletzt 1; Trupp 7 zurueck nach (179, 275) (verletzt [279]); Trupp 13: Gebaeude 23 (Typ 3) zerstoert; Trupp 13 (2) -> Gebaeude 84 Typ 3 bei (180,255), 23 Felder; MESSUNG Trupp 14: naechster Feind Typ 24 in 27 Feldern, verletzt 1; Trupp 14 zurueck nach (179, 265) (verletzt [257])
+14088 |  72   4   0 |  73   0 | 100.00 | 34/34 (6) | 14 10 | MESSUNG Trupp 3: naechster Feind Typ 24 in 29 Feldern, verletzt 1; Trupp 3 zurueck nach (178, 261) (verletzt [250]); Trupp 7 (1) -> Gebaeude 35 Typ 3 bei (200,250), 27 Felder; Trupp 14 (2) -> Gebaeude 71 Typ 32 bei (185,277), 5 Felder
+14206 |  72   4   0 |  72   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel; MESSUNG Trupp 14: naechster Feind Typ 24 in 39 Feldern, verletzt 1; Trupp 14 zurueck nach (168, 259) (verletzt [2])
+14280 |  62   4   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | 70 Assassinen angeworben (Gold jetzt 115); Trupp 14 (1) -> Gebaeude 71 Typ 32 bei (185,277), 9 Felder
+14363 |  63   4   0 |  61   0 | 100.00 | 34/34 (5) | 14 10 | Trupp 17 (4) rueckt vor nach (206, 190) (Ziel-Gebiet (218, 202))
+14397 |  70   4   0 |  61   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; Trupp 15: Gebaeude 72 (Typ 3) zerstoert; Trupp 15 (4) -> Gebaeude 19 Typ 32 bei (190,289), 12 Felder
+14457 |  70   4   0 |  60   0 | 100.00 | 34/34 (5) | 14 10 | MESSUNG Trupp 11: naechster Feind Typ 24 in 32 Feldern, verletzt 1; Trupp 11 zurueck nach (175, 274) (verletzt [311])
+14481 |  70   4   0 |  60   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; Trupp 11 (1) -> Gebaeude 69 Typ 3 bei (180,270), 9 Felder
+14603 |  78   4   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+14663 |  68   4   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+14697 |  58  16   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | -
+14732 |  58  16   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,stein
+14782 |  48  11   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | Trupp 11: Gebaeude 69 (Typ 3) zerstoert; Trupp 11 (1) -> Gebaeude 36 Typ 32 bei (187,300), 31 Felder
+14846 |  48  11   0 |  66   0 | 100.00 | 34/34 (5) | 14 10 | Trupp 13: Gebaeude 84 (Typ 3) zerstoert; Trupp 13 (2) -> Gebaeude 81 Typ 32 bei (162,302), 27 Felder; Trupp 17 (4) -> Gebaeude 104 Typ 32 bei (218,202), 58 Felder
+14907 |  48  11   0 |  65   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,stein,apfel
+15057 |  43   6   0 |  68   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,stein,apfel
+15177 |  46   1   0 |  58   0 | 100.00 | 34/34 (4) | 14 10 | -
+15194 |  49   1   0 |  57   0 | 100.00 | 34/34 (4) | 14 10 | verkauft: holz
+15271 |  46   1   0 |  57   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+15342 |  41   1   0 |  56   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+15420 |  36   1   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+15507 |  31   1   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+15552 |  26   1   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+15625 |  21   1   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+15653 |  16   1   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | -
+15866 |  16   1   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | -
+16012 |  23   1   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+16085 |  29   1   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+16110 |  24   1   0 |  64   0 | 100.00 | 34/34 (6) | 14 10 | Trupp 17: Gebaeude 104 (Typ 32) zerstoert; Trupp 17 (4) -> Gebaeude 105 Typ 32 bei (193,225), 24 Felder
+16170 |  24   1   0 |  67   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+16304 |  19   1   0 |  56   0 | 100.00 | 34/34 (5) | 14 10 | Trupp 18 (4) rueckt vor nach (272, 215) (Ziel-Gebiet (284, 224))
+16390 |  19   1   0 |  55   0 | 100.00 | 34/34 (5) | 14 10 | -
+16483 |  28   1   0 |  55   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+16575 |  37   1   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+16638 |  44   1   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | Trupp 17: Gebaeude 105 (Typ 32) zerstoert; Trupp 17 (4) -> Gebaeude 84 Typ 26 bei (201,281), 52 Felder
+16677 |  45   1   0 |  53   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+16757 |  40   1   0 |  53   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+16840 |  35   1   0 |  52   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+16922 |  30   1   0 |  52   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+16990 |  25   1   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+17025 |  20   1   0 |  65   0 | 100.00 | 34/34 (6) | 14 10 | MESSUNG Trupp 7: naechster Feind Typ 24 in 29 Feldern, verletzt 1; Trupp 7 zurueck nach (183, 248) (verletzt [282])
+17087 |  20   1   0 |  74   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+17109 |  17   1   0 |  64   0 | 100.00 | 34/34 (6) | 14 10 | 75 Assassinen angeworben (Gold jetzt 115)
+17158 |  27   1   0 |  63   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+17202 |  28   1   0 |  63   0 | 100.00 | 34/34 (5) | 14 10 | -
+17237 |  28   1   0 |  63   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+17289 |  23   1   0 |  62   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+17383 |  18   1   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | -
+17464 |  25   1   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+17544 |  45   1   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+17607 |  45   1   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+17643 |  53  13   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | Trupp 17: Gebaeude 84 (Typ 26) zerstoert; Trupp 17 (4) -> Gebaeude 73 Typ 32 bei (172,303), 29 Felder
+17680 |  60  13   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | MESSUNG Trupp 16: naechster Feind Typ 24 in 19 Feldern, verletzt 1; Trupp 16 zurueck nach (188, 276) (verletzt [319]); Trupp 18 (4) -> Gebaeude 107 Typ 32 bei (210,166), 14 Felder
+17724 |  65  13   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,stein; Trupp 16 (3) -> Gebaeude 35 Typ 3 bei (200,250), 28 Felder
+17815 |  63   8   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | MESSUNG Trupp 11: naechster Feind Typ 24 in 18 Feldern, verletzt 1; Trupp 11 zurueck nach (189, 267) (verletzt [307]); MESSUNG Trupp 13: naechster Feind Typ 24 in 26 Feldern, verletzt 1; Trupp 13 zurueck nach (181, 274) (verletzt [326]); MESSUNG Trupp 16: naechster Feind Typ 24 in 27 Feldern, verletzt 1; Trupp 16 zurueck nach (179, 267) (verletzt [245]); MESSUNG Trupp 17: naechster Feind Typ 24 in 23 Feldern, verletzt 1; Trupp 17 zurueck nach (183, 275) (verletzt [321])
+17944 |  65   8   0 |  58   0 | 100.00 | 34/34 (5) | 14 10 | Trupp 13 (1) -> Gebaeude 35 Typ 3 bei (200,250), 24 Felder; Trupp 16 (2) -> Gebaeude 36 Typ 32 bei (187,300), 30 Felder; Trupp 17 (3) -> Gebaeude 73 Typ 32 bei (172,303), 29 Felder
+18068 |  69   8   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,stein
+18183 |  76   3   0 |  66   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+18237 |  77   3   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | -
+18295 |  81   3   0 |  66   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,apfel
+18396 |  71   3   0 |  55   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+18475 |  70   3   0 |  54   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+18562 |  69   3   0 |  54   0 | 100.00 | 34/34 (5) | 14 10 | -
+18581 |  69   3   0 |  54   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; Trupp 19 (4) rueckt vor nach (272, 214) (Ziel-Gebiet (284, 224))
+18636 |  59   3   0 |  53   0 | 100.00 | 34/34 (5) | 14 10 | MESSUNG Trupp 18: naechster Feind Typ 24 in 36 Feldern, verletzt 0; Trupp 18 zurueck nach (211, 204) (Feind nah)
+18709 |  71   3   0 |  53   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; Trupp 17: Gebaeude 73 (Typ 32) zerstoert; Trupp 17 (3) -> Gebaeude 81 Typ 32 bei (162,302), 12 Felder; Trupp 18 (4) -> Gebaeude 107 Typ 32 bei (210,166), 51 Felder
+18802 |  77   3   0 |  52   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+18867 |  75   3   0 |  52   0 | 100.00 | 34/34 (6) | 14 10 | MESSUNG Trupp 18: naechster Feind Typ 24 in 47 Feldern, verletzt 1; Trupp 18 zurueck nach (207, 194) (verletzt [252]); Trupp 19 (4) -> Gebaeude 107 Typ 32 bei (210,166), 52 Felder
+18942 |  75   3   0 |  51   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; Trupp 18 (3) rueckt vor nach (272, 219) (Ziel-Gebiet (284, 224))
+19048 |  65   3   0 |  50   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+19108 |  55   3   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+19190 |  45   3   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+19235 |  40   3   0 |  63   0 | 100.00 | 34/34 (6) | 14 10 | -
+19300 |  40   3   0 |  65   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,apfel; Trupp 18 (3) -> Gebaeude 109 Typ 32 bei (284,224), 59 Felder
+19411 |  35   3   0 |  60   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+19495 |  30   3   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+19563 |  25   3   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | -
+19584 |  25   3   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+19653 |  30   3   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+19735 |  33   3   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+19778 |  28   3   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+19877 |  23   3   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+19900 |  18   3   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | 80 Assassinen angeworben (Gold jetzt 100)
+20047 |  18   3   0 |  56   0 | 100.00 | 34/34 (5) | 14 10 | -
+20140 |  18   3   0 |  55   0 | 100.00 | 34/34 (5) | 14 10 | MESSUNG Trupp 13: naechster Feind Typ 24 in 6 Feldern, verletzt 0; Trupp 13 zurueck nach (206, 277) (Feind nah); MESSUNG Trupp 15: naechster Feind Typ 24 in 8 Feldern, verletzt 0; Trupp 15 zurueck nach (203, 270) (Feind nah); MESSUNG Trupp 16: naechster Feind Typ 24 in 8 Feldern, verletzt 0; Trupp 16 zurueck nach (204, 273) (Feind nah)
+20213 |  18   3   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | Trupp 13 (1) -> Gebaeude 35 Typ 3 bei (200,250), 21 Felder; Trupp 15 (4) -> Gebaeude 100 Typ 7 bei (233,260), 14 Felder; Trupp 16 (2) -> Gebaeude 88 Typ 32 bei (279,271), 58 Felder
+20310 |  29   3   0 |  66   0 | 100.00 | 34/34 (6) | 14 10 | MESSUNG Trupp 13: naechster Feind Typ 22 in 22 Feldern, verletzt 1; Trupp 13 zurueck nach (214, 245) (verletzt [131]); MESSUNG Trupp 15: naechster Feind Typ 22 in 22 Feldern, verletzt 3; Trupp 15 zurueck nach (212, 244) (verletzt [185, 118, 191])
+20367 |  48   3   0 |  66   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel; Trupp 15 (1) -> Gebaeude 35 Typ 3 bei (200,250), 20 Felder; MESSUNG Trupp 16: naechster Feind Typ 22 in 21 Feldern, verletzt 1; Trupp 16 zurueck nach (214, 245) (verletzt [184])
+20479 |  44   3   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | MESSUNG Trupp 4: naechster Feind Typ 22 in 21 Feldern, verletzt 1; Trupp 4 zurueck nach (234, 246) (verletzt [208]); Trupp 16 (1) -> Gebaeude 100 Typ 7 bei (233,260), 9 Felder
+20551 |  44   6   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | MESSUNG Trupp 8: naechster Feind Typ 22 in 20 Feldern, verletzt 1; Trupp 8 zurueck nach (224, 247) (verletzt [288]); MESSUNG Trupp 14: naechster Feind Typ 22 in 22 Feldern, verletzt 1; Trupp 14 zurueck nach (227, 245) (verletzt [182])
+20607 |  44  15   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,stein
+20718 |  57  10   0 |  53   0 | 100.00 | 34/34 (5) | 14 10 | MESSUNG Trupp 17: naechster Feind Typ 22 in 23 Feldern, verletzt 1; Trupp 17 zurueck nach (238, 244) (verletzt [297])
+20741 |  57  10   0 |  53   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,stein; Trupp 17 (2) -> Gebaeude 106 Typ 3 bei (195,250), 39 Felder
+20827 |  64   5   0 |  52   0 | 100.00 | 34/34 (5) | 14 10 | MESSUNG Trupp 17: naechster Feind Typ 22 in 27 Feldern, verletzt 2; Trupp 17 zurueck nach (243, 239) (verletzt [330, 334])
+20867 |  65   5   0 |  52   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,stein
+20989 |  55   0   0 |  51   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; Trupp 20 (4) rueckt vor nach (204, 208) (Ziel-Gebiet (212, 220))
+21079 |  45   0   0 |  51   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+21166 |  40   0   0 |  57   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+21246 |  35   0   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+21287 |  30   0   0 |  67   0 | 100.00 | 34/34 (6) | 14 10 | -
+21325 |  30   0   0 |  67   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+21426 |  25   0   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+21507 |  45   0   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+21593 |  46   0   0 |  60   0 | 100.00 | 34/34 (5) | 14 10 | -
+21614 |  46   0   0 |  60   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+21682 |  42   0   0 |  60   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+21774 |  54   0   0 |  59   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; Trupp 20 (4) -> Gebaeude 90 Typ 32 bei (212,220), 59 Felder
+21882 |  44   0   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+21964 |  39   0   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+22041 |  34   0   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+22130 |  29   0   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+22162 |  24   0   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | -
+22199 |  24   0   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+22286 |  19   0   0 |  65   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: apfel
+22432 |  19   0   0 |  64   0 | 100.00 | 34/34 (5) | 14 10 | -
+22471 |  19   0   0 |  63   0 | 100.00 | 34/34 (5) | 14 10 | Trupp 20: Gebaeude 90 (Typ 32) zerstoert; Trupp 20 (4) rueckt vor nach (197, 253) (Ziel-Gebiet (195, 265))
+22538 |  23   0   0 |  63   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+22578 |  26   0   0 |  63   0 | 100.00 | 34/34 (5) | 14 10 | Trupp 20 (4) -> Gebaeude 84 Typ 3 bei (195,265), 60 Felder
+22623 |  32   0   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+22697 |  36   0   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+22757 |  40   0   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+22812 |  35   0   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+22878 |  30   0   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+22913 |  25   0   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | -
+22961 |  25   0   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23032 |  20   0   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+23132 |  15   0   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | -
+23256 |  15   0   0 |  67   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: apfel
+23299 |  15   0   0 |  57   0 | 100.00 | 34/34 (6) | 14 10 | 85 Assassinen angeworben (Gold jetzt 110)
+23359 |  15   0   0 |  57   0 | 100.00 | 34/34 (5) | 14 10 | -
+23400 |  15   0   0 |  63   0 | 100.00 | 34/34 (5) | 14 10 | Trupp 20: Gebaeude 84 (Typ 3) zerstoert; Trupp 20 (4) -> Gebaeude 71 Typ 32 bei (185,277), 22 Felder
+23433 |  22   0   0 |  65   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,apfel
+23494 |  28   0   0 |  54   0 | 100.00 | 34/34 (5) | 14 10 | MESSUNG Trupp 20: naechster Feind Typ 22 in 20 Feldern, verletzt 1; Trupp 20 zurueck nach (190, 247) (verletzt [230])
+23537 |  28  12   0 |  54   0 | 100.00 | 34/34 (5) | 14 10 | Trupp 20 (3) -> Gebaeude 71 Typ 32 bei (185,277), 15 Felder
+23600 |  28  12   0 |  58   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,stein
+23730 |  23   7   0 |  57   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,stein; Trupp 21 (4) rueckt vor nach (275, 202) (Ziel-Gebiet (287, 210))
+23813 |  18   2   0 |  56   0 | 100.00 | 34/34 (5) | 14 10 | Trupp 20: Gebaeude 71 (Typ 32) zerstoert; Trupp 20 (3) -> Gebaeude 84 Typ 3 bei (185,270), 6 Felder
+23917 |  21   2   0 |  56   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+23981 |  43   2   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; Trupp 15: Gebaeude 35 (Typ 3) zerstoert; Trupp 15 (1) -> Gebaeude 19 Typ 32 bei (190,289), 18 Felder
+24038 |  43   2   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | -
+24061 |  43   2   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+24148 |  68   2   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+24214 |  75   2   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+24294 |  86   2   0 |  53   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+24369 |  90   2   0 |  56   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+24451 |  89   2   0 |  60   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; Trupp 15: Gebaeude 19 (Typ 32) zerstoert; Trupp 15 (1) -> Gebaeude 35 Typ 3 bei (195,265), 23 Felder
+24540 |  83   2   0 |  64   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+24583 |  82   2   0 |  64   0 | 100.00 | 34/34 (6) | 14 10 | -
+24621 |  87   2   0 |  64   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+24695 |  77   2   0 |  63   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+24758 |  67   2   0 |  67   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel
+24856 |  57   2   0 |  56   0 | 100.00 | 34/34 (5) | 14 10 | -
+24877 |  57   2   0 |  56   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+24957 |  47   2   0 |  56   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; Trupp 15: Gebaeude 35 (Typ 3) zerstoert; Trupp 15 (1) -> Gebaeude 73 Typ 26 bei (201,281), 15 Felder
+25031 |  42   2   0 |  55   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz
+25105 |  37   2   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+25186 |  35   2   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+25221 |  37   2   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | Trupp 21 (4) -> Gebaeude 98 Typ 32 bei (287,210), 59 Felder
+25269 |  45   2   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | MESSUNG Trupp 19: naechster Feind Typ 24 in 19 Feldern, verletzt 0; Trupp 19 zurueck nach (187, 279) (Feind nah)
+25312 |  45   2   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; MESSUNG Trupp 18: naechster Feind Typ 24 in 12 Feldern, verletzt 0; Trupp 18 zurueck nach (194, 272) (Feind nah); MESSUNG Trupp 20: naechster Feind Typ 24 in 15 Feldern, verletzt 0; Trupp 20 zurueck nach (191, 270) (Feind nah)
+25401 |  40   2   0 |  67   0 | 100.00 | 34/34 (6) | 14 10 | Trupp 6 (4) -> Gebaeude 84 Typ 3 bei (185,270), 54 Felder; Trupp 19 (4) -> Gebaeude 19 Typ 3 bei (195,255), 24 Felder
+25458 |  40   2   0 |  66   0 | 100.00 | 34/34 (6) | 14 10 | Trupp 18 (3) -> Gebaeude 36 Typ 32 bei (187,300), 21 Felder; MESSUNG Trupp 19: naechster Feind Typ 24 in 29 Feldern, verletzt 1; Trupp 19 zurueck nach (178, 273) (verletzt [350])
+25527 |  40   2   0 |  73   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel; MESSUNG Trupp 18: naechster Feind Typ 24 in 18 Feldern, verletzt 2; Trupp 18 zurueck nach (188, 269) (verletzt [339, 341]); Trupp 19 (3) -> Gebaeude 19 Typ 3 bei (195,255), 22 Felder; Trupp 20 (3) -> Gebaeude 36 Typ 32 bei (187,300), 26 Felder
+25698 |  35   2   0 |  64   0 | 100.00 | 34/34 (6) | 14 10 | Trupp 18 (1) -> Gebaeude 83 Typ 4 bei (215,320), 45 Felder; MESSUNG Trupp 20: naechster Feind Typ 24 in 30 Feldern, verletzt 2; Trupp 20 zurueck nach (177, 261) (verletzt [300, 167])
+25793 |  35   2   0 |  63   0 | 100.00 | 34/34 (5) | 14 10 | MESSUNG Trupp 18: naechster Feind Typ 24 in 34 Feldern, verletzt 1; Trupp 18 zurueck nach (173, 263) (verletzt [338]); Trupp 20 (1) -> Gebaeude 36 Typ 32 bei (187,300), 24 Felder
+25844 |  35   2   0 |  63   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; MESSUNG Trupp 20: naechster Feind Typ 24 in 35 Feldern, verletzt 1; Trupp 20 zurueck nach (172, 270) (verletzt [239])
+25956 |  30   2   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+26038 |  25   2   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+26100 |  20   2   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | -
+26116 |  20   2   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+26306 |  15   2   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | -
+26483 |  15  14   0 |  63   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: stein
+26506 |  15   9   0 |  64   0 | 100.00 | 34/34 (6) | 14 10 | 90 Assassinen angeworben (Gold jetzt 105)
+26569 |  15   9   0 |  68   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: stein,apfel; Trupp 22 (4) rueckt vor nach (198, 157) (Ziel-Gebiet (210, 166))
+26694 |  15   4   0 |  57   0 | 100.00 | 34/34 (5) | 14 10 | MESSUNG Trupp 21: naechster Feind Typ 22 in 33 Feldern, verletzt 0; Trupp 21 zurueck nach (231, 233) (Feind nah)
+26743 |  15   4   0 |  56   0 | 100.00 | 34/34 (5) | 14 10 | Trupp 21 (4) -> Gebaeude 24 Typ 7 bei (243,272), 24 Felder
+26820 |  15   4   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | -
+26865 |  15   4   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | Trupp 22 (4) -> Gebaeude 107 Typ 32 bei (210,166), 59 Felder
+26976 |  15   4   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | MESSUNG Trupp 21: naechster Feind Typ 22 in 36 Feldern, verletzt 1; Trupp 21 zurueck nach (232, 231) (verletzt [337])
+27009 |  21   4   0 |  55   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; Trupp 21 (3) -> Gebaeude 88 Typ 32 bei (279,271), 47 Felder
+27125 |  28   4   0 |  54   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+27208 |  23   4   0 |  53   0 | 100.00 | 34/34 (5) | 14 10 | MESSUNG Trupp 19: naechster Feind Typ 24 in 15 Feldern, verletzt 0; Trupp 19 zurueck nach (191, 289) (Feind nah)
+27247 |  23   4   0 |  53   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; MESSUNG Trupp 16: naechster Feind Typ 24 in 13 Feldern, verletzt 0; Trupp 16 zurueck nach (194, 291) (Feind nah)
+27319 |  18   4   0 |  53   0 | 100.00 | 34/34 (5) | 14 10 | MESSUNG Trupp 15: naechster Feind Typ 24 in 9 Feldern, verletzt 1; Trupp 15 zurueck nach (198, 289) (verletzt [116]); Trupp 19 (3) -> Gebaeude 73 Typ 26 bei (201,281), 8 Felder
+27398 |  25   4   0 |  54   0 | 100.00 | 34/34 (5) | 14 10 | MESSUNG Trupp 6: naechster Feind Typ 24 in 13 Feldern, verletzt 0; Trupp 6 zurueck nach (194, 288) (Feind nah); Trupp 16 (1) -> Gebaeude 84 Typ 3 bei (185,270), 21 Felder; MESSUNG Trupp 19: naechster Feind Typ 24 in 25 Feldern, verletzt 2; Trupp 19 zurueck nach (182, 289) (verletzt [265, 262])
+27500 |  36   4   0 |  63   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; Trupp 6 (4) -> Gebaeude 73 Typ 26 bei (201,281), 7 Felder; Trupp 19 (1) -> Gebaeude 19 Typ 3 bei (195,255), 29 Felder
+27607 |  31   4   0 |  73   0 | 100.00 | 34/34 (6) | 14 10 | MESSUNG Trupp 6: naechster Feind Typ 24 in 23 Feldern, verletzt 2; Trupp 6 zurueck nach (183, 284) (verletzt [275, 277]); MESSUNG Trupp 16: naechster Feind Typ 24 in 22 Feldern, verletzt 1; Trupp 16 zurueck nach (185, 280) (verletzt [226])
+27676 |  31   4   0 |  72   0 | 100.00 | 34/34 (6) | 14 10 | Trupp 6 (2) -> Gebaeude 84 Typ 3 bei (185,270), 13 Felder
+27743 |  31   4   0 |  72   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel; VERLUST: Trupp 7 Mitglied 278
+27810 |  26   4   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | VERLUST: Trupp 7 Mitglied 279
+27851 |  30   4   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+27897 |  34   4   0 |  61   0 | 100.00 | 34/34 (6) | 14 10 | VERLUST: Trupp 7 Mitglied 282
+27938 |  45   4   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz; VERLUST: Trupp 7 Mitglied 283
+28028 |  56   4   0 |  60   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+28126 |  49   4   0 |  59   0 | 100.00 | 34/34 (5) | 14 10 | -
+28147 |  54   4   0 |  59   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz; Trupp 7 (1) rueckt vor nach (272, 213) (Ziel-Gebiet (284, 224))
+28261 |  45   4   0 |  67   0 | 100.00 | 34/34 (5) | 14 10 | verkauft: holz,apfel
+28384 |  40   4   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+28467 |  35   4   0 |  56   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+28542 |  34   4   0 |  59   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+28619 |  43   4   0 |  63   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+28694 |  38   4   0 |  62   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz
+Ende Phase 2 bei Tick 28742 nach 780 Runden (0.1 s je Runde); Kornspeicher 1, Holzfaeller 14, Apfelplantagen 10; Waechter: Bedrohungen 0, davon tot 0, eigene Truppen verloren 0; Angriff: zerstoert 29 Gebaeude {3: 19, 32: 8, 26: 2}, eigene Verluste 5, Trupps 23

@@ -1794,9 +1794,14 @@ local function einzelbefehl(cmd)
     end
     local TR = 0x01667F78 + 40
     local gruppe = nil
+    -- Gruppen, die in diesem Takt schon vergeben sind, reservieren (04.10.: die Gruppe entsteht erst im naechsten
+    -- Takt - zwei Angriffe in derselben Runde bekamen dieselbe Nummer, die zweite Auswahl ueberschrieb die erste,
+    -- und alle Trupps liefen auf ein Ziel)
+    if angriffReserve == nil or angriffReserve.tick ~= tick() then angriffReserve = { tick = tick(), vergeben = {} } end
     for g = 1249, 1, -1 do
-      if (core.readSmallInteger(TR + g * 0x334 + 24) or 1) == 0 then gruppe = g; break end
+      if not angriffReserve.vergeben[g] and (core.readSmallInteger(TR + g * 0x334 + 24) or 1) == 0 then gruppe = g; break end
     end
+    if gruppe then angriffReserve.vergeben[gruppe] = true end
     if n == 0 or gruppe == nil then
       log(INFO, string.format("ANGRIFF abgelehnt: %d eigene Einheiten, Gruppe %s", n, tostring(gruppe)))
       return true

@@ -22,7 +22,7 @@ TRUPPE = {22, 23, 24, 25, 26, 27, 28, 37, 55, 70, 71, 72, 73, 74, 75, 76}
 FERNKAMPF = {22, 23, 70, 72, 74, 76}
 WERT = {19: 100, 20: 60, 3: 50, 4: 40, 5: 40, 6: 30, 30: 30, 31: 30, 32: 25, 33: 25,
         17: 20, 18: 20, 34: 20, 1: 10, 7: 10, 26: 5}
-GROESSE, FERN, NAH, MAX_WEG = 6, 16, 8, 30
+GROESSE, FERN, NAH, MAX_WEG = 4, 16, 8, 30   # 4 statt 6: mehr verschiedene Ziele gleichzeitig (Daniel 23:22)
 
 def schach(a, b):
     return max(abs(a[0] - b[0]), abs(a[1] - b[1]))
@@ -47,6 +47,7 @@ class Trupp:
     def __init__(self, nr):
         self.nr, self.mitglieder, self.ziel, self.ziel_typ, self.zurueck, self.daheim = nr, set(), None, None, False, set()
         self.bereit = None     # Bereitstellungsplatz, zu dem der Trupp gerade laeuft
+        self.bereit_ziel = None  # das feindliche Gebaeude, vor dem er bereitsteht
 
 class Angriffstrupp:
     def __init__(self, sp=1, mitglieder=(), rueckzug=(125, 155)):
@@ -90,12 +91,35 @@ class Angriffstrupp:
             if not aktiv or (len(t.mitglieder) < GROESSE and t.ziel is None and t.bereit is None and not t.zurueck):
                 continue      # Trupp waechst noch - ab 6 geht er los (Daniel 23:18)
             mitte = (sum(L[n]["x"] for n in aktiv) / len(aktiv), sum(L[n]["y"] for n in aktiv) / len(aktiv))
-            verletzt = [n for n in aktiv if L[n]["leben"] < self.leben_max[n]]
+            # erst unter 60 % zurueck (Partie 6: jeder Kratzer schickte den Trupp heim, Schaden kam oft von Feinden
+            # 17-29 Felder weg - Quelle offen, vermutlich Tuerme)
+            verletzt = [n for n in aktiv if L[n]["leben"] < 0.6 * self.leben_max[n]]
             in_gefahr = any(gefaehrdet((L[n]["x"], L[n]["y"]), fe) for n in aktiv)
-            if (verletzt or in_gefahr) and not t.zurueck:
+            if verletzt and not in_gefahr and not t.zurueck:
+                # nur die Schwerverletzten heim, der Rest macht weiter
                 ort = naechster_sicherer(L, orte, mitte, fe, self.sp)
+                befehl({"halten": {"nr": verletzt, "x": ort[0], "y": ort[1]}}, 1.0, bis="HALTEN")
+                t.daheim |= set(verletzt)
+                ereignis.append("Trupp %d: %d unter 60 %% heim nach %s" % (t.nr, len(verletzt), tuple(ort)))
+                aktiv = [n for n in aktiv if n not in t.daheim]
+                if not aktiv:
+                    continue
+                verletzt = []
+            if in_gefahr and not t.zurueck:
+                # naechster Feind (Art, Abstand) - Messung der echten Reichweite (Daniel 23:22: einverstanden)
+                feind_e = [(schach(mitte, (e["x"], e["y"])), e["typ"]) for e in L.values()
+                           if e["besitzer"] not in (0, self.sp) and e["typ"] in TRUPPE]
+                nf = min(feind_e) if feind_e else (999, 0)
+                # weg vom Angreifer: 15 Felder in Gegenrichtung, wenn dort sicher - sonst naechster sicherer Ort
+                fx, fy = min(((e["x"], e["y"]) for e in L.values() if e["besitzer"] not in (0, self.sp) and e["typ"] in TRUPPE),
+                             key=lambda f: schach(mitte, f), default=(mitte[0], mitte[1]))
+                dx, dy = mitte[0] - fx, mitte[1] - fy
+                lang = max(abs(dx), abs(dy), 1)
+                weg = (int(mitte[0] + 15 * dx / lang), int(mitte[1] + 15 * dy / lang))
+                ort = weg if (0 < weg[0] < 400 and 0 < weg[1] < 400 and not gefaehrdet(weg, fe)) else naechster_sicherer(L, orte, mitte, fe, self.sp)
+                ereignis.append("MESSUNG Trupp %d: naechster Feind Typ %d in %d Feldern, verletzt %d" % (t.nr, nf[1], nf[0], len(verletzt)))
                 befehl({"halten": {"nr": list(t.mitglieder), "x": ort[0], "y": ort[1]}}, 1.0, bis="HALTEN")
-                t.daheim |= set(verletzt); t.zurueck = True
+                t.daheim |= set(verletzt); t.zurueck = True; t.bereit, t.bereit_ziel = None, None
                 belegt.discard(t.ziel); t.ziel = None
                 ereignis.append("Trupp %d zurueck nach %s (%s)" % (t.nr, tuple(ort), ("verletzt %s" % verletzt) if verletzt else "Feind nah"))
                 continue
@@ -122,32 +146,27 @@ class Angriffstrupp:
                     if kand:
                         break
                 if not kand:
-                    # nichts Freies und Sicheres: beim naechsten anderen Trupp mithelfen statt stehenzubleiben
-                    for n in belegt:
-                        if n in G:
-                            ort = (G[n]["x"], G[n]["y"]); d = schach(mitte, ort)
-                            if d <= 60 and not gefaehrdet(ort, fe, 2) and weg_sicher(mitte, ort, fe):
-                                kand.append((1.0 / (d + 1.0), n, G[n], d))
-                if not kand:
                     # Bereitstellung (Daniel 23:18: ab 6 sofort nach vorne, nicht am Soeldnerlager warten): sicher bis
                     # 12 Felder vor das naechste ungeschuetzte, erreichbare feindliche Gebaeude laufen
                     if t.bereit is not None and schach(mitte, t.bereit) > 3:
                         continue
+                    andere = [o.bereit_ziel for o in self.trupps if o is not t and o.bereit_ziel is not None]
                     ziele = sorted(((schach(mitte, (g["x"], g["y"])), (g["x"], g["y"])) for n, g in G.items()
                                     if g["besitzer"] not in (0, self.sp) and g["typ"] in WERT and g.get("erreichbar", 1)
-                                    and not gefaehrdet((g["x"], g["y"]), fe, 4)))
+                                    and n not in belegt and not gefaehrdet((g["x"], g["y"]), fe, 4)
+                                    and all(schach((g["x"], g["y"]), a) > 10 for a in andere)))
                     for d, (gx, gy) in ziele:
                         f = max(0.0, (d - 12.0) / d) if d else 0.0
                         platz = (int(mitte[0] + (gx - mitte[0]) * f), int(mitte[1] + (gy - mitte[1]) * f))
                         if weg_sicher(mitte, platz, fe) and not gefaehrdet(platz, fe, 4):
                             befehl({"halten": {"nr": aktiv, "x": platz[0], "y": platz[1]}}, 1.0, bis="HALTEN")
-                            t.bereit = platz
+                            t.bereit, t.bereit_ziel = platz, (gx, gy)
                             ereignis.append("Trupp %d (%d) rueckt vor nach %s (Ziel-Gebiet %s)" % (t.nr, len(aktiv), platz, (gx, gy)))
                             break
                     continue
                 if t.bereit is not None:
                     befehl({"halten": {"los": aktiv}}, 1.0, bis="HALTEN")
-                    t.bereit = None
+                    t.bereit, t.bereit_ziel = None, None
                 if kand:
                     w, n, g, d = max(kand)
                     befehl({"angriff": {"einheiten": aktiv, "gebaeude": n}}, 1.0, bis="ANGRIFF")
