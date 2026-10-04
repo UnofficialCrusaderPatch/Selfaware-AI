@@ -1504,6 +1504,8 @@ local function einzelbefehl(cmd)
   -- (0x01FE7B3C; 0 = geht) und ...FailReason (0x01FE7B40). Die Suche geht ringweise nach aussen
   -- und meldet die naechsten freien Stellen (Abstand = Schachbrett-Abstand zum Mittelpunkt).
   local function platzGeht(sp, mapper, groesse, x, y)
+    -- wie placeBuilding: vorher die Bau-Drehung setzen (TileMapState+0x5549B4 = Drehung/2, hier 0)
+    core.writeInteger(0x01FE7BBC, 0)
     local ok = pcall(core.exposeCode(0x005037B0, 6, 1), 0x01A93208, sp, x, y, mapper, groesse)
     return ok and (core.readInteger(0x01FE7B3C) or 1) == 0, core.readInteger(0x01FE7B3C), core.readInteger(0x01FE7B40)
   end

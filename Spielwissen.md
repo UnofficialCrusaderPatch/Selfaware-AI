@@ -29,6 +29,7 @@ bis eine Messung es bestaetigt (Marke dahinter).
 ## Bauen
 - Moeglichst nah am Vorratslager bauen. (Daniel 04.10.)
 - Ausnahmen, deren Arbeiter erst zur Produktion laufen: Holzfaeller mit dem Eingang direkt neben einem Baum (sie holen erst drei Holzscheite); Ochsenjoche direkt neben den Steinbruch (der Ochse bringt dann 12 Stein zum Lager). (Daniel 04.10.)
+- **Gebaeude lassen sich nicht drehen** (keine Ausnahme). Den Ausgang/Eingang kann man nur indirekt lenken: den ueblichen Platz zustellen oder dort bauen, wo etwas anderes ihn blockiert - z. B. beim Steinbruch, wohin der Ochse den Stein bringt; jede Produktion (Baecker usw.) laesst sich ueber Nachbargebaeude/Gelaende am Eingang beeinflussen - aber nur fein abgestimmt. (Daniel 04.10., 20:04)
 - Abreissen und naeher an Rohstoffen neu bauen (z. B. wenn das Holz in der Naehe weg ist) lohnt erst im Mittel-/Endspiel, dann aber richtig. (Daniel 04.10.)
 - Logisch noetige Gebaeude fuer Truppen kennen (Kaserne, Waffenwerkstaetten, Waffenkammer). (Daniel 04.10.)
 

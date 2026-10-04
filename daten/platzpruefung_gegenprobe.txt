@@ -1,0 +1,13 @@
+(178, 112) Pruefung geht | echt gebaut | STIMMT
+(177, 110) Pruefung nicht | echt nicht | STIMMT
+(176, 108) Pruefung geht | echt gebaut | STIMMT
+(170, 114) Pruefung geht | echt gebaut | STIMMT
+(168, 113) Pruefung nicht | echt nicht | STIMMT
+(174, 104) Pruefung geht | echt gebaut | STIMMT
+(180, 106) Pruefung geht | echt gebaut | STIMMT
+(166, 116) Pruefung nicht | echt nicht | STIMMT
+(186, 116) Pruefung geht | echt gebaut | STIMMT
+(162, 104) Pruefung nicht | echt nicht | STIMMT
+(179, 113) Pruefung nicht | echt nicht | STIMMT
+(184, 118) Pruefung nicht | echt nicht | STIMMT
+URTEIL: 12 von 12 stimmen -> Pruefung GILT
