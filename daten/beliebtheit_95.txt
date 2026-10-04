@@ -1,0 +1,10 @@
+Kornspeicher kostet {'holz': 5, 'stein': 0, 'eisen': 0, 'pech': 0, 'gold': 0} | jetzt {'Beliebt': 9325, 'Essen': -250, 'Rationen': 2}
+frei: [(169, 116), (170, 116), (169, 117), (170, 117), (171, 116)]
+Kornspeicher: (39, 169, 116)
+Aepfel 1 -> 52 | Gold 3934 -> 3535
+nach 300 Ticks: {'Beliebt': 9350, 'Essen': 0, 'Rationen': 2} Aepfel 65
+nach 600 Ticks: {'Beliebt': 9525, 'Essen': 125, 'Rationen': 2} Aepfel 65
+nach 900 Ticks: {'Beliebt': 9675, 'Essen': 125, 'Rationen': 2} Aepfel 65
+nach 1200 Ticks: {'Beliebt': 9975, 'Essen': 125, 'Rationen': 2} Aepfel 65
+nach 1500 Ticks: {'Beliebt': 10000, 'Essen': 125, 'Rationen': 2} Aepfel 64
+nach 1800 Ticks: {'Beliebt': 10000, 'Essen': 125, 'Rationen': 2} Aepfel 64

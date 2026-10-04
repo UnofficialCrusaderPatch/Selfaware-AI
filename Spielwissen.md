@@ -21,6 +21,7 @@ bis eine Messung es bestaetigt (Marke dahinter).
 ## Beliebtheit und Essen
 - **Beliebtheit ist das Wichtigste.** Unter 95 sinkt die Rate, mit der neue Bauern kommen; bei 50 kommen fast keine mehr; unter 50 gehen Leute AUS dem Dorf. (Daniel 04.10., 19:57)
 - Kornspeicher nicht vergessen. (Daniel 04.10., 19:57)
+  - Gemessen 04.10.: Ohne Kornspeicher kann man kein Essen kaufen (Kauf braucht Lagerplatz). Kornspeicher (5 Holz) + 50 Aepfel gekauft (~8 Gold je Apfel) -> Beliebtheit 93,25 -> ueber 95 nach ~600 Ticks, 100 nach ~1500 Ticks. **Essen kaufen ist der schnellste Hebel auf die Beliebtheit am Anfang.**
 - Kornspeicher haelt das Essen und ist damit sehr wichtig fuer die Beliebtheit. (Daniel 04.10.)
 - Beliebtheit vor allem ueber Bier. (Daniel 04.10.)
 - Essen anfangs ueber Aepfel. Jagd nur, wenn Wild (Rehe) da ist - erkennen, sonst kein Holz fuer eine Jaegerhuette ausgeben. Jaeger etwa einen Kathedralenabstand vom Wild. (Daniel 04.10.)
