@@ -756,3 +756,5 @@ Werkzeug `werkzeug/bauen.py` (Bausteine `baue_irgendwo`, `werbe`, `vorrat`, `kos
 - **M12 Anwerben gilt:** Soeldnerposten (120 Gold) gebaut, 1 arabischer Bogenschuetze (Typ 70) angeworben (0 -> 1). Genauer Einheitenpreis noch aus der Balance nachzulesen (Gold sank in 50 Ticks um 48, Steuern liefen mit).
 - Probe wiederholbar: `python werkzeug/bauen.py "M7-04 Mensch Grumpy T600"` - alle Urteile GILT (daten/bauen_probe.txt).
 - **Offen / naechste Schritte:** Kaserne (12 Stein) + Waffen fuer europaeische Truppen; Plaetze finden statt probieren (freie Flaeche, Baeume neben Holzfaeller, Steinbruch/Ochsen, Wild fuer Jaeger); Gold-Buch (Einnahmen/Ausgaben je Tick); Steuern/Rationen/Verkaufen steuern; dann der erste eigene Spielplan gegen das Rotkaeppchen.
+
+**Spielregeln fuer unsere KI (Daniel, 04.10.2026, 19:56):** keine kostenlosen Mauern (alles kostet wie beim Menschen); Kaufen/Verkaufen in beliebiger Menge auf einmal erlaubt (Menschen: mindestens 5). Stehen ausfuehrlich in `Spielwissen.md`.

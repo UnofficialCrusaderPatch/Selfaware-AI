@@ -7,6 +7,11 @@ bis eine Messung es bestaetigt (Marke dahinter).
 ## Ziel
 - Gegen das Rotkaeppchen gewinnen, unsere KI auf dem Menschenplatz (Daniel, 04.10.2026).
 
+## Regeln fuer unsere KI als Spieler (Daniel, 04.10.2026, 19:56)
+- Keine kostenlosen Mauern - Mauern und alle Gebaeude kosten wie beim Menschen. Gebaut wird nur ueber den Spielbefehl (mit Kostenpruefung des Spiels), nie durch direktes Schreiben von Rohstoffen oder Bauten.
+- Handel: die KI darf beliebig viel von einer Ware auf einmal kaufen oder verkaufen (Menschen nur in Schritten von mindestens 5) - zum Marktpreis, ueber den Marktplatz.
+- Keine anderen Schummeleien (Gold/Waren setzen, Leben aendern, Einheiten wandeln) im echten Spiel - diese Befehle bleiben Werkzeuge fuer Tests und Trainingslagen.
+
 ## Geld
 - Immer wissen: wie viel Gold da ist, was hereinkommt, was jede Sache kostet. Passend sparen, genau ausgeben. (Daniel 04.10.)
 - Moeglichst viel Geld in Wirtschaft stecken - sie hat den hoechsten Hebel auf Geld und damit Waffen und Truppen. (Daniel 04.10.)
