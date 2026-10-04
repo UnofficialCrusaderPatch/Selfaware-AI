@@ -1,0 +1,23 @@
+Eintrag 3 'Walltest 4' -> Scrollstand 0, Zeile 3; Spielzeit vorher 18988
+['[villagestudio]: LADEPAUSE: scharf (jetzt Tick 18988, pausiert).']
+['[villagestudio]: POKE 0x01126628: 0 -> 0', '[villagestudio]: POKE 0x01126624: 0 -> 3', '[villagestudio]: LADEN: Knopf 2 gedrueckt, ok=true', '[villagestudio]: logik: 3 von 3 Befehlen ausgefuehrt, 0 schon erledigt.', '[villagestudio]: LADEPAUSE: Laden erkannt (Pause aufgehoben) bei Tick 18988 - angehalten.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 18988.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 18988.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 18988.']
+Spielzeit nachher 18988 / 18988, Pause 1
+kein Typ 57 bei Spieler 1
+kein Typ 3 bei Spieler 1
+kein Typ 7 bei Spieler 1
+Eintrag 3 'Walltest 4' -> Scrollstand 0, Zeile 3; Spielzeit vorher 19288
+['[villagestudio]: LADEPAUSE: scharf (jetzt Tick 19288, pausiert).']
+['[villagestudio]: POKE 0x01126628: 0 -> 0', '[villagestudio]: POKE 0x01126624: 0 -> 3', '[villagestudio]: LADEN: Knopf 2 gedrueckt, ok=true', '[villagestudio]: logik: 3 von 3 Befehlen ausgefuehrt, 0 schon erledigt.', '[villagestudio]: LADEPAUSE: Laden erkannt (Spielzeit sprang um -300) bei Tick 18988 - angehalten.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 18988.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 18988.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 18988.']
+Spielzeit nachher 18988 / 18988, Pause 1
+Spieler Typ   Nr    Start       Ziel        ohne Bef.   mit Bef.    Urteil
+1      55    3     (227, 284)  (236, 281)  (227, 284)  (229, 286)  NICHT
+1      14    1     (192, 292)  (204, 292)  (192, 292)  (204, 292)  GEHORCHT
+1      72    145   (231, 290)  None        (231, 290)  (231, 290)  keine Aussage (Ziel/Ort fehlt)
+2      55    137   (172, 113)  (183, 112)  (172, 113)  (174, 115)  NICHT
+2      57    138   (174, 103)  (186, 103)  (171, 103)  (174, 97)   NICHT
+2      3     144   (153, 110)  (166, 111)  (165, 113)  (164, 113)  GEHORCHT
+2      4     86    (163, 113)  (175, 113)  (162, 103)  (167, 96)   NICHT
+2      6     142   (153, 130)  (165, 130)  (149, 135)  (152, 134)  NICHT
+2      13    2     (201, 110)  (213, 110)  (182, 101)  (207, 105)  GEHORCHT
+2      22    154   (168, 125)  (179, 124)  (168, 125)  (171, 125)  NICHT
+0      44    5     (90, 287)   (102, 287)  (90, 287)   (102, 287)  GEHORCHT

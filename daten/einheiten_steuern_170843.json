@@ -1,0 +1,257 @@
+{
+ "stand": "Walltest 4",
+ "lauf": 300,
+ "proben": [
+  {
+   "spieler": 1,
+   "typ": 55,
+   "nr": 3,
+   "start": [
+    227,
+    284
+   ],
+   "ziel": [
+    236,
+    281
+   ],
+   "ohne": [
+    227,
+    284
+   ],
+   "mit": [
+    229,
+    286
+   ],
+   "abstand_ohne": 9,
+   "abstand_mit": 7,
+   "urteil": "NICHT"
+  },
+  {
+   "spieler": 1,
+   "typ": 14,
+   "nr": 1,
+   "start": [
+    192,
+    292
+   ],
+   "ziel": [
+    204,
+    292
+   ],
+   "ohne": [
+    192,
+    292
+   ],
+   "mit": [
+    204,
+    292
+   ],
+   "abstand_ohne": 12,
+   "abstand_mit": 0,
+   "urteil": "GEHORCHT"
+  },
+  {
+   "spieler": 1,
+   "typ": 72,
+   "nr": 145,
+   "start": [
+    231,
+    290
+   ],
+   "ziel": null,
+   "urteil": "keine Aussage (Ziel/Ort fehlt)"
+  },
+  {
+   "spieler": 2,
+   "typ": 55,
+   "nr": 137,
+   "start": [
+    172,
+    113
+   ],
+   "ziel": [
+    183,
+    112
+   ],
+   "ohne": [
+    172,
+    113
+   ],
+   "mit": [
+    174,
+    115
+   ],
+   "abstand_ohne": 11,
+   "abstand_mit": 9,
+   "urteil": "NICHT"
+  },
+  {
+   "spieler": 2,
+   "typ": 57,
+   "nr": 138,
+   "start": [
+    174,
+    103
+   ],
+   "ziel": [
+    186,
+    103
+   ],
+   "ohne": [
+    171,
+    103
+   ],
+   "mit": [
+    174,
+    97
+   ],
+   "abstand_ohne": 15,
+   "abstand_mit": 12,
+   "urteil": "NICHT"
+  },
+  {
+   "spieler": 2,
+   "typ": 3,
+   "nr": 144,
+   "start": [
+    153,
+    110
+   ],
+   "ziel": [
+    166,
+    111
+   ],
+   "ohne": [
+    165,
+    113
+   ],
+   "mit": [
+    164,
+    113
+   ],
+   "abstand_ohne": 2,
+   "abstand_mit": 2,
+   "urteil": "GEHORCHT"
+  },
+  {
+   "spieler": 2,
+   "typ": 4,
+   "nr": 86,
+   "start": [
+    163,
+    113
+   ],
+   "ziel": [
+    175,
+    113
+   ],
+   "ohne": [
+    162,
+    103
+   ],
+   "mit": [
+    167,
+    96
+   ],
+   "abstand_ohne": 13,
+   "abstand_mit": 17,
+   "urteil": "NICHT"
+  },
+  {
+   "spieler": 2,
+   "typ": 6,
+   "nr": 142,
+   "start": [
+    153,
+    130
+   ],
+   "ziel": [
+    165,
+    130
+   ],
+   "ohne": [
+    149,
+    135
+   ],
+   "mit": [
+    152,
+    134
+   ],
+   "abstand_ohne": 16,
+   "abstand_mit": 13,
+   "urteil": "NICHT"
+  },
+  {
+   "spieler": 2,
+   "typ": 13,
+   "nr": 2,
+   "start": [
+    201,
+    110
+   ],
+   "ziel": [
+    213,
+    110
+   ],
+   "ohne": [
+    182,
+    101
+   ],
+   "mit": [
+    207,
+    105
+   ],
+   "abstand_ohne": 31,
+   "abstand_mit": 6,
+   "urteil": "GEHORCHT"
+  },
+  {
+   "spieler": 2,
+   "typ": 22,
+   "nr": 154,
+   "start": [
+    168,
+    125
+   ],
+   "ziel": [
+    179,
+    124
+   ],
+   "ohne": [
+    168,
+    125
+   ],
+   "mit": [
+    171,
+    125
+   ],
+   "abstand_ohne": 11,
+   "abstand_mit": 8,
+   "urteil": "NICHT"
+  },
+  {
+   "spieler": 0,
+   "typ": 44,
+   "nr": 5,
+   "start": [
+    90,
+    287
+   ],
+   "ziel": [
+    102,
+    287
+   ],
+   "ohne": [
+    90,
+    287
+   ],
+   "mit": [
+    102,
+    287
+   ],
+   "abstand_ohne": 12,
+   "abstand_mit": 0,
+   "urteil": "GEHORCHT"
+  }
+ ]
+}
