@@ -193,3 +193,56 @@ class Angriffstrupp:
         b = self.bilanz
         return "zerstoert %d Gebaeude %s, eigene Verluste %d, Trupps %d" % (
             sum(b["gebaeude"].values()), b["gebaeude"], len(b["verluste"]), len(self.trupps))
+
+
+class Einzeln:
+    """Jeder Assassine einzeln (Daniel 23:35): Befehl auf das NAECHSTE erreichbare feindliche Wirtschaftsgebaeude;
+    ist es schon von JE_GEBAEUDE anderen belegt, sofort das naechste. Kein Sammelpunkt, keine Bereitstellung.
+    schritt() gibt (ereignisse, befehle) - die Befehle einer Runde gehen gesammelt in EINEM Aufruf ans Spiel
+    (Partie 8: einzeln geschickt kostete eine Runde 0,7 s)."""
+    JE_GEBAEUDE = 3
+
+    def __init__(self, sp=1):
+        self.sp, self.ziel, self.bilanz = sp, {}, {"gebaeude": {}, "verluste": set()}
+        self.mitglieder, self.ziel_typ = set(), {}
+
+    def aufnehmen(self, nummern):
+        self.mitglieder |= set(n for n in nummern if n not in self.bilanz["verluste"])
+
+    def schritt(self, L, G, sichere_orte=None):
+        ereignis, neu = [], {}
+        for n in list(self.mitglieder):
+            if n not in L or L[n]["besitzer"] != self.sp:
+                self.bilanz["verluste"].add(n); self.mitglieder.discard(n); self.ziel.pop(n, None)
+        for n, z in list(self.ziel.items()):
+            if z not in G:
+                typ = self.ziel_typ.pop(z, None)
+                if typ is not None:
+                    self.bilanz["gebaeude"][typ] = self.bilanz["gebaeude"].get(typ, 0) + 1
+                    ereignis.append("Gebaeude %d (Typ %d) zerstoert" % (z, typ))
+                del self.ziel[n]
+        zahl = {}
+        for z in self.ziel.values():
+            zahl[z] = zahl.get(z, 0) + 1
+        gebs = [(n, (g["x"], g["y"]), g["typ"]) for n, g in G.items()
+                if g["besitzer"] not in (0, self.sp) and g["typ"] in WERT and g.get("erreichbar", 1)]
+        for n in self.mitglieder:
+            if n in self.ziel or not gebs:
+                continue
+            ort = (L[n]["x"], L[n]["y"])
+            frei = [(schach(ort, p), gn, typ) for gn, p, typ in gebs if zahl.get(gn, 0) < self.JE_GEBAEUDE]
+            if not frei:
+                continue
+            d, gn, typ = min(frei)
+            self.ziel[n] = gn; self.ziel_typ[gn] = typ; zahl[gn] = zahl.get(gn, 0) + 1
+            neu.setdefault(gn, []).append(n)
+        befehle = [{"angriff": {"einheiten": ns, "gebaeude": gn}} for gn, ns in neu.items()]
+        if befehle:
+            ereignis.append("%d Assassinen auf %d Gebaeude verteilt (gleichzeitig angegriffen: %d)" % (
+                sum(len(v) for v in neu.values()), len(neu), len(set(self.ziel.values()))))
+        return ereignis, befehle
+
+    def bericht(self):
+        b = self.bilanz
+        return "zerstoert %d Gebaeude %s, eigene Verluste %d, gleichzeitige Ziele zuletzt %d" % (
+            sum(b["gebaeude"].values()), b["gebaeude"], len(b["verluste"]), len(set(self.ziel.values())))

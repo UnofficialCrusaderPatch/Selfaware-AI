@@ -1,0 +1,62 @@
+== Phase 1: Eroeffnung nach Plan (eroeffnung_plan.json)
+Eintrag 7 'M7-04 Mensch Grumpy T600' -> Scrollstand 0, Zeile 7; Spielzeit vorher 29218
+['[villagestudio]: LADEPAUSE: scharf (jetzt Tick 29218, pausiert).']
+['[villagestudio]: POKE 0x01126628: 0 -> 0', '[villagestudio]: POKE 0x01126624: 0 -> 7', '[villagestudio]: LADEN: Knopf 2 gedrueckt, ok=true', '[villagestudio]: logik: 3 von 3 Befehlen ausgefuehrt, 0 schon erledigt.', '[villagestudio]: LADEPAUSE: Laden erkannt (Spielzeit sprang um -28618) bei Tick 600 - angehalten.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.']
+Spielzeit nachher 600 / 600, Pause 1
+Tick 600
+Vorab-Kontrolle gut: {'Ansicht': 14, 'gameOver': 0, 'Mensch': 1, 'Platz': 1}
+in einem Aufruf gebaut: 30 von 30, einzeln nachgeholt: 0
+GEBAUT 30 von 30; Fehlschlaege: keine; Holz 150 -> 0, Gold 3930 -> 3780
+Lager: alt 4 Teile abgerissen (Inhalt: {}), neu bei [118, 120] -> (6, 118, 120); jetzt 4 Teile
+['[villagestudio]: OPTIONEN: Knopf 3 gedrueckt, ok=true']
+aktives Textfeld: 2
+Laenge im Feld jetzt: 26
+['[villagestudio]: LADEN: Knopf 3 gedrueckt, ok=true']
+['[villagestudio]: DIALOG: Knopf 22 (Ja), hinterlegter Zweck 0', '[villagestudio]: DIALOG: zurueck, ok=true']
+GESCHAFFT: M14 Eroeffnung Grumpy T608.sav (1044425 Byte), Kopie daten/spielstaende/M14 Eroeffnung Grumpy T608_20261004-234017.sav
+== Phase 2: Echtzeit, Tempo 1000, 9 Minuten, Waechter an
+Vorab-Kontrolle gut: {'Ansicht': 14, 'gameOver': 0, 'Mensch': 1, 'Platz': 1}
+Tick | Holz Stein Eisen | Aepfel Brot | Beliebt | Leute/Platz (Feuer) | Holzf. Apfelb. | Ereignis
+ 1034 |   0   0   0 |  15  15 |  95.00 | 18/34 (2) | 2 10 | Stellung: 14 Truppen zum Posten (121, 123); Soeldnerlager gesetzt (125, 119) (Gold 3850)
+ 1118 |   0   0   0 |  15  15 |  95.00 | 20/34 (0) | 2 10 | Markt gesetzt (125, 129)
+ 1288 |   0   0   0 |  15  15 |  96.50 | 22/34 (1) | 6 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 1)
+WARNUNG: Runde dauerte 890 Ticks (1288 -> 2178) - Waechter war so lange blind
+ 2178 |   0   0   0 |  13  14 | 100.00 | 34/34 (6) | 14 10 | 2 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 2)
+WARNUNG: Runde dauerte 862 Ticks (2178 -> 3040) - Waechter war so lange blind
+ 3040 |   0   0   0 |  42  12 | 100.00 | 34/34 (6) | 14 10 | 5 Assassinen angeworben (Gold jetzt 3450); 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 2)
+WARNUNG: Runde dauerte 879 Ticks (3040 -> 3919) - Waechter war so lange blind
+ 3919 |   0   0   0 |  56  11 | 100.00 | 34/34 (6) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 3)
+WARNUNG: Runde dauerte 886 Ticks (3919 -> 4805) - Waechter war so lange blind
+ 4805 |   0   0   0 |  78   9 | 100.00 | 34/34 (6) | 14 10 | verkauft: apfel; 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 4)
+WARNUNG: Runde dauerte 913 Ticks (4805 -> 5718) - Waechter war so lange blind
+ 5718 |  84   0   0 |  86   8 | 100.00 | 34/34 (6) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 4)
+WARNUNG: Runde dauerte 882 Ticks (5718 -> 6600) - Waechter war so lange blind
+ 6600 | 144  12   0 |  98   6 | 100.00 | 34/34 (6) | 14 10 | Abfangen: 16 Verteidiger zum Laufziel (113,112) von Feind 236 (noch 100 Felder von uns); 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 4); Lager angebaut None (4 Teile)
+WARNUNG: Runde dauerte 914 Ticks (6600 -> 7514) - Waechter war so lange blind
+ 7514 | 144  12   0 | 114   5 | 100.00 | 34/34 (6) | 14 10 | 10 Assassinen angeworben (Gold jetzt 3130); verkauft: holz,stein,apfel; 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 5); Lager angebaut None (4 Teile)
+WARNUNG: Runde dauerte 933 Ticks (7514 -> 8447) - Waechter war so lange blind
+ 8447 | 144   7   0 | 105   3 | 100.00 | 34/34 (6) | 14 10 | Abwehr gebuendelt: alle 16 (22,24,55,73) gegen Feind 236 Typ 24 bei (147,156); 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 5); Lager angebaut None (4 Teile)
+WARNUNG: Runde dauerte 1759 Ticks (8447 -> 10206) - Waechter war so lange blind
+10206 | 144  19   0 | 143   0 | 100.00 | 34/34 (6) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 5); Lager angebaut None (4 Teile)
+WARNUNG: Runde dauerte 880 Ticks (10206 -> 11086) - Waechter war so lange blind
+11086 | 144  19   0 | 158   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,stein,apfel; 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 6); Lager angebaut None (4 Teile)
+WARNUNG: Runde dauerte 944 Ticks (11086 -> 12030) - Waechter war so lange blind
+12030 | 144  14   0 | 144   0 | 100.00 | 34/34 (6) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 6); Lager angebaut None (4 Teile)
+WARNUNG: Runde dauerte 892 Ticks (12030 -> 12922) - Waechter war so lange blind
+12922 | 144  26   0 | 147   0 | 100.00 | 34/34 (6) | 14 10 | 15 Assassinen angeworben (Gold jetzt 2990); 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 6); Lager angebaut None (4 Teile)
+WARNUNG: Runde dauerte 898 Ticks (12922 -> 13820) - Waechter war so lange blind
+13820 | 144  26   0 | 160   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,stein,apfel; 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 7); Lager angebaut None (4 Teile)
+WARNUNG: Runde dauerte 962 Ticks (13820 -> 14782) - Waechter war so lange blind
+14782 | 128  21   0 | 149   0 | 100.00 | 34/34 (6) | 14 10 | 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 7); Lager angebaut None (4 Teile)
+WARNUNG: Runde dauerte 887 Ticks (14782 -> 15669) - Waechter war so lange blind
+15669 | 144  33   0 | 164   0 | 100.00 | 34/34 (6) | 14 10 | Abfangen: 16 Verteidiger zum Laufziel (113,112) von Feind 421 (noch 116 Felder von uns); 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 7); Lager angebaut None (4 Teile)
+WARNUNG: Runde dauerte 877 Ticks (15669 -> 16546) - Waechter war so lange blind
+16546 | 144  33   0 | 174   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,stein,apfel; 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 8); Lager angebaut None (4 Teile)
+WARNUNG: Runde dauerte 975 Ticks (16546 -> 17521) - Waechter war so lange blind
+17521 | 144  28   0 | 171   0 | 100.00 | 34/34 (6) | 14 10 | 20 Assassinen angeworben (Gold jetzt 2850); 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 8); Lager angebaut None (4 Teile)
+WARNUNG: Runde dauerte 866 Ticks (17521 -> 18387) - Waechter war so lange blind
+18387 | 144  28   0 | 186   0 | 100.00 | 34/34 (6) | 14 10 | Abwehr gebuendelt: alle 16 (22,24,55,73) gegen Feind 421 Typ 24 bei (125,134); 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 8); Lager angebaut None (4 Teile)
+WARNUNG: Runde dauerte 1690 Ticks (18387 -> 20077) - Waechter war so lange blind
+20077 | 144  40   0 | 195   0 | 100.00 | 34/34 (6) | 14 10 | Lord in Sicherheit nach (140, 67) (Leben 100 %, Feinde nahe 33); Abwehr gebuendelt: alle 15 (22,24,73) gegen Feind 380 Typ 24 bei (161,118); verkauft: holz,stein,apfel; 1 Assassinen auf 1 Gebaeude verteilt (gleichzeitig angegriffen: 9); Lager angebaut (121, 123) (4 Teile)
+ABBRUCH - Testbedingung weg: {'ansicht': 14, 'over': 1, 'pause': 0, 't': 21861}
+Ende Phase 2 bei Tick 21883 nach 25 Runden (1.1 s je Runde); Kornspeicher 0, Holzfaeller 0, Apfelplantagen 0; Waechter: Bedrohungen 17, davon tot 4, eigene Truppen verloren 0; Angriff: zerstoert 0 Gebaeude {}, eigene Verluste 0, gleichzeitige Ziele zuletzt 9

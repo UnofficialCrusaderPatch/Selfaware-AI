@@ -24,7 +24,7 @@ from bauen import NACH_TYP, gebaeude_von, vorrat, baue_irgendwo
 from plantagen_lauf import baue_alle, vorab
 from speichern import speichere
 from waechter import Waechter, lies_lagebild, lies_gebaeude
-from assassinen import Angriffstrupp
+from assassinen import Angriffstrupp, Einzeln
 from befehl import sende, neue_id
 
 HIER = os.path.dirname(os.path.abspath(__file__))
@@ -149,8 +149,11 @@ def verkaufen(st):
 def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0):
     schreib("== Phase 2: Echtzeit, Tempo %d, %d Minuten, Waechter %s" % (tempo, minuten, "an" if mit_waechter else "aus"))
     vorab()
+    # Halte-Liste des Moduls ueberlebt das Laden einer Partie (04.10.: alte Eintraege zogen neue Assassinen mit
+    # gleicher Nummer an fremde Plaetze zurueck - "sie sammeln sich nur und machen nichts")
+    befehl({"halten": False}, 1.0, bis="HALTEN")
     w = Waechter(SP, posten=plan["lager_mitte"]) if mit_waechter else None
-    trupp = Angriffstrupp(SP, rueckzug=plan["lager_mitte"]) if assassinen else None
+    trupp = Einzeln(SP) if assassinen else None
     soeldner, geworben = None, 0
     befehl({"kamera": list(plan["lager_mitte"])}, 0.8)
     befehl({"tempo": tempo}, 0.5)
@@ -194,7 +197,12 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                 if v:
                     ereignis.append(v)
             trupp.aufnehmen([n for n, e in L.items() if e["besitzer"] == SP and e["typ"] == 73])
-            ereignis += trupp.schritt(L, G, sichere_orte=gebs + [(165, 111)])
+            erg = trupp.schritt(L, G, sichere_orte=gebs + [(165, 111)])
+            if isinstance(erg, tuple):          # Einzeln: Befehle der Runde gesammelt in EINEM Aufruf
+                erg, liste = erg
+                if liste:
+                    sende({"befehle": [dict(b, player=1, id=neue_id()) for b in liste]}, 1.0, bis="ANGRIFF")
+            ereignis += erg
         bedarf = sum(ARBEITER_JE[t] * st.get("G%d" % t, 0) for t in ARBEITER_JE)
         if st["holz"] >= 5 and (bedarf > st["platz"] or (trupp is not None and st["feuer"] == 0 and st["platz"] - st["leute"] <= 2)):
             ereignis.append("Huette %s (Bedarf %d, Platz %d, Leute %d, Feuer %d)" % (baue_haus(), bedarf, st["platz"], st["leute"], st["feuer"]))
