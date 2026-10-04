@@ -22,7 +22,7 @@ TRUPPE = {22, 23, 24, 25, 26, 27, 28, 37, 55, 70, 71, 72, 73, 74, 75, 76}
 FERNKAMPF = {22, 23, 70, 72, 74, 76}
 WERT = {19: 100, 20: 60, 3: 50, 4: 40, 5: 40, 6: 30, 30: 30, 31: 30, 32: 25, 33: 25,
         17: 20, 18: 20, 34: 20, 1: 10, 7: 10, 26: 5}
-GROESSE, FERN, NAH, MAX_WEG = 4, 16, 8, 30   # 4 statt 6: mehr verschiedene Ziele gleichzeitig (Daniel 23:22)
+GROESSE, FERN, NAH, MAX_WEG = 1, 16, 8, 30   # 1: jeder Assassine einzeln, eigene Gruppe (Daniel 23:32; Modul reserviert Gruppen je Takt)
 
 def schach(a, b):
     return max(abs(a[0] - b[0]), abs(a[1] - b[1]))
@@ -106,6 +106,21 @@ class Angriffstrupp:
                     continue
                 verletzt = []
             if in_gefahr and not t.zurueck:
+                # Kaempfen statt fliehen (Daniel 23:32): Fernkaempfer direkt daneben erledigen; gegen Nahkaempfer nur in
+                # Ueberzahl (eigene Assassinen im Umkreis 6 mindestens doppelt so viele wie feindliche Nahkaempfer im Umkreis 8)
+                fern_nah = sorted((schach(mitte, (e["x"], e["y"])), m) for m, e in L.items()
+                                  if e["besitzer"] not in (0, self.sp) and e["typ"] in FERNKAMPF and schach(mitte, (e["x"], e["y"])) <= 6)
+                nah_feinde = [m for m, e in L.items() if e["besitzer"] not in (0, self.sp) and e["typ"] in TRUPPE
+                              and e["typ"] not in FERNKAMPF and schach(mitte, (e["x"], e["y"])) <= 8]
+                freunde = sum(1 for e in L.values() if e["besitzer"] == self.sp and e["typ"] == ASSASSINE and schach(mitte, (e["x"], e["y"])) <= 6)
+                ziel_einheit = fern_nah[0][1] if fern_nah else (min(nah_feinde, key=lambda m: schach(mitte, (L[m]["x"], L[m]["y"])))
+                                                                 if nah_feinde and freunde >= 2 * len(nah_feinde) else None)
+                if ziel_einheit is not None:
+                    befehl({"angriff": {"einheiten": aktiv, "ziel": ziel_einheit}}, 1.0, bis="ANGRIFF")
+                    belegt.discard(t.ziel); t.ziel = None
+                    ereignis.append("Trupp %d kaempft gegen Einheit %d Typ %d (Freunde %d, Nahkaempfer %d)" % (
+                        t.nr, ziel_einheit, L[ziel_einheit]["typ"], freunde, len(nah_feinde)))
+                    continue
                 # naechster Feind (Art, Abstand) - Messung der echten Reichweite (Daniel 23:22: einverstanden)
                 feind_e = [(schach(mitte, (e["x"], e["y"])), e["typ"]) for e in L.values()
                            if e["besitzer"] not in (0, self.sp) and e["typ"] in TRUPPE]

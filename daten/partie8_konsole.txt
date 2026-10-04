@@ -1,0 +1,75 @@
+== Phase 1: Eroeffnung nach Plan (eroeffnung_plan.json)
+Eintrag 7 'M7-04 Mensch Grumpy T600' -> Scrollstand 0, Zeile 7; Spielzeit vorher 29558
+['[villagestudio]: LADEPAUSE: scharf (jetzt Tick 29558, pausiert).']
+['[villagestudio]: POKE 0x01126628: 0 -> 0', '[villagestudio]: POKE 0x01126624: 0 -> 7', '[villagestudio]: LADEN: Knopf 2 gedrueckt, ok=true', '[villagestudio]: logik: 3 von 3 Befehlen ausgefuehrt, 0 schon erledigt.', '[villagestudio]: LADEPAUSE: Laden erkannt (Spielzeit sprang um -28958) bei Tick 600 - angehalten.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.']
+Spielzeit nachher 600 / 600, Pause 1
+Tick 600
+Vorab-Kontrolle gut: {'Ansicht': 14, 'gameOver': 0, 'Mensch': 1, 'Platz': 1}
+in einem Aufruf gebaut: 30 von 30, einzeln nachgeholt: 0
+GEBAUT 30 von 30; Fehlschlaege: keine; Holz 150 -> 0, Gold 3930 -> 3780
+Lager: alt 4 Teile abgerissen (Inhalt: {}), neu bei [118, 120] -> (6, 118, 120); jetzt 4 Teile
+['[villagestudio]: OPTIONEN: Knopf 3 gedrueckt, ok=true']
+aktives Textfeld: 2
+Laenge im Feld jetzt: 26
+['[villagestudio]: LADEN: Knopf 3 gedrueckt, ok=true']
+['[villagestudio]: DIALOG: Knopf 22 (Ja), hinterlegter Zweck 0', '[villagestudio]: DIALOG: zurueck, ok=true']
+GESCHAFFT: M14 Eroeffnung Grumpy T608.sav (1044475 Byte), Kopie daten/spielstaende/M14 Eroeffnung Grumpy T608_20261004-233429.sav
+== Phase 2: Echtzeit, Tempo 1000, 9 Minuten, Waechter an
+Vorab-Kontrolle gut: {'Ansicht': 14, 'gameOver': 0, 'Mensch': 1, 'Platz': 1}
+Tick | Holz Stein Eisen | Aepfel Brot | Beliebt | Leute/Platz (Feuer) | Holzf. Apfelb. | Ereignis
+ 1022 |   0   0   0 |  15  15 |  95.00 | 18/34 (2) | 2 10 | Stellung: 14 Truppen zum Posten (121, 123); Soeldnerlager gesetzt (125, 119) (Gold 3850)
+ 1108 |   0   0   0 |  15  15 |  95.00 | 20/34 (0) | 2 10 | Markt gesetzt (125, 129)
+ 1270 |   0   0   0 |  15  15 |  96.50 | 22/34 (1) | 6 10 | Trupp 1 (1) rueckt vor nach (192, 243) (Ziel-Gebiet (195, 255))
+ 1341 |   0   0   0 |  15  15 |  96.50 | 21/34 (1) | 6 10 | Trupp 2 (1) rueckt vor nach (183, 258) (Ziel-Gebiet (185, 270)); Trupp 3 (1) rueckt vor nach (275, 273) (Ziel-Gebiet (284, 285))
+ 1425 |   0   0   0 |  15  15 |  98.00 | 22/34 (2) | 6 10 | 5 Assassinen angeworben (Gold jetzt 3450); Trupp 4 (1) rueckt vor nach (188, 277) (Ziel-Gebiet (190, 289))
+ 1495 |   0   0   0 |  14  15 |  98.00 | 22/34 (2) | 6 10 | Trupp 5 (1) rueckt vor nach (185, 288) (Ziel-Gebiet (187, 300))
+ 1561 |   0   0   0 |  14  15 |  98.00 | 23/34 (1) | 8 10 | Trupp 6 (1) rueckt vor nach (171, 291) (Ziel-Gebiet (172, 303))
+ 1687 |   0   0   0 |  14  14 |  99.50 | 24/34 (1) | 8 10 | -
+ 1710 |   0   0   0 |  14  14 |  99.50 | 24/34 (1) | 8 10 | 10 Assassinen angeworben (Gold jetzt 3170)
+ 1803 |   0   0   0 |  14  14 | 100.00 | 25/34 (1) | 9 10 | Trupp 7 (1) rueckt vor nach (269, 259) (Ziel-Gebiet (279, 271))
+ 1968 |   0   0   0 |  14  14 | 100.00 | 25/34 (1) | 9 10 | 15 Assassinen angeworben (Gold jetzt 2820)
+ 2068 |   0   0   0 |  14  14 | 100.00 | 25/34 (1) | 9 10 | Trupp 8 (1) rueckt vor nach (204, 208) (Ziel-Gebiet (212, 220))
+ 2144 |   0   0   0 |  14  14 | 100.00 | 24/34 (1) | 9 10 | Trupp 1 (1) -> Gebaeude 90 Typ 32 bei (212,220), 57 Felder; Trupp 9 (1) rueckt vor nach (190, 243) (Ziel-Gebiet (195, 255))
+WARNUNG: Runde dauerte 940 Ticks (2144 -> 3084) - Waechter war so lange blind
+ 3084 |   0   0   0 |  42  12 | 100.00 | 34/34 (6) | 14 10 | verkauft: apfel; Trupp 2 (1) -> Gebaeude 81 Typ 3 bei (200,255), 35 Felder; Trupp 3 (1) -> Gebaeude 72 Typ 3 bei (195,255), 39 Felder; Trupp 4 (1) -> Gebaeude 84 Typ 3 bei (200,260), 48 Felder; Trupp 5 (1) -> Gebaeude 23 Typ 3 bei (195,265), 56 Felder; Trupp 10 (1) rueckt vor nach (180, 258) (Ziel-Gebiet (185, 270)); Trupp 11 (1) rueckt vor nach (272, 273) (Ziel-Gebiet (284, 285)); Trupp 12 (1) rueckt vor nach (185, 277) (Ziel-Gebiet (190, 289)); Trupp 13 (1) rueckt vor nach (183, 288) (Ziel-Gebiet (187, 300)); Trupp 14 (1) rueckt vor nach (210, 324) (Ziel-Gebiet (215, 336))
+WARNUNG: Runde dauerte 3615 Ticks (3084 -> 6699) - Waechter war so lange blind
+ 6699 | 126   0   0 | 103   6 | 100.00 | 34/34 (6) | 14 10 | Abfangen: 16 Verteidiger zum Laufziel (113,112) von Feind 135 (noch 96 Felder von uns); 20 Assassinen angeworben (Gold jetzt 2485); Trupp 3: 1 unter 60 % heim nach (123, 122); VERLUST: Trupp 4 Mitglied 219; VERLUST: Trupp 5 Mitglied 229; Trupp 6: 1 unter 60 % heim nach (111, 183); Trupp 7: 1 unter 60 % heim nach (143, 167); Trupp 8 (1) -> Gebaeude 105 Typ 32 bei (216,201), 12 Felder; Trupp 9 (1) -> Gebaeude 35 Typ 3 bei (185,270), 27 Felder; Trupp 15 (1) rueckt vor nach (185, 210) (Ziel-Gebiet (193, 222)); Trupp 16 (1) rueckt vor nach (175, 213) (Ziel-Gebiet (181, 225)); Trupp 17 (1) rueckt vor nach (188, 224) (Ziel-Gebiet (195, 236)); Trupp 18 (1) rueckt vor nach (272, 211) (Ziel-Gebiet (284, 219))
+WARNUNG: Runde dauerte 1861 Ticks (6699 -> 8560) - Waechter war so lange blind
+ 8560 | 192   0   0 | 130   3 | 100.00 | 34/34 (6) | 14 10 | Abwehr gebuendelt: alle 16 (22,24,55,73) gegen Feind 135 Typ 24 bei (141,150); VERLUST: Trupp 9 Mitglied 247; VERLUST: Trupp 10 Mitglied 250; Trupp 11 (1) -> Gebaeude 125 Typ 32 bei (198,212), 40 Felder; Trupp 13 (1) -> Gebaeude 71 Typ 32 bei (185,277), 48 Felder; Trupp 14 (1) -> Gebaeude 19 Typ 32 bei (190,289), 59 Felder; Lager angebaut None (4 Teile)
+WARNUNG: Runde dauerte 3460 Ticks (8560 -> 12020) - Waechter war so lange blind
+12020 | 192   0   0 | 191   0 | 100.00 | 34/34 (6) | 14 10 | verkauft: holz,apfel; VERLUST: Trupp 14 Mitglied 261; Trupp 15: 1 unter 60 % heim nach (143, 167); Trupp 16 (1) -> Gebaeude 116 Typ 32 bei (181,225), 12 Felder; VERLUST: Trupp 17 Mitglied 269; Lager angebaut None (4 Teile)
+WARNUNG: Runde dauerte 961 Ticks (12020 -> 12981) - Waechter war so lange blind
+12981 | 192   0   0 | 182   0 | 100.00 | 34/34 (6) | 14 10 | Abfangen: 16 Verteidiger zum Laufziel (98,133) von Feind 364 (noch 127 Felder von uns); Lager angebaut None (4 Teile)
+13047 | 192   0   0 | 187   0 | 100.00 | 34/34 (5) | 14 10 | Lager angebaut None (4 Teile)
+13103 | 192   0   0 | 192   0 | 100.00 | 33/34 (4) | 14 10 | 25 Assassinen angeworben (Gold jetzt 2215); verkauft: holz,apfel; Trupp 10 (1) -> Gebaeude 121 Typ 32 bei (210,167), 52 Felder; Lager angebaut None (4 Teile)
+WARNUNG: Runde dauerte 949 Ticks (13103 -> 14052) - Waechter war so lange blind
+14052 | 192   0   0 | 180   0 | 100.00 | 34/34 (6) | 14 10 | Lager angebaut None (4 Teile)
+14110 | 192   0   0 | 180   0 | 100.00 | 34/34 (5) | 14 10 | Trupp 17 (1) -> Gebaeude 126 Typ 32 bei (197,170), 55 Felder; Lager angebaut None (4 Teile)
+WARNUNG: Runde dauerte 919 Ticks (14110 -> 15029) - Waechter war so lange blind
+15029 | 192   0   0 | 196   0 | 100.00 | 34/34 (6) | 14 10 | Abwehr gebuendelt: alle 17 (22,24,55,73) gegen Feind 364 Typ 24 bei (142,183); verkauft: holz,apfel; Trupp 19 (1) rueckt vor nach (198, 179) (Ziel-Gebiet (210, 190)); Lager angebaut None (4 Teile)
+WARNUNG: Runde dauerte 991 Ticks (15029 -> 16020) - Waechter war so lange blind
+16020 | 172   0   0 | 173   0 | 100.00 | 34/34 (5) | 13 10 | Abwehr gebuendelt: alle 17 (22,24,55,73) gegen Feind 366 Typ 24 bei (128,157); Trupp 20 (1) rueckt vor nach (250, 223) (Ziel-Gebiet (260, 235)); Lager angebaut None (4 Teile)
+WARNUNG: Runde dauerte 932 Ticks (16020 -> 16952) - Waechter war so lange blind
+16952 | 192   0   0 | 184   0 | 100.00 | 34/34 (5) | 14 10 | 30 Assassinen angeworben (Gold jetzt 2025); Lager angebaut None (4 Teile)
+17020 | 192   0   0 | 192   0 | 100.00 | 34/34 (4) | 14 10 | verkauft: holz,apfel; Lager angebaut None (4 Teile)
+17129 | 172   0   0 | 150   0 | 100.00 | 34/34 (4) | 14 10 | Lager angebaut None (4 Teile)
+17191 | 172   0   0 | 150   0 | 100.00 | 34/34 (3) | 14 10 | Abfangen: 17 Verteidiger zum Laufziel (113,112) von Feind 364 (noch 131 Felder von uns); Lager angebaut None (4 Teile)
+17252 | 172   0   0 | 150   0 | 100.00 | 34/34 (3) | 14 10 | verkauft: holz,apfel; Lager angebaut None (4 Teile)
+17351 | 152   0   0 | 129   0 | 100.00 | 34/34 (3) | 14 10 | 35 Assassinen angeworben (Gold jetzt 1925); Lager angebaut None (4 Teile)
+17418 | 152   0   0 | 129   0 | 100.00 | 34/34 (3) | 14 10 | Lager angebaut None (4 Teile)
+17485 | 152   0   0 | 128   0 | 100.00 | 34/34 (3) | 14 10 | verkauft: holz,apfel; Lager angebaut (113, 111) (4 Teile)
+17614 | 132   0   0 | 107   0 | 100.00 | 34/34 (4) | 14 10 | Lager angebaut None (4 Teile)
+17682 | 132   0   0 | 107   0 | 100.00 | 34/34 (4) | 14 10 | Lager angebaut (113, 111) (4 Teile)
+17762 | 132   0   0 | 106   0 | 100.00 | 34/34 (4) | 14 10 | 40 Assassinen angeworben (Gold jetzt 1655); verkauft: holz,apfel; MESSUNG Trupp 20: naechster Feind Typ 22 in 13 Feldern, verletzt 0; Trupp 20 zurueck nach (170, 147) (Feind nah); Lager angebaut None (4 Teile)
+18017 | 112  12   0 |  84   0 | 100.00 | 34/34 (3) | 14 10 | verkauft: holz,stein,apfel
+18215 |  92   7   0 |  88   0 | 100.00 | 33/34 (4) | 14 10 | 45 Assassinen angeworben (Gold jetzt 1460)
+18286 |  93   7   0 |  93   0 | 100.00 | 34/34 (4) | 14 10 | verkauft: holz,stein,apfel
+18570 | 118   2   0 |  81   0 | 100.00 | 34/34 (4) | 14 10 | verkauft: holz,apfel
+18699 | 114   2   0 |  70   0 | 100.00 | 34/34 (4) | 14 10 | 50 Assassinen angeworben (Gold jetzt 1225)
+18843 | 124   2   0 |  69   0 | 100.00 | 34/34 (4) | 14 10 | verkauft: holz,apfel
+19095 | 114   2   0 |  62   0 | 100.00 | 34/34 (3) | 14 10 | 55 Assassinen angeworben (Gold jetzt 925); verkauft: holz
+19323 |  94   2   0 |  77   0 | 100.00 | 34/34 (3) | 14 10 | verkauft: holz,apfel
+19450 |  84   2   0 |  67   0 | 100.00 | 34/34 (4) | 14 10 | Abwehr gebuendelt: alle 17 (22,24,55,73) gegen Feind 364 Typ 24 bei (167,176)
+WARNUNG: Runde dauerte 921 Ticks (19450 -> 20371) - Waechter war so lange blind
+20371 | 124   2   0 |  73   0 | 100.00 | 34/34 (5) | 14 10 | Abfangen: 17 Verteidiger zum Laufziel (125,128) von Feind 322 (noch 30 Felder von uns); 60 Assassinen angeworben (Gold jetzt 635); Trupp 22 kaempft gegen Einheit 415 Typ 24 (Freunde 45, Nahkaempfer 1); Trupp 23 kaempft gegen Einheit 415 Typ 24 (Freunde 35, Nahkaempfer 1); Trupp 31 kaempft gegen Einheit 415 Typ 24 (Freunde 50, Nahkaempfer 1); Trupp 32 kaempft gegen Einheit 415 Typ 24 (Freunde 33, Nahkaempfer 1); Trupp 33 kaempft gegen Einheit 415 Typ 24 (Freunde 38, Nahkaempfer 1); Trupp 34 kaempft gegen Einheit 415 Typ 24 (Freunde 45, Nahkaempfer 1); Trupp 35 kaempft gegen Einheit 415 Typ 24 (Freunde 45, Nahkaempfer 1); Trupp 36 kaempft gegen Einheit 415 Typ 24 (Freunde 31, Nahkaempfer 1); Trupp 37 kaempft gegen Einheit 415 Typ 24 (Freunde 35, Nahkaempfer 1); Trupp 38 kaempft gegen Einheit 415 Typ 24 (Freunde 38, Nahkaempfer 1); Trupp 39 kaempft gegen Einheit 415 Typ 24 (Freunde 41, Nahkaempfer 1); Trupp 40 kaempft gegen Einheit 415 Typ 24 (Freunde 41, Nahkaempfer 1); Trupp 41 kaempft gegen Einheit 415 Typ 24 (Freunde 29, Nahkaempfer 1); Trupp 42 kaempft gegen Einheit 415 Typ 24 (Freunde 33, Nahkaempfer 1); Trupp 43 kaempft gegen Einheit 415 Typ 24 (Freunde 35, Nahkaempfer 1); Trupp 44 kaempft gegen Einheit 415 Typ 24 (Freunde 37, Nahkaempfer 1); Trupp 45 kaempft gegen Einheit 415 Typ 24 (Freunde 37, Nahkaempfer 1)
+Ende Phase 2 bei Tick 34443 nach 62 Runden (0.7 s je Runde); Kornspeicher 1, Holzfaeller 12, Apfelplantagen 10; Waechter: Bedrohungen 11, davon tot 2, eigene Truppen verloren 0; Angriff: zerstoert 0 Gebaeude {}, eigene Verluste 6, Trupps 51
