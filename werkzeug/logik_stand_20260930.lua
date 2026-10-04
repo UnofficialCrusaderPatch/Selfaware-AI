@@ -1539,6 +1539,40 @@ local function einzelbefehl(cmd)
     return true
   end
 
+  --   { "gruenland": { "x0": 140, "y0": 80, "x1": 220, "y1": 160 } }  Textkarte nach
+  --   ucp/villagestudio/abzug/gruenland.txt: G Gruenland (Logic2Layer 0x10/0x80), s nur Gestruepp
+  --   (0x01), # blockiert (LogicLayer 0x30), x unfruchtbar (LogicLayer 0x100000), . sonst.
+  --   Regel abgelesen aus checkBuildingCanBePlacedHere (Farmen: alle Felder fruchtbar, >= 50 Gruenland).
+  --   Feldnummer = translationMatrix[y].addXgetTile (0x023372F8 + y*12 + 8) + x.
+  if cmd.gruenland ~= nil and type(cmd.gruenland) == "table" then
+    local g = cmd.gruenland
+    local x0, y0, x1, y1 = tonumber(g.x0), tonumber(g.y0), tonumber(g.x1), tonumber(g.y1)
+    local f = io.open("ucp/villagestudio/abzug/gruenland.txt", "w")
+    local n = { G = 0, s = 0, ["#"] = 0, x = 0, ["."] = 0 }
+    f:write(string.format("x0=%d y0=%d x1=%d y1=%d\n", x0, y0, x1, y1))
+    for y = y0, y1 do
+      local zeile = {}
+      local basis = core.readInteger(0x023372F8 + y * 12 + 8) or 0
+      for x = x0, x1 do
+        local k = basis + x
+        local l = core.readInteger(0x01BF8368 + k * 4) or 0
+        local l2 = core.readByte(0x01C471E8 + k) or 0
+        local c = "."
+        if (l & 0x30) ~= 0 then c = "#"
+        elseif (l & 0x100000) ~= 0 then c = "x"
+        elseif (l2 & 0x90) ~= 0 then c = "G"
+        elseif (l2 & 0x01) ~= 0 then c = "s" end
+        n[c] = n[c] + 1
+        zeile[#zeile + 1] = c
+      end
+      f:write(table.concat(zeile) .. "\n")
+    end
+    f:close()
+    log(INFO, string.format("GRUENLAND (%d,%d)-(%d,%d): G=%d s=%d #=%d x=%d .=%d -> abzug/gruenland.txt",
+      x0, y0, x1, y1, n.G, n.s, n["#"], n.x, n["."]))
+    return true
+  end
+
   if cmd.baue ~= nil and type(cmd.baue) == "table" then
     local b = cmd.baue
     local ok, err = befehlAbsetzen(28, { b.x, b.y, b.mapper, b.groesse, b.richtung or 0, b.trupp or 0 })
