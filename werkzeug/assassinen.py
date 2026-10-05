@@ -34,7 +34,10 @@ WERT = {
     22: 40, 18: 40, 17: 35, 34: 35, 33: 40, 30: 30, 36: 40, 37: 40, 38: 40,  # Wirtshaus, Brauerei, Baeckerei, Muehle, Milch, Weizen, Kirchen
     32: 30, 7: 30,                      # Apfelplantage, Jaegerhuette
     26: 20}
-GROESSE, FERN, NAH, MAX_WEG = 1, 16, 8, 30   # 1: jeder Assassine einzeln, eigene Gruppe (Daniel 23:32; Modul reserviert Gruppen je Takt)
+# Liga-Balance (liga_ai.json ranges): alle Bogen/Armbrust 40 Felder - eine Zahl fuer "in Schussweite" (Daniel 23:18: Schuetzen-
+# Gefahr auf 40; live_6: Assassine starb bei Tick 8.527, naechster Bogenschuetze 26 Felder weg, gezaehlt wurde nur bis 16)
+SCHUSSWEITE = 40
+GROESSE, FERN, NAH, MAX_WEG = 1, SCHUSSWEITE, 8, 30   # 1: jeder Assassine einzeln, eigene Gruppe (Daniel 23:32; Modul reserviert Gruppen je Takt)
 
 def schach(a, b):
     return max(abs(a[0] - b[0]), abs(a[1] - b[1]))
@@ -228,8 +231,8 @@ class Einzeln:
     ZIEL_NAH = 8           # gemessen 05.10.: Gebaeudeangriff -> Laufziel 1-2 Felder neben dem Gebaeude
     NEU_NACH = 4           # Runden (je ~30 Ticks bei Tempo 1000), bis ein Befehl im Spiel sichtbar sein muss
     VOLL = 12500           # gemessen 05.10.: Leben eines frisch angeworbenen Assassinen
-    SICHER_FERN, SICHER_NAH = 30, 10
-    RUECKZUG_FERN = 20
+    SICHER_FERN, SICHER_NAH = SCHUSSWEITE, 10
+    RUECKZUG_FERN = SCHUSSWEITE
     UEBERMACHT_R, FLUCHT_RUHE = 10, 2  # 4a (Daniel 22:16): Umkreis fuer "mehr Feinde als eigene", Runden ohne Verfolger bis zum Wiederangriff
                                        # (raidzuerst_4: mit 5 erst im Kontakt erkannt - Daniel 22:25 "er muss instant verstehen, wann das ist")
     FLUCHT_FREI = 15       # 4a: erst frei, wenn kein feindlicher Nahkaempfer naeher (raidzuerst_3: mit 10 hoerte er zu frueh auf)
