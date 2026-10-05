@@ -2656,6 +2656,24 @@ local function einzelbefehl(cmd)
       log(INFO, "GEFECHT: Startpause scharf bei Tick " .. tickPause.naechster)
     end
     starteGefecht(0)                                  -- 0 = Burgen selbst waehlen
+    -- Feste Saat (05.10.2026, Daniel 23:13 "ja, feste Saat einbauen"), nach dem Vorbild ucp_recorder (onStartSkirmish,
+    -- Referenz/ucp_recorder/code/recorder.lua): Karten-Saat schreiben, Zufallstabelle neu fuellen (0x0046A760), dann
+    -- Partie-Saat, Zufallswerte und Zaehler. Hier direkt NACH dem Start statt im Haken bei 0x004428B5 - ob das reicht,
+    -- zeigt der Vergleich zweier Partien mit gleicher Saat. Jeder Start schreibt die Werte ins Log (SAAT ...).
+    if type(cmd.saat) == "table" then
+      local s = cmd.saat
+      core.writeInteger(0x01A279C4, tonumber(s.karte))
+      pcall(core.exposeCode(0x0046A760, 1, 1), 0x01A279C0)
+      core.writeInteger(0x01A279C4, tonumber(s.partie))
+      core.writeInteger(0x01A3160C, tonumber(s.zaehler1))
+      core.writeInteger(0x01A31608, tonumber(s.zaehler2))
+      core.writeSmallInteger(0x01A279C0, tonumber(s.wert1))
+      core.writeSmallInteger(0x01A279C2, tonumber(s.wert2))
+      log(INFO, "GEFECHT: feste Saat gesetzt")
+    end
+    log(INFO, string.format("SAAT karte=%d partie=%d wert1=%d wert2=%d zaehler1=%d zaehler2=%d",
+      tonumber(cmd.saat and cmd.saat.karte) or -1, core.readInteger(0x01A279C4) or -1, core.readSmallInteger(0x01A279C0) or -1,
+      core.readSmallInteger(0x01A279C2) or -1, core.readInteger(0x01A3160C) or -1, core.readInteger(0x01A31608) or -1))
     zeigeMenue(CORE, 14, 0)                           -- MVT_BUILD_MENU
     log(INFO, "GEFECHT: LaunchSkirmishGame zurueck")
     return true

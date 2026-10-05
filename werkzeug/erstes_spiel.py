@@ -67,21 +67,43 @@ def lords():
     return [tuple(int(v) for v in m) for m in re.findall(r"LORD \d+: Spieler (\d+) bei \((\d+),(\d+)\)",
                                                           " ".join(befehl({"lords": True}, 1.0, bis="LORDS")))]
 
-def phase1(plan, tempo):
-    """Neue Partie ab Tick 0 (Daniel 05.10. 22:52: "warum laesst du der KI so einen Vorlauf? starte das Spiel bei Tick 0",
-    "Neustart komplett"; 22:54: "ohne komische Pausen, ein Spiel, das live mit gleicher Geschwindigkeit laeuft").
-    Vorher: jede Partie lud den Startstand "M19 Liga Start Grumpy T600" - Rotkaeppchen hatte 600 Ticks Vorsprung, dazu
-    Tick-Pausen in der Eroeffnung und ein Speichern. Jetzt: frisches Liga-Gefecht (Werte aus dem M19-Stand gelesen: 1 Gegner
-    Rotkaeppchen, Ausgleich 3, Startplaetze 0/1), sofort das feste Tempo, und jeder Schritt wartet bei laufendem Spiel."""
+SAAT_DATEI = os.path.join(D, "saat_liga.json")
+SAAT_FELDER = ("karte", "partie", "wert1", "wert2", "zaehler1", "zaehler2")
+LIGA_GEFECHT = {"eigenesGefecht": True, "karte": "Liga_Grumpy Neighbors", "ki": 1, "gegner": 1, "ausgleich": 3,
+                "startliste": [0, 1, 246, 246, 246, 246, 246, 246]}   # aus dem M19-Stand gelesen: Mensch Platz 0, Rotkaeppchen 1
+
+def saat_laden(datei=SAAT_DATEI):
+    """Feste Saat (Daniel 23:13): gleiche Zufallswerte bei jedem Start -> gleiche Partie, solange unser Lenker gleich spielt."""
+    return json.load(open(datei, encoding="utf-8")) if os.path.exists(datei) else None
+
+def saat_lesen(zeilen):
+    """Die SAAT-Zeile des Moduls (jeder Gefecht-Start schreibt sie) als dict, sonst None."""
+    m = re.search(r"SAAT " + " ".join(f + r"=(-?\d+)" for f in SAAT_FELDER), " ".join(zeilen))
+    return dict(zip(SAAT_FELDER, map(int, m.groups()))) if m else None
+
+def saat_merken(gelesen, datei=SAAT_DATEI):
+    """Die erste Partie legt die Saat fest; die Karten-Saat liest der Start nicht mit - die Partie-Saat dient fuer beide."""
+    saat = dict(gelesen, karte=gelesen["partie"])
+    json.dump(saat, open(datei, "w", encoding="utf-8"), indent=1)
+    return saat
+
+def gefecht_starten(tempo):
+    """Frisches Liga-Gefecht ab Tick 0 mit festem Tempo und fester Saat, ohne Pausen (Daniel 22:52-23:13). Wartet bei
+    laufendem Spiel auf beide Lords und prueft Startplatz + Testbedingung. Gibt den Tick, ab dem beide Lords da sind.
+    Tempo VOR dem Start (live_1: das Gefecht startete mit altem Tempo, erst bei Tick 3.250 kam unser erster Befehl)."""
     import befehl as kanal
-    schreib("== Phase 1: neue Partie ab Tick 0, Tempo %d durchgehend, ohne Pausen (Plan %s)" % (tempo, os.path.basename(plan["_datei"])))
     kanal.sende({"player": SP, "menue": 41}, 3)
-    # Tempo VOR dem Start setzen und nicht fest warten (live_1, 22:57: das Gefecht startete mit dem alten Tempo der
-    # Testlaeufe, der Startbefehl wartete fest 4 s - erst bei Tick 3.250 kam unser erster Befehl; Daniel 22:58 "bro wtf")
     befehl({"tempo": tempo}, 1.0, bis="TEMPO")
     kanal.sende({"player": SP, "pause": False}, 0.5)
-    kanal.sende({"eigenesGefecht": True, "karte": "Liga_Grumpy Neighbors", "ki": 1, "gegner": 1, "ausgleich": 3,
-                 "startliste": [0, 1, 246, 246, 246, 246, 246, 246]}, 4, bis="LaunchSkirmishGame zurueck")
+    saat = saat_laden()
+    zeilen = kanal.sende(dict(LIGA_GEFECHT, **({"saat": saat} if saat else {})), 4, bis="LaunchSkirmishGame zurueck")
+    gelesen = saat_lesen(zeilen)
+    if saat:
+        schreib("SAAT fest aus %s (Modul meldet %s)" % (os.path.basename(SAAT_DATEI), gelesen))
+    elif gelesen:
+        schreib("SAAT neu festgelegt: %s -> %s" % (saat_merken(gelesen), os.path.basename(SAAT_DATEI)))
+    else:
+        schreib("SAAT nicht gelesen: %s" % zeilen[-3:])
     befehl({"tempo": tempo}, 1.0, bis="TEMPO")
     t_lords = warte_bis(lambda: len(lords()) >= 2, "beide Lords")
     zustand = partie_pruefen()
@@ -89,6 +111,15 @@ def phase1(plan, tempo):
     if not eigener or max(abs(eigener[0][0] - BERGFRIED[0]), abs(eigener[0][1] - BERGFRIED[1])) > 8:
         raise SystemExit("STARTPLATZ FALSCH: unser Lord bei %s, Plan erwartet den Bergfried-Eingang %s" % (eigener, BERGFRIED))
     schreib("Partie laeuft seit Tick %d: Lords da, unser Lord bei %s, %s" % (t_lords, eigener[0], zustand))
+    return t_lords
+
+def phase1(plan, tempo):
+    """Neue Partie ab Tick 0 (Daniel 05.10. 22:52: "warum laesst du der KI so einen Vorlauf? starte das Spiel bei Tick 0",
+    "Neustart komplett"; 22:54: "ohne komische Pausen, ein Spiel, das live mit gleicher Geschwindigkeit laeuft").
+    Vorher: jede Partie lud den Startstand "M19 Liga Start Grumpy T600" - Rotkaeppchen hatte 600 Ticks Vorsprung, dazu
+    Tick-Pausen in der Eroeffnung und ein Speichern. Jetzt: gefecht_starten(), dann die Eroeffnung bei laufendem Spiel."""
+    schreib("== Phase 1: neue Partie ab Tick 0, Tempo %d durchgehend, ohne Pausen (Plan %s)" % (tempo, os.path.basename(plan["_datei"])))
+    gefecht_starten(tempo)
     from bauen import baue_viele
     # Daniel 22:59: "immer noch zu langsam, und dann ploeppt er ploetzlich seine Wirtschaft hin". Gemessen live_2: Markt
     # erst 200 Ticks nach dem Kornspeicher (Platzsuche), Posten + Assassine erst bei 976, die Wirtschaft (21 Bauten) auf
