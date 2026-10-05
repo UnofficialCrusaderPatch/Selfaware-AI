@@ -576,7 +576,10 @@ class Einzeln:
             angekommen = [n for n, s in st.items() if s == "sammeln" and schach((L[n]["x"], L[n]["y"]), P) <= kreis]
             welle = []
             if len(angekommen) >= self.LORD_MIN:
-                weg = self.wegtest(angekommen[0], [lp])[0] if self.wegtest else True
+                # Weg zu einem Feld im Ring um den Lord, nicht auf sein Feld (Serie p, 21:26: der Lord steht in seinem Bergfried,
+                # auf ein Gebaeudefeld fuehrt kein Weg - 16-21-mal "kein Weg", 20 standen bereit, keine Welle)
+                ring = [(lp[0] + dx, lp[1] + dy) for dx in (-3, 0, 3) for dy in (-3, 0, 3) if dx or dy]
+                weg = any(self.wegtest(angekommen[0], ring)) if self.wegtest else True
                 if weg:
                     welle = angekommen
                     self.wellen.append({"runde": self.runde, "groesse": len(welle), "fern": fern_l, "nah": nah_l,

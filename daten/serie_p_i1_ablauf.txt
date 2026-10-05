@@ -1,0 +1,10 @@
+Lauf 1/3 auf Instanz 1: Ansicht 14 (Partie vorbei: 0) -> Hauptmenue, pausiert
+Lauf 1/3: erwartete Code-Kennung d370a5dd
+partiep_1_i1_konsole.txt           d370a5dd offen             28731    80    62   7935     6001  1/0/0 von 2084 nein   {'Ochsenjoch (Regel)': 9, 'Steinbruch+Ochsenjoch': 3, 'Eisenmine': 11, 'Apfelplantage': 5, 'Holzfaeller': 1, 'Jaegerhuette': 5}
+Lauf 2/3 auf Instanz 1: Ansicht 14 (Partie vorbei: 0) -> Hauptmenue, pausiert
+Lauf 2/3: erwartete Code-Kennung d370a5dd
+partiep_2_i1_konsole.txt           d370a5dd offen             28714    85    65   8230     5941  1/0/0 von 2067 nein   {'Ochsenjoch (Regel)': 12, 'Steinbruch+Ochsenjoch': 3, 'Eisenmine': 11, 'Apfelplantage': 5, 'Holzfaeller': 2, 'Jaegerhuette': 5}
+Lauf 3/3 auf Instanz 1: Ansicht 14 (Partie vorbei: 0) -> Hauptmenue, pausiert
+Lauf 3/3: erwartete Code-Kennung d370a5dd
+partiep_3_i1_konsole.txt           d370a5dd offen             28728    85    27   8360     5971  1/0/0 von 2144 nein   {'Ochsenjoch (Regel)': 13, 'Steinbruch+Ochsenjoch': 3, 'Eisenmine': 12, 'Apfelplantage': 5, 'Holzfaeller': 1, 'Jaegerhuette': 9}
+Sperre SAI frei

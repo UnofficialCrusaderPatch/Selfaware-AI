@@ -1,0 +1,3 @@
+# Serie q, Einstellung waechter=ja assassinen=-1 bis_tick=28700 tempo=200 minuten=40
+Konsole                            Kennung  Ergebnis           Ende  Assa zerst   Gold   1.Mine  neg H/S/E    Fehler gesetzt
+partieq_1_i1_konsole.txt           a393bc8a offen             28727    85    52   7980     6049  1/0/0 von 2098 nein   {'Ochsenjoch (Regel)': 10, 'Steinbruch+Ochsenjoch': 3, 'Eisenmine': 10, 'Apfelplantage': 5, 'Holzfaeller': 1, 'Jaegerhuette': 7}
