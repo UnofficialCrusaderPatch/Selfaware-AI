@@ -14,7 +14,7 @@ bauen muss - **4.** wissen, warum und WANN man es bauen sollte - **5.** selbstae
 - [x] **Zeithorizont fuer Investitionen** (Befund 9t; erledigt 05.10. 20:10: Gewinn bis Partieende, M21): nur bauen, was sich innerhalb des Horizonts bezahlt macht; sonst geht das Gold in Truppen.
 - [x] Apfelplantage und Holzfaeller ueber Platzkarten statt Raster/Baumliste (erledigt 05.10. 20:10, Karten ueber die ganze Karte) (Befund 9t: 0 Apfelplantagen, Baum-Ziel 6-mal bebaut)
 - [ ] Wegformel je Art aus den Messdaten statt vermutet (M21: Holz haengt kaum am Weg, Jaeger unklar)
-- [ ] Mehrere Laeufe je Planer-Stand (eine Partie ist kein Beweis; zweite Spielinstanz nutzen)
+- [x] Mehrere Laeufe je Planer-Stand (erledigt 05.10. 20:22: `serie.py`, Serie x 8 Laeufe, M22)
 - [ ] Startwerte aus frueheren Partien (`daten/ertrag_gelernt_*.json`) - erster Schritt zum Selbstlernen
 - [ ] Horizont in echten Partien ohne festes Ende (bis zum geplanten Angriff?) - Daniel fragen
 
@@ -35,6 +35,7 @@ bauen muss - **4.** wissen, warum und WANN man es bauen sollte - **5.** selbstae
 - [x] Nie blind starten: Bergfried aus dem Spiel, Plan je Start, nur eigene Seite (05.10. 18:55)
 
 ## Kampf
+- [ ] **Lord-Trupp bildet sich nie** (M22: 0 Pruefungen in 8 Laeufen): erst messen, wie viele frei sind vs. noetig; dann Assassinen sammeln statt sofort verteilen (Daniel 05.10. 00:26: "Angriffsarmeen sammeln")
 - [x] Lord-Trupp nach Daniels Regel (05.10. 00:52, M18)
 - [ ] Zugebauten Lord freilegen (05.10. 00:52) - Wegtest steht, Freilegen fehlt
 - [ ] Sinnvoller angreifen, Angriffsarmeen sammeln (05.10. 00:26)

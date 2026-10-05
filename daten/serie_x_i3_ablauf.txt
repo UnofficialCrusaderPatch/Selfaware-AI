@@ -1,0 +1,9 @@
+Lauf 1/4 auf Instanz 3: Ende-Bildschirm (Ansicht 30) -> Hauptmenue, pausiert
+partiex_1_i3_konsole.txt           offen             28721    70    72   5900     5972  1/0/0 von 461 nein   {'Steinbruch+Ochsenjoch': 4, 'Eisenmine': 7, 'Jaegerhuette': 2, 'Apfelplantage': 2, 'Holzfaeller': 6}
+Lauf 2/4 auf Instanz 3: Ansicht 14, Partie nicht beendet, pausiert
+partiex_2_i3_konsole.txt           offen             28779    65    75   5980     6244  1/0/0 von 458 nein   {'Steinbruch+Ochsenjoch': 4, 'Eisenmine': 8, 'Jaegerhuette': 4, 'Apfelplantage': 2, 'Holzfaeller': 6}
+Lauf 3/4 auf Instanz 3: Ansicht 14, Partie nicht beendet, pausiert
+partiex_3_i3_konsole.txt           offen             28758    55    68   5340     6540  1/0/0 von 482 nein   {'Steinbruch+Ochsenjoch': 4, 'Eisenmine': 5, 'Apfelplantage': 2, 'Jaegerhuette': 2, 'Holzfaeller': 6}
+Lauf 4/4 auf Instanz 3: Ansicht 14, Partie nicht beendet, pausiert
+partiex_4_i3_konsole.txt           offen             28735    60    53   5580     6413  1/0/0 von 505 nein   {'Eisenmine': 5, 'Steinbruch+Ochsenjoch': 3, 'Jaegerhuette': 6, 'Holzfaeller': 6, 'Apfelplantage': 3}
+Sperre SAI frei

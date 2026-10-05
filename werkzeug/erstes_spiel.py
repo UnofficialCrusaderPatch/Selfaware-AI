@@ -227,7 +227,7 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
     trupp = Einzeln(SP, pruefe_begehbar=pruefe_begehbar, wegtest=wegtest) if assassinen else None
     wirt = Wirtschaft(plan, SP, baue_schnell, [nr for nr, _, _ in gebaeude_von(SP, 10)])
     karte_laden()        # Begehbarkeit fuer kurze Rueckzuege - jetzt, solange das Spiel noch steht
-    lernlog = os.path.join(D, "ertrag_live_%s.jsonl" % time.strftime("%Y%m%d_%H%M"))
+    lernlog = os.path.join(D, "ertrag_live_%s_i%d.jsonl" % (time.strftime("%Y%m%d_%H%M%S"), INSTANZ))   # je Instanz: Serien laufen parallel
     ausbau = Ertragsplaner(plan, SP, baue_schnell, wirt, s32(peek(PD + 0x2188)[0]), ende=bis_tick, protokoll=lernlog)   # lernt im Spiel (Daniel 19:44)
     schreib("Ertrags-Planer: Baukosten aus dem Spiel %s; Protokoll %s" % (
         {t: {w: v for w, v in k.items() if v} for t, k in ausbau.kosten.items()}, os.path.basename(lernlog)))
@@ -340,7 +340,7 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
         (("; Waechter: " + w.bericht()) if w else "") + (("; Angriff: " + trupp.bericht()) if trupp else "")))
     schreib("Wirtschaft: " + wirt.bericht())
     schreib(ausbau.bericht())
-    ausbau.sichern(os.path.join(D, "ertrag_gelernt_%s.json" % time.strftime("%Y%m%d_%H%M")))
+    ausbau.sichern(os.path.join(D, "ertrag_gelernt_%s_i%d.json" % (time.strftime("%Y%m%d_%H%M%S"), INSTANZ)))
 
 def fingerabdruck(plan):
     """Alles, was die Eroeffnung bestimmt: Plan, Phase-1-Code, Gruppenteilung, Bauwerkzeug. Gleich -> gleicher Stand."""

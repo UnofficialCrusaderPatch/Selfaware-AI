@@ -1,0 +1,13 @@
+Sperre villagestudio2 frei
+Traceback (most recent call last):
+  File "C:\Users\danie\Documents\PC_Affe\Games\Stronghold_Crusader\Stronghold Crusader Modding\Tools\Selfaware-AI\werkzeug\serie.py", line 152, in <module>
+    (auswerten if befehl_ == "auswerten" else serie)(arg)
+  File "C:\Users\danie\Documents\PC_Affe\Games\Stronghold_Crusader\Stronghold Crusader Modding\Tools\Selfaware-AI\werkzeug\serie.py", line 112, in serie
+    print("Lauf %d/%d auf Instanz %d: %s" % (i, anzahl, inst, zuruecksetzen()), flush=True)
+                                                              ^^^^^^^^^^^^^^^
+  File "C:\Users\danie\Documents\PC_Affe\Games\Stronghold_Crusader\Stronghold Crusader Modding\Tools\Selfaware-AI\werkzeug\serie.py", line 80, in zuruecksetzen
+    ansicht, vorbei = peek(ANSICHT)[0], peek(0x0117D500)[0]
+                      ^^^^^^^^^^^^^
+  File "C:\Users\danie\Documents\PC_Affe\Games\Stronghold_Crusader\Stronghold Crusader Modding\Tools\Selfaware-AI\werkzeug\laden.py", line 47, in peek
+    raise RuntimeError("keine Antwort auf peek 0x%08X" % adr)
+RuntimeError: keine Antwort auf peek 0x01FE7D1C
