@@ -1,0 +1,14 @@
+# 05.10.2026 18:40, 600 Ticks je Stufe, Start 'M19 Liga Start Grumpy T600'
+stufe | gold vorher -> nachher (je 100 Ticks) | beliebt vorher -> nachher | steuerteil | leute
+    0 |    0 ->    0 (+0.0) |  93.25 ->  86.50 |    25 | 10 (Stufe im Spiel 0)
+    1 |    0 ->    0 (+0.0) |  93.25 ->  86.50 |    25 | 10 (Stufe im Spiel 1)
+    2 |    0 ->    0 (+0.0) |  93.25 ->  86.50 |    25 | 10 (Stufe im Spiel 2)
+    3 |    0 ->    0 (+0.0) |  93.25 ->  85.00 |   -25 | 10 (Stufe im Spiel 3)
+    4 |    0 ->    1 (+0.2) |  93.25 ->  83.50 |   -75 | 10 (Stufe im Spiel 4)
+    5 |    0 ->    1 (+0.2) |  93.25 ->  82.00 |  -125 | 10 (Stufe im Spiel 5)
+    6 |    0 ->    2 (+0.3) |  93.25 ->  79.75 |  -200 | 10 (Stufe im Spiel 6)
+    7 |    0 ->    3 (+0.5) |  93.25 ->  77.50 |  -275 | 10 (Stufe im Spiel 7)
+    8 |    0 ->    4 (+0.7) |  93.25 ->  74.50 |  -375 | 10 (Stufe im Spiel 8)
+    9 |    0 ->    5 (+0.8) |  93.25 ->  70.75 |  -500 | 10 (Stufe im Spiel 9)
+   10 |    0 ->    6 (+1.0) |  93.25 ->  63.25 |  -750 | 10 (Stufe im Spiel 10)
+   11 |    0 ->   10 (+1.7) |  93.25 ->  55.75 | -1000 | 10 (Stufe im Spiel 11)

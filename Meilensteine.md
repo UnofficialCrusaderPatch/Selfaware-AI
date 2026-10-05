@@ -890,6 +890,13 @@ Auftraege (21:54), gezaehlt: 1 Kornspeicher und Lager mitrechnen, 2 erstes Spiel
 - **Partie 9m (nach der Korrektur): SIEG bei Tick 10.278** - EIN Trupp (26, noetig 13) bei Tick 9.267, 2 Verluste im Trupp; Partie gesamt 47 zerstoert / 16 verloren. Die SIEG-Zeile in der Konsole ist damit auch belegt.
 - Vergleich: 9i/9j siegten bei ~9.000-9.200 durch Zufall (Assassinen trafen den Lord im Vorbeilaufen), 9k gar nicht; 9l/9m gezielt.
 
+## M19 Liga-Start mit 0 Gold (Daniel 05.10. 00:55) - Messungen 05.10. 18:38-18:45
+- **Ursache der 3.930 Gold:** unsere Starts nahmen nicht die Liga-Bedingung. Gemessen mit `eigenesGefecht` (Grumpy, 1 Rotkaeppchen): Ausgleich 3 -> **Mensch 0 Gold, Rotkaeppchen 50** (Tick 20; 45 bei Tick 600); Ausgleich 2 -> beide 500. Die Liga-Konfiguration nennt "noAdvantage": Mensch 0, Computer 150.
+- **Neuer Startstand `M19 Liga Start Grumpy T600`:** 0 Gold, 150 Holz, 7 Speertraeger, 5 Bogenschuetzen, 10 Leute, Beliebtheit 93,25. Die Start-Nahrung (je 15 Brot, Kaese, Fleisch, Aepfel = 4 Sorten) erscheint erst mit einem Kornspeicher (gemessen: 200 Ticks nach dem Bau da).
+- **Steuern gemessen** (`werkzeug/steuern_messen.py`, `daten/steuern_messung.txt`; 10 Leute, je 600 Ticks ohne Kornspeicher): Stufe 0-2 (Bestechung) ohne Gold wirkungslos (+0 Gold, Steuerteil +25); Stufe 3 +0 Gold, Steuerteil -25; Stufe 4-11 +1 bis +10 Gold in 600 Ticks bei Steuerteil -75 bis -1.000 (Beliebtheit 93,25 -> 83,5 ... 55,75). **Am Anfang bringen Steuern fast nichts** - sie wachsen mit der Zahl der Leute.
+- **Kosten (Liga-Balance, aus dem Spiel gelesen):** Holzfaeller 5 Holz; Markt 0; Apfelplantage 3 Holz + 15 Gold; Jaegerhuette 3 Holz + **60 Gold**; Soeldnerlager 120 Gold. Naechstes Wild 57-61 Felder vom Bergfried (bei (106,137), neben unseren Apfelplantagen).
+- Folgerung: die alte Eroeffnung (10 Apfelplantagen sofort = 150 Gold) geht so nicht mehr; sie muss neu gerechnet werden.
+
 ## AUFTRAG FUER MORGEN (Daniel 05.10.2026 00:26, woertlich)
 > "besieh mal das rotkäppchen, morgen will ich dass du die wirtschaft optimierst -holzfäller, apfelfarmen seasonen, steinochsenjoche hinzufügen wenn abführung zu langsam ist und erwartbar schlau davor. einheiten besser optimieren. angreiffen sinnvoller, angriffsarmeen sammeln. erweitern der wirtschaft - maximale eisen/stein/pech etc. sowie brotwrritschaft, bier, religion, positiven/negativen angsfaktor etc. mauern bauen lord schützen etc."
 >
