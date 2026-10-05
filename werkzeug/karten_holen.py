@@ -23,7 +23,7 @@ from waechter import lies_gebaeude, lies_lagebild
 D = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "daten")
 ABZUG = r"C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme\ucp\villagestudio\abzug"
 FENSTER = 80
-KARTEN = {"holzfaeller": 3, "huette": 1, "apfel": 32, "speicher": 19, "steinbruch": 20, "ochsen": 4}
+KARTEN = {"holzfaeller": 3, "huette": 1, "apfel": 32, "speicher": 19, "steinbruch": 20, "ochsen": 4, "eisenmine": 5}
 
 def bergfriede():
     befehl({"lagebild": True}, 2.0, bis="LAGEBILD")

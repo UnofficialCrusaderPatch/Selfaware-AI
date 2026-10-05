@@ -26,7 +26,8 @@ from speichern import speichere
 from waechter import Waechter, lies_lagebild, lies_gebaeude
 from assassinen import Angriffstrupp, Einzeln
 from befehl import sende, neue_id
-from wirtschaft import Wirtschaft, Ausbau, apfel_gruppen
+from wirtschaft import Wirtschaft, apfel_gruppen
+from ertragsplaner import Ertragsplaner
 
 HIER = os.path.dirname(os.path.abspath(__file__))
 D = os.path.join(HIER, "..", "daten")
@@ -220,7 +221,7 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
     trupp = Einzeln(SP, pruefe_begehbar=pruefe_begehbar, wegtest=wegtest) if assassinen else None
     wirt = Wirtschaft(plan, SP, baue_schnell, [nr for nr, _, _ in gebaeude_von(SP, 10)])
     karte_laden()        # Begehbarkeit fuer kurze Rueckzuege - jetzt, solange das Spiel noch steht
-    ausbau = Ausbau(plan, SP, baue_schnell, wirt, s32(peek(PD + 0x2188)[0]))
+    ausbau = Ertragsplaner(plan, SP, baue_schnell, wirt, s32(peek(PD + 0x2188)[0]))   # ersetzt die Ausbau-Regeln (Daniel 19:11)
     schreib("Wirtschaft: Apfel A %s, B %s; alte Lagerteile %s" % (wirt.A, wirt.B, sorted(wirt.alt)))
     soeldner, geworben = None, 0
     befehl({"kamera": list(plan["lager_mitte"])}, 0.8)
