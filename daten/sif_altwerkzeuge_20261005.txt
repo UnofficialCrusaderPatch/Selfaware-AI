@@ -1,0 +1,163 @@
+﻿== 05.10.2026 20:00:56 SIF: Altwerkzeuge instanzfest - Probe 1: nur Instanz 1 laeuft
+{
+ "SHC_INSTANZ": "(leer)",
+ "shc": {
+  "ordner": "old Crusader Extreme",
+  "laeuft": 1,
+  "fenster": [
+   788524,
+   "Crusader"
+  ]
+ },
+ "starte_spiel": {
+  "ordner": "old Crusader Extreme",
+  "laeuft": "1",
+  "fenster": [
+   788524,
+   "Crusader"
+  ]
+ },
+ "bis_menue": {
+  "ordner": "old Crusader Extreme",
+  "laeuft": 1
+ },
+ "menue_erkunden": {
+  "ordner": "old Crusader Extreme",
+  "laeuft": 1
+ },
+ "bild": {
+  "ordner": "old Crusader Extreme",
+  "offen": [
+   1,
+   "Crusader"
+  ],
+  "prozess_laeuft": true
+ },
+ "lauf_burg2": {
+  "ordner": "old Crusader Extreme",
+  "instanzen": 1,
+  "fenstertitel": "Crusader",
+  "sperrname": "villagestudio"
+ },
+ "befehl.py": "old Crusader Extreme\\ucp\\villagestudio\\befehl.json",
+ "test.py": "Steam/steamapps/common/Stronghold Crusader Extreme",
+ "gefecht.py": "Steam/steamapps/common/Stronghold Crusader Extreme"
+}
+== 20:00:56 Sperre, Abgleich, Start Instanz 2
+Instanz 2:
+Sperre geholt: villagestudio2 - SIF Altwerkzeuge instanzfest
+Instanz 1 -> Instanz 2: 0 Modul-Dateien weichen ab.
+Instanz 2 gestartet: Prozess 29080
+Fenster da nach 2,1 s - schiebe sofort nach hinten.
+Modul laeuft und Lage sitzt - uebergebe nach 4,0 s an die Wacht im Spiel.
+Fertig: 6 Durchgaenge in 4 s. Spiel steht auf Platz 8 von 9 sichtbaren Fenstern.
+Fokus beim Spiel: False
+-> NICHT zuunterst: 1 Fenster liegen noch darunter.
+Instanz 1  Prozess 2604  Fenster 'Crusader'  C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme
+Instanz 2  Prozess 29080  Fenster 'Crusader'  C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme Instanz2
+== 20:01:12 Probe 2: beide laufen - NEUER Stand, SHC_INSTANZ=1
+python : Traceback (most recent call last):
+In Zeile:1 Zeichen:1122
++ ... probe.py" | python -c "import json,sys; d=json.load(sys.stdin); print ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Traceback (most recent call last)::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  File "<string>", line 1, in <module>
+  File "C:\Users\danie\AppData\Local\Programs\Python\Python311\Lib\json\__init__.py", line 293, in load
+    return loads(fp.read(),
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\danie\AppData\Local\Programs\Python\Python311\Lib\json\__init__.py", line 335, in loads
+    raise JSONDecodeError("Unexpected UTF-8 BOM (decode using utf-8-sig)",
+json.decoder.JSONDecodeError: Unexpected UTF-8 BOM (decode using utf-8-sig): line 1 column 1 (char 0)
+== NEUER Stand, SHC_INSTANZ=2
+python : Traceback (most recent call last):
+In Zeile:1 Zeichen:1325
++ ... probe.py" | python -c "import json,sys; d=json.load(sys.stdin); print ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Traceback (most recent call last)::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  File "<string>", line 1, in <module>
+  File "C:\Users\danie\AppData\Local\Programs\Python\Python311\Lib\json\__init__.py", line 293, in load
+    return loads(fp.read(),
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\danie\AppData\Local\Programs\Python\Python311\Lib\json\__init__.py", line 335, in loads
+    raise JSONDecodeError("Unexpected UTF-8 BOM (decode using utf-8-sig)",
+json.decoder.JSONDecodeError: Unexpected UTF-8 BOM (decode using utf-8-sig): line 1 column 1 (char 0)
+== NEGATIVLAUF: ALTER Stand (git HEAD) mit beiden Spielen
+python : Traceback (most recent call last):
+In Zeile:1 Zeichen:1544
++ ... -alt $alt | python -c "import json,sys; d=json.load(sys.stdin); print ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Traceback (most recent call last)::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  File "<string>", line 1, in <module>
+  File "C:\Users\danie\AppData\Local\Programs\Python\Python311\Lib\json\__init__.py", line 293, in load
+    return loads(fp.read(),
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\danie\AppData\Local\Programs\Python\Python311\Lib\json\__init__.py", line 335, in loads
+    raise JSONDecodeError("Unexpected UTF-8 BOM (decode using utf-8-sig)",
+json.decoder.JSONDecodeError: Unexpected UTF-8 BOM (decode using utf-8-sig): line 1 column 1 (char 0)
+== 20:01:24 Probe 2: beide laufen - NEUER Stand, SHC_INSTANZ=1
+{"SHC_INSTANZ": "1", "shc": {"ordner": "old Crusader Extreme", "laeuft": 1, "fenster": [788524, "Crusader"]}, "starte_spiel": {"ordner": "old Crusader Extreme", "laeuft": "1", "fenster": [788524, "Crusader"]}, "bis_menue": {"ordner": "old Crusader Extreme", "laeuft": 1}, "menue_erkunden": {"ordner": "old Crusader Extreme", "laeuft": 1}, "bild": {"ordner": "old Crusader Extreme", "offen": [1, "Crusader"], "prozess_laeuft": true}, "lauf_burg2": {"ordner": "old Crusader Extreme", "instanzen": 1, "fenstertitel": "Crusader", "sperrname": "villagestudio"}, "befehl.py": "old Crusader Extreme\\ucp\\villagestudio\\befehl.json", "test.py": "Steam/steamapps/common/Stronghold Crusader Extreme", "gefecht.py": "Steam/steamapps/common/Stronghold Crusader Extreme"}
+== NEUER Stand, SHC_INSTANZ=2
+{"SHC_INSTANZ": "2", "shc": {"ordner": "der Extreme Instanz2", "laeuft": 1, "fenster": [1641010, "Crusader"]}, "starte_spiel": {"ordner": "der Extreme Instanz2", "laeuft": "1", "fenster": [1641010, "Crusader"]}, "bis_menue": {"ordner": "der Extreme Instanz2", "laeuft": 1}, "menue_erkunden": {"ordner": "der Extreme Instanz2", "laeuft": 1}, "bild": {"ordner": "der Extreme Instanz2", "offen": [1, "Crusader"], "prozess_laeuft": true}, "lauf_burg2": {"ordner": "der Extreme Instanz2", "instanzen": 1, "fenstertitel": "Crusader", "sperrname": "villagestudio2"}, "befehl.py": "der Extreme Instanz2\\ucp\\villagestudio\\befehl.json", "test.py": "amapps/common/Stronghold Crusader Extreme Instanz2", "gefecht.py": "amapps/common/Stronghold Crusader Extreme Instanz2"}
+== NEGATIVLAUF: ALTER Stand (git HEAD) mit beiden Spielen
+{"SHC_INSTANZ": "(leer)", "shc": {"ordner": "old Crusader Extreme", "laeuft": 2, "fenster": [788524, "Crusader"]}, "starte_spiel": {"ordner": "old Crusader Extreme", "laeuft": "2", "fenster": [788524, "Crusader"]}, "bis_menue": {"ordner": "old Crusader Extreme", "laeuft": 2}, "menue_erkunden": {"ordner": "old Crusader Extreme", "laeuft": 2}, "bild": {"ordner": "old Crusader Extreme", "offen": [2, "Crusader,Crusader"], "prozess_laeuft": true}, "lauf_burg2": {"ordner": "old Crusader Extreme", "instanzen": 2, "fenstertitel": "Crusader, Crusader", "sperrname": "villagestudio"}, "befehl.py": "old Crusader Extreme/ucp/villagestudio/befehl.json", "test.py": "Steam/steamapps/common/Stronghold Crusader Extreme", "gefecht.py": "Steam/steamapps/common/Stronghold Crusader Extreme"}
+== 20:01:47 PowerShell-Werkzeuge, beide Spiele laufen (Fenster 1 = 788524, Fenster 2 = 1641010)
+-- stapel.ps1 -Instanz 1
+   Spiel: Platz 8 von 9   Fokus beim Spiel: False
+   ERGEBNIS: ZUUNTERST - alles andere liegt darueber.
+-- stapel.ps1 -Instanz 2
+   Spiel: Platz 8 von 9   Fokus beim Spiel: False
+   ERGEBNIS: ZUUNTERST - alles andere liegt darueber.
+-- bild_q.ps1 -Instanz 2 (Taste Q im Menue wirkungslos)
+Taste Q an Fenster 1641010 geschickt
+-- fenster_foto.ps1 -Instanz 2
+Fenster 'Instanz 2' 2560x1440 ueber PrintWindow Flag 0x2 aufgenommen: C:\Users\danie\AppData\Local\Temp\claude\C--Users-danie\a6ae4d29-c95a-4ff8-8411-4ffcc2549c3a\scratchpad\instanz2_foto.png
+-- nach_hinten.ps1 -Instanz 2
+   Spiel liegt auf Platz 8 von 8.
+   Spiel liegt jetzt auf Platz 8 von 8.
+   GANZ UNTEN - alle anderen Fenster liegen darueber.
+-- start_hinten.ps1 -NurSchieben -Instanz 2
+   Fertig: 13 Durchgaenge in 3 s. Spiel steht auf Platz 8 von 9 sichtbaren Fenstern.
+   -> NICHT zuunterst: 1 Fenster liegen noch darunter.
+== 20:02:28 Beenden-Weg lauf_burg2.prozesse_weg() mit SHC_INSTANZ=2
+"Stronghold Crusader.exe","2604","Console","1","245.852 K"
+"Stronghold Crusader.exe","29080","Console","1","210.644 K"
+
+Ziel: C:/Program Files (x86)/Steam/steamapps/common/Stronghold Crusader Extreme Instanz2 | Prozesse vorher: [29080]
+Prozesse nachher (Instanz 2): []
+-- danach:
+"Stronghold Crusader.exe","2604","Console","1","245.852 K"
+== spiel.py status je Instanz (Pfad-Erkennung ueber instanz.py)
+Instanz 2: C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme Instanz2
+Spiel: laeuft nicht
+Instanz 1: C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme
+Spiel: laeuft (PID 2604)
+Rechtestufe: hoeher - nur mit erhoehtem Helfer erreichbar
+Unser Modul: geladen (villagestudio aktiv)
+
+
+== 20:02:50 NEGATIVLAUF Gleichheitspruefung: befehl.py-Kopie nennt fuer Instanz 1 den Ordner von Instanz 2
+Sabotage gesetzt: True
+RuntimeError: befehl.py und instanz.py nennen verschiedene Ordner fuer Instanz 1: C:\Program Files 
+(x86)\Steam\steamapps\common\Stronghold Crusader Extreme Instanz2 / C:\Program Files 
+(x86)\Steam\steamapps\common\Stronghold Crusader Extreme
+== Regression Werkzeuge von heute Abend
+Instanz 1:
+Sperre gehoert: villagestudio
+   Zweck : SAI Baukosten lesen + Partie 9u (lernender Planer)
+   Alter : 13 Minuten
+Instanz 2:
+Sperre gehoert: villagestudio2
+   Zweck : SIF Altwerkzeuge instanzfest
+   Alter : 1 Minuten
+Instanz 1 -> Instanz 2: 0 Modul-Dateien weichen ab.
+rc=0
+Den Ordner gibt es schon - nichts getan. Fuer den Modulstand: instanz_abgleich.py 2
+WIDERSPRUCH: Name villagestudio2 gehoert zu Instanz 2, SHC_INSTANZ sagt 1 - nichts getan.
+== Selfaware ohne SHC_INSTANZ: Pfade wie vorher
+C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme True True

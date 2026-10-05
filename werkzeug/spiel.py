@@ -28,6 +28,19 @@ import base64, io, json, os, subprocess, sys, time
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from befehl import SPIEL, BEFEHL, LOG, INSTANZ
 
+# Welcher Prozess zu welcher Instanz gehoert, weiss VillageStudio/werkzeug/instanz.py
+# (erkannt am Programmpfad - liest sich auch beim erhoehten Spiel). befehl.py fuehrt
+# die Ordner-Regel getrennt, damit der Befehlskanal nicht an VillageStudio haengt;
+# hier wird geprueft, dass beide dasselbe sagen.
+_VS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "VillageStudio", "werkzeug")
+if not os.path.isfile(os.path.join(_VS, "instanz.py")):
+    raise RuntimeError("VillageStudio/werkzeug/instanz.py fehlt (erwartet neben Selfaware-AI): %s" % _VS)
+sys.path.insert(0, _VS)
+import instanz
+if os.path.normcase(instanz.spielordner(INSTANZ)) != os.path.normcase(SPIEL):
+    raise RuntimeError("befehl.py und instanz.py nennen verschiedene Ordner fuer Instanz %d: %s / %s"
+                       % (INSTANZ, SPIEL, instanz.spielordner(INSTANZ)))
+
 
 def ps(befehl):
     return subprocess.run(["powershell", "-NoProfile", "-Command", befehl],
@@ -43,26 +56,8 @@ def erhoeht(befehl, warte_s=20):
 
 
 def spiel_pids():
-    """Prozesse DIESER Instanz. UCP legt beim Start "ucp-pid-<nummer>" in den
-    Spielordner (gemessen 0,06-0,12 s nach Prozessstart). Nach einem Absturz
-    bleibt die Datei liegen; vergibt Windows die Nummer neu, zeigte sie auf
-    einen fremden Prozess. Darum zaehlt eine Nummer nur, wenn ein Spielprozess
-    mit ihr lebt UND hoechstens 30 s vor der Datei gestartet ist."""
-    dateien = {}
-    for f in os.listdir(SPIEL):
-        if f.startswith("ucp-pid-") and f[8:].isdigit():
-            dateien[int(f[8:])] = os.path.getctime(os.path.join(SPIEL, f))
-    if not dateien:
-        return []
-    aus = ps("Get-Process -Name 'Stronghold Crusader' -ErrorAction SilentlyContinue | "
-             "ForEach-Object { '{0} {1}' -f $_.Id, ([DateTimeOffset]$_.StartTime).ToUnixTimeMilliseconds() }")
-    pids = []
-    for z in aus.splitlines():
-        teile = z.split()
-        if len(teile) == 2 and teile[0].isdigit() and int(teile[0]) in dateien:
-            if abs(dateien[int(teile[0])] - int(teile[1]) / 1000.0) <= 30:
-                pids.append(int(teile[0]))
-    return pids
+    """Prozesse DIESER Instanz - erkannt am Programmpfad, nicht am Namen."""
+    return instanz.pids(INSTANZ)
 
 
 def modul_geladen():

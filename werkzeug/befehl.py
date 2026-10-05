@@ -14,7 +14,7 @@ Zwei Spielinstanzen (05.10.2026): SHC_INSTANZ=2 waehlt die Spielkopie
 "<Instanz 1> Instanz2" - mit eigener befehl.json, eigenem ucp3.log, eigener
 Kanalsperre (.lauf2) und eigenem Nummernzaehler (.letzte_id2). Ohne Angabe gilt
 Instanz 1, alles wie bisher. Dieselbe Ordner-Regel steht in
-VillageStudio/werkzeug/sperre.py und start_hinten.ps1. Andere Werkzeuge nehmen
+VillageStudio/werkzeug/instanz.py (spiel.py prueft, dass beide gleich sind). Andere Werkzeuge nehmen
 SPIEL und ABZUG von hier, nie einen eigenen Pfad - sonst liest ein Lauf auf
 Instanz 2 still die Lagebilder von Instanz 1.
 """
