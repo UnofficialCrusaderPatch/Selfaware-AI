@@ -1,0 +1,99 @@
+{
+ "bauten": {
+  "markt": [
+   145,
+   272
+  ],
+  "lager": [
+   89,
+   263
+  ],
+  "kornspeicher": [
+   90,
+   230
+  ],
+  "steinbruch": [
+   81,
+   268
+  ],
+  "ochsen": [
+   84,
+   264
+  ],
+  "eisenmine": [
+   133,
+   324
+  ],
+  "apfel": [
+   89,
+   235
+  ],
+  "jaeger": [
+   94,
+   283
+  ],
+  "holzfaeller": [
+   72,
+   251
+  ],
+  "huette0": [
+   134,
+   267
+  ],
+  "huette1": [
+   130,
+   263
+  ],
+  "huette2": [
+   130,
+   267
+  ]
+ },
+ "ertrag": {
+  "holz": {
+   "erste_lieferung_tick": 5000,
+   "zuwachs": 18,
+   "je_1000_ticks": 6.0
+  },
+  "stein": {
+   "erste_lieferung_tick": 3750,
+   "zuwachs": 24,
+   "je_1000_ticks": 5.6
+  },
+  "eisen": {
+   "erste_lieferung_tick": 6250,
+   "zuwachs": 2,
+   "je_1000_ticks": 1.1
+  },
+  "fleisch": {
+   "erste_lieferung_tick": 5000,
+   "zuwachs": 21,
+   "je_1000_ticks": 7.0
+  },
+  "apfel": {
+   "erste_lieferung_tick": 1750,
+   "zuwachs": 18,
+   "je_1000_ticks": 2.9
+  }
+ },
+ "preise": {
+  "stein": {
+   "stueck": 5,
+   "gold": 25,
+   "je_stueck": 5.0
+  },
+  "eisen": {
+   "stueck": 2,
+   "gold": 54,
+   "je_stueck": 27.0
+  }
+ },
+ "wege": {
+  "steinbruch": 8,
+  "eisenmine": 61,
+  "holzfaeller": 17,
+  "apfel->kornspeicher": 5,
+  "jaeger->kornspeicher": 53
+ },
+ "ticks": 8000
+}

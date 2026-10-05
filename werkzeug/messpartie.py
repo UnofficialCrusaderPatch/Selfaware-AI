@@ -38,9 +38,9 @@ def main():
     v = vorrat(1)
     if peek(PD + 0x4D0 + 2 * 4)[0] != v["holz"]:
         print("ABBRUCH: Warenstelle stimmt nicht (peek %d, vorrat %d)" % (peek(PD + 0x4D0 + 8)[0], v["holz"])); sys.exit(1)
-    setze(PD + 0x50C, 2000)                 # Gold - nur Pruefstand
-    setze(PD + 0x4D0 + 4 * 4, 30)           # Stein fuer die Eisenmine
-    setze(PD + 0x4D0 + 2 * 4, 300)          # Holz fuer alle Bauten
+    # Nur Gold setzen (Pruefstand). Waren NICHT setzen: gemessen 05.10. - gesetzte Zaehler verschwanden mit dem
+    # abgerissenen Lager, es zaehlt, was physisch im Lager liegt. Waren werden am Markt gekauft (je Kauf 5 Stueck).
+    setze(PD + 0x50C, 4000)
     z = open(os.path.join(D, "rohstoffe_M19.txt")).read().splitlines()[1:]
     info = json.load(open(os.path.join(D, "start_M19.json"), encoding="utf-8"))
     F = tuple(info["feind_bergfried"]["2"]["eingang"])
@@ -60,12 +60,26 @@ def main():
         befehl({"abreissen": {"nr": n_alt}}, 0.8, bis="ABREISSEN")
     laufe(2)
     lk = min(karte("lager_keins"), key=lambda p: schach(p, q) + (0 if schach(p, q) >= 8 else 100))
+    bau["markt"] = es.baue_schnell(26, K[0], K[1], 25)
     bau["lager"] = es.baue_schnell(10, lk[0], lk[1], 3)
+    laufe(30)
+    def kaufe(nr, lose):
+        es.sende({"befehle": [{"player": 1, "id": es.neue_id(), "spielbefehl": {"nr": 38, "werte": [0, nr]}} for _ in range(lose)]},
+                 2.0, bis="SPIELBEFEHL")
+        laufe(10)
+    kaufe(2, 18)      # 90 Holz - mit 150 war das Lager voll (4 Teile je 48), kein Platz mehr fuer Stein
+    kaufe(4, 3)       # 15 Stein (Eisenmine braucht 6)
+    # Kornspeicher ERST jetzt (5 Holz): Messpartie 3 baute ihn bei 0 Holz - er entstand nie, kein Essenskauf moeglich
+    bau["kornspeicher"] = es.baue_schnell(19, plan["kornspeicher"][0], plan["kornspeicher"][1], 6)
+    laufe(150)
+    steht = [g for g in gebaeude_von(1, 19)]
+    print("Kornspeicher steht:", steht, flush=True)
+    kaufe(13, 10)     # 50 Aepfel - ohne Nahrung gingen die Leute (Messpartie 1: 10 -> 4)
+    print("nach Kauf:", {k: v for k, v in vorrat(1).items() if v}, flush=True)
     bau["steinbruch"] = es.baue_schnell(20, q[0], q[1], 3)
     if bau["steinbruch"]:
         bau["ochsen"] = es.baue_schnell(4, bau["steinbruch"][0] + 3, bau["steinbruch"][1] - 4, 8)
     bau["eisenmine"] = es.baue_schnell(5, eisen[0], eisen[1], 12)
-    bau["kornspeicher"] = es.baue_schnell(19, plan["kornspeicher"][0], plan["kornspeicher"][1], 6)
     bau["apfel"] = es.baue_schnell(32, plan["aepfel"][0][0], plan["aepfel"][0][1], 6)
     bau["jaeger"] = es.baue_schnell(7, herde[0], herde[1], 12) if herde else None
     baeume = [w.split() for w in open(os.path.join(D, "baeume_M19.txt")).read().splitlines()[1:]]
@@ -73,7 +87,6 @@ def main():
     if bau["lager"]:
         b = min(baeume, key=lambda p: schach(p, bau["lager"]))
         bau["holzfaeller"] = es.baue_schnell(3, b[0], b[1], 4)
-    bau["markt"] = es.baue_schnell(26, K[0], K[1], 25)
     for i in range(3):
         bau["huette%d" % i] = es.baue_schnell(1, K[0] - 7, K[1] - 2, 25)
     print("Gebaut:", bau, flush=True)
@@ -82,7 +95,9 @@ def main():
     aus = open(os.path.join(D, "ertrag_messung.txt"), "w", encoding="utf-8")
     aus.write("# %s Messpartie (Pruefstand, Gold/Stein/Holz gesetzt), Bauten %s\ntick %s leute\n" % (
         time.strftime("%d.%m.%Y %H:%M"), bau, " ".join(WAREN)))
+    import befehl as befehlskanal
     while tick() - t0 < ticks:
+        befehlskanal.belege()
         laufe(stich)
         v = vorrat(1)
         st = " ".join(befehl({"status": 1}, 1.5, bis="STATUS"))
@@ -117,4 +132,10 @@ def main():
     print(json.dumps(ergebnis, ensure_ascii=False), flush=True)
 
 if __name__ == "__main__":
-    main()
+    import befehl as befehlskanal
+    befehlskanal._kanal_frei()        # laeuft schon ein anderer Lauf? dann sofort laut abbrechen
+    befehlskanal.belege()
+    try:
+        main()
+    finally:
+        befehlskanal.freigeben()
