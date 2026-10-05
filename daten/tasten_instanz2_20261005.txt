@@ -1,0 +1,49 @@
+﻿== 05.10.2026 20:08:12 Tastendruecke von aussen bei Instanz 2
+Instanz 2:
+Sperre geholt: villagestudio2 - Tastenprobe Instanz 2 + Ausbau auf 5
+Instanz 1 -> Instanz 2: 0 Modul-Dateien weichen ab.
+Instanz 2 gestartet: Prozess 16020
+Fenster da nach 1,9 s - schiebe sofort nach hinten.
+Modul laeuft und Lage sitzt - uebergebe nach 4,0 s an die Wacht im Spiel.
+Fertig: 6 Durchgaenge in 4 s. Spiel steht auf Platz 8 von 9 sichtbaren Fenstern.
+Fokus beim Spiel: False
+-> NICHT zuunterst: 1 Fenster liegen noch darunter.
+Kerne: 16
+== 20:08:22 Rechenzeit ueber 5 s (Menue Instanz 2, Gefecht Instanz 1)
+Prozess 2604: 4,39 CPU-Sekunden in 5 s
+Prozess 16020: 0,45 CPU-Sekunden in 5 s
+== 20:08:27 Gefecht auf Instanz 2 (gefecht.py 0)
+Befehl: { "id": 23001, "gefecht": 0 }
+--- neue Logzeilen: 3 ---
+   [villagestudio]: MENUE: starte Gefechtspfad-Mission 0 (Pfadart 0).
+   [villagestudio]: ZUSTAND (Bild 1200): Spielzeit 0 Ticks, maxUnitCount 2500 -> KEIN Gefecht
+   [villagestudio]: ZUSTAND (Bild 1800): Spielzeit 0 Ticks, maxUnitCount 2500 -> KEIN Gefecht
+Instanz 2: Spielzeit 0 Ansicht 41
+== 20:09:12 Spielstand laden auf Instanz 2
+['[villagestudio]: POKE 0x01126628: 0 -> 0', '[villagestudio]: POKE 0x01126624: 0 -> 1', '[villagestudio]: LADEN: Knopf 2 gedrueckt, ok=true', '[villagestudio]: logik: 3 von 3 Befehlen ausgefuehrt, 0 schon erledigt.', '[villagestudio]: LADEPAUSE: Laden erkannt (Spielzeit sprang um 600) bei Tick 600 - angehalten.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.']
+Spielzeit nachher 600 / 600, Pause 1
+geladen bei Tick 600
+['[villagestudio]: EIGENER PLATZ: 0 -> 1; Mensch-Eintrag Platz 1: -1 -> 1; gameOver 1']
+['[villagestudio]: logik: Spiel fortgesetzt.']
+gameOver 1 Pause 0
+== 20:09:37 Tastenprobe
+Fenster Instanz 2: 1182274 Crusader | Instanz 1: 788524
+vorher                 Pause=0  Spielzeit 1093 -> 1093 (STEHT)
+Taste P (1)            PostMessage KEYDOWN/CHAR/KEYUP: True, True, True
+nach P (1)             Pause=0  Spielzeit 1093 -> 1093 (STEHT)
+Taste P (2)            PostMessage KEYDOWN/CHAR/KEYUP: True, True, True
+nach P (2)             Pause=0  Spielzeit 1093 -> 1093 (STEHT)
+ERGEBNIS: NICHT wie vorhergesagt - Werte oben pruefen
+== 20:10:49 Lauf 1 ungueltig (Spiel stand schon am Endbildschirm, Ansicht 30, gameOver 1). Lauf 2: Hauptmenue, neu laden, angehalten lassen
+['[villagestudio]: MENUE: aktuell 30, Ziel 41, Wechselfrist -1', '[villagestudio]: MENUE: Wechsel nach 41 angefordert.']
+Ansicht nach menue 41: 41
+['[villagestudio]: EIGENER PLATZ: 0 -> 1; Mensch-Eintrag Platz 1: -1 -> 1; gameOver 0']
+geladen bei Tick 600 Pause 1 Ansicht 14
+== 20:11:15 Tastenprobe aus der Pause
+Fenster Instanz 2: 1182274 Crusader | Instanz 1: 788524
+vorher                 Pause=1  Spielzeit 600 -> 600 (STEHT)  Ansicht 14  gameOver 0
+Taste P (1)            PostMessage KEYDOWN/CHAR/KEYUP: True, True, True
+nach P (1)             Pause=0  Spielzeit 1415 -> 2262 (laeuft)  Ansicht 14  gameOver 0
+Taste P (2)            PostMessage KEYDOWN/CHAR/KEYUP: True, True, True
+nach P (2)             Pause=1  Spielzeit 2349 -> 2349 (STEHT)  Ansicht 14  gameOver 0
+ERGEBNIS: KOMMT AN - jede Taste P drehte die Pause um, die Spielzeit folgte

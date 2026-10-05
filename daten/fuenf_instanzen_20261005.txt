@@ -1,0 +1,95 @@
+﻿== 05.10.2026 20:11:41 Ausbau auf 5 Instanzen
+C: frei vorher 295,3 GB
+-- instanz_anlegen.py 3 --tun
+Ziel  : C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme Instanz3
+Ausgeschl. Dateien: ucp3.log
+           Insgesamt   KopiertÃœbersprungenKeine Ãœbereinstimmung    FEHLER    Extras
+  Dateien:      6392      6377        15         0         0         0
+Ausgeschl. Dateien: wer_testet.txt
+           Insgesamt   KopiertÃœbersprungenKeine Ãœbereinstimmung    FEHLER    Extras
+  Dateien:       133        14       119         0         0         0
+Sperrmarke umbenannt in Global\FireflyStrongholdCrusadersExtrem3, geaenderte Stelle(n): ['0x1abf93']
+Instanz 3 angelegt. Starten: start_hinten.ps1 -Instanz 3, dann 'villagestudio aktiv' im ucp3.log pruefen.
+   Dauer 4 s, Rueckgabe 0
+-- instanz_anlegen.py 4 --tun
+Ziel  : C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme Instanz4
+Ausgeschl. Dateien: ucp3.log
+           Insgesamt   KopiertÃœbersprungenKeine Ãœbereinstimmung    FEHLER    Extras
+  Dateien:      6392      6377        15         0         0         0
+Ausgeschl. Dateien: wer_testet.txt
+           Insgesamt   KopiertÃœbersprungenKeine Ãœbereinstimmung    FEHLER    Extras
+  Dateien:       133        14       119         0         0         0
+Sperrmarke umbenannt in Global\FireflyStrongholdCrusadersExtrem4, geaenderte Stelle(n): ['0x1abf93']
+Instanz 4 angelegt. Starten: start_hinten.ps1 -Instanz 4, dann 'villagestudio aktiv' im ucp3.log pruefen.
+   Dauer 4 s, Rueckgabe 0
+-- instanz_anlegen.py 5 --tun
+Ziel  : C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme Instanz5
+Ausgeschl. Dateien: ucp3.log
+           Insgesamt   KopiertÃœbersprungenKeine Ãœbereinstimmung    FEHLER    Extras
+  Dateien:      6392      6377        15         0         0         0
+Ausgeschl. Dateien: wer_testet.txt
+           Insgesamt   KopiertÃœbersprungenKeine Ãœbereinstimmung    FEHLER    Extras
+  Dateien:       133        14       119         0         0         0
+Sperrmarke umbenannt in Global\FireflyStrongholdCrusadersExtrem5, geaenderte Stelle(n): ['0x1abf93']
+Instanz 5 angelegt. Starten: start_hinten.ps1 -Instanz 5, dann 'villagestudio aktiv' im ucp3.log pruefen.
+   Dauer 4 s, Rueckgabe 0
+C: frei nachher 290,7 GB
+Instanz 1:
+Sperre ist FREI.
+Instanz 2:
+Sperre gehoert: villagestudio2
+   Zweck : Tastenprobe Instanz 2 + Ausbau auf 5
+   Alter : 3 Minuten
+Instanz 3:
+Sperre ist FREI.
+Instanz 4:
+Sperre ist FREI.
+Instanz 5:
+Sperre ist FREI.
+== 20:12:06 Instanz 3
+Sperre geholt: villagestudio3 - Ausbau auf 5 - Starttest
+   Instanz 3 gestartet: Prozess 20848
+   Modul laeuft und Lage sitzt - uebergebe nach 7,9 s an die Wacht im Spiel.
+== 20:12:15 Instanz 4
+Sperre geholt: villagestudio4 - Ausbau auf 5 - Starttest
+   Instanz 4 gestartet: Prozess 27144
+   Modul laeuft und Lage sitzt - uebergebe nach 7,0 s an die Wacht im Spiel.
+== 20:12:22 Instanz 5
+Sperre geholt: villagestudio5 - Ausbau auf 5 - Starttest
+   Instanz 5 gestartet: Prozess 26984
+   Modul laeuft und Lage sitzt - uebergebe nach 7,3 s an die Wacht im Spiel.
+== 20:12:33 Alle laufenden Spiele
+Instanz 1  Prozess 2604  Fenster 'Crusader'  C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme
+Instanz 2  Prozess 16020  Fenster 'Crusader'  C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme Instanz2
+Instanz 3  Prozess 20848  Fenster 'Crusader'  C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme Instanz3
+Instanz 4  Prozess 27144  Fenster 'Crusader'  C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme Instanz4
+Instanz 5  Prozess 26984  Fenster 'Crusader'  C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme Instanz5
+== Logs und Kanal je Instanz
+Instanz 1: villagestudio aktiv=True (Kanal nicht angefasst - gehoert der Hauptsitzung)
+Instanz 2: villagestudio aktiv=True | Kanal: Ansicht 14 Spielzeit 2349
+Instanz 3: villagestudio aktiv=True | Kanal: Ansicht 48 Spielzeit 0
+Instanz 4: villagestudio aktiv=True | Kanal: Ansicht 3 Spielzeit 0
+Instanz 5: villagestudio aktiv=True | Kanal: Ansicht 3 Spielzeit 0
+== 20:12:35 Rechenzeit ueber 5 s
+Prozess 2604: 0,83 CPU-s in 5 s, 242 MB Speicher
+Prozess 16020: 2,50 CPU-s in 5 s, 208 MB Speicher
+Prozess 20848: 0,64 CPU-s in 5 s, 216 MB Speicher
+Prozess 26984: 0,53 CPU-s in 5 s, 212 MB Speicher
+Prozess 27144: 0,52 CPU-s in 5 s, 212 MB Speicher
+== 20:12:51 Instanz 2 bis 5 beenden, Sperren freigeben
+Instanz 2: GESCHAFFT mit Stufe 1: unser Modul hat das Spiel beendet.
+Instanz 3: GESCHAFFT mit Stufe 1: unser Modul hat das Spiel beendet.
+Instanz 4: GESCHAFFT mit Stufe 1: unser Modul hat das Spiel beendet.
+Instanz 5: GESCHAFFT mit Stufe 1: unser Modul hat das Spiel beendet.
+== 20:12:54 danach
+Instanz 1  Prozess 2604  Fenster 'Crusader'  C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme
+Instanz 1:
+Sperre ist FREI.
+Instanz 2:
+Sperre ist FREI.
+Instanz 3:
+Sperre ist FREI.
+Instanz 4:
+Sperre ist FREI.
+Instanz 5:
+Sperre ist FREI.
