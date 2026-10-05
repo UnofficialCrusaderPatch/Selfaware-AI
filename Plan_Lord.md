@@ -54,6 +54,13 @@ Offen: die Wirtschaft waechst NICHT mit (Daniel fragen, siehe Bericht 22:2x).
   gewinn_5 92 / 86 / 74, gewinn_6 93 / 87 / 80. Preis von Seasoning am Anfang: erster Assassine bei 3.778 statt ~640
   (Gold 30 nach Posten + A). Gleiche Saat, trotzdem schwankt das Ergebnis (gewinn_3 Sieg, gewinn_4 Zeit um) - der Lenker
   laeuft in Echtzeit; Wirtschaftszahlen sind stabiler als Sieg/Niederlage.
+- **Naechste Schritte (Daniel 05.10. 23:51: "ja, mach das mit dem gemeinsamen Angriff. ausserdem bitte die Assassine
+  trotzdem noch frueh machen. aber das morgen"):**
+  1. Gemeinsamer Lord-Angriff statt zwei Wellen: sammeln ausser Schussweite (40) bis klar ueberlegen, dann alle
+     gleichzeitig. Anlass: erste Welle (20) opfert jedes Mal 17 (gewinn_3, gewinn_6), erst die zweite toetet ihn.
+  2. Erster Assassine trotz Seasoning frueh: gewinn_6 erst bei Tick 3.778 (vorher ~640), weil nach Posten + A-Plantagen
+     nur 30 Gold bleiben. Seasoning am Anfang bleibt (Daniel 23:41) - das Gold fuer den Assassinen anders finden.
+  Pruefen wie bisher: feste Saat, Tempo 300, `serie.werte` gegen gewinn_6.
 - **T2 Weglocken:** einer lockt die Verteidiger weg (und weicht nach T1 aus), ein anderer greift derweil an.
 - **T3 Sammeln bis zur eigenen Uebermacht**, dann gegen die Verteidigung - "dann ist die Tuere frei fuer die anderen".
 
