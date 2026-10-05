@@ -1,19 +1,24 @@
 # -*- coding: utf-8 -*-
-"""Totschlagtest fuer den Lord-Trupp Stand 2 (Daniel 05.10. 20:39: 5 gestapelt, Schwache zurueck, sofort wieder drauf) -
-an einer Attrappe ohne Spiel. Vorher festgelegt, was gelten muss:
-  1. freie Assassinen kommen in den Trupp (hoechstens LORD_MAX) und laufen zum Sammelpunkt (halten-Befehl)
-  2. Sammelpunkt: kein feindlicher Fernkaempfer naeher als LORD_SAMMEL_FERN
-  3. erst ab LORD_MIN Angekommenen EIN Angriffsbefehl mit allen zugleich (= gestapelt); mit 4 noch keiner
-  4. schwach UND gerade getroffen -> Rueckzug (halten), nicht schwach oder nicht getroffen -> bleibt
-  5. eine Runde spaeter wieder auf den Lord, zusammen in einem Befehl
-Aufruf: python werkzeug/lordtrupp_pruefen.py   (Rueckgabe 0 = gruen)
+"""Pruefung ohne Spiel fuer "Alle auf den Lord" (Daniel 05.10. 21:34: raiden, bei kritischer Menge auf dem ganzen Feld
+greifen ALLE zugleich den Lord an). Vorher festgelegt, was gelten muss:
+  1. 19 lebende Assassinen -> kein Lord-Befehl
+  2. 20 lebende, ueber das Feld verteilt, einige mitten im Raid -> EIN Angriffsbefehl mit allen 20 auf den Lord
+  3. waehrend des Angriffs vergibt die Raid-Logik keinem Angreifer ein Gebaeude
+  4. wer nach NEU_NACH Runden nicht den Lord angreift, bekommt den Lord-Befehl neu
+  5. Messung: am Lord (<= 3 Felder, greift ihn an) wird gezaehlt, Ablenkung nach Einheitentyp
+  6. weniger als LORD_REST uebrig -> Angriff vorbei; neuer Angriff erst wieder ab LORD_KRITISCH lebenden
+Aufruf: python werkzeug/lordtrupp_pruefen.py [andere_assassinen.py]   (Rueckgabe 0 = gruen)
 """
-import os, sys
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import assassinen as A
+import importlib.util, os, sys
+HIER = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, HIER)
+if len(sys.argv) > 1:                                   # Gegenprobe gegen eine andere Fassung
+    spec = importlib.util.spec_from_file_location("assassinen", sys.argv[1])
+    A = importlib.util.module_from_spec(spec); spec.loader.exec_module(A)
+else:
+    import assassinen as A
 
-HEIM = (141, 269)
-LORD = (230, 287)
+HEIM, LORD = (141, 269), (230, 287)
 
 
 def einheit(typ, besitzer, x, y, leben=12500, **k):
@@ -24,71 +29,54 @@ def einheit(typ, besitzer, x, y, leben=12500, **k):
     return e
 
 
+def lord_befehle(bef):
+    return [b for b in bef if b.get("angriff", {}).get("ziel") == 500]
+
+
 def main():
     ok = []
     def pruefe(nr, text, bed):
-        ok.append(bed)
-        print("%-4s %d %s" % ("OK" if bed else "ROT", nr, text))
-
+        ok.append(bool(bed)); print("%-4s %d %s" % ("OK" if bed else "ROT", nr, text))
     t = A.Einzeln(1, pruefe_begehbar=lambda pkt: set(pkt), wegtest=lambda n, p: [True] * len(p))
-    L = {500: einheit(55, 2, *LORD)}
-    for i, (dx, dy) in enumerate([(0, 0), (2, 0), (-2, 1), (0, -2), (4, 0), (6, 6)]):
-        L[600 + i] = einheit(22, 2, LORD[0] + dx, LORD[1] + dy)          # 6 Bogenschuetzen um den Lord
-    MIN = A.Einzeln.LORD_MIN
-    for i in range(A.Einzeln.LORD_MAX + 2):
-        L[100 + i] = einheit(73, 1, 150 + i, 270)                        # 12 eigene Assassinen daheim
-    G = {}
+    K = getattr(A.Einzeln, "LORD_KRITISCH", 20)
+    L = {500: einheit(55, 2, *LORD), 600: einheit(22, 2, LORD[0] + 2, LORD[1]), 601: einheit(24, 2, 200, 280)}
+    G = {900: {"besitzer": 2, "typ": 32, "x": 190, "y": 250, "leben": 500, "uid": 1, "erreichbar": 1}}
+    for i in range(K - 1):                                            # 19 verteilt
+        L[100 + i] = einheit(73, 1, 150 + 3 * i, 260 + (i % 5) * 4)
     t.aufnehmen([n for n in L if L[n]["typ"] == 73])
     erg, bef = t.schritt(L, G, sichere_orte=[(94, 280), HEIM])
-    lt = t.lordtrupp
-    P = lt.get("punkt")
-    halten = [b for b in bef if "halten" in b]
-    pruefe(1, "freie in den Trupp (hoechstens %d), alle auf dem Weg zum Sammelpunkt" % t.LORD_MAX,
-           len(lt["mitglieder"]) == t.LORD_MAX and any(b["halten"]["x"] == P[0] and b["halten"]["y"] == P[1] for b in halten))
-    nf = min(A.schach(P, (L[n]["x"], L[n]["y"])) for n in L if L[n]["typ"] == 22)
-    pruefe(2, "Sammelpunkt %s hat %d Felder Abstand zum naechsten Bogenschuetzen (>= %d)" % (P, nf, t.LORD_SAMMEL_FERN), nf >= t.LORD_SAMMEL_FERN)
-    # 4 angekommen -> noch kein Angriff
-    mitgl = sorted(lt["mitglieder"])
-    for n in mitgl[:MIN - 1]:
-        L[n]["x"], L[n]["y"] = P
+    pruefe(1, "%d lebende -> kein Lord-Befehl" % (K - 1), not lord_befehle(bef))
+    L[100 + K - 1] = einheit(73, 1, 120, 300)                       # der 20., weit weg
+    t.aufnehmen([100 + K - 1])
     erg, bef = t.schritt(L, G, sichere_orte=[(94, 280), HEIM])
-    pruefe(3, "mit %d Angekommenen noch kein Lord-Angriff" % (MIN - 1), not any(b.get("angriff", {}).get("ziel") == 500 for b in bef))
-    for n in mitgl[:MIN + 2]:
-        L[n]["x"], L[n]["y"] = P
+    lb = lord_befehle(bef)
+    alle = sorted(n for n in L if L[n]["typ"] == 73)
+    pruefe(2, "%d lebende -> EIN Befehl mit allen %d auf den Lord" % (K, K), len(lb) == 1 and lb[0]["angriff"]["einheiten"] == alle)
     erg, bef = t.schritt(L, G, sichere_orte=[(94, 280), HEIM])
-    lb = [b for b in bef if b.get("angriff", {}).get("ziel") == 500]
-    pruefe(3, "ab %d Angekommenen EIN Befehl mit allen %d zugleich" % (MIN, min(MIN + 2, len(mitgl))), len(lb) == 1 and lb[0]["angriff"]["einheiten"] == mitgl[:MIN + 2])
-    # Angriff laeuft: n0 schwach + getroffen, n1 nur getroffen (stark), n2 schwach aber nicht getroffen
-    for n in mitgl[:MIN + 2]:
-        L[n]["x"], L[n]["y"], L[n]["zielart"], L[n]["zieleinheit"] = LORD[0] + 1, LORD[1], 4, 500
-    erg, bef = t.schritt(L, G, sichere_orte=[(94, 280), HEIM])          # Leben merken
-    n0, n1, n2 = mitgl[0], mitgl[1], mitgl[2]
-    L[n0]["leben"] = int(0.4 * t.VOLL); L[n1]["leben"] = int(0.9 * t.VOLL)
-    t.leben[n2] = int(0.4 * t.VOLL); L[n2]["leben"] = int(0.4 * t.VOLL)
+    raid = [b for b in bef if b.get("angriff", {}).get("gebaeude")]
+    pruefe(3, "waehrend des Angriffs kein Gebaeude-Ziel fuer Angreifer", not raid)
+    for n in alle[:5]:                                                # 5 am Lord und greifen ihn an
+        L[n].update(x=LORD[0] + 1, y=LORD[1], zielart=4, zieleinheit=500)
+    for n in alle[5:8]:                                               # 3 abgelenkt von einem Speertraeger (Typ 24)
+        L[n].update(zielart=4, zieleinheit=601)
+    lb = []
+    for _ in range(A.Einzeln.NEU_NACH + 1):                          # der Neu-Befehl kommt in genau einer dieser Runden
+        erg, bef = t.schritt(L, G, sichere_orte=[(94, 280), HEIM])
+        lb += lord_befehle(bef)
+    pruefe(4, "nach NEU_NACH Runden die Abgelenkten neu auf den Lord", lb and set(alle[5:8]) <= set(lb[0]["angriff"]["einheiten"]))
+    a = t.angriffe[-1] if getattr(t, "angriffe", None) else {}
+    pruefe(5, "Messung: am Lord %s (soll 5), abgelenkt %s (soll Typ 24: 3)" % (a.get("am_lord_max"), a.get("anderes")),
+           a.get("am_lord_max") == 5 and a.get("anderes", {}).get(24) == 3)
+    for n in alle[2:]:                                                # nur 2 ueberleben
+        del L[n]
     erg, bef = t.schritt(L, G, sichere_orte=[(94, 280), HEIM])
-    zurueck = [n for b in bef if "halten" in b for n in b["halten"]["nr"]]
-    pruefe(4, "schwach+getroffen zurueck, stark oder ungetroffen bleibt", n0 in zurueck and n1 not in zurueck and n2 not in zurueck
-           and t.lordtrupp["status"][n0].startswith("zurueck"))
+    vorbei = not t.lordtrupp["mitglieder"]
+    for i in range(K - 3):                                           # 2 alte + 17 neue = 19 -> noch kein neuer Angriff
+        L[300 + i] = einheit(73, 1, 150, 270 + i)
+    t.aufnehmen([300 + i for i in range(K - 3)])
     erg, bef = t.schritt(L, G, sichere_orte=[(94, 280), HEIM])
-    lb = [b for b in bef if b.get("angriff", {}).get("ziel") == 500]
-    pruefe(5, "eine Runde spaeter sofort wieder auf den Lord", len(lb) == 1 and n0 in lb[0]["angriff"]["einheiten"]
-           and t.lordtrupp["status"][n0] == "angriff")
-    # 6 - beim Sammeln getroffen -> Punkt gesperrt, neuer Punkt naeher an daheim (z1: 13 starben stehend am Sammelpunkt)
-    t2 = A.Einzeln(1, pruefe_begehbar=lambda pkt: set(pkt), wegtest=lambda n, p: [True] * len(p))
-    L2 = {500: einheit(55, 2, *LORD), 600: einheit(22, 2, LORD[0], LORD[1])}
-    for i in range(3):
-        L2[100 + i] = einheit(73, 1, 150 + i, 270)
-    t2.aufnehmen([100, 101, 102])
-    t2.schritt(L2, {}, sichere_orte=[(94, 280), HEIM])
-    P1 = t2.lordtrupp["punkt"]
-    for n in (100, 101, 102):
-        L2[n]["x"], L2[n]["y"] = P1
-    t2.schritt(L2, {}, sichere_orte=[(94, 280), HEIM])
-    L2[100]["leben"] -= 2000
-    t2.schritt(L2, {}, sichere_orte=[(94, 280), HEIM])
-    P2 = t2.lordtrupp["punkt"]
-    pruefe(6, "getroffen am Sammelpunkt %s -> gesperrt, neuer Punkt %s naeher an daheim" % (P1, P2),
-           P1 in t2.lord_schlecht and A.schach(P2, HEIM) < A.schach(P1, HEIM))
+    pruefe(6, "unter %d uebrig -> vorbei; mit 19 lebenden noch kein neuer Angriff" % getattr(A.Einzeln, "LORD_REST", 3),
+           vorbei and not lord_befehle(bef))
     print("\n%d von %d gruen" % (sum(ok), len(ok)))
     return 0 if all(ok) else 1
 

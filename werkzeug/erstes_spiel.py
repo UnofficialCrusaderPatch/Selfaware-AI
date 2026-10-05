@@ -225,6 +225,8 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
     befehlskanal.STRENG = True     # ab hier bricht jeder Modulfehler den Lauf laut ab
     w = Waechter(SP, posten=plan["lager_mitte"]) if mit_waechter else None
     trupp = Einzeln(SP, pruefe_begehbar=pruefe_begehbar, wegtest=wegtest) if assassinen else None
+    if trupp is not None:   # S1 (Plan_Lord.md): was tut der Angriff auf den Lord, Runde fuer Runde
+        trupp.wellen_protokoll = os.path.join(D, "angriff_live_%s_i%d.jsonl" % (time.strftime("%Y%m%d_%H%M%S"), INSTANZ))
     wirt = Wirtschaft(plan, SP, baue_schnell, [nr for nr, _, _ in gebaeude_von(SP, 10)])
     karte_laden()        # Begehbarkeit fuer kurze Rueckzuege - jetzt, solange das Spiel noch steht
     lernlog = os.path.join(D, "ertrag_live_%s_i%d.jsonl" % (time.strftime("%Y%m%d_%H%M%S"), INSTANZ))   # je Instanz: Serien laufen parallel

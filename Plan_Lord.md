@@ -31,6 +31,23 @@ Die Liga-Partie gegen Rotkaeppchen gewinnen: ihren Lord toeten, ohne unseren zu 
 leben, mittlerer Abstand zum Lord, wer greift wen an, wo stirbt wer. Abnahme: fuer jede Welle in 3 Laeufen ist
 beantwortet, ob sie den Lord erreicht, und wenn nein, woran sie scheitert (Weg, Bogenschuetzen, Nahkaempfer, Mauer).
 
+**Aenderung 21:34 (Daniel): "warum jetzt ploetzlich in Wellen? ... du raidest eh schon mit Assassinen, dann wartest du,
+bis du eine kritische Menge auf dem kompletten Feld hast, und alle greifen dann gleichzeitig den Lord an."** Sammelpunkt,
+Wellen und Rueckzug-Mikro (meine Konstruktion) fallen weg. Neu: raiden wie bisher; sobald 20 Assassinen leben (Daniel
+21:05: "lieber 20 auf einmal"), greifen ALLE mit einem Befehl den Lord an; sind davon weniger als 3 uebrig, wieder raiden
+bis 20. Die S1-Messung haengt an diesem Angriff. Abnahme: Attrappe (19 -> kein Angriff, 20 verstreute -> ein Befehl mit
+allen 20, Raids nehmen keine Angreifer, Ende bei < 3) gruen und gegen den alten Stand rot; Serie mit 3 Laeufen beantwortet
+je Angriff: wie viele kamen am Lord an, wann, was hielt die anderen auf, Lord-Schaden.
+
+S1 ausgefuehrt ab 05.10. 21:33 (Daniel: "ja, fang mit S1 an"). Vorher festgelegt:
+- Neu: `assassinen.py` schreibt je Welle und Runde eine Zeile nach `daten/wellen_live_<zeit>_i<inst>.jsonl` (leben,
+  Abstand zum Lord mittel/kleinster, greifen Lord an, greifen anderes an + Typ, ohne Ziel, Feinde fern/nah um die Welle,
+  Lord-Leben). `werkzeug/wellen_auswerten.py` macht daraus je Welle eine Zeile.
+- Gegenprobe kein neues Verhalten: Attrappe gibt mit und ohne Protokoll dieselben Befehle aus.
+- Abnahme S1: fuer jede Welle in 3 Laeufen steht da, ob sie den Lord erreicht (jemand <= 3 Felder und greift ihn an),
+  und sonst die Ursache: kein Weg (Abstand faellt nicht) / abgefangen (Ziel ist ein anderer Feind) / unterwegs
+  gestorben / angekommen ohne Schaden.
+
 **S2 - Die eine Ursache aus S1 beheben, die die meisten Wellen stoppt.** Was genau, entscheidet die Messung aus S1 -
 nicht vorher raten. Abnahme: Lord-Schaden je Welle im Mittel ueber 3 Laeufe deutlich ueber der Basis (Zahl lege ich
 nach S1 fest, bevor gebaut wird).
