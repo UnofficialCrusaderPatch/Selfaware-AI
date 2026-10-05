@@ -376,7 +376,7 @@ class Einzeln:
                 # Kreis herum", waehrenddessen reissen die anderen ihre Wirtschaft ab. Bevorzugt Punkte auf dem Ring KREIS_R um mitte.
                 # und nicht unter ihre Fernkaempfer (Pruefung 18: der Ring streifte bei (209,259) ihre Aussenmauer)
                 fern = getattr(self, "_fern", [])
-                return min(kurz, key=lambda q: (weg(q), min(schach(q, h) for h in alle_heim) < self.HEIM_ABSTAND,
+                return min(kurz, key=lambda q: (weg(q), self._an_feindburg(q), min(schach(q, h) for h in alle_heim) < self.HEIM_ABSTAND,
                                                 self._anzahl(q, fern, self.RUECKZUG_FERN),
                                                 abs(schach(q, mitte) - self.KREIS_R) // 4, -self._naechster(q, nah)[0]))
             if alle_heim:                    # Heim zu schwach: seitlich weg, die Verfolger NICHT an unsere Burg ziehen
@@ -384,6 +384,10 @@ class Einzeln:
                                                 -self._naechster(q, nah)[0]))
             return min(kurz, key=lambda q: (weg(q), -self._naechster(q, nah)[0]))
         return min(heim, key=lambda h: schach(ort, h)) if heim else None
+
+    def _an_feindburg(self, q):
+        """True, wenn q naeher als SCHUSSWEITE an einem feindlichen Lord (ihrer Burg) liegt."""
+        return any(schach(q, b) < SCHUSSWEITE for b in getattr(self, "_feindburg", []))
 
     @staticmethod
     def _im_weg(von, nach, L, ich):
@@ -508,6 +512,9 @@ class Einzeln:
             orte = [o for o in orte if o in gut] or orte
         fern, nah = self._feinde(L)
         self._fern = fern                    # 4a: Fluchtpunkte nicht unter feindliche Fernkaempfer
+        # 4a: ihre Burg ist tabu (gewinn_1, Tick 4.312: Assassine 163 starb auf der Flucht an ihrer Aussenmauer, 13 Felder
+        # neben ihrem Lord, 14 Fernkaempfer im Umkreis 40) - Fluchtpunkte und Kreismitte mind. SCHUSSWEITE von ihrem Lord
+        self._feindburg = [(e["x"], e["y"]) for e in L.values() if e["typ"] == 55 and e["besitzer"] not in (0, self.sp)]
         # Rueckzugs-Kandidaten fuer alle, die Feinde nah haben - EIN Modulaufruf prueft, welche begehbar sind
         self._kand = {}
         for n in self.mitglieder:
@@ -647,9 +654,10 @@ class Einzeln:
             mitte = [ort[i] + (sicher[i] - ort[i]) * self.KREIS_MITTE / lang for i in (0, 1)]
             # der ganze Ring soll HEIM_ABSTAND von der Burg wegbleiben: Mitte notfalls von der naechsten Burg wegschieben
             # (Pruefung 18: Mitte 17 Felder neben dem Bergfried, halber Ring gesperrt, er driftete zur Burg)
-            for h in getattr(self, "_heim", []):
+            tabu = [(h, self.HEIM_ABSTAND + self.KREIS_R) for h in getattr(self, "_heim", [])]
+            tabu += [(b, SCHUSSWEITE + self.KREIS_R) for b in getattr(self, "_feindburg", [])]
+            for h, soll in tabu:
                 d = max(abs(mitte[0] - h[0]), abs(mitte[1] - h[1]))
-                soll = self.HEIM_ABSTAND + self.KREIS_R
                 if d < soll:
                     vx, vy = mitte[0] - h[0], mitte[1] - h[1]
                     if vx == 0 and vy == 0:
