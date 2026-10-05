@@ -417,7 +417,9 @@ class Ertragsplaner:
         if (runde - 1) % self.PLANEN:
             return []
         ev = []
-        self.braucht_gold = bool(self.wirt.B_offen)     # Seasoning-B hat beim Gold Vorrang
+        # Seasoning-B hat beim Gold Vorrang - aber erst, wenn A reif und B dran ist (bremse_2: B war die ganze Partie
+        # "offen", weil A spaeter kommt; braucht_gold stand immer auf True, in 28.700 Ticks nur 1 Assassine)
+        self.braucht_gold = bool(self.wirt.B_offen) and self.wirt.A_reif_tick is not None
         eigen = [dict(g, nr=n) for n, g in G.items() if g["besitzer"] == self.sp]
         holz, stein, gold = st.get("holz", 0), st.get("stein", 0), st.get("gold", 0)
         # Steuern nach Beliebtheit (Regel bleibt, bis der Planer sie mitrechnet)

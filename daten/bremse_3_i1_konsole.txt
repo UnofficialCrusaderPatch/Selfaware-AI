@@ -1,0 +1,354 @@
+CODE-KENNUNG c5a44f01 (14 Dateien: assassinen.py d73598, bauen.py fe647a, befehl.py f9d5aa, erstes_spiel.py 6ca61e, ertrag_startwerte_M19.json b566ad, ertragsplaner.py 11474f, farmen_mischen.py f28949, kennung.py c1d186, laden.py 69ccb2, logik.lua 1af8f2, serie.py 3ff731, steuerkarte.py 57bd5a, waechter.py b98179, wirtschaft.py fd8fa8)
+== Phase 1: neue Partie ab Tick 0, Tempo 300 durchgehend, ohne Pausen (Plan eroeffnung_plan_M19.json)
+Zuruecksetzen: Ansicht 14 (Partie vorbei: 0) -> Hauptmenue, pausiert
+SAAT fest aus saat_liga.json (Modul meldet {'karte': 1788115329, 'partie': 1788115329, 'wert1': 7474, 'wert2': 22872, 'zaehler1': 1, 'zaehler2': 118})
+Partie laeuft seit Tick 106: Lords da, unser Lord bei (143, 268), {'Ansicht': 14, 'gameOver': 0, 'Mensch': 1, 'Platz': 1}
+ERSTE BAUBEFEHLE bei Tick 159: 16 von 20 Holz-Bauten stehen bei Tick 332 (Kornspeicher, Markt, Holzfaeller, Steinbruch, Ochsenjoch, Huetten); nicht gebaut: [('Steinbruch', 80, 271), ('Ochsenkarren', 87, 278), ('Huette', 134, 267), ('Huette', 134, 262)]
+VERKAUFT bis Tick 435: {'kaese': 3, 'brot': 3, 'apfel': 3} Lose, Gold 195
+RAID ZUERST: Nahrung da bei Tick 381, {'kaese': 3, 'brot': 3, 'apfel': 3} verkauft (Lose zu 5); Soeldnerposten (145, 274); 1 Assassinen angeworben (freie Leute am Feuer jetzt 2) -> Gold 5, Nahrung uebrig {'fleisch': 15}, Tick 616
+NACHGEHOLT bei Tick 745: 3 von 7 (Apfelplantagen A + Rest); nicht gebaut: [('Huette', 134, 267), ('Apfelplantage', 79, 237), ('Apfelplantage', 82, 247), ('Apfelplantage', 92, 245)]; Holz 55, Gold 5
+Apfelplantagen A 3, B 3 spaeter [(89, 235), (80, 225), (70, 223)]; altes Lager bleibt mit {'holz': 55}
+== Phase 2: Echtzeit, Tempo 300, 10 Minuten, Waechter an
+Ertrags-Planer: Baukosten aus dem Spiel {1: {'holz': 5}, 3: {'holz': 5}, 4: {'holz': 5}, 5: {'holz': 20, 'stein': 6}, 7: {'holz': 3, 'gold': 60}, 10: {}, 19: {'holz': 5}, 20: {'holz': 25}, 32: {'holz': 3, 'gold': 15}}; Protokoll ertrag_live_20261005_232528_i1.jsonl
+Ertrags-Planer: Startwerte aus 10 frueheren Partien: Eisenmine 0.61 (Gewicht 63177, Anlauf 6664); Steinbruch+Ochsenjoch 6.72 (Gewicht 54086, Anlauf 3644); Apfelplantage 3.25 (Gewicht 131019, Anlauf 2224); Jaegerhuette 3.07 (Gewicht 82848, Anlauf 4427); Holzfaeller 13.24 (Gewicht 151124, Anlauf 4000)
+Wirtschaft: Apfel A [(79, 237), (82, 247), (92, 245)], B [(89, 235), (80, 225), (70, 223)]; alte Lagerteile [6, 7, 8, 9]
+Tick | Holz Stein Eisen | Aepfel Brot | Beliebt | Leute/Platz (Feuer) | Holzf. Apfelb. | Ereignis
+ 1083 |  55   0   0 |   0   0 |  98.75 | 18/18 (4) | 11 0 | Stellung: 12 Truppen zum Posten (97, 283); ZIELWAHL 163 -> 55 Typ 3 in 35: Fern<=10 0, <=20 0, <=30 0, Leben 12500; 0 Assassinen ohne Ziel (); 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen); STEUER 2 -> 3 (Beliebtheit 98.75); PLANER Lage (Gewinn bis Ende / Amortisation): Steinbruch+Ochsenjoch 66/1020, Apfelplantage 24/1991, Holzfaeller 10/988, Jaegerhuette -47/9552 [Horizont], Eisenmine -47/3869 [Horizont] | Stein-Reserve 0; PLANER wartet auf Steinbruch+Ochsenjoch (fehlt: )
+ 1192 |  55   0   0 |   0   0 |  98.75 | 18/18 (2) | 14 0 | verkauft: holz,fleisch x1
+ 1223 |  45   0   0 |   0   0 |  98.50 | 18/18 (2) | 14 0 | Apfelplantage A nachgeholt bei (79, 237): (79, 237) (Gold 20, Holz 45)
+ 1259 |  42   0   0 |   0   0 |  98.50 | 18/18 (3) | 14 0 | Huette (132, 266) (Bedarf 19, Platz 18, Leute 18, Feuer 3)
+ 1294 |  37   0   0 |   0   0 |  98.50 | 19/26 (3) | 14 0 | verkauft: holz
+ZEITEN nach 10 Runden: lesen 0.39 s, wirtschaft 0.24 s, bauen_werben_verkauf 0.09 s, haus_lager_zeile 0.06 s, waechter 0.04 s, assassinen 0.03 s
+ 1370 |  32   0   0 |   0   0 |  98.50 | 20/26 (0) | 14 1 | -
+ZEITEN nach 20 Runden: lesen 0.77 s, wirtschaft 0.32 s, bauen_werben_verkauf 0.09 s, haus_lager_zeile 0.06 s, waechter 0.04 s, assassinen 0.04 s
+ 1525 |  32   0   0 |   0   0 |  98.25 | 23/26 (0) | 14 1 | STEUER 3 -> 4 (Beliebtheit 98.25)
+ 1609 |  32   0   0 |   0   0 |  97.50 | 25/26 (2) | 14 1 | Apfelplantage A nachgeholt bei (82, 247): (82, 247) (Gold 15, Holz 32)
+ZEITEN nach 30 Runden: lesen 1.15 s, wirtschaft 0.44 s, bauen_werben_verkauf 0.09 s, haus_lager_zeile 0.06 s, waechter 0.04 s, assassinen 0.04 s
+ 1694 |  29   0   0 |   0   0 |  97.50 | 26/26 (4) | 14 1 | -
+ 1747 |  29   0   0 |   0   0 |  97.50 | 26/26 (4) | 14 2 | Gebaeude 55 (Typ 3) zerstoert; ZIELWAHL 163 -> 39 Typ 3 in 11: Fern<=10 0, <=20 0, <=30 2, Leben 12500; 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+ZEITEN nach 40 Runden: lesen 1.53 s, wirtschaft 0.45 s, bauen_werben_verkauf 0.09 s, assassinen 0.07 s, haus_lager_zeile 0.06 s, waechter 0.04 s
+ 1833 |  29   0   0 |   0   0 |  96.75 | 26/26 (5) | 14 2 | -
+ 1903 |  29   0   0 |   0   0 |  96.75 | 26/26 (6) | 14 2 | MESSUNG verletzt 163: leben 12500 -> 12450 | ort (193,268) zustand 106 | naechster Feind Typ 73 in 17 | naechster Fernkaempfer Typ 22 in 30 | Fern<=40: 9 | Nah<=8: 0 | naechstes Feindgebaeude Typ 3 in 3 | Ziel 39 in 3; 1 Assassinen warten/ziehen sich zurueck ausser Reichweite
+ 1925 |  29   0   0 |   0   0 |  96.75 | 26/26 (6) | 14 2 | MESSUNG verletzt 163: leben 12450 -> 12230 | ort (193,268) zustand 106 | naechster Feind Typ 73 in 15 | naechster Fernkaempfer Typ 22 in 30 | Fern<=40: 9 | Nah<=8: 0 | naechstes Feindgebaeude Typ 3 in 3 | Ziel None in -1
+ 1938 |  29   0   0 |   0   0 |  96.75 | 26/26 (6) | 14 2 | MESSUNG verletzt 163: leben 12230 -> 12110 | ort (193,268) zustand 106 | naechster Feind Typ 73 in 15 | naechster Fernkaempfer Typ 22 in 30 | Fern<=40: 9 | Nah<=8: 0 | naechstes Feindgebaeude Typ 3 in 3 | Ziel None in -1
+ 1951 |  29   0   0 |   0   0 |  96.75 | 26/26 (6) | 14 2 | ZIELWAHL 163 -> 39 Typ 3 in 3: Fern<=10 0, <=20 0, <=30 2, Leben 12110; 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+ 1976 |  29   0   0 |   0   0 |  96.75 | 26/26 (6) | 14 2 | ANWERBEN-BREMSE: Gold 0 (braucht 100), Feuer 6, Planer braucht Gold True, A-Farmen offen 1
+ZEITEN nach 50 Runden: lesen 1.92 s, wirtschaft 0.45 s, assassinen 0.14 s, bauen_werben_verkauf 0.09 s, haus_lager_zeile 0.06 s, waechter 0.05 s
+ 1992 |  29   0   0 |   0   0 |  96.75 | 26/26 (6) | 14 2 | PLANER Lage (Gewinn bis Ende / Amortisation): Steinbruch+Ochsenjoch 40/1020, Apfelplantage 16/1991, Holzfaeller 5/976, Jaegerhuette -53/9552 [Horizont], Eisenmine -58/3869 [Horizont] | Stein-Reserve 0; PLANER wartet auf Steinbruch+Ochsenjoch (fehlt: holz 1)
+ 2054 |  29   0   0 |   0   0 |  96.00 | 26/26 (6) | 14 2 | AUSWEICHEN 163: Bedrohung 2.0 (Nahkaempfer im Umkreis 10, schlagende Arbeiter im Umkreis 3) gegen 1 eigene, Leben 12110 -> nach (169, 267) (Heim: (97, 283) eigene 1.0 gegen Verfolger 2.0; (141, 269) eigene 1.0 gegen Verfolger 2.0)
+ 2080 |  29   0   0 |   0   0 |  96.00 | 26/26 (6) | 14 2 | FLUCHT 163: ort (193, 267) zustand 101 lauf (169, 267) Verfolger in 6 Leben 12110 -> laeuft weiter
+ 2090 |  29   0   0 |   0   0 |  96.00 | 26/26 (6) | 14 2 | FLUCHT 163: ort (193, 267) zustand 101 lauf (169, 267) Verfolger in 5 Leben 12110 -> laeuft weiter
+ 2107 |  29   0   0 |   0   0 |  96.00 | 26/26 (6) | 14 2 | FLUCHT 163: ort (192, 267) zustand 101 lauf (169, 267) Verfolger in 5 Leben 12110 -> laeuft weiter
+ 2116 |  29   0   0 |   0   0 |  96.00 | 26/26 (6) | 14 2 | FLUCHT 163: ort (191, 267) zustand 101 lauf (169, 267) Verfolger in 5 Leben 12110 -> laeuft weiter
+ZEITEN nach 60 Runden: lesen 2.29 s, wirtschaft 0.46 s, assassinen 0.18 s, bauen_werben_verkauf 0.09 s, haus_lager_zeile 0.06 s, waechter 0.05 s
+ 2129 |  29   0   0 |   0   0 |  96.00 | 26/26 (6) | 14 2 | FLUCHT 163: ort (190, 267) zustand 101 lauf (169, 267) Verfolger in 6 Leben 12110 -> laeuft weiter
+ 2147 |  29   0   0 |   0   0 |  96.00 | 26/26 (6) | 14 2 | FLUCHT 163: ort (189, 267) zustand 101 lauf (169, 267) Verfolger in 5 Leben 12110 -> laeuft weiter
+ 2161 |  29   0   0 |   0   0 |  96.00 | 26/26 (6) | 14 2 | FLUCHT 163: ort (188, 266) zustand 101 lauf (169, 267) Verfolger in 6 Leben 12110 -> laeuft weiter
+ 2174 |  29   0   0 |   0   0 |  96.00 | 26/26 (6) | 14 2 | FLUCHT 163: ort (187, 266) zustand 101 lauf (169, 267) Verfolger in 6 Leben 12110 -> laeuft weiter
+ 2186 |  29   0   0 |   0   0 |  96.00 | 26/26 (6) | 14 2 | FLUCHT 163: ort (187, 266) zustand 101 lauf (169, 267) Verfolger in 6 Leben 12110 -> laeuft weiter
+ 2201 |  29   0   0 |   0   0 |  95.25 | 26/26 (6) | 14 2 | FLUCHT 163: ort (186, 266) zustand 101 lauf (169, 267) Verfolger in 7 Leben 12110 -> laeuft weiter
+ 2214 |  29   0   0 |   0   0 |  95.25 | 26/26 (6) | 14 2 | FLUCHT 163: ort (185, 266) zustand 101 lauf (169, 267) Verfolger in 8 Leben 12110 -> laeuft weiter
+ 2227 |  29   0   0 |   0   0 |  95.25 | 26/26 (6) | 14 2 | FLUCHT 163: ort (184, 266) zustand 101 lauf (169, 267) Verfolger in 9 Leben 12110 -> laeuft weiter
+ 2241 |  29   0   0 |   0   0 |  95.25 | 26/26 (6) | 14 2 | FLUCHT 163: ort (183, 266) zustand 101 lauf (169, 267) Verfolger in 9 Leben 12110 -> laeuft weiter
+ 2254 |  29   0   0 |   0   0 |  95.25 | 26/26 (6) | 14 2 | FLUCHT 163: ort (182, 266) zustand 101 lauf (169, 267) Verfolger in 10 Leben 12110 -> laeuft weiter
+ZEITEN nach 70 Runden: lesen 2.69 s, wirtschaft 0.46 s, assassinen 0.18 s, bauen_werben_verkauf 0.09 s, haus_lager_zeile 0.06 s, waechter 0.06 s
+ 2267 |  29   0   0 |   0   0 |  95.25 | 26/26 (6) | 14 2 | FLUCHT 163: ort (182, 266) zustand 101 lauf (169, 267) Verfolger in 9 Leben 12110 -> laeuft weiter
+ 2282 |  29   0   0 |   0   0 |  95.25 | 26/26 (6) | 14 2 | FLUCHT 163: ort (181, 266) zustand 101 lauf (169, 267) Verfolger in 9 Leben 12110 -> laeuft weiter
+ 2294 |  29   0   0 |   0   0 |  95.25 | 26/26 (6) | 14 2 | FLUCHT 163: ort (180, 266) zustand 101 lauf (169, 267) Verfolger in 9 Leben 12110 -> laeuft weiter
+ 2311 |  29   0   0 |   0   0 |  95.25 | 26/26 (6) | 14 2 | FLUCHT 163: ort (179, 266) zustand 101 lauf (169, 267) Verfolger in 9 Leben 12110 -> laeuft weiter
+ 2323 |  29   0   0 |   0   0 |  95.25 | 26/26 (6) | 14 2 | FLUCHT 163: ort (178, 266) zustand 101 lauf (169, 267) Verfolger in 10 Leben 12110 -> laeuft weiter
+ 2339 |  29   0   0 |   0   0 |  95.25 | 26/26 (6) | 14 2 | FLUCHT 163: ort (177, 266) zustand 101 lauf (169, 267) Verfolger in 10 Leben 12110 -> laeuft weiter
+ 2352 |  29   0   0 |   0   0 |  95.25 | 26/26 (6) | 14 2 | FLUCHT 163: ort (176, 266) zustand 101 lauf (169, 267) Verfolger in 11 Leben 12110 -> laeuft weiter
+ 2368 |  29   0   0 |   0   0 |  95.25 | 26/26 (6) | 14 2 | FLUCHT 163: ort (175, 266) zustand 101 lauf (169, 267) Verfolger in 11 Leben 12110 -> laeuft weiter
+ 2383 |  29   0   0 |   0   0 |  95.25 | 26/26 (6) | 14 2 | FLUCHT 163: ort (174, 266) zustand 101 lauf (169, 267) Verfolger in 11 Leben 12110 -> laeuft weiter
+ 2396 |  29   0   0 |   0   0 |  95.25 | 26/26 (6) | 14 2 | FLUCHT 163: ort (174, 266) zustand 101 lauf (169, 267) Verfolger in 10 Leben 12110 -> laeuft weiter
+ZEITEN nach 80 Runden: lesen 3.09 s, wirtschaft 0.47 s, assassinen 0.19 s, bauen_werben_verkauf 0.09 s, waechter 0.06 s, haus_lager_zeile 0.06 s
+ 2409 |  29   0   0 |   0   0 |  94.50 | 26/26 (6) | 14 2 | FLUCHT 163: ort (173, 266) zustand 101 lauf (169, 267) Verfolger in 10 Leben 12110 -> laeuft weiter; STEUER 4 -> 3 (Beliebtheit 94.50)
+ 2431 |  29   0   0 |   0   0 |  94.50 | 26/26 (6) | 14 2 | FLUCHT 163: ort (171, 266) zustand 101 lauf (169, 267) Verfolger in 11 Leben 12110 -> neu nach (171, 241) (Heim: (97, 283) eigene 1.0 gegen Verfolger 2.0; (141, 269) eigene 1.0 gegen Verfolger 2.0)
+ 2458 |  29   0   0 |   0   0 |  94.50 | 26/26 (6) | 14 2 | FLUCHT 163: ort (170, 266) zustand 101 lauf (171, 241) Verfolger in 10 Leben 12110 -> laeuft weiter
+ 2469 |  29   0   0 |   0   0 |  94.50 | 26/26 (6) | 14 2 | FLUCHT 163: ort (170, 265) zustand 101 lauf (171, 241) Verfolger in 9 Leben 12110 -> laeuft weiter
+ 2484 |  29   0   0 |   0   0 |  94.50 | 26/26 (6) | 14 2 | FLUCHT 163: ort (170, 264) zustand 101 lauf (171, 241) Verfolger in 8 Leben 12110 -> laeuft weiter
+ 2497 |  29   0   0 |   0   0 |  94.50 | 26/26 (6) | 14 2 | FLUCHT 163: ort (170, 263) zustand 101 lauf (171, 241) Verfolger in 8 Leben 12110 -> laeuft weiter
+ 2507 |  29   0   0 |   0   0 |  94.50 | 26/26 (6) | 14 2 | FLUCHT 163: ort (170, 263) zustand 101 lauf (171, 241) Verfolger in 7 Leben 12110 -> laeuft weiter
+ 2524 |  29   0   0 |   0   0 |  94.50 | 26/26 (6) | 14 2 | FLUCHT 163: ort (170, 262) zustand 101 lauf (171, 241) Verfolger in 6 Leben 12110 -> laeuft weiter
+ 2538 |  29   0   0 |   0   0 |  94.50 | 26/26 (6) | 14 2 | FLUCHT 163: ort (170, 261) zustand 101 lauf (171, 241) Verfolger in 5 Leben 12110 -> laeuft weiter
+ 2551 |  29   0   0 |   0   0 |  94.50 | 26/26 (6) | 14 2 | FLUCHT 163: ort (170, 260) zustand 101 lauf (171, 241) Verfolger in 4 Leben 12110 -> laeuft weiter
+ZEITEN nach 90 Runden: lesen 3.48 s, wirtschaft 0.50 s, assassinen 0.23 s, bauen_werben_verkauf 0.09 s, waechter 0.06 s, haus_lager_zeile 0.06 s
+ 2564 |  29   0   0 |   0   0 |  94.50 | 26/26 (6) | 14 2 | FLUCHT 163: ort (170, 259) zustand 101 lauf (171, 241) Verfolger in 4 Leben 12110 -> laeuft weiter
+ 2580 |  29   0   0 |   0   0 |  94.50 | 26/26 (6) | 14 2 | FLUCHT 163: ort (170, 258) zustand 101 lauf (171, 241) Verfolger in 5 Leben 12110 -> laeuft weiter
+ 2594 |  29   0   0 |   0   0 |  94.50 | 26/26 (6) | 14 2 | FLUCHT 163: ort (170, 257) zustand 101 lauf (171, 241) Verfolger in 6 Leben 12110 -> laeuft weiter
+ 2606 |  29   0   0 |   0   0 |  94.25 | 26/26 (6) | 14 2 | FLUCHT 163: ort (170, 256) zustand 101 lauf (171, 241) Verfolger in 7 Leben 12110 -> laeuft weiter
+ 2622 |  29   0   0 |   0   0 |  94.25 | 26/26 (6) | 14 2 | FLUCHT 163: ort (170, 255) zustand 101 lauf (171, 241) Verfolger in 8 Leben 12110 -> laeuft weiter
+ 2635 |  29   0   0 |   0   0 |  94.25 | 26/26 (6) | 14 2 | FLUCHT 163: ort (170, 255) zustand 101 lauf (171, 241) Verfolger in 7 Leben 12110 -> laeuft weiter
+ 2649 |  29   0   0 |   0   0 |  94.25 | 26/26 (6) | 14 2 | FLUCHT 163: ort (170, 254) zustand 101 lauf (171, 241) Verfolger in 7 Leben 12110 -> laeuft weiter
+ 2662 |  29   0   0 |   0   0 |  94.25 | 26/26 (6) | 14 2 | FLUCHT 163: ort (170, 253) zustand 101 lauf (171, 241) Verfolger in 8 Leben 12110 -> laeuft weiter
+ 2671 |  29   0   0 |   0   0 |  94.25 | 26/26 (6) | 14 2 | FLUCHT 163: ort (170, 252) zustand 101 lauf (171, 241) Verfolger in 8 Leben 12110 -> laeuft weiter
+ 2686 |  29   0   0 |   0   0 |  94.25 | 26/26 (6) | 14 2 | ANWERBEN-BREMSE: Gold 12 (braucht 100), Feuer 6, Planer braucht Gold True, A-Farmen offen 1; FLUCHT 163: ort (170, 251) zustand 101 lauf (171, 241) Verfolger in 8 Leben 12110 -> laeuft weiter
+ZEITEN nach 100 Runden: lesen 3.87 s, wirtschaft 0.51 s, assassinen 0.23 s, bauen_werben_verkauf 0.09 s, waechter 0.07 s, haus_lager_zeile 0.06 s
+ 2700 |  29   0   0 |   0   0 |  94.25 | 26/26 (6) | 14 2 | FLUCHT 163: ort (170, 251) zustand 101 lauf (171, 241) Verfolger in 7 Leben 12110 -> laeuft weiter; PLANER Lage (Gewinn bis Ende / Amortisation): Steinbruch+Ochsenjoch 19/1020, Apfelplantage 10/1991, Holzfaeller 2/976, Jaegerhuette -57/9552 [Horizont], Eisenmine -68/3869 [Horizont] | Stein-Reserve 0; PLANER wartet auf Steinbruch+Ochsenjoch (fehlt: holz 1)
+ 2715 |  29   0   0 |   0   0 |  94.25 | 26/26 (6) | 14 2 | FLUCHT 163: ort (170, 250) zustand 101 lauf (171, 241) Verfolger in 7 Leben 12110 -> laeuft weiter
+ 2729 |  29   0   0 |   0   0 |  94.25 | 26/26 (6) | 14 2 | FLUCHT 163: ort (170, 249) zustand 101 lauf (171, 241) Verfolger in 7 Leben 12110 -> laeuft weiter
+ 2746 |  29   0   0 |   0   0 |  94.25 | 26/26 (6) | 14 2 | FLUCHT 163: ort (170, 248) zustand 101 lauf (171, 241) Verfolger in 7 Leben 12110 -> laeuft weiter
+ 2760 |  29   0   0 |   0   0 |  94.25 | 26/26 (6) | 14 2 | FLUCHT 163: ort (170, 247) zustand 101 lauf (171, 241) Verfolger in 7 Leben 12110 -> laeuft weiter
+ 2773 |  29   0   0 |   0   0 |  94.25 | 26/26 (6) | 14 2 | FLUCHT 163: ort (170, 246) zustand 101 lauf (171, 241) Verfolger in 8 Leben 12110 -> laeuft weiter
+ 2786 |  29   0   0 |   0   0 |  94.25 | 26/26 (6) | 14 2 | FLUCHT 163: ort (170, 245) zustand 101 lauf (171, 241) Verfolger in 8 Leben 12110 -> laeuft weiter
+ 2800 |  29   0   0 |   0   0 |  91.50 | 26/26 (6) | 14 2 | FLUCHT 163: ort (170, 244) zustand 101 lauf (171, 241) Verfolger in 8 Leben 12110 -> neu nach (157, 237) (Heim: (97, 283) eigene 1.0 gegen Verfolger 3.0; (141, 269) eigene 1.0 gegen Verfolger 3.0)
+ 2823 |  29   0   0 |   0   0 |  91.50 | 26/26 (6) | 14 2 | FLUCHT 163: ort (170, 243) zustand 101 lauf (157, 237) Verfolger in 9 Leben 12110 -> laeuft weiter
+ 2840 |  29   0   0 |   0   0 |  91.50 | 26/26 (6) | 14 2 | FLUCHT 163: ort (169, 243) zustand 101 lauf (157, 237) Verfolger in 8 Leben 12110 -> laeuft weiter
+ZEITEN nach 110 Runden: lesen 4.28 s, wirtschaft 0.51 s, assassinen 0.27 s, bauen_werben_verkauf 0.09 s, waechter 0.07 s, haus_lager_zeile 0.06 s
+ 2853 |  29   0   0 |   0   0 |  91.50 | 26/26 (6) | 14 2 | FLUCHT 163: ort (168, 243) zustand 101 lauf (157, 237) Verfolger in 8 Leben 12110 -> laeuft weiter; PLANER Ochsenjoch an Steinbruch 58: erster Ochse beladen unterwegs -> sofort der zweite (Joche 1, Haufen 0) -> (83, 267)
+ 2889 |  24   0   0 |   0   0 |  91.50 | 26/26 (6) | 14 2 | FLUCHT 163: ort (166, 243) zustand 101 lauf (157, 237) Verfolger in 5 Leben 12110 -> laeuft weiter
+ 2902 |  24   0   0 |   0   0 |  91.50 | 26/26 (5) | 14 2 | FLUCHT 163: ort (165, 243) zustand 101 lauf (157, 237) Verfolger in 5 Leben 12110 -> laeuft weiter
+ 2915 |  24   0   0 |   0   0 |  91.50 | 26/26 (5) | 14 2 | FLUCHT 163: ort (164, 243) zustand 101 lauf (157, 237) Verfolger in 5 Leben 12110 -> laeuft weiter
+ 2928 |  24   0   0 |   0   0 |  91.50 | 26/26 (5) | 14 2 | FLUCHT 163: ort (163, 243) zustand 101 lauf (157, 237) Verfolger in 5 Leben 12110 -> laeuft weiter
+ 2942 |  24   0   0 |   0   0 |  91.50 | 26/26 (5) | 14 2 | FLUCHT 163: ort (162, 242) zustand 101 lauf (157, 237) Verfolger in 5 Leben 12110 -> laeuft weiter
+ 2955 |  24   0   0 |   0   0 |  91.50 | 26/26 (5) | 14 2 | FLUCHT 163: ort (162, 242) zustand 101 lauf (157, 237) Verfolger in 4 Leben 12110 -> laeuft weiter
+ 2970 |  24   0   0 |   0   0 |  91.50 | 26/26 (5) | 14 2 | FLUCHT 163: ort (161, 241) zustand 101 lauf (157, 237) Verfolger in 5 Leben 12110 -> laeuft weiter
+ 2982 |  24   0   0 |   3   0 |  91.50 | 26/26 (5) | 14 2 | FLUCHT 163: ort (160, 240) zustand 101 lauf (157, 237) Verfolger in 6 Leben 12110 -> neu nach (147, 232) (Heim: (97, 283) eigene 1.0 gegen Verfolger 3.0; (141, 269) eigene 1.0 gegen Verfolger 3.0)
+ 3008 |  24   0   0 |   4   0 |  91.25 | 26/26 (5) | 14 2 | FLUCHT 163: ort (158, 239) zustand 101 lauf (147, 232) Verfolger in 8 Leben 12110 -> laeuft weiter
+ZEITEN nach 120 Runden: lesen 4.67 s, wirtschaft 0.58 s, assassinen 0.31 s, bauen_werben_verkauf 0.09 s, waechter 0.08 s, haus_lager_zeile 0.06 s
+ 3021 |  24   0   0 |   4   0 |  91.25 | 26/26 (5) | 14 2 | FLUCHT 163: ort (158, 239) zustand 101 lauf (147, 232) Verfolger in 7 Leben 12110 -> laeuft weiter
+ 3035 |  24   0   0 |   4   0 |  91.25 | 26/26 (5) | 14 2 | FLUCHT 163: ort (157, 239) zustand 101 lauf (147, 232) Verfolger in 7 Leben 12110 -> laeuft weiter
+ 3048 |  24   0   0 |   4   0 |  91.25 | 26/26 (5) | 14 2 | FLUCHT 163: ort (156, 239) zustand 101 lauf (147, 232) Verfolger in 7 Leben 12110 -> laeuft weiter
+ 3061 |  24   0   0 |   4   0 |  91.25 | 26/26 (5) | 14 2 | FLUCHT 163: ort (155, 239) zustand 101 lauf (147, 232) Verfolger in 8 Leben 12110 -> laeuft weiter
+ 3074 |  24   0   0 |   4   0 |  91.25 | 26/26 (5) | 14 2 | FLUCHT 163: ort (154, 239) zustand 101 lauf (147, 232) Verfolger in 9 Leben 12110 -> laeuft weiter
+ 3088 |  24   0   0 |   4   0 |  91.25 | 26/26 (5) | 14 2 | FLUCHT 163: ort (153, 238) zustand 101 lauf (147, 232) Verfolger in 9 Leben 12110 -> laeuft weiter
+ 3101 |  24   0   0 |   4   0 |  91.25 | 26/26 (5) | 14 2 | FLUCHT 163: ort (153, 238) zustand 101 lauf (147, 232) Verfolger in 8 Leben 12110 -> laeuft weiter
+ 3115 |  24   0   0 |   4   0 |  91.25 | 26/26 (5) | 14 2 | FLUCHT 163: ort (152, 237) zustand 101 lauf (147, 232) Verfolger in 8 Leben 12110 -> laeuft weiter
+ 3128 |  24   0   0 |   4   0 |  91.25 | 26/26 (5) | 14 2 | FLUCHT 163: ort (151, 236) zustand 101 lauf (147, 232) Verfolger in 9 Leben 12110 -> laeuft weiter
+ 3142 |  24   0   0 |   4   0 |  91.25 | 26/26 (5) | 14 2 | FLUCHT 163: ort (150, 235) zustand 101 lauf (147, 232) Verfolger in 10 Leben 12110 -> neu nach (155, 221) (Heim: (97, 283) eigene 1.0 gegen Verfolger 3.0; (141, 269) eigene 1.0 gegen Verfolger 3.0)
+ZEITEN nach 130 Runden: lesen 5.06 s, wirtschaft 0.58 s, assassinen 0.35 s, bauen_werben_verkauf 0.09 s, waechter 0.08 s, haus_lager_zeile 0.06 s
+ 3164 |  24   0   0 |   3   0 |  91.25 | 26/26 (5) | 14 2 | FLUCHT 163: ort (149, 234) zustand 101 lauf (155, 221) Verfolger in 9 Leben 12110 -> laeuft weiter
+ 3181 |  24   0   0 |   3   0 |  91.25 | 26/26 (5) | 14 2 | FLUCHT 163: ort (149, 233) zustand 101 lauf (155, 221) Verfolger in 8 Leben 12110 -> laeuft weiter
+ 3194 |  24   0   0 |   3   0 |  91.25 | 26/26 (5) | 14 2 | FLUCHT 163: ort (149, 232) zustand 101 lauf (155, 221) Verfolger in 7 Leben 12110 -> laeuft weiter
+ 3208 |  24   0   0 |   3   0 |  91.00 | 26/26 (5) | 14 2 | FLUCHT 163: ort (149, 231) zustand 101 lauf (155, 221) Verfolger in 7 Leben 12110 -> laeuft weiter; Apfelplantage A nachgeholt bei (92, 245): (92, 245) (Gold 18, Holz 24)
+ 3243 |  21   0   0 |   3   0 |  91.00 | 26/26 (5) | 14 2 | FLUCHT 163: ort (149, 229) zustand 101 lauf (155, 221) Verfolger in 6 Leben 12110 -> laeuft weiter
+ 3256 |  21   0   0 |   3   0 |  91.00 | 26/26 (5) | 14 2 | FLUCHT 163: ort (149, 228) zustand 101 lauf (155, 221) Verfolger in 7 Leben 12110 -> laeuft weiter
+ 3270 |  21   0   0 |   3   0 |  91.00 | 26/26 (5) | 14 2 | FLUCHT 163: ort (149, 227) zustand 101 lauf (155, 221) Verfolger in 8 Leben 12110 -> laeuft weiter
+ 3283 |  21   0   0 |   3   0 |  91.00 | 26/26 (5) | 14 2 | FLUCHT 163: ort (150, 226) zustand 101 lauf (155, 221) Verfolger in 8 Leben 12110 -> laeuft weiter
+ 3296 |  21   0   0 |   3   0 |  91.00 | 26/26 (4) | 14 2 | FLUCHT 163: ort (151, 225) zustand 101 lauf (155, 221) Verfolger in 8 Leben 12110 -> laeuft weiter
+ 3309 |  21   0   0 |   3   0 |  91.00 | 26/26 (4) | 14 2 | FLUCHT 163: ort (152, 225) zustand 101 lauf (155, 221) Verfolger in 7 Leben 12110 -> laeuft weiter
+ZEITEN nach 140 Runden: lesen 5.46 s, wirtschaft 0.65 s, assassinen 0.35 s, bauen_werben_verkauf 0.09 s, waechter 0.08 s, haus_lager_zeile 0.06 s
+ 3322 |  21   0   0 |   3   0 |  91.00 | 26/26 (4) | 14 2 | FLUCHT 163: ort (152, 224) zustand 101 lauf (155, 221) Verfolger in 8 Leben 12110 -> neu nach (176, 232) (Heim: (97, 283) eigene 1.0 gegen Verfolger 3.0; (141, 269) eigene 1.0 gegen Verfolger 3.0)
+ 3349 |  21   0   0 |   3   0 |  91.00 | 26/26 (4) | 14 3 | FLUCHT 163: ort (154, 222) zustand 101 lauf (176, 232) Verfolger in 9 Leben 12110 -> laeuft weiter
+ 3362 |  21   0   0 |   2   0 |  91.00 | 26/26 (4) | 14 3 | FLUCHT 163: ort (155, 222) zustand 101 lauf (176, 232) Verfolger in 8 Leben 12110 -> laeuft weiter
+ 3376 |  21   0   0 |   2   0 |  91.00 | 26/26 (4) | 14 3 | FLUCHT 163: ort (156, 222) zustand 101 lauf (176, 232) Verfolger in 7 Leben 12110 -> laeuft weiter
+ 3389 |  21   0   0 |   3   0 |  91.00 | 26/26 (4) | 14 3 | FLUCHT 163: ort (157, 222) zustand 101 lauf (176, 232) Verfolger in 7 Leben 12110 -> laeuft weiter
+ 3402 |  21   0   0 |   6   0 |  90.75 | 26/26 (4) | 14 3 | FLUCHT 163: ort (157, 222) zustand 101 lauf (176, 232) Verfolger in 6 Leben 12110 -> laeuft weiter
+ 3416 |  21   0   0 |   6   0 |  90.75 | 26/26 (4) | 14 3 | FLUCHT 163: ort (158, 222) zustand 101 lauf (176, 232) Verfolger in 5 Leben 12110 -> laeuft weiter
+ 3431 |  21   0   0 |   6   0 |  90.75 | 26/26 (4) | 14 3 | FLUCHT 163: ort (159, 222) zustand 101 lauf (176, 232) Verfolger in 5 Leben 12110 -> laeuft weiter
+ 3446 |  21   0   0 |   6   0 |  90.75 | 26/26 (4) | 14 3 | FLUCHT 163: ort (160, 222) zustand 101 lauf (176, 232) Verfolger in 6 Leben 12110 -> laeuft weiter
+ 3458 |  21   0   0 |   6   0 |  90.75 | 26/26 (4) | 14 3 | ANWERBEN-BREMSE: Gold 3 (braucht 100), Feuer 4, Planer braucht Gold True, A-Farmen offen 0; FLUCHT 163: ort (161, 222) zustand 101 lauf (176, 232) Verfolger in 7 Leben 12110 -> laeuft weiter
+ZEITEN nach 150 Runden: lesen 5.85 s, wirtschaft 0.65 s, assassinen 0.39 s, bauen_werben_verkauf 0.09 s, waechter 0.09 s, haus_lager_zeile 0.06 s
+ 3473 |  21   0   0 |   6   0 |  90.75 | 26/26 (4) | 14 3 | FLUCHT 163: ort (162, 222) zustand 101 lauf (176, 232) Verfolger in 8 Leben 12110 -> laeuft weiter; PLANER Lage (Gewinn bis Ende / Amortisation): Apfelplantage 8/1999, Holzfaeller -2/976 [Horizont], Steinbruch+Ochsenjoch -4/1020 [Horizont], Jaegerhuette -62/9552 [Horizont], Eisenmine -78/3869 [Horizont] | Stein-Reserve 0; PLANER wartet auf Apfelplantage (fehlt: gold 12)
+ 3486 |  21   0   0 |   6   0 |  90.75 | 26/26 (4) | 14 3 | FLUCHT 163: ort (163, 222) zustand 101 lauf (176, 232) Verfolger in 8 Leben 12110 -> laeuft weiter
+ 3499 |  21   0   0 |   6   0 |  90.75 | 26/26 (4) | 14 3 | FLUCHT 163: ort (163, 222) zustand 101 lauf (176, 232) Verfolger in 7 Leben 12110 -> laeuft weiter
+ 3513 |  21   0   0 |   6   0 |  90.75 | 26/26 (4) | 14 3 | FLUCHT 163: ort (164, 222) zustand 101 lauf (176, 232) Verfolger in 7 Leben 12110 -> laeuft weiter
+ 3526 |  21   0   0 |   6   0 |  90.75 | 26/26 (4) | 14 3 | FLUCHT 163: ort (165, 222) zustand 101 lauf (176, 232) Verfolger in 7 Leben 12110 -> laeuft weiter
+ 3539 |  21   0   0 |   6   0 |  90.75 | 26/26 (4) | 14 3 | FLUCHT 163: ort (166, 222) zustand 101 lauf (176, 232) Verfolger in 8 Leben 12110 -> laeuft weiter
+ 3555 |  21   0   0 |   5   0 |  90.75 | 26/26 (4) | 14 3 | FLUCHT 163: ort (167, 222) zustand 101 lauf (176, 232) Verfolger in 8 Leben 12110 -> laeuft weiter
+ 3570 |  21   0   0 |   5   0 |  90.75 | 26/26 (4) | 14 3 | FLUCHT 163: ort (168, 222) zustand 101 lauf (176, 232) Verfolger in 8 Leben 12110 -> laeuft weiter
+ 3584 |  21   0   0 |   5   0 |  90.75 | 26/26 (4) | 14 3 | FLUCHT 163: ort (169, 223) zustand 101 lauf (176, 232) Verfolger in 9 Leben 12110 -> laeuft weiter
+ 3596 |  21   0   0 |   5   0 |  90.75 | 26/26 (4) | 14 3 | FLUCHT 163: ort (170, 224) zustand 101 lauf (176, 232) Verfolger in 10 Leben 12110 -> laeuft weiter
+ZEITEN nach 160 Runden: lesen 6.26 s, wirtschaft 0.66 s, assassinen 0.40 s, bauen_werben_verkauf 0.09 s, waechter 0.09 s, haus_lager_zeile 0.06 s
+ 3609 |  21   0   0 |   5   0 |  90.50 | 26/26 (4) | 14 3 | FLUCHT 163: ort (170, 224) zustand 101 lauf (176, 232) Verfolger in 9 Leben 12110 -> laeuft weiter
+ 3626 |  21   0   0 |   5   0 |  90.50 | 26/26 (4) | 14 3 | FLUCHT 163: ort (171, 225) zustand 101 lauf (176, 232) Verfolger in 9 Leben 12110 -> laeuft weiter
+ 3640 |  21   0   0 |   5   0 |  90.50 | 26/26 (4) | 14 3 | FLUCHT 163: ort (172, 226) zustand 101 lauf (176, 232) Verfolger in 9 Leben 12110 -> laeuft weiter
+ 3653 |  21   0   0 |   5   0 |  90.50 | 26/26 (4) | 14 3 | FLUCHT 163: ort (173, 227) zustand 101 lauf (176, 232) Verfolger in 9 Leben 12110 -> laeuft weiter
+ 3666 |  21   0   0 |   5   0 |  90.50 | 26/26 (4) | 14 3 | FLUCHT 163: ort (174, 228) zustand 101 lauf (176, 232) Verfolger in 10 Leben 12110 -> laeuft weiter
+ 3680 |  21   0   0 |   5   0 |  90.50 | 26/26 (4) | 14 3 | FLUCHT 163: ort (175, 229) zustand 101 lauf (176, 232) Verfolger in 10 Leben 12110 -> neu nach (166, 247) (Heim: (97, 283) eigene 1.0 gegen Verfolger 3.0; (141, 269) eigene 1.0 gegen Verfolger 3.0); Altes Lager leeren: holz verkauft (Inhalt {'holz': 21}); Lager gesetzt bei None - 1 Holzfaeller wollen abliefern (Tick 3680)
+ 3724 |  16   0   0 |   5   0 |  90.50 | 26/26 (4) | 14 3 | FLUCHT 163: ort (176, 232) zustand 101 lauf (166, 247) Verfolger in 8 Leben 12110 -> laeuft weiter; Altes Lager abgerissen (4 Teile, Rest {'holz': 16}) bei Tick 3724
+ 3777 |   0   0   0 |   4   0 |  90.50 | 26/26 (4) | 14 3 | FLUCHT 163: ort (176, 235) zustand 101 lauf (166, 247) Verfolger in 8 Leben 12110 -> laeuft weiter
+ 3791 |   0   0   0 |   4   0 |  90.50 | 26/26 (4) | 14 3 | FLUCHT 163: ort (176, 236) zustand 101 lauf (166, 247) Verfolger in 8 Leben 12110 -> laeuft weiter
+ 3804 |   0   0   0 |   4   0 |  90.25 | 26/26 (4) | 14 3 | FLUCHT 163: ort (176, 237) zustand 101 lauf (166, 247) Verfolger in 8 Leben 12110 -> laeuft weiter
+ZEITEN nach 170 Runden: lesen 6.66 s, wirtschaft 0.84 s, assassinen 0.43 s, waechter 0.09 s, bauen_werben_verkauf 0.09 s, haus_lager_zeile 0.06 s
+ 3817 |   0   0   0 |   4   0 |  90.25 | 26/26 (4) | 14 3 | FLUCHT 163: ort (176, 237) zustand 101 lauf (166, 247) Verfolger in 7 Leben 12110 -> laeuft weiter
+ 3835 |   0   0   0 |   4   0 |  90.25 | 26/26 (4) | 14 3 | FLUCHT 163: ort (175, 238) zustand 101 lauf (166, 247) Verfolger in 8 Leben 12110 -> laeuft weiter
+ 3848 |   0   0   0 |   4   0 |  90.25 | 26/26 (4) | 14 3 | FLUCHT 163: ort (174, 239) zustand 101 lauf (166, 247) Verfolger in 8 Leben 12110 -> laeuft weiter
+ 3862 |   0   0   0 |   4   0 |  90.25 | 26/26 (4) | 14 3 | FLUCHT 163: ort (173, 240) zustand 101 lauf (166, 247) Verfolger in 8 Leben 12110 -> laeuft weiter; Lager gesetzt bei (91, 277) - 1 Holzfaeller wollen abliefern (Tick 3862)
+ 3897 |   0   0   0 |   4   0 |  90.25 | 26/26 (4) | 14 3 | FLUCHT 163: ort (171, 242) zustand 101 lauf (166, 247) Verfolger in 9 Leben 12110 -> laeuft weiter
+ 3911 |   0   0   0 |   4   0 |  90.25 | 26/26 (4) | 14 3 | FLUCHT 163: ort (170, 243) zustand 101 lauf (166, 247) Verfolger in 9 Leben 12110 -> laeuft weiter
+ 3922 |   0   0   0 |   4   0 |  90.25 | 26/26 (4) | 14 3 | FLUCHT 163: ort (169, 244) zustand 101 lauf (166, 247) Verfolger in 10 Leben 12110 -> neu nach (170, 269) (Heim: (97, 283) eigene 1.0 gegen Verfolger 3.0; (141, 269) eigene 1.0 gegen Verfolger 3.0)
+ 3946 |   0   0   0 |   3   0 |  90.25 | 26/26 (4) | 14 3 | FLUCHT 163: ort (168, 245) zustand 101 lauf (170, 269) Verfolger in 9 Leben 12110 -> laeuft weiter
+ 3958 |   0   0   0 |   3   0 |  90.25 | 26/26 (4) | 14 3 | FLUCHT 163: ort (168, 246) zustand 101 lauf (170, 269) Verfolger in 9 Leben 12110 -> laeuft weiter
+ 3973 |   0   0   0 |   3   0 |  90.25 | 26/26 (4) | 14 3 | FLUCHT 163: ort (168, 247) zustand 101 lauf (170, 269) Verfolger in 9 Leben 12110 -> laeuft weiter
+ZEITEN nach 180 Runden: lesen 7.05 s, wirtschaft 0.90 s, assassinen 0.47 s, waechter 0.10 s, bauen_werben_verkauf 0.09 s, haus_lager_zeile 0.06 s
+ 3986 |   0   0   0 |   6   0 |  90.25 | 26/26 (4) | 14 3 | FLUCHT 163: ort (168, 248) zustand 101 lauf (170, 269) Verfolger in 10 Leben 12110 -> laeuft weiter
+ 4004 |   0   0   0 |   8   0 |  90.00 | 26/26 (4) | 14 3 | FLUCHT 163: ort (168, 249) zustand 101 lauf (170, 269) Verfolger in 10 Leben 12110 -> laeuft weiter
+ 4017 |   0   0   0 |   8   0 |  90.00 | 26/26 (4) | 14 3 | FLUCHT 163: ort (168, 250) zustand 101 lauf (170, 269) Verfolger in 10 Leben 12110 -> laeuft weiter
+ 4030 |   0   0   0 |   8   0 |  90.00 | 26/26 (4) | 14 3 | FLUCHT 163: ort (168, 251) zustand 101 lauf (170, 269) Verfolger in 10 Leben 12110 -> laeuft weiter
+ 4047 |   0   0   0 |   8   0 |  90.00 | 26/26 (4) | 14 3 | FLUCHT 163: ort (168, 252) zustand 101 lauf (170, 269) Verfolger in 10 Leben 12110 -> laeuft weiter
+ 4061 |   0   0   0 |   8   0 |  90.00 | 26/26 (4) | 14 3 | FLUCHT 163: ort (168, 253) zustand 101 lauf (170, 269) Verfolger in 10 Leben 12110 -> laeuft weiter
+ 4074 |   0   0   0 |   8   0 |  90.00 | 26/26 (4) | 14 3 | FLUCHT 163: ort (168, 253) zustand 101 lauf (170, 269) Verfolger in 9 Leben 12110 -> laeuft weiter
+ 4088 |   0   0   0 |   8   0 |  90.00 | 26/26 (4) | 14 3 | FLUCHT 163: ort (168, 254) zustand 101 lauf (170, 269) Verfolger in 9 Leben 12110 -> laeuft weiter
+ 4101 |   0   0   0 |   8   0 |  90.00 | 26/26 (4) | 14 3 | FLUCHT 163: ort (168, 255) zustand 101 lauf (170, 269) Verfolger in 9 Leben 12110 -> laeuft weiter
+ 4116 |   0   0   0 |   8   0 |  90.00 | 26/26 (4) | 14 3 | FLUCHT 163: ort (168, 256) zustand 101 lauf (170, 269) Verfolger in 10 Leben 12110 -> laeuft weiter
+ZEITEN nach 190 Runden: lesen 7.47 s, wirtschaft 0.91 s, assassinen 0.48 s, waechter 0.11 s, bauen_werben_verkauf 0.09 s, haus_lager_zeile 0.06 s
+ 4132 |   0   0   0 |   7   0 |  90.00 | 26/26 (4) | 14 3 | FLUCHT 163: ort (168, 257) zustand 101 lauf (170, 269) Verfolger in 10 Leben 12110 -> laeuft weiter
+ 4145 |   0   0   0 |   7   0 |  90.00 | 26/26 (4) | 14 3 | FLUCHT 163: ort (168, 258) zustand 101 lauf (170, 269) Verfolger in 10 Leben 12110 -> laeuft weiter
+ 4160 |   0   0   0 |   7   0 |  90.00 | 26/26 (4) | 14 3 | FLUCHT 163: ort (168, 259) zustand 101 lauf (170, 269) Verfolger in 10 Leben 12110 -> laeuft weiter
+ 4177 |   0   0   0 |   7   0 |  90.00 | 26/26 (4) | 14 3 | FLUCHT 163: ort (168, 260) zustand 101 lauf (170, 269) Verfolger in 10 Leben 12110 -> laeuft weiter
+ 4190 |   0   0   0 |   7   0 |  90.00 | 26/26 (4) | 14 3 | FLUCHT 163: ort (168, 261) zustand 101 lauf (170, 269) Verfolger in 10 Leben 12110 -> laeuft weiter
+ 4203 |   0   0   0 |   7   0 |  89.75 | 26/26 (4) | 14 3 | FLUCHT 163: ort (168, 261) zustand 101 lauf (170, 269) Verfolger in 9 Leben 12110 -> laeuft weiter
+ 4216 |   0   0   0 |   7   0 |  89.75 | 26/26 (4) | 14 3 | FLUCHT 163: ort (168, 262) zustand 101 lauf (170, 269) Verfolger in 9 Leben 12110 -> laeuft weiter
+ 4230 |   0   0   0 |   7   0 |  89.75 | 26/26 (4) | 14 3 | FLUCHT 163: ort (168, 263) zustand 101 lauf (170, 269) Verfolger in 9 Leben 12110 -> laeuft weiter
+ 4245 |   0   0   0 |   7   0 |  89.75 | 26/26 (4) | 14 3 | FLUCHT 163: ort (168, 264) zustand 101 lauf (170, 269) Verfolger in 10 Leben 12110 -> laeuft weiter
+ 4260 |   0   0   0 |   7   0 |  89.75 | 26/26 (4) | 14 3 | ANWERBEN-BREMSE: Gold 14 (braucht 100), Feuer 4, Planer braucht Gold True, A-Farmen offen 0; FLUCHT 163: ort (168, 265) zustand 101 lauf (170, 269) Verfolger in 11 Leben 12110 -> laeuft weiter
+ZEITEN nach 200 Runden: lesen 7.88 s, wirtschaft 0.92 s, assassinen 0.48 s, waechter 0.11 s, bauen_werben_verkauf 0.09 s, haus_lager_zeile 0.06 s
+ 4273 |   0   0   0 |   7   0 |  89.75 | 26/26 (4) | 14 3 | FLUCHT 163: ort (168, 266) zustand 101 lauf (170, 269) Verfolger in 11 Leben 12110 -> neu nach (182, 287) (Heim: (97, 283) eigene 1.0 gegen Verfolger 3.0; (141, 269) eigene 1.0 gegen Verfolger 3.0); PLANER Lage (Gewinn bis Ende / Amortisation): Apfelplantage 1/2002, Holzfaeller -6/971 [Horizont], Steinbruch+Ochsenjoch -27/989 [Horizont], Jaegerhuette -68/9552 [Horizont], Eisenmine -89/3750 [Horizont] | Stein-Reserve 0; PLANER wartet auf Apfelplantage (fehlt: holz 3, gold 1)
+ 4300 |   0   0   0 |   7   0 |  89.75 | 26/26 (4) | 14 3 | FLUCHT 163: ort (168, 268) zustand 101 lauf (182, 287) Verfolger in 11 Leben 12110 -> laeuft weiter
+ 4311 |   0   0   0 |   7   0 |  89.75 | 26/26 (4) | 14 3 | FLUCHT 163: ort (168, 268) zustand 101 lauf (182, 287) Verfolger in 11 Leben 12110 -> laeuft weiter
+ 4326 |   0   0   0 |   6   0 |  89.75 | 26/26 (4) | 14 3 | FLUCHT 163: ort (168, 269) zustand 101 lauf (182, 287) Verfolger in 12 Leben 12110 -> laeuft weiter
+ 4340 |   0   0   0 |   6   0 |  89.75 | 26/26 (4) | 14 3 | FLUCHT 163: ort (168, 270) zustand 101 lauf (182, 287) Verfolger in 12 Leben 12110 -> laeuft weiter
+ 4357 |   0   0   0 |   6   0 |  89.75 | 26/26 (4) | 14 3 | FLUCHT 163: ort (168, 271) zustand 101 lauf (182, 287) Verfolger in 12 Leben 12110 -> laeuft weiter
+ 4370 |   0   0   0 |   6   0 |  89.75 | 26/26 (4) | 14 3 | FLUCHT 163: ort (168, 272) zustand 101 lauf (182, 287) Verfolger in 12 Leben 12110 -> laeuft weiter
+ 4384 |   0   0   0 |   6   0 |  89.75 | 26/26 (4) | 14 3 | FLUCHT 163: ort (168, 273) zustand 101 lauf (182, 287) Verfolger in 12 Leben 12110 -> laeuft weiter
+ 4397 |   0   0   0 |   6   0 |  89.75 | 26/26 (4) | 14 3 | FLUCHT 163: ort (169, 274) zustand 101 lauf (182, 287) Verfolger in 13 Leben 12110 -> laeuft weiter
+ 4408 |   0   0   0 |   6   0 |  89.50 | 26/26 (4) | 14 3 | FLUCHT 163: ort (169, 274) zustand 101 lauf (182, 287) Verfolger in 13 Leben 12110 -> laeuft weiter
+ZEITEN nach 210 Runden: lesen 8.28 s, wirtschaft 0.92 s, assassinen 0.52 s, waechter 0.12 s, bauen_werben_verkauf 0.09 s, haus_lager_zeile 0.06 s
+ 4423 |   0   0   0 |   6   0 |  89.50 | 26/26 (4) | 14 3 | FLUCHT 163: ort (170, 275) zustand 101 lauf (182, 287) Verfolger in 14 Leben 12110 -> laeuft weiter
+ 4436 |   0   0   0 |   6   0 |  89.50 | 26/26 (4) | 14 3 | FLUCHT 163: ort (171, 276) zustand 101 lauf (182, 287) Verfolger in 15 Leben 12110 -> laeuft weiter
+ 4480 |   0   0   0 |   6   0 |  89.50 | 26/26 (4) | 14 3 | AUSWEICHEN vorbei 163: 31 Ticks kein Verfolger im Umkreis 15 - greift wieder an (Leben 12110); ZIELWAHL 163 -> 39 Typ 3 in 21: Fern<=10 0, <=20 0, <=30 2, Leben 12110; 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+ZEITEN nach 220 Runden: lesen 8.68 s, wirtschaft 0.93 s, assassinen 0.55 s, waechter 0.12 s, bauen_werben_verkauf 0.09 s, haus_lager_zeile 0.06 s
+ 4573 |   0   0   0 |   5   0 |  89.50 | 26/26 (4) | 14 3 | -
+ 4627 |   0   0   0 |   5   0 |  89.25 | 26/26 (4) | 14 3 | Abwehr gebuendelt: alle 13 (22,24,55) gegen Feind 215 Typ 73 bei (144,269)
+ZEITEN nach 230 Runden: lesen 9.08 s, wirtschaft 0.93 s, assassinen 0.55 s, waechter 0.19 s, bauen_werben_verkauf 0.09 s, haus_lager_zeile 0.06 s
+ 4729 |   0   0   0 |   4   0 |  89.25 | 26/26 (3) | 14 3 | -
+ 4791 |   0   0   0 |   4   0 |  89.25 | 26/26 (2) | 14 3 | Abwehr gebuendelt: alle 13 (22,24,55) gegen Feind 218 Typ 73 bei (142,271)
+ZEITEN nach 240 Runden: lesen 9.49 s, wirtschaft 0.94 s, assassinen 0.56 s, waechter 0.25 s, bauen_werben_verkauf 0.09 s, haus_lager_zeile 0.06 s
+ 4893 |   0   0   0 |   4   0 |  89.00 | 26/26 (2) | 14 3 | -
+ 4911 |   0   0   0 |   3   0 |  89.00 | 25/26 (2) | 14 3 | Abwehr gebuendelt: alle 13 (22,24,55) gegen Feind 221 Typ 73 bei (141,268); Gebaeude 39 (Typ 3) zerstoert; ZIELWAHL 163 -> 55 Typ 3 in 6: Fern<=10 0, <=20 0, <=30 3, Leben 12110; 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+ 5049 |   0   0   0 |   3   0 |  88.75 | 26/26 (2) | 14 3 | ANWERBEN-BREMSE: Gold 20 (braucht 100), Feuer 2, Planer braucht Gold False, A-Farmen offen 0
+ZEITEN nach 250 Runden: lesen 9.89 s, wirtschaft 0.94 s, assassinen 0.59 s, waechter 0.32 s, bauen_werben_verkauf 0.09 s, haus_lager_zeile 0.06 s
+ 5062 |   0   0   0 |   3   0 |  88.75 | 26/26 (3) | 14 3 | PLANER Lage (Gewinn bis Ende / Amortisation): Apfelplantage -7/2021 [Horizont], Holzfaeller -10/973 [Horizont], Steinbruch+Ochsenjoch -51/994 [Horizont], Jaegerhuette -73/9552 [Horizont], Eisenmine -100/3750 [Horizont] | Stein-Reserve 0
+ 5119 |   0   0   0 |   2   0 |  88.75 | 26/26 (4) | 14 3 | Gebaeude 55 (Typ 3) zerstoert; ZIELWAHL 163 -> 74 Typ 3 in 7: Fern<=10 0, <=20 0, <=30 3, Leben 12110; 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+ 5155 |   0   0   0 |   2   0 |  88.75 | 26/26 (4) | 14 3 | AUSWEICHEN 163: Bedrohung 1.4 (Nahkaempfer im Umkreis 10, schlagende Arbeiter im Umkreis 3) gegen 1 eigene, Leben 12110 -> nach (178, 253) (Heim: (97, 283) eigene 1.0 gegen Verfolger 2.0; (141, 269) eigene 1.0 gegen Verfolger 2.0)
+ 5178 |   0   0   0 |   3   0 |  88.75 | 26/26 (4) | 14 3 | FLUCHT 163: ort (201, 264) zustand 101 lauf (178, 253) Verfolger in 6 Leben 12110 -> laeuft weiter
+ 5194 |   0   0   0 |   6   0 |  88.75 | 26/26 (4) | 14 3 | FLUCHT 163: ort (200, 264) zustand 101 lauf (178, 253) Verfolger in 6 Leben 12110 -> laeuft weiter
+ 5208 |   0   0   0 |   6   0 |  88.50 | 26/26 (4) | 14 3 | FLUCHT 163: ort (199, 264) zustand 101 lauf (178, 253) Verfolger in 6 Leben 12110 -> laeuft weiter
+ZEITEN nach 260 Runden: lesen 10.29 s, wirtschaft 0.95 s, assassinen 0.66 s, waechter 0.32 s, bauen_werben_verkauf 0.09 s, haus_lager_zeile 0.06 s
+ 5221 |   0   0   0 |   6   0 |  88.50 | 26/26 (4) | 14 3 | FLUCHT 163: ort (199, 264) zustand 101 lauf (178, 253) Verfolger in 5 Leben 12110 -> laeuft weiter
+ 5239 |   0   0   0 |   6   0 |  88.50 | 26/26 (4) | 14 3 | FLUCHT 163: ort (198, 264) zustand 101 lauf (178, 253) Verfolger in 5 Leben 12110 -> laeuft weiter; Lager erweitert (96, 277): Bestand 0, Holz unterwegs 180 + bald 18, Teile 4 -> noetig 5
+ 5273 |   0   0   0 |  10   0 |  88.50 | 26/26 (4) | 14 3 | FLUCHT 163: ort (196, 263) zustand 101 lauf (178, 253) Verfolger in 5 Leben 12110 -> laeuft weiter
+ 5287 |   0   0   0 |   9   0 |  88.50 | 26/26 (4) | 14 3 | FLUCHT 163: ort (195, 263) zustand 101 lauf (178, 253) Verfolger in 5 Leben 12110 -> laeuft weiter
+ 5301 |   0   0   0 |   9   0 |  88.50 | 26/26 (4) | 14 3 | FLUCHT 163: ort (194, 263) zustand 101 lauf (178, 253) Verfolger in 5 Leben 12110 -> laeuft weiter
+ 5314 |   0   0   0 |   9   0 |  88.50 | 26/26 (4) | 14 3 | FLUCHT 163: ort (193, 263) zustand 101 lauf (178, 253) Verfolger in 6 Leben 12110 -> laeuft weiter
+ 5328 |   0   0   0 |   9   0 |  88.50 | 26/26 (4) | 14 3 | FLUCHT 163: ort (192, 263) zustand 101 lauf (178, 253) Verfolger in 7 Leben 12110 -> laeuft weiter
+ 5341 |   0  12   0 |   9   0 |  88.50 | 26/26 (4) | 14 3 | MESSUNG verletzt 163: leben 12110 -> 10910 | ort (191,263) zustand 101 | naechster Feind Typ 73 in 8 | naechster Fernkaempfer Typ 22 in 32 | Fern<=40: 9 | Nah<=8: 1 | naechstes Feindgebaeude Typ 3 in 8 | Ziel None in -1; FLUCHT 163: ort (191, 263) zustand 101 lauf (178, 253) Verfolger in 8 Leben 10910 -> neu nach (179, 241) (Heim: (97, 283) eigene 1.0 gegen Verfolger 3.0; (141, 269) eigene 1.0 gegen Verfolger 3.0); 1 Assassinen warten/ziehen sich zurueck ausser Reichweite
+ 5368 |   0  12   0 |   9   0 |  88.50 | 26/26 (4) | 14 3 | FLUCHT 163: ort (190, 262) zustand 101 lauf (179, 241) Verfolger in 9 Leben 10910 -> laeuft weiter
+ 5382 |   0  12   0 |   9   0 |  88.50 | 26/26 (4) | 14 3 | verkauft: stein; FLUCHT 163: ort (190, 261) zustand 101 lauf (179, 241) Verfolger in 8 Leben 10910 -> laeuft weiter
+ZEITEN nach 270 Runden: lesen 10.70 s, wirtschaft 1.02 s, assassinen 0.70 s, waechter 0.33 s, bauen_werben_verkauf 0.12 s, haus_lager_zeile 0.06 s
+ 5404 |   0   7   0 |   9   0 |  88.25 | 26/26 (4) | 14 3 | FLUCHT 163: ort (190, 259) zustand 101 lauf (179, 241) Verfolger in 7 Leben 10910 -> laeuft weiter
+ 5430 |   0   7   0 |   9   0 |  88.25 | 26/26 (4) | 14 3 | MESSUNG verletzt 163: leben 10910 -> 9710 | ort (190,258) zustand 101 | naechster Feind Typ 73 in 5 | naechster Fernkaempfer Typ 22 in 33 | Fern<=40: 3 | Nah<=8: 3 | naechstes Feindgebaeude Typ 3 in 3 | Ziel None in -1; FLUCHT 163: ort (190, 258) zustand 101 lauf (179, 241) Verfolger in 5 Leben 9710 -> neu nach (178, 242) (Heim: (97, 283) eigene 1.0 gegen Verfolger 3.0; (141, 269) eigene 1.0 gegen Verfolger 3.0); 1 Assassinen warten/ziehen sich zurueck ausser Reichweite
+ 5457 |   4   7   0 |   9   0 |  88.25 | 26/26 (4) | 14 3 | verkauft: stein; FLUCHT 163: ort (189, 256) zustand 101 lauf (178, 242) Verfolger in 5 Leben 9710 -> laeuft weiter
+ 5479 |   9   2   0 |   9   0 |  88.25 | 26/26 (4) | 14 3 | FLUCHT 163: ort (189, 255) zustand 101 lauf (178, 242) Verfolger in 5 Leben 9710 -> laeuft weiter
+ 5494 |  12   2   0 |   8   0 |  88.25 | 26/26 (4) | 14 3 | FLUCHT 163: ort (189, 254) zustand 101 lauf (178, 242) Verfolger in 6 Leben 9710 -> laeuft weiter
+ 5510 |  15   2   0 |   8   0 |  88.25 | 26/26 (4) | 14 3 | FLUCHT 163: ort (189, 253) zustand 101 lauf (178, 242) Verfolger in 7 Leben 9710 -> laeuft weiter
+ 5524 |  18   2   0 |   8   0 |  88.25 | 26/26 (4) | 14 3 | FLUCHT 163: ort (189, 252) zustand 101 lauf (178, 242) Verfolger in 7 Leben 9710 -> laeuft weiter
+ 5537 |  18   2   0 |   8   0 |  88.25 | 26/26 (4) | 14 3 | FLUCHT 163: ort (188, 251) zustand 101 lauf (178, 242) Verfolger in 8 Leben 9710 -> laeuft weiter
+ 5552 |  18   2   0 |   8   0 |  88.25 | 26/26 (4) | 14 3 | FLUCHT 163: ort (187, 250) zustand 101 lauf (178, 242) Verfolger in 8 Leben 9710 -> laeuft weiter
+ 5564 |  18   2   0 |   8   0 |  88.25 | 26/26 (4) | 14 3 | FLUCHT 163: ort (186, 249) zustand 101 lauf (178, 242) Verfolger in 8 Leben 9710 -> laeuft weiter
+ZEITEN nach 280 Runden: lesen 11.10 s, wirtschaft 1.05 s, assassinen 0.74 s, waechter 0.34 s, bauen_werben_verkauf 0.15 s, haus_lager_zeile 0.06 s
+ 5582 |  18   2   0 |   8   0 |  88.25 | 26/26 (4) | 14 3 | FLUCHT 163: ort (185, 248) zustand 101 lauf (178, 242) Verfolger in 8 Leben 9710 -> laeuft weiter
+ 5595 |  18   2   0 |   9   0 |  88.25 | 26/26 (4) | 14 3 | FLUCHT 163: ort (184, 247) zustand 101 lauf (178, 242) Verfolger in 8 Leben 9710 -> laeuft weiter
+ 5608 |  18   2   0 |  12   0 |  88.00 | 26/26 (4) | 14 3 | FLUCHT 163: ort (184, 247) zustand 101 lauf (178, 242) Verfolger in 8 Leben 9710 -> laeuft weiter
+ 5623 |  18   2   0 |  13   0 |  88.00 | 26/26 (4) | 14 3 | FLUCHT 163: ort (183, 246) zustand 101 lauf (178, 242) Verfolger in 8 Leben 9710 -> laeuft weiter
+ 5639 |  18   2   0 |  13   0 |  88.00 | 26/26 (4) | 14 3 | verkauft: apfel x1; FLUCHT 163: ort (182, 245) zustand 101 lauf (178, 242) Verfolger in 9 Leben 9710 -> laeuft weiter
+ 5661 |  18   2   0 |   8   0 |  88.00 | 26/26 (4) | 14 3 | FLUCHT 163: ort (180, 243) zustand 101 lauf (178, 242) Verfolger in 10 Leben 9710 -> neu nach (165, 223) (Heim: (97, 283) eigene 1.0 gegen Verfolger 2.0; (141, 269) eigene 1.0 gegen Verfolger 2.0)
+ 5688 |  21   2   0 |   7   0 |  88.00 | 26/26 (4) | 14 3 | FLUCHT 163: ort (179, 242) zustand 101 lauf (165, 223) Verfolger in 9 Leben 9710 -> laeuft weiter
+ 5702 |  24   2   0 |   7   0 |  88.00 | 26/26 (4) | 14 3 | FLUCHT 163: ort (179, 241) zustand 101 lauf (165, 223) Verfolger in 9 Leben 9710 -> laeuft weiter
+ 5715 |  26   2   0 |   7   0 |  88.00 | 26/26 (4) | 14 3 | FLUCHT 163: ort (179, 240) zustand 101 lauf (165, 223) Verfolger in 10 Leben 9710 -> laeuft weiter
+ 5732 |  31   2   0 |   7   0 |  88.00 | 26/26 (4) | 14 3 | FLUCHT 163: ort (179, 239) zustand 101 lauf (165, 223) Verfolger in 9 Leben 9710 -> laeuft weiter
+ZEITEN nach 290 Runden: lesen 11.51 s, wirtschaft 1.06 s, assassinen 0.78 s, waechter 0.34 s, bauen_werben_verkauf 0.18 s, haus_lager_zeile 0.06 s
+ 5746 |  38   2   0 |   7   0 |  88.00 | 26/26 (4) | 14 3 | verkauft: holz; FLUCHT 163: ort (179, 238) zustand 101 lauf (165, 223) Verfolger in 10 Leben 9710 -> laeuft weiter
+ 5772 |  46   2   0 |   7   0 |  88.00 | 26/26 (4) | 14 3 | FLUCHT 163: ort (178, 236) zustand 101 lauf (165, 223) Verfolger in 10 Leben 9710 -> laeuft weiter
+ 5786 |  48   2   0 |   7   0 |  88.00 | 26/26 (4) | 14 3 | FLUCHT 163: ort (177, 235) zustand 101 lauf (165, 223) Verfolger in 10 Leben 9710 -> laeuft weiter
+ 5799 |  48   2   0 |   7   0 |  88.00 | 26/26 (4) | 14 3 | verkauft: holz; FLUCHT 163: ort (177, 235) zustand 101 lauf (165, 223) Verfolger in 9 Leben 9710 -> laeuft weiter
+ 5821 |  43   2   0 |   7   0 |  87.75 | 26/26 (4) | 14 3 | FLUCHT 163: ort (175, 233) zustand 101 lauf (165, 223) Verfolger in 10 Leben 9710 -> laeuft weiter
+ 5848 |  43   2   0 |   7   0 |  87.75 | 26/26 (3) | 14 3 | FLUCHT 163: ort (174, 232) zustand 101 lauf (165, 223) Verfolger in 9 Leben 9710 -> laeuft weiter
+ 5861 |  43   2   0 |   7   0 |  87.75 | 26/26 (3) | 14 3 | verkauft: holz; FLUCHT 163: ort (173, 231) zustand 101 lauf (165, 223) Verfolger in 9 Leben 9710 -> laeuft weiter
+ 5888 |  41   2   0 |   6   0 |  87.75 | 26/26 (3) | 14 3 | FLUCHT 163: ort (171, 229) zustand 101 lauf (165, 223) Verfolger in 10 Leben 9710 -> laeuft weiter; ZIELWAHL 252 -> 67 Typ 20 in 77: Fern<=10 0, <=20 0, <=30 2, Leben 12500; 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+ 5909 |  49   2   0 |   6   0 |  87.75 | 26/26 (3) | 14 3 | FLUCHT 163: ort (170, 228) zustand 101 lauf (165, 223) Verfolger in 9 Leben 9710 -> laeuft weiter
+ 5927 |  53   2   0 |   6   0 |  87.75 | 26/26 (3) | 14 3 | ANWERBEN-BREMSE: Gold 36 (braucht 100), Feuer 3, Planer braucht Gold False, A-Farmen offen 0; verkauft: holz; FLUCHT 163: ort (169, 227) zustand 101 lauf (165, 223) Verfolger in 9 Leben 9710 -> laeuft weiter
+ZEITEN nach 300 Runden: lesen 11.93 s, wirtschaft 1.07 s, assassinen 0.81 s, waechter 0.34 s, bauen_werben_verkauf 0.33 s, haus_lager_zeile 0.06 s
+ 5950 |  47   2   0 |   6   0 |  87.75 | 26/26 (3) | 14 3 | FLUCHT 163: ort (167, 225) zustand 101 lauf (165, 223) Verfolger in 10 Leben 9710 -> neu nach (147, 241) (Heim: (97, 283) eigene 1.0 gegen Verfolger 1.0; (141, 269) eigene 2.0 gegen Verfolger 1.0); PLANER Lage (Gewinn bis Ende / Amortisation): Apfelplantage -15/2012 [Horizont], Holzfaeller -15/996 [Horizont], Jaegerhuette -79/9552 [Horizont], Steinbruch+Ochsenjoch -95/977 [Horizont], Eisenmine -116/3512 [Horizont] | Stein-Reserve 0
+ 5977 |  47   2   0 |   6   0 |  87.75 | 26/26 (3) | 14 3 | FLUCHT 163: ort (166, 224) zustand 101 lauf (147, 241) Verfolger in 9 Leben 9710 -> laeuft weiter
+ 5990 |  47   2   0 |   6   0 |  87.75 | 26/26 (3) | 14 3 | verkauft: holz; FLUCHT 163: ort (165, 224) zustand 101 lauf (147, 241) Verfolger in 8 Leben 9710 -> laeuft weiter
+ 6017 |  42   2   0 |   6   0 |  87.50 | 26/26 (3) | 14 3 | FLUCHT 163: ort (163, 225) zustand 101 lauf (147, 241) Verfolger in 8 Leben 9710 -> laeuft weiter
+ 6030 |  42   2   0 |   6   0 |  87.50 | 26/26 (3) | 14 3 | FLUCHT 163: ort (162, 226) zustand 101 lauf (147, 241) Verfolger in 8 Leben 9710 -> laeuft weiter
+ 6044 |  42   2   0 |   6   0 |  87.50 | 26/26 (3) | 14 3 | verkauft: holz; FLUCHT 163: ort (161, 227) zustand 101 lauf (147, 241) Verfolger in 8 Leben 9710 -> laeuft weiter
+ 6066 |  37   2   0 |   5   0 |  87.50 | 26/26 (3) | 14 3 | FLUCHT 163: ort (160, 228) zustand 101 lauf (147, 241) Verfolger in 8 Leben 9710 -> laeuft weiter
+ 6079 |  37   2   0 |   5   0 |  87.50 | 26/26 (4) | 14 3 | FLUCHT 163: ort (159, 229) zustand 101 lauf (147, 241) Verfolger in 8 Leben 9710 -> laeuft weiter
+ 6097 |  37   2   0 |   5   0 |  87.50 | 26/26 (4) | 14 3 | verkauft: holz; FLUCHT 163: ort (158, 230) zustand 101 lauf (147, 241) Verfolger in 8 Leben 9710 -> laeuft weiter
+ 6119 |  32   2   0 |   9   0 |  87.50 | 26/26 (4) | 14 3 | FLUCHT 163: ort (157, 231) zustand 101 lauf (147, 241) Verfolger in 8 Leben 9710 -> laeuft weiter
+ZEITEN nach 310 Runden: lesen 12.34 s, wirtschaft 1.07 s, assassinen 0.85 s, bauen_werben_verkauf 0.42 s, waechter 0.35 s, haus_lager_zeile 0.06 s
+ 6133 |  32   2   0 |  10   0 |  87.50 | 26/26 (4) | 14 3 | FLUCHT 163: ort (156, 232) zustand 101 lauf (147, 241) Verfolger in 9 Leben 9710 -> laeuft weiter
+ 6150 |  32   2   0 |  10   0 |  87.50 | 26/26 (4) | 14 3 | verkauft: apfel x1; FLUCHT 163: ort (155, 233) zustand 101 lauf (147, 241) Verfolger in 9 Leben 9710 -> laeuft weiter
+ 6176 |  36   2   0 |   5   0 |  87.50 | 26/26 (4) | 14 3 | FLUCHT 163: ort (153, 235) zustand 101 lauf (147, 241) Verfolger in 10 Leben 9710 -> laeuft weiter
+ 6190 |  39   2   0 |   5   0 |  87.50 | 26/26 (4) | 14 3 | FLUCHT 163: ort (152, 236) zustand 101 lauf (147, 241) Verfolger in 10 Leben 9710 -> laeuft weiter
+ 6203 |  41   2   0 |   5   0 |  87.25 | 26/26 (4) | 14 3 | verkauft: holz; FLUCHT 163: ort (151, 237) zustand 101 lauf (147, 241) Verfolger in 10 Leben 9710 -> laeuft weiter
+ 6230 |  42   2   0 |   5   0 |  87.25 | 26/26 (4) | 14 3 | FLUCHT 163: ort (150, 238) zustand 101 lauf (147, 241) Verfolger in 9 Leben 9710 -> neu nach (153, 263) (Heim: (97, 283) eigene 1.0 gegen Verfolger 1.0; (141, 269) eigene 1.0 gegen Verfolger 1.0)
+ 6252 |  47   2   0 |   4   0 |  87.25 | 26/26 (4) | 14 3 | FLUCHT 163: ort (148, 240) zustand 101 lauf (153, 263) Verfolger in 10 Leben 9710 -> laeuft weiter
+ 6266 |  50   2   0 |   4   0 |  87.25 | 26/26 (4) | 14 3 | verkauft: holz; FLUCHT 163: ort (148, 241) zustand 101 lauf (153, 263) Verfolger in 9 Leben 9710 -> laeuft weiter
+ 6292 |  49   2   0 |   4   0 |  87.25 | 26/26 (4) | 14 3 | FLUCHT 163: ort (148, 242) zustand 101 lauf (153, 263) Verfolger in 7 Leben 9710 -> laeuft weiter
+ 6306 |  55   2   0 |   4   0 |  87.25 | 26/26 (4) | 14 3 | FLUCHT 163: ort (148, 243) zustand 101 lauf (153, 263) Verfolger in 7 Leben 9710 -> laeuft weiter
+ZEITEN nach 320 Runden: lesen 12.75 s, wirtschaft 1.08 s, assassinen 0.89 s, bauen_werben_verkauf 0.51 s, waechter 0.35 s, haus_lager_zeile 0.06 s
+ 6319 |  60   2   0 |   4   0 |  87.25 | 26/26 (4) | 14 3 | verkauft: holz; FLUCHT 163: ort (148, 244) zustand 101 lauf (153, 263) Verfolger in 8 Leben 9710 -> laeuft weiter
+ 6345 |  57   2   0 |   4   0 |  87.25 | 26/26 (4) | 14 3 | FLUCHT 163: ort (148, 246) zustand 101 lauf (153, 263) Verfolger in 8 Leben 9710 -> laeuft weiter
+ 6368 |  61   2   0 |   4   0 |  87.25 | 26/26 (3) | 14 3 | FLUCHT 163: ort (148, 247) zustand 101 lauf (153, 263) Verfolger in 8 Leben 9710 -> laeuft weiter
+ 6383 |  61   2   0 |   4   0 |  87.25 | 26/26 (3) | 14 3 | verkauft: holz; FLUCHT 163: ort (148, 248) zustand 101 lauf (153, 263) Verfolger in 8 Leben 9710 -> laeuft weiter
+ 6408 |  51   2   0 |   4   0 |  87.00 | 26/26 (3) | 14 3 | FLUCHT 163: ort (148, 250) zustand 101 lauf (153, 263) Verfolger in 8 Leben 9710 -> laeuft weiter; ZIELWAHL 253 -> 67 Typ 20 in 77: Fern<=10 0, <=20 0, <=30 2, Leben 12500; 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 1 Gebaeude gleichzeitig angelaufen)
+ 6430 |  51   2   0 |   4   0 |  87.00 | 26/26 (3) | 14 3 | FLUCHT 163: ort (148, 251) zustand 101 lauf (153, 263) Verfolger in 8 Leben 9710 -> laeuft weiter
+ 6446 |  51   2   0 |   3   0 |  87.00 | 26/26 (3) | 14 3 | verkauft: holz; FLUCHT 163: ort (148, 252) zustand 101 lauf (153, 263) Verfolger in 8 Leben 9710 -> laeuft weiter
+ 6470 |  41   2   0 |   3   0 |  87.00 | 26/26 (3) | 14 3 | FLUCHT 163: ort (148, 253) zustand 101 lauf (153, 263) Verfolger in 7 Leben 9710 -> laeuft weiter
+ 6483 |  43   2   0 |   3   0 |  87.00 | 26/26 (3) | 14 3 | FLUCHT 163: ort (148, 254) zustand 101 lauf (153, 263) Verfolger in 7 Leben 9710 -> laeuft weiter
+ 6497 |  46   2   0 |   3   0 |  87.00 | 26/26 (3) | 14 3 | verkauft: holz; FLUCHT 163: ort (148, 255) zustand 101 lauf (153, 263) Verfolger in 8 Leben 9710 -> laeuft weiter
+ZEITEN nach 330 Runden: lesen 13.17 s, wirtschaft 1.09 s, assassinen 0.92 s, bauen_werben_verkauf 0.66 s, waechter 0.35 s, haus_lager_zeile 0.06 s
+ 6523 |  46   2   0 |   3   0 |  87.00 | 26/26 (3) | 14 3 | FLUCHT 163: ort (148, 257) zustand 101 lauf (153, 263) Verfolger in 10 Leben 9710 -> laeuft weiter
+ 6540 |  50   2   0 |   3   0 |  87.00 | 26/26 (3) | 14 3 | Abwehr gebuendelt: alle 13 (22,24,55) gegen Feind 217 Typ 73 bei (148,248); FLUCHT 163: ort (148, 258) zustand 101 lauf (153, 263) Verfolger in 10 Leben 9710 -> laeuft weiter
+ 6572 |  54   2   0 |   3   0 |  87.00 | 26/26 (3) | 14 3 | verkauft: holz; FLUCHT 163: ort (148, 260) zustand 101 lauf (153, 263) Verfolger in 10 Leben 9710 -> laeuft weiter
+ 6596 |  44   2   0 |   3   0 |  87.00 | 26/26 (4) | 14 3 | FLUCHT 163: ort (149, 261) zustand 101 lauf (153, 263) Verfolger in 9 Leben 9710 -> laeuft weiter
+ 6612 |  44   2   0 |   3   0 |  86.75 | 26/26 (4) | 14 3 | FLUCHT 163: ort (150, 262) zustand 101 lauf (153, 263) Verfolger in 9 Leben 9710 -> neu nach (155, 286) (Heim: (97, 283) eigene 1.0 gegen Verfolger 1.0; (141, 269) eigene 2.0 gegen Verfolger 1.0)
+ 6634 |  44   2   0 |   3   0 |  86.75 | 26/26 (4) | 14 3 | verkauft: holz; FLUCHT 163: ort (151, 264) zustand 101 lauf (155, 286) Verfolger in 10 Leben 9710 -> laeuft weiter
+ 6657 |  40   2   0 |   2   0 |  86.75 | 26/26 (4) | 14 3 | FLUCHT 163: ort (151, 265) zustand 101 lauf (155, 286) Verfolger in 10 Leben 9710 -> laeuft weiter
+ 6674 |  43   2   0 |   2   0 |  86.75 | 26/26 (4) | 14 3 | FLUCHT 163: ort (151, 266) zustand 101 lauf (155, 286) Verfolger in 9 Leben 9710 -> laeuft weiter
+ 6687 |  46   2   0 |   2   0 |  86.75 | 26/26 (4) | 14 3 | verkauft: holz; FLUCHT 163: ort (151, 267) zustand 101 lauf (155, 286) Verfolger in 10 Leben 9710 -> laeuft weiter
+ 6713 |  46   2   0 |   2   0 |  86.75 | 26/26 (4) | 14 3 | FLUCHT 163: ort (151, 269) zustand 101 lauf (155, 286) Verfolger in 10 Leben 9710 -> laeuft weiter
+ZEITEN nach 340 Runden: lesen 13.58 s, wirtschaft 1.09 s, assassinen 0.96 s, bauen_werben_verkauf 0.75 s, waechter 0.42 s, haus_lager_zeile 0.06 s
+ 6728 |  49   2   0 |   2   0 |  86.75 | 26/26 (4) | 14 3 | FLUCHT 163: ort (151, 270) zustand 101 lauf (155, 286) Verfolger in 11 Leben 9710 -> laeuft weiter
+ 6742 |  52   2   0 |   2   0 |  86.75 | 26/26 (4) | 14 3 | verkauft: holz; FLUCHT 163: ort (151, 270) zustand 101 lauf (155, 286) Verfolger in 11 Leben 9710 -> laeuft weiter
+ 6768 |  42   2   0 |   2   0 |  86.75 | 26/26 (4) | 14 3 | FLUCHT 163: ort (151, 272) zustand 101 lauf (155, 286) Verfolger in 13 Leben 9710 -> laeuft weiter
+ 6781 |  42   2   0 |   2   0 |  86.75 | 26/26 (4) | 14 3 | FLUCHT 163: ort (151, 273) zustand 101 lauf (155, 286) Verfolger in 14 Leben 9710 -> laeuft weiter
+ 6794 |  42   2   0 |   2   0 |  86.75 | 26/26 (4) | 14 3 | verkauft: holz; FLUCHT 163: ort (151, 274) zustand 101 lauf (155, 286) Verfolger in 15 Leben 9710 -> laeuft weiter
+ 6847 |  37   2   0 |   1   0 |  86.50 | 26/26 (4) | 14 3 | verkauft: holz; AUSWEICHEN vorbei 163: 30 Ticks kein Verfolger im Umkreis 15 - greift wieder an (Leben 9710); ZIELWAHL 163 -> 67 Typ 20 in 65: Fern<=10 0, <=20 0, <=30 2, Leben 9710; 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 1 Gebaeude gleichzeitig angelaufen)
+ 6905 |  32   2   0 |   1   0 |  86.50 | 26/26 (3) | 14 3 | ANWERBEN-BREMSE: Gold 32 (braucht 100), Feuer 3, Planer braucht Gold False, A-Farmen offen 0
+ZEITEN nach 350 Runden: lesen 13.98 s, wirtschaft 1.10 s, assassinen 0.99 s, bauen_werben_verkauf 0.87 s, waechter 0.43 s, haus_lager_zeile 0.06 s
+ 6919 |  32   2   0 |   1   0 |  86.50 | 26/26 (3) | 14 3 | PLANER Lage (Gewinn bis Ende / Amortisation): Holzfaeller -20/944 [Horizont], Apfelplantage -23/2020 [Horizont], Jaegerhuette -85/9552 [Horizont], Steinbruch+Ochsenjoch -123/993 [Horizont], Eisenmine -129/3512 [Horizont] | Stein-Reserve 0
+ 6934 |  32   2   0 |   1   0 |  86.50 | 26/26 (3) | 14 3 | ZIELWAHL 256 -> 67 Typ 20 in 77: Fern<=10 0, <=20 0, <=30 2, Leben 12500; 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 1 Gebaeude gleichzeitig angelaufen)
+ 7016 |  32   2   0 |   1   0 |  86.25 | 26/26 (3) | 14 3 | Abwehr gebuendelt: alle 10 (22,24,55) gegen Feind 220 Typ 73 bei (137,261)
+ZEITEN nach 360 Runden: lesen 14.39 s, wirtschaft 1.11 s, assassinen 1.03 s, bauen_werben_verkauf 0.87 s, waechter 0.49 s, haus_lager_zeile 0.06 s
+ 7091 |  32   2   0 |   0   0 |  86.25 | 26/26 (3) | 14 3 | -
+ZEITEN nach 370 Runden: lesen 14.80 s, wirtschaft 1.11 s, assassinen 1.03 s, bauen_werben_verkauf 0.87 s, waechter 0.50 s, haus_lager_zeile 0.06 s
+ 7234 |  32   2   0 |   4   0 |  86.00 | 26/26 (4) | 14 3 | -
+ZEITEN nach 380 Runden: lesen 15.21 s, wirtschaft 1.12 s, assassinen 1.04 s, bauen_werben_verkauf 0.87 s, waechter 0.50 s, haus_lager_zeile 0.06 s
+ 7376 |  32   2   0 |   9   0 |  86.00 | 26/26 (4) | 14 3 | -
+ 7503 |  43   2   0 |   8   0 |  85.75 | 26/26 (4) | 14 3 | verkauft: holz
+ZEITEN nach 390 Runden: lesen 15.61 s, wirtschaft 1.13 s, assassinen 1.05 s, bauen_werben_verkauf 0.90 s, waechter 0.50 s, haus_lager_zeile 0.06 s
+ 7525 |  42   2   0 |   8   0 |  85.75 | 26/26 (4) | 14 3 | -
+ 7556 |  45   2   0 |   8   0 |  85.75 | 26/26 (4) | 14 3 | verkauft: holz
+ 7609 |  40   2   0 |   7   0 |  85.50 | 26/26 (4) | 14 3 | verkauft: holz
+ 7659 |  35   2   0 |   7   0 |  85.50 | 26/26 (4) | 14 3 | verkauft: holz
+ 7683 |  34   2   0 |   7   0 |  85.50 | 26/26 (4) | 14 3 | ANWERBEN-BREMSE: Gold 58 (braucht 100), Feuer 4, Planer braucht Gold False, A-Farmen offen 0
+ZEITEN nach 400 Runden: lesen 16.02 s, wirtschaft 1.14 s, assassinen 1.06 s, bauen_werben_verkauf 0.99 s, waechter 0.51 s, haus_lager_zeile 0.06 s
+ 7697 |  36   2   0 |   7   0 |  85.50 | 26/26 (4) | 14 3 | PLANER Lage (Gewinn bis Ende / Amortisation): Holzfaeller -25/944 [Horizont], Apfelplantage -30/2003 [Horizont], Jaegerhuette -90/9552 [Horizont], Eisenmine -141/3512 [Horizont], Steinbruch+Ochsenjoch -145/1006 [Horizont] | Stein-Reserve 0
+ 7715 |  40   2   0 |   7   0 |  85.50 | 26/26 (4) | 14 3 | verkauft: holz
+ 7768 |  43   2   0 |   6   0 |  85.50 | 26/26 (4) | 14 3 | verkauft: holz; Gebaeude 67 (Typ 20) zerstoert; ZIELWAHL 163 -> 79 Typ 4 in 6: Fern<=10 0, <=20 0, <=30 4, Leben 9710; ZIELWAHL 252 -> 73 Typ 4 in 9: Fern<=10 0, <=20 0, <=30 6, Leben 12500; ZIELWAHL 253 -> 73 Typ 4 in 9: Fern<=10 0, <=20 0, <=30 6, Leben 12500; ZIELWAHL 256 -> 79 Typ 4 in 20: Fern<=10 0, <=20 0, <=30 4, Leben 12500; 4 Assassinen auf 2 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+ 7831 |  38   2   0 |  10   0 |  85.25 | 26/26 (4) | 14 3 | verkauft: holz,apfel x1
+ZEITEN nach 410 Runden: lesen 16.44 s, wirtschaft 1.14 s, bauen_werben_verkauf 1.11 s, assassinen 1.10 s, waechter 0.51 s, haus_lager_zeile 0.06 s
+ 7893 |  33   2   0 |   5   0 |  85.25 | 26/26 (4) | 14 3 | -
+ 7938 |  41   2   0 |   5   0 |  85.25 | 26/26 (4) | 14 3 | verkauft: holz
+ 7991 |  46   2   0 |   4   0 |  85.25 | 26/26 (4) | 14 3 | verkauft: holz
+Ende Phase 2 bei Tick 8027 nach 417 Runden (0.1 s je Runde); Kornspeicher 1, Holzfaeller 14, Apfelplantagen 3; Waechter: Bedrohungen 6, davon tot 0, eigene Truppen verloren 3; Angriff: zerstoert 4 Gebaeude {3: 3, 20: 1}, eigene Verluste 0, im Spiel gleichzeitig angelaufen zuletzt 2, neu befohlen 0, Rueckzuege 3, ausgewichen 0, Fernkaempfer angegriffen 0, Warten neu geschickt 0, Stapel-Ziele 0, gesperrte Warteplaetze 0, Lord-Trupps 0, Uebermacht ausgewichen 2, Alle-auf-den-Lord []
+Wirtschaft: Seasoning: A 3 / B 3 Plantagen, A reif bei None, B gesetzt bei None; Apfelbauern untaetig vor B 26 % (410 Messungen), B bis B+1000 keine Messung, danach keine Messung; FESTES FENSTER Tick 5000-12000 (zum Vergleich zwischen Partien): 29 % (171 Messungen); Lager gesetzt bei 3862, gemessene Ladung je Gang {3: 18}
+Ertrags-Planer: gesetzt {'Ochsenjoch (Regel)': 1}, stehen am Ende {'Eisenmine': 0, 'Steinbruch+Ochsenjoch': 1, 'Apfelplantage': 3, 'Jaegerhuette': 0, 'Holzfaeller': 14, 'Ochsenjoch': 2, 'Steinhaufen zuletzt': {58: 0}, 'Bauplaetze ohne Weg verworfen': 11}, abgelehnt {'Jaegerhuette: Horizont': 42, 'Eisenmine: Horizont': 42, 'Holzfaeller: Horizont': 29, 'Steinbruch+Ochsenjoch: Horizont': 27, 'Apfelplantage: Horizont': 21}, Verstoesse gegen den Horizont keine, Steuerstufe 3
+Ertragsmesser: Eisenmine 0.61->0.61 (Zugang 0, Lieferung None, Gegenprobe None, Anlauf 6664 Startwert); Steinbruch+Ochsenjoch 6.72->6.57 (Zugang 12, Lieferung None, Gegenprobe None, Anlauf 4162 gemessen an der Art); Apfelplantage 3.25->3.25 (Zugang 44, Lieferung 5, Gegenprobe 0.48, Anlauf 1665 gemessen an der Art); Jaegerhuette 3.07->3.07 (Zugang 0, Lieferung None, Gegenprobe None, Anlauf 4427 Startwert); Holzfaeller 13.24->13.83 (Zugang 590, Lieferung 18, Gegenprobe 0.06, Anlauf 4000 Startwert) | negative Zugaenge: holz 2 von 416 Runden, Summe 21; stein 0 von 416 Runden, Summe 0; eisen 0 von 416 Runden, Summe 0 | abgegebene Ladung je Einheit@Art: {'13@32': 21, '3@3': 37}

@@ -1,0 +1,160 @@
+CODE-KENNUNG bdb1875c (14 Dateien: assassinen.py d73598, bauen.py fe647a, befehl.py f9d5aa, erstes_spiel.py 6ca61e, ertrag_startwerte_M19.json b566ad, ertragsplaner.py b72d8a, farmen_mischen.py f28949, kennung.py c1d186, laden.py 69ccb2, logik.lua 1af8f2, serie.py 3ff731, steuerkarte.py 57bd5a, waechter.py b98179, wirtschaft.py fd8fa8)
+== Phase 1: neue Partie ab Tick 0, Tempo 300 durchgehend, ohne Pausen (Plan eroeffnung_plan_M19.json)
+Zuruecksetzen: Ansicht 14 (Partie vorbei: 0) -> Hauptmenue, pausiert
+SAAT fest aus saat_liga.json (Modul meldet {'karte': 1788115329, 'partie': 1788115329, 'wert1': 7474, 'wert2': 22872, 'zaehler1': 1, 'zaehler2': 118})
+Partie laeuft seit Tick 120: Lords da, unser Lord bei (144, 268), {'Ansicht': 14, 'gameOver': 0, 'Mensch': 1, 'Platz': 1}
+ERSTE BAUBEFEHLE bei Tick 175: 16 von 20 Holz-Bauten stehen bei Tick 349 (Kornspeicher, Markt, Holzfaeller, Steinbruch, Ochsenjoch, Huetten); nicht gebaut: [('Steinbruch', 80, 271), ('Ochsenkarren', 87, 278), ('Huette', 134, 267), ('Huette', 134, 262)]
+VERKAUFT bis Tick 453: {'kaese': 3, 'brot': 3, 'apfel': 3} Lose, Gold 195
+RAID ZUERST: Nahrung da bei Tick 398, {'kaese': 3, 'brot': 3, 'apfel': 3} verkauft (Lose zu 5); Soeldnerposten (145, 274); 1 Assassinen angeworben (freie Leute am Feuer jetzt 2) -> Gold 5, Nahrung uebrig {'fleisch': 15}, Tick 631
+NACHGEHOLT bei Tick 763: 3 von 7 (Apfelplantagen A + Rest); nicht gebaut: [('Huette', 134, 267), ('Apfelplantage', 79, 237), ('Apfelplantage', 82, 247), ('Apfelplantage', 92, 245)]; Holz 50, Gold 5
+Apfelplantagen A 3, B 3 spaeter [(89, 235), (80, 225), (70, 223)]; altes Lager bleibt mit {'holz': 50}
+== Phase 2: Echtzeit, Tempo 300, 10 Minuten, Waechter an
+Ertrags-Planer: Baukosten aus dem Spiel {1: {'holz': 5}, 3: {'holz': 5}, 4: {'holz': 5}, 5: {'holz': 20, 'stein': 6}, 7: {'holz': 3, 'gold': 60}, 10: {}, 19: {'holz': 5}, 20: {'holz': 25}, 32: {'holz': 3, 'gold': 15}}; Protokoll ertrag_live_20261005_232427_i1.jsonl
+Ertrags-Planer: Startwerte aus 10 frueheren Partien: Eisenmine 0.61 (Gewicht 63177, Anlauf 6664); Steinbruch+Ochsenjoch 6.72 (Gewicht 54086, Anlauf 3644); Apfelplantage 3.25 (Gewicht 131019, Anlauf 2224); Jaegerhuette 3.07 (Gewicht 82848, Anlauf 4427); Holzfaeller 13.24 (Gewicht 151124, Anlauf 4000)
+Wirtschaft: Apfel A [(79, 237), (82, 247), (92, 245)], B [(89, 235), (80, 225), (70, 223)]; alte Lagerteile [6, 7, 8, 9]
+Tick | Holz Stein Eisen | Aepfel Brot | Beliebt | Leute/Platz (Feuer) | Holzf. Apfelb. | Ereignis
+ 1107 |  50   0   0 |   0   0 |  98.75 | 18/18 (0) | 11 0 | Stellung: 12 Truppen zum Posten (97, 283); ZIELWAHL 163 -> 67 Typ 20 in 66: Fern<=10 0, <=20 0, <=30 2, Leben 12500; 0 Assassinen ohne Ziel (); 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen); STEUER 2 -> 3 (Beliebtheit 98.75); PLANER Lage (Gewinn bis Ende / Amortisation): Steinbruch+Ochsenjoch 66/1020, Apfelplantage 24/1991, Holzfaeller 10/988, Jaegerhuette -47/9552 [Horizont], Eisenmine -47/3869 [Horizont] | Stein-Reserve 0; PLANER Huette zuerst (Feuer 0, Steinbruch+Ochsenjoch braucht 4) -> (134, 267); Huette (130, 263) (Bedarf 18, Platz 18, Leute 18, Feuer 0)
+ 1257 |  40   0   0 |   0   0 |  98.50 | 19/34 (3) | 14 0 | verkauft: holz,fleisch x1
+ 1292 |  35   0   0 |   0   0 |  98.50 | 20/34 (3) | 14 0 | Apfelplantage A nachgeholt bei (79, 237): (79, 237) (Gold 15, Holz 35)
+ZEITEN nach 10 Runden: lesen 0.40 s, wirtschaft 0.30 s, bauen_werben_verkauf 0.06 s, haus_lager_zeile 0.06 s, assassinen 0.03 s, waechter 0.03 s
+ 1404 |  32   0   0 |   0   0 |  98.25 | 22/34 (0) | 14 0 | -
+ZEITEN nach 20 Runden: lesen 0.78 s, wirtschaft 0.36 s, bauen_werben_verkauf 0.06 s, haus_lager_zeile 0.06 s, assassinen 0.04 s, waechter 0.04 s
+ 1555 |  32   0   0 |   0   0 |  98.25 | 25/34 (2) | 14 1 | STEUER 3 -> 4 (Beliebtheit 98.25)
+ZEITEN nach 30 Runden: lesen 1.15 s, wirtschaft 0.43 s, bauen_werben_verkauf 0.06 s, haus_lager_zeile 0.06 s, waechter 0.04 s, assassinen 0.04 s
+ 1704 |  32   0   0 |   0   0 |  97.50 | 28/34 (5) | 14 1 | -
+ZEITEN nach 40 Runden: lesen 1.53 s, wirtschaft 0.43 s, bauen_werben_verkauf 0.06 s, haus_lager_zeile 0.06 s, waechter 0.05 s, assassinen 0.05 s
+ 1834 |  32   0   0 |   0   0 |  96.75 | 31/34 (8) | 14 1 | -
+ 1954 |  32   0   0 |   0   0 |  96.75 | 33/34 (10) | 14 1 | ANWERBEN-BREMSE: Gold 5 (braucht 100), Feuer 10, Planer braucht Gold True, A-Farmen offen 2
+ZEITEN nach 50 Runden: lesen 1.92 s, wirtschaft 0.44 s, bauen_werben_verkauf 0.06 s, haus_lager_zeile 0.06 s, waechter 0.05 s, assassinen 0.05 s
+ 1970 |  32   0   0 |   0   0 |  96.75 | 34/34 (11) | 14 1 | PLANER Lage (Gewinn bis Ende / Amortisation): Steinbruch+Ochsenjoch 40/1020, Apfelplantage 16/1991, Holzfaeller 5/980, Jaegerhuette -52/9552 [Horizont], Eisenmine -58/3869 [Horizont] | Stein-Reserve 0; PLANER wartet auf Steinbruch+Ochsenjoch (fehlt: )
+ZEITEN nach 60 Runden: lesen 2.30 s, wirtschaft 0.44 s, bauen_werben_verkauf 0.06 s, waechter 0.06 s, haus_lager_zeile 0.06 s, assassinen 0.06 s
+ 2097 |  32   0   0 |   0   0 |  96.00 | 34/34 (13) | 14 1 | -
+ZEITEN nach 70 Runden: lesen 2.69 s, wirtschaft 0.45 s, waechter 0.06 s, bauen_werben_verkauf 0.06 s, assassinen 0.06 s, haus_lager_zeile 0.06 s
+ 2231 |  32   0   0 |   0   0 |  95.25 | 34/34 (15) | 14 1 | -
+ZEITEN nach 80 Runden: lesen 3.08 s, wirtschaft 0.45 s, waechter 0.07 s, assassinen 0.06 s, bauen_werben_verkauf 0.06 s, haus_lager_zeile 0.06 s
+ 2369 |  32   0   0 |   0   0 |  95.25 | 34/34 (15) | 14 1 | -
+ 2400 |  32   0   0 |   0   0 |  94.50 | 34/34 (15) | 14 1 | Apfelplantage A nachgeholt bei (82, 247): None (Gold 21, Holz 32)
+ 2422 |  32   0   0 |   0   0 |  94.50 | 34/34 (15) | 14 1 | Apfelplantage A nachgeholt bei (92, 245): (92, 245) (Gold 21, Holz 32)
+ZEITEN nach 90 Runden: lesen 3.48 s, wirtschaft 0.55 s, waechter 0.07 s, assassinen 0.07 s, bauen_werben_verkauf 0.06 s, haus_lager_zeile 0.06 s
+ 2538 |  29   0   0 |   0   0 |  94.50 | 34/34 (14) | 14 2 | STEUER 4 -> 3 (Beliebtheit 94.50)
+ 2675 |  29   0   0 |   0   0 |  91.75 | 34/34 (14) | 14 2 | ANWERBEN-BREMSE: Gold 6 (braucht 100), Feuer 14, Planer braucht Gold True, A-Farmen offen 1
+ZEITEN nach 100 Runden: lesen 3.89 s, wirtschaft 0.58 s, waechter 0.08 s, assassinen 0.07 s, bauen_werben_verkauf 0.06 s, haus_lager_zeile 0.06 s
+ 2689 |  29   0   0 |   0   0 |  91.75 | 34/34 (14) | 14 2 | PLANER Lage (Gewinn bis Ende / Amortisation): Steinbruch+Ochsenjoch 19/1020, Apfelplantage 10/1991, Holzfaeller 2/980, Jaegerhuette -57/9552 [Horizont], Eisenmine -67/3869 [Horizont] | Stein-Reserve 0; PLANER wartet auf Steinbruch+Ochsenjoch (fehlt: holz 1)
+ 2787 |  29   0   0 |   0   0 |  91.75 | 34/34 (14) | 14 2 | Gebaeude 67 (Typ 20) zerstoert; ZIELWAHL 163 -> 74 Typ 4 in 7: Fern<=10 0, <=20 0, <=30 6, Leben 12500; 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+ZEITEN nach 110 Runden: lesen 4.29 s, wirtschaft 0.59 s, assassinen 0.11 s, waechter 0.08 s, bauen_werben_verkauf 0.06 s, haus_lager_zeile 0.06 s
+ 2840 |  29   0   0 |   0   0 |  89.00 | 34/34 (14) | 14 2 | PLANER Ochsenjoch an Steinbruch 58: erster Ochse beladen unterwegs -> sofort der zweite (Joche 1, Haufen 0) -> (83, 267)
+ZEITEN nach 120 Runden: lesen 4.68 s, wirtschaft 0.65 s, assassinen 0.11 s, waechter 0.09 s, bauen_werben_verkauf 0.06 s, haus_lager_zeile 0.06 s
+ 2995 |  24   0   0 |   0   0 |  89.00 | 34/34 (13) | 14 2 | -
+ZEITEN nach 130 Runden: lesen 5.08 s, wirtschaft 0.65 s, assassinen 0.12 s, waechter 0.10 s, bauen_werben_verkauf 0.06 s, haus_lager_zeile 0.06 s
+ 3133 |  24   0   0 |   0   0 |  86.25 | 34/34 (13) | 14 2 | -
+ZEITEN nach 140 Runden: lesen 5.48 s, wirtschaft 0.66 s, assassinen 0.12 s, waechter 0.10 s, bauen_werben_verkauf 0.06 s, haus_lager_zeile 0.06 s
+ 3272 |  24   0   0 |   4   0 |  83.50 | 34/34 (13) | 14 2 | -
+ 3368 |  24   0   0 |   4   0 |  83.50 | 34/34 (13) | 14 2 | Gebaeude 74 (Typ 4) zerstoert; ZIELWAHL 163 -> 79 Typ 4 in 6: Fern<=10 0, <=20 0, <=30 4, Leben 12500; 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+ 3408 |  24   0   0 |   3   0 |  83.25 | 34/34 (13) | 14 2 | ANWERBEN-BREMSE: Gold 14 (braucht 100), Feuer 13, Planer braucht Gold True, A-Farmen offen 1
+ZEITEN nach 150 Runden: lesen 5.88 s, wirtschaft 0.66 s, assassinen 0.15 s, waechter 0.10 s, bauen_werben_verkauf 0.06 s, haus_lager_zeile 0.06 s
+ 3420 |  24   0   0 |   3   0 |  83.25 | 34/34 (13) | 14 2 | PLANER Lage (Gewinn bis Ende / Amortisation): Apfelplantage 8/1993, Holzfaeller -2/980 [Horizont], Steinbruch+Ochsenjoch -2/1020 [Horizont], Jaegerhuette -62/9552 [Horizont], Eisenmine -77/3869 [Horizont] | Stein-Reserve 0; PLANER wartet auf Apfelplantage (fehlt: gold 1)
+ZEITEN nach 160 Runden: lesen 6.27 s, wirtschaft 0.67 s, assassinen 0.16 s, waechter 0.11 s, bauen_werben_verkauf 0.06 s, haus_lager_zeile 0.06 s
+ 3559 |  24   0   0 |   2   0 |  83.25 | 34/34 (13) | 14 2 | -
+ 3683 |  24   0   0 |   1   0 |  83.00 | 34/34 (13) | 14 2 | Altes Lager leeren: holz verkauft (Inhalt {'holz': 24}); Lager gesetzt bei None - 1 Holzfaeller wollen abliefern (Tick 3683)
+ZEITEN nach 170 Runden: lesen 6.67 s, wirtschaft 0.73 s, assassinen 0.16 s, waechter 0.11 s, bauen_werben_verkauf 0.06 s, haus_lager_zeile 0.06 s
+ 3716 |  19   0   0 |   1   0 |  83.00 | 34/34 (13) | 14 2 | Gebaeude 79 (Typ 4) zerstoert; ZIELWAHL 163 -> 55 Typ 3 in 60: Fern<=10 0, <=20 0, <=30 0, Leben 12500; 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen); Apfelplantage A nachgeholt bei (82, 247): (82, 247) (Gold 19, Holz 19); Altes Lager abgerissen (4 Teile, Rest {'holz': 19}) bei Tick 3716
+ 3874 |   0   0   0 |   0   0 |  82.75 | 34/34 (13) | 14 2 | Lager gesetzt bei (91, 277) - 1 Holzfaeller wollen abliefern (Tick 3874)
+ZEITEN nach 180 Runden: lesen 7.08 s, wirtschaft 1.06 s, assassinen 0.20 s, waechter 0.11 s, bauen_werben_verkauf 0.06 s, haus_lager_zeile 0.06 s
+ 3974 |   0   0   0 |   0   0 |  82.75 | 34/34 (12) | 14 3 | -
+ZEITEN nach 190 Runden: lesen 7.48 s, wirtschaft 1.07 s, assassinen 0.20 s, waechter 0.12 s, bauen_werben_verkauf 0.06 s, haus_lager_zeile 0.06 s
+ 4114 |   0   0   0 |   0   0 |  80.00 | 34/34 (12) | 14 3 | -
+ 4214 |   0   0   0 |   4   0 |  79.75 | 34/34 (12) | 14 3 | MESSUNG verletzt 163: leben 12500 -> 10100 | ort (212,300) zustand 101 | naechster Feind Typ 73 in 6 | naechster Fernkaempfer Typ 22 in 11 | Fern<=40: 14 | Nah<=8: 1 | naechstes Feindgebaeude Typ 55 in 12 | Ziel 55 in 30; 1 Assassinen warten/ziehen sich zurueck ausser Reichweite
+ 4238 |   0   0   0 |   4   0 |  79.75 | 34/34 (12) | 14 3 | ZIELWAHL 163 -> 55 Typ 3 in 30: Fern<=10 0, <=20 0, <=30 0, Leben 10100; 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+ 4260 |   0   0   0 |   4   0 |  79.75 | 34/34 (12) | 14 3 | ANWERBEN-BREMSE: Gold 12 (braucht 100), Feuer 12, Planer braucht Gold True, A-Farmen offen 0
+ZEITEN nach 200 Runden: lesen 7.88 s, wirtschaft 1.08 s, assassinen 0.27 s, waechter 0.12 s, bauen_werben_verkauf 0.06 s, haus_lager_zeile 0.06 s
+ 4274 |   0   0   0 |   4   0 |  79.75 | 34/34 (12) | 14 3 | AUSWEICHEN 163: Bedrohung 2.0 (Nahkaempfer im Umkreis 10, schlagende Arbeiter im Umkreis 3) gegen 1 eigene, Leben 10100 -> nach (211, 325) (Heim: (97, 283) eigene 1.0 gegen Verfolger 3.0; (141, 269) eigene 1.0 gegen Verfolger 3.0); PLANER Lage (Gewinn bis Ende / Amortisation): Apfelplantage -0/2005 [Horizont], Holzfaeller -6/973 [Horizont], Steinbruch+Ochsenjoch -28/989 [Horizont], Jaegerhuette -68/9552 [Horizont], Eisenmine -89/3750 [Horizont] | Stein-Reserve 0
+ 4300 |   0   0   0 |   4   0 |  79.75 | 34/34 (12) | 14 3 | MESSUNG verletzt 163: leben 10100 -> 6650 | ort (210,300) zustand 106 | naechster Feind Typ 73 in 2 | naechster Fernkaempfer Typ 22 in 13 | Fern<=40: 14 | Nah<=8: 2 | naechstes Feindgebaeude Typ 55 in 14 | Ziel None in -1; FLUCHT 163: ort (210, 300) zustand 106 lauf (211, 325) Verfolger in 2 Leben 6650 -> neu nach (188, 313) (Heim: (97, 283) eigene 1.0 gegen Verfolger 3.0; (141, 269) eigene 1.0 gegen Verfolger 3.0); 1 Assassinen warten/ziehen sich zurueck ausser Reichweite
+ 4327 |   0   0   0 |   3   0 |  79.75 | 34/34 (12) | 14 3 | MESSUNG verletzt 163: leben 6650 -> 3050 | ort (209,300) zustand 101 | naechster Feind Typ 73 in 3 | naechster Fernkaempfer Typ 22 in 14 | Fern<=40: 14 | Nah<=8: 3 | naechstes Feindgebaeude Typ 11 in 15 | Ziel None in -1; FLUCHT 163: ort (209, 300) zustand 101 lauf (188, 313) Verfolger in 3 Leben 3050 -> neu nach (199, 317) (Heim: (97, 283) eigene 1.0 gegen Verfolger 3.0; (141, 269) eigene 1.0 gegen Verfolger 3.0); 1 Assassinen warten/ziehen sich zurueck ausser Reichweite
+ 4354 |   0   0   0 |   8   0 |  79.75 | 34/34 (12) | 14 3 | MESSUNG verletzt 163: leben 3050 -> 650 | ort (208,300) zustand 101 | naechster Feind Typ 73 in 4 | naechster Fernkaempfer Typ 22 in 15 | Fern<=40: 14 | Nah<=8: 3 | naechstes Feindgebaeude Typ 11 in 15 | Ziel None in -1; FLUCHT 163: ort (208, 300) zustand 101 lauf (199, 317) Verfolger in 4 Leben 650 -> neu nach (194, 321) (Heim: (97, 283) eigene 1.0 gegen Verfolger 3.0; (141, 269) eigene 1.0 gegen Verfolger 3.0); 1 Assassinen warten/ziehen sich zurueck ausser Reichweite
+ 4381 |   0   0   0 |   8   0 |  79.75 | 34/34 (12) | 14 3 | FLUCHT 163: ort (208, 302) zustand 101 lauf (183, 299) Verfolger in 3 Leben 650 -> neu nach (187, 315) (Heim: (97, 283) eigene 1.0 gegen Verfolger 3.0; (141, 269) eigene 1.0 gegen Verfolger 3.0)
+ 4407 |   0   0   0 |   8   0 |  79.50 | 34/34 (12) | 14 3 | MESSUNG verletzt 163: leben 650 -> 200 | ort (206,300) zustand 101 | naechster Feind Typ 73 in 4 | naechster Fernkaempfer Typ 22 in 17 | Fern<=40: 14 | Nah<=8: 3 | naechstes Feindgebaeude Typ 11 in 15 | Ziel None in -1; FLUCHT 163: ort (206, 300) zustand 101 lauf (187, 315) Verfolger in 4 Leben 200 -> neu nach (181, 297) (Heim: (97, 283) eigene 1.0 gegen Verfolger 3.0; (141, 269) eigene 1.0 gegen Verfolger 3.0); 1 Assassinen warten/ziehen sich zurueck ausser Reichweite
+ 4431 |   0   0   0 |   8   0 |  79.50 | 34/34 (12) | 14 3 | FLUCHT 163: ort (205, 300) zustand 101 lauf (181, 297) Verfolger in 5 Leben 200 -> laeuft weiter
+ 4447 |   0   0   0 |   8   0 |  79.50 | 34/34 (12) | 14 3 | MESSUNG tot 163: zuletzt ort (205,300) zustand 101 | naechster Feind Typ 73 in 5 | naechster Fernkaempfer Typ 22 in 18 | Fern<=40: 14 | Nah<=8: 3 | naechstes Feindgebaeude Typ 11 in 15 | Ziel None in -1
+ZEITEN nach 210 Runden: lesen 8.29 s, wirtschaft 1.08 s, assassinen 0.48 s, waechter 0.12 s, bauen_werben_verkauf 0.06 s, haus_lager_zeile 0.06 s
+ 4486 |   0   0   0 |   7   0 |  79.50 | 34/34 (12) | 14 3 | -
+ZEITEN nach 220 Runden: lesen 8.69 s, wirtschaft 1.09 s, assassinen 0.48 s, waechter 0.13 s, bauen_werben_verkauf 0.06 s, haus_lager_zeile 0.06 s
+ 4625 |   0   0   0 |   6   0 |  79.25 | 34/34 (12) | 14 3 | -
+ZEITEN nach 230 Runden: lesen 9.08 s, wirtschaft 1.10 s, assassinen 0.49 s, waechter 0.13 s, bauen_werben_verkauf 0.06 s, haus_lager_zeile 0.06 s
+ 4763 |   0   0   0 |   5   0 |  79.25 | 34/34 (12) | 14 3 | -
+ZEITEN nach 240 Runden: lesen 9.49 s, wirtschaft 1.10 s, assassinen 0.49 s, waechter 0.14 s, bauen_werben_verkauf 0.06 s, haus_lager_zeile 0.06 s
+ 4903 |   0   0   0 |   4   0 |  79.00 | 34/34 (12) | 14 3 | -
+ 5024 |   0   0   0 |   4   0 |  78.75 | 34/34 (12) | 14 3 | ANWERBEN-BREMSE: Gold 20 (braucht 100), Feuer 12, Planer braucht Gold True, A-Farmen offen 0
+ZEITEN nach 250 Runden: lesen 9.87 s, wirtschaft 1.11 s, assassinen 0.50 s, waechter 0.14 s, bauen_werben_verkauf 0.06 s, haus_lager_zeile 0.06 s
+ 5037 |   0   0   0 |   4   0 |  78.75 | 34/34 (12) | 14 3 | PLANER Lage (Gewinn bis Ende / Amortisation): Apfelplantage -7/2008 [Horizont], Holzfaeller -10/973 [Horizont], Steinbruch+Ochsenjoch -51/993 [Horizont], Jaegerhuette -73/9552 [Horizont], Eisenmine -99/3750 [Horizont] | Stein-Reserve 0
+ 5145 |   0   9   0 |   3   0 |  78.75 | 34/34 (12) | 14 3 | Lager erweitert (96, 276): Bestand 9, Holz unterwegs 147 + bald 18, Teile 4 -> noetig 5
+ZEITEN nach 260 Runden: lesen 10.27 s, wirtschaft 1.17 s, assassinen 0.50 s, waechter 0.15 s, bauen_werben_verkauf 0.06 s, haus_lager_zeile 0.06 s
+ 5193 |   0  12   0 |   2   0 |  78.75 | 34/34 (12) | 14 3 | verkauft: stein
+ 5259 |   0   7   0 |  11   0 |  78.50 | 34/34 (12) | 14 3 | verkauft: stein,apfel x1
+ZEITEN nach 270 Runden: lesen 10.67 s, wirtschaft 1.21 s, assassinen 0.50 s, waechter 0.16 s, bauen_werben_verkauf 0.15 s, haus_lager_zeile 0.06 s
+ 5370 |   0   2   0 |   5   0 |  78.50 | 34/34 (12) | 14 3 | -
+ZEITEN nach 280 Runden: lesen 11.08 s, wirtschaft 1.22 s, assassinen 0.51 s, waechter 0.16 s, bauen_werben_verkauf 0.15 s, haus_lager_zeile 0.06 s
+ 5509 |  18   2   0 |   4   0 |  78.25 | 34/34 (12) | 14 3 | -
+ZEITEN nach 290 Runden: lesen 11.49 s, wirtschaft 1.22 s, assassinen 0.51 s, waechter 0.16 s, bauen_werben_verkauf 0.15 s, haus_lager_zeile 0.06 s
+ 5653 |  18   2   0 |   7   0 |  78.00 | 34/34 (12) | 14 3 | -
+ 5744 |  36   2   0 |   7   0 |  78.00 | 34/34 (12) | 14 3 | verkauft: holz
+ 5797 |  48   2   0 |   6   0 |  78.00 | 34/34 (12) | 14 3 | ANWERBEN-BREMSE: Gold 98 (braucht 100), Feuer 12, Planer braucht Gold True, A-Farmen offen 0; verkauft: holz
+ZEITEN nach 300 Runden: lesen 11.92 s, wirtschaft 1.23 s, assassinen 0.51 s, bauen_werben_verkauf 0.21 s, waechter 0.17 s, haus_lager_zeile 0.06 s
+ 5821 |  43   2   0 |   6   0 |  77.75 | 34/34 (12) | 14 3 | PLANER Lage (Gewinn bis Ende / Amortisation): Apfelplantage -14/1991 [Horizont], Holzfaeller -14/984 [Horizont], Steinbruch+Ochsenjoch -75/974 [Horizont], Jaegerhuette -78/9552 [Horizont], Eisenmine -113/3572 [Horizont] | Stein-Reserve 0
+ 5850 |  43   2   0 |   6   0 |  77.75 | 34/34 (12) | 14 3 | verkauft: holz
+ 5903 |  47   2   0 |   6   0 |  77.75 | 34/34 (12) | 14 3 | verkauft: holz
+ 5957 |  47   2   0 |   5   0 |  77.75 | 34/34 (12) | 14 3 | verkauft: holz
+ZEITEN nach 310 Runden: lesen 12.33 s, wirtschaft 1.24 s, assassinen 0.51 s, bauen_werben_verkauf 0.30 s, waechter 0.18 s, haus_lager_zeile 0.06 s
+ 5994 |  42   2   0 |   5   0 |  77.75 | 34/34 (12) | 14 3 | -
+ 6010 |  42   2   0 |   5   0 |  77.50 | 34/34 (12) | 14 3 | verkauft: holz
+ 6064 |  37   2   0 |   5   0 |  77.50 | 34/34 (12) | 14 3 | verkauft: holz
+ZEITEN nach 320 Runden: lesen 12.73 s, wirtschaft 1.24 s, assassinen 0.52 s, bauen_werben_verkauf 0.36 s, waechter 0.18 s, haus_lager_zeile 0.06 s
+ 6149 |  32   2   0 |   4   0 |  77.50 | 34/34 (12) | 14 3 | -
+ 6194 |  38   2   0 |   4   0 |  77.50 | 34/34 (12) | 14 3 | verkauft: holz
+ 6247 |  54   2   0 |   3   0 |  77.25 | 34/34 (12) | 14 3 | verkauft: holz
+ 6300 |  65   2   0 |   3   0 |  77.25 | 34/34 (12) | 14 3 | verkauft: holz
+ZEITEN nach 330 Runden: lesen 13.14 s, wirtschaft 1.25 s, assassinen 0.52 s, bauen_werben_verkauf 0.45 s, waechter 0.19 s, haus_lager_zeile 0.06 s
+ 6327 |  57   2   0 |   8   0 |  77.25 | 34/34 (12) | 14 3 | -
+ 6354 |  57   2   0 |   8   0 |  77.25 | 34/34 (12) | 14 3 | verkauft: holz
+ 6407 |  51   2   0 |   7   0 |  77.00 | 34/34 (12) | 14 3 | verkauft: holz
+ 6461 |  56   2   0 |   7   0 |  77.00 | 34/34 (12) | 14 3 | verkauft: holz
+ZEITEN nach 340 Runden: lesen 13.56 s, wirtschaft 1.26 s, bauen_werben_verkauf 0.54 s, assassinen 0.52 s, waechter 0.19 s, haus_lager_zeile 0.06 s
+ 6497 |  49   2   0 |   7   0 |  77.00 | 34/34 (12) | 14 3 | -
+ 6511 |  49   2   0 |   7   0 |  77.00 | 34/34 (12) | 14 3 | verkauft: holz
+ 6564 |  44   2   0 |   6   0 |  77.00 | 34/34 (12) | 14 3 | verkauft: holz
+ 6617 |  39   2   0 |  10   0 |  76.75 | 34/34 (12) | 14 3 | verkauft: holz
+ 6652 |  34   2   0 |  10   0 |  76.75 | 34/34 (12) | 14 3 | ANWERBEN-BREMSE: Gold 211 (braucht 100), Feuer 12, Planer braucht Gold True, A-Farmen offen 0
+ZEITEN nach 350 Runden: lesen 13.96 s, wirtschaft 1.26 s, bauen_werben_verkauf 0.63 s, assassinen 0.52 s, waechter 0.20 s, haus_lager_zeile 0.06 s
+ 6666 |  34   2   0 |  10   0 |  76.75 | 34/34 (12) | 14 3 | PLANER Lage (Gewinn bis Ende / Amortisation): Holzfaeller -19/941 [Horizont], Apfelplantage -22/1977 [Horizont], Jaegerhuette -83/9552 [Horizont], Steinbruch+Ochsenjoch -100/988 [Horizont], Eisenmine -125/3572 [Horizont] | Stein-Reserve 0
+ 6712 |  34   2   0 |  11   0 |  76.75 | 34/34 (12) | 14 3 | verkauft: apfel x1
+ 6808 |  43   2   0 |   9   0 |  76.50 | 34/34 (12) | 14 3 | verkauft: holz
+ZEITEN nach 360 Runden: lesen 14.37 s, wirtschaft 1.27 s, bauen_werben_verkauf 0.69 s, assassinen 0.53 s, waechter 0.20 s, haus_lager_zeile 0.06 s
+ 6830 |  43   2   0 |   8   0 |  76.50 | 34/34 (12) | 14 3 | -
+ 6861 |  47   2   0 |   8   0 |  76.50 | 34/34 (12) | 14 3 | verkauft: holz
+ 6915 |  42   2   0 |   8   0 |  76.50 | 34/34 (12) | 14 3 | verkauft: holz
+ 6963 |  37   2   0 |   8   0 |  76.50 | 34/34 (12) | 14 3 | verkauft: holz
+ZEITEN nach 370 Runden: lesen 14.78 s, wirtschaft 1.28 s, bauen_werben_verkauf 0.78 s, assassinen 0.53 s, waechter 0.21 s, haus_lager_zeile 0.06 s
+ 7004 |  32   2   0 |   7   0 |  76.25 | 34/34 (12) | 14 3 | -
+ZEITEN nach 380 Runden: lesen 15.17 s, wirtschaft 1.28 s, bauen_werben_verkauf 0.78 s, assassinen 0.54 s, waechter 0.22 s, haus_lager_zeile 0.06 s
+ 7141 |  32   2   0 |   6   0 |  76.25 | 34/34 (12) | 14 3 | -
+ZEITEN nach 390 Runden: lesen 15.57 s, wirtschaft 1.29 s, bauen_werben_verkauf 0.78 s, assassinen 0.54 s, waechter 0.22 s, haus_lager_zeile 0.06 s
+ 7279 |  32   2   0 |   9   0 |  76.00 | 34/34 (12) | 14 3 | -
+ 7407 |  32   2   0 |   9   0 |  75.75 | 34/34 (12) | 14 3 | ANWERBEN-BREMSE: Gold 254 (braucht 100), Feuer 12, Planer braucht Gold True, A-Farmen offen 0
+ZEITEN nach 400 Runden: lesen 15.98 s, wirtschaft 1.30 s, bauen_werben_verkauf 0.78 s, assassinen 0.55 s, waechter 0.23 s, haus_lager_zeile 0.06 s
+ 7421 |  32   2   0 |   8   0 |  75.75 | 34/34 (12) | 14 3 | PLANER Lage (Gewinn bis Ende / Amortisation): Holzfaeller -23/943 [Horizont], Apfelplantage -29/1960 [Horizont], Jaegerhuette -88/9552 [Horizont], Steinbruch+Ochsenjoch -122/1001 [Horizont], Eisenmine -135/3572 [Horizont] | Stein-Reserve 0
+ 7479 |  38   2   0 |   8   0 |  75.75 | 34/34 (12) | 14 3 | verkauft: holz
+ 7532 |  44   2   0 |   8   0 |  75.75 | 34/34 (12) | 14 3 | verkauft: holz
+ZEITEN nach 410 Runden: lesen 16.39 s, wirtschaft 1.30 s, bauen_werben_verkauf 0.84 s, assassinen 0.55 s, waechter 0.23 s, haus_lager_zeile 0.06 s
+ 7584 |  49   2   0 |   7   0 |  75.75 | 34/34 (12) | 14 3 | verkauft: holz
+ 7639 |  48   2   0 |   7   0 |  75.50 | 34/34 (12) | 14 3 | verkauft: holz
+ 7692 |  43   2   0 |   7   0 |  75.50 | 34/34 (12) | 14 3 | verkauft: holz
+ 7745 |  38   2   0 |  10   0 |  75.50 | 34/34 (12) | 14 3 | verkauft: holz
+ZEITEN nach 420 Runden: lesen 16.80 s, wirtschaft 1.31 s, bauen_werben_verkauf 0.96 s, assassinen 0.56 s, waechter 0.24 s, haus_lager_zeile 0.06 s
+ 7768 |  33   2   0 |  10   0 |  75.50 | 34/34 (12) | 14 3 | -
+ZEITEN nach 430 Runden: lesen 17.21 s, wirtschaft 1.32 s, bauen_werben_verkauf 0.96 s, assassinen 0.56 s, waechter 0.25 s, haus_lager_zeile 0.06 s
+ 7910 |  37   2   0 |   9   0 |  75.25 | 34/34 (12) | 14 3 | -
+ 7928 |  41   2   0 |   9   0 |  75.25 | 34/34 (12) | 14 3 | verkauft: holz
+ 7980 |  46   2   0 |   9   0 |  75.25 | 34/34 (12) | 14 3 | verkauft: holz
+Ende Phase 2 bei Tick 8016 nach 435 Runden (0.0 s je Runde); Kornspeicher 1, Holzfaeller 14, Apfelplantagen 3; Waechter: Bedrohungen 0, davon tot 0, eigene Truppen verloren 0; Angriff: zerstoert 3 Gebaeude {20: 1, 4: 2}, eigene Verluste 1, im Spiel gleichzeitig angelaufen zuletzt 0, neu befohlen 0, Rueckzuege 5, ausgewichen 0, Fernkaempfer angegriffen 0, Warten neu geschickt 0, Stapel-Ziele 0, gesperrte Warteplaetze 0, Lord-Trupps 0, Uebermacht ausgewichen 1, Alle-auf-den-Lord []
+Wirtschaft: Seasoning: A 3 / B 3 Plantagen, A reif bei None, B gesetzt bei None; Apfelbauern untaetig vor B 7 % (417 Messungen), B bis B+1000 keine Messung, danach keine Messung; FESTES FENSTER Tick 5000-12000 (zum Vergleich zwischen Partien): 14 % (187 Messungen); Lager gesetzt bei 3874, gemessene Ladung je Gang {3: 18}
+Ertrags-Planer: gesetzt {'Ochsenjoch (Regel)': 1}, stehen am Ende {'Eisenmine': 0, 'Steinbruch+Ochsenjoch': 1, 'Apfelplantage': 3, 'Jaegerhuette': 0, 'Holzfaeller': 14, 'Ochsenjoch': 2, 'Steinhaufen zuletzt': {58: 0}, 'Bauplaetze ohne Weg verworfen': 11}, abgelehnt {'Jaegerhuette: Horizont': 44, 'Eisenmine: Horizont': 44, 'Holzfaeller: Horizont': 31, 'Steinbruch+Ochsenjoch: Horizont': 29, 'Apfelplantage: Horizont': 24}, Verstoesse gegen den Horizont keine, Steuerstufe 3
+Ertragsmesser: Eisenmine 0.61->0.61 (Zugang 0, Lieferung None, Gegenprobe None, Anlauf 6664 Startwert); Steinbruch+Ochsenjoch 6.72->6.58 (Zugang 12, Lieferung None, Gegenprobe None, Anlauf 3644 Startwert); Apfelplantage 3.25->3.31 (Zugang 48, Lieferung 5, Gegenprobe 0.67, Anlauf 1741 gemessen an der Art); Jaegerhuette 3.07->3.07 (Zugang 0, Lieferung None, Gegenprobe None, Anlauf 4427 Startwert); Holzfaeller 13.24->13.78 (Zugang 580, Lieferung 18, Gegenprobe 0.06, Anlauf 4000 Startwert) | negative Zugaenge: holz 2 von 434 Runden, Summe 21; stein 0 von 434 Runden, Summe 0; eisen 0 von 434 Runden, Summe 0 | abgegebene Ladung je Einheit@Art: {'13@32': 32, '3@3': 34}
