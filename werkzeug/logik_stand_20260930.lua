@@ -1607,7 +1607,10 @@ local function einzelbefehl(cmd)
         local l2 = core.readByte(0x01C471E8 + k) or 0
         local geb = core.readSmallInteger(0x01C95BB8 + k * 2) or 0
         local c = "."
-        if (l & 0x30) ~= 0 then c = "#"
+        if g.mauern and (l & MAUERBIT) ~= 0 then         -- 05.10.: Mauerfelder fuer den Klettertest (nur mit "mauern": true)
+          -- T = Torhaus/Turm (Gebaeude auf dem Feld), sonst Mauer: Ziffer = Besitzer-Ebene (zaehlt ab 0, 9 = 9 und mehr)
+          c = (geb ~= 0) and "T" or tostring(math.min(core.readByte(BESITZER + k) or 9, 9))
+        elseif (l & 0x30) ~= 0 then c = "#"
         elseif geb ~= 0 then c = "B"
         elseif (l & 0x20000) ~= 0 then c = "b"
         elseif (l & 0x80000) ~= 0 then c = "i"
@@ -1801,6 +1804,10 @@ local function einzelbefehl(cmd)
   --   { "angriff": { "einheiten": [nr, ...], "ziel": nr } }       Einheit angreifen  (Art 4)
   --   { "angriff": { "einheiten": [nr, ...], "gebaeude": nr } }   Gebaeude angreifen (Art 9)
   --   { "angriff": { "einheiten": [nr, ...], "halt": true } }     anhalten           (Art 31)
+  --   { "angriff": { "einheiten": [nr, ...], "lauf": [x, y] } }   hinlaufen wie ein Mensch-Klick: Spielbefehl 17
+  --   ClickMoveUnit (Gruppe, x, y, Sammeln 0, Tempo 0). Abgelesen 05.10.2026 (daten/dekomp_klettern.c): nur dieser
+  --   Laufbefehl sucht fuer eine Gruppe NUR aus Assassinen einen Kletterweg (giveTribeMoveInstruction ->
+  --   isTribeAllAssassins -> findPathUsingClimbingWithHeightMargin16); Befehl 36 kennt das nicht.
   --   Wie der Mensch (gelesen 04.10.): Auswahl-Bits (UnitsState 0x01387F38 +116, 400 Byte, Bit je
   --   Einheitennummer) setzen, Spielbefehl 16 MakeUnitSelection mit einer freien Gruppennummer
   --   (createPlayerTribe legt die Gruppe genau unter dieser Nummer an; frei = tribeState +24 == 0,
@@ -1894,7 +1901,13 @@ local function einzelbefehl(cmd)
       zielUid = core.readInteger(GEBAEUDE + zielNr * G_SCHRITT + 0xEC) or 0
     end
     local ok1 = befehlAbsetzen(16, { gruppe })
-    local ok2 = befehlAbsetzen(36, { gruppe, art, zielNr, zielUid, 0 })
+    local ok2
+    if type(a.lauf) == "table" then
+      art, zielNr, zielUid = 17, tonumber(a.lauf[1]) or 0, tonumber(a.lauf[2]) or 0   -- im Log: Art 17, Ziel = x, uid = y
+      ok2 = befehlAbsetzen(17, { gruppe, zielNr, zielUid, 0, 0 })
+    else
+      ok2 = befehlAbsetzen(36, { gruppe, art, zielNr, zielUid, 0 })
+    end
     angriffWarten = { gruppe = gruppe, einheiten = gewaehlt, tick = tick() }
     log(INFO, string.format("ANGRIFF Tick %d: %d Einheiten, Gruppe %d, Art %d, Ziel %d (uid %d) - Auswahl=%s Befehl=%s",
       tick(), n, gruppe, art, zielNr, zielUid, tostring(ok1), tostring(ok2)))
