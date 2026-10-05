@@ -74,6 +74,7 @@ class Wirtschaft:
         self.lager_tick, self.ladung_max = None, {}
         self.bauern = []                          # (tick, Bauern, untaetig)
         self.versuche_B = 0
+        self.a_versucht = {}                 # A-Platz -> Tick des letzten Bauversuchs (nachholen)
         # Baum gleich jetzt suchen, solange das Spiel noch steht (9g: die Kartensuche mitten im Lauf kostete ~600 Ticks)
         if self.B:
             self.apfelbaum = self._a_baum() or -1
@@ -97,6 +98,11 @@ class Wirtschaft:
         return peek(BAUM_BASIS + self.apfelbaum * BAUM_SCHRITT + BAUM_STUFE)[0]
 
     # ---- eine Runde -----------------------------------------------------------------------------------------------
+    def a_offen(self, G):
+        """A-Plaetze, an denen (noch) keine eigene Apfelplantage steht."""
+        stehen = [(g["x"], g["y"]) for g in G.values() if g["besitzer"] == self.sp and g["typ"] == APFEL]
+        return [o for o in self.A if not any(schach(o, s) <= 2 for s in stehen)]
+
     def schritt(self, st, L, G):
         ev = []
         t = st.get("t", 0)
@@ -106,6 +112,15 @@ class Wirtschaft:
         bauern = [e for e in einheiten.values() if e["typ"] == BAUER]
         if bauern:
             self.bauern.append((t, len(bauern), sum(1 for e in bauern if e["zustand"] == 1)))
+        # 0. A nachholen (Daniel 05.10. 23:09 "bitte nicht Farmen vergessen"): in der Eroeffnung reicht das Gold nach Posten +
+        #    Assassine nicht (gemessen live_4/5: 5 Gold, Plantage 15) - ohne A wird A nie reif und B nie gesetzt. Fehlende
+        #    A-Plantage bauen, sobald 15 Gold + 3 Holz da sind; derselbe Platz erst nach 50 Ticks wieder (schnelle Runden).
+        for o in self.a_offen(G):
+            if st.get("gold", 0) >= 15 and st.get("holz", 0) >= 3 and t - self.a_versucht.get(o, -999) >= 50:
+                self.a_versucht[o] = t
+                ev.append("Apfelplantage A nachgeholt bei %s: %s (Gold %d, Holz %d)" % (o, self.baue_schnell(APFEL, o[0], o[1], 2),
+                                                                                   st.get("gold", 0), st.get("holz", 0)))
+                break
         # 1. Seasoning: B setzen, sobald A reif wird
         if self.B_offen:
             stufe = self.stufe_a() if self.B_tick is None else REIF
