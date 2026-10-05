@@ -124,7 +124,8 @@ class Wirtschaft:
         # 1. Seasoning: B setzen, sobald A reif wird
         if self.B_offen:
             stufe = self.stufe_a() if self.B_tick is None else REIF
-            if stufe == REIF:
+            # Daniel 23:29 "Seasoning zu langsam": B nicht erst, wenn A reif ist, sondern sobald alle A-Plantagen stehen
+            if stufe == REIF or not self.a_offen(G):
                 if self.A_reif_tick is None:
                     self.A_reif_tick = t
                     ev.append("Seasoning: A-Plantagen reif bei Tick %d (Baum %d) - setze %d B-Plantagen" % (t, self.apfelbaum, len(self.B_offen)))

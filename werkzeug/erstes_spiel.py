@@ -378,7 +378,7 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                 # nicht am Lagerplatz (9i: Markt/Soeldnerlager belegten ihn - 14 Holzfaeller warteten Tick 4500-9035)
                 soeldner = baue_schnell(8, BERGFRIED[0], BERGFRIED[1], 25)
                 ereignis.append("Soeldnerlager gesetzt %s (Gold %d)" % (soeldner, st["gold"]))
-            elif posten and st["gold"] >= 70 + GOLD_RESERVE and st["feuer"] >= 1 and (assassinen < 0 or geworben < assassinen) and not ausbau.braucht_gold \
+            elif posten and st["gold"] >= 70 and st["feuer"] >= 1 and (assassinen < 0 or geworben < assassinen) and not ausbau.braucht_gold \
                     and not wirt.a_offen(G):   # Daniel 23:09: Farmen nicht vergessen - erst die fehlenden A-Plantagen (45 Gold)   # erst rollen (Daniel 18:51/19:05)
                 befehl({"werbe": {"typ": 73, "gebaeude": posten[0]}}, 1.0, bis="WERBE")
                 geworben += 1
