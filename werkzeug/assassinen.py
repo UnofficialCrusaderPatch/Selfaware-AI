@@ -233,6 +233,20 @@ class Einzeln:
     UEBERMACHT_R, FLUCHT_RUHE = 10, 2  # 4a (Daniel 22:16): Umkreis fuer "mehr Feinde als eigene", Runden ohne Verfolger bis zum Wiederangriff
                                        # (raidzuerst_4: mit 5 erst im Kontakt erkannt - Daniel 22:25 "er muss instant verstehen, wann das ist")
     FLUCHT_FREI = 15       # 4a: erst frei, wenn kein feindlicher Nahkaempfer naeher (raidzuerst_3: mit 10 hoerte er zu frueh auf)
+    # 4a (Daniel 22:37 "ja, beides"): Arbeiter, die Assassinen schlagen, zaehlen bei der Uebermacht mit. Gewicht = ihr Schaden
+    # gegen Assassinen / Schaden eines Speertraegers (25), Liga-Balance meleeDamageVs "Arabian assassin": Holzfaeller 10,
+    # Steinmetz 10, Schmied 10, Jaeger 5, Tunnelgraeber 20. Nur im Umkreis ARBEITER_R (sie schlagen nur, wer neben ihnen steht).
+    ARBEITER_GEFAHR = {3: 0.4, 7: 0.4, 19: 0.4, 6: 0.2, 5: 0.8}
+    ARBEITER_R = 3
+    # Staerke gegen Assassinen in Assassinen-Einheiten = (Schaden gegen Assassine x Leben) / (Assassinen-Schaden gegen sie x 12.500),
+    # alles Liga-Balance: Speer 25x12.500/(120x12.500)=0.21, Pike 30x80.000/(120x12.500)=1.6, Streitkolben 70x25.000/(120x12.500)
+    # =1.17, Schwert/Ritter 150x40.000/(120x12.500)=4.0, arab. Schwert 125x32.000/(120x12.500)=2.67, Assassine 1.0.
+    # Fernkaempfer 0.2 = STARTWERT (ihr Pfeilschaden laesst sich so nicht umrechnen); Lord 0 - die Verfolger nie zu unserem Lord.
+    # Gemessen raidzuerst_6: der Waechter warf bei Tick 2.954 alle 13 Verteidiger (Bogen, Speer UND Lord) gegen einen
+    # Verfolger bei (166,262), bei 3.416 noch 9 gegen den naechsten; am Ende 6 eigene tot, 0 Verfolger tot. Mit diesen Werten
+    # zaehlen 7 Speer + 5 Bogen 2.5 - die Rechnung ist ein Startwert; die FLUCHT-Zeilen schreiben sie mit, damit nachgemessen wird.
+    STAERKE = {24: 0.21, 25: 1.6, 26: 1.17, 27: 4.0, 28: 4.0, 75: 2.67, 73: 1.0, 22: 0.2, 23: 0.2, 70: 0.2, 72: 0.2, 74: 0.2, 55: 0.0}
+    HEIM_R, HEIM_ABSTAND = 15, 25   # eigene Truppen bis HEIM_R um Lager/Bergfried; zu schwach -> Fluchtpunkt mind. HEIM_ABSTAND weg
     ZUSCHLAGEN = 3
     ZIEL_FERN, ZIEL_FERN_MAX = 20, 2
     SCHWACH, SCHWACH_FERN = 0.6, 25
@@ -275,11 +289,26 @@ class Einzeln:
     # --- Hilfen ---------------------------------------------------------------------------------------------------
     def _feinde(self, L):
         fern, nah = [], []
+        self._arbeiter = []                  # 4a: feindliche Arbeiter, die Assassinen schlagen (ARBEITER_GEFAHR)
         for nr, e in L.items():
-            if e["besitzer"] in (0, self.sp) or e["typ"] not in TRUPPE:
+            if e["besitzer"] in (0, self.sp):
+                continue
+            if e["typ"] not in TRUPPE:
+                if e["typ"] in self.ARBEITER_GEFAHR:
+                    self._arbeiter.append((nr, (e["x"], e["y"]), e["typ"]))
                 continue
             (fern if e["typ"] in FERNKAMPF else nah).append((nr, (e["x"], e["y"]), e["typ"]))
         return fern, nah
+
+    def _bedrohung(self, ort, nah):
+        """4a: Gewicht der Feinde um ihn - jeder Nahkaempfer im Umkreis UEBERMACHT_R zaehlt 1, jeder schlagende Arbeiter im
+        Umkreis ARBEITER_R sein ARBEITER_GEFAHR-Gewicht."""
+        return self._anzahl(ort, nah, self.UEBERMACHT_R) + sum(
+            self.ARBEITER_GEFAHR[t] for _, p, t in getattr(self, "_arbeiter", []) if schach(ort, p) <= self.ARBEITER_R)
+
+    def _staerke(self, einheiten):
+        """Staerke gegen Assassinen in Assassinen-Einheiten (STAERKE, aus der Liga-Balance)."""
+        return sum(self.STAERKE.get(t, 1.0) for t in einheiten)
 
     @staticmethod
     def _naechster(ort, liste):
@@ -312,11 +341,24 @@ class Einzeln:
         Ohne solchen Punkt: das naechste Heim selbst."""
         kurz = [p for p in self._kand.get(n, []) if p in self._begehbar and p not in self.schlechte_orte
                 and all(schach(p, b) > 6 for b in (nicht_bei or []))]
-        heim = getattr(self, "_heim", [])
+        alle_heim = getattr(self, "_heim", [])
+        # Daniel 22:37: nur nach Hause, wenn unsere Truppen dort die Verfolger schlagen koennen, sonst seitlich weg.
+        # Gemessen raidzuerst_6: er zog 2-3 Assassinen bis an unsere Burg - 6 eigene Soldaten tot, kein Verfolger tot.
+        verfolger = self._staerke(t for _, p, t in nah if schach(ort, p) <= self.SICHER_NAH)
+        heim, self._heimgrund = [], []
+        for h in alle_heim:
+            eigene = 1.0 + self._staerke(e["typ"] for m, e in (L or {}).items()
+                                         if m != n and e["besitzer"] == self.sp and e["typ"] in TRUPPE and schach((e["x"], e["y"]), h) <= self.HEIM_R)
+            self._heimgrund.append("%s eigene %.1f gegen Verfolger %.1f" % (h, eigene, verfolger))
+            if L is None or eigene >= verfolger:
+                heim.append(h)
         if kurz:
             weg = (lambda q: self._im_weg(ort, q, L, n)) if L else (lambda q: 0)
             if heim:
                 return min(kurz, key=lambda q: (weg(q), min(schach(q, h) for h in heim), -self._naechster(q, nah)[0]))
+            if alle_heim:                    # Heim zu schwach: seitlich weg, die Verfolger NICHT an unsere Burg ziehen
+                return min(kurz, key=lambda q: (weg(q), min(schach(q, h) for h in alle_heim) < self.HEIM_ABSTAND,
+                                                -self._naechster(q, nah)[0]))
             return min(kurz, key=lambda q: (weg(q), -self._naechster(q, nah)[0]))
         return min(heim, key=lambda h: schach(ort, h)) if heim else None
 
@@ -515,7 +557,7 @@ class Einzeln:
             if n in self.lordtrupp["mitglieder"]:
                 continue                   # der Lord-Angriff bleibt dran (Daniel 21:47)
             ort = (L[n]["x"], L[n]["y"])
-            feinde = self._anzahl(ort, nah, self.UEBERMACHT_R)
+            feinde = self._bedrohung(ort, nah)
             eigene = sum(1 for q in eigene_orte if schach(ort, q) <= self.UEBERMACHT_R)
             if n in self.flucht:
                 verfolger = self._naechster(ort, nah)[0]
@@ -553,7 +595,8 @@ class Einzeln:
                     self._fliehen(n, ziel, flieh)
                 ereignis.append("FLUCHT %d: ort %s zustand %d lauf %s Verfolger in %d Leben %d -> %s" % (
                     n, ort, L[n]["zustand"], lauf, verfolger, L[n]["leben"],
-                    "laeuft weiter" if ziel is None and laeuft_weg else "%sneu nach %s" % ("BLOCKIERT - " if blockiert else "", ziel)))
+                    "laeuft weiter" if ziel is None and laeuft_weg else "%sneu nach %s (Heim: %s)" % (
+                        "BLOCKIERT - " if blockiert else "", ziel, "; ".join(getattr(self, "_heimgrund", [])))))
                 continue
             if feinde == 0 or feinde <= eigene:
                 continue
@@ -565,8 +608,9 @@ class Einzeln:
             self._fliehen(n, sicher, flieh)
             self.flucht[n] = {"seit": self.runde, "ruhig": 0, "letzt": ort}
             self.bilanz["uebermacht"] = self.bilanz.get("uebermacht", 0) + 1
-            ereignis.append("AUSWEICHEN %d: %d feindliche Nahkaempfer gegen %d eigene im Umkreis %d, Leben %d -> nach %s" % (
-                n, feinde, eigene, self.UEBERMACHT_R, L[n]["leben"], sicher))
+            ereignis.append("AUSWEICHEN %d: Bedrohung %.1f (Nahkaempfer im Umkreis %d, schlagende Arbeiter im Umkreis %d) gegen %d "
+                            "eigene, Leben %d -> nach %s (Heim: %s)" % (n, feinde, self.UEBERMACHT_R, self.ARBEITER_R, eigene,
+                                                                       L[n]["leben"], sicher, "; ".join(getattr(self, "_heimgrund", []))))
         # 4b. Ausweichen, bevor es weh tut: rueckt eine Gruppe Fernkaempfer heran, Ziel aufgeben
         for n in self.mitglieder:
             if n in verletzt or n in self.jagd or n in self.warte or n in self.stapel["mitglieder"] or n in self.lordtrupp["mitglieder"]:

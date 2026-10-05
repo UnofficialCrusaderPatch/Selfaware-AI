@@ -60,8 +60,9 @@ def main():
     flieh = [b["angriff"]["lauf"] for b in bef if "lauf" in b.get("angriff", {}) and 100 in b["angriff"]["einheiten"]]
     heim = min(max(abs(192 - h[0]), abs(268 - h[1])) for h in ORTE)
     neu_heim = min(max(abs(flieh[0][0] - h[0]), abs(flieh[0][1] - h[1])) for h in ORTE) if flieh else 999
-    pruefe(2, "Verfolger bleiben nah: in DIESER Runde neuer Fluchtbefehl Richtung Heim (%s, Abstand Heim %d -> %d), kein Ziel" % (
-        flieh, heim, neu_heim), 100 in getattr(t, "flucht", {}) and 100 not in t.ziel and flieh and neu_heim < heim)
+    # (seit 22:37: zu Hause steht hier niemand - also NICHT zur Burg, mindestens HEIM_ABSTAND weg; Fall 14/15 pruefen das genauer)
+    pruefe(2, "Verfolger bleiben nah: in DIESER Runde neuer Fluchtbefehl (%s, Abstand Heim %d -> %d), kein Ziel" % (
+        flieh, heim, neu_heim), 100 in getattr(t, "flucht", {}) and 100 not in t.ziel and flieh)
     # 6./7. kein Stop-and-go (raidzuerst_3: neuer Befehl je Runde = neue Gruppe = kurzer Halt, 3 Felder in 60 Ticks)
     o = t.warte.get(100)
     L[100].update(x=185, y=268, zustand=101, laufx=o[0] if o else 0, laufy=o[1] if o else 0)
@@ -149,6 +150,32 @@ def main():
     t.aufnehmen([100])
     erg, bef = t.schritt(L, G, sichere_orte=ORTE)
     pruefe(11, "Ziel mit 2 Wachen, wir allein: kein Angriff darauf (Ziel %s)" % t.ziel.get(100), t.ziel.get(100) != 900)
+    # 12./13. schlagende Arbeiter (Daniel 22:37): 1 Speertraeger + 2 Holzfaeller direkt neben ihm = 1.8 > 1 -> ausweichen;
+    #         dieselben Holzfaeller 6 Felder weg schlagen nicht -> 1 gegen 1, kein Ausweichen
+    for nr, abst, soll in ((12, 1, True), (13, 6, False)):
+        t = neu()
+        L = {100: einheit(73, 1, 190, 270), 501: einheit(24, 2, 192, 270),
+             601: einheit(3, 2, 190 + abst, 271), 602: einheit(3, 2, 190 + abst, 269)}
+        t.aufnehmen([100])
+        erg, bef = t.schritt(L, G, sichere_orte=ORTE)
+        aus = any(z.startswith("AUSWEICHEN 100") for z in erg)
+        pruefe(nr, "1 Speertraeger + 2 Holzfaeller %d Felder weg: ausweichen %s (soll %s)" % (abst, aus, soll), aus == soll)
+    # 14./15. Heim nur, wenn stark genug: 3 Verfolger-Assassinen; zu Hause 2 Speertraeger (zu schwach) bzw. 3 Schwertkaempfer
+    def fluchtziel(verteidiger_typ, anzahl):
+        t = neu()
+        L = {100: einheit(73, 1, 190, 270), 501: einheit(73, 2, 192, 270), 502: einheit(73, 2, 192, 271), 503: einheit(73, 2, 191, 272)}
+        for i in range(anzahl):
+            L[800 + i] = einheit(verteidiger_typ, 1, 140 + i, 269)
+        t.aufnehmen([100])
+        t.schritt(L, G, sichere_orte=ORTE)
+        p = t.warte.get(100)
+        return p, (min(max(abs(p[0] - h[0]), abs(p[1] - h[1])) for h in ORTE) if p else -1)
+    schwach, staerke = fluchtziel(24, 2), fluchtziel(27, 3)
+    abstand = getattr(A.Einzeln, "HEIM_ABSTAND", 25)
+    pruefe(14, "Heim zu schwach (2 Speer gegen 3 Assassinen): Fluchtpunkt %s bleibt >= %d von der Burg weg (%d)" % (
+        schwach[0], abstand, schwach[1]), schwach[0] and schwach[1] >= abstand)
+    pruefe(15, "Heim stark (3 Schwertkaempfer): Fluchtpunkt %s naeher an der Burg (%d) als bei zu schwach (%d)" % (
+        staerke[0], staerke[1], schwach[1]), staerke[0] and staerke[1] < schwach[1])
     print("\n%d von %d gruen" % (sum(ok), len(ok)))
     return 0 if all(ok) else 1
 
