@@ -54,12 +54,14 @@ def main():
     # Plaetze aus den Platzkarten dieses Starts (gueltige Ankerpunkte laut Spielpruefung), nicht der naechste Rohstoff-Fleck
     from farmen_mischen import lies_karte
     karte = lambda n: [p for p in lies_karte(os.path.join(D, "start_M19_platz_%s.txt" % n)) if eigen(p)]
-    q = min(karte("steinbruch"), key=lambda p: schach(p, K))
+    # Lauf 2 (Daniel 19:27): Steinbruch nahe am Eisen, Lager zwischen beiden - Weg zum Lager klein halten
+    q = min(karte("steinbruch"), key=lambda p: schach(p, eisen))
     # ein neues Lagerteil schliesst an ein vorhandenes an (vermutet aus 9i/9p) - darum zuerst das Startlager abreissen
     for n_alt, _, _ in gebaeude_von(1, 10):
         befehl({"abreissen": {"nr": n_alt}}, 0.8, bis="ABREISSEN")
     laufe(2)
-    lk = min(karte("lager_keins"), key=lambda p: schach(p, q) + (0 if schach(p, q) >= 8 else 100))
+    mitte = ((q[0] + eisen[0]) // 2, (q[1] + eisen[1]) // 2)
+    lk = min(karte("lager_keins"), key=lambda p: schach(p, mitte) + (0 if min(schach(p, q), schach(p, eisen)) >= 7 else 100))
     bau["markt"] = es.baue_schnell(26, K[0], K[1], 25)
     bau["lager"] = es.baue_schnell(10, lk[0], lk[1], 3)
     laufe(30)
