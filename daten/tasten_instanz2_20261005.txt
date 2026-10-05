@@ -47,3 +47,24 @@ nach P (1)             Pause=0  Spielzeit 1415 -> 2262 (laeuft)  Ansicht 14  gam
 Taste P (2)            PostMessage KEYDOWN/CHAR/KEYUP: True, True, True
 nach P (2)             Pause=1  Spielzeit 2349 -> 2349 (STEHT)  Ansicht 14  gameOver 0
 ERGEBNIS: KOMMT AN - jede Taste P drehte die Pause um, die Spielzeit folgte
+== 20:15:20 Zweiter Versuch gefecht.py (sauber): Instanz 2 frisch, erst Hauptmenue abwarten
+Sperre geholt: villagestudio2 - gefecht.py pruefen
+   Instanz 2 gestartet: Prozess 30460
+   Modul laeuft und Lage sitzt - uebergebe nach 3,9 s an die Wacht im Spiel.
+Hauptmenue (Ansicht 41) nach 26 s; noch 5 s Ruhe
+Befehl: { "id": 23002, "gefecht": 0 }
+--- neue Logzeilen: 6 ---
+   [villagestudio]: MENUE: starte Gefechtspfad-Mission 0 (Pfadart 0).
+   [villagestudio]: ZUSTAND (Bild 3000): Spielzeit 0 Ticks, maxUnitCount 2500 -> KEIN Gefecht
+   [villagestudio]: ZUSTAND (Bild 3600): Spielzeit 4488 Ticks, maxUnitCount 48 -> Gefecht laeuft
+   [villagestudio]: ZUSTAND (Bild 4200): Spielzeit 6611 Ticks, maxUnitCount 47 -> Gefecht laeuft
+   [villagestudio]: ZUSTAND (Bild 4800): Spielzeit 6611 Ticks, maxUnitCount 47 -> Gefecht laeuft
+   [villagestudio]: ZUSTAND (Bild 5400): Spielzeit 6611 Ticks, maxUnitCount 47 -> Gefecht laeuft
+Ansicht 30 Spielzeit 6611
+Ansicht 30 Spielzeit 6611
+Ansicht 30 Spielzeit 6611
+== 20:17:13 Ergebnis: gefecht.py FUNKTIONIERT, wenn das Hauptmenue steht (Gefecht lief bis Tick 6611, dann Endbildschirm). Instanz 2 beenden
+GESCHAFFT mit Stufe 1: unser Modul hat das Spiel beendet.
+Sperre freigegeben.
+Instanz 1  Prozess 2604  Fenster 'Crusader'  C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme
+Instanz 3  Prozess 4560  Fenster 'Crusader'  C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme Instanz3
