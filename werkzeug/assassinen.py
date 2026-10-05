@@ -346,6 +346,9 @@ class Einzeln:
             if L[n]["zielart"] == 4 and z and z != ln and z in L:
                 anderes[L[z]["typ"]] = anderes.get(L[z]["typ"], 0) + 1
         ohne = sum(1 for n in lebend if L[n]["zielart"] == 0)
+        # S2a: ohne Ziel in der Naehe des Lords = steht vor der Mauer (Daniel 21:47, Bild)
+        stehen_nah = sum(1 for n in lebend if L[n]["zielart"] == 0 and schach((L[n]["x"], L[n]["y"]), lp) <= 15)
+        a["stehen_nah_max"] = max(a.get("stehen_nah_max", 0), stehen_nah)
         a["lord_nachher"], a["verluste"] = le["leben"], len(a["truppe"]) - len(lebend)
         a["am_lord_max"] = max(a["am_lord_max"], len(am_lord))
         if am_lord and a["erreicht_runde"] is None:
@@ -357,7 +360,7 @@ class Einzeln:
             with open(self.wellen_protokoll, "a", encoding="utf-8") as f:
                 f.write(json.dumps({"runde": self.runde, "angriff": len(self.angriffe), "lord_leben": le["leben"], "leben": len(lebend),
                                     "abst_min": abst[0], "abst_mitte": abst[len(abst) // 2], "am_lord": len(am_lord),
-                                    "anderes": anderes, "ohne_ziel": ohne, "fern_um_lord": self._anzahl(lp, fern, self.LORD_UMKREIS),
+                                    "anderes": anderes, "ohne_ziel": ohne, "stehen_nah": stehen_nah, "fern_um_lord": self._anzahl(lp, fern, self.LORD_UMKREIS),
                                     "nah_um_lord": self._anzahl(lp, nah, self.LORD_UMKREIS)}) + chr(10))
 
     def _vergessen(self, n):
@@ -506,7 +509,9 @@ class Einzeln:
                                       "anderes": {}, "truppe": set(alle), "verluste": 0})
                 ereignis.append("ALLE-AUF-LORD: %d Assassinen mit einem Befehl auf den Lord (Leben %d, Fern %d / Nah %d um ihn, Weg %d-%d Felder)" % (
                     len(alle), le["leben"], self._anzahl(lp, fern, self.LORD_UMKREIS), self._anzahl(lp, nah, self.LORD_UMKREIS), wege[0], wege[-1]))
-            elif lt["mitglieder"] and self.runde - lt["seit"] >= self.NEU_NACH:
+            elif lt["mitglieder"]:
+                # S2a (Daniel 21:46: "jeder Tick, wo sie rumstehen, ist eine Sekunde mehr, wo der Gegner rekrutieren und auf
+                # unsere schiessen kann"): wer nicht den Lord angreift, bekommt den Befehl JEDE Runde neu (vorher erst nach NEU_NACH)
                 abseits = [n for n in lt["mitglieder"] if not (L[n]["zielart"] == 4 and L[n].get("zieleinheit") == ln)]
                 if abseits:
                     lord_befehl = {"angriff": {"einheiten": sorted(abseits), "ziel": ln}}
@@ -618,7 +623,7 @@ class Einzeln:
                     b.get("stapel_ziele", 0), len(self.schlechte_orte)) + ", Lord-Trupps %d" % b.get("lordtrupps", 0)
                 + ", Alle-auf-den-Lord [%s]" % "; ".join(
                     "Runde %d: %d Assassinen, Weg %d-%d, Fern %d / Nah %d am Lord, am Lord hoechstens %d (zuerst Runde %s), "
-                    "abgelenkt durch Typ %s, Lord %d -> %d, Verluste %d" % (
+                    "abgelenkt durch Typ %s, ohne Ziel nah am Lord hoechstens %s, Lord %d -> %d, Verluste %d" % (
                         a["runde"], a["groesse"], a["weg_min"], a["weg_max"], a["fern"], a["nah"], a["am_lord_max"], a["erreicht_runde"],
-                        a["anderes"] or "-", a["lord_vorher"], a["lord_nachher"], a["verluste"]) for a in self.angriffe))
+                        a["anderes"] or "-", a.get("stehen_nah_max", 0), a["lord_vorher"], a["lord_nachher"], a["verluste"]) for a in self.angriffe))
 

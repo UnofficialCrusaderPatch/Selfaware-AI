@@ -4,7 +4,7 @@ greifen ALLE zugleich den Lord an). Vorher festgelegt, was gelten muss:
   1. 19 lebende Assassinen -> kein Lord-Befehl
   2. 20 lebende, ueber das Feld verteilt, einige mitten im Raid -> EIN Angriffsbefehl mit allen 20 auf den Lord
   3. waehrend des Angriffs vergibt die Raid-Logik keinem Angreifer ein Gebaeude
-  4. wer nach NEU_NACH Runden nicht den Lord angreift, bekommt den Lord-Befehl neu
+  4. wer nicht den Lord angreift, bekommt den Lord-Befehl in der naechsten Runde neu (S2a, vorher erst nach NEU_NACH)
   5. Messung: am Lord (<= 3 Felder, greift ihn an) wird gezaehlt, Ablenkung nach Einheitentyp
   6. weniger als LORD_REST uebrig -> Angriff vorbei; neuer Angriff erst wieder ab LORD_KRITISCH lebenden
 Aufruf: python werkzeug/lordtrupp_pruefen.py [andere_assassinen.py]   (Rueckgabe 0 = gruen)
@@ -59,11 +59,9 @@ def main():
         L[n].update(x=LORD[0] + 1, y=LORD[1], zielart=4, zieleinheit=500)
     for n in alle[5:8]:                                               # 3 abgelenkt von einem Speertraeger (Typ 24)
         L[n].update(zielart=4, zieleinheit=601)
-    lb = []
-    for _ in range(A.Einzeln.NEU_NACH + 1):                          # der Neu-Befehl kommt in genau einer dieser Runden
-        erg, bef = t.schritt(L, G, sichere_orte=[(94, 280), HEIM])
-        lb += lord_befehle(bef)
-    pruefe(4, "nach NEU_NACH Runden die Abgelenkten neu auf den Lord", lb and set(alle[5:8]) <= set(lb[0]["angriff"]["einheiten"]))
+    erg, bef = t.schritt(L, G, sichere_orte=[(94, 280), HEIM])     # S2a: schon in der NAECHSTEN Runde
+    lb = lord_befehle(bef)
+    pruefe(4, "schon in der naechsten Runde die Abgelenkten neu auf den Lord", lb and set(alle[5:8]) <= set(lb[0]["angriff"]["einheiten"]))
     a = t.angriffe[-1] if getattr(t, "angriffe", None) else {}
     pruefe(5, "Messung: am Lord %s (soll 5), abgelenkt %s (soll Typ 24: 3)" % (a.get("am_lord_max"), a.get("anderes")),
            a.get("am_lord_max") == 5 and a.get("anderes", {}).get(24) == 3)
