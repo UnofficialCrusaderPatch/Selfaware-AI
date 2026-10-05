@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """Pruefung ohne Spiel fuer 4a "Ausweichen bei Uebermacht" (Daniel 05.10. 22:16: erst weggehen, bis sie nicht mehr
 verfolgen, dann weiter angreifen). Vorher festgelegt, was gelten muss:
-  1. 1 eigener gegen 3 feindliche Assassinen (2 Felder) -> AUSWEICHEN, wartet an einem Ort weiter weg, KEIN neues Ziel
-  2. naechste Runde, Verfolger weiter 2 Felder nah -> bleibt auf der Flucht, kein Ziel
+  1. 1 eigener gegen 3 feindliche Assassinen (2 Felder) -> AUSWEICHEN als echter Laufbefehl (Spielbefehl 17) weiter weg, KEIN Ziel
+  2. naechste Runde, Verfolger weiter dicht dran -> in DIESER Runde wieder ein Laufbefehl, naeher an Heim, kein Ziel
   3. Verfolger 15 Felder weg (> SICHER_NAH): nach FLUCHT_RUHE Runden "AUSWEICHEN vorbei" und wieder eine ZIELWAHL
   4. 3 eigene gegen 3 feindliche -> kein Ausweichen (nicht unterlegen)
   5. 1 gegen 1 -> kein Ausweichen
@@ -47,13 +47,36 @@ def main():
     t.aufnehmen([100])
     erg, bef = t.schritt(L, G, sichere_orte=ORTE)
     flucht = getattr(t, "flucht", {})
-    pruefe(1, "1 gegen 3: ausweichen, wartet weiter weg, kein Ziel (Flucht %s, wartet %s, Ziel %s)" % (
-        100 in flucht, t.warte.get(100), t.ziel.get(100)),
-        100 in flucht and t.warte.get(100) and max(abs(t.warte[100][0] - 200), abs(t.warte[100][1] - 270)) > 5 and 100 not in t.ziel)
+    lauf = [b["angriff"]["lauf"] for b in bef if "lauf" in b.get("angriff", {}) and 100 in b["angriff"]["einheiten"]]
+    pruefe(1, "1 gegen 3: ausweichen per Laufbefehl %s, weiter weg, kein Ziel (Flucht %s, Ziel %s)" % (
+        lauf, 100 in flucht, t.ziel.get(100)),
+        100 in flucht and lauf and max(abs(lauf[0][0] - 200), abs(lauf[0][1] - 270)) > 5 and 100 not in t.ziel)
+    L[100].update(x=192, y=268)                                    # ein Stueck gelaufen, Verfolger dicht dahinter
+    for f, (x, y) in zip((501, 502, 503), ((194, 268), (194, 269), (193, 270))):
+        L[f].update(x=x, y=y)
     erg, bef = t.schritt(L, G, sichere_orte=ORTE)
-    pruefe(2, "Verfolger bleiben nah: weiter auf der Flucht, kein Ziel", 100 in getattr(t, "flucht", {}) and 100 not in t.ziel)
+    # Flucht muss ein echter Laufbefehl sein (angriff mit lauf = Spielbefehl 17), kein halten - halten bricht den Nahkampf
+    # nicht ab (abgelesen logik.lua, gemessen raidzuerst_2: er kaempfte am Warteplatz 1 gegen 3 bis zum Tod)
+    flieh = [b["angriff"]["lauf"] for b in bef if "lauf" in b.get("angriff", {}) and 100 in b["angriff"]["einheiten"]]
+    heim = min(max(abs(192 - h[0]), abs(268 - h[1])) for h in ORTE)
+    neu_heim = min(max(abs(flieh[0][0] - h[0]), abs(flieh[0][1] - h[1])) for h in ORTE) if flieh else 999
+    pruefe(2, "Verfolger bleiben nah: in DIESER Runde neuer Fluchtbefehl Richtung Heim (%s, Abstand Heim %d -> %d), kein Ziel" % (
+        flieh, heim, neu_heim), 100 in getattr(t, "flucht", {}) and 100 not in t.ziel and flieh and neu_heim < heim)
+    # 6./7. kein Stop-and-go (raidzuerst_3: neuer Befehl je Runde = neue Gruppe = kurzer Halt, 3 Felder in 60 Ticks)
+    o = t.warte.get(100)
+    L[100].update(x=185, y=268, zustand=101, laufx=o[0] if o else 0, laufy=o[1] if o else 0)
+    for f, (x, y) in zip((501, 502, 503), ((190, 268), (190, 269), (189, 270))):
+        L[f].update(x=x, y=y)
+    erg, bef = t.schritt(L, G, sichere_orte=ORTE)
+    fuer100 = [b for b in bef if 100 in b.get("angriff", {}).get("einheiten", []) or 100 in b.get("halten", {}).get("nr", [])]
+    pruefe(6, "laeuft schon zu seinem Fluchtpunkt %s, Verfolger 5 Felder hinter ihm: KEIN neuer Befehl (%s)" % (o, fuer100),
+           o and not fuer100 and 100 in getattr(t, "flucht", {}))
+    L[100].update(zustand=106)                                    # eingeholt, kaempft
+    erg, bef = t.schritt(L, G, sichere_orte=ORTE)
+    lauf = [b["angriff"]["lauf"] for b in bef if "lauf" in b.get("angriff", {}) and 100 in b["angriff"]["einheiten"]]
+    pruefe(7, "eingeholt und im Nahkampf: sofort neuer Laufbefehl weg (%s)" % lauf, bool(lauf))
     for f in (501, 502, 503):                                     # Verfolger geben auf: 15+ Felder weg
-        L[f].update(x=L[f]["x"] + 20)
+        L[f].update(x=L[f]["x"] + 40)                              # (40: auch nicht mehr am Zielgebaeude - sonst gilt es als bewacht)
     L[100].update(x=180, y=270)
     runden = []
     for _ in range(getattr(A.Einzeln, "FLUCHT_RUHE", 2) + 1):
@@ -74,6 +97,58 @@ def main():
     t.aufnehmen([100])
     erg, bef = t.schritt(L, G, sichere_orte=ORTE)
     pruefe(5, "1 gegen 1: kein Ausweichen", not any("AUSWEICHEN" in z for z in erg))
+    # 8. frueh erkennen: 2 feindliche Nahkaempfer 8 Felder weg, noch kein Kontakt -> schon jetzt ausweichen
+    t = neu()
+    L = {100: einheit(73, 1, 190, 270), 501: einheit(73, 2, 198, 270), 502: einheit(24, 2, 198, 272)}
+    t.aufnehmen([100])
+    erg, bef = t.schritt(L, G, sichere_orte=ORTE)
+    pruefe(8, "Uebermacht 8 Felder weg (noch kein Kontakt): schon ausweichen", any(z.startswith("AUSWEICHEN 100") for z in erg))
+    # 9. blockiert: Zustand laeuft, Laufziel = Fluchtpunkt, aber gleiches Feld wie letzte Runde -> andere Richtung
+    # 9a. normales Gehen (raidzuerst_5): eine Runde auf demselben Feld, dann ein Feld weiter -> NICHT blockiert, kein neuer Befehl
+    o = t.warte.get(100)
+    L[100].update(zustand=101, laufx=o[0] if o else 0, laufy=o[1] if o else 0)
+    neu_befohlen = []
+    for x in (190, 189, 189, 188):                               # Feld wechselt jede zweite Runde
+        L[100].update(x=x)
+        erg, bef = t.schritt(L, G, sichere_orte=ORTE)
+        neu_befohlen += [b for b in bef if 100 in b.get("angriff", {}).get("einheiten", [])]
+    pruefe(91, "normales Gehen (jede 2. Runde ein Feld weiter): kein neuer Befehl, kein Zickzack (%s)" % neu_befohlen, o and not neu_befohlen)
+    # 9b. echt blockiert: drei Runden dasselbe Feld trotz Laufbefehl -> neuer Fluchtpunkt, nie zurueck in eine blockierte Richtung
+    punkte = [t.warte.get(100)]
+    for _ in range(2):
+        o = punkte[-1]
+        L[100].update(zustand=101, laufx=o[0] if o else 0, laufy=o[1] if o else 0)
+        lauf = []
+        for _ in range(3):
+            erg, bef = t.schritt(L, G, sichere_orte=ORTE)
+            lauf = lauf or [b["angriff"]["lauf"] for b in bef if "lauf" in b.get("angriff", {}) and 100 in b["angriff"]["einheiten"]]
+            if lauf:
+                break
+        punkte.append(tuple(lauf[0]) if lauf else None)
+    weit = lambda a, b: a and b and max(abs(a[0] - b[0]), abs(a[1] - b[1])) > 6
+    pruefe(9, "zweimal blockiert (je 2 Runden auf demselben Feld): jedes Mal neuer Fluchtpunkt, nie zurueck %s" % punkte,
+           bool(weit(punkte[1], punkte[0]) and weit(punkte[2], punkte[1]) and weit(punkte[2], punkte[0])))
+    # 10. Leute im Weg: der ohne Arbeiter gewaehlte Punkt ist zugestellt (Arbeiter stehen/laufen dort) -> anderer Punkt
+    def lauf_einer(L):
+        t = neu()
+        t.aufnehmen([100])
+        t.schritt(L, G, sichere_orte=ORTE)
+        return t.warte.get(100)
+    basis = {100: einheit(73, 1, 190, 270), 501: einheit(73, 2, 192, 270), 502: einheit(73, 2, 192, 271)}
+    frei = lauf_einer({k: dict(v) for k, v in basis.items()})
+    L = {k: dict(v) for k, v in basis.items()}
+    if frei:
+        for i, k in enumerate((4, 7, 10)):                       # drei Arbeiter (Typ 3) auf der Strecke
+            L[700 + i] = einheit(3, 2, 190 + (frei[0] - 190) * k // 15, 270 + (frei[1] - 270) * k // 15)
+        L[710] = einheit(3, 0, 150, 300, laufx=190 + (frei[0] - 190) // 2, laufy=270 + (frei[1] - 270) // 2)   # laeuft dorthin
+    zugestellt = lauf_einer(L)
+    pruefe(10, "Arbeiter auf der Strecke nach %s: anderer Fluchtpunkt %s" % (frei, zugestellt), bool(frei and zugestellt and zugestellt != frei))
+    # 11. bewachtes Ziel: 2 feindliche Nahkaempfer 6 Felder neben dem Gebaeude, wir allein 30 Felder weg -> nicht als Ziel
+    t = neu()
+    L = {100: einheit(73, 1, 170, 270), 501: einheit(24, 2, 206, 270), 502: einheit(24, 2, 206, 271)}
+    t.aufnehmen([100])
+    erg, bef = t.schritt(L, G, sichere_orte=ORTE)
+    pruefe(11, "Ziel mit 2 Wachen, wir allein: kein Angriff darauf (Ziel %s)" % t.ziel.get(100), t.ziel.get(100) != 900)
     print("\n%d von %d gruen" % (sum(ok), len(ok)))
     return 0 if all(ok) else 1
 

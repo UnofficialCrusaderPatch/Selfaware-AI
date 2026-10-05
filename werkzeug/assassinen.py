@@ -230,7 +230,9 @@ class Einzeln:
     VOLL = 12500           # gemessen 05.10.: Leben eines frisch angeworbenen Assassinen
     SICHER_FERN, SICHER_NAH = 30, 10
     RUECKZUG_FERN = 20
-    UEBERMACHT_R, FLUCHT_RUHE = 5, 2   # 4a (Daniel 22:16): Umkreis fuer "mehr Feinde als eigene", Runden ohne Verfolger bis zum Wiederangriff
+    UEBERMACHT_R, FLUCHT_RUHE = 10, 2  # 4a (Daniel 22:16): Umkreis fuer "mehr Feinde als eigene", Runden ohne Verfolger bis zum Wiederangriff
+                                       # (raidzuerst_4: mit 5 erst im Kontakt erkannt - Daniel 22:25 "er muss instant verstehen, wann das ist")
+    FLUCHT_FREI = 15       # 4a: erst frei, wenn kein feindlicher Nahkaempfer naeher (raidzuerst_3: mit 10 hoerte er zu frueh auf)
     ZUSCHLAGEN = 3
     ZIEL_FERN, ZIEL_FERN_MAX = 20, 2
     SCHWACH, SCHWACH_FERN = 0.6, 25
@@ -300,6 +302,44 @@ class Einzeln:
             return min(gut, key=lambda o: schach(ort, o))
         return max(orte, key=lambda o: min(self._naechster(o, fern)[0], self._naechster(o, nah)[0])) if orte else None
 
+    def _fluchtpunkt(self, ort, nah, n, L=None, nicht_bei=None):
+        """4a: wohin vor einer Nahkampf-Uebermacht? Unter den begehbaren Punkten weg vom Feind (_weg_vom_feind, 15-25 Felder,
+        geradeaus und 30 Grad seitlich) zuerst der mit den wenigsten Einheiten im Weg (Daniel 22:28: "Arbeiter koennen in
+        den Weg kommen - dafuer muesste er wissen, wo diese Personen laufen"; _im_weg zaehlt Ort UND Laufziel jeder Einheit),
+        dann der naechste an Heim (Lager/Bergfried = eigene Truppen, dort laufen die Verfolger in unsere Verteidigung).
+        nicht_bei: Liste blockierter Fluchtpunkte dieser Flucht (er stand trotz Laufbefehl still) - Punkte dort auslassen,
+        alle, sonst pendelt er zwischen zwei blockierten Richtungen.
+        Ohne solchen Punkt: das naechste Heim selbst."""
+        kurz = [p for p in self._kand.get(n, []) if p in self._begehbar and p not in self.schlechte_orte
+                and all(schach(p, b) > 6 for b in (nicht_bei or []))]
+        heim = getattr(self, "_heim", [])
+        if kurz:
+            weg = (lambda q: self._im_weg(ort, q, L, n)) if L else (lambda q: 0)
+            if heim:
+                return min(kurz, key=lambda q: (weg(q), min(schach(q, h) for h in heim), -self._naechster(q, nah)[0]))
+            return min(kurz, key=lambda q: (weg(q), -self._naechster(q, nah)[0]))
+        return min(heim, key=lambda h: schach(ort, h)) if heim else None
+
+    @staticmethod
+    def _im_weg(von, nach, L, ich):
+        """Wie viele Einheiten (jeder Besitzer, auch Arbeiter) stehen auf der Strecke von -> nach (1 Feld breit) oder
+        laufen gerade dorthin (Laufziel auf der Strecke)?"""
+        k = max(schach(von, nach), 1)
+        strecke = set()
+        for i in range(1, k + 1):
+            x = von[0] + (nach[0] - von[0]) * i / k
+            y = von[1] + (nach[1] - von[1]) * i / k
+            for dx in (-1, 0, 1):
+                for dy in (-1, 0, 1):
+                    strecke.add((int(round(x)) + dx, int(round(y)) + dy))
+        n = 0
+        for nr, e in L.items():
+            if nr == ich or schach(von, (e["x"], e["y"])) > k + 2 and schach(von, (e.get("laufx", -99), e.get("laufy", -99))) > k + 2:
+                continue
+            if (e["x"], e["y"]) in strecke or (e.get("laufx"), e.get("laufy")) in strecke:
+                n += 1
+        return n
+
     def _weg_vom_feind(self, ort, fern, nah):
         """Kandidaten fuer einen KURZEN Rueckzug: 15/20/25 Felder weg vom Schwerpunkt der nahen Feinde, geradeaus und
         30 Grad links/rechts (Partie 9h: 210 Rueckzuege quer ueber die Karte nach Hause, 37 Assassinen starben im Laufen;
@@ -368,6 +408,15 @@ class Einzeln:
     def _vergessen(self, n):
         self.ziel.pop(n, None); self.jagd.pop(n, None); self.warte.pop(n, None); self.warte_seit.pop(n, None)
 
+    def _fliehen(self, n, ort, flieh):
+        """4a: Flucht als echter Laufbefehl (Spielbefehl 17 wie ein Mensch-Klick, Modul angriff mit lauf). NICHT halten:
+        abgelesen 05.10. (logik.lua halten/festhaltenTick) - halten setzt nur das Laufziel (setDestinationForUnit, der
+        Nahkampf-Zustand bleibt) und laesst die Einheit los, sobald sie im Kampf ein Ziel hat (+924). So kam in
+        raidzuerst_2 keiner aus dem Nahkampf heraus."""
+        self.warte[n] = ort
+        self.warte_seit[n] = self.runde
+        flieh.setdefault(ort, []).append(n)
+
     def _warten(self, n, ort_sicher, halten):
         self.warte[n] = ort_sicher
         self.warte_seit[n] = self.runde
@@ -375,8 +424,9 @@ class Einzeln:
 
     # --- eine Runde -----------------------------------------------------------------------------------------------
     def schritt(self, L, G, sichere_orte=None):
-        ereignis, angriffe, jagen, halten = [], [], [], {}
+        ereignis, angriffe, jagen, halten, flieh = [], [], [], {}, {}
         self.runde += 1
+        self._heim = list(sichere_orte or [])          # 4a: Fluchtrichtung (Lager, Bergfried)
         # begehbare Warteplaetze: wo gerade eine eigene Nicht-Kampfeinheit steht, ist begehbarer Boden
         orte = list(sichere_orte or []) + sorted({(e["x"], e["y"]) for e in L.values()
                                                   if e["besitzer"] == self.sp and e["typ"] not in TRUPPE and e["typ"] != ASSASSINE})
@@ -468,29 +518,52 @@ class Einzeln:
             feinde = self._anzahl(ort, nah, self.UEBERMACHT_R)
             eigene = sum(1 for q in eigene_orte if schach(ort, q) <= self.UEBERMACHT_R)
             if n in self.flucht:
-                if self._naechster(ort, nah)[0] > self.SICHER_NAH:
+                verfolger = self._naechster(ort, nah)[0]
+                if verfolger > self.FLUCHT_FREI:
                     self.flucht[n]["ruhig"] += 1
                     if self.flucht[n]["ruhig"] >= self.FLUCHT_RUHE:
                         del self.flucht[n]
                         self.warte.pop(n, None); self.warte_seit.pop(n, None)
                         ereignis.append("AUSWEICHEN vorbei %d: %d Runden kein Verfolger im Umkreis %d - greift wieder an (Leben %d)" % (
-                            n, self.FLUCHT_RUHE, self.SICHER_NAH, L[n]["leben"]))
+                            n, self.FLUCHT_RUHE, self.FLUCHT_FREI, L[n]["leben"]))
                     continue
                 self.flucht[n]["ruhig"] = 0
-                if feinde > eigene:            # noch verfolgt und unterlegen: weiter weg
-                    sicher = self._sicherer_ort(ort, orte, fern, nah, n)
-                    if sicher and self.warte.get(n) != sicher:
-                        self._warten(n, sicher, halten)
+                # noch verfolgt: weiter weg, Richtung Heim (eigene Truppen) - auch mitten im Nahkampf. Gemessen raidzuerst_2:
+                # ein einziger kurzer Rueckzug reichte nicht (unterwegs 2.481 und am Warteplatz 2.941 eingeholt).
+                # Gemessen raidzuerst_3: ein NEUER Befehl in jeder Runde (neue Gruppe) liess ihn immer wieder kurz stehen -
+                # 3 Felder in 60 Ticks, Leben 11.720 -> 3.020. Darum nur neu befehlen, wenn er NICHT schon zu seinem
+                # Fluchtpunkt laeuft (steht, kaempft, anderes Laufziel) oder dort angekommen ist.
+                o, lauf = self.warte.get(n), (L[n]["laufx"], L[n]["laufy"])
+                laeuft_weg = o is not None and L[n]["zustand"] == 101 and schach(lauf, o) <= 2 and schach(ort, o) > 3
+                # raidzuerst_4: Zustand "laeuft", Laufziel stimmt - und doch 30 Ticks auf demselben Feld (blockiert). Steht er
+                # trotz Laufbefehl auf dem Feld der letzten Runde: sofort eine andere Richtung (Daniel: "durchklicken oder ausweichen")
+                # raidzuerst_5: er laeuft ~1 Feld je 17 Ticks, eine Runde dauert 13-20 Ticks - EINE Runde auf demselben Feld ist
+                # normales Gehen (sonst Zickzack: 1.150 Ticks fuer 45 Felder). Blockiert erst nach 2 Runden ohne Feldwechsel.
+                f = self.flucht[n]
+                f["steht"] = f.get("steht", 0) + 1 if f.get("letzt") == ort else 0
+                f["letzt"] = ort
+                blockiert = laeuft_weg and f["steht"] >= 2
+                if laeuft_weg and not blockiert:
+                    ziel = None
+                else:
+                    if blockiert:
+                        self.flucht[n].setdefault("gesperrt", []).append(o)
+                    ziel = self._fluchtpunkt(ort, nah, n, L, nicht_bei=self.flucht[n].get("gesperrt"))
+                if ziel:
+                    self._fliehen(n, ziel, flieh)
+                ereignis.append("FLUCHT %d: ort %s zustand %d lauf %s Verfolger in %d Leben %d -> %s" % (
+                    n, ort, L[n]["zustand"], lauf, verfolger, L[n]["leben"],
+                    "laeuft weiter" if ziel is None and laeuft_weg else "%sneu nach %s" % ("BLOCKIERT - " if blockiert else "", ziel)))
                 continue
             if feinde == 0 or feinde <= eigene:
                 continue
-            sicher = self._sicherer_ort(ort, orte, fern, nah, n)
+            sicher = self._fluchtpunkt(ort, nah, n, L) or self._sicherer_ort(ort, orte, fern, nah, n)
             if not sicher:
                 continue                       # kein Weg weg: weiterkaempfen
             self._vergessen(n)
             self.stapel["mitglieder"].discard(n)
-            self._warten(n, sicher, halten)
-            self.flucht[n] = {"seit": self.runde, "ruhig": 0}
+            self._fliehen(n, sicher, flieh)
+            self.flucht[n] = {"seit": self.runde, "ruhig": 0, "letzt": ort}
             self.bilanz["uebermacht"] = self.bilanz.get("uebermacht", 0) + 1
             ereignis.append("AUSWEICHEN %d: %d feindliche Nahkaempfer gegen %d eigene im Umkreis %d, Leben %d -> nach %s" % (
                 n, feinde, eigene, self.UEBERMACHT_R, L[n]["leben"], sicher))
@@ -507,7 +580,7 @@ class Einzeln:
                     self.bilanz["ausgewichen"] = self.bilanz.get("ausgewichen", 0) + 1
         # 4c. Gegenprobe Warten: laeuft er nach NEU_NACH Runden nicht zu seinem sicheren Ort, neu schicken (mit Messzeile)
         for n, o in list(self.warte.items()):
-            if self.runde - self.warte_seit.get(n, self.runde) < self.NEU_NACH or n in halten.get(o, []):
+            if self.runde - self.warte_seit.get(n, self.runde) < self.NEU_NACH or n in halten.get(o, []) or n in self.flucht:
                 continue
             ort, lauf = (L[n]["x"], L[n]["y"]), (L[n]["laufx"], L[n]["laufy"])
             if schach(ort, o) > 4 and schach(lauf, o) > 4:
@@ -570,7 +643,8 @@ class Einzeln:
                 continue
             p = (g["x"], g["y"])
             kand.append((gn, p, g["typ"], g.get("erreichbar", 1), self._anzahl(p, fern, 10),
-                         self._anzahl(p, fern, self.ZIEL_FERN), self._anzahl(p, fern, 30), self._anzahl(p, fern, self.SCHWACH_FERN)))
+                         self._anzahl(p, fern, self.ZIEL_FERN), self._anzahl(p, fern, 30), self._anzahl(p, fern, self.SCHWACH_FERN),
+                         self._anzahl(p, nah, self.UEBERMACHT_R)))
         gruende = {"keins erreichbar": 0, "alle voll": 0, "alle gefaehrlich": 0}
         ohne = 0
         for n in sorted(self.mitglieder):
@@ -581,10 +655,11 @@ class Einzeln:
             schwach = L[n]["leben"] < self.SCHWACH * self.VOLL
             erreichbar = [k for k in kand if k[3]]
             frei = [k for k in erreichbar if zahl.get(k[0], 0) < self.JE_GEBAEUDE]
-            sicher = [k for k in frei if (k[7] == 0 if schwach else k[5] <= self.ZIEL_FERN_MAX)]
+            sicher = [k for k in frei if (k[7] == 0 if schwach else k[5] <= self.ZIEL_FERN_MAX)
+                      and k[8] <= zahl.get(k[0], 0) + 1]   # 4a: nicht dorthin, wo mehr Nahkampf-Wachen stehen als wir Angreifer haetten
             if sicher:
                 # Wert je Weg, abgeschwaecht durch Fernkaempfer am Ziel (Daniel 19:05: wertvoll UND nicht allzu schwer bewacht)
-                gn, p, typ, _, f10, f20, f30, _ = max(sicher, key=lambda k: WERT.get(k[2], 10) / ((schach(ort, k[1]) + 20.0) * (1 + k[5])))
+                gn, p, typ, _, f10, f20, f30, _, _ = max(sicher, key=lambda k: WERT.get(k[2], 10) / ((schach(ort, k[1]) + 20.0) * (1 + k[5])))
                 self.ziel[n] = gn
                 self.ziel_typ[gn] = typ
                 zahl[gn] = zahl.get(gn, 0) + 1
@@ -642,6 +717,7 @@ class Einzeln:
         befehle = [{"angriff": {"einheiten": [n], "gebaeude": gn}} for n, gn in angriffe]
         befehle += [{"angriff": {"einheiten": [n], "ziel": f}} for n, f in jagen]
         befehle += [{"halten": {"nr": ns, "x": o[0], "y": o[1]}} for o, ns in halten.items()]
+        befehle += [{"angriff": {"einheiten": ns, "lauf": [o[0], o[1]]}} for o, ns in flieh.items()]   # 4a: echter Laufbefehl
         if stapel_befehl:
             befehle.append(stapel_befehl)
         if lord_befehl:

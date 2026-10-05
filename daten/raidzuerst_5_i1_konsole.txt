@@ -1,0 +1,262 @@
+CODE-KENNUNG e04f2fa2 (15 Dateien: assassinen.py 947052, bauen.py f4b4ab, befehl.py f0b9c5, erstes_spiel.py 8f0487, ertrag_startwerte_M19.json b566ad, ertragsplaner.py b72d8a, farmen_mischen.py f28949, kennung.py c1d186, laden.py 69ccb2, logik.lua 193251, plantagen_lauf.py e3f098, speichern.py 00a42e, steuerkarte.py 57bd5a, waechter.py b98179, wirtschaft.py 8f4389)
+Eroeffnung unveraendert (Fingerabdruck 4c87a41d58) - lade M19 Liga Eroeffnung T989 statt neu zu bauen
+Eintrag 0 'M19 Liga Eroeffnung T989' -> Scrollstand 0, Zeile 0; Spielzeit vorher 8009
+['[villagestudio]: LADEPAUSE: scharf (jetzt Tick 8009, pausiert).']
+['[villagestudio]: POKE 0x01126628: 0 -> 0', '[villagestudio]: POKE 0x01126624: 0 -> 0', '[villagestudio]: LADEN: Knopf 2 gedrueckt, ok=true', '[villagestudio]: logik: 3 von 3 Befehlen ausgefuehrt, 0 schon erledigt.', '[villagestudio]: LADEPAUSE: Laden erkannt (Spielzeit sprang um -7020) bei Tick 989 - angehalten.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 989.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 989.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 989.']
+Spielzeit nachher 989 / 989, Pause 1
+Tick 989
+== Phase 2: Echtzeit, Tempo 200, 10 Minuten, Waechter an
+Vorab-Kontrolle gut: {'Ansicht': 14, 'gameOver': 0, 'Mensch': 1, 'Platz': 1}
+Ertrags-Planer: Baukosten aus dem Spiel {1: {'holz': 5}, 3: {'holz': 5}, 4: {'holz': 5}, 5: {'holz': 20, 'stein': 6}, 7: {'holz': 3, 'gold': 60}, 10: {}, 19: {'holz': 5}, 20: {'holz': 25}, 32: {'holz': 3, 'gold': 15}}; Protokoll ertrag_live_20261005_223218_i1.jsonl
+Ertrags-Planer: Startwerte aus 10 frueheren Partien: Eisenmine 0.61 (Gewicht 63177, Anlauf 6664); Steinbruch+Ochsenjoch 6.72 (Gewicht 54086, Anlauf 3644); Apfelplantage 3.25 (Gewicht 131019, Anlauf 2224); Jaegerhuette 3.07 (Gewicht 82848, Anlauf 4427); Holzfaeller 13.24 (Gewicht 151124, Anlauf 4000)
+Wirtschaft: Apfel A [(79, 237), (82, 247), (92, 245)], B [(89, 235), (80, 225), (70, 223)]; alte Lagerteile [6, 7, 8, 9]
+Tick | Holz Stein Eisen | Aepfel Brot | Beliebt | Leute/Platz (Feuer) | Holzf. Apfelb. | Ereignis
+ 1093 |  32   0   0 |   0   0 |  91.00 | 16/26 (0) | 8 1 | Stellung: 12 Truppen zum Posten (97, 283); ZIELWAHL 1 -> 35 Typ 3 in 47: Fern<=10 0, <=20 0, <=30 0, Leben 12500; 0 Assassinen ohne Ziel (); 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen); PLANER Lage (Gewinn bis Ende / Amortisation): Steinbruch+Ochsenjoch 66/1020, Apfelplantage 24/1991, Holzfaeller 10/988, Jaegerhuette -47/9552 [Horizont], Eisenmine -47/3869 [Horizont] | Stein-Reserve 0; PLANER wartet auf Steinbruch+Ochsenjoch (fehlt: )
+ZEITEN nach 10 Runden: wirtschaft 0.42 s, lesen 0.38 s, waechter 0.03 s, assassinen 0.03 s, bauen_werben_verkauf 0.00 s, haus_lager_zeile 0.00 s
+ 1266 |  32   0   0 |   0   0 |  88.75 | 19/26 (3) | 11 1 | -
+ZEITEN nach 20 Runden: lesen 0.76 s, wirtschaft 0.72 s, assassinen 0.04 s, waechter 0.04 s, bauen_werben_verkauf 0.00 s, haus_lager_zeile 0.00 s
+ 1404 |  32   0   0 |   0   0 |  86.50 | 21/26 (2) | 14 1 | -
+ZEITEN nach 30 Runden: lesen 1.13 s, wirtschaft 1.02 s, assassinen 0.04 s, waechter 0.04 s, bauen_werben_verkauf 0.00 s, haus_lager_zeile 0.00 s
+ 1540 |  32   0   0 |   0   0 |  86.50 | 23/26 (1) | 14 1 | -
+ZEITEN nach 40 Runden: lesen 1.51 s, wirtschaft 1.30 s, assassinen 0.05 s, waechter 0.04 s, bauen_werben_verkauf 0.00 s, haus_lager_zeile 0.00 s
+ 1673 |  32   0   0 |   0   0 |  84.25 | 25/26 (3) | 14 1 | PLANER Huette zuerst (Feuer 3, Steinbruch+Ochsenjoch braucht 4) -> (130, 263)
+ 1726 |  27   0   0 |   0   0 |  84.25 | 26/34 (4) | 14 1 | Seasoning: A-Plantagen reif bei Tick 1726 (Baum 538) - setze 3 B-Plantagen
+ZEITEN nach 50 Runden: lesen 1.89 s, wirtschaft 1.63 s, assassinen 0.05 s, waechter 0.04 s, bauen_werben_verkauf 0.00 s, haus_lager_zeile 0.00 s
+ 1816 |  27   0   0 |   0   0 |  82.00 | 27/34 (5) | 14 1 | PLANER Lage (Gewinn bis Ende / Amortisation): Steinbruch+Ochsenjoch 45/1020, Apfelplantage 18/1991, Holzfaeller 6/988, Jaegerhuette -51/9552 [Horizont], Eisenmine -56/3869 [Horizont] | Stein-Reserve 0; PLANER wartet auf Steinbruch+Ochsenjoch (fehlt: holz 3)
+ 1843 |  27   0   0 |   0   0 |  82.00 | 27/34 (6) | 14 1 | MESSUNG verletzt 1: leben 12500 -> 12440 | ort (184,272) zustand 106 | naechster Feind Typ 73 in 26 | naechster Fernkaempfer Typ 22 in 39 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 3 in 2 | Ziel 35 in 2; Seasoning: 3 B-Plantagen noch offen (Holz 27, Gold 5)
+ 1857 |  27   0   0 |   0   0 |  82.00 | 28/34 (6) | 14 1 | MESSUNG verletzt 1: leben 12440 -> 12300 | ort (184,272) zustand 106 | naechster Feind Typ 73 in 26 | naechster Fernkaempfer Typ 22 in 39 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 3 in 2 | Ziel 35 in 2
+ 1870 |  27   0   0 |   0   0 |  82.00 | 28/34 (6) | 14 1 | MESSUNG verletzt 1: leben 12300 -> 12170 | ort (184,272) zustand 106 | naechster Feind Typ 73 in 26 | naechster Fernkaempfer Typ 22 in 39 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 3 in 2 | Ziel 35 in 2
+ 1883 |  27   0   0 |   0   0 |  82.00 | 28/34 (6) | 14 1 | MESSUNG verletzt 1: leben 12170 -> 12110 | ort (184,272) zustand 106 | naechster Feind Typ 73 in 26 | naechster Fernkaempfer Typ 22 in 39 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 3 in 2 | Ziel 35 in 2
+ZEITEN nach 60 Runden: lesen 2.28 s, wirtschaft 1.91 s, assassinen 0.05 s, waechter 0.05 s, bauen_werben_verkauf 0.00 s, haus_lager_zeile 0.00 s
+ 1950 |  27   0   0 |   0   0 |  82.00 | 29/34 (7) | 14 1 | -
+ 1979 |  27   0   0 |   0   0 |  82.00 | 29/34 (7) | 14 1 | Seasoning: 3 B-Plantagen noch offen (Holz 27, Gold 5)
+ 2003 |  27   0   0 |   0   0 |  79.75 | 30/34 (8) | 14 1 | Gebaeude 35 (Typ 3) zerstoert; ZIELWAHL 1 -> 23 Typ 3 in 11: Fern<=10 0, <=20 0, <=30 2, Leben 12110; 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+ZEITEN nach 70 Runden: lesen 2.65 s, wirtschaft 2.18 s, assassinen 0.08 s, waechter 0.05 s, bauen_werben_verkauf 0.00 s, haus_lager_zeile 0.00 s
+ 2087 |  27   0   0 |   0   0 |  79.75 | 31/34 (9) | 14 1 | -
+ 2117 |  27   0   0 |   0   0 |  79.75 | 31/34 (9) | 14 1 | Seasoning: 3 B-Plantagen noch offen (Holz 27, Gold 5)
+ 2168 |  27   0   0 |   0   0 |  79.75 | 32/34 (10) | 14 1 | MESSUNG verletzt 1: leben 12110 -> 12080 | ort (194,267) zustand 101 | naechster Feind Typ 73 in 17 | naechster Fernkaempfer Typ 22 in 29 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 3 in 2 | Ziel 23 in 2
+ 2181 |  27   0   0 |   0   0 |  79.75 | 32/34 (10) | 14 1 | MESSUNG verletzt 1: leben 12080 -> 11950 | ort (194,267) zustand 106 | naechster Feind Typ 73 in 17 | naechster Fernkaempfer Typ 22 in 29 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 3 in 2 | Ziel 23 in 2
+ 2194 |  27   0   0 |   0   0 |  77.50 | 32/34 (10) | 14 1 | MESSUNG verletzt 1: leben 11950 -> 11820 | ort (194,267) zustand 106 | naechster Feind Typ 73 in 16 | naechster Fernkaempfer Typ 22 in 29 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 3 in 2 | Ziel 23 in 2
+ 2205 |  27   0   0 |   0   0 |  77.50 | 32/34 (11) | 14 1 | MESSUNG verletzt 1: leben 11820 -> 11720 | ort (194,267) zustand 106 | naechster Feind Typ 73 in 15 | naechster Fernkaempfer Typ 22 in 29 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 3 in 2 | Ziel 23 in 2
+ZEITEN nach 80 Runden: lesen 3.03 s, wirtschaft 2.45 s, assassinen 0.09 s, waechter 0.06 s, bauen_werben_verkauf 0.00 s, haus_lager_zeile 0.00 s
+ 2218 |  27   0   0 |   0   0 |  77.50 | 32/34 (11) | 14 1 | -
+ 2245 |  27   0   0 |   0   0 |  77.50 | 32/34 (11) | 14 1 | Seasoning: 3 B-Plantagen noch offen (Holz 27, Gold 5)
+ 2312 |  27   0   0 |   0   0 |  77.50 | 33/34 (12) | 14 1 | AUSWEICHEN 1: 2 feindliche Nahkaempfer gegen 1 eigene im Umkreis 10, Leben 11720 -> nach (170, 260)
+ 2330 |  27   0   0 |   0   0 |  77.50 | 33/34 (12) | 14 1 | FLUCHT 1: ort (193, 267) zustand 101 lauf (170, 260) Verfolger in 8 Leben 11720 -> laeuft weiter
+ 2346 |  27   0   0 |   0   0 |  77.50 | 34/34 (12) | 14 1 | FLUCHT 1: ort (192, 267) zustand 101 lauf (170, 260) Verfolger in 8 Leben 11720 -> laeuft weiter
+ZEITEN nach 90 Runden: lesen 3.41 s, wirtschaft 2.72 s, assassinen 0.12 s, waechter 0.06 s, bauen_werben_verkauf 0.00 s, haus_lager_zeile 0.00 s
+ 2357 |  27   0   0 |   0   0 |  77.50 | 34/34 (12) | 14 1 | FLUCHT 1: ort (192, 267) zustand 101 lauf (170, 260) Verfolger in 7 Leben 11720 -> BLOCKIERT - neu nach (173, 251)
+ 2378 |  27   0   0 |   0   0 |  77.50 | 34/34 (13) | 14 1 | FLUCHT 1: ort (190, 267) zustand 101 lauf (173, 251) Verfolger in 8 Leben 11720 -> laeuft weiter
+ 2392 |  27   0   0 |   0   0 |  75.25 | 34/34 (13) | 14 1 | FLUCHT 1: ort (190, 267) zustand 101 lauf (173, 251) Verfolger in 7 Leben 11720 -> BLOCKIERT - neu nach (175, 267); Seasoning: 3 B-Plantagen noch offen (Holz 27, Gold 5)
+ 2410 |  27   0   0 |   0   0 |  75.25 | 34/34 (13) | 14 1 | FLUCHT 1: ort (188, 266) zustand 101 lauf (175, 267) Verfolger in 8 Leben 11720 -> laeuft weiter
+ 2423 |  27   0   0 |   0   0 |  75.25 | 34/34 (13) | 14 1 | FLUCHT 1: ort (188, 266) zustand 101 lauf (175, 267) Verfolger in 7 Leben 11720 -> BLOCKIERT - neu nach (163, 267)
+ 2442 |  27   0   0 |   0   0 |  75.25 | 34/34 (13) | 14 1 | FLUCHT 1: ort (186, 265) zustand 101 lauf (163, 267) Verfolger in 8 Leben 11720 -> laeuft weiter
+ 2455 |  27   0   0 |   0   0 |  75.25 | 34/34 (13) | 14 1 | FLUCHT 1: ort (186, 265) zustand 101 lauf (163, 267) Verfolger in 7 Leben 11720 -> BLOCKIERT - neu nach (172, 244)
+ 2474 |  27   0   0 |   0   0 |  75.25 | 34/34 (14) | 14 1 | FLUCHT 1: ort (185, 264) zustand 101 lauf (172, 244) Verfolger in 7 Leben 11720 -> laeuft weiter
+ 2488 |  27   0   0 |   0   0 |  75.25 | 34/34 (14) | 14 1 | FLUCHT 1: ort (185, 264) zustand 101 lauf (172, 244) Verfolger in 6 Leben 11720 -> BLOCKIERT - neu nach (163, 252)
+ 2509 |  27   0   0 |   0   0 |  75.25 | 34/34 (14) | 14 1 | FLUCHT 1: ort (184, 263) zustand 101 lauf (163, 252) Verfolger in 5 Leben 11720 -> laeuft weiter
+ZEITEN nach 100 Runden: lesen 3.79 s, wirtschaft 2.99 s, assassinen 0.28 s, waechter 0.07 s, bauen_werben_verkauf 0.00 s, haus_lager_zeile 0.00 s
+ 2520 |  27   0   0 |   0   0 |  75.25 | 34/34 (14) | 14 1 | FLUCHT 1: ort (184, 263) zustand 101 lauf (163, 252) Verfolger in 5 Leben 11720 -> BLOCKIERT - neu nach (141, 269); PLANER Lage (Gewinn bis Ende / Amortisation): Steinbruch+Ochsenjoch 24/1020, Apfelplantage 11/1991, Holzfaeller 2/988, Jaegerhuette -56/9552 [Horizont], Eisenmine -65/3869 [Horizont] | Stein-Reserve 0; PLANER wartet auf Steinbruch+Ochsenjoch (fehlt: holz 3)
+ 2541 |  27   0   0 |   0   0 |  75.25 | 34/34 (15) | 14 1 | FLUCHT 1: ort (182, 263) zustand 101 lauf (141, 269) Verfolger in 7 Leben 11720 -> laeuft weiter
+ 2554 |  27   0   0 |   0   0 |  75.25 | 34/34 (15) | 14 1 | FLUCHT 1: ort (181, 263) zustand 101 lauf (141, 269) Verfolger in 8 Leben 11720 -> laeuft weiter; Seasoning: 3 B-Plantagen noch offen (Holz 27, Gold 5)
+ 2567 |  27   0   0 |   0   0 |  75.25 | 34/34 (15) | 14 1 | FLUCHT 1: ort (181, 263) zustand 101 lauf (141, 269) Verfolger in 8 Leben 11720 -> BLOCKIERT - neu nach (161, 259)
+ 2586 |  27   0   0 |   0   0 |  75.25 | 34/34 (15) | 14 1 | FLUCHT 1: ort (179, 263) zustand 101 lauf (161, 259) Verfolger in 9 Leben 11720 -> laeuft weiter
+ 2599 |  27   0   0 |   0   0 |  73.00 | 34/34 (15) | 14 1 | FLUCHT 1: ort (179, 263) zustand 101 lauf (161, 259) Verfolger in 8 Leben 11720 -> BLOCKIERT - neu nach (154, 261)
+ 2617 |  27   0   0 |   0   0 |  73.00 | 34/34 (15) | 14 1 | FLUCHT 1: ort (177, 263) zustand 101 lauf (154, 261) Verfolger in 9 Leben 11720 -> laeuft weiter
+ 2633 |  27   0   0 |   0   0 |  73.00 | 34/34 (15) | 14 1 | FLUCHT 1: ort (176, 263) zustand 101 lauf (154, 261) Verfolger in 9 Leben 11720 -> laeuft weiter
+ 2647 |  27   0   0 |   3   0 |  73.00 | 34/34 (15) | 14 1 | FLUCHT 1: ort (176, 263) zustand 101 lauf (154, 261) Verfolger in 8 Leben 11720 -> BLOCKIERT - neu nach (154, 275)
+ 2665 |  27   0   0 |   4   0 |  73.00 | 34/34 (15) | 14 1 | FLUCHT 1: ort (174, 263) zustand 101 lauf (154, 275) Verfolger in 9 Leben 11720 -> laeuft weiter
+ZEITEN nach 110 Runden: lesen 4.19 s, wirtschaft 3.26 s, assassinen 0.40 s, waechter 0.08 s, bauen_werben_verkauf 0.00 s, haus_lager_zeile 0.00 s
+ 2679 |  27   0   0 |   4   0 |  73.00 | 34/34 (15) | 14 1 | FLUCHT 1: ort (174, 263) zustand 101 lauf (154, 275) Verfolger in 8 Leben 11720 -> BLOCKIERT - neu nach (152, 251)
+ 2700 |  27   0   0 |   4   0 |  73.00 | 34/34 (15) | 14 1 | FLUCHT 1: ort (172, 263) zustand 101 lauf (152, 251) Verfolger in 9 Leben 11720 -> laeuft weiter
+ 2713 |  27   0   0 |   4   0 |  73.00 | 34/34 (15) | 14 1 | FLUCHT 1: ort (171, 263) zustand 101 lauf (152, 251) Verfolger in 9 Leben 11720 -> laeuft weiter
+ 2726 |  27   0   0 |   4   0 |  73.00 | 34/34 (15) | 14 1 | FLUCHT 1: ort (171, 263) zustand 101 lauf (152, 251) Verfolger in 9 Leben 11720 -> BLOCKIERT - neu nach (141, 269)
+ 2745 |  27   0   0 |   4   0 |  73.00 | 34/34 (15) | 14 1 | FLUCHT 1: ort (169, 263) zustand 101 lauf (141, 269) Verfolger in 10 Leben 11720 -> laeuft weiter
+ 2761 |  27   0   0 |   3   0 |  73.00 | 34/34 (15) | 14 1 | FLUCHT 1: ort (168, 263) zustand 101 lauf (141, 269) Verfolger in 10 Leben 11720 -> laeuft weiter
+ 2774 |  27   0   0 |   3   0 |  73.00 | 34/34 (15) | 14 1 | FLUCHT 1: ort (168, 263) zustand 101 lauf (141, 269) Verfolger in 9 Leben 11720 -> BLOCKIERT - neu nach (141, 269)
+ 2793 |  27   0   0 |   3   0 |  73.25 | 34/34 (15) | 14 1 | FLUCHT 1: ort (166, 263) zustand 101 lauf (141, 269) Verfolger in 10 Leben 11720 -> laeuft weiter
+ 2806 |  27   0   0 |   3   0 |  73.25 | 34/34 (15) | 14 1 | FLUCHT 1: ort (166, 263) zustand 101 lauf (141, 269) Verfolger in 9 Leben 11720 -> BLOCKIERT - neu nach (144, 251)
+ 2825 |  27   0   0 |   3   0 |  73.25 | 34/34 (15) | 14 1 | FLUCHT 1: ort (164, 263) zustand 101 lauf (144, 251) Verfolger in 10 Leben 11720 -> laeuft weiter
+ZEITEN nach 120 Runden: lesen 4.59 s, wirtschaft 3.54 s, assassinen 0.52 s, waechter 0.08 s, bauen_werben_verkauf 0.00 s, haus_lager_zeile 0.00 s
+ 2841 |  27   0   0 |   3   0 |  73.25 | 34/34 (15) | 14 1 | FLUCHT 1: ort (163, 263) zustand 101 lauf (144, 251) Verfolger in 10 Leben 11720 -> laeuft weiter
+ 2857 |  27   0   0 |   3   0 |  73.25 | 34/34 (15) | 14 1 | FLUCHT 1: ort (162, 263) zustand 101 lauf (144, 251) Verfolger in 10 Leben 11720 -> laeuft weiter
+ 2870 |  27   0   0 |   3   0 |  73.25 | 34/34 (15) | 14 1 | FLUCHT 1: ort (162, 263) zustand 101 lauf (144, 251) Verfolger in 9 Leben 11720 -> BLOCKIERT - neu nach (141, 269)
+ 2889 |  27   0   0 |   3   0 |  73.25 | 34/34 (15) | 14 1 | FLUCHT 1: ort (160, 263) zustand 101 lauf (141, 269) Verfolger in 10 Leben 11720 -> laeuft weiter
+ 2902 |  27   0   0 |   2   0 |  73.25 | 34/34 (15) | 14 1 | FLUCHT 1: ort (160, 263) zustand 101 lauf (141, 269) Verfolger in 9 Leben 11720 -> BLOCKIERT - neu nach (141, 269)
+ 2923 |  27   0   0 |   2   0 |  73.25 | 34/34 (15) | 14 1 | FLUCHT 1: ort (158, 263) zustand 101 lauf (141, 269) Verfolger in 10 Leben 11720 -> laeuft weiter
+ 2936 |  27   0   0 |   2   0 |  73.25 | 34/34 (15) | 14 1 | FLUCHT 1: ort (158, 263) zustand 101 lauf (141, 269) Verfolger in 9 Leben 11720 -> BLOCKIERT - neu nach (136, 251)
+ 2955 |  27   0   0 |   2   0 |  73.25 | 34/34 (15) | 14 1 | Abwehr gebuendelt: alle 13 (22,24,55) gegen Feind 209 Typ 73 bei (167,263); FLUCHT 1: ort (156, 263) zustand 101 lauf (136, 251) Verfolger in 10 Leben 11720 -> laeuft weiter
+ 2981 |  27   0   0 |   2   0 |  73.25 | 34/34 (15) | 14 1 | FLUCHT 1: ort (155, 263) zustand 101 lauf (136, 251) Verfolger in 9 Leben 11720 -> laeuft weiter
+ 2995 |  27   0   0 |   2   0 |  73.50 | 34/34 (15) | 14 1 | FLUCHT 1: ort (154, 263) zustand 101 lauf (136, 251) Verfolger in 10 Leben 11720 -> laeuft weiter
+ZEITEN nach 130 Runden: lesen 4.99 s, wirtschaft 3.81 s, assassinen 0.61 s, waechter 0.15 s, bauen_werben_verkauf 0.00 s, haus_lager_zeile 0.00 s
+ 3008 |  27   0   0 |   2   0 |  73.50 | 34/34 (15) | 14 1 | FLUCHT 1: ort (153, 263) zustand 101 lauf (136, 251) Verfolger in 10 Leben 11720 -> laeuft weiter; PLANER Ochsenjoch an Steinbruch 59: erster Ochse beladen unterwegs -> sofort der zweite (Joche 1, Haufen 0) -> (83, 267)
+ 3034 |  22   0   0 |   2   0 |  73.50 | 34/34 (15) | 14 1 | FLUCHT 1: ort (151, 263) zustand 101 lauf (136, 251) Verfolger in 10 Leben 11720 -> laeuft weiter
+ 3048 |  22   0   0 |   1   0 |  73.50 | 34/34 (15) | 14 1 | FLUCHT 1: ort (151, 263) zustand 101 lauf (136, 251) Verfolger in 9 Leben 11720 -> BLOCKIERT - neu nach (129, 252)
+ 3067 |  22   0   0 |   1   0 |  73.50 | 34/34 (15) | 14 1 | FLUCHT 1: ort (149, 263) zustand 101 lauf (129, 252) Verfolger in 10 Leben 11720 -> laeuft weiter
+ 3083 |  22   0   0 |   1   0 |  73.50 | 34/34 (15) | 14 1 | FLUCHT 1: ort (148, 263) zustand 101 lauf (129, 252) Verfolger in 10 Leben 11720 -> laeuft weiter
+ 3096 |  22   0   0 |   1   0 |  73.50 | 34/34 (14) | 14 1 | FLUCHT 1: ort (148, 263) zustand 101 lauf (129, 252) Verfolger in 9 Leben 11720 -> BLOCKIERT - neu nach (128, 264)
+ 3115 |  22   0   0 |   1   0 |  73.50 | 34/34 (14) | 14 1 | FLUCHT 1: ort (146, 263) zustand 101 lauf (128, 264) Verfolger in 10 Leben 11720 -> laeuft weiter
+ 3131 |  22   0   0 |   1   0 |  73.50 | 34/34 (14) | 14 1 | FLUCHT 1: ort (145, 263) zustand 101 lauf (128, 264) Verfolger in 10 Leben 11720 -> laeuft weiter
+ 3144 |  22   0   0 |   1   0 |  73.50 | 34/34 (14) | 14 1 | FLUCHT 1: ort (145, 263) zustand 101 lauf (128, 264) Verfolger in 9 Leben 11720 -> BLOCKIERT - neu nach (120, 262)
+ 3163 |  22   0   0 |   1   0 |  73.50 | 34/34 (14) | 14 1 | FLUCHT 1: ort (144, 261) zustand 101 lauf (120, 262) Verfolger in 9 Leben 11720 -> laeuft weiter
+ZEITEN nach 140 Runden: lesen 5.41 s, wirtschaft 4.15 s, assassinen 0.71 s, waechter 0.15 s, bauen_werben_verkauf 0.00 s, haus_lager_zeile 0.00 s
+ 3179 |  22   0   0 |   1   0 |  73.50 | 34/34 (14) | 14 1 | FLUCHT 1: ort (143, 261) zustand 101 lauf (120, 262) Verfolger in 9 Leben 11720 -> laeuft weiter
+ 3192 |  22   0   0 |   0   0 |  73.75 | 34/34 (14) | 14 1 | FLUCHT 1: ort (143, 261) zustand 101 lauf (120, 262) Verfolger in 8 Leben 11720 -> BLOCKIERT - neu nach (121, 249)
+ 3214 |  22   0   0 |   0   0 |  73.75 | 34/34 (14) | 14 1 | FLUCHT 1: ort (141, 261) zustand 101 lauf (121, 249) Verfolger in 10 Leben 11720 -> laeuft weiter
+ 3227 |  22   0   0 |   0   0 |  73.75 | 34/34 (14) | 14 1 | FLUCHT 1: ort (140, 261) zustand 101 lauf (121, 249) Verfolger in 11 Leben 11720 -> laeuft weiter
+ 3240 |  22   0   0 |   0   0 |  73.75 | 34/34 (14) | 14 1 | FLUCHT 1: ort (140, 261) zustand 101 lauf (121, 249) Verfolger in 10 Leben 11720 -> BLOCKIERT - neu nach (128, 245)
+ 3259 |  22   0   0 |   0   0 |  73.75 | 34/34 (14) | 14 1 | FLUCHT 1: ort (139, 260) zustand 101 lauf (128, 245) Verfolger in 10 Leben 11720 -> laeuft weiter
+ 3275 |  22   0   0 |   0   0 |  73.75 | 34/34 (14) | 14 1 | FLUCHT 1: ort (139, 259) zustand 101 lauf (128, 245) Verfolger in 10 Leben 11720 -> laeuft weiter
+ 3288 |  22   0   0 |   0   0 |  73.75 | 34/34 (14) | 14 1 | FLUCHT 1: ort (139, 259) zustand 101 lauf (128, 245) Verfolger in 10 Leben 11720 -> BLOCKIERT - neu nach (128, 236)
+ 3307 |  22   0   0 |   0   0 |  73.75 | 34/34 (14) | 14 1 | FLUCHT 1: ort (139, 257) zustand 101 lauf (128, 236) Verfolger in 9 Leben 11720 -> laeuft weiter
+ 3320 |  22   0   0 |   0   0 |  73.75 | 34/34 (14) | 14 1 | FLUCHT 1: ort (139, 257) zustand 101 lauf (128, 236) Verfolger in 10 Leben 11720 -> BLOCKIERT - neu nach (137, 242)
+ZEITEN nach 150 Runden: lesen 5.81 s, wirtschaft 4.42 s, assassinen 0.84 s, waechter 0.15 s, bauen_werben_verkauf 0.00 s, haus_lager_zeile 0.00 s
+ 3342 |  22   0   0 |   0   0 |  73.75 | 34/34 (14) | 14 1 | FLUCHT 1: ort (139, 255) zustand 101 lauf (137, 242) Verfolger in 12 Leben 11720 -> laeuft weiter; PLANER Lage (Gewinn bis Ende / Amortisation): Apfelplantage 4/2000, Steinbruch+Ochsenjoch -0/1020 [Horizont], Holzfaeller -2/988 [Horizont], Jaegerhuette -61/9552 [Horizont], Eisenmine -76/3869 [Horizont] | Stein-Reserve 0; PLANER wartet auf Apfelplantage (fehlt: gold 10)
+ 3354 |  22   0   0 |   0   0 |  73.75 | 34/34 (14) | 14 1 | FLUCHT 1: ort (139, 255) zustand 101 lauf (137, 242) Verfolger in 12 Leben 11720 -> BLOCKIERT - neu nach (141, 269)
+ 3376 |  22   0   0 |   0   0 |  73.75 | 34/34 (14) | 14 1 | Abwehr gebuendelt: alle 12 (22,24,55) gegen Feind 212 Typ 73 bei (147,267); FLUCHT 1: ort (139, 253) zustand 101 lauf (141, 269) Verfolger in 14 Leben 11720 -> laeuft weiter
+ 3400 |  22   0   0 |   0   0 |  71.50 | 34/34 (14) | 14 1 | FLUCHT 1: ort (139, 254) zustand 101 lauf (141, 269) Verfolger in 13 Leben 11720 -> laeuft weiter
+ 3414 |  22   0   0 |   0   0 |  71.50 | 34/34 (14) | 14 1 | FLUCHT 1: ort (139, 255) zustand 101 lauf (141, 269) Verfolger in 12 Leben 11720 -> laeuft weiter
+ 3426 |  22   0   0 |   0   0 |  71.50 | 34/34 (14) | 14 1 | FLUCHT 1: ort (140, 256) zustand 101 lauf (141, 269) Verfolger in 11 Leben 11720 -> laeuft weiter
+ 3456 |  22   0   0 |   0   0 |  71.50 | 34/34 (14) | 14 1 | AUSWEICHEN vorbei 1: 2 Runden kein Verfolger im Umkreis 15 - greift wieder an (Leben 11720); ZIELWAHL 1 -> 69 Typ 20 in 78: Fern<=10 0, <=20 0, <=30 2, Leben 11720; 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+ZEITEN nach 160 Runden: lesen 6.22 s, wirtschaft 4.70 s, assassinen 0.90 s, waechter 0.22 s, bauen_werben_verkauf 0.00 s, haus_lager_zeile 0.00 s
+ 3501 |  22   0   0 |   0   0 |  71.50 | 34/34 (14) | 14 1 | -
+ZEITEN nach 170 Runden: lesen 6.62 s, wirtschaft 4.97 s, assassinen 0.90 s, waechter 0.22 s, bauen_werben_verkauf 0.00 s, haus_lager_zeile 0.00 s
+ 3640 |  22   0   0 |   0   0 |  69.25 | 34/34 (14) | 14 1 | -
+ZEITEN nach 180 Runden: lesen 7.03 s, wirtschaft 5.24 s, assassinen 0.90 s, waechter 0.23 s, bauen_werben_verkauf 0.00 s, haus_lager_zeile 0.00 s
+ 3778 |  22   0   0 |   0   0 |  69.25 | 34/34 (14) | 14 1 | -
+ 3806 |  22   0   0 |   0   0 |  67.00 | 34/34 (14) | 14 1 | Seasoning: 3 B-Plantagen noch offen (Holz 22, Gold 5)
+ZEITEN nach 190 Runden: lesen 7.43 s, wirtschaft 5.51 s, assassinen 0.91 s, waechter 0.24 s, bauen_werben_verkauf 0.00 s, haus_lager_zeile 0.00 s
+ 3914 |  22   0   0 |   0   0 |  67.00 | 34/34 (14) | 14 1 | -
+ 3943 |  22   0   0 |   0   0 |  67.00 | 34/34 (14) | 14 1 | Seasoning: 3 B-Plantagen noch offen (Holz 22, Gold 5)
+ZEITEN nach 200 Runden: lesen 7.83 s, wirtschaft 5.79 s, assassinen 0.91 s, waechter 0.24 s, bauen_werben_verkauf 0.00 s, haus_lager_zeile 0.00 s
+ 4052 |  22   0   0 |   0   0 |  64.75 | 34/34 (14) | 14 1 | PLANER Lage (Gewinn bis Ende / Amortisation): Apfelplantage -3/2009 [Horizont], Holzfaeller -5/988 [Horizont], Steinbruch+Ochsenjoch -21/1020 [Horizont], Jaegerhuette -66/9552 [Horizont], Eisenmine -85/3869 [Horizont] | Stein-Reserve 0
+ 4079 |  22   0   0 |   0   0 |  64.75 | 34/34 (14) | 14 1 | Seasoning: 3 B-Plantagen noch offen (Holz 22, Gold 5)
+ 4134 |  22   0   0 |   0   0 |  64.75 | 34/34 (14) | 14 1 | Altes Lager leeren: holz verkauft (Inhalt {'holz': 22}); Lager gesetzt bei None - 2 Holzfaeller wollen abliefern (Tick 4134)
+ZEITEN nach 210 Runden: lesen 8.25 s, wirtschaft 6.12 s, assassinen 0.92 s, waechter 0.25 s, bauen_werben_verkauf 0.00 s, haus_lager_zeile 0.00 s
+ 4201 |  17   0   0 |   0   0 |  62.50 | 34/34 (14) | 14 1 | -
+ 4229 |  17   0   0 |   0   0 |  62.50 | 34/34 (14) | 14 1 | Seasoning: 3 B-Plantagen noch offen (Holz 17, Gold 10)
+ZEITEN nach 220 Runden: lesen 8.64 s, wirtschaft 6.40 s, assassinen 0.92 s, waechter 0.25 s, bauen_werben_verkauf 0.00 s, haus_lager_zeile 0.00 s
+ 4339 |  17   0   0 |   0   0 |  62.50 | 34/34 (14) | 14 1 | -
+ 4364 |  17   0   0 |   0   0 |  62.50 | 34/34 (14) | 14 1 | Seasoning: 3 B-Plantagen noch offen (Holz 17, Gold 10)
+ 4408 |  17   0   0 |   0   0 |  60.25 | 34/34 (14) | 14 1 | Altes Lager abgerissen (4 Teile, Rest {'holz': 17}) bei Tick 4408; Lager gesetzt bei (92, 278) - 1 Holzfaeller wollen abliefern (Tick 4408)
+ZEITEN nach 230 Runden: lesen 9.05 s, wirtschaft 6.85 s, assassinen 0.93 s, waechter 0.25 s, bauen_werben_verkauf 0.00 s, haus_lager_zeile 0.00 s
+ 4512 |   0   0   0 |   0   0 |  60.25 | 34/34 (14) | 14 1 | -
+ 4541 |   0   0   0 |   0   0 |  60.25 | 34/34 (14) | 14 1 | Seasoning: 3 B-Plantagen noch offen (Holz 0, Gold 10)
+ZEITEN nach 240 Runden: lesen 9.45 s, wirtschaft 7.13 s, assassinen 0.93 s, waechter 0.26 s, bauen_werben_verkauf 0.00 s, haus_lager_zeile 0.00 s
+ 4648 |   0   0   0 |   0   0 |  58.00 | 34/34 (14) | 14 1 | -
+ 4677 |   0   0   0 |   0   0 |  58.00 | 34/34 (14) | 14 1 | Seasoning: 3 B-Plantagen noch offen (Holz 0, Gold 10)
+ZEITEN nach 250 Runden: lesen 9.86 s, wirtschaft 7.40 s, assassinen 0.94 s, waechter 0.26 s, bauen_werben_verkauf 0.00 s, haus_lager_zeile 0.00 s
+ 4788 |  13   0   0 |   5   0 |  58.00 | 34/34 (14) | 14 1 | PLANER Lage (Gewinn bis Ende / Amortisation): Holzfaeller -9/988 [Horizont], Apfelplantage -9/2000 [Horizont], Steinbruch+Ochsenjoch -43/1021 [Horizont], Jaegerhuette -71/9552 [Horizont], Eisenmine -97/3691 [Horizont] | Stein-Reserve 0
+ZEITEN nach 260 Runden: lesen 10.27 s, wirtschaft 7.68 s, assassinen 0.94 s, waechter 0.27 s, bauen_werben_verkauf 0.00 s, haus_lager_zeile 0.00 s
+ 4926 |  18   0   0 |   4   0 |  58.25 | 34/34 (14) | 14 1 | -
+ZEITEN nach 270 Runden: lesen 10.67 s, wirtschaft 7.95 s, assassinen 0.95 s, waechter 0.27 s, bauen_werben_verkauf 0.00 s, haus_lager_zeile 0.00 s
+ 5064 |  18   0   0 |   3   0 |  58.50 | 34/34 (14) | 14 1 | -
+ZEITEN nach 280 Runden: lesen 11.08 s, wirtschaft 8.23 s, assassinen 0.95 s, waechter 0.28 s, bauen_werben_verkauf 0.00 s, haus_lager_zeile 0.00 s
+ 5201 |  18   0   0 |   2   0 |  58.75 | 34/34 (14) | 14 1 | -
+ZEITEN nach 290 Runden: lesen 11.48 s, wirtschaft 8.50 s, assassinen 0.96 s, waechter 0.28 s, bauen_werben_verkauf 0.00 s, haus_lager_zeile 0.00 s
+ 5337 |  18   0   0 |   1   0 |  58.75 | 34/34 (14) | 14 1 | -
+ 5420 |  18   0   0 |   1   0 |  59.00 | 34/34 (14) | 14 1 | Lager erweitert (97, 276): Bestand 18, Holz unterwegs 162 + bald 18, Teile 4 -> noetig 5
+ZEITEN nach 300 Runden: lesen 11.89 s, wirtschaft 8.83 s, assassinen 0.96 s, waechter 0.28 s, bauen_werben_verkauf 0.00 s, haus_lager_zeile 0.00 s
+ 5489 |  18   0   0 |   0   0 |  59.00 | 34/34 (14) | 14 1 | PLANER Lage (Gewinn bis Ende / Amortisation): Holzfaeller -13/976 [Horizont], Apfelplantage -15/2008 [Horizont], Steinbruch+Ochsenjoch -63/1033 [Horizont], Jaegerhuette -76/9552 [Horizont], Eisenmine -109/3512 [Horizont] | Stein-Reserve 0
+ 5624 |  18   0   0 |   0   0 |  56.75 | 34/34 (14) | 14 1 | Gebaeude 69 (Typ 20) zerstoert; ZIELWAHL 1 -> 73 Typ 4 in 5: Fern<=10 0, <=20 0, <=30 6, Leben 11720; 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+ZEITEN nach 310 Runden: lesen 12.30 s, wirtschaft 9.17 s, assassinen 0.99 s, waechter 0.29 s, bauen_werben_verkauf 0.00 s, haus_lager_zeile 0.00 s
+ 5642 |  18   0   0 |   0   0 |  56.75 | 34/34 (14) | 14 1 | -
+ZEITEN nach 320 Runden: lesen 12.71 s, wirtschaft 9.45 s, assassinen 1.00 s, waechter 0.29 s, bauen_werben_verkauf 0.00 s, haus_lager_zeile 0.00 s
+ 5784 |  24  12   0 |   0   0 |  56.75 | 34/34 (14) | 14 1 | verkauft: stein
+ 5834 |  34   7   0 |   0   0 |  54.50 | 34/34 (14) | 14 1 | verkauft: stein
+ 5879 |  36   2   0 |   0   0 |  54.50 | 34/34 (14) | 14 1 | verkauft: holz
+ 5935 |  28   2   0 |   0   0 |  54.50 | 34/34 (14) | 14 1 | Seasoning: alle 3 B-Plantagen stehen (Tick 5935, 4209 Ticks nach A-Reife)
+ZEITEN nach 330 Runden: lesen 13.12 s, wirtschaft 9.84 s, assassinen 1.00 s, waechter 0.30 s, bauen_werben_verkauf 0.09 s, haus_lager_zeile 0.00 s
+ 5967 |  34   2   0 |   0   0 |  54.50 | 34/34 (14) | 14 1 | -
+ 5991 |  39   2   0 |   0   0 |  52.25 | 34/34 (14) | 14 1 | verkauft: holz
+ 6023 |  35   2   0 |   0   0 |  52.25 | 34/34 (14) | 14 1 | verkauft: holz
+ZEITEN nach 340 Runden: lesen 13.53 s, wirtschaft 9.88 s, assassinen 1.01 s, waechter 0.30 s, bauen_werben_verkauf 0.15 s, haus_lager_zeile 0.00 s
+ 6071 |  30   2   0 |   0   0 |  52.25 | 34/34 (14) | 14 1 | -
+ 6089 |  30   2   0 |   0   0 |  52.25 | 34/34 (11) | 14 1 | Gebaeude 73 (Typ 4) zerstoert; ZIELWAHL 1 -> 70 Typ 20 in 13: Fern<=10 0, <=20 0, <=30 2, Leben 11720; 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+ZEITEN nach 350 Runden: lesen 13.95 s, wirtschaft 9.89 s, assassinen 1.04 s, waechter 0.31 s, bauen_werben_verkauf 0.15 s, haus_lager_zeile 0.00 s
+ 6159 |  30   2   0 |   0   0 |  52.25 | 34/34 (11) | 14 4 | PLANER Lage (Gewinn bis Ende / Amortisation): Holzfaeller -16/1003 [Horizont], Apfelplantage -20/2838 [Horizont], Jaegerhuette -80/9552 [Horizont], Steinbruch+Ochsenjoch -108/1011 [Horizont], Eisenmine -119/3512 [Horizont] | Stein-Reserve 0
+ 6236 |  39   2   0 |   0   0 |  50.00 | 34/34 (11) | 14 4 | verkauft: holz
+ZEITEN nach 360 Runden: lesen 14.35 s, wirtschaft 9.90 s, assassinen 1.05 s, waechter 0.31 s, bauen_werben_verkauf 0.18 s, haus_lager_zeile 0.00 s
+ 6249 |  38   2   0 |   0   0 |  50.00 | 34/34 (11) | 14 4 | -
+ 6268 |  46   2   0 |   0   0 |  50.00 | 34/34 (11) | 14 4 | verkauft: holz
+ 6283 |  46   2   0 |   0   0 |  50.00 | 34/34 (11) | 14 4 | MESSUNG verletzt 1: leben 11720 -> 11620 | ort (222,343) zustand 106 | naechster Feind Typ 22 in 25 | naechster Fernkaempfer Typ 22 in 25 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 20 in 2 | Ziel 70 in 2
+ 6292 |  48   2   0 |   0   0 |  50.00 | 34/34 (11) | 14 4 | MESSUNG verletzt 1: leben 11620 -> 11530 | ort (222,343) zustand 106 | naechster Feind Typ 22 in 25 | naechster Fernkaempfer Typ 22 in 25 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 20 in 2 | Ziel 70 in 2
+ 6300 |  48   2   0 |   0   0 |  50.00 | 34/34 (11) | 14 4 | verkauft: holz; MESSUNG verletzt 1: leben 11530 -> 11450 | ort (222,343) zustand 106 | naechster Feind Typ 22 in 25 | naechster Fernkaempfer Typ 22 in 25 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 20 in 2 | Ziel 70 in 2
+ 6313 |  43   2   0 |   0   0 |  50.00 | 34/34 (11) | 14 4 | MESSUNG verletzt 1: leben 11450 -> 11330 | ort (222,343) zustand 106 | naechster Feind Typ 22 in 25 | naechster Fernkaempfer Typ 22 in 25 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 20 in 2 | Ziel 70 in 2
+ 6322 |  43   2   0 |   0   0 |  50.00 | 34/34 (11) | 14 4 | MESSUNG verletzt 1: leben 11330 -> 11240 | ort (222,343) zustand 106 | naechster Feind Typ 22 in 25 | naechster Fernkaempfer Typ 22 in 25 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 20 in 2 | Ziel 70 in 2
+ 6332 |  43   2   0 |   0   0 |  50.00 | 34/34 (11) | 14 4 | verkauft: holz; MESSUNG verletzt 1: leben 11240 -> 11140 | ort (222,343) zustand 106 | naechster Feind Typ 22 in 25 | naechster Fernkaempfer Typ 22 in 25 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 20 in 2 | Ziel 70 in 2
+ 6345 |  38   2   0 |   0   0 |  50.00 | 34/34 (11) | 14 4 | MESSUNG verletzt 1: leben 11140 -> 11010 | ort (222,343) zustand 106 | naechster Feind Typ 22 in 25 | naechster Fernkaempfer Typ 22 in 25 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 20 in 2 | Ziel 70 in 2
+ZEITEN nach 370 Runden: lesen 14.77 s, wirtschaft 9.90 s, assassinen 1.05 s, waechter 0.31 s, bauen_werben_verkauf 0.27 s, haus_lager_zeile 0.00 s
+ 6353 |  38   2   0 |   0   0 |  50.00 | 34/34 (11) | 14 4 | MESSUNG verletzt 1: leben 11010 -> 10940 | ort (222,343) zustand 106 | naechster Feind Typ 22 in 25 | naechster Fernkaempfer Typ 22 in 25 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 20 in 2 | Ziel 70 in 2
+ 6364 |  38   2   0 |   0   0 |  50.00 | 34/34 (11) | 14 4 | verkauft: holz
+ 6393 |  44   2   0 |   0   0 |  47.75 | 34/34 (11) | 14 4 | verkauft: holz
+ 6425 |  54   2   0 |   0   0 |  47.75 | 34/34 (11) | 14 4 | verkauft: holz
+ZEITEN nach 380 Runden: lesen 15.17 s, wirtschaft 9.91 s, assassinen 1.06 s, bauen_werben_verkauf 0.36 s, waechter 0.32 s, haus_lager_zeile 0.00 s
+ 6455 |  56   2   0 |   0   0 |  47.75 | 34/34 (11) | 14 4 | verkauft: holz
+ 6488 |  48   2   0 |   0   0 |  47.75 | 34/34 (11) | 14 4 | verkauft: holz
+ 6521 |  49   2   0 |   0   0 |  47.75 | 34/34 (11) | 14 4 | verkauft: holz
+ 6550 |  48   2   0 |   0   0 |  47.75 | 34/34 (11) | 14 4 | verkauft: holz
+ZEITEN nach 390 Runden: lesen 15.58 s, wirtschaft 9.92 s, assassinen 1.06 s, bauen_werben_verkauf 0.48 s, waechter 0.32 s, haus_lager_zeile 0.00 s
+ 6565 |  44   2   0 |   0   0 |  47.75 | 34/34 (11) | 14 4 | -
+ 6589 |  45   2   0 |   0   0 |  45.50 | 34/34 (10) | 14 4 | verkauft: holz
+ 6610 |  40   2   0 |   0   0 |  45.50 | 33/34 (10) | 14 4 | ZIELWAHL 246 -> 70 Typ 20 in 82: Fern<=10 0, <=20 0, <=30 2, Leben 12500; 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 1 Gebaeude gleichzeitig angelaufen)
+ 6626 |  40   2   0 |   0   0 |  45.50 | 33/34 (10) | 14 4 | verkauft: holz
+ 6655 |  35   2   0 |   0   0 |  45.50 | 33/34 (10) | 14 4 | verkauft: holz
+ZEITEN nach 400 Runden: lesen 15.99 s, wirtschaft 9.92 s, assassinen 1.10 s, bauen_werben_verkauf 0.60 s, waechter 0.33 s, haus_lager_zeile 0.00 s
+ 6679 |  30   2   0 |   0   0 |  45.50 | 33/34 (10) | 14 4 | PLANER Lage (Gewinn bis Ende / Amortisation): Holzfaeller -19/940 [Horizont], Apfelplantage -24/2848 [Horizont], Jaegerhuette -83/9552 [Horizont], Steinbruch+Ochsenjoch -122/1020 [Horizont], Eisenmine -126/3512 [Horizont] | Stein-Reserve 0
+ZEITEN nach 410 Runden: lesen 16.40 s, wirtschaft 9.93 s, assassinen 1.10 s, bauen_werben_verkauf 0.60 s, waechter 0.34 s, haus_lager_zeile 0.00 s
+ 6764 |  38   2   0 |   0   0 |  45.50 | 33/34 (10) | 14 4 | verkauft: holz
+ 6799 |  40   2   0 |   2   0 |  43.25 | 33/34 (10) | 14 4 | verkauft: holz
+ 6831 |  38   2   0 |   4   0 |  43.25 | 33/34 (10) | 14 4 | verkauft: holz
+ZEITEN nach 420 Runden: lesen 16.80 s, wirtschaft 9.94 s, assassinen 1.11 s, bauen_werben_verkauf 0.69 s, waechter 0.34 s, haus_lager_zeile 0.00 s
+ 6868 |  33   2   0 |   4   0 |  43.25 | 33/34 (10) | 14 4 | -
+ 6886 |  33   2   0 |   4   0 |  43.25 | 33/34 (10) | 14 4 | Gebaeude 70 (Typ 20) zerstoert; ZIELWAHL 1 -> 98 Typ 4 in 9: Fern<=10 0, <=20 0, <=30 2, Leben 10940; ZIELWAHL 246 -> 23 Typ 3 in 39: Fern<=10 0, <=20 0, <=30 2, Leben 12500; 2 Assassinen auf 2 Gebaeude verteilt (im Spiel gemessen: 0 Gebaeude gleichzeitig angelaufen)
+ZEITEN nach 430 Runden: lesen 17.21 s, wirtschaft 9.94 s, assassinen 1.14 s, bauen_werben_verkauf 0.69 s, waechter 0.35 s, haus_lager_zeile 0.00 s
+ 6959 |  33   2   0 |   3   0 |  43.25 | 33/34 (10) | 14 4 | -
+ZEITEN nach 440 Runden: lesen 17.60 s, wirtschaft 9.95 s, assassinen 1.15 s, bauen_werben_verkauf 0.69 s, waechter 0.36 s, haus_lager_zeile 0.00 s
+ 7044 |  33   2   0 |   3   0 |  43.50 | 33/34 (10) | 14 4 | -
+ZEITEN nach 450 Runden: lesen 18.02 s, wirtschaft 9.96 s, assassinen 1.16 s, bauen_werben_verkauf 0.69 s, waechter 0.36 s, haus_lager_zeile 0.00 s
+ 7127 |  33   2   0 |   2   0 |  43.50 | 33/34 (10) | 14 4 | PLANER Lage (Gewinn bis Ende / Amortisation): Holzfaeller -22/937 [Horizont], Apfelplantage -27/2829 [Horizont], Jaegerhuette -86/9552 [Horizont], Eisenmine -132/3512 [Horizont], Steinbruch+Ochsenjoch -135/1027 [Horizont] | Stein-Reserve 0
+ZEITEN nach 460 Runden: lesen 18.41 s, wirtschaft 9.96 s, assassinen 1.16 s, bauen_werben_verkauf 0.69 s, waechter 0.37 s, haus_lager_zeile 0.00 s
+ 7208 |  33   2   0 |   2   0 |  43.75 | 33/34 (10) | 14 4 | -
+ 7240 |  35   2   0 |   2   0 |  43.75 | 33/34 (10) | 14 4 | verkauft: holz
+ 7256 |  33   2   0 |   1   0 |  43.75 | 33/34 (10) | 14 4 | Gebaeude 98 (Typ 4) zerstoert; ZIELWAHL 1 -> 92 Typ 20 in 7: Fern<=10 0, <=20 0, <=30 2, Leben 10940; 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 1 Gebaeude gleichzeitig angelaufen)
+ 7279 |  37   2   0 |   1   0 |  43.75 | 33/34 (10) | 14 4 | verkauft: holz
+ZEITEN nach 470 Runden: lesen 18.81 s, wirtschaft 9.97 s, assassinen 1.20 s, bauen_werben_verkauf 0.74 s, waechter 0.37 s, haus_lager_zeile 0.00 s
+ 7309 |  41   2   0 |   1   0 |  43.75 | 33/34 (10) | 14 4 | verkauft: holz
+ 7342 |  51   2   0 |   1   0 |  43.75 | 33/34 (10) | 14 4 | verkauft: holz
+ 7372 |  53   2   0 |   1   0 |  43.75 | 33/34 (10) | 14 4 | verkauft: holz
+ 7409 |  52   2   0 |   0   0 |  44.00 | 33/34 (9) | 14 4 | verkauft: holz
+ZEITEN nach 480 Runden: lesen 19.22 s, wirtschaft 9.98 s, assassinen 1.20 s, bauen_werben_verkauf 0.89 s, waechter 0.38 s, haus_lager_zeile 0.00 s
+ 7425 |  42   2   0 |   0   0 |  44.00 | 33/34 (9) | 14 4 | -
+ 7436 |  42   2   0 |   0   0 |  44.00 | 32/34 (9) | 14 4 | ZIELWAHL 250 -> 92 Typ 20 in 75: Fern<=10 0, <=20 0, <=30 2, Leben 12500; 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 2 Gebaeude gleichzeitig angelaufen)
+ 7449 |  42   2   0 |   0   0 |  44.00 | 32/34 (9) | 14 4 | verkauft: holz
+ 7480 |  37   2   0 |   3   0 |  44.00 | 32/34 (9) | 14 4 | verkauft: holz
+ZEITEN nach 490 Runden: lesen 19.63 s, wirtschaft 9.98 s, assassinen 1.24 s, bauen_werben_verkauf 0.95 s, waechter 0.39 s, haus_lager_zeile 0.00 s
+ 7528 |  32   2   0 |   4   0 |  44.00 | 32/34 (9) | 14 4 | -
+ZEITEN nach 500 Runden: lesen 20.02 s, wirtschaft 9.99 s, assassinen 1.24 s, bauen_werben_verkauf 0.95 s, waechter 0.39 s, haus_lager_zeile 0.00 s
+ 7605 |  32   2   0 |   4   0 |  44.25 | 32/34 (9) | 14 4 | PLANER Lage (Gewinn bis Ende / Amortisation): Holzfaeller -25/904 [Horizont], Apfelplantage -30/2846 [Horizont], Jaegerhuette -90/9552 [Horizont], Eisenmine -139/3512 [Horizont], Steinbruch+Ochsenjoch -148/1035 [Horizont] | Stein-Reserve 0
+ 7632 |  32   2   0 |   3   0 |  44.25 | 32/34 (9) | 14 4 | Gebaeude 23 (Typ 3) zerstoert; ZIELWAHL 246 -> 35 Typ 3 in 6: Fern<=10 0, <=20 0, <=30 3, Leben 12500; 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 1 Gebaeude gleichzeitig angelaufen)
+ZEITEN nach 510 Runden: lesen 20.41 s, wirtschaft 10.00 s, assassinen 1.28 s, bauen_werben_verkauf 0.95 s, waechter 0.40 s, haus_lager_zeile 0.00 s
+ 7693 |  32   2   0 |   3   0 |  44.25 | 32/34 (9) | 14 4 | -
+ 7720 |  32   2   0 |   3   0 |  44.25 | 32/34 (9) | 14 4 | MESSUNG verletzt 246: leben 12500 -> 12450 | ort (198,267) zustand 101 | naechster Feind Typ 73 in 22 | naechster Fernkaempfer Typ 22 in 25 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 3 in 2 | Ziel 35 in 2
+ 7728 |  32   2   0 |   3   0 |  44.25 | 32/34 (9) | 14 4 | MESSUNG verletzt 246: leben 12450 -> 12370 | ort (199,267) zustand 101 | naechster Feind Typ 73 in 21 | naechster Fernkaempfer Typ 22 in 24 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 3 in 2 | Ziel 35 in 2
+ 7738 |  32   2   0 |   3   0 |  44.25 | 32/34 (9) | 14 4 | MESSUNG verletzt 246: leben 12370 -> 12270 | ort (199,267) zustand 106 | naechster Feind Typ 73 in 21 | naechster Fernkaempfer Typ 22 in 24 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 3 in 2 | Ziel 35 in 2
+ 7745 |  32   2   0 |   3   0 |  44.25 | 32/34 (9) | 14 4 | MESSUNG verletzt 246: leben 12270 -> 12200 | ort (199,267) zustand 106 | naechster Feind Typ 73 in 21 | naechster Fernkaempfer Typ 22 in 24 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 3 in 2 | Ziel 35 in 2
+ 7752 |  32   2   0 |   3   0 |  44.25 | 32/34 (9) | 14 4 | MESSUNG verletzt 246: leben 12200 -> 12130 | ort (199,267) zustand 106 | naechster Feind Typ 73 in 20 | naechster Fernkaempfer Typ 22 in 24 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 3 in 2 | Ziel 35 in 2; Gebaeude 92 (Typ 20) zerstoert; ZIELWAHL 1 -> 73 Typ 4 in 6: Fern<=10 0, <=20 0, <=30 6, Leben 10940; ZIELWAHL 250 -> 67 Typ 3 in 37: Fern<=10 0, <=20 0, <=30 2, Leben 12500; 2 Assassinen auf 2 Gebaeude verteilt (im Spiel gemessen: 1 Gebaeude gleichzeitig angelaufen)
+ 7768 |  32   2   0 |   6   0 |  44.25 | 32/34 (9) | 14 4 | MESSUNG verletzt 246: leben 12130 -> 12100 | ort (199,267) zustand 106 | naechster Feind Typ 73 in 19 | naechster Fernkaempfer Typ 22 in 24 | Fern<=16: 0 | Nah<=8: 0 | naechstes Feindgebaeude Typ 3 in 2 | Ziel 35 in 2
+ZEITEN nach 520 Runden: lesen 20.81 s, wirtschaft 10.01 s, assassinen 1.31 s, bauen_werben_verkauf 0.95 s, waechter 0.40 s, haus_lager_zeile 0.00 s
+ 7786 |  32   2   0 |   7   0 |  44.25 | 32/34 (9) | 14 4 | -
+ZEITEN nach 530 Runden: lesen 21.22 s, wirtschaft 10.01 s, assassinen 1.32 s, bauen_werben_verkauf 0.95 s, waechter 0.41 s, haus_lager_zeile 0.00 s
+ 7869 |  32   2   0 |   7   0 |  44.50 | 32/34 (9) | 14 4 | -
+ 7888 |  34   2   0 |   9   0 |  44.50 | 32/34 (9) | 14 4 | Gebaeude 35 (Typ 3) zerstoert; ZIELWAHL 246 -> 74 Typ 3 in 7: Fern<=10 0, <=20 0, <=30 3, Leben 12100; 1 Assassinen auf 1 Gebaeude verteilt (im Spiel gemessen: 2 Gebaeude gleichzeitig angelaufen)
+ 7904 |  38   2   0 |  11   0 |  44.50 | 32/34 (9) | 14 4 | verkauft: holz,apfel x1
+ 7941 |  40   2   0 |   5   0 |  44.50 | 32/34 (9) | 14 4 | verkauft: holz
+ 7957 |  38   2   0 |   5   0 |  44.50 | 32/34 (9) | 14 4 | AUSWEICHEN 246: 3 feindliche Nahkaempfer gegen 1 eigene im Umkreis 10, Leben 12100 -> nach (190, 241)
+ 7969 |  40   2   0 |   5   0 |  44.50 | 32/34 (9) | 14 4 | FLUCHT 246: ort (202, 263) zustand 101 lauf (190, 241) Verfolger in 6 Leben 12100 -> BLOCKIERT - neu nach (197, 249)
+ 7986 |  40   2   0 |   5   0 |  44.50 | 32/34 (9) | 14 4 | verkauft: holz; FLUCHT 246: ort (203, 262) zustand 101 lauf (197, 249) Verfolger in 7 Leben 12100 -> laeuft weiter
+ZEITEN nach 540 Runden: lesen 21.63 s, wirtschaft 10.02 s, assassinen 1.41 s, bauen_werben_verkauf 1.07 s, waechter 0.42 s, haus_lager_zeile 0.00 s
+Ende Phase 2 bei Tick 8008 nach 540 Runden (0.1 s je Runde); Kornspeicher 1, Holzfaeller 14, Apfelplantagen 4; Waechter: Bedrohungen 3, davon tot 0, eigene Truppen verloren 1; Angriff: zerstoert 8 Gebaeude {3: 3, 20: 3, 4: 2}, eigene Verluste 0, im Spiel gleichzeitig angelaufen zuletzt 2, neu befohlen 0, Rueckzuege 0, ausgewichen 0, Fernkaempfer angegriffen 0, Warten neu geschickt 0, Stapel-Ziele 0, gesperrte Warteplaetze 0, Lord-Trupps 0, Uebermacht ausgewichen 2, Alle-auf-den-Lord []
+Wirtschaft: Seasoning: A 3 / B 3 Plantagen, A reif bei 1726, B gesetzt bei 5935; Apfelbauern untaetig vor B 44 % (327 Messungen), B bis B+1000 5 % (100 Messungen), danach 0 % (113 Messungen); FESTES FENSTER Tick 5000-12000 (zum Vergleich zwischen Partien): 9 % (274 Messungen); Lager gesetzt bei 4408, gemessene Ladung je Gang {3: 18}
+Ertrags-Planer: gesetzt {'Ochsenjoch (Regel)': 1}, stehen am Ende {'Eisenmine': 0, 'Steinbruch+Ochsenjoch': 1, 'Apfelplantage': 4, 'Jaegerhuette': 0, 'Holzfaeller': 14, 'Ochsenjoch': 2, 'Steinhaufen zuletzt': {59: 0}, 'Bauplaetze ohne Weg verworfen': 12}, abgelehnt {'Jaegerhuette: Horizont': 54, 'Eisenmine: Horizont': 54, 'Holzfaeller: Horizont': 40, 'Steinbruch+Ochsenjoch: Horizont': 39, 'Apfelplantage: Horizont': 36}, Verstoesse gegen den Horizont keine, Steuerstufe 2
+Ertragsmesser: Eisenmine 0.61->0.61 (Zugang 0, Lieferung None, Gegenprobe None, Anlauf 6664 Startwert); Steinbruch+Ochsenjoch 6.72->6.59 (Zugang 12, Lieferung None, Gegenprobe None, Anlauf 4454 gemessen an der Art); Apfelplantage 3.25->3.21 (Zugang 25, Lieferung 5, Gegenprobe 0.36, Anlauf 2224 Startwert); Jaegerhuette 3.07->3.07 (Zugang 0, Lieferung None, Gegenprobe None, Anlauf 4427 Startwert); Holzfaeller 13.24->14.01 (Zugang 627, Lieferung 18, Gegenprobe 0.05, Anlauf 4000 Startwert) | negative Zugaenge: holz 2 von 539 Runden, Summe 22; stein 0 von 539 Runden, Summe 0; eisen 0 von 539 Runden, Summe 0 | abgegebene Ladung je Einheit@Art: {'13@32': 9, '3@3': 32}
