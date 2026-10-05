@@ -72,6 +72,26 @@ haette man viel frueher abreissen und dann gezielt auf den Lord gehen koennen.
   am Lord hoechstens 2 von 20).
 - **S2d Raiden: naechstes Ziel, Wirtschaft zuerst** (nicht anderen folgen).
 
+**WISSEN VOR DEM NAECHSTEN TEST (Daniel 21:49: "du machst das jetzt noch vor den Tests und stoppst alle Tests"):**
+- Handbuch `Stronghold Crusader Extreme/manual/manual_de.pdf` S. 21: "Meuchelmoerder: Mit Hilfe ihres Kletterhakens
+  koennen sie Waelle erklimmen und sind daher sehr nuetzlich beim Einnehmen von Torhaeusern"; unsichtbar, bis eine
+  feindliche Einheit sie entdeckt. S. 27: hat eine Einheit das Torhaus erklommen, weht unsere Flagge - Zugang zur Burg.
+- SHC-Wiki (stronghold.fandom.com/wiki/Assassin, per Suche): Klettern in Sekunden auf Befehl; oben auf einem Torhaus
+  wird es eingenommen und das Tor geoeffnet; beim Klettern bleibt die Tarnung, solange keine Einheiten nah sind; Grenze:
+  Mauern verschiedener Hoehe ohne Treppe dazwischen koennen sie nicht erklimmen. Werte wie der Streitkolbenkaempfer.
+- Folgerung fuer S2a: vor der Mauer stehen ist der falsche Befehl - erst auf den Wall/das Torhaus (Haken), Torhaus
+  einnehmen, dann ist der Weg zum Lord offen. Gemessen haben wir: Lord 150.000 Leben, Assassine voll 12.500, 1-2
+  Assassinen am Lord = 1.500-3.000 Schaden je Lenker-Runde (MESSUNG Feindlord).
+
+**EFFEKTIVER TESTEN (vor jedem weiteren Test):**
+1. Keine ganzen Partien mehr fuer eine Kampf-Frage: einmal bis kurz vor den Angriff spielen, SPEICHERN, dann nur den
+   Angriff (~2.000 Ticks) immer wieder vom selben Stand - Minuten statt einer Viertelstunde je Wiederholung, gleiche
+   Ausgangslage, echter Vergleich.
+2. Einzelne Mechanik einzeln pruefen, bevor sie in den Lenker kommt: EIN Assassine bekommt den Befehl auf ein Mauerfeld
+   - klettert er? auf das Torhaus - wird es unseres? (Sekunden).
+3. Werte aus dem Speicher lesen statt schaetzen (Leben/Schaden je Einheitentyp; VillageStudio-Wissensstand pruefen).
+4. Erst wenn eine Mechanik belegt ist, kommt sie in den Lenker, dann Szenario-Serie, erst danach ganze Partien.
+
 **S2 - Die eine Ursache aus S1 beheben, die die meisten Wellen stoppt.** Was genau, entscheidet die Messung aus S1 -
 nicht vorher raten. Abnahme: Lord-Schaden je Welle im Mittel ueber 3 Laeufe deutlich ueber der Basis (Zahl lege ich
 nach S1 fest, bevor gebaut wird).
