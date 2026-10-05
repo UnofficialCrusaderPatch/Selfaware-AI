@@ -132,12 +132,19 @@ class Wirtschaft:
         # 2. Altes Lager abreissen, wenn B steht (oder keins geplant) und es leer ist
         alt_da = [n for n in self.alt if n in eigen]
         if alt_da and not self.B_offen:
-            inhalt = sum(st.get(k, 0) for k in LAGERWAREN)
-            if inhalt == 0:
+            inhalt = {k: st.get(k, 0) for k in LAGERWAREN if st.get(k, 0) > 0}
+            if sum(inhalt.values()) <= 20:
+                # 9o: 26 Holz blieben liegen, "nur wenn leer" kam nie - die Holzfaeller trugen alles 50-80 Felder zum alten
+                # Lager am Bergfried. Rest bis 20 wird in Kauf genommen (hoechstens 20 Gold).
                 for n in alt_da:
                     befehl({"abreissen": {"nr": n}}, 0.8, bis="ABREISSEN")
-                ev.append("Altes Lager abgerissen (%d Teile, leer) bei Tick %d" % (len(alt_da), t))
+                ev.append("Altes Lager abgerissen (%d Teile, Rest %s) bei Tick %d" % (len(alt_da), inhalt or "leer", t))
                 self.alt.clear()
+            else:
+                ware = max(inhalt, key=inhalt.get)
+                befehl({"spielbefehl": {"nr": 38, "werte": [1, {"holz": 2, "stein": 4, "eisen": 6, "pech": 7, "weizen": 9,
+                                                               "hopfen": 3, "mehl": 16}[ware]]}}, 1.0, bis="SPIELBEFEHL")
+                ev.append("Altes Lager leeren: %s verkauft (Inhalt %s)" % (ware, inhalt))
         # 3. Neues Lager erst, wenn ein Holzfaeller abliefern will (Zustand 7)
         teile = [n for n, g in eigen.items() if g["typ"] == LAGER]
         wollen = [n for n, e in einheiten.items() if e["typ"] == HOLZFAELLER and e["zustand"] == 7]

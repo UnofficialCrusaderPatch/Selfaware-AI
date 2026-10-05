@@ -31,6 +31,8 @@ bis eine Messung es bestaetigt (Marke dahinter).
   - Erkennbar: Rehe sind Einheitentyp 44 (UT_ANTELOPESHDEER), Besitzer 0. (gemessen 04.10.: 134 bzw. 200 auf Grumpy)
 
 ## Bauen
+- **Nie blind starten** (Daniel 05.10. 18:55: "du musst auch schauen, wo dein Keep steht"): Vor jeder Eroeffnung den eigenen Bergfried im Spiel finden (Gebaeudetyp 41, Eingang im Datensatz +0x112/+0x114) und alles um ihn herum planen; keine festen Koordinaten. Werkzeug: `karten_holen.py <Spielstand> <Kurz>` holt Bergfried, Baeume, Rohstoff- und Platzkarten, dann `eroeffnung.py start=<Kurz>`. Gemessen: im Liga-Start steht unser Bergfried bei (141,269), Rotkaeppchens bei (227,289) - im alten Start war es (165,111).
+- Sicherheit beim Planen (Daniel 04.10.: "je nach Metrik, z. B. wie nah der Gegner ist"): nur Stellen und Baeume, die naeher an unserem Bergfried liegen als an einem feindlichen.
 - Moeglichst nah am Vorratslager bauen. (Daniel 04.10.)
 - Ausnahmen, deren Arbeiter erst zur Produktion laufen: Holzfaeller mit dem Eingang direkt neben einem Baum (sie holen erst drei Holzscheite); Ochsenjoche direkt neben den Steinbruch (der Ochse bringt dann 12 Stein zum Lager). (Daniel 04.10.)
 - **Gebaeude lassen sich nicht drehen** (keine Ausnahme). Den Ausgang/Eingang kann man nur indirekt lenken: den ueblichen Platz zustellen oder dort bauen, wo etwas anderes ihn blockiert - z. B. beim Steinbruch, wohin der Ochse den Stein bringt; jede Produktion (Baecker usw.) laesst sich ueber Nachbargebaeude/Gelaende am Eingang beeinflussen - aber nur fein abgestimmt. (Daniel 04.10., 20:04)

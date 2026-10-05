@@ -45,17 +45,27 @@ def schreib(text):
 
 def phase1(plan):
     schreib("== Phase 1: Eroeffnung nach Plan (%s)" % os.path.basename(plan["_datei"]))
-    print("Tick", lade_stand("M7-04 Mensch Grumpy T600", mit_bild=False))
+    print("Tick", lade_stand(BASIS, mit_bild=False))
     befehl({"eigenerPlatz": SP}, 0.8)
     vorab()
+    from bauen import baue_viele
+    # Liga-Start (0 Gold): Kornspeicher + Markt zuerst; die Start-Nahrung (je 15) erscheint erst mit dem Kornspeicher.
+    # Dann alles bis auf den Puffer verkaufen, teuerste Sorte zuerst - das ist das Startgold fuer die Apfelplantagen.
+    baue_viele([(19, plan["kornspeicher"][0], plan["kornspeicher"][1])], SP)
+    markt = baue_schnell(26, BERGFRIED[0], BERGFRIED[1], 25)
+    laufe(120)
+    vk = vorrat(SP)
+    lose = nahrung_auf_kante({k: vk.get(k, 0) for k in NAHRUNG_PREIS}, nahrung_puffer(10))
+    laufe(5)
     v0 = vorrat(SP)
+    schreib("Liga-Start: Kornspeicher + Markt %s; Start-Nahrung %s verkauft (Lose zu 5) -> Gold %d, Nahrung uebrig %s" % (
+        markt, lose, v0["gold"], {k: v0.get(k, 0) for k in NAHRUNG_PREIS if v0.get(k, 0)}))
     # Seasoning (Daniel 04.10./05.10.): nur Gruppe A jetzt, B wenn A reif wird (wirtschaft.py); B-Holz bleibt im alten Lager
     A, B = apfel_gruppen(plan["aepfel"])
-    auftrag = [(3, p) for p in plan["holzfaeller"]] + [(19, plan["kornspeicher"])] + [(32, p) for p in A]
+    auftrag = [(3, p) for p in plan["holzfaeller"]] + [(32, p) for p in A]
     if plan.get("stein"):
         auftrag += [(20, plan["stein"]["steinbruch"]), (4, plan["stein"]["ochsen"])]
     auftrag += [(1, p) for p in plan["huetten"]]
-    from bauen import baue_viele
     g1, f1 = baue_viele([(typ, x, y) for typ, (x, y) in auftrag], SP)
     gebaut, fehl = len(g1), []
     for typ, x, y in f1:                      # Rest einzeln (z. B. stand gerade eine Einheit auf der Flaeche)
@@ -69,7 +79,7 @@ def phase1(plan):
     # abliefern will - beides in Phase 2 (wirtschaft.py)
     schreib("Apfelplantagen A %d jetzt, B %d spaeter %s; altes Lager bleibt mit %s" % (
         len(A), len(B), B, {k: v1[k] for k in LAGERWAREN if v1.get(k)}))
-    name = "M17 Eroeffnung Saison T%d" % tick()
+    name = "M19 Liga Eroeffnung T%d" % tick()
     speichere(name)
     befehl({"eigenerPlatz": SP}, 0.8)
     return name
@@ -104,7 +114,7 @@ def baue_schnell(typ, x, y, r, mapper=None):
     return frei[0]
 
 def baue_haus():
-    return baue_schnell(1, 158, 109, 20)
+    return baue_schnell(1, BERGFRIED[0] - 7, BERGFRIED[1] - 2, 20)    # nahe am Bergfried (frueher fest 158,109 = 165-7, 111-2)
 
 def lager_knapp(l, teile):
     menge = sum(l["v"].get(k, 0) for k in LAGERWAREN)
@@ -160,6 +170,30 @@ def eigene_gebaeude():
     return orte
 
 ESSEN_RESERVE, HOLZ_RESERVE, STEIN_RESERVE, GOLD_RESERVE = 60, 15, 0, 30   # Daniel 23:06: alles ueber dem Minimum verkaufen
+BASIS = "M19 Liga Start Grumpy T600"     # Liga-Bedingung: 0 Gold, 150 Holz (Daniel 05.10. 00:55; gemessen 18:38)
+BERGFRIED = (141, 269)                    # wird in main() aus dem Plan gesetzt (Bergfried-Eingang dieses Starts)
+# Verkaufspreise Liga, gemessen 05.10. 18:50 (daten/verkaufspreise_liga.txt), ein Verkauf = 5 Stueck
+NAHRUNG_PREIS = {"kaese": 6, "brot": 4, "apfel": 3, "fleisch": 1}
+
+def nahrung_puffer(leute):
+    """Nahrung auf Kante (Daniel 05.10. 18:51): nur so viel behalten, dass bis zur naechsten Lieferung genau noch etwas
+    da ist - alles andere ist Startgold. Gemessen 05.10.: 10 Leute assen bei normalen Rationen 1 Stueck in 1.000 Ticks.
+    STARTWERT: 3 + 1 je 10 Leute (deckt mit Abstand die ~1.000 Ticks bis zu den ersten eigenen Aepfeln)."""
+    return 3 + leute // 10
+
+def nahrung_auf_kante(bestand, puffer, hoechstens=12):
+    """Verkauft Nahrung in Losen zu 5, die teuerste Sorte zuerst, ohne unter <puffer> zu fallen; die billigste bleibt.
+    bestand: dict Sorte -> Menge. Gibt dict Sorte -> verkaufte Lose."""
+    rest = dict(bestand)
+    lose = {}
+    for ware in sorted(NAHRUNG_PREIS, key=lambda w: -NAHRUNG_PREIS[w]):
+        while rest.get(ware, 0) >= 5 and sum(rest.values()) - 5 >= puffer and sum(lose.values()) < hoechstens:
+            rest[ware] -= 5
+            lose[ware] = lose.get(ware, 0) + 1
+    if lose:
+        sende({"befehle": [{"player": 1, "id": neue_id(), "spielbefehl": {"nr": 38, "werte": [1, WAREN_NR[w]]}}
+                           for w, k in lose.items() for _ in range(k)]}, 1.5, bis="SPIELBEFEHL")
+    return lose
 WAREN_NR = {"holz": 2, "stein": 4, "eisen": 6, "pech": 7, "apfel": 13, "brot": 10, "kaese": 11, "fleisch": 12, "weizen": 9, "hopfen": 3, "mehl": 16}
 
 def verkaufen(st):
@@ -170,9 +204,8 @@ def verkaufen(st):
                           ("weizen", 0), ("hopfen", 0), ("mehl", 0)):
         if st.get(ware, 0) > reserve + 4:
             befehl({"spielbefehl": {"nr": 38, "werte": [1, WAREN_NR[ware]]}}, 1.0, bis="SPIELBEFEHL"); teile.append(ware)
-    if essen > ESSEN_RESERVE + 4:
-        ware = max(("apfel", "brot", "kaese", "fleisch"), key=lambda k: st.get(k, 0))
-        befehl({"spielbefehl": {"nr": 38, "werte": [1, WAREN_NR[ware]]}}, 1.0, bis="SPIELBEFEHL"); teile.append(ware)
+    lose = nahrung_auf_kante({k: st.get(k, 0) for k in NAHRUNG_PREIS}, nahrung_puffer(st.get("leute", 10)))
+    teile += ["%s x%d" % (w, k) for w, k in lose.items()]
     return ("verkauft: " + ",".join(teile)) if teile else None
 
 def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0):
@@ -237,7 +270,7 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
             posten = [n for n, g in G.items() if g["besitzer"] == SP and g["typ"] == 8]
             if not posten and (soeldner is None or runde % 10 == 0):
                 # nicht am Lagerplatz (9i: Markt/Soeldnerlager belegten ihn - 14 Holzfaeller warteten Tick 4500-9035)
-                soeldner = baue_schnell(8, 165, 111, 25)
+                soeldner = baue_schnell(8, BERGFRIED[0], BERGFRIED[1], 25)
                 ereignis.append("Soeldnerlager gesetzt %s (Gold %d)" % (soeldner, st["gold"]))
             elif posten and st["gold"] >= 70 + GOLD_RESERVE and st["feuer"] >= 1 and (assassinen < 0 or geworben < assassinen):
                 befehl({"werbe": {"typ": 73, "gebaeude": posten[0]}}, 1.0, bis="WERBE")
@@ -245,7 +278,7 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                 if geworben % 5 == 0:
                     ereignis.append("%d Assassinen angeworben (Gold jetzt %d)" % (geworben, st["gold"]))
             if not [n for n, g in G.items() if g["besitzer"] == SP and g["typ"] == 26] and runde % 20 == 2:
-                ereignis.append("Markt gesetzt %s" % (baue_schnell(26, 165, 111, 25),))
+                ereignis.append("Markt gesetzt %s" % (baue_schnell(26, BERGFRIED[0], BERGFRIED[1], 25),))
             elif runde % 3 == 0:
                 v = verkaufen(st)
                 if v:
@@ -253,7 +286,7 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
             tz = uhr("bauen_werben_verkauf", tz)
             trupp.aufnehmen([n for n, e in L.items() if e["besitzer"] == SP and e["typ"] == 73])
             # nur begehbare Plaetze (9g: Gebaeudemitten waren nicht begehbar - die Wartenden blieben im Schussfeld)
-            erg = trupp.schritt(L, G, sichere_orte=[tuple(plan["lager_mitte"]), (165, 111)])
+            erg = trupp.schritt(L, G, sichere_orte=[tuple(plan["lager_mitte"]), BERGFRIED])
             if isinstance(erg, tuple):          # Einzeln: Befehle der Runde gesammelt in EINEM Aufruf
                 erg, liste = erg
                 if liste:
@@ -303,8 +336,14 @@ def fingerabdruck(plan):
 
 def main():
     arg = dict(a.split("=") for a in sys.argv[1:])
-    datei = os.path.join(D, "eroeffnung_plan.json")
+    # Plan je Startstand (Daniel 05.10. 18:55: erst schauen, wo der Bergfried steht) - karten_holen.py + eroeffnung.py start=...
+    datei = os.path.join(D, arg.get("plan", "eroeffnung_plan_M19.json"))
     plan = json.load(open(datei, encoding="utf-8")); plan["_datei"] = datei
+    global BASIS, BERGFRIED
+    BASIS = plan.get("spielstand", BASIS)
+    BERGFRIED = tuple(plan.get("bergfried_eingang", BERGFRIED))
+    import waechter
+    waechter.BERGFRIED_EINGANG = BERGFRIED
     if arg.get("start"):
         print("Tick", lade_stand(arg["start"], mit_bild=False))
         befehl({"eigenerPlatz": SP}, 0.8)

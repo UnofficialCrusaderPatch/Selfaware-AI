@@ -151,10 +151,30 @@ def holz_lebensdauer(huetten, lager_mitte, horizont=20000):
              "baeume_leer_nach_ticks": int(k["geliefert"] / k["rate"]) if k["geliefert"] < k["rate"] * horizont else None}
             for k in huetten]
 
-def plane(K=8, A=6, holz=150, bevoelkerung_platz=10, steinbruch=True, huetten_min=0):
-    karten = {n: lies_karte(os.path.join(D, "start_platz_%s.txt" % n)) for n in ("holzfaeller", "huette", "apfel", "speicher")}
-    karten["lager"] = lies_karte(os.path.join(D, "platzkarte_lager_keins.txt"))
-    B = baeume()
+def plane(K=8, A=6, holz=150, bevoelkerung_platz=10, steinbruch=True, huetten_min=0, start=None):
+    """start = Kurzname eines mit karten_holen.py geholten Startstands (z. B. "M19"): dann kommen Platzkarten, Baeume
+    und der Bergfried-Eingang aus diesem Start (Daniel 05.10.: erst schauen, wo der Bergfried steht)."""
+    global BERGFRIED_EINGANG
+    info = None
+    if start:
+        info = json.load(open(os.path.join(D, "start_%s.json" % start), encoding="utf-8"))
+        BERGFRIED_EINGANG = tuple(info["bergfried_eingang"])
+        vorsilbe, lagerdatei, baumdatei = "start_%s_platz_" % start, "start_%s_platz_lager_keins.txt" % start, "baeume_%s.txt" % start
+    else:
+        vorsilbe, lagerdatei, baumdatei = "start_platz_", "platzkarte_lager_keins.txt", "baeume_M7-04_T600.txt"
+    karten = {n: lies_karte(os.path.join(D, vorsilbe + "%s.txt" % n)) for n in ("holzfaeller", "huette", "apfel", "speicher")}
+    karten["lager"] = lies_karte(os.path.join(D, lagerdatei))
+    B = baeume(baumdatei)
+    eigene_seite = lambda p: True
+    if info and info.get("feind_bergfried"):
+        # Sicherheit (Daniel 04.10.: "je nach Metrik, z. B. wie nah der Gegner ist"; 05.10. 18:55: erst schauen, wo der
+        # Bergfried steht): nur Stellen und Baeume, die naeher an unserem Bergfried liegen als an jedem feindlichen
+        feinde = [tuple(v["eingang"]) for v in info["feind_bergfried"].values()]
+        def eigene_seite(p):
+            d_eigen = max(abs(p[0] - BERGFRIED_EINGANG[0]), abs(p[1] - BERGFRIED_EINGANG[1]))
+            return all(d_eigen < max(abs(p[0] - f[0]), abs(p[1] - f[1])) for f in feinde)
+        karten = {n: {q for q in k if eigene_seite(q)} for n, k in karten.items()}
+        B = [b for b in B if eigene_seite((b[1], b[2]) if isinstance(b, (tuple, list)) else (b["x"], b["y"]))]
     h = plane_holz(karten["holzfaeller"], karten["lager"], B, K)
     if h is None:
         return {"fehler": "keine Holzfaeller-Stelle"}
@@ -172,8 +192,8 @@ def plane(K=8, A=6, holz=150, bevoelkerung_platz=10, steinbruch=True, huetten_mi
     # Steinbruch so nah wie moeglich am neuen Lager, Ochsenjoch direkt daneben (Daniels Regel)
     stein = None
     if steinbruch:
-        kb = lies_karte(os.path.join(D, "start_platz_steinbruch.txt"))
-        ko = lies_karte(os.path.join(D, "start_platz_ochsen.txt"))
+        kb = {q for q in lies_karte(os.path.join(D, vorsilbe + "steinbruch.txt")) if eigene_seite(q)}
+        ko = {q for q in lies_karte(os.path.join(D, vorsilbe + "ochsen.txt")) if eigene_seite(q)}
         for (x, y) in sorted(kb, key=lambda p: math.hypot(p[0] + 3 - lm[0], p[1] + 3 - lm[1])):
             fb = felder(x, y, 6)
             if fb & belegt:
@@ -193,15 +213,19 @@ def plane(K=8, A=6, holz=150, bevoelkerung_platz=10, steinbruch=True, huetten_mi
             "holz_in_20000_ticks": int(gesamt), "holzfaeller": [(k["x"], k["y"]) for k in huetten], "holz_lebensdauer": holz_lebensdauer(huetten, lm),
             "kornspeicher": speicher, "aepfel": [(f["x"], f["y"]) for f in farmen["farmen"]], "aepfel_status": farmen["status"],
             "aepfel_weg_summe": farmen["weg_summe"], "huetten": haeuser, "stein": stein, "arbeiter": arbeiter,
-            "holz_kosten": kosten, "holz_rest": holz - kosten, "gold_kosten": 15 * A}
+            "holz_kosten": kosten, "holz_rest": holz - kosten, "gold_kosten": 15 * A,
+            "start": start, "spielstand": info["spielstand"] if info else "M7-04 Mensch Grumpy T600",
+            "bergfried_eingang": BERGFRIED_EINGANG}
 
 if __name__ == "__main__":
     arg = dict(a.split("=") for a in sys.argv[1:])
     import time
     t0 = time.time()
     p = plane(int(arg.get("holzfaeller", 8)), int(arg.get("aepfel", 6)), steinbruch=arg.get("steinbruch", "ja") == "ja",
-              huetten_min=int(arg.get("huetten", 0)))
+              huetten_min=int(arg.get("huetten", 0)), start=arg.get("start"))
     p["sekunden"] = round(time.time() - t0, 1)
     print(json.dumps(p, ensure_ascii=False, indent=1))
     if "fehler" not in p:
-        json.dump(p, open(os.path.join(D, "eroeffnung_plan.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+        name = "eroeffnung_plan_%s.json" % arg["start"] if arg.get("start") else "eroeffnung_plan.json"
+        json.dump(p, open(os.path.join(D, name), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+        print("-> daten/" + name)

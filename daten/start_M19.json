@@ -1,0 +1,36 @@
+{
+ "spielstand": "M19 Liga Start Grumpy T600",
+ "kurz": "M19",
+ "bergfried_anker": [
+  138,
+  262
+ ],
+ "bergfried_eingang": [
+  141,
+  269
+ ],
+ "feind_bergfried": {
+  "2": {
+   "anker": [
+    224,
+    282
+   ],
+   "eingang": [
+    227,
+    289
+   ]
+  }
+ },
+ "lord": [
+  [
+   144,
+   267
+  ]
+ ],
+ "fenster": [
+  61,
+  189,
+  221,
+  349
+ ]
+}

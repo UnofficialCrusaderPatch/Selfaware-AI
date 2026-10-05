@@ -1,0 +1,85 @@
+== Phase 1: Eroeffnung nach Plan (eroeffnung_plan.json)
+Eintrag 0 'M19 Liga Start Grumpy T600' -> Scrollstand 0, Zeile 0; Spielzeit vorher 1702
+['[villagestudio]: LADEPAUSE: scharf (jetzt Tick 1702, pausiert).']
+['[villagestudio]: POKE 0x01126628: 0 -> 0', '[villagestudio]: POKE 0x01126624: 0 -> 0', '[villagestudio]: LADEN: Knopf 2 gedrueckt, ok=true', '[villagestudio]: logik: 3 von 3 Befehlen ausgefuehrt, 0 schon erledigt.', '[villagestudio]: LADEPAUSE: Laden erkannt (Spielzeit sprang um -1102) bei Tick 600 - angehalten.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.']
+Spielzeit nachher 600 / 600, Pause 1
+Tick 600
+Vorab-Kontrolle gut: {'Ansicht': 14, 'gameOver': 0, 'Mensch': 1, 'Platz': 1}
+Liga-Start: Kornspeicher + Markt (165, 111); Start-Nahrung {'kaese': 3, 'brot': 3, 'apfel': 3, 'fleisch': 2} verkauft (Lose zu 5) -> Gold 205, Nahrung uebrig {'fleisch': 5}
+in einem Aufruf gebaut: 25 von 25, einzeln nachgeholt: 0
+GEBAUT 25 von 25; Fehlschlaege: keine; Holz 145 -> 12, Gold 205 -> 115
+Apfelplantagen A 6 jetzt, B 4 spaeter [(105, 120), (107, 100), (94, 170), (152, 62)]; altes Lager bleibt mit {'holz': 12}
+['[villagestudio]: OPTIONEN: Knopf 3 gedrueckt, ok=true']
+aktives Textfeld: 2
+Laenge im Feld jetzt: 24
+['[villagestudio]: LADEN: Knopf 3 gedrueckt, ok=true']
+GESCHAFFT: M19 Liga Eroeffnung T729.sav (1044359 Byte), Kopie daten/spielstaende/M19 Liga Eroeffnung T729_20261005-185507.sav
+== Phase 2: Echtzeit, Tempo 1000, 9 Minuten, Waechter an
+Vorab-Kontrolle gut: {'Ansicht': 14, 'gameOver': 0, 'Mensch': 1, 'Platz': 1}
+Wirtschaft: Apfel A [(110, 110), (100, 110), (115, 126), (104, 168), (106, 178), (142, 64)], B [(105, 120), (107, 100), (94, 170), (152, 62)]; alte Lagerteile [6, 7, 8, 9]
+Tick | Holz Stein Eisen | Aepfel Brot | Beliebt | Leute/Platz (Feuer) | Holzf. Apfelb. | Ereignis
+ 1158 |  12   0   0 |   0   0 |  93.75 | 18/34 (1) | 7 6 | Stellung: 12 Truppen zum Posten (121, 123); Soeldnerlager gesetzt (167, 116) (Gold 115); 0 Assassinen ohne Ziel ()
+ 1591 |  12   0   0 |   0   0 |  94.25 | 26/34 (2) | 14 6 | Soeldnerlager gesetzt (162, 116) (Gold 115)
+ZEITEN nach 10 Runden: lesen 0.39 s, wirtschaft 0.27 s, bauen_werben_verkauf 0.12 s, waechter 0.03 s, assassinen 0.00 s, haus_lager_zeile 0.00 s
+ 1674 |  12   0   0 |   0   0 |  94.50 | 27/34 (4) | 14 6 | -
+ 1713 |  12   0   0 |   0   0 |  94.50 | 28/34 (0) | 14 6 | Seasoning: A-Plantagen reif bei Tick 1713 (Baum 349) - setze 4 B-Plantagen
+ 1941 |   0   0   0 |   0   0 |  94.75 | 32/34 (1) | 14 9 | Seasoning: alle 4 B-Plantagen stehen (Tick 1941, 228 Ticks nach A-Reife); Altes Lager abgerissen (4 Teile, leer) bei Tick 1941
+ 2222 |   0   0   0 |   0   0 |  90.25 | 34/34 (6) | 14 10 | Soeldnerlager gesetzt (162, 116) (Gold 55)
+ZEITEN nach 20 Runden: lesen 0.76 s, wirtschaft 0.70 s, bauen_werben_verkauf 0.17 s, waechter 0.04 s, assassinen 0.01 s, haus_lager_zeile 0.00 s
+ 2273 |   0   0   0 |   0   0 |  90.25 | 34/34 (6) | 14 10 | -
+ 2462 |   0   0   0 |   0   0 |  88.00 | 34/34 (6) | 14 10 | Soeldnerlager gesetzt (164, 116) (Gold 55)
+ZEITEN nach 30 Runden: lesen 1.14 s, wirtschaft 0.70 s, bauen_werben_verkauf 0.23 s, waechter 0.04 s, assassinen 0.01 s, haus_lager_zeile 0.00 s
+ 2520 |   0   0   0 |   0   0 |  88.00 | 34/34 (6) | 14 10 | -
+ 2685 |   0   0   0 |   0   0 |  85.75 | 34/34 (6) | 14 10 | Soeldnerlager gesetzt (162, 116) (Gold 55)
+ZEITEN nach 40 Runden: lesen 1.50 s, wirtschaft 0.70 s, bauen_werben_verkauf 0.29 s, waechter 0.05 s, assassinen 0.01 s, haus_lager_zeile 0.00 s
+ 2748 |   0   0   0 |   0   0 |  85.75 | 34/34 (6) | 14 10 | -
+ 2932 |   0   0   0 |   0   0 |  83.50 | 34/34 (6) | 14 10 | Soeldnerlager gesetzt (162, 116) (Gold 55)
+ZEITEN nach 50 Runden: lesen 1.88 s, wirtschaft 0.70 s, bauen_werben_verkauf 0.35 s, waechter 0.06 s, assassinen 0.01 s, haus_lager_zeile 0.00 s
+ 3001 |   0   0   0 |   0   0 |  81.25 | 34/34 (6) | 14 10 | -
+ 3188 |   0   0   0 |   0   0 |  81.25 | 34/34 (6) | 14 10 | Soeldnerlager gesetzt (170, 106) (Gold 55)
+ZEITEN nach 60 Runden: lesen 2.25 s, wirtschaft 0.70 s, bauen_werben_verkauf 0.41 s, waechter 0.06 s, assassinen 0.02 s, haus_lager_zeile 0.00 s
+ 3254 |   0   0   0 |   0   0 |  79.00 | 34/34 (6) | 14 10 | -
+ 3441 |   0   0   0 |   0   0 |  76.75 | 34/34 (6) | 14 10 | Soeldnerlager gesetzt (162, 116) (Gold 55)
+ZEITEN nach 70 Runden: lesen 2.62 s, wirtschaft 0.70 s, bauen_werben_verkauf 0.46 s, waechter 0.06 s, assassinen 0.02 s, haus_lager_zeile 0.00 s
+ 3507 |   0   0   0 |   0   0 |  76.75 | 34/34 (6) | 14 10 | -
+ 3700 |   0   0   0 |   0   0 |  74.50 | 34/34 (6) | 14 10 | Soeldnerlager gesetzt (162, 116) (Gold 55)
+ZEITEN nach 80 Runden: lesen 2.98 s, wirtschaft 0.70 s, bauen_werben_verkauf 0.52 s, waechter 0.07 s, assassinen 0.02 s, haus_lager_zeile 0.00 s
+ 3767 |   0   0   0 |   0   0 |  74.50 | 34/34 (6) | 14 10 | -
+ 3950 |   0   0   0 |   4   0 |  72.25 | 34/34 (6) | 14 10 | Soeldnerlager gesetzt (162, 116) (Gold 55)
+ZEITEN nach 90 Runden: lesen 3.36 s, wirtschaft 0.70 s, bauen_werben_verkauf 0.58 s, waechter 0.08 s, assassinen 0.03 s, haus_lager_zeile 0.00 s
+ 4014 |   0   0   0 |   3   0 |  72.50 | 34/34 (6) | 14 10 | -
+ 4200 |   0   0   0 |   2   0 |  72.75 | 34/34 (6) | 14 10 | Soeldnerlager gesetzt (162, 116) (Gold 55)
+ZEITEN nach 100 Runden: lesen 3.72 s, wirtschaft 0.70 s, bauen_werben_verkauf 0.64 s, waechter 0.08 s, assassinen 0.03 s, haus_lager_zeile 0.00 s
+ 4259 |   0   0   0 |   2   0 |  72.75 | 34/34 (6) | 14 10 | -
+ 4443 |   0   0   0 |   0   0 |  73.00 | 34/34 (6) | 14 10 | Soeldnerlager gesetzt (162, 116) (Gold 55)
+ZEITEN nach 110 Runden: lesen 4.09 s, wirtschaft 0.70 s, bauen_werben_verkauf 0.70 s, waechter 0.09 s, assassinen 0.04 s, haus_lager_zeile 0.00 s
+ 4501 |   0   0   0 |   0   0 |  73.00 | 34/34 (6) | 14 10 | -
+ 4688 |   0   0   0 |   3   0 |  73.25 | 34/34 (6) | 14 10 | Soeldnerlager gesetzt (162, 116) (Gold 55)
+ZEITEN nach 120 Runden: lesen 4.46 s, bauen_werben_verkauf 0.76 s, wirtschaft 0.70 s, waechter 0.09 s, assassinen 0.04 s, haus_lager_zeile 0.00 s
+ 4756 |   0   0   0 |  10   0 |  73.25 | 34/34 (6) | 14 10 | -
+ 4801 |   0   0   0 |  11   0 |  73.50 | 34/34 (6) | 14 10 | verkauft: apfel x1
+ 4968 |   0   0   0 |   4   0 |  73.50 | 34/34 (6) | 14 10 | Soeldnerlager gesetzt (162, 116) (Gold 70)
+ZEITEN nach 130 Runden: lesen 4.83 s, bauen_werben_verkauf 0.85 s, wirtschaft 0.70 s, waechter 0.10 s, assassinen 0.04 s, haus_lager_zeile 0.00 s
+ 5040 |   0   0   0 |   4   0 |  73.75 | 34/34 (6) | 14 10 | -
+ 5223 |   0   0   0 |   7   0 |  74.00 | 34/34 (6) | 14 10 | Soeldnerlager gesetzt (162, 116) (Gold 70)
+ZEITEN nach 140 Runden: lesen 5.21 s, bauen_werben_verkauf 0.90 s, wirtschaft 0.70 s, waechter 0.11 s, assassinen 0.04 s, haus_lager_zeile 0.00 s
+ 5285 |   0   0   0 |   6   0 |  74.00 | 34/34 (6) | 14 10 | -
+ 5402 |   0   0   0 |  15   0 |  74.25 | 34/34 (6) | 14 10 | verkauft: apfel x1
+ 5480 |   0   0   0 |   9   0 |  74.25 | 34/34 (6) | 14 10 | Soeldnerlager gesetzt (162, 116) (Gold 85)
+ZEITEN nach 150 Runden: lesen 5.59 s, bauen_werben_verkauf 0.99 s, wirtschaft 0.70 s, waechter 0.11 s, assassinen 0.04 s, haus_lager_zeile 0.00 s
+ 5547 |   0   0   0 |   9   0 |  74.25 | 34/34 (6) | 14 10 | -
+ 5657 |   0   0   0 |  15   0 |  74.50 | 34/34 (6) | 14 10 | verkauft: apfel x1
+ 5746 |   0   0   0 |  10   0 |  74.50 | 34/34 (6) | 14 10 | Soeldnerlager gesetzt (162, 116) (Gold 100)
+ZEITEN nach 160 Runden: lesen 5.96 s, bauen_werben_verkauf 1.08 s, wirtschaft 0.70 s, waechter 0.12 s, assassinen 0.04 s, haus_lager_zeile 0.00 s
+ 5817 |   0   0   0 |  14   0 |  74.75 | 34/34 (6) | 14 10 | -
+ 5834 |   0   0   0 |  14   0 |  74.75 | 34/34 (6) | 14 10 | verkauft: apfel x1
+ 6010 |   0   0   0 |   7   0 |  75.00 | 34/34 (6) | 14 10 | Soeldnerlager gesetzt (162, 116) (Gold 115)
+ZEITEN nach 170 Runden: lesen 6.33 s, bauen_werben_verkauf 1.17 s, wirtschaft 0.70 s, waechter 0.12 s, assassinen 0.05 s, haus_lager_zeile 0.00 s
+ 6080 |   0   0   0 |   7   0 |  75.00 | 34/34 (6) | 14 10 | -
+ 6256 |   0   0   0 |   6   0 |  75.25 | 34/34 (6) | 14 10 | Soeldnerlager gesetzt (162, 116) (Gold 115); Lager gesetzt bei (115, 120) - 1 Holzfaeller wollen abliefern (Tick 6256)
+ZEITEN nach 180 Runden: lesen 6.71 s, bauen_werben_verkauf 1.23 s, wirtschaft 0.76 s, waechter 0.13 s, assassinen 0.06 s, haus_lager_zeile 0.00 s
+ 6355 |   0   0   0 |   5   0 |  75.25 | 34/34 (6) | 14 10 | -
+ 6538 |   0   0   0 |   4   0 |  75.50 | 34/34 (6) | 14 10 | Soeldnerlager gesetzt (162, 116) (Gold 115)
+ZEITEN nach 190 Runden: lesen 7.08 s, bauen_werben_verkauf 1.29 s, wirtschaft 0.76 s, waechter 0.14 s, assassinen 0.06 s, haus_lager_zeile 0.00 s
+ 6595 |   0   0   0 |   7   0 |  75.50 | 34/34 (6) | 14 10 | -
+ 6684 |   0   0   0 |  14   0 |  75.75 | 34/34 (6) | 14 10 | verkauft: apfel x1
