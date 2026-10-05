@@ -15,14 +15,18 @@ Die drei Stufen, von sanft nach hart:
 Aufruf:
   python spiel.py status
   python spiel.py beenden
+  (SHC_INSTANZ=2 davor: die zweite Spielkopie)
 
 Rueckgabe: 0 = geschafft, 1 = nicht geschafft (Grund steht in der Ausgabe).
+
+Zwei Instanzen (05.10.2026): Stufe 2 und 3 suchten frueher alle Prozesse
+namens "Stronghold Crusader" - mit zwei Instanzen haette das Beenden der einen
+die andere mitgerissen. Jetzt zaehlt nur der Prozess der gewaehlten Instanz.
 """
 import base64, io, json, os, subprocess, sys, time
 
-SPIEL  = r"C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme"
-BEFEHL = os.path.join(SPIEL, "ucp", "villagestudio", "befehl.json")
-LOG    = os.path.join(SPIEL, "ucp3.log")
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from befehl import SPIEL, BEFEHL, LOG, INSTANZ
 
 
 def ps(befehl):
@@ -39,8 +43,26 @@ def erhoeht(befehl, warte_s=20):
 
 
 def spiel_pids():
-    aus = ps("(Get-Process -Name 'Stronghold Crusader' -ErrorAction SilentlyContinue).Id")
-    return [int(z) for z in aus.split() if z.strip().isdigit()]
+    """Prozesse DIESER Instanz. UCP legt beim Start "ucp-pid-<nummer>" in den
+    Spielordner (gemessen 0,06-0,12 s nach Prozessstart). Nach einem Absturz
+    bleibt die Datei liegen; vergibt Windows die Nummer neu, zeigte sie auf
+    einen fremden Prozess. Darum zaehlt eine Nummer nur, wenn ein Spielprozess
+    mit ihr lebt UND hoechstens 30 s vor der Datei gestartet ist."""
+    dateien = {}
+    for f in os.listdir(SPIEL):
+        if f.startswith("ucp-pid-") and f[8:].isdigit():
+            dateien[int(f[8:])] = os.path.getctime(os.path.join(SPIEL, f))
+    if not dateien:
+        return []
+    aus = ps("Get-Process -Name 'Stronghold Crusader' -ErrorAction SilentlyContinue | "
+             "ForEach-Object { '{0} {1}' -f $_.Id, ([DateTimeOffset]$_.StartTime).ToUnixTimeMilliseconds() }")
+    pids = []
+    for z in aus.splitlines():
+        teile = z.split()
+        if len(teile) == 2 and teile[0].isdigit() and int(teile[0]) in dateien:
+            if abs(dateien[int(teile[0])] - int(teile[1]) / 1000.0) <= 30:
+                pids.append(int(teile[0]))
+    return pids
 
 
 def modul_geladen():
@@ -62,6 +84,7 @@ def warte_bis_weg(sekunden):
 
 def status():
     pids = spiel_pids()
+    print("Instanz %d: %s" % (INSTANZ, SPIEL))
     if not pids:
         print("Spiel: laeuft nicht")
         return
@@ -72,9 +95,12 @@ def status():
 
 
 def beenden():
-    if not spiel_pids():
+    pids = spiel_pids()
+    print("Instanz %d: %s" % (INSTANZ, SPIEL))
+    if not pids:
         print("GESCHAFFT: das Spiel lief gar nicht.")
         return 0
+    nur_diese = "Get-Process -Id %s -ErrorAction SilentlyContinue | " % ",".join(map(str, pids))
     if modul_geladen():
         kennung = int(time.time())
         io.open(BEFEHL, "wb").write(json.dumps({"id": kennung, "player": 1, "beenden": True}).encode("utf-8"))
@@ -85,14 +111,13 @@ def beenden():
     else:
         print("Stufe 1 entfaellt: unser Modul ist in diesem Spiel nicht geladen.")
 
-    erhoeht("Get-Process -Name 'Stronghold Crusader' -ErrorAction SilentlyContinue | "
-            "ForEach-Object { [void]$_.CloseMainWindow() }")
+    erhoeht(nur_diese + "ForEach-Object { [void]$_.CloseMainWindow() }")
     if warte_bis_weg(10):
         print("GESCHAFFT mit Stufe 2: das Fenster wurde gebeten zu schliessen und hat es getan.")
         return 0
     print("Stufe 2 ohne Wirkung nach 10 s (das Spiel reagiert nicht auf 'Fenster schliessen') - Stufe 3.")
 
-    erhoeht("Get-Process -Name 'Stronghold Crusader' -ErrorAction SilentlyContinue | Stop-Process -Force")
+    erhoeht(nur_diese + "Stop-Process -Force")
     if warte_bis_weg(5):
         print("GESCHAFFT mit Stufe 3: der Prozess wurde hart beendet.")
         return 0

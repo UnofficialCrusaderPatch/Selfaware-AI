@@ -25,7 +25,7 @@ from plantagen_lauf import baue_alle, vorab
 from speichern import speichere
 from waechter import Waechter, lies_lagebild, lies_gebaeude
 from assassinen import Angriffstrupp, Einzeln
-from befehl import sende, neue_id
+from befehl import sende, neue_id, ABZUG, INSTANZ
 from wirtschaft import Wirtschaft, apfel_gruppen
 from ertragsplaner import Ertragsplaner
 
@@ -35,7 +35,7 @@ SP = 1
 PD = 0x0115BDF8 + SP * 0x39F4
 ARBEITER_JE = {3: 1, 32: 1, 30: 1, 31: 1, 33: 1, 20: 3, 4: 1, 5: 2, 7: 1, 6: 1}   # Betrieb -> Arbeiter (Steinbruch 3, Mine 2: Annahme)
 LAGERWAREN = ("holz", "hopfen", "stein", "eisen", "pech", "weizen", "mehl")
-LOG = os.path.join(D, "erstes_spiel_log.txt")
+LOG = os.path.join(D, "erstes_spiel_log%s.txt" % ("" if INSTANZ == 1 else INSTANZ))   # je Instanz ein Protokoll
 
 def s32(v): return v - 0x100000000 if v > 0x7FFFFFFF else v
 
@@ -128,7 +128,7 @@ def baue_lager(plan):
 
 EIGENE_ARTEN = (3, 19, 32, 20, 4, 1, 10, 30, 31, 33, 5)
 
-ROHSTOFFE = r"C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme\ucp\villagestudio\abzug\rohstoffe.txt"
+ROHSTOFFE = os.path.join(ABZUG, "rohstoffe.txt")
 _KARTE = []
 
 def karte_laden():

@@ -9,13 +9,30 @@ die letzte vergebene steht in .letzte_id neben diesem Skript.
 Aufruf:    python befehl.py '<json>' [wartesekunden]
 Beispiel:  python befehl.py '{"player": 1, "tempo": 90}' 3
 Als Baustein:  from befehl import sende; zeilen = sende({"zeit": True})
+
+Zwei Spielinstanzen (05.10.2026): SHC_INSTANZ=2 waehlt die Spielkopie
+"<Instanz 1> Instanz2" - mit eigener befehl.json, eigenem ucp3.log, eigener
+Kanalsperre (.lauf2) und eigenem Nummernzaehler (.letzte_id2). Ohne Angabe gilt
+Instanz 1, alles wie bisher. Dieselbe Ordner-Regel steht in
+VillageStudio/werkzeug/sperre.py und start_hinten.ps1. Andere Werkzeuge nehmen
+SPIEL und ABZUG von hier, nie einen eigenen Pfad - sonst liest ein Lauf auf
+Instanz 2 still die Lagebilder von Instanz 1.
 """
 import io, json, os, re, sys, time
 
-SPIEL  = r"C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme"
+_ROH = os.environ.get("SHC_INSTANZ", "").strip() or "1"
+if not _ROH.isdigit() or int(_ROH) < 1:
+    raise RuntimeError("SHC_INSTANZ=%r ist keine Instanznummer (1, 2, ...)" % _ROH)
+INSTANZ = int(_ROH)
+_STAMM = r"C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme"
+SPIEL  = _STAMM if INSTANZ == 1 else "%s Instanz%d" % (_STAMM, INSTANZ)
+if not os.path.isdir(SPIEL):
+    raise RuntimeError("Instanz %d gibt es nicht: %s" % (INSTANZ, SPIEL))
+_ENDUNG = "" if INSTANZ == 1 else str(INSTANZ)
 BEFEHL = os.path.join(SPIEL, "ucp", "villagestudio", "befehl.json")
 LOG    = os.path.join(SPIEL, "ucp3.log")
-MERKER = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".letzte_id")
+ABZUG  = os.path.join(SPIEL, "ucp", "villagestudio", "abzug")
+MERKER = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".letzte_id" + _ENDUNG)
 
 
 def neue_id():
@@ -42,7 +59,7 @@ def pruefe(zeilen):
             raise RuntimeError("MODULFEHLER (Antwort des Moduls): " + z[:240])
     return zeilen
 
-LAUF = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".lauf")   # Kanal belegt: "<pid>" - der Lenker frischt sie je Runde auf
+LAUF = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".lauf" + _ENDUNG)   # Kanal belegt: "<pid>" - der Lenker frischt sie je Runde auf; je Instanz eine
 
 def belege():
     """Der Lenker meldet sich als Besitzer des Kanals (je Runde aufrufen). 05.10.: eine Nebenabfrage aus einem zweiten
@@ -63,7 +80,7 @@ def _kanal_frei():
     except OSError:
         return
     if pid != str(os.getpid()) and alter < 15:
-        raise RuntimeError("KANAL BELEGT: ein Lauf (Prozess %s) benutzt den Befehlskanal gerade (vor %.0f s gemeldet)" % (pid, alter))
+        raise RuntimeError("KANAL BELEGT: ein Lauf (Prozess %s) benutzt den Befehlskanal von Instanz %d gerade (vor %.0f s gemeldet)" % (pid, INSTANZ, alter))
 
 def sende(befehl, warte=3.0, bis=None):
     """Schickt den Befehl (dict) und gibt die neuen Modul-Logzeilen zurueck.

@@ -23,13 +23,12 @@ Als Baustein:  from laden import lade_stand; tick = lade_stand("M7-01 ...")
 """
 import os, sys, time
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from befehl import sende, neue_id
+from befehl import sende, neue_id, SPIEL
 
 ANZAHL, MARKIERT, SCROLL, SICHTBAR = 0x0112661C, 0x01126624, 0x01126628, 0x0112662C
 LISTE, NAMEN, NAMENSLAENGE = 0x01126E28, 0x11BFCF8, 0x3E9
 TICK, PAUSE, ANSICHT = 0x0117CADC, 0x01FEA054, 0x01FE7D1C
 HAUPTMENUE = 41
-SPIEL = r"C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme"
 BILDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "daten", "bilder")
 
 def befehl(cmd, warte=0.8, bis=None):

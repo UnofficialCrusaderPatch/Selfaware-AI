@@ -1,4 +1,5 @@
-werkzeug/.letzte_id
+werkzeug/.letzte_id*
+werkzeug/.lauf*
 __pycache__/
 daten/bilder/
 daten/spielstaende/

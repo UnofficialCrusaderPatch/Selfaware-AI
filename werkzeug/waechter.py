@@ -14,8 +14,9 @@ Gemessen 22:46: 8 Speertraeger gegen 2 Angreifer - beide tot, keiner von uns ver
 """
 import math, os
 from laden import befehl
+from befehl import ABZUG
 
-LAGEBILD = r"C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme\ucp\villagestudio\abzug\lagebild.txt"
+LAGEBILD = os.path.join(ABZUG, "lagebild.txt")
 NAHKAMPF = {24, 25, 26, 27, 28, 37, 55, 71, 73, 75}
 FERNKAMPF = {22, 23, 70, 72, 74, 76}
 TRUPPE = NAHKAMPF | FERNKAMPF

@@ -23,7 +23,10 @@ import io, os, shutil, subprocess, sys, time
 
 import yaml
 
-CONFIG = r"C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme\ucp-config.yml"
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from befehl import SPIEL
+
+CONFIG = os.path.join(SPIEL, "ucp-config.yml")   # Konfiguration der gewaehlten Instanz (SHC_INSTANZ)
 NAME, VERSION = "villagestudio", "0.1.0"
 
 

@@ -13,7 +13,8 @@ Liest:   ucp/villagestudio/abzug/<name>_t<tick>_<bereich>.bin
 import glob, json, os, re, struct, sys
 from collections import defaultdict
 
-ORDNER = r"C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme\ucp\villagestudio\abzug"
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from befehl import ABZUG as ORDNER   # Ordner der gewaehlten Instanz (SHC_INSTANZ)
 # Bereich -> (Kopf in Byte, Satzgroesse in Byte, Name des Satzes); None = flach
 TABELLEN = {"spieler": (0, 0x39F4, "Spieler"), "einheiten": (0, 1168, "Einheit"),
             "gebaeude": (0x14, 812, "Gebaeude"), "aiv": (4, 0x6D98, "KI-Slot")}

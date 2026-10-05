@@ -12,9 +12,9 @@ Aufruf:  python steuerkarte.py <ausgabe.json> [start=1000] [schritt=100] [spiele
 """
 import io, json, os, re, struct, sys, time
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from befehl import sende
+from befehl import sende, ABZUG
 
-ORDNER = r"C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme\ucp\villagestudio\abzug"
+ORDNER = ABZUG
 SPIELER_BASIS, SATZ = 0x0115BDF8, 0x39F4
 
 def s32(v): return v - 0x100000000 if v > 0x7FFFFFFF else v

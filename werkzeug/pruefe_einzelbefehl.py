@@ -18,12 +18,12 @@ Aufruf:  python pruefe_einzelbefehl.py [n=3] [ticks=100]
 import os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from laden import befehl
-from befehl import sende, neue_id
+from befehl import sende, neue_id, ABZUG
 from assassinen import WERT
 from waechter import lies_lagebild, lies_gebaeude, schach
 from steuerkarte import laufe
 
-LAGEBILD = r"C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme\ucp\villagestudio\abzug\lagebild.txt"
+LAGEBILD = os.path.join(ABZUG, "lagebild.txt")
 WIRTSCHAFT = set(WERT)   # dieselben Wirtschaftsgebaeude wie der Assassinen-Lenker
 
 

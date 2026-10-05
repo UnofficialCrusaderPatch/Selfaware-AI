@@ -1,0 +1,216 @@
+﻿== 05.10.2026 19:33:50 Kopie Instanz 1 -> Instanz 2
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robustes Dateikopieren für Windows                              
+-------------------------------------------------------------------------------
+
+  Gestartet: Montag, 5. Oktober 2026 19:33:50
+   Quelle : C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme\
+     Ziel : C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme Instanz2\
+
+    Dateien : *.*
+	    
+Ausgeschl. Dateien: ucp3.log
+	    ucp3-error-log.log
+	    RedirectPlay.log
+	    ucp-pid-*
+	    ucp-config.yml.*
+	    
+ Ausgeschl. Verzeichnisse: C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme\ucp\villagestudio
+	    
+  Optionen: *.* /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /NP /R:1 /W:1 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+           Insgesamt   KopiertÜbersprungenKeine Übereinstimmung    FEHLER    Extras
+Verzeich.:       462       461         1         0         0         0
+  Dateien:      6392      6376        16         0         0         0
+    Bytes:   1.528 g   1.522 g    5.83 m         0         0         0
+   Zeiten:   0:00:05   0:00:04                       0:00:00   0:00:00
+
+
+Geschwindigkeit:           338.180.796 Bytes/Sek.
+Geschwindigkeit:             19350,861 Megabytes/Min.
+   Beendet: Montag, 5. Oktober 2026 19:33:55
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robustes Dateikopieren für Windows                              
+-------------------------------------------------------------------------------
+
+  Gestartet: Montag, 5. Oktober 2026 19:33:55
+   Quelle : C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme\ucp\villagestudio\
+     Ziel : C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme Instanz2\ucp\villagestudio\
+
+    Dateien : *.*
+	    
+Ausgeschl. Dateien: wer_testet.txt
+	    befehl.json
+	    *.bmp
+	    logik.lua.bak-*
+	    
+ Ausgeschl. Verzeichnisse: C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme\ucp\villagestudio\abzug
+	    
+  Optionen: *.* /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /NP /R:1 /W:1 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+           Insgesamt   KopiertÜbersprungenKeine Übereinstimmung    FEHLER    Extras
+Verzeich.:         3         2         1         0         0         0
+  Dateien:       133        14       119         0         0         0
+    Bytes:  576.17 m   717.2 k  575.47 m         0         0         0
+   Zeiten:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Geschwindigkeit:           66.768.727 Bytes/Sek.
+Geschwindigkeit:             3820,537 Megabytes/Min.
+   Beendet: Montag, 5. Oktober 2026 19:33:55
+
+Dauer 5 s
+Treffer alt: 0 neu: 0 b'Global\\\\FireflyStrongholdCrusadersExtreme\x00'
+Laenge gleich: True abweichende Bytes: []
+Suchtext: b'Global\\FireflyStrongholdCrusadersExtreme\x00'
+Treffer alt: 1  neu: 0
+geschrieben an Dateiversatz 0x1abf6c (Speicher 0x5ABF6C)
+Laenge gleich: True  abweichende Bytes: [('0x1abf93', 'e', '2')]
+== 19:36:34 Vorher: Spielprozesse
+"Stronghold Crusader.exe","2604","Console","1","244.612 K","Running","PRO-PC\danie","0:45:58","Crusader"
+== 19:36:34 start_hinten.ps1 -Instanz 2
+Instanz 2 gestartet: Prozess 11092
+Fenster da nach 2,2 s - schiebe sofort nach hinten.
+Modul laeuft und Lage sitzt - uebergebe nach 8,3 s an die Wacht im Spiel.
+Fertig: 6 Durchgaenge in 8 s. Spiel steht auf Platz 9 von 10 sichtbaren Fenstern.
+Fokus beim Spiel: False
+-> NICHT zuunterst: 1 Fenster liegen noch darunter.
+== 19:36:42 Nachher: Spielprozesse
+"Stronghold Crusader.exe","2604","Console","1","245.704 K","Running","PRO-PC\danie","0:46:04","Crusader"
+"Stronghold Crusader.exe","11092","Console","1","216.704 K","Running","PRO-PC\danie","0:00:02","Crusader"
+== 19:36:54 Logs
+C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme\ucp3.log: 6.246.902 Bytes, geaendert 19:36:51
+2026-10-05 18:32:30.307 (   1.949s) [(main thread)   ]            logging.cpp:102   INFO| [villagestudio]: villagestudio aktiv. AIV-Manager 0x1866AB0, Befehlsdatei 'ucp/villagestudio/befehl.json'.
+ucp-pid: ucp-pid-2604
+C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme Instanz2\ucp3.log: 63.584 Bytes, geaendert 19:36:50
+2026-10-05 19:36:36.597 (   1.889s) [(main thread)   ]            logging.cpp:102   INFO| [villagestudio]: villagestudio aktiv. AIV-Manager 0x1866AB0, Befehlsdatei 'ucp/villagestudio/befehl.json'.
+ucp-pid: ucp-pid-11092
+== Rechtestufe
+2604: Pfad lesbar=False Pfad= Fenster=Crusader
+11092: Pfad lesbar=True Pfad=C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme Instanz2\Stronghold Crusader.exe Fenster=Crusader
+== 19:40:34 spiel.py status je Instanz
+Instanz 1: C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme
+Spiel: laeuft (PID 2604)
+Rechtestufe: hoeher - nur mit erhoehtem Helfer erreichbar
+Unser Modul: geladen (villagestudio aktiv)
+Instanz 2: C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme Instanz2
+Spiel: laeuft (PID 11092)
+Rechtestufe: gleich wie diese Sitzung
+Unser Modul: geladen (villagestudio aktiv)
+== 19:40:35 Kanalprobe Instanz 2 (peek Ansicht und Tick)
+Instanz 2 Ansicht 41 (Hauptmenue=41) Tick 0
+letzte id 1791222036
+== 19:40:57 Gegenprobe: Instanz-2-Datei ein zweites Mal starten
+dritter Prozess: 14420
+ 3s  3.Prozess lebt=True Fenster=[Stronghold Crusader Error] | Instanz2 11092 Fenster=[Crusader] | Instanz1 2604 Fenster=[Crusader]
+ 6s  3.Prozess lebt=True Fenster=[Stronghold Crusader Error] | Instanz2 11092 Fenster=[Crusader] | Instanz1 2604 Fenster=[Crusader]
+ 9s  3.Prozess lebt=True Fenster=[Stronghold Crusader Error] | Instanz2 11092 Fenster=[Crusader] | Instanz1 2604 Fenster=[Crusader]
+12s  3.Prozess lebt=True Fenster=[Stronghold Crusader Error] | Instanz2 11092 Fenster=[Crusader] | Instanz1 2604 Fenster=[Crusader]
+15s  3.Prozess lebt=True Fenster=[Stronghold Crusader Error] | Instanz2 11092 Fenster=[Crusader] | Instanz1 2604 Fenster=[Crusader]
+18s  3.Prozess lebt=True Fenster=[Stronghold Crusader Error] | Instanz2 11092 Fenster=[Crusader] | Instanz1 2604 Fenster=[Crusader]
+Log-Zeilen 'already' / 'villagestudio aktiv' / 'ZUSTAND' im Instanz-2-Log:
+  already: 0
+  villagestudio aktiv: 1
+  ZUSTAND: 3
+== beende dritten Prozess (gleiche Rechtestufe)
+3.Prozess beendet: True
+"Stronghold Crusader.exe","2604","Console","1","246.344 K"
+"Stronghold Crusader.exe","11092","Console","1","220.284 K"
+== 19:41:27 liegengebliebene pid-Datei: ucp-pid-11092
+Instanz 2: C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme Instanz2
+Spiel: laeuft (PID 11092)
+Rechtestufe: gleich wie diese Sitzung
+Unser Modul: geladen (villagestudio aktiv)
+== 19:41:27 spiel.py beenden (Instanz 2)
+Instanz 2: C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme Instanz2
+GESCHAFFT mit Stufe 1: unser Modul hat das Spiel beendet.
+rc=0
+== 19:41:28 danach
+"Stronghold Crusader.exe","2604","Console","1","246.344 K","Running","PRO-PC\danie","0:49:47","Crusader"
+Instanz 1: C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme
+Spiel: laeuft (PID 2604)
+Rechtestufe: hoeher - nur mit erhoehtem Helfer erreichbar
+Unser Modul: geladen (villagestudio aktiv)
+== 19:41:45 pid-Dateien nach dem Beenden: 
+== falsche Datei ucp-pid-2604 (zeigt auf Instanz 1) in Instanz 2 angelegt
+Instanz 2: C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme Instanz2
+Spiel: laeuft nicht
+== start_hinten -NurSchieben -Instanz 2 (muss 'Kein Spielfenster' melden)
+Kein Spielfenster gefunden.
+rc=1
+== 19:42:04 NEGATIVLAUF: Zeitbedingung abgeschaltet, falsche Datei ucp-pid-2604 in Instanz 2
+Instanz 2: C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme Instanz2
+Spiel: laeuft (PID 2604)
+Rechtestufe: hoeher - nur mit erhoehtem Helfer erreichbar
+Unser Modul: geladen (villagestudio aktiv)
+== 19:43:13 Abgleich frisch nach Kopie
+Instanz 1 -> Instanz 2: 0 Modul-Dateien weichen ab.
+rc=0
+== aeltere logik.lua in Instanz 2 eingesetzt (logik.lua.bak-wegtest-20261005)
+Instanz 1 -> Instanz 2: 1 Modul-Dateien weichen ab.
+   ucp/villagestudio/logik.lua                             anders (Quelle +0 min neuer)
+Nur gezeigt. Abgleichen mit:  python instanz_abgleich.py 2 --tun --als villagestudio2
+rc=1
+== Sperre von Instanz 2 an fremden Namen, dann --tun --als villagestudio2 (muss GESPERRT sagen)
+Instanz 1 -> Instanz 2: 1 Modul-Dateien weichen ab.
+   ucp/villagestudio/logik.lua                             anders (Quelle +0 min neuer)
+GESPERRT: die Sperre von Instanz 2 gehoert SIT-Fremd (probe) - nichts kopiert.
+logik.lua neu zu laden wuerde deren laufende Partie stoeren.
+rc=1
+== mit eigener Sperre
+Instanz 1 -> Instanz 2: 1 Modul-Dateien weichen ab.
+   ucp/villagestudio/logik.lua                             anders (Quelle +0 min neuer)
+Abgeglichen: 1 Dateien. Alter Stand liegt in C:/Program Files (x86)/Steam/steamapps/common/Stronghold Crusader Extreme Instanz2\ucp\villagestudio\alt\20261005-194314
+rc=0
+logik.lua gleich: True
+Sicherung: C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme Instanz2\ucp\villagestudio\alt\20261005-194314\ucp\villagestudio\logik.lua
+Instanz 1 -> Instanz 2: 0 Modul-Dateien weichen ab.
+rc=0
+== 19:43:25 SCHLUSSLAUF: start_hinten -Instanz 2 (fertige Fassung)
+Instanz 2 gestartet: Prozess 18252
+Fenster da nach 1,7 s - schiebe sofort nach hinten.
+Modul laeuft und Lage sitzt - uebergebe nach 3,3 s an die Wacht im Spiel.
+Fertig: 5 Durchgaenge in 3 s. Spiel steht auf Platz 8 von 9 sichtbaren Fenstern.
+Fokus beim Spiel: False
+-> NICHT zuunterst: 1 Fenster liegen noch darunter.
+== 19:43:34 Prozesse
+"Stronghold Crusader.exe","2604","Console","1","246.344 K","Running","PRO-PC\danie","0:51:35","Crusader"
+"Stronghold Crusader.exe","18252","Console","1","206.292 K","Running","PRO-PC\danie","0:00:02","Crusader"
+C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme
+   [villagestudio]: villagestudio aktiv. AIV-Manager 0x1866AB0, Befehlsdatei 'ucp/villagestudio/befehl.json'.
+   letzte ZUSTAND-Zeile: 2026-10-05 19:43:32.200 [villagestudio]: ZUSTAND (Bild 319200): Spielzeit 28731 Ticks, maxUnitCount 455 -> Gefecht laeuft
+C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme Instanz2
+   [villagestudio]: villagestudio aktiv. AIV-Manager 0x1866AB0, Befehlsdatei 'ucp/villagestudio/befehl.json'.
+   letzte ZUSTAND-Zeile: 2026-10-05 19:43:27.782 [villagestudio]: ZUSTAND (Bild 1): Spielzeit 0 Ticks, maxUnitCount 2500 -> KEIN Gefecht
+Instanz 2: C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme Instanz2
+Spiel: laeuft (PID 18252)
+Rechtestufe: gleich wie diese Sitzung
+Unser Modul: geladen (villagestudio aktiv)
+Kanal Instanz 2 -> Ansicht 3
+Instanz 1: C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme
+Spiel: laeuft (PID 2604)
+Rechtestufe: hoeher - nur mit erhoehtem Helfer erreichbar
+Unser Modul: geladen (villagestudio aktiv)
+== 19:43:58 Instanz 2 beenden, Sperre freigeben
+Instanz 2: C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme Instanz2
+GESCHAFFT mit Stufe 1: unser Modul hat das Spiel beendet.
+Instanz 2:
+Sperre freigegeben.
+"Stronghold Crusader.exe","2604","Console","1","246.312 K"
+Instanz 1:
+Sperre ist FREI.
+Instanz 2:
+Sperre ist FREI.

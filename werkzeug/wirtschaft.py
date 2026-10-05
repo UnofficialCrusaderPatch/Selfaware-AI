@@ -21,7 +21,9 @@
    Zustand 8 plus Holzfaeller in Zustand 7 mal der groessten bisher gemessenen Ladung.
 """
 import math
+import os
 from laden import befehl, peek
+from befehl import ABZUG
 
 APFEL, HOLZFAELLER, LAGER, BAUER = 32, 3, 10, 13
 SUCHRADIUS_BAUER = 30                       # abgelesen: selectClosestTree nimmt Baeume naeher als 0x1E Felder
@@ -80,7 +82,7 @@ class Wirtschaft:
     def _a_baum(self):
         """Einen Apfelbaum einer A-Plantage suchen (einmal, ueber die Baumliste des Moduls)."""
         befehl({"rohstoffkarte": {}}, 5.0, bis="ROHSTOFF")
-        datei = "C:/Program Files (x86)/Steam/steamapps/common/Stronghold Crusader Extreme/ucp/villagestudio/abzug/baeume.txt"
+        datei = os.path.join(ABZUG, "baeume.txt")
         for z in open(datei).read().splitlines()[1:]:
             w = z.split()
             if len(w) >= 6 and w[1] == "15" and any(schach((int(w[3]), int(w[4])), (a[0] + 5, a[1] + 5)) <= 8 for a in self.A):
