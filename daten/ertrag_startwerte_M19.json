@@ -1,0 +1,48 @@
+{
+ "zeit": "05.10.2026 20:33",
+ "partien": 10,
+ "quellen": [
+  "ertrag_gelernt_20261005_2006.json",
+  "ertrag_gelernt_20261005_2008.json",
+  "ertrag_gelernt_20261005_201548_i1.json",
+  "ertrag_gelernt_20261005_201659_i1.json",
+  "ertrag_gelernt_20261005_201807_i1.json",
+  "ertrag_gelernt_20261005_201902_i3.json",
+  "ertrag_gelernt_20261005_201918_i1.json",
+  "ertrag_gelernt_20261005_201956_i3.json",
+  "ertrag_gelernt_20261005_202051_i3.json",
+  "ertrag_gelernt_20261005_202147_i3.json"
+ ],
+ "werte": {
+  "5": {
+   "rate": 0.61,
+   "gewicht": 63177,
+   "anlauf": 6664,
+   "partien": 10
+  },
+  "20": {
+   "rate": 6.72,
+   "gewicht": 54086,
+   "anlauf": 3644,
+   "partien": 10
+  },
+  "32": {
+   "rate": 3.254,
+   "gewicht": 131019,
+   "anlauf": 2224,
+   "partien": 10
+  },
+  "7": {
+   "rate": 3.072,
+   "gewicht": 82848,
+   "anlauf": 4427,
+   "partien": 10
+  },
+  "3": {
+   "rate": 13.239,
+   "gewicht": 151124,
+   "anlauf": null,
+   "partien": 10
+  }
+ }
+}

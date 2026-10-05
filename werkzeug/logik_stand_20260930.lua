@@ -1700,7 +1700,7 @@ local function einzelbefehl(cmd)
     f:close()
     -- dazu alle Gebaeude (eigene UND fremde): nr besitzer typ x y leben uid -> abzug/gebaeude.txt
     local fg = io.open("ucp/villagestudio/abzug/gebaeude.txt", "w")
-    fg:write("nr besitzer typ x y leben uid erreichbar" .. NL)
+    fg:write("nr besitzer typ x y leben uid erreichbar vorrat grenze verbund" .. NL)
     -- erreichbar (04.10., Daniel: zugebaute Gebaeude erkennen): irgendein Feld rund um den Grundriss liegt in einem
     -- Wegnetz-Gebiet (PathConnectionLayer, TileMapState +0x363DD0 = 0x01DF6FD8, ushort je Feld), das Spieler 1 vom
     -- Gebiet seines Bergfried-Eingangs aus erreichen kann (calculateCanPlayerUnitsNavigateToAreaFromArea 0x004A5320,
@@ -1727,9 +1727,14 @@ local function einzelbefehl(cmd)
             end
           end
         end
-        fg:write(string.format("%d %d %d %d %d %d %d %d", i, core.readSmallInteger(b + G_BESITZER) or -1,
+        -- vorrat/grenze (05.10., Daniel: "nicht genug Ochsenjoche ... nicht geschaut, wann sich Steine sammeln"):
+        -- Building +0x184 currentNumberOfResource / +0x188 currentLimitOfResource (hier b = Datensatz - 0x14),
+        -- gemessen: Steinhaufen am Steinbruch (Typ 21) 7/47/42/34 von 48, Eisenmine 1-2 von 48.
+        -- verbund: Building +0x192 quarryStockpileID - der Steinbruch zeigt auf seinen Steinhaufen (gemessen nr+1).
+        fg:write(string.format("%d %d %d %d %d %d %d %d %d %d %d", i, core.readSmallInteger(b + G_BESITZER) or -1,
           core.readSmallInteger(b + G_TYP) or -1, bx, by, core.readSmallInteger(b + G_LEBEN) or -1,
-          core.readInteger(b + 0xEC) or 0, erreichbar) .. NL)
+          core.readInteger(b + 0xEC) or 0, erreichbar, core.readInteger(b + 0x198) or -1, core.readInteger(b + 0x19C) or -1,
+          core.readSmallInteger(b + 0x1A6) or -1) .. NL)
       end
     end
     fg:close()

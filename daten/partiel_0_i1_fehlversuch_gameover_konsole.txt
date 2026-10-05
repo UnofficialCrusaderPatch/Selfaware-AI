@@ -1,0 +1,8 @@
+Eroeffnung unveraendert (Fingerabdruck 05f61082fc) - lade M19 Liga Eroeffnung T729 statt neu zu bauen
+Eintrag 0 'M19 Liga Eroeffnung T729' -> Scrollstand 0, Zeile 0; Spielzeit vorher 729
+['[villagestudio]: LADEPAUSE: scharf (jetzt Tick 729, pausiert).']
+['[villagestudio]: POKE 0x01126628: 0 -> 0', '[villagestudio]: POKE 0x01126624: 0 -> 0', '[villagestudio]: LADEN: Knopf 2 gedrueckt, ok=true', '[villagestudio]: logik: 3 von 3 Befehlen ausgefuehrt, 0 schon erledigt.', '[villagestudio]: LADEPAUSE: Laden erkannt (Pause aufgehoben) bei Tick 729 - angehalten.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 729.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 729.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 729.']
+Spielzeit nachher 729 / 729, Pause 1
+Tick 729
+== Phase 2: Echtzeit, Tempo 1000, 25 Minuten, Waechter an
+TESTBEDINGUNG FEHLT: {'Ansicht': 14, 'gameOver': 1, 'Mensch': 1, 'Platz': 1} - erst laden und eigenerPlatz schicken

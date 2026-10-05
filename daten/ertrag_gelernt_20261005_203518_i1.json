@@ -1,0 +1,175 @@
+{
+ "zeit": "05.10.2026 20:35",
+ "kosten": {
+  "1": {
+   "holz": 5,
+   "stein": 0,
+   "eisen": 0,
+   "pech": 0,
+   "gold": 0
+  },
+  "3": {
+   "holz": 5,
+   "stein": 0,
+   "eisen": 0,
+   "pech": 0,
+   "gold": 0
+  },
+  "4": {
+   "holz": 5,
+   "stein": 0,
+   "eisen": 0,
+   "pech": 0,
+   "gold": 0
+  },
+  "5": {
+   "holz": 20,
+   "stein": 6,
+   "eisen": 0,
+   "pech": 0,
+   "gold": 0
+  },
+  "7": {
+   "holz": 3,
+   "stein": 0,
+   "eisen": 0,
+   "pech": 0,
+   "gold": 60
+  },
+  "10": {
+   "holz": 0,
+   "stein": 0,
+   "eisen": 0,
+   "pech": 0,
+   "gold": 0
+  },
+  "19": {
+   "holz": 5,
+   "stein": 0,
+   "eisen": 0,
+   "pech": 0,
+   "gold": 0
+  },
+  "20": {
+   "holz": 25,
+   "stein": 0,
+   "eisen": 0,
+   "pech": 0,
+   "gold": 0
+  },
+  "32": {
+   "holz": 3,
+   "stein": 0,
+   "eisen": 0,
+   "pech": 0,
+   "gold": 15
+  }
+ },
+ "gelernt": {
+  "Eisenmine": {
+   "startwert": 0.61,
+   "startgewicht": 63177,
+   "gemessen_je_1000_auf_d0": 0.63,
+   "zugang": 60.0,
+   "lieferung": 2,
+   "uhr_ab_abgabe": 2,
+   "uhr_ab_alter": 6,
+   "betriebs_ticks": 137355,
+   "gewichtete_ticks": 67713,
+   "gegenprobe": 0.93,
+   "anlauf": 6706,
+   "anlauf_quelle": "gemessen an 8 Betrieben",
+   "anlaeufe": [
+    6133,
+    6245,
+    6451,
+    6650,
+    6706,
+    6770,
+    6804,
+    6812
+   ],
+   "lief_beim_start": false
+  },
+  "Steinbruch+Ochsenjoch": {
+   "startwert": 6.72,
+   "startgewicht": 54086,
+   "gemessen_je_1000_auf_d0": 7.51,
+   "zugang": 466.0,
+   "lieferung": null,
+   "uhr_ab_abgabe": 0,
+   "uhr_ab_alter": 5,
+   "betriebs_ticks": 114861,
+   "gewichtete_ticks": 56383,
+   "gegenprobe": 0.0,
+   "anlauf": 3707,
+   "anlauf_quelle": "gemessen an der Art",
+   "anlaeufe": [],
+   "lief_beim_start": false
+  },
+  "Apfelplantage": {
+   "startwert": 3.254,
+   "startgewicht": 131019,
+   "gemessen_je_1000_auf_d0": 3.21,
+   "zugang": 449.0,
+   "lieferung": 5,
+   "uhr_ab_abgabe": 5,
+   "uhr_ab_alter": 3,
+   "betriebs_ticks": 191943,
+   "gewichtete_ticks": 128927,
+   "gegenprobe": 0.94,
+   "anlauf": 2142,
+   "anlauf_quelle": "gemessen an 5 Betrieben",
+   "anlaeufe": [
+    1750,
+    1801,
+    2142,
+    2339,
+    2766
+   ],
+   "lief_beim_start": true
+  },
+  "Jaegerhuette": {
+   "startwert": 3.072,
+   "startgewicht": 82848,
+   "gemessen_je_1000_auf_d0": 3.07,
+   "zugang": 0.0,
+   "lieferung": null,
+   "uhr_ab_abgabe": 0,
+   "uhr_ab_alter": 0,
+   "betriebs_ticks": 0,
+   "gewichtete_ticks": 0,
+   "gegenprobe": null,
+   "anlauf": 4427,
+   "anlauf_quelle": "Startwert",
+   "anlaeufe": [],
+   "lief_beim_start": false
+  },
+  "Holzfaeller": {
+   "startwert": 13.239,
+   "startgewicht": 151124,
+   "gemessen_je_1000_auf_d0": 13.31,
+   "zugang": 2289.0,
+   "lieferung": 18,
+   "uhr_ab_abgabe": 2,
+   "uhr_ab_alter": 13,
+   "betriebs_ticks": 396435,
+   "gewichtete_ticks": 150925,
+   "gegenprobe": 0.18,
+   "anlauf": 4000,
+   "anlauf_quelle": "Startwert",
+   "anlaeufe": [
+    6452
+   ],
+   "lief_beim_start": true
+  }
+ },
+ "gesetzt": {
+  "Steinbruch+Ochsenjoch": 4,
+  "Eisenmine": 8,
+  "Apfelplantage": 2,
+  "Holzfaeller": 6,
+  "Ochsenjoch (Stau)": 6
+ },
+ "verstoesse": []
+}

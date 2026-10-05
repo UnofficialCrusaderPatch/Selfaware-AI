@@ -228,9 +228,10 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
     wirt = Wirtschaft(plan, SP, baue_schnell, [nr for nr, _, _ in gebaeude_von(SP, 10)])
     karte_laden()        # Begehbarkeit fuer kurze Rueckzuege - jetzt, solange das Spiel noch steht
     lernlog = os.path.join(D, "ertrag_live_%s_i%d.jsonl" % (time.strftime("%Y%m%d_%H%M%S"), INSTANZ))   # je Instanz: Serien laufen parallel
-    ausbau = Ertragsplaner(plan, SP, baue_schnell, wirt, s32(peek(PD + 0x2188)[0]), ende=bis_tick, protokoll=lernlog)   # lernt im Spiel (Daniel 19:44)
+    ausbau = Ertragsplaner(plan, SP, baue_schnell, wirt, s32(peek(PD + 0x2188)[0]), ende=bis_tick, protokoll=lernlog, wegtest=wegtest)   # lernt im Spiel (Daniel 19:44)
     schreib("Ertrags-Planer: Baukosten aus dem Spiel %s; Protokoll %s" % (
         {t: {w: v for w, v in k.items() if v} for t, k in ausbau.kosten.items()}, os.path.basename(lernlog)))
+    schreib("Ertrags-Planer: " + ausbau.startwerte)
     schreib("Wirtschaft: Apfel A %s, B %s; alte Lagerteile %s" % (wirt.A, wirt.B, sorted(wirt.alt)))
     soeldner, geworben = None, 0
     befehl({"kamera": list(plan["lager_mitte"])}, 0.8)
@@ -351,6 +352,8 @@ def fingerabdruck(plan):
 
 def main():
     arg = dict(a.split("=") for a in sys.argv[1:])
+    import kennung                    # Daniel 20:46: sofort sehen, welcher Code-Stand diese Partie spielt
+    schreib(kennung.zeile())
     # Plan je Startstand (Daniel 05.10. 18:55: erst schauen, wo der Bergfried steht) - karten_holen.py + eroeffnung.py start=...
     datei = os.path.join(D, arg.get("plan", "eroeffnung_plan_M19.json"))
     plan = json.load(open(datei, encoding="utf-8")); plan["_datei"] = datei
@@ -370,8 +373,14 @@ def main():
         alt = json.load(open(merk, encoding="utf-8")) if os.path.exists(merk) else {}
         if alt.get("fingerabdruck") == fp and arg.get("neu", "nein") != "ja":
             schreib("Eroeffnung unveraendert (Fingerabdruck %s) - lade %s statt neu zu bauen" % (fp[:10], alt["spielstand"]))
-            print("Tick", lade_stand(alt["spielstand"], mit_bild=False))
-            befehl({"eigenerPlatz": SP}, 0.8)
+            for versuch in range(1, 4):
+                print("Tick", lade_stand(alt["spielstand"], mit_bild=False))
+                befehl({"eigenerPlatz": SP}, 0.8)
+                # 05.10. 20:53 (Laeufe l1, l4): gelegentlich steht nach dem Laden gameOver 1 - die Niederlage-Pruefung lief
+                # vor eigenerPlatz (Meilensteine 30.09.). Neu laden statt den Lauf zu verwerfen; kein Eingriff in den Spielstand.
+                if peek(0x0117D500)[0] == 0:
+                    break
+                schreib("gameOver 1 nach dem Laden (Versuch %d) - lade erneut" % versuch)
         else:
             name = phase1(plan)
             json.dump({"fingerabdruck": fp, "spielstand": name, "erstellt": time.strftime("%d.%m.%Y %H:%M")},

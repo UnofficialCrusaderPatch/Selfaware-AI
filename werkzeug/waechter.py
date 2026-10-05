@@ -32,7 +32,10 @@ def lies_gebaeude():
         w = z.split()
         if len(w) >= 7:
             G[int(w[0])] = {"besitzer": int(w[1]), "typ": int(w[2]), "x": int(w[3]), "y": int(w[4]), "leben": int(w[5]), "uid": int(w[6]),
-                            "erreichbar": int(w[7]) if len(w) >= 8 else 1}
+                            "erreichbar": int(w[7]) if len(w) >= 8 else 1,
+                            # Vorrat im Gebaeude, Hoechstmenge, Verbund (Steinbruch -> sein Steinhaufen Typ 21); seit 05.10. 20:35
+                            "vorrat": int(w[8]) if len(w) >= 11 else None, "grenze": int(w[9]) if len(w) >= 11 else None,
+                            "verbund": int(w[10]) if len(w) >= 11 else None}
     return G
 
 def lies_lagebild(neu_holen=True):

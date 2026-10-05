@@ -69,6 +69,44 @@ BAUM_FREI = 7           # ein Baum gilt als vergeben, wenn ein eigener Holzfaell
 SIGNAL_GUT = (0.7, 1.3)  # abgegebene Ladung / gebuchter Zugang, in dem die Abgaben einer Art als sichtbar gelten
 SIGNAL_AB = 20           # ab so viel gebuchtem Zugang wird die Gegenprobe ausgewertet
 
+OCHSENLADUNG = 12        # Steinbloecke je Ochsengang (gemessen M20, 05.10.)
+JOCHE_MAX = 3            # Building +0x2ca quarryLinkedOxTethers short[3] (abgelesen, Ghidra)
+
+
+def startwerte_aus_partien(dateien):
+    """Startwerte aus den gelernten Werten frueherer Partien (daten/ertrag_gelernt_*.json, gleicher Planer-Stand):
+    Rate = Mittel der gemessenen Raten auf d0; Gewicht = Median der gewichteten Betriebs-Ticks EINER Partie (eine fruehere
+    Partie zaehlt wie eine Partie, sonst lernte die laufende nichts mehr); Anlauf = Mittel, nur wo im Spiel gemessen."""
+    import statistics
+    sammel = {}
+    for f in dateien:
+        d = json.load(open(f, encoding="utf-8"))
+        for art, v in d["gelernt"].items():
+            typ = next(t for t, n in NAME.items() if n == art)
+            e = sammel.setdefault(typ, {"rate": [], "gewicht": [], "anlauf": []})
+            e["rate"].append(v["gemessen_je_1000_auf_d0"])
+            e["gewicht"].append(v["gewichtete_ticks"])
+            if v["anlauf_quelle"] != "Startwert":
+                e["anlauf"].append(v["anlauf"])
+    return {typ: {"rate": round(statistics.mean(e["rate"]), 3), "gewicht": round(statistics.median(e["gewicht"])),
+                  "anlauf": round(statistics.mean(e["anlauf"])) if e["anlauf"] else None, "partien": len(e["rate"])}
+            for typ, e in sammel.items()}
+
+
+def startwerte_laden(pfad):
+    """Ersetzt Rate, Gewicht und (falls gemessen) Anlauf in START. Gibt Text fuer das Protokoll."""
+    if not os.path.exists(pfad):
+        return "keine Startwerte-Datei (%s) - Messpartie-Werte" % os.path.basename(pfad)
+    w = json.load(open(pfad, encoding="utf-8"))
+    teile = []
+    for typ_s, v in w["werte"].items():
+        typ = int(typ_s)
+        ware, r0, d0, gew, anl, arb, ziel = START[typ]
+        START[typ] = (ware, v["rate"], d0, v["gewicht"], v["anlauf"] or anl, arb, ziel)
+        teile.append("%s %.2f (Gewicht %d, Anlauf %d)" % (NAME[typ], v["rate"], v["gewicht"], v["anlauf"] or anl))
+    return "Startwerte aus %d frueheren Partien: %s" % (w["partien"], "; ".join(teile))
+
+
 def lies_baukosten(typen):
     """Baukosten aus dem laufenden Spiel (erst nach Kartenstart gefuellt). Gibt typ -> {holz, stein, eisen, pech, gold}."""
     return {t: dict(zip(KOSTEN_WAREN, peek(KOSTEN_ADR + t * 20, 5))) for t in typen}
@@ -239,13 +277,18 @@ class Ertragsmesser:
 class Ertragsplaner:
     PLANEN = 10
 
-    def __init__(self, plan, sp, baue_schnell, wirt, steuerstufe, ende=None, kosten=None, groesse=None, protokoll=None):
+    def __init__(self, plan, sp, baue_schnell, wirt, steuerstufe, ende=None, kosten=None, groesse=None, protokoll=None, wegtest=None):
         self.sp, self.plan, self.baue, self.wirt, self.ende = sp, plan, baue_schnell, wirt, ende
+        # Daniel 05.10. 20:50: "deine Holzfaeller sind in einer unzugehbaren Position - nirgends bauen, wo es nicht begehbar ist"
+        # (Bild: Holzfaeller jenseits des Flusses). Platzkarte = darf man bauen; Wegtest (Wegfinder des Spiels, setDestinationForUnit,
+        # Gegenprobe 05.10.: Wasser 2/2 kein Weg) = kommt man hin. Ergebnis je Punkt gemerkt.
+        self.wegtest, self.erreichbar_ok, self.unerreichbar = wegtest, set(), set()
         self.K = tuple(plan.get("bergfried_eingang", (165, 111)))
         d = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "daten")
         kurz = plan["start"]
         info = json.load(open(os.path.join(d, "start_%s.json" % kurz), encoding="utf-8"))
         self.feinde = [tuple(v["eingang"]) for v in info["feind_bergfried"].values()]
+        self.startwerte = startwerte_laden(os.path.join(d, "ertrag_startwerte_%s.json" % kurz))
         self.kosten = kosten if kosten is not None else lies_baukosten((1, 3, 4, 5, 7, 10, 19, 20, 32))
         if groesse is None:
             from bauen import NACH_TYP
@@ -273,6 +316,7 @@ class Ertragsplaner:
         self.braucht_gold, self.letzte_wahl, self.gesetzt = False, None, {}
         self.fehlschlag, self.abgelehnt, self.verstoss = {}, {}, []
         self.stein_reserve = 0
+        self.haufen, self.joch_bei, self.planung_t = {}, {}, []
 
     def eigene_seite(self, p):
         d = schach(p, self.K)
@@ -321,7 +365,9 @@ class Ertragsplaner:
                 continue
             b = self.groesse.get(typ, 2) // 2
             weg = lambda p: min(schach((p[0] + b, p[1] + b), z) for z in zl[typ])
-            ort = min(orte, key=weg)
+            ort = self._erreichbarer(sorted(orte, key=weg), L)
+            if ort is None:
+                continue
             w = weg(ort)
             if w > 70:
                 continue
@@ -340,6 +386,20 @@ class Ertragsplaner:
             return sorted(aus, key=lambda k: k["amort"])
         return sorted(aus, key=lambda k: -k["gewinn"])
 
+    def _erreichbarer(self, orte, L):
+        """Der erste der besten Orte, zu dem unser Lord einen Weg hat (ein Modulaufruf fuer bis zu 8 neue Punkte)."""
+        if not self.wegtest:
+            return orte[0] if orte else None
+        probe = [p for p in orte[:16] if p not in self.unerreichbar][:8]
+        neu = [p for p in probe if p not in self.erreichbar_ok]
+        if neu:
+            lord = next((n for n, e in L.items() if e["typ"] == 55 and e["besitzer"] == self.sp), None)
+            if lord is None:
+                return probe[0] if probe else None
+            for p, ok in zip(neu, self.wegtest(lord, neu)):
+                (self.erreichbar_ok if ok else self.unerreichbar).add(p)
+        return next((p for p in probe if p in self.erreichbar_ok), None)
+
     def reserve(self):
         """Was nicht verkauft werden darf (Daniel 19:44: Stein bis auf den Bedarf der geplanten Eisenmine)."""
         return {"stein": self.stein_reserve}
@@ -349,7 +409,9 @@ class Ertragsplaner:
         return self.messer.beobachte(st, L, G, self.ziele(G))
 
     def schritt(self, st, L, G, runde):
-        if runde % self.PLANEN:
+        # ab Runde 1, dann alle PLANEN Runden (bis 05.10. 20:55 erst ab Runde 10: Lauf l1 plante zum ersten Mal bei Tick
+        # 1.634, geladen war Tick 729 - Daniel: "waehrend du noch wartest, hat Rotkaeppchen schon laengst angefangen")
+        if (runde - 1) % self.PLANEN:
             return []
         ev = []
         self.braucht_gold = bool(self.wirt.B_offen)     # Seasoning-B hat beim Gold Vorrang
@@ -371,6 +433,7 @@ class Ertragsplaner:
             if voll and belegt >= teile:
                 l = self.ziele(G)[5][0]
                 ev.append("PLANER Lager anbauen (%s fast voll, %d Teile) -> %s" % (voll, teile, self.baue(10, l[0], l[1], 10)))
+        ev += self.ochsen_nach_stau(st, G, holz)
         alle = self.kandidaten(st, L, G)
         for k in alle:
             if k["grund"]:
@@ -379,7 +442,7 @@ class Ertragsplaner:
         kand = [k for k in alle if not k["grund"]]
         # Stein-Reserve: Bedarf der naechsten Eisenmine, solange sich eine Mine noch lohnt
         self.stein_reserve = self.kosten[5]["stein"] if any(k["typ"] == 5 for k in kand) else 0
-        if runde % (5 * self.PLANEN) == 0:
+        if (runde - 1) % (5 * self.PLANEN) == 0:
             ev.append("PLANER Lage (Gewinn bis Ende / Amortisation): " + ", ".join("%s %s/%.0f%s" % (
                 NAME[k["typ"]], "-" if k["gewinn"] is None else "%.0f" % k["gewinn"], k["amort"], " [%s]" % k["grund"].split(" (")[0] if k["grund"] else "")
                 for k in alle) + " | Stein-Reserve %d" % self.stein_reserve)
@@ -404,7 +467,7 @@ class Ertragsplaner:
             # nur sparen, was fehlt: Gold zurueckhalten nur, wenn dem besten Bau Gold fehlt
             if gold < beste["kosten"]["gold"] + reserve_gold:
                 self.braucht_gold = True
-            if runde % (5 * self.PLANEN) == 0:
+            if (runde - 1) % (5 * self.PLANEN) == 0:
                 ev.append("PLANER wartet auf %s (fehlt: %s)" % (NAME[beste["typ"]], ", ".join(
                     "%s %d" % (w, beste["kosten"][w] - v) for w, v in (("holz", holz), ("stein", stein), ("gold", gold)) if beste["kosten"][w] > v)))
             return ev
@@ -424,8 +487,45 @@ class Ertragsplaner:
             "-" if wahl["gewinn"] is None else "%.0f" % wahl["gewinn"], "" if wahl is beste else " statt %s" % NAME[beste["typ"]], ort))
         return ev
 
+    def ochsen_nach_stau(self, st, G, holz):
+        """Daniel 05.10. 20:26: "nicht genug Ochsenjoche gebaut - nicht geschaut, wann sich Steine sammeln, und dann nach
+        einem gewissen Punkt Ochsenjoche bauen". Gemessen 20:33: die fernen Steinbrueche hatten 47/42/34 von 48 Bloecken
+        auf dem Haufen (Typ 21, Vorrat im Lagebild), jeder mit 1 Ochsen; voll heisst: die Steinmetze stehen.
+        Stau = am Haufen liegt mindestens eine Ochsenladung (12) und er schrumpft nicht. Dann ein Joch mehr (hoechstens 3
+        je Steinbruch), danach 3 Planungsrunden beobachten, ob es reicht. Ein Joch gehoert zum naechsten Steinbruch."""
+        t = st.get("t", 0)
+        self.planung_t.append(t)
+        fenster = 3 * (self.planung_t[-1] - self.planung_t[-2]) if len(self.planung_t) >= 2 else 10 ** 9
+        brueche = {n: g for n, g in G.items() if g["besitzer"] == self.sp and g["typ"] == 20}
+        joche = {n: 0 for n in brueche}
+        for o in G.values():
+            if o["besitzer"] == self.sp and o["typ"] == 4 and brueche:
+                n = min(brueche, key=lambda q: schach((o["x"], o["y"]), (brueche[q]["x"], brueche[q]["y"])))
+                if schach((o["x"], o["y"]), (brueche[n]["x"], brueche[n]["y"])) <= 15:
+                    joche[n] += 1
+        ev = []
+        for n, g in sorted(brueche.items()):
+            h = G.get(g.get("verbund") or -1)
+            if not h or h.get("vorrat") is None:
+                continue
+            v, vor = h["vorrat"], self.haufen.get(n)
+            self.haufen[n] = v
+            if (vor is not None and v >= OCHSENLADUNG and v >= vor and joche[n] < JOCHE_MAX
+                    and t - self.joch_bei.get(n, -10 ** 9) >= fenster and holz >= self.kosten[4]["holz"]):
+                ort = self.baue(4, g["x"] + 3, g["y"] - 4, 8)
+                self.joch_bei[n] = t
+                if ort:
+                    self.gesetzt["Ochsenjoch (Stau)"] = self.gesetzt.get("Ochsenjoch (Stau)", 0) + 1
+                ev.append("PLANER Ochsenjoch an Steinbruch %d: Haufen %d/%d (vorher %d), Joche %d -> %s" % (
+                    n, v, h["grenze"], vor, joche[n], ort))
+                break                                               # eins je Planungsrunde
+        return ev
+
     def bericht(self):
         stehen = {NAME[t]: self.messer.letzter.get("G%d" % t, 0) for t in START}
+        stehen["Ochsenjoch"] = self.messer.letzter.get("G4", 0)
+        stehen["Steinhaufen zuletzt"] = dict(sorted(self.haufen.items()))
+        stehen["Bauplaetze ohne Weg verworfen"] = len(self.unerreichbar)
         return "Ertrags-Planer: gesetzt %s, stehen am Ende %s, abgelehnt %s, Verstoesse gegen den Horizont %s, Steuerstufe %d\n%s" % (
             self.gesetzt or "nichts", stehen, {"%s: %s" % k: v for k, v in self.abgelehnt.items()}, self.verstoss or "keine",
             self.steuer, self.messer.bericht())
@@ -433,3 +533,16 @@ class Ertragsplaner:
     def sichern(self, pfad):
         json.dump({"zeit": time.strftime("%d.%m.%Y %H:%M"), "kosten": self.kosten, "gelernt": self.messer.stand(),
                    "gesetzt": self.gesetzt, "verstoesse": self.verstoss}, open(pfad, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+
+
+if __name__ == "__main__":
+    # python ertragsplaner.py startwerte M19 <datei> [<datei> ...]  -> daten/ertrag_startwerte_M19.json
+    import sys
+    if len(sys.argv) >= 4 and sys.argv[1] == "startwerte":
+        kurz, dateien = sys.argv[2], sys.argv[3:]
+        w = startwerte_aus_partien(dateien)
+        ziel = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "daten", "ertrag_startwerte_%s.json" % kurz)
+        json.dump({"zeit": time.strftime("%d.%m.%Y %H:%M"), "partien": len(dateien), "quellen": [os.path.basename(f) for f in dateien],
+                   "werte": {str(t): v for t, v in w.items()}}, open(ziel, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+        for t, v in w.items():
+            print("%-22s %s" % (NAME[t], v))

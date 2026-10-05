@@ -56,15 +56,17 @@ def werte(pfad):
     z["negativ"] = "%s/%s/%s von %s" % (m.group(1), m.group(3), m.group(4), m.group(2)) if m else "-"
     # 20:21: der Fehlversuch ohne Pause endete mit "TESTBEDINGUNG FEHLT" und zaehlte als gueltiger Lauf mit 0 Assassinen
     z["fehler"] = "ja" if re.search(r"Traceback|ABBRUCH|TESTBEDINGUNG FEHLT", t) or z["ende"] is None else "nein"
+    m = re.search(r"CODE-KENNUNG (\w+)", t)
+    z["kennung"] = m.group(1) if m else "-"
     return z
 
 
 def zeile(z):
-    return "%-34s %-16s %6s %5d %5s %6d %8s  %-12s %-6s %s" % (
-        z["datei"], z["ergebnis"], z["ende"], z["assassinen"], z["zerstoert"], z["verkaufsgold"], z["erste_mine"],
+    return "%-34s %-8s %-16s %6s %5d %5s %6d %8s  %-12s %-6s %s" % (
+        z["datei"], z.get("kennung", "-"), z["ergebnis"], z["ende"], z["assassinen"], z["zerstoert"], z["verkaufsgold"], z["erste_mine"],
         z["negativ"], z["fehler"], z["gesetzt"])
 
-KOPF = "%-34s %-16s %6s %5s %5s %6s %8s  %-12s %-6s %s" % ("Konsole", "Ergebnis", "Ende", "Assa", "zerst", "Gold", "1.Mine",
+KOPF = "%-34s %-8s %-16s %6s %5s %5s %6s %8s  %-12s %-6s %s" % ("Konsole", "Kennung", "Ergebnis", "Ende", "Assa", "zerst", "Gold", "1.Mine",
                                                         "neg H/S/E", "Fehler", "gesetzt")
 
 
@@ -81,14 +83,16 @@ def zuruecksetzen():
     kanal.belege()
     try:
         ansicht, vorbei = peek(ANSICHT)[0], peek(0x0117D500)[0]
-        text = "Ansicht %d, Partie nicht beendet" % ansicht
-        if vorbei == 1 or ansicht in (29, 30):
+        text = "Ansicht %d" % ansicht
+        # immer ueber das Hauptmenue laden (05.10. 20:46, Lauf l1: aus der laufenden Partie geladen hob das Laden die
+        # Pause auf, die Niederlage-Pruefung setzte gameOver 1; aus dem Hauptmenue lief es bisher jedes Mal)
+        if ansicht != HAUPTMENUE:
             befehl({"menue": HAUPTMENUE}, 2.0, bis="MENUE")
             time.sleep(2.0)
             neu = peek(ANSICHT)[0]
             if neu != HAUPTMENUE:
                 raise RuntimeError("Hauptmenue nicht erreicht (Ansicht %d -> %d)" % (ansicht, neu))
-            text = "Ende-Bildschirm (Ansicht %d) -> Hauptmenue" % ansicht
+            text = "Ansicht %d (Partie vorbei: %d) -> Hauptmenue" % (ansicht, vorbei)
         befehl({"pause": True}, 0.8)
         if peek(PAUSE)[0] != 1:
             raise RuntimeError("Spiel laesst sich nicht pausieren (Pause %d)" % peek(PAUSE)[0])
@@ -104,6 +108,10 @@ def serie(arg):
     os.environ["SHC_INSTANZ"] = str(inst)
     name = "SAI"
     kurz, anzahl, warte = arg.get("name", "x"), int(arg.get("anzahl", 3)), int(arg.get("warte", 60))
+    # tempo/minuten einstellbar (05.10. 20:55): bei Tempo 1000 schafft der Lenker nur ~25 Runden je 1.000 Ticks
+    global EINSTELLUNG
+    EINSTELLUNG = [e for e in EINSTELLUNG if not e.startswith(("tempo=", "minuten="))] + [
+        "tempo=%s" % arg.get("tempo", "1000"), "minuten=%s" % arg.get("minuten", "25")]
     aus = os.path.join(D, "serie_%s.txt" % kurz)
     if not os.path.exists(aus):
         open(aus, "w", encoding="utf-8").write("# Serie %s, Einstellung %s\n%s\n" % (kurz, " ".join(EINSTELLUNG), KOPF))
@@ -120,6 +128,9 @@ def serie(arg):
                 print("Instanz %d belegt - warte 30 s (%s)" % (inst, r.stdout.strip().replace("\n", " | ")), flush=True)
                 time.sleep(30)
             print("Lauf %d/%d auf Instanz %d: %s" % (i, anzahl, inst, zuruecksetzen()), flush=True)
+            import kennung
+            soll = kennung.kennung()[0]
+            print("Lauf %d/%d: erwartete Code-Kennung %s" % (i, anzahl, soll), flush=True)
             konsole = os.path.join(D, "partie%s_%d_i%d_konsole.txt" % (kurz, i, inst))
             with open(konsole, "w", encoding="utf-8") as f:
                 rc = subprocess.run([sys.executable, "-u", os.path.join(HIER, "erstes_spiel.py")] + EINSTELLUNG,
@@ -127,6 +138,8 @@ def serie(arg):
             z = werte(konsole)
             if rc != 0:
                 z["fehler"] = "rc %d" % rc
+            if z["kennung"] != soll:
+                z["fehler"] = "Kennung %s statt %s" % (z["kennung"], soll)
             open(aus, "a", encoding="utf-8").write(zeile(z) + "\n")
             print(zeile(z), flush=True)
             if z["fehler"] != "nein":

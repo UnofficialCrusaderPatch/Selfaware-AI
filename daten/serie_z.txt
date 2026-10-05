@@ -1,0 +1,4 @@
+# Serie z, Einstellung minuten=25 tempo=1000 waechter=ja assassinen=-1 bis_tick=28700
+Konsole                            Ergebnis           Ende  Assa zerst   Gold   1.Mine  neg H/S/E    Fehler gesetzt
+partiez_1_i1_konsole.txt           offen             28725    70    86   5895     8155  1/9/0 von 574 nein   {'Steinbruch+Ochsenjoch': 4, 'Eisenmine': 7, 'Apfelplantage': 3, 'Holzfaeller': 6, 'Ochsenjoch (Stau)': 7}
+partiez_2_i1_konsole.txt           offen             28782    80    85   6180     7198  1/9/0 von 590 nein   {'Steinbruch+Ochsenjoch': 4, 'Eisenmine': 9, 'Apfelplantage': 4, 'Holzfaeller': 6, 'Ochsenjoch (Stau)': 9}
