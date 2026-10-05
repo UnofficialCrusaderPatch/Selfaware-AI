@@ -78,6 +78,7 @@ bis eine Messung es bestaetigt (Marke dahinter).
 - Folgerung: Patrouillen sind die Gefahr fuer Assassinen (meiden oder mit Ueberzahl gebuendelt erledigen); ihr Essen kommt nur aus Aepfeln - Plantagen und Kornspeicher sind ihr wunder Punkt; gegen den Grossangriff brauchen wir Mauern/Tuerme und den Lord in Sicherheit.
 
 ## Arbeitsweise beim Testen
+- Lernstufen je Sache (Daniel 05.10. 19:18) - ein Prozess, kein Schritt ist fest, aber jeder muss irgendwann beantwortet werden (und viele weitere Fragen): **1.** bauen koennen - **2.** es wirksam machen - **3.** wissen, warum man es NICHT bauen muss - **4.** wissen, warum und WANN man es bauen sollte - **5.** selbstaendig situativ auf kreative Loesungen kommen.
 - Offenes steht an EINER Stelle: `Backlog.md`. Vor jedem Schritt dort den passenden Punkt waehlen, Erledigtes abhaken (Daniel 05.10. 19:14).
 - Bei Fehlern immer den passenden Stand laden; nach vielen Neuerungen lieber ganz neu starten, um eine noch bessere Moeglichkeit zu finden (Daniel 04.10., 22:54).
 

@@ -4,6 +4,10 @@ Eine Stelle fuer alles Offene (Daniel 05.10.2026 19:14: "schreib dir das in den 
 passende"). Vor jedem neuen Schritt hier den passenden Punkt waehlen; Erledigtes wird abgehakt und bleibt stehen.
 Herkunft je Punkt in Klammern. Einzelheiten und Messwerte stehen in `Meilensteine.md`.
 
+Lernstufen je Sache (Daniel 05.10. 19:18) - ein Prozess, kein Schritt ist fest, aber jeder muss irgendwann beantwortet
+werden (und viele weitere Fragen): **1.** bauen koennen - **2.** es wirksam machen - **3.** wissen, warum man es NICHT
+bauen muss - **4.** wissen, warum und WANN man es bauen sollte - **5.** selbstaendig situativ auf kreative Loesungen kommen.
+
 ## Jetzt dran
 - [ ] **Ertrags-Planer** (Daniel 19:11/19:14): erst Messpartie (Ertrag je Gebaeude je 1.000 Ticks, Verkaufspreis Stein/Eisen, Weglaenge), dann jede Runde die Aktion mit der schnellsten Amortisation bauen, ohne feste Stueckzahlen; Umgebung bestimmt alles. Stein und Eisen vermutlich vorne.
 
