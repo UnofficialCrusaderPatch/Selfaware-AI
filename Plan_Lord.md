@@ -4,6 +4,33 @@ Anlass: Daniel 21:30 - "du hast komplett die Kontrolle verloren ... maximal unor
 neun Aenderungen hintereinander, jeder Fehler erst in einer ganzen Partie gefunden, fast jede Serie mit anderem Code.
 Ab jetzt gilt dieser Plan; gebaut wird erst nach Daniels Ja, und dann nur Schritt fuer Schritt.
 
+## NEUE RICHTUNG (Daniel 05.10. 22:09-22:19) - gilt vor allem darunter
+Woertlich: "Du solltest dich mehr darauf fokussieren, wie du so schnell wie moeglich am Anfang des Spiels raiden kannst,
+dann parallel deine Wirtschaft maximal aufbaust, dann eine Armee aufstellst und mit allen Assassinen moeglichst
+gleichzeitig auf den Lord gehst." 22:11: "sobald moeglich anfangen zu raiden ohne Ruecksicht auf Verluste:
+1. Soeldnerposten 2. Kornspeicher 3. Markt, Essen verkaufen, Assassinen ausbilden - dann direkt raiden, dabei die
+klassische Wirtschaft hoch." (Der Klettertest war unnoetig - Daniel 22:09: "ja koennen sie, glueckwunsch".)
+
+**Schritt R1 - Raid zuerst (gebaut 22:12, Eroeffnung phase1):** Kornspeicher + Markt, ALLES Startessen verkaufen,
+Posten, mit dem Rest Assassinen, erst dann die Wirtschaft. (Posten kann nicht vor dem Kornspeicher: 120 Gold, das Gold
+kommt nur aus dem Startessen, und das erscheint erst mit dem Kornspeicher.)
+Gemessen raidzuerst_1 (Kennung 043d044d, bis Tick 8.000) gegen Serie a (3 Laeufe):
+| | Serie a | raidzuerst_1 |
+|---|---|---|
+| Posten + 1. Assassine | Posten ~833, 1. Raid ~5.930 | beides Tick 737, 1. Raid 1.093 |
+| 1. feindliches Gebaeude weg | ~7.750 | 2.007 |
+| zerstoert bis 8.000 | 1 | 2 |
+| Beliebtheit bei ~7.500 | ~92 | 42 (kein Essen bis ~5.400, nur 1 von 3 Apfelplantagen - Gold 20 nach Posten+Assassine) |
+Offen: die Wirtschaft waechst NICHT mit (Daniel fragen, siehe Bericht 22:2x).
+
+**Assassinen-Taktik in drei Stufen (Daniel 22:16 / 22:19):**
+- **T1 Ausweichen bei Uebermacht** (gebaut, Abschnitt 4a): mehr feindliche Nahkaempfer als eigene Assassinen im
+  Umkreis 5 -> kurz weg, kein Ziel, bis 2 Runden kein Verfolger im Umkreis 10, dann wieder angreifen. Anlass: der erste
+  Assassine starb 1 gegen 3 ihrer Verteidigungs-Assassinen (Tick 2.429, Leben 11.720 -> 920 in ~50 Ticks), weil der
+  Rueckzug nur Fernkaempfer kannte. Pruefung ohne Spiel `ausweichen_pruefen.py` 5/5 gruen, gegen alten Stand 3 rot.
+- **T2 Weglocken:** einer lockt die Verteidiger weg (und weicht nach T1 aus), ein anderer greift derweil an.
+- **T3 Sammeln bis zur eigenen Uebermacht**, dann gegen die Verteidigung - "dann ist die Tuere frei fuer die anderen".
+
 ## Ziel
 Die Liga-Partie gegen Rotkaeppchen gewinnen: ihren Lord toeten, ohne unseren zu verlieren.
 

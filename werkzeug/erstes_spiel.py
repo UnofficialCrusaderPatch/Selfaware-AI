@@ -50,17 +50,33 @@ def phase1(plan):
     befehl({"eigenerPlatz": SP}, 0.8)
     vorab()
     from bauen import baue_viele
-    # Liga-Start (0 Gold): Kornspeicher + Markt zuerst; die Start-Nahrung (je 15) erscheint erst mit dem Kornspeicher.
-    # Dann alles bis auf den Puffer verkaufen, teuerste Sorte zuerst - das ist das Startgold fuer die Apfelplantagen.
+    # Daniel 05.10. 22:11: "sobald moeglich anfangen zu raiden ohne Ruecksicht auf Verluste: 1. Soeldnerposten
+    # 2. Kornspeicher 3. Markt, Essen verkaufen, Assassinen ausbilden - dann direkt raiden, dabei die klassische
+    # Wirtschaft hoch." Liga-Start = 0 Gold: das Gold kommt nur aus der Start-Nahrung (je 15), und die erscheint erst
+    # mit dem Kornspeicher - darum Kornspeicher + Markt zuerst, ALLES verkaufen (kein Puffer), dann Posten (120 Gold) und
+    # mit dem ganzen Rest Assassinen (70), BEVOR die Wirtschaftsgebaeude die freien Leute belegen. Die Wirtschaft baut
+    # danach mit dem, was uebrig ist; fehlende Apfelplantagen setzt der Ertrags-Planer in Phase 2 nach.
+    # (Stand davor, gemessen Serie a: Gold 205 nach dem Verkauf, 45 in Apfelplantagen, Posten erst Tick ~833,
+    #  erster Raid Tick ~5.930.)
     baue_viele([(19, plan["kornspeicher"][0], plan["kornspeicher"][1])], SP)
     markt = baue_schnell(26, BERGFRIED[0], BERGFRIED[1], 25)
     laufe(120)
     vk = vorrat(SP)
-    lose = nahrung_auf_kante({k: vk.get(k, 0) for k in NAHRUNG_PREIS}, nahrung_puffer(10))
+    lose = nahrung_auf_kante({k: vk.get(k, 0) for k in NAHRUNG_PREIS}, 0)
     laufe(5)
     v0 = vorrat(SP)
-    schreib("Liga-Start: Kornspeicher + Markt %s; Start-Nahrung %s verkauft (Lose zu 5) -> Gold %d, Nahrung uebrig %s" % (
-        markt, lose, v0["gold"], {k: v0.get(k, 0) for k in NAHRUNG_PREIS if v0.get(k, 0)}))
+    posten = baue_schnell(8, BERGFRIED[0], BERGFRIED[1], 25)
+    laufe(5)
+    geworben = 0
+    nr_posten = [n for n, _, _ in gebaeude_von(SP, 8)]
+    while nr_posten and vorrat(SP)["gold"] >= 70 and s32(peek(PD + 136)[0]) >= 1:
+        befehl({"werbe": {"typ": 73, "gebaeude": nr_posten[0]}}, 1.0, bis="WERBE")
+        geworben += 1
+        laufe(5)
+    v0 = vorrat(SP)
+    schreib("RAID ZUERST: Kornspeicher + Markt %s; Start-Nahrung %s verkauft (Lose zu 5); Soeldnerposten %s; %d Assassinen "
+            "angeworben -> Gold %d, Nahrung uebrig %s, Tick %d" % (markt, lose, posten, geworben, v0["gold"],
+            {k: v0.get(k, 0) for k in NAHRUNG_PREIS if v0.get(k, 0)}, tick()))
     # Seasoning (Daniel 04.10./05.10.): nur Gruppe A jetzt, B wenn A reif wird (wirtschaft.py); B-Holz bleibt im alten Lager
     A, B = apfel_gruppen(plan["aepfel"])
     auftrag = [(3, p) for p in plan["holzfaeller"]] + [(32, p) for p in A]

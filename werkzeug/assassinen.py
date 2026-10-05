@@ -230,6 +230,7 @@ class Einzeln:
     VOLL = 12500           # gemessen 05.10.: Leben eines frisch angeworbenen Assassinen
     SICHER_FERN, SICHER_NAH = 30, 10
     RUECKZUG_FERN = 20
+    UEBERMACHT_R, FLUCHT_RUHE = 5, 2   # 4a (Daniel 22:16): Umkreis fuer "mehr Feinde als eigene", Runden ohne Verfolger bis zum Wiederangriff
     ZUSCHLAGEN = 3
     ZIEL_FERN, ZIEL_FERN_MAX = 20, 2
     SCHWACH, SCHWACH_FERN = 0.6, 25
@@ -257,6 +258,7 @@ class Einzeln:
         self.mitglieder = set()
         self.ziel, self.ziel_typ, self.jagd, self.warte, self.befohlen = {}, {}, {}, {}, {}
         self.warte_seit = {}
+        self.flucht = {}                     # 4a: n -> {seit, ruhig} - weicht einer Nahkampf-Uebermacht aus
         self.schlechte_orte = set()          # Warteplaetze, an die keiner hinlief (9g: Gebaeudemitten)
         self.stapel = {"ziel": None, "mitglieder": set()}
         self.leben, self.umfeld = {}, {}
@@ -394,7 +396,7 @@ class Einzeln:
         # 1. Verluste und Verletzungen messen
         for n in list(self.mitglieder):
             if n not in L or L[n]["besitzer"] != self.sp:
-                self.bilanz["verluste"].add(n); self.mitglieder.discard(n); self._vergessen(n)
+                self.bilanz["verluste"].add(n); self.mitglieder.discard(n); self._vergessen(n); self.flucht.pop(n, None)
                 ereignis.append("MESSUNG tot %d: zuletzt %s" % (n, self.umfeld.pop(n, "unbekannt")))
                 self.leben.pop(n, None)
         verletzt = set()
@@ -452,6 +454,46 @@ class Einzeln:
                 self._vergessen(n)
                 self._warten(n, sicher, halten)
                 self.bilanz["rueckzug"] += 1
+        # 4a. Uebermacht im Nahkampf (Daniel 05.10. 22:16: "der erste Assassine wurde leider weggeworfen und von ihren
+        # Verteidigungs-Assassinen genommen (3 vs 1) - er haette lieber davor weggehen sollen, bis sie ihn nicht mehr
+        # verfolgen, und dann weiter angreifen sollen, anstatt einfach zu sterben"). Gemessen in raidzuerst_1 (Tick 2.429):
+        # drei feindliche Assassinen 2 Felder neben ihm, Leben 11.720 -> 920 in ~50 Ticks, kein Rueckzug - Regel 4 kennt
+        # nur Fernkaempfer. Neu: mehr feindliche Nahkaempfer als eigene Assassinen im Umkreis UEBERMACHT_R -> kurz weg vom
+        # Feind; kein neues Ziel, bis FLUCHT_RUHE Runden lang kein feindlicher Nahkaempfer im Umkreis SICHER_NAH stand.
+        eigene_orte = [(L[m]["x"], L[m]["y"]) for m in self.mitglieder]
+        for n in sorted(self.mitglieder):
+            if n in self.lordtrupp["mitglieder"]:
+                continue                   # der Lord-Angriff bleibt dran (Daniel 21:47)
+            ort = (L[n]["x"], L[n]["y"])
+            feinde = self._anzahl(ort, nah, self.UEBERMACHT_R)
+            eigene = sum(1 for q in eigene_orte if schach(ort, q) <= self.UEBERMACHT_R)
+            if n in self.flucht:
+                if self._naechster(ort, nah)[0] > self.SICHER_NAH:
+                    self.flucht[n]["ruhig"] += 1
+                    if self.flucht[n]["ruhig"] >= self.FLUCHT_RUHE:
+                        del self.flucht[n]
+                        self.warte.pop(n, None); self.warte_seit.pop(n, None)
+                        ereignis.append("AUSWEICHEN vorbei %d: %d Runden kein Verfolger im Umkreis %d - greift wieder an (Leben %d)" % (
+                            n, self.FLUCHT_RUHE, self.SICHER_NAH, L[n]["leben"]))
+                    continue
+                self.flucht[n]["ruhig"] = 0
+                if feinde > eigene:            # noch verfolgt und unterlegen: weiter weg
+                    sicher = self._sicherer_ort(ort, orte, fern, nah, n)
+                    if sicher and self.warte.get(n) != sicher:
+                        self._warten(n, sicher, halten)
+                continue
+            if feinde == 0 or feinde <= eigene:
+                continue
+            sicher = self._sicherer_ort(ort, orte, fern, nah, n)
+            if not sicher:
+                continue                       # kein Weg weg: weiterkaempfen
+            self._vergessen(n)
+            self.stapel["mitglieder"].discard(n)
+            self._warten(n, sicher, halten)
+            self.flucht[n] = {"seit": self.runde, "ruhig": 0}
+            self.bilanz["uebermacht"] = self.bilanz.get("uebermacht", 0) + 1
+            ereignis.append("AUSWEICHEN %d: %d feindliche Nahkaempfer gegen %d eigene im Umkreis %d, Leben %d -> nach %s" % (
+                n, feinde, eigene, self.UEBERMACHT_R, L[n]["leben"], sicher))
         # 4b. Ausweichen, bevor es weh tut: rueckt eine Gruppe Fernkaempfer heran, Ziel aufgeben
         for n in self.mitglieder:
             if n in verletzt or n in self.jagd or n in self.warte or n in self.stapel["mitglieder"] or n in self.lordtrupp["mitglieder"]:
@@ -533,7 +575,7 @@ class Einzeln:
         ohne = 0
         for n in sorted(self.mitglieder):
             if n in self.ziel or n in self.jagd or n in self.stapel["mitglieder"] or n in self.lordtrupp["mitglieder"] \
-                    or (n in self.warte and n in verletzt):
+                    or (n in self.warte and n in verletzt) or n in self.flucht:
                 continue
             ort = (L[n]["x"], L[n]["y"])
             schwach = L[n]["leben"] < self.SCHWACH * self.VOLL
@@ -565,7 +607,7 @@ class Einzeln:
         stp["mitglieder"] = {n for n in stp["mitglieder"] if n in self.mitglieder}
         ziel_lebt = stp["ziel"] in L and L[stp["ziel"]]["besitzer"] not in (0, self.sp)
         wartende = [n for n in self.mitglieder if n not in self.ziel and n not in self.jagd and n not in stp["mitglieder"]
-                    and n not in self.lordtrupp["mitglieder"] and L[n]["leben"] >= self.SCHWACH * self.VOLL]
+                    and n not in self.lordtrupp["mitglieder"] and n not in self.flucht and L[n]["leben"] >= self.SCHWACH * self.VOLL]
         if stp["mitglieder"] or len(wartende) >= self.STAPEL_AB:
             if not stp["mitglieder"]:
                 stp["mitglieder"] = set(wartende)
@@ -621,6 +663,7 @@ class Einzeln:
                     sum(b["gebaeude"].values()), b["gebaeude"], len(b["verluste"]), self.gemessen, b["neu_befohlen"],
                     b["rueckzug"], b.get("ausgewichen", 0), b["zuschlagen"], b.get("warten_neu", 0),
                     b.get("stapel_ziele", 0), len(self.schlechte_orte)) + ", Lord-Trupps %d" % b.get("lordtrupps", 0)
+                + ", Uebermacht ausgewichen %d" % b.get("uebermacht", 0)
                 + ", Alle-auf-den-Lord [%s]" % "; ".join(
                     "Runde %d: %d Assassinen, Weg %d-%d, Fern %d / Nah %d am Lord, am Lord hoechstens %d (zuerst Runde %s), "
                     "abgelenkt durch Typ %s, ohne Ziel nah am Lord hoechstens %s, Lord %d -> %d, Verluste %d" % (
