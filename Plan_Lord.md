@@ -40,6 +40,14 @@ Offen: die Wirtschaft waechst NICHT mit (Daniel fragen, siehe Bericht 22:2x).
   gleich schnell, sie geben nicht auf. Reine Flucht schuettelt sie nie ab; Burg = eigene Verluste (Speer/Bogen toeten sie
   nicht), ins Leere = Tod am Rand. Aber: 2-3 ihrer Wachen 4.000 Ticks weggelockt = Stufe T2. Stecken-bleiben-Fehler (Zustand 1)
   danach behoben (Pruefung 18/18), im Spiel noch nicht gelaufen.
+- **Ganze Partien ab Tick 0, Tempo 300, feste Saat (05.10. 23:2x-23:35):**
+  | Partie | Stand | Ergebnis | zerstoert | eigene Verluste | 10. Assassine | Seasoning A reif / B steht |
+  |---|---|---|---|---|---|---|
+  | gewinn_2 | Burg-Tabu fehlt, Anwerben ab 100 Gold | kein Sieg (Zeit um 28.745), Lord 75.000 -> 75.000 | 84 | 31 | Tick 16.418 | nie / nie |
+  | gewinn_3 | + Burg-Tabu, Anwerben ab 70, A-Baum neu suchen | **SIEG Tick 26.081** | 64 (24 Apfel, 18 Holz, 9 Joch, 5 Steinbruch, Kornspeicher) | 29 | Tick 13.443 | 2.325 / 6.601 |
+  gewinn_3 Lord: erste Welle (20) Lord 75.000 -> 58.500, 17 tot; zweite Welle (20) 58.500 -> tot, 3 tot.
+  Offen: B stand erst 4.276 Ticks nach A-Reife (Holz 0, der Planer verbaute es) -> Planer legt jetzt 3 Holz je offener
+  B-Plantage zurueck (noch nicht im Spiel gelaufen).
 - **T2 Weglocken:** einer lockt die Verteidiger weg (und weicht nach T1 aus), ein anderer greift derweil an.
 - **T3 Sammeln bis zur eigenen Uebermacht**, dann gegen die Verteidigung - "dann ist die Tuere frei fuer die anderen".
 

@@ -460,7 +460,10 @@ class Ertragsplaner:
                                                                               self.baue(1, self.K[0] - 7, self.K[1] - 2, 25)))
             return ev
         reserve_gold = 15 if self.wirt.B_offen else 0
-        habe = {"holz": holz, "stein": stein, "gold": gold - reserve_gold}
+        # B-Holz zuruecklegen: 3 je offener B-Plantage (gewinn_3: Holz 0 nach A-Reife, der Planer verbaute es - B stand
+        # erst 4.276 Ticks nach A-Reife; Daniel 23:29 "Seasoning zu langsam")
+        reserve_holz = 3 * len(self.wirt.B_offen)
+        habe = {"holz": holz - reserve_holz, "stein": stein, "gold": gold - reserve_gold}
         bezahlbar = lambda k: all(habe[w] >= k["kosten"][w] for w in habe)
         # Ausweichbau nur, wenn er nichts verbraucht, was der beste braucht (sonst schiebt er den besten weiter hinaus)
         stiehlt = lambda k: any(beste["kosten"][w] > 0 and habe[w] - k["kosten"][w] < beste["kosten"][w] for w in habe if k["kosten"][w] > 0)
