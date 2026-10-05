@@ -45,9 +45,15 @@ Offen: die Wirtschaft waechst NICHT mit (Daniel fragen, siehe Bericht 22:2x).
   |---|---|---|---|---|---|---|
   | gewinn_2 | Burg-Tabu fehlt, Anwerben ab 100 Gold | kein Sieg (Zeit um 28.745), Lord 75.000 -> 75.000 | 84 | 31 | Tick 16.418 | nie / nie |
   | gewinn_3 | + Burg-Tabu, Anwerben ab 70, A-Baum neu suchen | **SIEG Tick 26.081** | 64 (24 Apfel, 18 Holz, 9 Joch, 5 Steinbruch, Kornspeicher) | 29 | Tick 13.443 | 2.325 / 6.601 |
+  | gewinn_4 | + B-Holz im Planer zurueckgelegt | kein Sieg (Zeit um 28.744), Lord 75.000 -> 33.200 | 87 | 38 | Tick 12.892 | 2.324 / 5.158 |
+  | gewinn_5 | + A-Plantagen mit dem Posten in der Eroeffnung (Daniel 23:41 "Seasoning am Anfang") | **SIEG Tick 24.935** | 69 | 37 | Tick 12.218 | 1.500 / 3.978 |
+  | gewinn_6 | + gemeinsame B-Ruecklage (Holz + Gold) fuer Anwerben, Planer, Huetten | **SIEG Tick 23.336** | 61 | 31 | Tick 13.571 | 1.473 / 1.554 |
   gewinn_3 Lord: erste Welle (20) Lord 75.000 -> 58.500, 17 tot; zweite Welle (20) 58.500 -> tot, 3 tot.
-  Offen: B stand erst 4.276 Ticks nach A-Reife (Holz 0, der Planer verbaute es) -> Planer legt jetzt 3 Holz je offener
-  B-Plantage zurueck (noch nicht im Spiel gelaufen).
+  gewinn_6 Lord: erste Welle 75.000 -> 32.700, 17 tot; zweite Welle 32.700 -> tot, 6 tot (Muster wie gewinn_3).
+  Beliebtheit bei Tick 5.000 / 10.000 / 20.000 (`serie.werte`): gewinn_3 83 / 77 / 65, gewinn_4 77 / 71 / 61,
+  gewinn_5 92 / 86 / 74, gewinn_6 93 / 87 / 80. Preis von Seasoning am Anfang: erster Assassine bei 3.778 statt ~640
+  (Gold 30 nach Posten + A). Gleiche Saat, trotzdem schwankt das Ergebnis (gewinn_3 Sieg, gewinn_4 Zeit um) - der Lenker
+  laeuft in Echtzeit; Wirtschaftszahlen sind stabiler als Sieg/Niederlage.
 - **T2 Weglocken:** einer lockt die Verteidiger weg (und weicht nach T1 aus), ein anderer greift derweil an.
 - **T3 Sammeln bis zur eigenen Uebermacht**, dann gegen die Verteidigung - "dann ist die Tuere frei fuer die anderen".
 
