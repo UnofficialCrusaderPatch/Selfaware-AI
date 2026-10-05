@@ -20,6 +20,9 @@ bis eine Messung es bestaetigt (Marke dahinter).
 - Moeglichst viel Geld in Wirtschaft stecken - sie hat den hoechsten Hebel auf Geld und damit Waffen und Truppen. (Daniel 04.10.)
 - Beliebtheit erlaubt Steuern = Geld. Rohstoffe verkaufen bringt ebenfalls Geld. (Daniel 04.10.)
 - Kosten kommen aus der Balance (Team-Liga): Baukosten int[110][5] (Holz, Stein, Eisen, Pech, Gold) im Spiel bei 0x01124CF4, Index = Gebaeudetyp (VillageStudio lib/kosten.json). (abgelesen)
+- **Holz und Stein werden nicht gekauft** (Daniel 05.10. 19:44: "du musst Holz nicht kaufen, in den meisten Faellen baust du ja Holzfaeller, damit du nicht Holz kaufen musst"). Verbautes Holz/Stein kostet darum nur den entgangenen Verkauf: bewertet zum Verkaufspreis (Holz 1, Stein 5), nie zum Kaufpreis.
+- **Stein bis auf den Bedarf der geplanten Eisenminen verkaufen** (Daniel 05.10. 19:44). Gemessen 05.10. 19:52 in der Baukostentabelle (Liga): Eisenmine = 20 Holz + **6 Stein**; Holzfaeller, Huette, Ochsenjoch, Kornspeicher je 5 Holz; Steinbruch 25 Holz; Jaeger 3 Holz + 60 Gold; Apfelplantage 3 Holz + 15 Gold; Soeldnerposten 120 Gold; Lager und Markt 0.
+- **Ertrag im Liga-Spiel gemessen** (Ertragsmesser, Partien 9u/9v 05.10., je 1.000 Ticks je besetztem Betrieb, auf Messweg umgerechnet): Eisenmine 0,55-0,58 Eisen @ 31 Felder (= ~15 Gold), **Anlauf ~6.500-6.700 Ticks** vom Bau bis zum ersten Eisen; Steinbruch+Ochse 6,5-6,6 Stein @ 8 (= ~33 Gold); Apfelplantage 3,3-3,7 @ 5, Anlauf ~2.300-2.500; Jaeger 3,5-3,8 Fleisch @ 53; Holzfaeller ~5,6 Holz im Schnitt aller Holzfaeller - kaum abhaengig vom Weg. Eine Eisenmine lohnt sich in einer Partie nur, wenn danach noch Anlauf + ~3.500 Ticks bleiben.
 
 ## Beliebtheit und Essen
 - **Beliebtheit ist das Wichtigste.** Unter 95 sinkt die Rate, mit der neue Bauern kommen; bei 50 kommen fast keine mehr; unter 50 gehen Leute AUS dem Dorf. (Daniel 04.10., 19:57)

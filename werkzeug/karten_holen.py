@@ -7,7 +7,9 @@
    (Gegenprobe 05.10.: im alten Start M7-04 kam genau (165,111) heraus, der bis dahin feste Wert).
 3. Rohstoffkarte und Baumliste (Modulbefehl rohstoffkarte) -> daten/rohstoffe_<kurz>.txt, baeume_<kurz>.txt.
 4. Platzkarten (Spielpruefung je Feld) fuer Holzfaeller, Huette, Apfelplantage, Kornspeicher, Steinbruch,
-   Ochsenjoch im Fenster Bergfried +- FENSTER Felder -> daten/start_<kurz>_platz_<name>.txt.
+   Ochsenjoch, Eisenmine ueber die GANZE Karte -> daten/start_<kurz>_platz_<name>.txt. (Bis 05.10. 19:58 nur
+   Bergfried +- 80: die meisten Baeume unserer Seite lagen ausserhalb - 9t baute Holzfaeller bei x=26..37 ohne Karte.
+   Eine Karte dauert 0-1 s, die ganze Karte kostet nichts.)
 5. Lagerkarte OHNE Lager: Startlager kurz abreissen, Karte nehmen, Startstand neu laden (nichts bleibt veraendert).
 6. daten/start_<kurz>.json mit Spielstand, Bergfried-Anker und -Eingang, feindlichem Bergfried.
 
@@ -22,7 +24,6 @@ from waechter import lies_gebaeude, lies_lagebild
 from befehl import ABZUG
 
 D = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "daten")
-FENSTER = 80
 KARTEN = {"holzfaeller": 3, "huette": 1, "apfel": 32, "speicher": 19, "steinbruch": 20, "ochsen": 4, "eisenmine": 5}
 
 def bergfriede():
@@ -44,12 +45,12 @@ def main():
     laden(spielstand)
     bf = bergfriede()
     eigen = bf[1]
-    ex, ey = eigen["eingang"]
-    x0, y0, x1, y1 = max(0, ex - FENSTER), max(0, ey - FENSTER), min(399, ex + FENSTER), min(399, ey + FENSTER)
-    print("Bergfried Spieler 1: Anker %s, Eingang %s; Fenster (%d,%d)-(%d,%d)" % (eigen["anker"], eigen["eingang"], x0, y0, x1, y1), flush=True)
     befehl({"rohstoffkarte": {}}, 8.0, bis="ROHSTOFF")
     shutil.copy(os.path.join(ABZUG, "rohstoffe.txt"), os.path.join(D, "rohstoffe_%s.txt" % kurz))
     shutil.copy(os.path.join(ABZUG, "baeume.txt"), os.path.join(D, "baeume_%s.txt" % kurz))
+    zeilen = open(os.path.join(D, "rohstoffe_%s.txt" % kurz)).read().splitlines()[1:]
+    x0, y0, x1, y1 = 0, 0, max(len(r) for r in zeilen) - 1, len(zeilen) - 1      # ganze Karte
+    print("Bergfried Spieler 1: Anker %s, Eingang %s; Karte (%d,%d)-(%d,%d)" % (eigen["anker"], eigen["eingang"], x0, y0, x1, y1), flush=True)
     for name, typ in KARTEN.items():
         gut, alle, sek = platzkarte(typ, x0, y0, x1, y1, os.path.join(D, "start_%s_platz_%s.txt" % (kurz, name)))
         print("Platzkarte %-11s: %6d von %6d Feldern gehen (%.0f s)" % (name, gut, alle, sek), flush=True)

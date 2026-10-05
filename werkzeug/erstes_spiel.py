@@ -197,15 +197,21 @@ def nahrung_auf_kante(bestand, puffer, hoechstens=12):
     return lose
 WAREN_NR = {"holz": 2, "stein": 4, "eisen": 6, "pech": 7, "apfel": 13, "brot": 10, "kaese": 11, "fleisch": 12, "weizen": 9, "hopfen": 3, "mehl": 16}
 
-def verkaufen(st):
-    """Je Runde hoechstens ein Verkauf je Ware (Spielbefehl 38, verkaufen=1). Gibt Text oder None."""
+def verkaufen(st, stein_reserve=None, messer=None):
+    """Je Runde hoechstens ein Verkauf je Ware (Spielbefehl 38, verkaufen=1). Gibt Text oder None.
+    stein_reserve: Bedarf der naechsten geplanten Eisenmine (Daniel 05.10. 19:44: Stein bis darauf verkaufen);
+    messer: Ertragsmesser - bekommt jedes verkaufte Los (fuer die Buchfuehrung Zugang = Bestand + Verkauft + Verbaut)."""
     teile = []
-    essen = sum(st.get(k, 0) for k in ("apfel", "brot", "kaese", "fleisch"))
-    for ware, reserve in (("holz", HOLZ_RESERVE), ("stein", STEIN_RESERVE), ("eisen", 0), ("pech", 0),
-                          ("weizen", 0), ("hopfen", 0), ("mehl", 0)):
+    for ware, reserve in (("holz", HOLZ_RESERVE), ("stein", STEIN_RESERVE if stein_reserve is None else stein_reserve), ("eisen", 0),
+                          ("pech", 0), ("weizen", 0), ("hopfen", 0), ("mehl", 0)):
         if st.get(ware, 0) > reserve + 4:
             befehl({"spielbefehl": {"nr": 38, "werte": [1, WAREN_NR[ware]]}}, 1.0, bis="SPIELBEFEHL"); teile.append(ware)
+            if messer is not None:
+                messer.verkauft(ware)
     lose = nahrung_auf_kante({k: st.get(k, 0) for k in NAHRUNG_PREIS}, nahrung_puffer(st.get("leute", 10)))
+    if messer is not None:
+        for w, k in lose.items():
+            messer.verkauft(w, k)
     teile += ["%s x%d" % (w, k) for w, k in lose.items()]
     return ("verkauft: " + ",".join(teile)) if teile else None
 
@@ -221,7 +227,10 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
     trupp = Einzeln(SP, pruefe_begehbar=pruefe_begehbar, wegtest=wegtest) if assassinen else None
     wirt = Wirtschaft(plan, SP, baue_schnell, [nr for nr, _, _ in gebaeude_von(SP, 10)])
     karte_laden()        # Begehbarkeit fuer kurze Rueckzuege - jetzt, solange das Spiel noch steht
-    ausbau = Ertragsplaner(plan, SP, baue_schnell, wirt, s32(peek(PD + 0x2188)[0]))   # ersetzt die Ausbau-Regeln (Daniel 19:11)
+    lernlog = os.path.join(D, "ertrag_live_%s.jsonl" % time.strftime("%Y%m%d_%H%M"))
+    ausbau = Ertragsplaner(plan, SP, baue_schnell, wirt, s32(peek(PD + 0x2188)[0]), ende=bis_tick, protokoll=lernlog)   # lernt im Spiel (Daniel 19:44)
+    schreib("Ertrags-Planer: Baukosten aus dem Spiel %s; Protokoll %s" % (
+        {t: {w: v for w, v in k.items() if v} for t, k in ausbau.kosten.items()}, os.path.basename(lernlog)))
     schreib("Wirtschaft: Apfel A %s, B %s; alte Lagerteile %s" % (wirt.A, wirt.B, sorted(wirt.alt)))
     soeldner, geworben = None, 0
     befehl({"kamera": list(plan["lager_mitte"])}, 0.8)
@@ -261,6 +270,7 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
         if stand >= 4:
             schreib("ABBRUCH - Spielzeit steht bei %d" % st["t"]); break
         letzter_tick = st["t"]
+        ausbau.beobachte(st, L, G)        # Buchfuehrung des Planers: Zugang je Ware seit der letzten Runde
         eig = [g for g in G.values() if g["besitzer"] == SP]
         gebs = [(g["x"] + NACH_TYP.get(g["typ"], {"b": 2})["b"] // 2, g["y"] + NACH_TYP.get(g["typ"], {"b": 2})["b"] // 2)
                 for g in eig if g["typ"] in EIGENE_ARTEN]
@@ -282,7 +292,7 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
             if not [n for n, g in G.items() if g["besitzer"] == SP and g["typ"] == 26] and runde % 20 == 2:
                 ereignis.append("Markt gesetzt %s" % (baue_schnell(26, BERGFRIED[0], BERGFRIED[1], 25),))
             elif runde % 3 == 0:
-                v = verkaufen(st)
+                v = verkaufen(st, ausbau.reserve()["stein"], ausbau.messer)
                 if v:
                     ereignis.append(v)
             tz = uhr("bauen_werben_verkauf", tz)
@@ -330,6 +340,7 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
         (("; Waechter: " + w.bericht()) if w else "") + (("; Angriff: " + trupp.bericht()) if trupp else "")))
     schreib("Wirtschaft: " + wirt.bericht())
     schreib(ausbau.bericht())
+    ausbau.sichern(os.path.join(D, "ertrag_gelernt_%s.json" % time.strftime("%Y%m%d_%H%M")))
 
 def fingerabdruck(plan):
     """Alles, was die Eroeffnung bestimmt: Plan, Phase-1-Code, Gruppenteilung, Bauwerkzeug. Gleich -> gleicher Stand."""

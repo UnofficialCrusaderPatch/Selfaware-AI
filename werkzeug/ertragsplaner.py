@@ -1,173 +1,435 @@
 # -*- coding: utf-8 -*-
-"""Ertrags-Planer (Daniel 05.10. 19:11 "keine Fixes, sondern ein schlaues System, das abhaengig von der Umgebung
-handelt; beliebig erweitern; am meisten Geld geben Stein und Eisen"; 19:33 "ja, bau den Ertrags-Planer").
+"""Ertrags-Planer, Stand 3: lernt im Spiel (Daniel 05.10. 19:44 "ja, bau das so" - nach Partie 9t; Stand 3 nach 9u).
 
-Jede PLANEN-te Runde:
-  1. Voraussetzungen: Lagerteil fast voll fuer eine Ware -> Lager erweitern (kostet nichts); zu wenig freie Leute fuer
-     den besten Kandidaten -> erst eine Huette.
-  2. Kandidaten: jede Gebaeudeart an ihrem besten Platz auf unserer Seite (Rohstoff-Feld bzw. Rehe, nahe am Lager /
-     Kornspeicher). Wert = Ertrag (Startwert aus der Messpartie, korrigiert nach Weg) * Preis.
-     Amortisation = Kosten in Gold (Holz 3, Stein 5 = Kaufpreise) / Gold je Tick.
-  3. Gebaut wird der Kandidat mit der schnellsten Amortisation, wenn bezahlbar; sonst wird darauf gespart
-     (braucht_gold -> keine Assassinen), ausser ein bezahlbarer ist hoechstens 1,5-mal langsamer.
-Ohne feste Stueckzahlen - der Platz, die Rohstoffe und das Gold bestimmen, wie weit ausgebaut wird.
-STARTWERTE (Messpartie 05.10., daten/ertrag_messung.json, wenige Lieferungen): Ertrag je 1.000 Ticks bei Weg D0 -
-Eisen 0,9 @ 40, Stein 5,6 @ 8 (2,4 @ 23 war durch volles Lager gedeckelt), Apfel 2,5 @ 5, Fleisch 6 @ 53, Holz 5,5 @ 10.
-Wegkorrektur (vermutet, nicht gemessen): Ertrag * (D0 + 20) / (D + 20).
-Grenze: der Planer lernt noch nicht aus der laufenden Partie nach (Backlog: Selbstlernen).
+Stand 1 (9s/9t) rechnete mit festen Startwerten und einer vermuteten Wegkorrektur; Befund 9t: 26 Jaegerhuetten fuer
+1.560 Gold, die 120 Gold brachten. Stand 2 (9u) lernte im Spiel, hatte aber drei Annahmen, die 9u widerlegt hat
+(Meilensteine M21). Stand 3:
+
+1. MESSEN (Ertragsmesser, jede Runde): Zugang je Ware = Bestandsaenderung + Verkauftes + Verbautes. Verbautes = neue
+   eigene Gebaeude (Zaehler G<typ> der Statuszeile) mal Baukosten. Nahrung wird zusaetzlich gegessen, dort zaehlt nur der
+   positive Teil (untere Schranke). 9u: Holz 1 von 756 Runden negativ (17 von 2.521), Stein und Eisen 0 - die Buchfuehrung
+   haelt. Geteilt durch die Betriebszeit der BESETZTEN Betriebe, gewichtet mit dem Wegfaktor (d0 + 20) / (d + 20)
+   (vermutet; Holz haengt in 9u kaum am Weg) -> Ertrag je 1.000 Ticks auf dem Messweg d0.
+   STARTWERTE aus der langen Messpartie (20.000 Ticks, ein Betrieb je Art, daten/ertrag_messung.json) zaehlen so viel wie
+   die Ticks, ueber die sie gemessen wurden (ab erster Lieferung) - ein einzelner Lieferbrocken reisst die Schaetzung
+   nicht mehr hoch (9u: Jaeger sprang nach der ersten Fleischlieferung auf 25 Gold/1000).
+   UHR je Betrieb: startet bei seiner ersten Abgabe (Ladung des Arbeiters faellt auf 0) oder nach der Anlaufzeit, was
+   zuerst kommt - auch fuer Betriebe, die beim Start schon standen (9u: die 14 Holzfaeller der Eroeffnung zaehlten ab
+   Tick 729, ihre erste Ladung kam erst bei ~4.600; der Messer hielt Holzfaeller fuer wertlos). Die erste beobachtete
+   Abgabe jedes Betriebs wird abgezogen (Zaunpfahl: sie beendet den Anlauf, sie ist kein Dauerertrag); ihre Groesse =
+   die groesste getragene Ladung der Art (gemessen: Holz 18, Eisen 1).
+   ANLAUF je Art: Median Bau -> erste Abgabe, aber nur, wenn die Gegenprobe zeigt, dass die Abgaben der Art sichtbar sind
+   (abgegebene Ladung / gebuchter Zugang 0,7-1,3; 9u: Eisen 0,91, Aepfel 0,84 ja - Holz 0,10, Jaeger 0,46 nein).
+   Sonst: erste Lieferung der Art minus erster besetzter Betrieb; sonst Startwert.
+2. KOSTEN aus der Baukostentabelle des laufenden Spiels (0x01124CF4 + Typ*20: Holz Stein Eisen Pech Gold, Wissensstand
+   Abschnitt Baukosten; gelesen 05.10. 19:52: Eisenmine 20 Holz + 6 Stein, Holzfaeller 5 Holz, Jaeger 3 Holz + 60 Gold).
+   Bewertet zum VERKAUFSpreis: Holz und Stein werden nie gekauft (Daniel 19:44), verbaut fehlen sie nur dem Verkauf.
+3. HORIZONT UND REIHENFOLGE: gebaut wird nur, was sich bis Partieende bezahlt macht, und zuerst, was bis dahin den
+   meisten Gewinn bringt: Gewinn = Ertrag in Gold je Tick * (Rest - Anlauf) - Kosten. (Stand 3 reihte nach kuerzester
+   Amortisation - 9v: billige, schwache Bauten zuerst, 7 ferne Holzfaeller zu ~2 Gold/1000 und 3 ferne Steinbrueche vor
+   der ersten Eisenmine bei Tick 10.826.) Ist der beste Bau nicht bezahlbar, darf ein anderer nur gebaut werden, wenn er
+   nichts verbraucht, was der beste braucht. Ohne Partieende (ende=None) gilt die kuerzeste Amortisation.
+4. PLAETZE aus den Platzkarten des Starts (karten_holen.py, ganze Karte): Eisenmine, Steinbruch, Apfelplantage direkt;
+   Holzfaeller am naechsten gueltigen Platz zu einem Baum, den noch kein Holzfaeller im Umkreis 7 hat.
+5. STEIN-RESERVE (Daniel 19:44): Stein wird bis auf den Bedarf der naechsten Eisenmine verkauft, solange sich eine Mine
+   noch lohnt (gemessen: 6 Stein je Mine).
+Gespart wird nur, was fehlt: Gold-Sparen (keine Assassinen) nur, wenn dem besten Bau Gold fehlt.
+(Stand 2 hatte "kein zweiter Betrieb vor der ersten Lieferung" - meine Regel, nicht Daniels; sie schob in 9u die Minen
+2-6 um ~6.000 Ticks: 6 statt 12 Eisen-Lose. Gestrichen; die gewichteten Startwerte tragen jetzt die Vorsicht.)
+
+WIDERLEGUNG, vorher festgelegt (05.10. 19:55, gilt weiter):
+ a) Buchfuehrung falsch, wenn bei Holz/Stein/Eisen mehr als 5 % der Runden einen negativen Zugang zeigen oder die
+    negativen Zugaenge mehr als 10 % des Gesamtzugangs ausmachen (dann fehlt ein Abfluss).
+ b) Planer falsch, wenn er eine Art baut, deren Anlauf + Amortisation laut eigener Rechnung ueber das Partieende geht.
 """
-import json, os
-from laden import befehl
+import json, os, time
+from laden import befehl, peek
 
 def schach(a, b):
     return max(abs(a[0] - b[0]), abs(a[1] - b[1]))
 
-# Typ: (Ware, Ertrag je 1000 Ticks, Weg bei der Messung, Preis je Stueck, Arbeiter, Kosten Holz, Stein, Gold, Ziel)
-ERTRAG = {
-    5:  ("eisen", 0.9, 40, 27, 2, 20, 6, 0, "lager"),
-    20: ("stein", 5.6, 8, 5, 4, 30, 0, 0, "lager"),        # Steinbruch + Ochsenjoch zusammen (3 + 1 Arbeiter)
-    32: ("apfel", 2.5, 5, 3, 1, 3, 0, 15, "kornspeicher"),
-    7:  ("fleisch", 6.0, 53, 1, 1, 3, 0, 60, "kornspeicher"),
-    3:  ("holz", 5.5, 10, 3, 1, 5, 0, 0, "lager"),          # Holz zum Kaufpreis bewertet: es spart Zukauf
+KOSTEN_ADR = 0x01124CF4
+KOSTEN_WAREN = ("holz", "stein", "eisen", "pech", "gold")
+VERKAUF = {"holz": 1, "stein": 5, "eisen": 27, "pech": 0, "apfel": 3, "fleisch": 1, "gold": 1}   # gemessen 05.10. (Liga)
+LOS = {"holz": 20}                       # Stueck je Verkauf; alles andere 5 (gemessen 05.10.)
+NAHRUNG = ("apfel", "fleisch")
+# Typ: (Ware, Startwert je 1000 Ticks, Messweg d0, Gewicht = gemessene Ticks, Anlauf-Startwert, Arbeiter, Ziel)
+# Lange Messpartie 05.10. 19:28 (20.000 Ticks, je ein Betrieb); Stein dort ab ~12.000 vom vollen Lagerteil gedeckelt,
+# darum Stein aus der ersten Messpartie (8.000 Ticks, erste Lieferung 3.750).
+START = {
+    5:  ("eisen", 0.7, 31, 14000, 6000, 2, "lager"),    # erste Lieferung 6.000; 9u: Median 6.505 an 6 Minen
+    20: ("stein", 5.6, 8, 4250, 3750, 4, "lager"),      # mit Ochsenjoch (3 + 1 Arbeiter)
+    32: ("apfel", 2.2, 5, 18500, 1500, 1, "kornspeicher"),
+    7:  ("fleisch", 5.5, 53, 15000, 5000, 1, "kornspeicher"),
+    3:  ("holz", 5.4, 6, 16000, 4000, 1, "lager"),
 }
 NAME = {5: "Eisenmine", 20: "Steinbruch+Ochsenjoch", 32: "Apfelplantage", 7: "Jaegerhuette", 3: "Holzfaeller"}
 JE_TEIL = 48
+BAUM_FREI = 7           # ein Baum gilt als vergeben, wenn ein eigener Holzfaeller naeher steht
+SIGNAL_GUT = (0.7, 1.3)  # abgegebene Ladung / gebuchter Zugang, in dem die Abgaben einer Art als sichtbar gelten
+SIGNAL_AB = 20           # ab so viel gebuchtem Zugang wird die Gegenprobe ausgewertet
+
+def lies_baukosten(typen):
+    """Baukosten aus dem laufenden Spiel (erst nach Kartenstart gefuellt). Gibt typ -> {holz, stein, eisen, pech, gold}."""
+    return {t: dict(zip(KOSTEN_WAREN, peek(KOSTEN_ADR + t * 20, 5))) for t in typen}
+
+def gold_wert(kosten):
+    return sum(VERKAUF[w] * kosten.get(w, 0) for w in KOSTEN_WAREN)
+
+
+class Ertragsmesser:
+    """Buchfuehrung je Ware und Lernwerte je Gebaeudeart (Kopf, Teil 1)."""
+
+    def __init__(self, sp, kosten, groesse, protokoll=None):
+        self.sp, self.kosten, self.groesse = sp, kosten, groesse
+        self.zugang = {t: 0.0 for t in START}
+        self.zeit = {t: 0.0 for t in START}          # gewichtete Betriebs-Ticks mit laufender Uhr
+        self.besetzt_zeit = {t: 0.0 for t in START}  # ungewichtet, nur zur Anzeige
+        self.gesehen = {}                            # Gebaeude-Nr -> erster beobachteter Tick
+        self.beim_start = set()                      # Gebaeude, die bei der ersten Beobachtung schon standen
+        self.erst_abgabe = {}                        # Gebaeude-Nr -> Tick der ersten Abgabe seines Arbeiters
+        self.anlaeufe = {t: [] for t in START}       # Bau -> erste Abgabe, nur neu gebaute Betriebe
+        self.uhr = {t: {} for t in START}            # Gebaeude-Nr -> "abgabe" | "alter" (womit seine Uhr startete)
+        self.ladung_max = {}                         # groesste getragene Ladung je Art (= eine Lieferung)
+        self.abgaben = {}                            # Art -> abgegebene Ladung (Gegenprobe)
+        self.abgaben_einheit = {}                    # "Einheit@Art" -> abgegebene Ladung (zur Anzeige)
+        self.typ_besetzt, self.typ_geliefert, self.vorher = {}, {}, set()
+        self.vor, self.verk, self.runden, self.letzter = None, {}, 0, {}
+        self.neg = {w: [0, 0.0] for w in ("holz", "stein", "eisen")}
+        self.ladung_vor = {}
+        self.f = open(protokoll, "w", encoding="utf-8") if protokoll else None
+
+    def verkauft(self, ware, lose=1):
+        self.verk[ware] = self.verk.get(ware, 0) + lose * LOS.get(ware, 5)
+
+    def wegfaktor(self, typ, d):
+        return (START[typ][2] + 20.0) / (d + 20.0)
+
+    def signal(self, typ):
+        """Gegenprobe: abgegebene Ladung / gebuchter Zugang. None, solange zu wenig Zugang."""
+        if self.zugang[typ] < SIGNAL_AB:
+            return None
+        return self.abgaben.get(typ, 0) / self.zugang[typ]
+
+    def anlauf(self, typ):
+        q = self.signal(typ)
+        a = sorted(self.anlaeufe[typ])
+        if a and q is not None and SIGNAL_GUT[0] <= q <= SIGNAL_GUT[1]:
+            return a[len(a) // 2], "gemessen an %d Betrieben" % len(a)
+        if typ in self.typ_geliefert and typ in self.typ_besetzt and typ not in self.vorher:
+            return self.typ_geliefert[typ] - self.typ_besetzt[typ], "gemessen an der Art"
+        return START[typ][4], "Startwert"
+
+    def rate(self, typ):
+        """Ertrag je 1.000 Ticks auf dem Messweg d0: Startwert mit seinem Gewicht, dazu die Messung im Spiel."""
+        r0, gew = START[typ][1], START[typ][3]
+        zaunpfahl = self.ladung_max.get(typ, 0) * sum(1 for nr in self.uhr[typ] if nr in self.erst_abgabe)
+        return (r0 * gew + 1000.0 * max(0.0, self.zugang[typ] - zaunpfahl)) / (gew + self.zeit[typ])
+
+    def beobachte(self, st, L, G, ziele):
+        """ziele: typ -> Liste Zielorte (Lager bzw. Kornspeicher). Einmal je Runde, VOR Verkaufen und Bauen."""
+        t = st.get("t", 0)
+        erste = self.vor is None
+        for n, g in G.items():
+            if g["besitzer"] == self.sp and n not in self.gesehen:
+                self.gesehen[n] = t
+                if erste:
+                    self.beim_start.add(n)
+        besetzt = {}
+        for nr, e in L.items():
+            if e["besitzer"] != self.sp:
+                continue
+            lv, jetzt = self.ladung_vor.get(nr, 0), e.get("ladung", 0)
+            self.ladung_vor[nr] = jetzt
+            ap = e.get("arbeitsplatz")
+            g = G.get(ap) if ap else None
+            if not g or g["besitzer"] != self.sp or g["typ"] not in START:
+                continue
+            typ = g["typ"]
+            besetzt.setdefault(typ, set()).add(ap)
+            if jetzt > self.ladung_max.get(typ, 0):
+                self.ladung_max[typ] = jetzt
+            if lv > 0 and jetzt == 0:                       # Abgabe
+                self.abgaben[typ] = self.abgaben.get(typ, 0) + lv
+                k = "%d@%d" % (e["typ"], typ)
+                self.abgaben_einheit[k] = self.abgaben_einheit.get(k, 0) + lv
+                if ap not in self.erst_abgabe:
+                    self.erst_abgabe[ap] = t
+                    if ap not in self.beim_start and ap in self.gesehen:
+                        self.anlaeufe[typ].append(t - self.gesehen[ap])
+        gewicht = {}
+        for typ, nrs in besetzt.items():
+            if typ not in self.typ_besetzt:
+                self.typ_besetzt[typ] = t
+                if erste:
+                    self.vorher.add(typ)
+            anl = self.anlauf(typ)[0]
+            s = 0.0
+            for nr in nrs:
+                if nr not in self.uhr[typ]:
+                    if nr in self.erst_abgabe:
+                        self.uhr[typ][nr] = "abgabe"
+                    elif t - self.gesehen.get(nr, t) >= anl:
+                        self.uhr[typ][nr] = "alter"
+                    else:
+                        continue
+                g = G[nr]
+                b = self.groesse.get(typ, 2) // 2
+                s += self.wegfaktor(typ, min(schach((g["x"] + b, g["y"] + b), z) for z in ziele[typ]))
+            gewicht[typ] = s
+        zug = {}
+        if not erste:
+            t0, w0, g0, gew0, bes0 = self.vor
+            dt = t - t0
+            if dt > 0:
+                self.runden += 1
+                gebaut = {w: 0 for w in KOSTEN_WAREN}
+                for k, v in st.items():
+                    if k.startswith("G") and k[1:].isdigit() and v > g0.get(k, 0):
+                        for w in KOSTEN_WAREN:
+                            gebaut[w] += (v - g0.get(k, 0)) * self.kosten.get(int(k[1:]), {}).get(w, 0)
+                for typ, (ware, *_r) in START.items():
+                    roh = st.get(ware, 0) - w0.get(ware, 0) + self.verk.get(ware, 0) + gebaut.get(ware, 0)
+                    if ware in NAHRUNG:
+                        roh = max(0, roh)
+                    elif roh < 0:
+                        self.neg[ware][0] += 1
+                        self.neg[ware][1] += -roh
+                    zug[ware] = roh
+                    self.zugang[typ] += roh
+                    self.zeit[typ] += gew0.get(typ, 0.0) * dt
+                    self.besetzt_zeit[typ] += bes0.get(typ, 0) * dt
+                    if roh > 0 and typ in self.typ_besetzt and typ not in self.typ_geliefert:
+                        self.typ_geliefert[typ] = t
+                if self.f:
+                    self.f.write(json.dumps({"t": t, "dt": dt, "zug": zug, "verk": self.verk, "gebaut": {k: v for k, v in gebaut.items() if v},
+                                             "besetzt": {NAME[k]: len(v) for k, v in besetzt.items()},
+                                             "gewicht": {NAME[k]: round(v, 2) for k, v in gewicht.items()}}, ensure_ascii=False) + "\n")
+                    self.f.flush()
+        g_now = {k: v for k, v in st.items() if k.startswith("G") and k[1:].isdigit()}
+        self.vor = (t, {w: st.get(w, 0) for w in ("holz", "stein", "eisen", "apfel", "fleisch")}, g_now, gewicht,
+                    {k: len(v) for k, v in besetzt.items()})
+        self.letzter = g_now
+        self.verk = {}
+        return zug
+
+    def stand(self):
+        aus = {}
+        for typ, (ware, r0, d0, gew, *_r) in START.items():
+            anl, quelle = self.anlauf(typ)
+            q = self.signal(typ)
+            aus[NAME[typ]] = {"startwert": r0, "startgewicht": gew, "gemessen_je_1000_auf_d0": round(self.rate(typ), 2),
+                              "zugang": round(self.zugang[typ], 1), "lieferung": self.ladung_max.get(typ),
+                              "uhr_ab_abgabe": sum(1 for w in self.uhr[typ].values() if w == "abgabe"),
+                              "uhr_ab_alter": sum(1 for w in self.uhr[typ].values() if w == "alter"),
+                              "betriebs_ticks": round(self.besetzt_zeit[typ]), "gewichtete_ticks": round(self.zeit[typ]),
+                              "gegenprobe": None if q is None else round(q, 2), "anlauf": anl, "anlauf_quelle": quelle,
+                              "anlaeufe": sorted(self.anlaeufe[typ]), "lief_beim_start": typ in self.vorher}
+        return aus
+
+    def bericht(self):
+        teile = ["%s %.2f->%.2f (Zugang %.0f, Lieferung %s, Gegenprobe %s, Anlauf %d %s)" % (
+            n, v["startwert"], v["gemessen_je_1000_auf_d0"], v["zugang"], v["lieferung"], v["gegenprobe"], v["anlauf"], v["anlauf_quelle"])
+            for n, v in self.stand().items()]
+        neg = "; ".join("%s %d von %d Runden, Summe %.0f" % (w, n, self.runden, s) for w, (n, s) in self.neg.items())
+        return "Ertragsmesser: %s | negative Zugaenge: %s | abgegebene Ladung je Einheit@Art: %s" % (
+            "; ".join(teile), neg, self.abgaben_einheit)
+
 
 class Ertragsplaner:
     PLANEN = 10
 
-    def __init__(self, plan, sp, baue_schnell, wirt, steuerstufe):
-        self.sp, self.plan, self.baue, self.wirt = sp, plan, baue_schnell, wirt
+    def __init__(self, plan, sp, baue_schnell, wirt, steuerstufe, ende=None, kosten=None, groesse=None, protokoll=None):
+        self.sp, self.plan, self.baue, self.wirt, self.ende = sp, plan, baue_schnell, wirt, ende
         self.K = tuple(plan.get("bergfried_eingang", (165, 111)))
         d = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "daten")
-        info = json.load(open(os.path.join(d, "start_%s.json" % plan["start"]), encoding="utf-8"))
+        kurz = plan["start"]
+        info = json.load(open(os.path.join(d, "start_%s.json" % kurz), encoding="utf-8"))
         self.feinde = [tuple(v["eingang"]) for v in info["feind_bergfried"].values()]
-        z = open(os.path.join(d, "rohstoffe_%s.txt" % plan["start"])).read().splitlines()[1:]
-        self.felder = {"b": [], "i": []}
-        for y, r in enumerate(z):
-            for x, c in enumerate(r):
-                if c in self.felder and self.eigene_seite((x, y)):
-                    self.felder[c].append((x, y))
-        self.baeume = []
-        for w in open(os.path.join(d, "baeume_%s.txt" % plan["start"])).read().splitlines()[1:]:
+        self.kosten = kosten if kosten is not None else lies_baukosten((1, 3, 4, 5, 7, 10, 19, 20, 32))
+        if groesse is None:
+            from bauen import NACH_TYP
+            groesse = {t: NACH_TYP[t]["b"] for t in (1, 3, 4, 5, 7, 10, 19, 20, 32)}
+        self.groesse = groesse
+        self.messer = Ertragsmesser(sp, self.kosten, groesse, protokoll)
+        from farmen_mischen import lies_karte
+        self.platz = {}
+        for typ, name in ((5, "eisenmine"), (20, "steinbruch"), (32, "apfel"), (3, "holzfaeller")):
+            pfad = os.path.join(d, "start_%s_platz_%s.txt" % (kurz, name))
+            self.platz[typ] = [p for p in lies_karte(pfad) if self.eigene_seite(p)] if os.path.exists(pfad) else []
+        # Holzfaeller: je Baum der naechste gueltige Platz (einmal vorberechnet)
+        baeume = []
+        for w in open(os.path.join(d, "baeume_%s.txt" % kurz)).read().splitlines()[1:]:
             w = w.split()
             if len(w) >= 7 and w[2] == "2" and int(w[5]) < 4 and int(w[6]) > 0 and self.eigene_seite((int(w[3]), int(w[4]))):
-                self.baeume.append((int(w[3]), int(w[4])))
+                baeume.append((int(w[3]), int(w[4])))
+        hp = set(self.platz[3])
+        self.baum_platz = {}
+        for b in baeume:
+            nah = [(b[0] + dx, b[1] + dy) for dx in range(-4, 2) for dy in range(-4, 2) if (b[0] + dx, b[1] + dy) in hp]
+            if nah:
+                self.baum_platz[b] = min(nah, key=lambda p: schach((p[0] + 1, p[1] + 1), b))
         self.steuer, self.steuer_runde = steuerstufe, -99
-        self.braucht_gold, self.letzte_wahl, self.bilanz = False, None, {}
-        self.fehlschlag = {}
-        from farmen_mischen import lies_karte
-        self.anker = {}
-        for typ, name in ((5, "eisenmine"), (20, "steinbruch")):
-            pfad = os.path.join(d, "start_%s_platz_%s.txt" % (plan["start"], name))
-            if os.path.exists(pfad):
-                self.anker[typ] = [p for p in lies_karte(pfad) if self.eigene_seite(p)]
+        self.braucht_gold, self.letzte_wahl, self.gesetzt = False, None, {}
+        self.fehlschlag, self.abgelehnt, self.verstoss = {}, {}, []
+        self.stein_reserve = 0
 
     def eigene_seite(self, p):
         d = schach(p, self.K)
         return all(d < schach(p, f) for f in self.feinde)
 
-    # ---- Kandidaten ------------------------------------------------------------------------------------------------
-    def _ziel_orte(self, eigen):
-        # das alte Startlager zaehlt nicht (wird abgerissen) - sonst baut der Planer an den Bergfried statt ans Holz (9s)
-        lager = [(g["x"] + 2, g["y"] + 2) for g in eigen if g["typ"] == 10 and g.get("nr") not in self.wirt.alt] or [tuple(self.plan["lager"])]
-        speicher = [(g["x"] + 2, g["y"] + 2) for g in eigen if g["typ"] == 19] or [tuple(self.plan["kornspeicher"])]
-        return lager, speicher
+    def kosten_von(self, typ):
+        k = dict(self.kosten[typ])
+        if typ == 20:                         # Steinbruch nur mit Ochsenjoch (Daniels Regel)
+            for w in KOSTEN_WAREN:
+                k[w] += self.kosten[4][w]
+        return k
 
-    def _platz(self, typ, L, eigen, lager, speicher):
-        """Bester Ort fuer typ: am Rohstoff, moeglichst nahe am Ziel (Lager bzw. Kornspeicher). Gibt (ort, weg) oder None."""
-        ziele = lager if ERTRAG[typ][8] == "lager" else speicher
-        weg = lambda p: min(schach(p, z) for z in ziele)
-        belegt = [(g["x"], g["y"]) for g in eigen if g["typ"] == typ]
-        # 9s: die Eisenmine scheiterte 7-mal an Nachbarfeldern - ein Fehlschlag sperrt den Umkreis 8 fuer diese Art
-        frei = lambda p: all(schach(p, b) > 6 for b in belegt) and not any(t == typ and schach(p, q) <= 8 for (t, q) in self.fehlschlag)
-        # gueltige Ankerpunkte laut Spielpruefung, falls karten_holen sie geholt hat (start_<kurz>_platz_eisenmine/steinbruch)
-        anker = self.anker.get(typ)
-        if typ in (5, 20) and anker:
-            kand = anker
-        elif typ == 5:
-            kand = self.felder["i"]
-        elif typ == 20:
-            kand = self.felder["b"]
-        elif typ == 3:
-            kand = self.baeume
-        elif typ == 7:
-            rehe = [(e["x"], e["y"]) for e in L.values() if e["typ"] == 44 and e["besitzer"] == 0 and self.eigene_seite((e["x"], e["y"]))]
-            kand = [p for p in rehe if sum(1 for q in rehe if schach(p, q) <= 15) >= 5]
-        else:
-            kand = [tuple(p) for p in self.plan.get("aepfel", [])] + [(s[0] + dx, s[1] + dy) for s in speicher for dx in (-20, -10, 10, 20) for dy in (-20, -10, 10, 20)]
-        kand = [p for p in kand if frei(p) and weg(p) <= 70]
-        if not kand:
-            return None
-        p = min(kand, key=weg)
-        return p, weg(p)
+    # ---- Ziele und Plaetze ----------------------------------------------------------------------------------------
+    def ziele(self, G):
+        eigen = [(n, g) for n, g in G.items() if g["besitzer"] == self.sp]
+        lager = [(g["x"] + 2, g["y"] + 2) for n, g in eigen if g["typ"] == 10 and n not in self.wirt.alt] or [tuple(self.plan["lager"])]
+        speicher = [(g["x"] + 2, g["y"] + 2) for n, g in eigen if g["typ"] == 19] or [tuple(self.plan["kornspeicher"])]
+        return {t: (lager if START[t][6] == "lager" else speicher) for t in START}
 
-    def kandidaten(self, L, eigen, st=None):
-        lager, speicher = self._ziel_orte(eigen)
-        # Holz je nach Lage: fehlt es, spart es Zukauf (3 Gold); liegt reichlich da, bringt es nur den Verkauf (1 Gold)
-        holz_wert = 3 if (st or {}).get("holz", 0) < 60 else 1
+    def _orte(self, typ, L, G):
+        """Kandidaten-Orte fuer typ (Ankerpunkte)."""
+        eigen = [g for g in G.values() if g["besitzer"] == self.sp]
+        gleich = [(g["x"], g["y"]) for g in eigen if g["typ"] == typ]
+        b = self.groesse.get(typ, 3)
+        gesperrt = lambda p: any(t == typ and schach(p, q) <= 8 for (t, q) in self.fehlschlag)
+        frei = lambda p: all(schach(p, q) >= b for q in gleich) and not gesperrt(p)
+        if typ in (5, 20, 32):
+            return [p for p in self.platz[typ] if frei(p)]
+        if typ == 3:
+            hf = [(x + 1, y + 1) for (x, y) in gleich]
+            return list({p for baum, p in self.baum_platz.items()
+                         if all(schach(baum, h) > BAUM_FREI for h in hf) and frei(p)})
+        rehe = [(e["x"], e["y"]) for e in L.values() if e["typ"] == 44 and e["besitzer"] == 0 and self.eigene_seite((e["x"], e["y"]))]
+        return [p for p in rehe if sum(1 for q in rehe if schach(p, q) <= 15) >= 5 and frei(p)]
+
+    # ---- Kandidaten -----------------------------------------------------------------------------------------------
+    def kandidaten(self, st, L, G):
+        """Alle Arten an ihrem besten Ort, mit Horizont-Pruefung. Sortiert nach Gewinn bis Partieende (ohne Ende: Amortisation)."""
+        t = st.get("t", 0)
+        rest = (self.ende - t) if self.ende else None
+        zl = self.ziele(G)
         aus = []
-        for typ, (ware, rate, d0, preis, arb, h, s, g, _) in ERTRAG.items():
-            pl = self._platz(typ, L, eigen, lager, speicher)
-            if not pl:
+        for typ, (ware, _r0, _d0, _g, _a, arb, _z) in START.items():
+            orte = self._orte(typ, L, G)
+            if not orte:
                 continue
-            ort, weg = pl
-            gold_je_tick = rate * (d0 + 20.0) / (weg + 20.0) * (holz_wert if ware == "holz" else preis) / 1000.0
-            kosten = 3 * h + 5 * s + g
-            aus.append({"typ": typ, "ort": ort, "weg": weg, "gold_je_1000": round(1000 * gold_je_tick, 1),
-                        "amort": kosten / gold_je_tick if gold_je_tick > 0 else 10 ** 9, "holz": h, "stein": s, "gold": g, "arbeiter": arb})
-        return sorted(aus, key=lambda k: k["amort"])
+            b = self.groesse.get(typ, 2) // 2
+            weg = lambda p: min(schach((p[0] + b, p[1] + b), z) for z in zl[typ])
+            ort = min(orte, key=weg)
+            w = weg(ort)
+            if w > 70:
+                continue
+            rate = self.messer.rate(typ) * self.messer.wegfaktor(typ, w)
+            gold_je_tick = rate * VERKAUF[ware] / 1000.0
+            k = self.kosten_von(typ)
+            amort = gold_wert(k) / gold_je_tick if gold_je_tick > 0 else 10 ** 9
+            anl, _q = self.messer.anlauf(typ)
+            gewinn = gold_je_tick * (rest - anl) - gold_wert(k) if rest is not None else None
+            grund = None
+            if rest is not None and anl + amort > rest:
+                grund = "Horizont (Anlauf %d + Amortisation %.0f > Rest %d)" % (anl, amort, rest)
+            aus.append({"typ": typ, "ort": ort, "weg": w, "gold_je_1000": round(1000 * gold_je_tick, 1), "amort": amort,
+                        "gewinn": gewinn, "anlauf": anl, "rest": rest, "kosten": k, "arbeiter": arb, "grund": grund})
+        if rest is None:
+            return sorted(aus, key=lambda k: k["amort"])
+        return sorted(aus, key=lambda k: -k["gewinn"])
 
-    # ---- eine Planungsrunde ----------------------------------------------------------------------------------------
+    def reserve(self):
+        """Was nicht verkauft werden darf (Daniel 19:44: Stein bis auf den Bedarf der geplanten Eisenmine)."""
+        return {"stein": self.stein_reserve}
+
+    # ---- jede Runde -----------------------------------------------------------------------------------------------
+    def beobachte(self, st, L, G):
+        return self.messer.beobachte(st, L, G, self.ziele(G))
+
     def schritt(self, st, L, G, runde):
         if runde % self.PLANEN:
             return []
-        ev, self.braucht_gold = [], bool(self.wirt.B_offen)     # Seasoning-B hat beim Gold Vorrang
+        ev = []
+        self.braucht_gold = bool(self.wirt.B_offen)     # Seasoning-B hat beim Gold Vorrang
         eigen = [dict(g, nr=n) for n, g in G.items() if g["besitzer"] == self.sp]
         holz, stein, gold = st.get("holz", 0), st.get("stein", 0), st.get("gold", 0)
         # Steuern nach Beliebtheit (Regel bleibt, bis der Planer sie mitrechnet)
-        b = st.get("beliebt", 0) / 100.0
+        bel = st.get("beliebt", 0) / 100.0
         if runde - self.steuer_runde >= 2 * self.PLANEN:
-            neu = self.steuer + 1 if (b >= 97 and self.steuer < 8 and st.get("leute", 0) >= 15) else self.steuer - 1 if (b < 95 and self.steuer > 3) else self.steuer
+            neu = self.steuer + 1 if (bel >= 97 and self.steuer < 8 and st.get("leute", 0) >= 15) else self.steuer - 1 if (bel < 95 and self.steuer > 3) else self.steuer
             if neu != self.steuer:
                 befehl({"spielbefehl": {"nr": 34, "werte": [neu]}}, 1.0, bis="SPIELBEFEHL")
-                ev.append("STEUER %d -> %d (Beliebtheit %.2f)" % (self.steuer, neu, b))
+                ev.append("STEUER %d -> %d (Beliebtheit %.2f)" % (self.steuer, neu, bel))
                 self.steuer, self.steuer_runde = neu, runde
-        # Voraussetzung Lager: eine Ware nahe am Teil-Deckel (48 je Teil) -> anbauen
+        # Lager: eine Ware nahe am Teil-Deckel (48 je Teil) -> anbauen (kostet nichts)
         teile = sum(1 for g in eigen if g["typ"] == 10)
         if teile and not [n for n in self.wirt.alt if n in G]:
             belegt = sum(-(-st.get(w, 0) // JE_TEIL) for w in ("holz", "stein", "eisen", "pech", "hopfen", "weizen", "mehl"))
             voll = [w for w in ("holz", "stein", "eisen") if st.get(w, 0) % JE_TEIL >= JE_TEIL - 8]
             if voll and belegt >= teile:
-                lager, _ = self._ziel_orte(eigen)
-                ev.append("PLANER Lager anbauen (%s fast voll, %d Teile) -> %s" % (voll, teile, self.baue(10, lager[0][0], lager[0][1], 10)))
-        kand = self.kandidaten(L, eigen, st)
+                l = self.ziele(G)[5][0]
+                ev.append("PLANER Lager anbauen (%s fast voll, %d Teile) -> %s" % (voll, teile, self.baue(10, l[0], l[1], 10)))
+        alle = self.kandidaten(st, L, G)
+        for k in alle:
+            if k["grund"]:
+                schl = (NAME[k["typ"]], k["grund"].split(" (")[0])
+                self.abgelehnt[schl] = self.abgelehnt.get(schl, 0) + 1
+        kand = [k for k in alle if not k["grund"]]
+        # Stein-Reserve: Bedarf der naechsten Eisenmine, solange sich eine Mine noch lohnt
+        self.stein_reserve = self.kosten[5]["stein"] if any(k["typ"] == 5 for k in kand) else 0
+        if runde % (5 * self.PLANEN) == 0:
+            ev.append("PLANER Lage (Gewinn bis Ende / Amortisation): " + ", ".join("%s %s/%.0f%s" % (
+                NAME[k["typ"]], "-" if k["gewinn"] is None else "%.0f" % k["gewinn"], k["amort"], " [%s]" % k["grund"].split(" (")[0] if k["grund"] else "")
+                for k in alle) + " | Stein-Reserve %d" % self.stein_reserve)
         if not kand:
             return ev
         beste = kand[0]
         self.letzte_wahl = beste
-        # Voraussetzung Arbeiter: zu wenig freie Leute am Feuer -> erst Huette
-        if st.get("feuer", 0) < beste["arbeiter"] and holz >= 5 and st.get("leute", 0) >= st.get("platz", 0) - 2:
+        if st.get("feuer", 0) < beste["arbeiter"] and holz >= self.kosten[1]["holz"] and st.get("leute", 0) >= st.get("platz", 0) - 2:
             ev.append("PLANER Huette zuerst (Feuer %d, %s braucht %d) -> %s" % (st.get("feuer", 0), NAME[beste["typ"]], beste["arbeiter"],
                                                                               self.baue(1, self.K[0] - 7, self.K[1] - 2, 25)))
             return ev
-        bezahlbar = lambda k: holz >= k["holz"] and stein >= k["stein"] and gold >= k["gold"] + (15 if self.wirt.B_offen else 0)
-        wahl = beste if bezahlbar(beste) else next((k for k in kand[1:] if bezahlbar(k) and k["amort"] <= 1.5 * beste["amort"]), None)
+        reserve_gold = 15 if self.wirt.B_offen else 0
+        habe = {"holz": holz, "stein": stein, "gold": gold - reserve_gold}
+        bezahlbar = lambda k: all(habe[w] >= k["kosten"][w] for w in habe)
+        # Ausweichbau nur, wenn er nichts verbraucht, was der beste braucht (sonst schiebt er den besten weiter hinaus)
+        stiehlt = lambda k: any(beste["kosten"][w] > 0 and habe[w] - k["kosten"][w] < beste["kosten"][w] for w in habe if k["kosten"][w] > 0)
+        if self.ende is None:
+            wahl = beste if bezahlbar(beste) else next((k for k in kand[1:] if bezahlbar(k) and k["amort"] <= 1.5 * beste["amort"]), None)
+        else:
+            wahl = beste if bezahlbar(beste) else next((k for k in kand[1:] if bezahlbar(k) and not stiehlt(k)), None)
         if wahl is None:
-            self.braucht_gold = True
+            # nur sparen, was fehlt: Gold zurueckhalten nur, wenn dem besten Bau Gold fehlt
+            if gold < beste["kosten"]["gold"] + reserve_gold:
+                self.braucht_gold = True
             if runde % (5 * self.PLANEN) == 0:
-                ev.append("PLANER spart auf %s (Amortisation %.0f Ticks, %.1f Gold/1000)" % (NAME[beste["typ"]], beste["amort"], beste["gold_je_1000"]))
+                ev.append("PLANER wartet auf %s (fehlt: %s)" % (NAME[beste["typ"]], ", ".join(
+                    "%s %d" % (w, beste["kosten"][w] - v) for w, v in (("holz", holz), ("stein", stein), ("gold", gold)) if beste["kosten"][w] > v)))
             return ev
-        ort = self.baue(wahl["typ"], wahl["ort"][0], wahl["ort"][1], 10)
+        # Widerlegung b) mitschreiben statt nur behaupten: Bau, der laut eigener Rechnung nicht mehr rechnet
+        if wahl["rest"] is not None and wahl["anlauf"] + wahl["amort"] > wahl["rest"]:
+            self.verstoss.append((st.get("t"), NAME[wahl["typ"]]))
+        r = 3 if wahl["typ"] in (5, 20, 32, 3) else 10
+        ort = self.baue(wahl["typ"], wahl["ort"][0], wahl["ort"][1], r)
         if ort is None:
             self.fehlschlag[(wahl["typ"], wahl["ort"])] = self.fehlschlag.get((wahl["typ"], wahl["ort"]), 0) + 1
         elif wahl["typ"] == 20:
-            self.baue(4, ort[0] + 3, ort[1] - 4, 8)                # Ochsenjoch direkt dazu (Daniels Regel)
-        self.bilanz[NAME[wahl["typ"]]] = self.bilanz.get(NAME[wahl["typ"]], 0) + (1 if ort else 0)
-        ev.append("PLANER %s bei %s (Weg %d, %.1f Gold/1000, Amortisation %.0f Ticks) -> %s" % (
-            NAME[wahl["typ"]], wahl["ort"], wahl["weg"], wahl["gold_je_1000"], wahl["amort"], ort))
+            self.baue(4, ort[0] + 3, ort[1] - 4, 8)                # Ochsenjoch direkt dazu
+        if ort:
+            self.gesetzt[NAME[wahl["typ"]]] = self.gesetzt.get(NAME[wahl["typ"]], 0) + 1
+        ev.append("PLANER %s bei %s (Weg %d, %.1f Gold/1000, Anlauf %d, Amortisation %.0f, Gewinn bis Ende %s)%s -> %s" % (
+            NAME[wahl["typ"]], wahl["ort"], wahl["weg"], wahl["gold_je_1000"], wahl["anlauf"], wahl["amort"],
+            "-" if wahl["gewinn"] is None else "%.0f" % wahl["gewinn"], "" if wahl is beste else " statt %s" % NAME[beste["typ"]], ort))
         return ev
 
     def bericht(self):
-        return "Ertrags-Planer: gebaut %s, Steuerstufe %d, zuletzt bester Kandidat %s" % (
-            self.bilanz or "nichts", self.steuer, (NAME[self.letzte_wahl["typ"]], round(self.letzte_wahl["amort"])) if self.letzte_wahl else None)
+        stehen = {NAME[t]: self.messer.letzter.get("G%d" % t, 0) for t in START}
+        return "Ertrags-Planer: gesetzt %s, stehen am Ende %s, abgelehnt %s, Verstoesse gegen den Horizont %s, Steuerstufe %d\n%s" % (
+            self.gesetzt or "nichts", stehen, {"%s: %s" % k: v for k, v in self.abgelehnt.items()}, self.verstoss or "keine",
+            self.steuer, self.messer.bericht())
+
+    def sichern(self, pfad):
+        json.dump({"zeit": time.strftime("%d.%m.%Y %H:%M"), "kosten": self.kosten, "gelernt": self.messer.stand(),
+                   "gesetzt": self.gesetzt, "verstoesse": self.verstoss}, open(pfad, "w", encoding="utf-8"), ensure_ascii=False, indent=1)

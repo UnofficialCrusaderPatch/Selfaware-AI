@@ -1,18 +1,18 @@
-Eintrag 1 'M19 Liga Start Grumpy T600' -> Scrollstand 0, Zeile 1; Spielzeit vorher 73952
-['[villagestudio]: LADEPAUSE: scharf (jetzt Tick 73952, NICHT pausiert - nur der Zeitsprung zaehlt).']
-['[villagestudio]: POKE 0x01126628: 0 -> 0', '[villagestudio]: POKE 0x01126624: 0 -> 1', '[villagestudio]: LADEN: Knopf 2 gedrueckt, ok=true', '[villagestudio]: logik: 3 von 3 Befehlen ausgefuehrt, 0 schon erledigt.', '[villagestudio]: LADEPAUSE: Laden erkannt (Spielzeit sprang um -73352) bei Tick 600 - angehalten.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.']
+Eintrag 1 'M19 Liga Start Grumpy T600' -> Scrollstand 0, Zeile 1; Spielzeit vorher 28731
+['[villagestudio]: LADEPAUSE: scharf (jetzt Tick 28731, pausiert).']
+['[villagestudio]: POKE 0x01126628: 0 -> 0', '[villagestudio]: POKE 0x01126624: 0 -> 1', '[villagestudio]: LADEN: Knopf 2 gedrueckt, ok=true', '[villagestudio]: logik: 3 von 3 Befehlen ausgefuehrt, 0 schon erledigt.', '[villagestudio]: LADEPAUSE: Laden erkannt (Spielzeit sprang um -28131) bei Tick 600 - angehalten.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.']
 Spielzeit nachher 600 / 600, Pause 1
-Bergfried Spieler 1: Anker (138, 262), Eingang (141, 269); Fenster (61,189)-(221,349)
-Platzkarte holzfaeller:  16801 von  25921 Feldern gehen (0 s)
-Platzkarte huette     :  14765 von  25921 Feldern gehen (0 s)
-Platzkarte apfel      :    839 von  25921 Feldern gehen (0 s)
-Platzkarte speicher   :  15652 von  25921 Feldern gehen (0 s)
-Platzkarte steinbruch :    137 von  25921 Feldern gehen (0 s)
-Platzkarte ochsen     :  18209 von  25921 Feldern gehen (0 s)
-Platzkarte eisenmine  :    242 von  25921 Feldern gehen (0 s)
-Platzkarte lager_keins:  14796 von  25921 (Startlager [6, 7, 8, 9] abgerissen, 0 s)
+Bergfried Spieler 1: Anker (138, 262), Eingang (141, 269); Karte (0,0)-(399,399)
+Platzkarte holzfaeller:  55216 von 160000 Feldern gehen (0 s)
+Platzkarte huette     :  48369 von 160000 Feldern gehen (0 s)
+Platzkarte apfel      :   2845 von 160000 Feldern gehen (0 s)
+Platzkarte speicher   :  50374 von 160000 Feldern gehen (0 s)
+Platzkarte steinbruch :    408 von 160000 Feldern gehen (0 s)
+Platzkarte ochsen     :  62508 von 160000 Feldern gehen (0 s)
+Platzkarte eisenmine  :    818 von 160000 Feldern gehen (0 s)
+Platzkarte lager_keins:  47038 von 160000 (Startlager [6, 7, 8, 9] abgerissen, 2 s)
 Eintrag 1 'M19 Liga Start Grumpy T600' -> Scrollstand 0, Zeile 1; Spielzeit vorher 602
 ['[villagestudio]: LADEPAUSE: scharf (jetzt Tick 602, pausiert).']
 ['[villagestudio]: POKE 0x01126628: 0 -> 0', '[villagestudio]: POKE 0x01126624: 0 -> 1', '[villagestudio]: LADEN: Knopf 2 gedrueckt, ok=true', '[villagestudio]: logik: 3 von 3 Befehlen ausgefuehrt, 0 schon erledigt.', '[villagestudio]: LADEPAUSE: Laden erkannt (Spielzeit sprang um -2) bei Tick 600 - angehalten.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.', '[villagestudio]: LADEPAUSE: nachgehalten bei Tick 600.']
 Spielzeit nachher 600 / 600, Pause 1
-{"spielstand": "M19 Liga Start Grumpy T600", "kurz": "M19", "bergfried_anker": [138, 262], "bergfried_eingang": [141, 269], "feind_bergfried": {"2": {"anker": [224, 282], "eingang": [227, 289]}}, "lord": [[144, 267]], "fenster": [61, 189, 221, 349]}
+{"spielstand": "M19 Liga Start Grumpy T600", "kurz": "M19", "bergfried_anker": [138, 262], "bergfried_eingang": [141, 269], "feind_bergfried": {"2": {"anker": [224, 282], "eingang": [227, 289]}}, "lord": [[144, 267]], "fenster": [0, 0, 399, 399]}
