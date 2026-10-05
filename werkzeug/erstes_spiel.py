@@ -21,8 +21,6 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from laden import lade_stand, befehl, peek
 from steuerkarte import laufe, tick, spielzustand
 from bauen import NACH_TYP, gebaeude_von, vorrat, baue_irgendwo
-from plantagen_lauf import baue_alle, vorab
-from speichern import speichere
 from waechter import Waechter, lies_lagebild, lies_gebaeude
 from assassinen import Angriffstrupp, Einzeln
 from befehl import sende, neue_id, ABZUG, INSTANZ
@@ -44,66 +42,106 @@ def schreib(text):
     with open(LOG, "a", encoding="utf-8") as f:
         f.write(time.strftime("%H:%M:%S ") + text + "\n")
 
-def phase1(plan):
-    schreib("== Phase 1: Eroeffnung nach Plan (%s)" % os.path.basename(plan["_datei"]))
-    print("Tick", lade_stand(BASIS, mit_bild=False))
-    befehl({"eigenerPlatz": SP}, 0.8)
-    vorab()
+def partie_pruefen():
+    """Fehlerkontrolle (Daniel 04.10.) OHNE Tempo zu aendern: laeuft das Gefecht, ist der Mensch eingetragen, gameOver 0?
+    (plantagen_lauf.vorab() stellt Tempo 1000 - in einer Live-Partie ein sichtbarer Sprung, Daniel 22:54.)"""
+    zustand = {"Ansicht": peek(0x01FE7D1C)[0], "gameOver": peek(0x0117D500)[0],
+               "Mensch": s32(peek(0x0191DE10 + SP * 4)[0]), "Platz": peek(0x01A275DC)[0]}
+    if zustand != {"Ansicht": 14, "gameOver": 0, "Mensch": 1, "Platz": SP}:
+        raise SystemExit("TESTBEDINGUNG FEHLT: %s" % zustand)
+    return zustand
+
+def warte_bis(bedingung, text, sekunden=90, pflicht=True):
+    """Bei LAUFENDEM Spiel warten, bis bedingung() wahr ist (keine Tick-Pause - Daniel 22:54 "ohne komische Pausen").
+    pflicht=False: bei Zeitablauf None statt Abbruch."""
+    ende = time.time() + sekunden
+    while time.time() < ende:
+        if bedingung():
+            return tick()
+        time.sleep(0.02)        # unter einem Tick (Daniel 23:01: keine festen Wartezeiten)
+    if not pflicht:
+        return None
+    raise SystemExit("ZEIT UM beim Warten auf: %s (Tick %s)" % (text, tick()))
+
+def lords():
+    return [tuple(int(v) for v in m) for m in re.findall(r"LORD \d+: Spieler (\d+) bei \((\d+),(\d+)\)",
+                                                          " ".join(befehl({"lords": True}, 1.0, bis="LORDS")))]
+
+def phase1(plan, tempo):
+    """Neue Partie ab Tick 0 (Daniel 05.10. 22:52: "warum laesst du der KI so einen Vorlauf? starte das Spiel bei Tick 0",
+    "Neustart komplett"; 22:54: "ohne komische Pausen, ein Spiel, das live mit gleicher Geschwindigkeit laeuft").
+    Vorher: jede Partie lud den Startstand "M19 Liga Start Grumpy T600" - Rotkaeppchen hatte 600 Ticks Vorsprung, dazu
+    Tick-Pausen in der Eroeffnung und ein Speichern. Jetzt: frisches Liga-Gefecht (Werte aus dem M19-Stand gelesen: 1 Gegner
+    Rotkaeppchen, Ausgleich 3, Startplaetze 0/1), sofort das feste Tempo, und jeder Schritt wartet bei laufendem Spiel."""
+    import befehl as kanal
+    schreib("== Phase 1: neue Partie ab Tick 0, Tempo %d durchgehend, ohne Pausen (Plan %s)" % (tempo, os.path.basename(plan["_datei"])))
+    kanal.sende({"player": SP, "menue": 41}, 3)
+    # Tempo VOR dem Start setzen und nicht fest warten (live_1, 22:57: das Gefecht startete mit dem alten Tempo der
+    # Testlaeufe, der Startbefehl wartete fest 4 s - erst bei Tick 3.250 kam unser erster Befehl; Daniel 22:58 "bro wtf")
+    befehl({"tempo": tempo}, 1.0, bis="TEMPO")
+    kanal.sende({"player": SP, "pause": False}, 0.5)
+    kanal.sende({"eigenesGefecht": True, "karte": "Liga_Grumpy Neighbors", "ki": 1, "gegner": 1, "ausgleich": 3,
+                 "startliste": [0, 1, 246, 246, 246, 246, 246, 246]}, 4, bis="LaunchSkirmishGame zurueck")
+    befehl({"tempo": tempo}, 1.0, bis="TEMPO")
+    t_lords = warte_bis(lambda: len(lords()) >= 2, "beide Lords")
+    zustand = partie_pruefen()
+    eigener = [(x, y) for sp, x, y in lords() if sp == SP]
+    if not eigener or max(abs(eigener[0][0] - BERGFRIED[0]), abs(eigener[0][1] - BERGFRIED[1])) > 8:
+        raise SystemExit("STARTPLATZ FALSCH: unser Lord bei %s, Plan erwartet den Bergfried-Eingang %s" % (eigener, BERGFRIED))
+    schreib("Partie laeuft seit Tick %d: Lords da, unser Lord bei %s, %s" % (t_lords, eigener[0], zustand))
     from bauen import baue_viele
-    # Daniel 05.10. 22:11: "sobald moeglich anfangen zu raiden ohne Ruecksicht auf Verluste: 1. Soeldnerposten
-    # 2. Kornspeicher 3. Markt, Essen verkaufen, Assassinen ausbilden - dann direkt raiden, dabei die klassische
-    # Wirtschaft hoch." Liga-Start = 0 Gold: das Gold kommt nur aus der Start-Nahrung (je 15), und die erscheint erst
-    # mit dem Kornspeicher - darum Kornspeicher + Markt zuerst, ALLES verkaufen (kein Puffer), dann Posten (120 Gold) und
-    # mit dem ganzen Rest Assassinen (70), BEVOR die Wirtschaftsgebaeude die freien Leute belegen. Die Wirtschaft baut
-    # danach mit dem, was uebrig ist; fehlende Apfelplantagen setzt der Ertrags-Planer in Phase 2 nach.
-    # (Stand davor, gemessen Serie a: Gold 205 nach dem Verkauf, 45 in Apfelplantagen, Posten erst Tick ~833,
-    #  erster Raid Tick ~5.930.)
-    baue_viele([(19, plan["kornspeicher"][0], plan["kornspeicher"][1])], SP)
-    markt = baue_schnell(26, BERGFRIED[0], BERGFRIED[1], 25)
-    laufe(120)
-    vk = vorrat(SP)
-    # Daniel 22:49: "Kornspeicher als erstes, dann Nahrung vielleicht weniger verkaufen - Wirtschaft ist doch wichtig".
-    # Gemessen raidzuerst_1-9 (alles verkauft): kein Essen bis ~5.400, Beliebtheit ~45 bei Tick 8.000. Fleisch bringt nur
-    # 5 Gold je 5 Stueck (Liga-Preis, gemessen 05.10.) - die 15 Fleisch behalten kostet 15 Gold: 195 statt 210, reicht weiter
-    # fuer Posten (120) + Assassine (70). Puffer 15 = die teuren Sorten gehen, das Fleisch bleibt (nahrung_auf_kante).
-    lose = nahrung_auf_kante({k: vk.get(k, 0) for k in NAHRUNG_PREIS}, 15)
-    laufe(5)
-    v0 = vorrat(SP)
-    posten = baue_schnell(8, BERGFRIED[0], BERGFRIED[1], 25)
-    laufe(5)
+    # Daniel 22:59: "immer noch zu langsam, und dann ploeppt er ploetzlich seine Wirtschaft hin". Gemessen live_2: Markt
+    # erst 200 Ticks nach dem Kornspeicher (Platzsuche), Posten + Assassine erst bei 976, die Wirtschaft (21 Bauten) auf
+    # einen Schlag bei 2.504 - jede Abfrage wartete fest 1 s (= 40 Ticks bei Tempo 40), dazu Kontrolle je Gebaeudeart.
+    # Jetzt: ALLES, was nur Holz kostet, in EINEM Befehl gleich beim Start (Kornspeicher, Markt, Holzfaeller, Steinbruch,
+    # Ochsenjoch, Huetten) an festen Plaetzen; sobald das Essen da ist verkaufen, Posten, Assassine; dann die Apfelplantagen
+    # (die kosten Gold). Kontrolle einmal, waehrend wir sowieso aufs Essen warten.
+    A, B = apfel_gruppen(plan["aepfel"])
+    holz_bauten = [(19, tuple(plan["kornspeicher"])), (26, MARKT)] + [(3, tuple(p)) for p in plan["holzfaeller"]]
+    if plan.get("stein"):
+        holz_bauten += [(20, tuple(plan["stein"]["steinbruch"])), (4, tuple(plan["stein"]["ochsen"]))]
+    holz_bauten += [(1, tuple(p)) for p in plan["huetten"]]
+    t_bau = tick()
+    g1, f1 = baue_viele([(typ, x, y) for typ, (x, y) in holz_bauten], SP, live=True)
+    schreib("ERSTE BAUBEFEHLE bei Tick %d: %d von %d Holz-Bauten stehen bei Tick %d (Kornspeicher, Markt, Holzfaeller, "
+            "Steinbruch, Ochsenjoch, Huetten); nicht gebaut: %s" % (t_bau, len(g1), len(holz_bauten), tick(),
+            [(NACH_TYP[t]["name"], x, y) for t, x, y in f1] or "keine"))
+    if any(t == 26 for t, _, _ in f1):                # Markt-Platz belegt (z. B. Einheit drauf): Platz suchen
+        schreib("Markt am festen Platz nicht moeglich - gesucht: %s" % (baue_schnell(26, BERGFRIED[0], BERGFRIED[1], 25),))
+    rest = [r for r in f1 if r[0] != 26]
+    # live_3: sofort beim ersten Essen verkauft - es kommt nach und nach an, verkauft wurde 1 Los Kaese (30 Gold), dann
+    # Abbruch "Gold aus dem Verkauf". Jetzt: warten, bis alle 4 Sorten da sind; reicht das Gold nicht, nochmal verkaufen.
+    t_essen = warte_bis(lambda: all(vorrat(SP).get(k, 0) > 0 for k in NAHRUNG_PREIS), "alle 4 Sorten Start-Nahrung")
+    lose = {}
+    for versuch in range(3):
+        vk = vorrat(SP)
+        for w, k in nahrung_auf_kante({k: vk.get(k, 0) for k in NAHRUNG_PREIS}, 15).items():
+            lose[w] = lose.get(w, 0) + k
+        if warte_bis(lambda: vorrat(SP)["gold"] >= 190, "Gold fuer Posten + Assassine", 5, pflicht=False):
+            break
+    schreib("VERKAUFT bis Tick %d: %s Lose, Gold %d" % (tick(), lose, vorrat(SP)["gold"]))
+    gp, fp = baue_viele([(8, POSTEN[0], POSTEN[1])], SP, live=True)
+    posten = POSTEN if gp else baue_schnell(8, BERGFRIED[0], BERGFRIED[1], 25)
+    warte_bis(lambda: gebaeude_von(SP, 8), "Soeldnerposten", 20)
     geworben = 0
     nr_posten = [n for n, _, _ in gebaeude_von(SP, 8)]
     while nr_posten and vorrat(SP)["gold"] >= 70 and s32(peek(PD + 136)[0]) >= 1:
+        vorher = vorrat(SP)["gold"]
         befehl({"werbe": {"typ": 73, "gebaeude": nr_posten[0]}}, 1.0, bis="WERBE")
         geworben += 1
-        laufe(5)
+        warte_bis(lambda: vorrat(SP)["gold"] < vorher, "Gold fuer den Assassinen abgebucht", 10)
     v0 = vorrat(SP)
-    schreib("RAID ZUERST: Kornspeicher + Markt %s; Start-Nahrung %s verkauft (Lose zu 5); Soeldnerposten %s; %d Assassinen "
-            "angeworben -> Gold %d, Nahrung uebrig %s, Tick %d" % (markt, lose, posten, geworben, v0["gold"],
-            {k: v0.get(k, 0) for k in NAHRUNG_PREIS if v0.get(k, 0)}, tick()))
-    # Seasoning (Daniel 04.10./05.10.): nur Gruppe A jetzt, B wenn A reif wird (wirtschaft.py); B-Holz bleibt im alten Lager
-    A, B = apfel_gruppen(plan["aepfel"])
-    auftrag = [(3, p) for p in plan["holzfaeller"]] + [(32, p) for p in A]
-    if plan.get("stein"):
-        auftrag += [(20, plan["stein"]["steinbruch"]), (4, plan["stein"]["ochsen"])]
-    auftrag += [(1, p) for p in plan["huetten"]]
-    g1, f1 = baue_viele([(typ, x, y) for typ, (x, y) in auftrag], SP)
-    gebaut, fehl = len(g1), []
-    for typ, x, y in f1:                      # Rest einzeln (z. B. stand gerade eine Einheit auf der Flaeche)
-        g, f = baue_alle(typ, [(x, y)])
-        gebaut += len(g); fehl += [(NACH_TYP[typ]["name"], x, y) for (x, y) in f]
-    schreib("in einem Aufruf gebaut: %d von %d, einzeln nachgeholt: %d" % (len(g1), len(auftrag), len(f1)))
+    schreib("RAID ZUERST: Nahrung da bei Tick %d, %s verkauft (Lose zu 5); Soeldnerposten %s; %d Assassinen angeworben "
+            "(freie Leute am Feuer jetzt %d) -> Gold %d, Nahrung uebrig %s, Tick %d" % (t_essen, lose, posten, geworben,
+            s32(peek(PD + 136)[0]), v0["gold"], {k: v0.get(k, 0) for k in NAHRUNG_PREIS if v0.get(k, 0)}, tick()))
+    # Apfelplantagen (Gold) und was beim ersten Befehl nicht ging - einmal nachholen; den Rest setzen Planer/Wirtschaft
+    nach = rest + [(32, x, y) for (x, y) in A]
+    g2, f2 = baue_viele(nach, SP, live=True) if nach else ([], [])
     v1 = vorrat(SP)
-    schreib("GEBAUT %d von %d; Fehlschlaege: %s; Holz %d -> %d, Gold %d -> %d" % (gebaut, len(auftrag), fehl or "keine",
-            v0["holz"], v1["holz"], v0["gold"], v1["gold"]))
-    # Lager (Daniel 04.10.): das alte bleibt, bis B steht (haelt dessen Holz); das neue erst, wenn ein Holzfaeller
-    # abliefern will - beides in Phase 2 (wirtschaft.py)
-    schreib("Apfelplantagen A %d jetzt, B %d spaeter %s; altes Lager bleibt mit %s" % (
+    schreib("NACHGEHOLT bei Tick %d: %d von %d (Apfelplantagen A + Rest); nicht gebaut: %s; Holz %d, Gold %d" % (
+        tick(), len(g2), len(nach), [(NACH_TYP[t]["name"], x, y) for t, x, y in f2] or "keine", v1["holz"], v1["gold"]))
+    schreib("Apfelplantagen A %d, B %d spaeter %s; altes Lager bleibt mit %s" % (
         len(A), len(B), B, {k: v1[k] for k in LAGERWAREN if v1.get(k)}))
-    name = "M19 Liga Eroeffnung T%d" % tick()
-    speichere(name)
-    befehl({"eigenerPlatz": SP}, 0.8)
-    return name
 
 def lage():
     v = vorrat(SP)
@@ -192,6 +230,7 @@ def eigene_gebaeude():
 
 ESSEN_RESERVE, HOLZ_RESERVE, STEIN_RESERVE, GOLD_RESERVE = 60, 30, 10, 30   # Daniel 23:06: alles ueber dem Minimum verkaufen
 BASIS = "M19 Liga Start Grumpy T600"     # Liga-Bedingung: 0 Gold, 150 Holz (Daniel 05.10. 00:55; gemessen 18:38)
+MARKT, POSTEN = (145, 269), (145, 274)   # feste Plaetze, gemessen live_2 (dort gebaut); belegt -> Platzsuche
 BERGFRIED = (141, 269)                    # wird in main() aus dem Plan gesetzt (Bergfried-Eingang dieses Starts)
 # Verkaufspreise Liga, gemessen 05.10. 18:50 (daten/verkaufspreise_liga.txt), ein Verkauf = 5 Stueck
 NAHRUNG_PREIS = {"kaese": 6, "brot": 4, "apfel": 3, "fleisch": 1}
@@ -237,7 +276,7 @@ def verkaufen(st, stein_reserve=None, messer=None):
 
 def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0):
     schreib("== Phase 2: Echtzeit, Tempo %d, %d Minuten, Waechter %s" % (tempo, minuten, "an" if mit_waechter else "aus"))
-    vorab()
+    partie_pruefen()
     # Halte-Liste des Moduls ueberlebt das Laden einer Partie (04.10.: alte Eintraege zogen neue Assassinen mit
     # gleicher Nummer an fremde Plaetze zurueck - "sie sammeln sich nur und machen nichts")
     befehl({"halten": False}, 1.0, bis="HALTEN")
@@ -321,7 +360,7 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
             tz = uhr("bauen_werben_verkauf", tz)
             trupp.aufnehmen([n for n, e in L.items() if e["besitzer"] == SP and e["typ"] == 73])
             # nur begehbare Plaetze (9g: Gebaeudemitten waren nicht begehbar - die Wartenden blieben im Schussfeld)
-            erg = trupp.schritt(L, G, sichere_orte=[tuple(plan["lager_mitte"]), BERGFRIED])
+            erg = trupp.schritt(L, G, sichere_orte=[tuple(plan["lager_mitte"]), BERGFRIED], tick=st.get("t"))
             if isinstance(erg, tuple):          # Einzeln: Befehle der Runde gesammelt in EINEM Aufruf
                 erg, liste = erg
                 if liste:
@@ -365,13 +404,6 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
     schreib(ausbau.bericht())
     ausbau.sichern(os.path.join(D, "ertrag_gelernt_%s_i%d.json" % (time.strftime("%Y%m%d_%H%M%S"), INSTANZ)))
 
-def fingerabdruck(plan):
-    """Alles, was die Eroeffnung bestimmt: Plan, Phase-1-Code, Gruppenteilung, Bauwerkzeug. Gleich -> gleicher Stand."""
-    import hashlib, inspect, bauen, wirtschaft
-    teile = [json.dumps({k: v for k, v in plan.items() if not k.startswith("_")}, sort_keys=True),
-             inspect.getsource(phase1), inspect.getsource(wirtschaft.apfel_gruppen), inspect.getsource(bauen)]
-    return hashlib.sha1("|".join(teile).encode("utf-8")).hexdigest()
-
 def main():
     arg = dict(a.split("=") for a in sys.argv[1:])
     import kennung                    # Daniel 20:46: sofort sehen, welcher Code-Stand diese Partie spielt
@@ -388,25 +420,7 @@ def main():
         print("Tick", lade_stand(arg["start"], mit_bild=False))
         befehl({"eigenerPlatz": SP}, 0.8)
     elif arg.get("nur_phase2", "nein") != "ja":
-        # Eroeffnung nur neu bauen, wenn sie sich geaendert hat (Daniel 05.10. 00:18: "wenn du immer den gleichen
-        # Speicherstand nutzt, musst du ihn nicht immer wieder erzeugen lassen")
-        merk = os.path.join(D, "eroeffnung_stand.json")
-        fp = fingerabdruck(plan)
-        alt = json.load(open(merk, encoding="utf-8")) if os.path.exists(merk) else {}
-        if alt.get("fingerabdruck") == fp and arg.get("neu", "nein") != "ja":
-            schreib("Eroeffnung unveraendert (Fingerabdruck %s) - lade %s statt neu zu bauen" % (fp[:10], alt["spielstand"]))
-            for versuch in range(1, 4):
-                print("Tick", lade_stand(alt["spielstand"], mit_bild=False))
-                befehl({"eigenerPlatz": SP}, 0.8)
-                # 05.10. 20:53 (Laeufe l1, l4): gelegentlich steht nach dem Laden gameOver 1 - die Niederlage-Pruefung lief
-                # vor eigenerPlatz (Meilensteine 30.09.). Neu laden statt den Lauf zu verwerfen; kein Eingriff in den Spielstand.
-                if peek(0x0117D500)[0] == 0:
-                    break
-                schreib("gameOver 1 nach dem Laden (Versuch %d) - lade erneut" % versuch)
-        else:
-            name = phase1(plan)
-            json.dump({"fingerabdruck": fp, "spielstand": name, "erstellt": time.strftime("%d.%m.%Y %H:%M")},
-                      open(merk, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+        phase1(plan, int(arg.get("tempo", 40)))      # Daniel 22:52: "Neustart komplett" - jede Partie ab Tick 0
     try:
         phase2(plan, int(arg.get("minuten", 10)), int(arg.get("tempo", 40)), arg.get("waechter", "nein") == "ja",
                int(arg["bis_tick"]) if arg.get("bis_tick") else None, int(arg.get("assassinen", 0)))

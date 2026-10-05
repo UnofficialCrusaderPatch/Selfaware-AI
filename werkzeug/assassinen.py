@@ -233,6 +233,9 @@ class Einzeln:
     UEBERMACHT_R, FLUCHT_RUHE = 10, 2  # 4a (Daniel 22:16): Umkreis fuer "mehr Feinde als eigene", Runden ohne Verfolger bis zum Wiederangriff
                                        # (raidzuerst_4: mit 5 erst im Kontakt erkannt - Daniel 22:25 "er muss instant verstehen, wann das ist")
     FLUCHT_FREI = 15       # 4a: erst frei, wenn kein feindlicher Nahkaempfer naeher (raidzuerst_3: mit 10 hoerte er zu frueh auf)
+    # 4a in Spielzeit (Daniel 23:01 "minimale Tickanzahlen"): gemessen gehen Assassinen ~1 Feld je 13-17 Ticks, echt
+    # blockiert stand er 30+ Ticks (raidzuerst_4). Ohne Spielzeit (Pruefung) zaehlt eine Runde RUNDE_TICKS.
+    BLOCK_TICKS, RUHE_TICKS, RUNDE_TICKS = 30, 30, 15
     # 4a (Daniel 22:37 "ja, beides"): Arbeiter, die Assassinen schlagen, zaehlen bei der Uebermacht mit. Gewicht = ihr Schaden
     # gegen Assassinen / Schaden eines Speertraegers (25), Liga-Balance meleeDamageVs "Arabian assassin": Holzfaeller 10,
     # Steinmetz 10, Schmied 10, Jaeger 5, Tunnelgraeber 20. Nur im Umkreis ARBEITER_R (sie schlagen nur, wer neben ihnen steht).
@@ -486,9 +489,13 @@ class Einzeln:
         halten.setdefault(ort_sicher, []).append(n)
 
     # --- eine Runde -----------------------------------------------------------------------------------------------
-    def schritt(self, L, G, sichere_orte=None):
+    def schritt(self, L, G, sichere_orte=None, tick=None):
         ereignis, angriffe, jagen, halten, flieh = [], [], [], {}, {}
         self.runde += 1
+        # 4a rechnet in TICKS, nicht in Runden (live_4, 23:05: ohne feste Wartezeiten dauert eine Runde 2-4 statt 13-20
+        # Ticks - "2 Runden ohne Feldwechsel" war normales Gehen, er wechselte staendig die Richtung und wurde eingeholt).
+        # Ohne Spielzeit (Pruefung ohne Spiel): RUNDE_TICKS je Runde.
+        self.jetzt = tick if tick is not None else self.runde * self.RUNDE_TICKS
         self._heim = list(sichere_orte or [])          # 4a: Fluchtrichtung (Lager, Bergfried)
         # begehbare Warteplaetze: wo gerade eine eigene Nicht-Kampfeinheit steht, ist begehbarer Boden
         orte = list(sichere_orte or []) + sorted({(e["x"], e["y"]) for e in L.values()
@@ -584,14 +591,14 @@ class Einzeln:
             if n in self.flucht:
                 verfolger = self._naechster(ort, nah)[0]
                 if verfolger > self.FLUCHT_FREI:
-                    self.flucht[n]["ruhig"] += 1
-                    if self.flucht[n]["ruhig"] >= self.FLUCHT_RUHE:
+                    frei = self.flucht[n].setdefault("frei_seit", self.jetzt)
+                    if self.jetzt - frei >= self.RUHE_TICKS:
                         del self.flucht[n]
                         self.warte.pop(n, None); self.warte_seit.pop(n, None)
-                        ereignis.append("AUSWEICHEN vorbei %d: %d Runden kein Verfolger im Umkreis %d - greift wieder an (Leben %d)" % (
-                            n, self.FLUCHT_RUHE, self.FLUCHT_FREI, L[n]["leben"]))
+                        ereignis.append("AUSWEICHEN vorbei %d: %d Ticks kein Verfolger im Umkreis %d - greift wieder an (Leben %d)" % (
+                            n, self.jetzt - frei, self.FLUCHT_FREI, L[n]["leben"]))
                     continue
-                self.flucht[n]["ruhig"] = 0
+                self.flucht[n].pop("frei_seit", None)
                 # noch verfolgt: weiter weg, Richtung Heim (eigene Truppen) - auch mitten im Nahkampf. Gemessen raidzuerst_2:
                 # ein einziger kurzer Rueckzug reichte nicht (unterwegs 2.481 und am Warteplatz 2.941 eingeholt).
                 # Gemessen raidzuerst_3: ein NEUER Befehl in jeder Runde (neue Gruppe) liess ihn immer wieder kurz stehen -
@@ -604,12 +611,13 @@ class Einzeln:
                 # raidzuerst_5: er laeuft ~1 Feld je 17 Ticks, eine Runde dauert 13-20 Ticks - EINE Runde auf demselben Feld ist
                 # normales Gehen (sonst Zickzack: 1.150 Ticks fuer 45 Felder). Blockiert erst nach 2 Runden ohne Feldwechsel.
                 f = self.flucht[n]
-                f["steht"] = f.get("steht", 0) + 1 if f.get("letzt") == ort else 0
+                if f.get("letzt") != ort or "feld_seit" not in f:
+                    f["feld_seit"] = self.jetzt            # seit wann steht er auf diesem Feld (Spielzeit)
                 f["letzt"] = ort
                 # raidzuerst_9: am Kartenrand (160,43) kam er nicht weiter, Zustand 1 (steht) statt 101 - "blockiert" griff nicht,
                 # er bekam immer wieder denselben unerreichbaren Punkt und wurde eingeholt. Blockiert = 2 Runden kein Feldwechsel,
                 # solange er nicht am Fluchtpunkt ist - egal welcher Zustand.
-                blockiert = o is not None and schach(ort, o) > 3 and f["steht"] >= 2
+                blockiert = o is not None and schach(ort, o) > 3 and self.jetzt - f["feld_seit"] >= self.BLOCK_TICKS
                 if laeuft_weg and not blockiert:
                     ziel = None
                 else:

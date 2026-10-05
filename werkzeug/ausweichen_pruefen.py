@@ -252,6 +252,24 @@ def main():
     nah_schuetzen = min((max(abs(p[0] - 205), abs(p[1] - 280)) for p in pkt), default=-1)
     pruefe(19, "Schuetzen auf der Kreisbahn: naechster Fluchtpunkt %d Felder von ihnen (soll > 12): %s" % (nah_schuetzen, pkt),
            len(pkt) >= 8 and nah_schuetzen > 12)
+    # 20. schnelle Runden (live_4: 2-4 Ticks je Runde): Runde alle 3 Ticks, er geht 1 Feld je 15 Ticks Richtung Fluchtpunkt
+    #     -> nie "blockiert", kein neuer Befehl (vorher: blockiert nach 2 Runden = 6 Ticks, staendige Richtungswechsel)
+    t = neu()
+    L = {100: einheit(73, 1, 190, 270), 501: einheit(73, 2, 196, 270), 502: einheit(73, 2, 196, 271)}
+    t.aufnehmen([100])
+    t.schritt(L, G, sichere_orte=ORTE, tick=1000)
+    o = t.warte.get(100)
+    neu_bef, x = [], 190
+    for i in range(1, 31):                                         # 90 Ticks, alle 3 Ticks eine Runde
+        if i % 5 == 0:
+            x -= 1                                                 # ein Feld je 15 Ticks
+        L[100].update(x=x, zustand=101, laufx=o[0] if o else 0, laufy=o[1] if o else 0)
+        for f in (501, 502):
+            L[f].update(x=x + 6)
+        erg, bef = t.schritt(L, G, sichere_orte=ORTE, tick=1000 + 3 * i)
+        neu_bef += [b for b in bef if 100 in b.get("angriff", {}).get("einheiten", [])]
+    pruefe(20, "Runden alle 3 Ticks, 1 Feld je 15 Ticks: kein BLOCKIERT, kein neuer Befehl (%d neue)" % len(neu_bef),
+           o and not neu_bef)
     print("\n%d von %d gruen" % (sum(ok), len(ok)))
     return 0 if all(ok) else 1
 

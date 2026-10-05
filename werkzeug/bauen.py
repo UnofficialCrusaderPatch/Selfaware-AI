@@ -43,7 +43,7 @@ def baue_irgendwo(typ, kandidaten, sp=1):
             return neu[0]
     return None
 
-def baue_viele(auftraege, sp=1):
+def baue_viele(auftraege, sp=1, live=False):
     """Viele Bauten in EINER Befehlsliste (das Modul arbeitet eine Liste in einem Takt ab), dann eine Kontrolle
     je Gebaeudeart: gebaut = neues Gebaeude dieser Art genau an der Stelle. auftraege: [(typ, x, y), ...].
     Gibt (gebaut, fehl) - fehl z. B. weil gerade eine Einheit auf der Flaeche steht oder Holz fehlt."""
@@ -55,7 +55,14 @@ def baue_viele(auftraege, sp=1):
         g = NACH_TYP[t]
         liste.append({"player": 1, "id": neue_id(), "baue": {"mapper": g["mapper"], "x": x, "y": y, "groesse": g["b"], "richtung": 0}})
     sende({"befehle": liste}, 1.0)
-    laufe(2)
+    if live:                    # Live-Partie (Daniel 05.10. 22:54 "ohne komische Pausen"): 2 Ticks abwarten, nicht anhalten
+        import time
+        from steuerkarte import tick
+        t0, ende = tick(), time.time() + 10
+        while tick() < t0 + 2 and time.time() < ende:
+            time.sleep(0.02)
+    else:
+        laufe(2)
     neu = {t: {(x, y): n for n, x, y in gebaeude_von(sp, t) if n not in vorher[t]} for t in arten}
     gebaut = [(t, x, y, neu[t][(x, y)]) for t, x, y in auftraege if (x, y) in neu[t]]
     fehl = [(t, x, y) for t, x, y in auftraege if (x, y) not in neu[t]]

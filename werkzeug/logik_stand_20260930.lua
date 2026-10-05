@@ -2639,6 +2639,12 @@ local function einzelbefehl(cmd)
       log(INFO, "GEFECHT: Selbstspiel-Aufbau (kein Mensch, feste Startplaetze) nach Lobby-Messung 30.09.")
     else
       for slot = 1, 1 + anzKI do platziereZuf(slot) end
+      -- 05.10.2026 (Daniel 22:52 "starte bei Tick 0"): feste Startplaetze auch mit Mensch, sonst Zufall. Gemessen im
+      -- Startstand M19: playerPositionsArray = 0, 1, 246... (Mensch Platz 0, Rotkaeppchen Platz 1).
+      if type(cmd.startliste) == "table" then
+        for i = 0, 7 do core.writeByte(posArr + i, tonumber(cmd.startliste[i + 1]) or 246) end
+        log(INFO, "GEFECHT: feste Startplaetze " .. table.concat(cmd.startliste, ","))
+      end
     end
 
     log(INFO, string.format("GEFECHT: Karte '%s', %d Gegner vom Typ %d", karte, anzKI, ki))
@@ -2818,6 +2824,9 @@ local function handleCommand(cmd)
     log(INFO, string.format("logik: %d von %d Befehlen ausgefuehrt, %d schon erledigt.",
       ok, ok + fehler, uebersprungen))
   end
+  -- Quittung (05.10.2026, Daniel 23:01 "feste Zeit warten - Sekunden sind Killer"): der Kanal (befehl.py) wartet auf
+  -- genau diese Zeile statt eine feste Zeit. Die Datei wird jeden Tick gelesen, die Quittung kommt also im selben Tick.
+  if cmd.id ~= nil then log(INFO, "QUITTUNG " .. tostring(cmd.id)) end
 end
 
 --============================================================================

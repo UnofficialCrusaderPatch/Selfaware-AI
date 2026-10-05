@@ -92,16 +92,17 @@ def sende(befehl, warte=3.0, bis=None):
     vorher = os.path.getsize(LOG)
     io.open(BEFEHL, "wb").write(json.dumps(befehl).encode("utf-8"))
     if bis is None:
-        time.sleep(warte)
-    else:
-        ende = time.time() + warte
-        while time.time() < ende:
-            time.sleep(0.02)
-            if os.path.getsize(LOG) > vorher:
-                with io.open(LOG, encoding="utf-8", errors="replace") as f:
-                    f.seek(vorher)
-                    if bis in f.read():
-                        break
+        # Daniel 05.10. 23:01: "loesch das feste Zeit-Warten - Sekunden sind Killer". Die Logik quittiert jeden Befehl mit
+        # "QUITTUNG <id>" (gleicher Tick); warte ist nur noch die Notbremse, falls keine Quittung kommt (z. B. Hauptmenue).
+        bis = "QUITTUNG %s" % befehl["id"]
+    ende = time.time() + warte
+    while time.time() < ende:
+        time.sleep(0.02)
+        if os.path.getsize(LOG) > vorher:
+            with io.open(LOG, encoding="utf-8", errors="replace") as f:
+                f.seek(vorher)
+                if bis in f.read():
+                    break
     with io.open(LOG, encoding="utf-8", errors="replace") as f:
         f.seek(vorher)
         neu = f.read()
