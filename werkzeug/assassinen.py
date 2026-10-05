@@ -251,6 +251,9 @@ class Einzeln:
     # Pike/Streitkolben/Schwert/Ritter: gerechnet, nicht gemessen (wir haben keine).
     STAERKE = {24: 0.0, 25: 1.6, 26: 1.17, 27: 4.0, 28: 4.0, 75: 2.67, 73: 1.0, 22: 0.0, 23: 0.0, 70: 0.0, 72: 0.0, 74: 0.0, 55: 0.0}
     HEIM_R, HEIM_ABSTAND = 15, 25   # eigene Truppen bis HEIM_R um Lager/Bergfried; zu schwach -> Fluchtpunkt mind. HEIM_ABSTAND weg
+    # T2 Im Kreis fuehren (Daniel 22:49): Ring mit Radius KREIS_R um eine Mitte KREIS_MITTE Felder in der ersten Fluchtrichtung,
+    # mindestens KREIS_RAND vom Kartenrand (raidzuerst_9: geradeaus bis an den Rand, dort eingeholt). STARTWERTE.
+    KREIS_R, KREIS_MITTE, KREIS_RAND = 20, 35, 40
     ZUSCHLAGEN = 3
     ZIEL_FERN, ZIEL_FERN_MAX = 20, 2
     SCHWACH, SCHWACH_FERN = 0.6, 25
@@ -335,7 +338,7 @@ class Einzeln:
             return min(gut, key=lambda o: schach(ort, o))
         return max(orte, key=lambda o: min(self._naechster(o, fern)[0], self._naechster(o, nah)[0])) if orte else None
 
-    def _fluchtpunkt(self, ort, nah, n, L=None, nicht_bei=None):
+    def _fluchtpunkt(self, ort, nah, n, L=None, nicht_bei=None, mitte=None):
         """4a: wohin vor einer Nahkampf-Uebermacht? Unter den begehbaren Punkten weg vom Feind (_weg_vom_feind, 15-25 Felder,
         geradeaus und 30 Grad seitlich) zuerst der mit den wenigsten Einheiten im Weg (Daniel 22:28: "Arbeiter koennen in
         den Weg kommen - dafuer muesste er wissen, wo diese Personen laufen"; _im_weg zaehlt Ort UND Laufziel jeder Einheit),
@@ -362,6 +365,14 @@ class Einzeln:
             weg = (lambda q: self._im_weg(ort, q, L, n)) if L else (lambda q: 0)
             if heim:
                 return min(kurz, key=lambda q: (weg(q), min(schach(q, h) for h in heim), -self._naechster(q, nah)[0]))
+            if alle_heim and mitte:          # Heim zu schwach: IM KREIS um mitte (T2, Daniel 22:49), nie an unsere Burg
+                # raidzuerst_9: geradeaus weg -> 4.000 Ticks bis an den Kartenrand, dort eingeholt. Daniel 22:49: "er fuehrt sie im
+                # Kreis herum", waehrenddessen reissen die anderen ihre Wirtschaft ab. Bevorzugt Punkte auf dem Ring KREIS_R um mitte.
+                # und nicht unter ihre Fernkaempfer (Pruefung 18: der Ring streifte bei (209,259) ihre Aussenmauer)
+                fern = getattr(self, "_fern", [])
+                return min(kurz, key=lambda q: (weg(q), min(schach(q, h) for h in alle_heim) < self.HEIM_ABSTAND,
+                                                self._anzahl(q, fern, self.RUECKZUG_FERN),
+                                                abs(schach(q, mitte) - self.KREIS_R) // 4, -self._naechster(q, nah)[0]))
             if alle_heim:                    # Heim zu schwach: seitlich weg, die Verfolger NICHT an unsere Burg ziehen
                 return min(kurz, key=lambda q: (weg(q), min(schach(q, h) for h in alle_heim) < self.HEIM_ABSTAND,
                                                 -self._naechster(q, nah)[0]))
@@ -486,6 +497,7 @@ class Einzeln:
             gut = self.pruefe_begehbar(orte)
             orte = [o for o in orte if o in gut] or orte
         fern, nah = self._feinde(L)
+        self._fern = fern                    # 4a: Fluchtpunkte nicht unter feindliche Fernkaempfer
         # Rueckzugs-Kandidaten fuer alle, die Feinde nah haben - EIN Modulaufruf prueft, welche begehbar sind
         self._kand = {}
         for n in self.mitglieder:
@@ -603,7 +615,7 @@ class Einzeln:
                 else:
                     if blockiert:
                         self.flucht[n].setdefault("gesperrt", []).append(o)
-                    ziel = self._fluchtpunkt(ort, nah, n, L, nicht_bei=self.flucht[n].get("gesperrt"))
+                    ziel = self._fluchtpunkt(ort, nah, n, L, nicht_bei=self.flucht[n].get("gesperrt"), mitte=self.flucht[n].get("mitte"))
                 if ziel:
                     self._fliehen(n, ziel, flieh)
                 ereignis.append("FLUCHT %d: ort %s zustand %d lauf %s Verfolger in %d Leben %d -> %s" % (
@@ -619,7 +631,22 @@ class Einzeln:
             self._vergessen(n)
             self.stapel["mitglieder"].discard(n)
             self._fliehen(n, sicher, flieh)
-            self.flucht[n] = {"seit": self.runde, "ruhig": 0, "letzt": ort}
+            # Kreismitte (T2): KREIS_MITTE Felder in der ersten Fluchtrichtung, nicht naeher als KREIS_RAND am Kartenrand
+            lang = max(schach(ort, sicher), 1)
+            mitte = [ort[i] + (sicher[i] - ort[i]) * self.KREIS_MITTE / lang for i in (0, 1)]
+            # der ganze Ring soll HEIM_ABSTAND von der Burg wegbleiben: Mitte notfalls von der naechsten Burg wegschieben
+            # (Pruefung 18: Mitte 17 Felder neben dem Bergfried, halber Ring gesperrt, er driftete zur Burg)
+            for h in getattr(self, "_heim", []):
+                d = max(abs(mitte[0] - h[0]), abs(mitte[1] - h[1]))
+                soll = self.HEIM_ABSTAND + self.KREIS_R
+                if d < soll:
+                    vx, vy = mitte[0] - h[0], mitte[1] - h[1]
+                    if vx == 0 and vy == 0:
+                        vx, vy = mitte[0] - ort[0] or 1, mitte[1] - ort[1]
+                    f = soll / max(abs(vx), abs(vy))
+                    mitte = [h[0] + vx * f, h[1] + vy * f]
+            mitte = tuple(min(400 - self.KREIS_RAND, max(self.KREIS_RAND, int(round(v)))) for v in mitte)
+            self.flucht[n] = {"seit": self.runde, "ruhig": 0, "letzt": ort, "mitte": mitte}
             self.bilanz["uebermacht"] = self.bilanz.get("uebermacht", 0) + 1
             ereignis.append("AUSWEICHEN %d: Bedrohung %.1f (Nahkaempfer im Umkreis %d, schlagende Arbeiter im Umkreis %d) gegen %d "
                             "eigene, Leben %d -> nach %s (Heim: %s)" % (n, feinde, self.UEBERMACHT_R, self.ARBEITER_R, eigene,

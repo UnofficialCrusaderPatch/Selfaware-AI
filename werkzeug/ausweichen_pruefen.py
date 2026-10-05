@@ -205,6 +205,53 @@ def main():
         erg, bef = t.schritt(L, G, sichere_orte=ORTE)
         gesehen += [tuple(b["angriff"]["lauf"]) for b in bef if "lauf" in b.get("angriff", {}) and 100 in b["angriff"]["einheiten"]]
     pruefe(17, "steht 4 Runden fest (Zustand 1) mit Fluchtbefehl: wechselt die Richtung %s" % gesehen, len(set(gesehen)) >= 2)
+    # 18. Im Kreis fuehren (T2, Daniel 22:49): zu Hause zu schwach, 2 Verfolger bleiben 10 Felder hinter ihm. 10 Runden lang
+    #     laeuft er zu seinem Fluchtpunkt, die Verfolger folgen. Er soll in der Gegend kreisen (nie > 60 Felder vom Start,
+    #     raidzuerst_9: geradeaus bis zum Kartenrand) und nie naeher als HEIM_ABSTAND an die Burg.
+    t = neu()
+    start = (190, 250)
+    L = {100: einheit(73, 1, *start), 501: einheit(73, 2, 196, 250), 502: einheit(73, 2, 196, 251)}
+    t.aufnehmen([100])
+    weg_pkt = [start]
+    for _ in range(10):
+        erg, bef = t.schritt(L, G, sichere_orte=ORTE)
+        ziel = t.warte.get(100)
+        if not ziel:
+            break
+        x0, y0 = L[100]["x"], L[100]["y"]
+        L[100].update(x=ziel[0], y=ziel[1], zustand=0, laufx=ziel[0], laufy=ziel[1])   # dort angekommen
+        dx, dy = ziel[0] - x0, ziel[1] - y0
+        lang = max(abs(dx), abs(dy), 1)
+        for f, k in ((501, 10), (502, 11)):                              # Verfolger 10-11 Felder hinter ihm
+            L[f].update(x=int(round(ziel[0] - dx * k / lang)), y=int(round(ziel[1] - dy * k / lang)))
+        weg_pkt.append(ziel)
+    weit = max(max(abs(p[0] - start[0]), abs(p[1] - start[1])) for p in weg_pkt)
+    heim = min(min(max(abs(p[0] - h[0]), abs(p[1] - h[1])) for h in ORTE) for p in weg_pkt[1:]) if len(weg_pkt) > 1 else -1
+    pruefe(18, "im Kreis: %d Fluchtpunkte, weitester %d Felder vom Start (soll <= 60), naechster an der Burg %d (soll >= %d): %s" % (
+        len(weg_pkt) - 1, weit, heim, getattr(A.Einzeln, "HEIM_ABSTAND", 25), weg_pkt[1:]),
+        len(weg_pkt) >= 8 and weit <= 60 and heim >= getattr(A.Einzeln, "HEIM_ABSTAND", 25))
+    # 19. dieselbe Kreisflucht, aber 3 feindliche Bogenschuetzen stehen auf der Kreisbahn (205,280) -> kein Fluchtpunkt
+    #     naeher als 12 Felder an ihnen (ohne Schuetzen lief der Kreis durch (207,279))
+    t = neu()
+    L = {100: einheit(73, 1, *start), 501: einheit(73, 2, 196, 250), 502: einheit(73, 2, 196, 251),
+         521: einheit(22, 2, 205, 280), 522: einheit(22, 2, 206, 281), 523: einheit(22, 2, 204, 281)}
+    t.aufnehmen([100])
+    pkt = []
+    for _ in range(10):
+        t.schritt(L, G, sichere_orte=ORTE)
+        ziel = t.warte.get(100)
+        if not ziel:
+            break
+        x0, y0 = L[100]["x"], L[100]["y"]
+        L[100].update(x=ziel[0], y=ziel[1], zustand=0, laufx=ziel[0], laufy=ziel[1])
+        dx, dy = ziel[0] - x0, ziel[1] - y0
+        lang = max(abs(dx), abs(dy), 1)
+        for f, k in ((501, 10), (502, 11)):
+            L[f].update(x=int(round(ziel[0] - dx * k / lang)), y=int(round(ziel[1] - dy * k / lang)))
+        pkt.append(ziel)
+    nah_schuetzen = min((max(abs(p[0] - 205), abs(p[1] - 280)) for p in pkt), default=-1)
+    pruefe(19, "Schuetzen auf der Kreisbahn: naechster Fluchtpunkt %d Felder von ihnen (soll > 12): %s" % (nah_schuetzen, pkt),
+           len(pkt) >= 8 and nah_schuetzen > 12)
     print("\n%d von %d gruen" % (sum(ok), len(ok)))
     return 0 if all(ok) else 1
 

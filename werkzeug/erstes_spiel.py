@@ -62,7 +62,11 @@ def phase1(plan):
     markt = baue_schnell(26, BERGFRIED[0], BERGFRIED[1], 25)
     laufe(120)
     vk = vorrat(SP)
-    lose = nahrung_auf_kante({k: vk.get(k, 0) for k in NAHRUNG_PREIS}, 0)
+    # Daniel 22:49: "Kornspeicher als erstes, dann Nahrung vielleicht weniger verkaufen - Wirtschaft ist doch wichtig".
+    # Gemessen raidzuerst_1-9 (alles verkauft): kein Essen bis ~5.400, Beliebtheit ~45 bei Tick 8.000. Fleisch bringt nur
+    # 5 Gold je 5 Stueck (Liga-Preis, gemessen 05.10.) - die 15 Fleisch behalten kostet 15 Gold: 195 statt 210, reicht weiter
+    # fuer Posten (120) + Assassine (70). Puffer 15 = die teuren Sorten gehen, das Fleisch bleibt (nahrung_auf_kante).
+    lose = nahrung_auf_kante({k: vk.get(k, 0) for k in NAHRUNG_PREIS}, 15)
     laufe(5)
     v0 = vorrat(SP)
     posten = baue_schnell(8, BERGFRIED[0], BERGFRIED[1], 25)
