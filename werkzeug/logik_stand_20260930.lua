@@ -1801,6 +1801,32 @@ local function einzelbefehl(cmd)
   --   (createPlayerTribe legt die Gruppe genau unter dieser Nummer an; frei = tribeState +24 == 0,
   --   Gruppen ab 0x01667F78 + 40, je 0x334 Byte), dann Spielbefehl 36 ClickGiveUnitsInstruction
   --   (Gruppe, Art, Ziel-Nr, Ziel-uid, 0). Nur eigene Einheiten werden ausgewaehlt (Fairness).
+  --   { "wegtest": { "nr": <eigene Einheit>, "punkte": [[x, y], ...] } }  (05.10.2026, Lord-Trupp Schritt 0)
+  --   Fragt den Wegfinder des Spiels selbst: setDestinationForUnit (0x0053D3D0) gibt FALSE, wenn es keinen Weg gibt
+  --   (abgelesen: UpdateWoodcutter wertet genau das aus). Je Punkt 1/0 in "WEGTEST <nr>: 1011...", danach bekommt die
+  --   Einheit ihr altes Laufziel zurueck. Nur eigene Einheiten (Fairness).
+  if cmd.wegtest ~= nil and type(cmd.wegtest) == "table" then
+    local w = cmd.wegtest
+    local nr = tonumber(w.nr) or 0
+    local u = 0x0138854C + nr * 1168
+    local ich = core.readInteger(0x01A275DC) or -1
+    if nr <= 0 or core.readSmallInteger(u + 0x96) ~= ich then
+      log(INFO, string.format("WEGTEST %d: keine eigene Einheit", nr))
+      return true
+    end
+    _setDest = _setDest or core.exposeCode(ADR_SETDEST, 5, 1)
+    local altX, altY = core.readSmallInteger(u + 0xC8) or -1, core.readSmallInteger(u + 0xCA) or -1
+    local aus = {}
+    for _, p in ipairs(w.punkte or {}) do
+      local ok, r = pcall(_setDest, UNITS_STATE, nr, tonumber(p[1]) or 0, tonumber(p[2]) or 0, 0)
+      aus[#aus + 1] = (ok and r ~= 0 and r ~= false) and "1" or "0"
+    end
+    if altX >= 0 then pcall(_setDest, UNITS_STATE, nr, altX, altY, 0) end
+    log(INFO, string.format("WEGTEST %d: %s (Typ %d, altes Laufziel (%d,%d) zurueck)", nr, table.concat(aus, ""),
+      core.readSmallInteger(u + 0x8E) or -1, altX, altY))
+    return true
+  end
+
   if cmd.angriff ~= nil and type(cmd.angriff) == "table" then
     local a = cmd.angriff
     if not cmd.ausSchlange then

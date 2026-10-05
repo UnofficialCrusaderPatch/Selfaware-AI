@@ -226,9 +226,17 @@ class Einzeln:
     STAPEL_AB = 12         # Daniel 05.10. 00:30: "oben stehen noch so 30 Assassinen, die nichts machen" - ab so vielen
                            # Wartenden greifen ALLE gebuendelt einen erreichbaren Fernkaempfer am Boden an (perfekt stapeln)
     STAPEL_RUECKZUG = 0.3  # im Stapel erst unter 30 % Leben zurueck (Daniel: manchmal ist kein Rueckzug besser)
+    # Lord-Trupp (Daniel 05.10. 00:52): nebenher immer wieder pruefen; freie Raid-Assassinen gebuendelt auf den Lord -
+    # meist reichen 10, steht er allein sogar 5, bei Bogenschuetzen mehr, je nach Feindmenge noch viel mehr.
+    # STARTWERTE aus dieser Regel: 5 allein, sonst 10 + 2 je Fernkaempfer + 1 je Nahkaempfer im Umkreis LORD_UMKREIS.
+    LORD_ALLEIN, LORD_NORMAL, LORD_JE_FERN, LORD_JE_NAH, LORD_UMKREIS = 5, 10, 2, 1, 15
+    LORD_PRUEFEN = 5       # alle 5 Runden (~150 Ticks bei Tempo 1000)
+    LORD_WENIG_FEINDE = 5  # Daniel: "auf jeden Fall, wenn keine oder nur noch ein paar Einheiten im Spiel sind"
 
-    def __init__(self, sp=1, pruefe_begehbar=None):
+    def __init__(self, sp=1, pruefe_begehbar=None, wegtest=None):
         self.sp = sp
+        self.wegtest = wegtest                     # Funktion(nr, punkte) -> [bool] (Modulbefehl "wegtest", Wegfinder des Spiels)
+        self.lordtrupp = {"lord": None, "mitglieder": set(), "seit": 0}
         self.pruefe_begehbar = pruefe_begehbar     # Funktion(punkte) -> Menge begehbarer Punkte (Modulbefehl "begehbar")
         self._kand, self._begehbar = {}, set()
         self.mitglieder = set()
@@ -379,6 +387,8 @@ class Einzeln:
             nf = self._naechster(ort, fern)
             if nf[0] > self.RUECKZUG_FERN:
                 continue
+            if n in self.lordtrupp["mitglieder"]:
+                continue                   # der Lord-Trupp bleibt dran (gebuendelt; Daniel: nur die letzten Lebenspunkte zaehlen)
             if n in self.stapel["mitglieder"]:
                 if L[n]["leben"] >= self.STAPEL_RUECKZUG * self.VOLL:
                     continue
@@ -397,7 +407,7 @@ class Einzeln:
                 self.bilanz["rueckzug"] += 1
         # 4b. Ausweichen, bevor es weh tut: rueckt eine Gruppe Fernkaempfer heran, Ziel aufgeben
         for n in self.mitglieder:
-            if n in verletzt or n in self.jagd or n in self.warte or n in self.stapel["mitglieder"]:
+            if n in verletzt or n in self.jagd or n in self.warte or n in self.stapel["mitglieder"] or n in self.lordtrupp["mitglieder"]:
                 continue
             ort = (L[n]["x"], L[n]["y"])
             if self._anzahl(ort, fern, self.VORAUS_FERN) >= self.VORAUS_ANZAHL:
@@ -433,7 +443,8 @@ class Einzeln:
         gruende = {"keins erreichbar": 0, "alle voll": 0, "alle gefaehrlich": 0}
         ohne = 0
         for n in sorted(self.mitglieder):
-            if n in self.ziel or n in self.jagd or n in self.stapel["mitglieder"] or (n in self.warte and n in verletzt):
+            if n in self.ziel or n in self.jagd or n in self.stapel["mitglieder"] or n in self.lordtrupp["mitglieder"] \
+                    or (n in self.warte and n in verletzt):
                 continue
             ort = (L[n]["x"], L[n]["y"])
             schwach = L[n]["leben"] < self.SCHWACH * self.VOLL
@@ -458,13 +469,61 @@ class Einzeln:
                 sicher_ort = self._sicherer_ort(ort, orte, fern, nah, n)
                 if sicher_ort and self.warte.get(n) != sicher_ort:
                     self._warten(n, sicher_ort, halten)
+        # 5b. Lord-Trupp (Daniel 05.10. 00:52)
+        lord_befehl = None
+        lt = self.lordtrupp
+        lt["mitglieder"] = {n for n in lt["mitglieder"] if n in self.mitglieder}
+        lords = [(n, e) for n, e in L.items() if e["typ"] == 55 and e["besitzer"] not in (0, self.sp)]
+        if not lords:
+            if lt["mitglieder"]:
+                ereignis.append("LORD-TRUPP aufgeloest: kein feindlicher Lord mehr (%d frei)" % len(lt["mitglieder"]))
+            lt["mitglieder"], lt["lord"] = set(), None
+        else:
+            ln, le = lords[0]
+            lp = (le["x"], le["y"])
+            fern_l = self._anzahl(lp, fern, self.LORD_UMKREIS)
+            nah_l = self._anzahl(lp, nah, self.LORD_UMKREIS)
+            noetig = self.LORD_ALLEIN if fern_l + nah_l == 0 else self.LORD_NORMAL + self.LORD_JE_FERN * fern_l + self.LORD_JE_NAH * nah_l
+            feinde_gesamt = len(fern) + len(nah)
+            if lt["mitglieder"]:
+                # Gegenprobe: wer nicht (mehr) den Lord angreift, bekommt den Befehl neu; zu wenige -> aufloesen
+                if len(lt["mitglieder"]) < 3:
+                    ereignis.append("LORD-TRUPP aufgeloest: nur noch %d (Lord-Leben %d)" % (len(lt["mitglieder"]), le["leben"]))
+                    lt["mitglieder"], lt["lord"] = set(), None
+                elif self.runde - lt["seit"] >= self.NEU_NACH:
+                    abseits = [n for n in lt["mitglieder"] if not (L[n]["zielart"] == 4 and L[n].get("zieleinheit") == ln)]
+                    if abseits:
+                        lord_befehl = {"angriff": {"einheiten": sorted(lt["mitglieder"]), "ziel": ln}}
+                        lt["seit"] = self.runde
+                        ereignis.append("LORD-TRUPP neu befohlen: %d von %d griffen den Lord nicht an" % (len(abseits), len(lt["mitglieder"])))
+            elif self.runde % self.LORD_PRUEFEN == 0:
+                frei = [n for n in self.mitglieder if n not in self.ziel and n not in self.jagd and n not in self.stapel["mitglieder"]
+                        and L[n]["leben"] >= self.SCHWACH * self.VOLL]
+                # Truppgroesse gilt immer (9l: "wenig Feinde" schickte 7 statt der noetigen 15 - 5 starben, der Lord ueberlebte);
+                # wenige Feinde heisst nur: dann alle Freien mitschicken, nicht mit weniger losgehen
+                genug = len(frei) >= noetig
+                if genug:
+                    frei.sort(key=lambda n: schach((L[n]["x"], L[n]["y"]), lp))
+                    weg = self.wegtest(frei[0], [lp])[0] if self.wegtest else True
+                    ereignis.append("LORD-PRUEFUNG: Lord %d bei %s Leben %d, Fern %d / Nah %d im Umkreis %d, Feinde gesamt %d -> noetig %d, frei %d, Weg %s" % (
+                        ln, lp, le["leben"], fern_l, nah_l, self.LORD_UMKREIS, feinde_gesamt, noetig, len(frei), "ja" if weg else "NEIN"))
+                    if weg:
+                        anzahl = len(frei) if feinde_gesamt <= self.LORD_WENIG_FEINDE else max(noetig, min(len(frei), 2 * noetig))
+                        lt["mitglieder"] = set(frei[:anzahl])
+                        lt["lord"], lt["seit"] = ln, self.runde
+                        for n in lt["mitglieder"]:
+                            self.warte.pop(n, None)
+                            self.warte_seit.pop(n, None)
+                        lord_befehl = {"angriff": {"einheiten": sorted(lt["mitglieder"]), "ziel": ln}}
+                        self.bilanz["lordtrupps"] = self.bilanz.get("lordtrupps", 0) + 1
+                        ereignis.append("LORD-TRUPP: %d Assassinen gebuendelt auf den Lord" % anzahl)
         # 6. Stapel: viele Wartende -> alle gebuendelt auf EINEN erreichbaren Fernkaempfer am Boden, dann den naechsten
         stapel_befehl = None
         stp = self.stapel
         stp["mitglieder"] = {n for n in stp["mitglieder"] if n in self.mitglieder}
         ziel_lebt = stp["ziel"] in L and L[stp["ziel"]]["besitzer"] not in (0, self.sp)
         wartende = [n for n in self.mitglieder if n not in self.ziel and n not in self.jagd and n not in stp["mitglieder"]
-                    and L[n]["leben"] >= self.SCHWACH * self.VOLL]
+                    and n not in self.lordtrupp["mitglieder"] and L[n]["leben"] >= self.SCHWACH * self.VOLL]
         if stp["mitglieder"] or len(wartende) >= self.STAPEL_AB:
             if not stp["mitglieder"]:
                 stp["mitglieder"] = set(wartende)
@@ -501,6 +560,8 @@ class Einzeln:
         befehle += [{"halten": {"nr": ns, "x": o[0], "y": o[1]}} for o, ns in halten.items()]
         if stapel_befehl:
             befehle.append(stapel_befehl)
+        if lord_befehl:
+            befehle.append(lord_befehl)
         if angriffe:
             ereignis.append("%d Assassinen auf %d Gebaeude verteilt (im Spiel gemessen: %d Gebaeude gleichzeitig angelaufen)" % (
                 len(angriffe), len(set(g for _, g in angriffe)), self.gemessen))
@@ -517,4 +578,4 @@ class Einzeln:
                 "gesperrte Warteplaetze %d" % (
                     sum(b["gebaeude"].values()), b["gebaeude"], len(b["verluste"]), self.gemessen, b["neu_befohlen"],
                     b["rueckzug"], b.get("ausgewichen", 0), b["zuschlagen"], b.get("warten_neu", 0),
-                    b.get("stapel_ziele", 0), len(self.schlechte_orte)))
+                    b.get("stapel_ziele", 0), len(self.schlechte_orte)) + ", Lord-Trupps %d" % b.get("lordtrupps", 0))

@@ -137,6 +137,13 @@ def pruefe_begehbar(punkte):
             gut.add((x, y))
     return gut
 
+def wegtest(nr, punkte):
+    """Modulbefehl wegtest: hat Einheit <nr> laut Wegfinder des Spiels einen Weg zu jedem Punkt? (05.10., Gegenprobe gruen:
+    Wasser und Gebaeudefelder -> kein Weg, freies Feld -> Weg)"""
+    z = " ".join(befehl({"wegtest": {"nr": nr, "punkte": [list(p) for p in punkte]}}, 1.0, bis="WEGTEST"))
+    m = re.search(r"WEGTEST \d+: ([01]*)", z)
+    return [c == "1" for c in m.group(1)] if m else [False] * len(punkte)
+
 def runde_lesen():
     """EIN Aufruf fuer die ganze Runde (04.10.: einzelne Abfragen kosteten ~20 s = 800 Ticks je Runde):
     Modulbefehle status + lagebild in einer Liste. Gibt (status, einheiten, gebaeude)."""
@@ -177,7 +184,7 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
     import befehl as befehlskanal
     befehlskanal.STRENG = True     # ab hier bricht jeder Modulfehler den Lauf laut ab
     w = Waechter(SP, posten=plan["lager_mitte"]) if mit_waechter else None
-    trupp = Einzeln(SP, pruefe_begehbar=pruefe_begehbar) if assassinen else None
+    trupp = Einzeln(SP, pruefe_begehbar=pruefe_begehbar, wegtest=wegtest) if assassinen else None
     wirt = Wirtschaft(plan, SP, baue_schnell, [nr for nr, _, _ in gebaeude_von(SP, 10)])
     karte_laden()        # Begehbarkeit fuer kurze Rueckzuege - jetzt, solange das Spiel noch steht
     schreib("Wirtschaft: Apfel A %s, B %s; alte Lagerteile %s" % (wirt.A, wirt.B, sorted(wirt.alt)))
