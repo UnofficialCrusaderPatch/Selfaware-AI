@@ -214,3 +214,24 @@ Instanz 1:
 Sperre ist FREI.
 Instanz 2:
 Sperre ist FREI.
+== 19:48:42 instanz_anlegen.py: Probe
+Quelle: C:/Program Files (x86)/Steam/steamapps/common/Stronghold Crusader Extreme
+Ziel  : C:/Program Files (x86)/Steam/steamapps/common/Stronghold Crusader Extreme Instanz2
+Den Ordner gibt es schon - nichts getan. Fuer den Modulstand: instanz_abgleich.py 2
+rc=1
+Quelle: C:/Program Files (x86)/Steam/steamapps/common/Stronghold Crusader Extreme
+Ziel  : C:/Program Files (x86)/Steam/steamapps/common/Stronghold Crusader Extreme Instanz3
+Nur gezeigt. Anlegen mit:  python instanz_anlegen.py 3 --tun
+rc=0
+Ausgeschl. Dateien: ucp3.log
+           Insgesamt   KopiertÃœbersprungenKeine Ãœbereinstimmung    FEHLER    Extras
+  Dateien:         7         3         4         0         0         0
+Ausgeschl. Dateien: wer_testet.txt
+           Insgesamt   KopiertÃœbersprungenKeine Ãœbereinstimmung    FEHLER    Extras
+  Dateien:         6         2         4         0         0         0
+A Kopierregeln: GRUEN | befehl.json = {}
+Sperrmarke umbenannt in Global\FireflyStrongholdCrusadersExtrem2, geaenderte Stelle(n): ['0x1abf93']
+B Eingriff: Stellen ['0x1abf93'] | gleich Instanz 2: True
+Sperrmarke ist schon umbenannt: Global\FireflyStrongholdCrusadersExtrem2
+C nochmal: []
+D Abbruch wie verlangt: Sperrmarke 0-mal gefunden statt einmal - andere Spielversion? Nichts geaendert.
