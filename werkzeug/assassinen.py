@@ -244,8 +244,13 @@ class Einzeln:
     LORD_PRUEFEN = 5       # alle 5 Runden (~150 Ticks bei Tempo 1000)
     LORD_WENIG_FEINDE = 5  # Daniel: "auf jeden Fall, wenn keine oder nur noch ein paar Einheiten im Spiel sind"
     # Stand 2 (Daniel 05.10. 20:39): mindestens 5, gestapelt, Schwache kurz zurueck und sofort wieder drauf
-    LORD_MIN = 5           # "mit minimal 5 Assassinen einen Lord killen"
-    LORD_MAX = 10          # Startwert: hoechstens doppelt so viele binden, der Rest raidet weiter
+    # Daniel 05.10. 21:05: "5 koennen mit maximalem Mikromanagement einen Lord killen, mit 20 brauchst du kein so krasses
+    # Mikromanagement - je gestackter sie auf einmal ankommen, desto effektiver; der Schaden stackt, der Lord macht viel
+    # Schaden, aber immer nur an einer Einheit. Lieber 20 auf einmal als 5, bis du herausgefunden hast, wie man die Zahl
+    # auf ein effektives Minimum reduziert" (haengt ab von: Leben der eigenen und fremden Einheiten, Fern-/Nahkaempfer im
+    # Kampf, Moerderloecher, Feuer, Hunde, Bevoelkerung im Weg). Jede Welle wird darum mitgeschrieben (self.wellen).
+    LORD_MIN = 20          # Welle erst ab so vielen am Sammelpunkt
+    LORD_MAX = 20          # so viele bindet der Trupp; der Rest raidet weiter
     LORD_ZURUECK = 6       # Startwert: so viele Felder weg vom Lord beim kurzen Rueckzug (Richtung Sammelpunkt)
     LORD_SAMMEL_FERN = 25  # Sammelpunkt: kein feindlicher Fernkaempfer naeher (z1: 20 war zu knapp, dort starben 13 stehend)
 
@@ -262,6 +267,7 @@ class Einzeln:
         self.stapel = {"ziel": None, "mitglieder": set()}
         self.leben, self.umfeld = {}, {}
         self.lord_schlecht = []              # Sammelpunkte, an denen Wartende getroffen wurden
+        self.wellen = []                     # je Welle: Runde, Groesse, Fern/Nah um den Lord, Lord-Leben, eigene im Trupp
         self.messung_lord = []               # (runde, noetig, frei, alle) - M22: der Trupp bildete sich in 8 Laeufen nie
         self.runde, self.gemessen, self.ohne_ziel_zuletzt = 0, 0, None
         self.bilanz = {"gebaeude": {}, "verluste": set(), "neu_befohlen": 0, "rueckzug": 0, "zuschlagen": 0}
@@ -564,12 +570,17 @@ class Einzeln:
             for n, s in st.items():
                 if s == "sammeln" and self.warte.get(n) != P:
                     self._warten(n, P, halten)
-            angekommen = [n for n, s in st.items() if s == "sammeln" and schach((L[n]["x"], L[n]["y"]), P) <= 4]
+            # angekommen: Kreis waechst mit der Truppgroesse (Serie o, 05.10. 21:17: 20 standen ab Tick 18.374 am Sammelpunkt,
+            # aber 20 Einheiten passen nicht in 4 Felder - die Welle startete nie)
+            kreis = 4 + int(math.ceil(math.sqrt(self.LORD_MIN)))
+            angekommen = [n for n, s in st.items() if s == "sammeln" and schach((L[n]["x"], L[n]["y"]), P) <= kreis]
             welle = []
             if len(angekommen) >= self.LORD_MIN:
                 weg = self.wegtest(angekommen[0], [lp])[0] if self.wegtest else True
                 if weg:
                     welle = angekommen
+                    self.wellen.append({"runde": self.runde, "groesse": len(welle), "fern": fern_l, "nah": nah_l,
+                                        "lord_vorher": le["leben"], "lord_nachher": None, "verluste": None, "truppe": set(welle)})
                     self.bilanz["lordtrupps"] = self.bilanz.get("lordtrupps", 0) + 1
                     ereignis.append("LORD-WELLE: %d Assassinen gestapelt auf den Lord (Leben %d, Fern %d / Nah %d um ihn)" % (
                         len(welle), le["leben"], fern_l, nah_l))
@@ -604,6 +615,10 @@ class Einzeln:
                 if abseits:
                     ereignis.append("LORD-TRUPP neu befohlen: %d griffen den Lord nicht an" % len(abseits))
             lt["min_leben"] = min(lt.get("min_leben", le["leben"]), le["leben"])
+            for w in self.wellen:                                   # Wirkung je Welle laufend nachtragen
+                if w["lord_nachher"] is None or any(n in self.mitglieder for n in w["truppe"]):
+                    w["lord_nachher"] = le["leben"]
+                    w["verluste"] = sum(1 for n in w["truppe"] if n not in self.mitglieder)
         # 6. Stapel: viele Wartende -> alle gebuendelt auf EINEN erreichbaren Fernkaempfer am Boden, dann den naechsten
         stapel_befehl = None
         stp = self.stapel
@@ -667,4 +682,6 @@ class Einzeln:
                     b["rueckzug"], b.get("ausgewichen", 0), b["zuschlagen"], b.get("warten_neu", 0),
                     b.get("stapel_ziele", 0), len(self.schlechte_orte)) + ", Lord-Trupps %d" % b.get("lordtrupps", 0)
                 + ", Lord: Wellen %d, Rueckzuege %d, wieder drauf %d, niedrigstes Lord-Leben %s" % (
-                    b.get("lordtrupps", 0), b.get("lord_rueckzug", 0), b.get("lord_wieder", 0), self.lordtrupp.get("min_leben", "-")))
+                    b.get("lordtrupps", 0), b.get("lord_rueckzug", 0), b.get("lord_wieder", 0), self.lordtrupp.get("min_leben", "-"))
+                + ", Wellen im Einzelnen [%s]" % "; ".join("Runde %d: %d Assassinen, Fern %d / Nah %d am Lord, Lord %d -> %s, Verluste %s" % (
+                    w["runde"], w["groesse"], w["fern"], w["nah"], w["lord_vorher"], w["lord_nachher"], w["verluste"]) for w in self.wellen))

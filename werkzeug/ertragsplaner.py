@@ -69,8 +69,6 @@ BAUM_FREI = 7           # ein Baum gilt als vergeben, wenn ein eigener Holzfaell
 SIGNAL_GUT = (0.7, 1.3)  # abgegebene Ladung / gebuchter Zugang, in dem die Abgaben einer Art als sichtbar gelten
 SIGNAL_AB = 20           # ab so viel gebuchtem Zugang wird die Gegenprobe ausgewertet
 
-OCHSENLADUNG = 12        # Steinbloecke je Ochsengang (gemessen M20, 05.10.)
-JOCHE_MAX = 3            # Building +0x2ca quarryLinkedOxTethers short[3] (abgelesen, Ghidra)
 
 
 def startwerte_aus_partien(dateien):
@@ -316,7 +314,7 @@ class Ertragsplaner:
         self.braucht_gold, self.letzte_wahl, self.gesetzt = False, None, {}
         self.fehlschlag, self.abgelehnt, self.verstoss = {}, {}, []
         self.stein_reserve = 0
-        self.haufen, self.joch_bei, self.planung_t = {}, {}, []
+        self.haufen, self.joch_bestellt, self.joch_beladen = {}, {}, set()
 
     def eigene_seite(self, p):
         d = schach(p, self.K)
@@ -406,6 +404,11 @@ class Ertragsplaner:
 
     # ---- jede Runde -----------------------------------------------------------------------------------------------
     def beobachte(self, st, L, G):
+        # Ochsen: welches Joch hatte schon einen beladenen Ochsen unterwegs? (jede Runde, sonst verpasst man es)
+        for e in L.values():
+            ap = e.get("arbeitsplatz")
+            if e["besitzer"] == self.sp and ap and e.get("ladung", 0) > 0 and G.get(ap, {}).get("typ") == 4:
+                self.joch_beladen.add(ap)
         return self.messer.beobachte(st, L, G, self.ziele(G))
 
     def schritt(self, st, L, G, runde):
@@ -488,37 +491,46 @@ class Ertragsplaner:
         return ev
 
     def ochsen_nach_stau(self, st, G, holz):
-        """Daniel 05.10. 20:26: "nicht genug Ochsenjoche gebaut - nicht geschaut, wann sich Steine sammeln, und dann nach
-        einem gewissen Punkt Ochsenjoche bauen". Gemessen 20:33: die fernen Steinbrueche hatten 47/42/34 von 48 Bloecken
-        auf dem Haufen (Typ 21, Vorrat im Lagebild), jeder mit 1 Ochsen; voll heisst: die Steinmetze stehen.
-        Stau = am Haufen liegt mindestens eine Ochsenladung (12) und er schrumpft nicht. Dann ein Joch mehr (hoechstens 3
-        je Steinbruch), danach 3 Planungsrunden beobachten, ob es reicht. Ein Joch gehoert zum naechsten Steinbruch."""
+        """Ochsenjoche nach Daniels Regel (05.10. 21:05): "nicht erst, wenn es gebraucht wird - nachdem der erste Ochse auf
+        dem Weg ist, Stein abliefern zu wollen, direkt den zweiten; und wenn dann immer noch mehr als 8 neue Steine da sind,
+        einen dritten; keine Obergrenze pro Steinbruch."
+        Ochse unterwegs = sein Treiber (Arbeitsplatz = das Joch) traegt Ladung (Lagebild, jede Runde in beobachte gemerkt).
+          - genau 1 Joch und dessen Ochse war beladen unterwegs -> sofort das zweite
+          - ab 2 Jochen: das juengste war schon beladen unterwegs und am Haufen liegen mehr als 8 -> noch eins
+        Ein bestelltes Joch wird abgewartet, bis es steht. (Stand davor, 20:30: erst ab 12 am Haufen, hoechstens 3, mit
+        Beobachtungsfenster - zu spaet und zu wenig.) Ein Joch gehoert zum naechsten Steinbruch."""
         t = st.get("t", 0)
-        self.planung_t.append(t)
-        fenster = 3 * (self.planung_t[-1] - self.planung_t[-2]) if len(self.planung_t) >= 2 else 10 ** 9
         brueche = {n: g for n, g in G.items() if g["besitzer"] == self.sp and g["typ"] == 20}
-        joche = {n: 0 for n in brueche}
-        for o in G.values():
+        joche = {n: [] for n in brueche}
+        for j, o in G.items():
             if o["besitzer"] == self.sp and o["typ"] == 4 and brueche:
                 n = min(brueche, key=lambda q: schach((o["x"], o["y"]), (brueche[q]["x"], brueche[q]["y"])))
                 if schach((o["x"], o["y"]), (brueche[n]["x"], brueche[n]["y"])) <= 15:
-                    joche[n] += 1
+                    joche[n].append(j)
         ev = []
         for n, g in sorted(brueche.items()):
             h = G.get(g.get("verbund") or -1)
-            if not h or h.get("vorrat") is None:
+            v = h.get("vorrat") if h else None
+            if v is not None:
+                self.haufen[n] = v
+            js = joche[n]
+            if self.joch_bestellt.get(n, 0) > len(js) or not js or holz < self.kosten[4]["holz"]:
+                continue                                              # bestelltes Joch steht noch nicht
+            juengstes = max(js, key=lambda j: (self.messer.gesehen.get(j, 0), j))
+            if not (juengstes in self.joch_beladen):
+                continue                                              # dessen Ochse war noch nicht beladen unterwegs
+            if len(js) == 1:
+                grund = "erster Ochse beladen unterwegs -> sofort der zweite"
+            elif v is not None and v > 8:
+                grund = "juengster Ochse unterwegs und noch %d am Haufen (> 8)" % v
+            else:
                 continue
-            v, vor = h["vorrat"], self.haufen.get(n)
-            self.haufen[n] = v
-            if (vor is not None and v >= OCHSENLADUNG and v >= vor and joche[n] < JOCHE_MAX
-                    and t - self.joch_bei.get(n, -10 ** 9) >= fenster and holz >= self.kosten[4]["holz"]):
-                ort = self.baue(4, g["x"] + 3, g["y"] - 4, 8)
-                self.joch_bei[n] = t
-                if ort:
-                    self.gesetzt["Ochsenjoch (Stau)"] = self.gesetzt.get("Ochsenjoch (Stau)", 0) + 1
-                ev.append("PLANER Ochsenjoch an Steinbruch %d: Haufen %d/%d (vorher %d), Joche %d -> %s" % (
-                    n, v, h["grenze"], vor, joche[n], ort))
-                break                                               # eins je Planungsrunde
+            ort = self.baue(4, g["x"] + 3, g["y"] - 4, 8)
+            if ort:
+                self.joch_bestellt[n] = len(js) + 1
+                self.gesetzt["Ochsenjoch (Regel)"] = self.gesetzt.get("Ochsenjoch (Regel)", 0) + 1
+            ev.append("PLANER Ochsenjoch an Steinbruch %d: %s (Joche %d, Haufen %s) -> %s" % (n, grund, len(js), v, ort))
+            break                                                     # eins je Planungsrunde
         return ev
 
     def bericht(self):

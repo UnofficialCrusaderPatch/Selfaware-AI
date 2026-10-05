@@ -35,6 +35,10 @@ bauen muss - **4.** wissen, warum und WANN man es bauen sollte - **5.** selbstae
 - [x] Nie blind starten: Bergfried aus dem Spiel, Plan je Start, nur eigene Seite (05.10. 18:55)
 
 ## Kampf
+- [ ] Wirksames Minimum je Lord-Welle aus den Wellen-Daten lernen (Groesse, Fern/Nah am Lord, Schaden, Verluste) - Daniel 21:05
+- [ ] Weitere Parameter messen: Moerderloecher, Feuer, Hunde, Bevoelkerung im Weg (Daniel 21:05)
+- [ ] Eigenen Lord schuetzen, wenn Rotkaeppchens Grossangriff kommt (Serie t2: Niederlage bei Tick 20.990)
+- [ ] Mehr Eisen: erste Mine wieder frueher (mit Startwerten aus Partien rueckte sie auf Tick ~8.000)
 - [ ] **Lord-Trupp bildet sich nie** (M22: 0 Pruefungen in 8 Laeufen): erst messen, wie viele frei sind vs. noetig; dann Assassinen sammeln statt sofort verteilen (Daniel 05.10. 00:26: "Angriffsarmeen sammeln")
 - [x] Lord-Trupp nach Daniels Regel (05.10. 00:52, M18)
 - [ ] Zugebauten Lord freilegen (05.10. 00:52) - Wegtest steht, Freilegen fehlt

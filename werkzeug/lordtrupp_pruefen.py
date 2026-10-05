@@ -34,7 +34,8 @@ def main():
     L = {500: einheit(55, 2, *LORD)}
     for i, (dx, dy) in enumerate([(0, 0), (2, 0), (-2, 1), (0, -2), (4, 0), (6, 6)]):
         L[600 + i] = einheit(22, 2, LORD[0] + dx, LORD[1] + dy)          # 6 Bogenschuetzen um den Lord
-    for i in range(12):
+    MIN = A.Einzeln.LORD_MIN
+    for i in range(A.Einzeln.LORD_MAX + 2):
         L[100 + i] = einheit(73, 1, 150 + i, 270)                        # 12 eigene Assassinen daheim
     G = {}
     t.aufnehmen([n for n in L if L[n]["typ"] == 73])
@@ -48,17 +49,17 @@ def main():
     pruefe(2, "Sammelpunkt %s hat %d Felder Abstand zum naechsten Bogenschuetzen (>= %d)" % (P, nf, t.LORD_SAMMEL_FERN), nf >= t.LORD_SAMMEL_FERN)
     # 4 angekommen -> noch kein Angriff
     mitgl = sorted(lt["mitglieder"])
-    for n in mitgl[:4]:
+    for n in mitgl[:MIN - 1]:
         L[n]["x"], L[n]["y"] = P
     erg, bef = t.schritt(L, G, sichere_orte=[(94, 280), HEIM])
-    pruefe(3, "mit 4 Angekommenen noch kein Lord-Angriff", not any(b.get("angriff", {}).get("ziel") == 500 for b in bef))
-    for n in mitgl[:7]:
+    pruefe(3, "mit %d Angekommenen noch kein Lord-Angriff" % (MIN - 1), not any(b.get("angriff", {}).get("ziel") == 500 for b in bef))
+    for n in mitgl[:MIN + 2]:
         L[n]["x"], L[n]["y"] = P
     erg, bef = t.schritt(L, G, sichere_orte=[(94, 280), HEIM])
     lb = [b for b in bef if b.get("angriff", {}).get("ziel") == 500]
-    pruefe(3, "ab 5 Angekommenen EIN Befehl mit allen 7 zugleich", len(lb) == 1 and lb[0]["angriff"]["einheiten"] == mitgl[:7])
+    pruefe(3, "ab %d Angekommenen EIN Befehl mit allen %d zugleich" % (MIN, min(MIN + 2, len(mitgl))), len(lb) == 1 and lb[0]["angriff"]["einheiten"] == mitgl[:MIN + 2])
     # Angriff laeuft: n0 schwach + getroffen, n1 nur getroffen (stark), n2 schwach aber nicht getroffen
-    for n in mitgl[:7]:
+    for n in mitgl[:MIN + 2]:
         L[n]["x"], L[n]["y"], L[n]["zielart"], L[n]["zieleinheit"] = LORD[0] + 1, LORD[1], 4, 500
     erg, bef = t.schritt(L, G, sichere_orte=[(94, 280), HEIM])          # Leben merken
     n0, n1, n2 = mitgl[0], mitgl[1], mitgl[2]
