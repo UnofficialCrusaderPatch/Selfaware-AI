@@ -75,6 +75,25 @@ bis eine Messung es bestaetigt (Marke dahinter).
 - Lord toeten (Daniel 05.10. 00:52): wann, ist schwer abzuschaetzen - auf jeden Fall, wenn keine oder nur noch wenige Feindeinheiten im Spiel sind. Der Lord muss angreifbar sein; ist er zugebaut ("zugebuddelt"), erst freilegen. Nebenher immer wieder pruefen und Raid-Assassinen, die nichts mehr zu tun haben, gebuendelt und gestapelt auf den Lord schicken: meist reichen 10 locker, steht der Lord allein sogar 5; bei Bogenschuetzen mehr, je nach Feindmenge noch viel mehr.
 - Assassinen-Raid (Daniel 04.10. 23:14-23:35, 05.10. 00:00): aufteilen, **hoechstens 6 je Gebaeude**; jeder Assassine einzeln befohlen auf das naechste Wirtschaftsgebaeude, ist es voll, sofort das naechste; nach einer Zerstoerung sofort weiter; kein Sammelpunkt noetig.
 
+## Liga-Balance (abgelesen 05.10.2026 aus `ucp/plugins/Mod-KI-Team-Liga-2.0.2/resources/balance/liga_ai.json`)
+Beide Instanzen laden sie (ucp3.log: rebalancer 1.1.3 mit genau dieser Datei). Was NICHT drinsteht, ist Grundspiel.
+- **Assassine:** 12.500 Leben, 70 Gold, Grundschaden 250; gegen den **Lord nur 100** je Schlag, gegen Speertraeger 120,
+  gegen Bogenschuetzen 225. Pfeile treffen ihn mit 1.200 (Speertraeger 3.000), Armbrust mit 6.000.
+- **Lord:** Leben nicht geaendert (gemessen 150.000) -> rund 1.500 Assassinen-Schlaege. Sein Schaden gegen Assassinen
+  steht nicht drin (Grundspiel, offen).
+- **Schrecken hilft im Kampf:** Kampfkraft je Furchtstufe 80 % (nur Gutes) bis **140 % (nur Schreckliches)**, Reichweite 4.
+  Galgen/Pranger/Galgenkaefig je 40 Gold, Kerker/Streckbank 30 Gold.
+- **Hunde:** Zwinger laesst los ab 16 Feinden in der Naehe; Hund 20.000 Leben, Schaden 80. Feuer 75.
+- **Reichweiten:** alle Bogen 40, Schleuder 18. `reduce_height_advantage` wirkt bei uns NICHT (ucp3.log: "only available
+  for SHC Extreme" - wir starten Stronghold Crusader.exe), Hoehe bringt also den vollen Vorteil.
+- **Kosten** (Holz, Stein, Eisen, Pech, Gold): Eisenmine 20/6, Steinbruch 25 Holz, Ochsenjoch 5 Holz, Holzfaeller 5 Holz,
+  Kaserne 12 Stein, Soeldnerposten 120 Gold, Moerdergrube 4 Holz, Zwinger 5 Holz + 75 Gold.
+- **Preise:** Stein 50/25 (Kauf/Verkauf), Eisen 270/135 (doppelte Abholung an), Holz Kauf 15.
+- **Klettern:** steht nicht in der Balance - es ist Spielmechanik. Im Spielcode (giveTribeAnInstruction) setzt das Spiel beim
+  Angriffsbefehl ein Merkmal "Gruppe besteht nur aus Assassinen" fuer den Wegfinder (abgelesen, Bedeutung vermutet:
+  erlaubt Kletterwege). Unser `wegtest` ruft den Wegfinder OHNE dieses Merkmal - darum sagt er beim Lord "kein Weg",
+  obwohl Assassinen klettern koennten (vermutet, noch nicht gemessen).
+
 ## Gegner Rotkaeppchen (abgelesen 05.10.2026 aus `ucp/plugins/Mod-KI-Team-Liga-2.0.2/resources/ai/Rotkaeppchen/character.json`)
 - Start: 9 Assassinen, 14 Bogenschuetzen, 5 Speertraeger; arabischer Lord mit Staerke 0,5 (halb so stark).
 - Wirtschaft: NUR Aepfel (8 Plantagen-Plaetze, bis 24 Plantagen, 2 Leute je Plantage), 6 Holzfaeller, 1 Steinbruch, 2 Eisenminen, 2 Pechgruben, bis 5 Ochsen. Steuern 3-11, Beliebtheit 93-99, Essen hoechstens 50, doppelte Rationen ab 50 Essen. Verkauft Weizen, Mehl, Hopfen, Bier, Waffen, Kaese, Brot. -> Ihre Nahrung haengt allein an den Apfelplantagen und dem Kornspeicher.
