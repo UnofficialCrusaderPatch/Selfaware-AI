@@ -94,6 +94,17 @@ Beide Instanzen laden sie (ucp3.log: rebalancer 1.1.3 mit genau dieser Datei). W
   erlaubt Kletterwege). Unser `wegtest` ruft den Wegfinder OHNE dieses Merkmal - darum sagt er beim Lord "kein Weg",
   obwohl Assassinen klettern koennten (vermutet, noch nicht gemessen).
 
+## Replay-Modul als Code-Vorlage (abgelesen 05.10.2026, github.com/Krarilotus/ucp_recorder, Stand df397bb 12.09.2026)
+Daniel 23:09: "schau dir den Replay-Mode als Code-Referenz an, um das Spiel noch besser zu machen". Kopie (nur lesen):
+`Tools/Referenz/ucp_recorder/` (init.lua, code/recorder.lua). Gilt fuer SHC, nicht Extreme - wie unser Spiel.
+- **Gleicher Zufall = gleiche Partie:** Karten-/Partie-Saat 0x01A279C4, Zufallswerte 0x01A279C0/C2, Zaehler 0x01A3160C/08;
+  der Haken bei 0x004428B5 (Gefecht startet) setzt sie auf gespeicherte Werte. Mit fester Saat laeuft jede Testpartie
+  gleich, bis UNSER Lenker etwas anders macht - echter Vergleich zweier Code-Staende statt Zufallsrauschen.
+- **Befehl auf einen genauen Tick planen:** 0x00480210 scheduleCommand(0x0191D768, Art, Spieler, Spielzeit, Daten);
+  Spielzeit 0x01FE7DA8. Mitschnitt an 0x00487C50 (gesendet) und 0x00480353 (empfangen), Groesse 0x0194AF98.
+- **Mitschnitt + Abspielen:** jeder Spielerbefehl mit Spielzeit in eine Datei; beim Abspielen gleiche Saat, Befehle zur
+  gleichen Spielzeit, Gleichlauf-Pruefung (Zufallswerte je Befehl). So koennte Daniel jede unserer Partien spaeter ansehen.
+
 ## Gegner Rotkaeppchen (abgelesen 05.10.2026 aus `ucp/plugins/Mod-KI-Team-Liga-2.0.2/resources/ai/Rotkaeppchen/character.json`)
 - Start: 9 Assassinen, 14 Bogenschuetzen, 5 Speertraeger; arabischer Lord mit Staerke 0,5 (halb so stark).
 - Wirtschaft: NUR Aepfel (8 Plantagen-Plaetze, bis 24 Plantagen, 2 Leute je Plantage), 6 Holzfaeller, 1 Steinbruch, 2 Eisenminen, 2 Pechgruben, bis 5 Ochsen. Steuern 3-11, Beliebtheit 93-99, Essen hoechstens 50, doppelte Rationen ab 50 Essen. Verkauft Weizen, Mehl, Hopfen, Bier, Waffen, Kaese, Brot. -> Ihre Nahrung haengt allein an den Apfelplantagen und dem Kornspeicher.
