@@ -1,0 +1,266 @@
+<title>Selfaware-AI Handbuch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Source+Sans+3:wght@400;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: Laborbuch einer Spiel-KI - schmale Inhaltsspalte, links ein festes Kapitelregister, Messreihen als Tabellen */
+:root {
+  --bg: #f3f2ef; --fl: #ffffff; --fg: #1d1f22; --mute: #5d6168; --rand: #d9d6cf; --akzent: #a3241b; --akzent-hell: #f6e3e0;
+  --gut: #2e6b3a; --warn: #8a5a00;
+  --t-display: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --t-text: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --t-mono: "JetBrains Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #16171a; --fl: #1f2125; --fg: #e8e6e1; --mute: #a2a5ab; --rand: #34363b; --akzent: #e0665b; --akzent-hell: #3a1f1c;
+  --gut: #7fc28c; --warn: #e2b04e; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #16171a; --fl: #1f2125; --fg: #e8e6e1; --mute: #a2a5ab; --rand: #34363b; --akzent: #e0665b; --akzent-hell: #3a1f1c;
+  --gut: #7fc28c; --warn: #e2b04e; color-scheme: dark }
+body { background: var(--bg); color: var(--fg); font: 16px/1.6 var(--t-text); }
+.rahmen { display: grid; grid-template-columns: 15rem minmax(0, 1fr); gap: 3rem; max-width: 72rem; margin: 0 auto; padding-inline: 1.25rem; padding-block: 2rem 4rem; }
+nav { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 1.5rem); align-self: start; font-size: .9rem; }
+nav p { font: 700 .75rem/1 var(--t-display); letter-spacing: .12em; text-transform: uppercase; color: var(--mute); margin: 0 0 .6rem; }
+nav ol { list-style: none; margin: 0; padding: 0; display: grid; gap: .3rem; counter-reset: k; }
+nav li { counter-increment: k; }
+nav a { color: var(--fg); text-decoration: none; display: flex; gap: .5rem; }
+nav a::before { content: counter(k); color: var(--akzent); font: 600 .8rem/1.6 var(--t-mono); min-width: 1.2rem; }
+nav a:hover, nav a:focus-visible { color: var(--akzent); }
+main { min-width: 0; }
+header { border-bottom: 3px solid var(--akzent); padding-bottom: 1.25rem; margin-bottom: 2rem; }
+header .marke { font: 600 .8rem/1 var(--t-mono); color: var(--akzent); letter-spacing: .08em; text-transform: uppercase; }
+h1 { font: 700 clamp(2.2rem, 5vw, 3.2rem)/1.05 var(--t-display); margin: .5rem 0 .75rem; text-wrap: balance; letter-spacing: .01em; }
+header p { color: var(--mute); max-width: 62ch; margin: 0; }
+section { padding-block: 1.5rem; border-bottom: 1px solid var(--rand); }
+h2 { font: 700 1.7rem/1.15 var(--t-display); margin: 0 0 .75rem; text-wrap: balance; }
+h2 small { font: 600 .8rem var(--t-mono); color: var(--akzent); margin-right: .5rem; vertical-align: .2em; }
+h3 { font: 600 1.05rem/1.3 var(--t-text); margin: 1.4rem 0 .4rem; }
+p, li { max-width: 68ch; }
+ul { padding-left: 1.2rem; display: grid; gap: .35rem; }
+code, .mono { font: .88em var(--t-mono); }
+code { background: var(--fl); border: 1px solid var(--rand); border-radius: 3px; padding: 0 .3em; overflow-wrap: anywhere; }
+.tab { overflow-x: auto; margin: .75rem 0 1rem; border: 1px solid var(--rand); border-radius: 4px; background: var(--fl); }
+table { border-collapse: collapse; width: 100%; font-size: .92rem; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; padding: .45rem .7rem; border-bottom: 1px solid var(--rand); vertical-align: top; }
+th { font: 600 .78rem var(--t-display); letter-spacing: .08em; text-transform: uppercase; color: var(--mute); background: var(--bg); }
+tr:last-child td { border-bottom: 0; }
+td.z { text-align: right; white-space: nowrap; }
+.merk { border-left: 3px solid var(--akzent); background: var(--akzent-hell); padding: .7rem 1rem; margin: 1rem 0; border-radius: 0 4px 4px 0; }
+.merk b { color: var(--akzent); }
+.status { display: inline-block; font: 600 .7rem/1.6 var(--t-mono); padding: 0 .45rem; border-radius: 3px; border: 1px solid currentColor; text-transform: uppercase; letter-spacing: .05em; }
+.gemessen { color: var(--gut); } .abgelesen { color: var(--akzent); } .offen { color: var(--warn); }
+.legende { display: flex; flex-wrap: wrap; gap: .75rem; font-size: .85rem; color: var(--mute); margin-top: 1rem; }
+@media (max-width: 800px) {
+  .rahmen { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
+  nav { position: static; border: 1px solid var(--rand); background: var(--fl); padding: .9rem 1rem; border-radius: 4px; }
+  nav ol { grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr)); }
+}
+@media (prefers-reduced-motion: no-preference) { nav a { transition: color .15s; } }
+</style>
+
+<div class="rahmen">
+<nav aria-label="Kapitel">
+  <p>Kapitel</p>
+  <ol>
+    <li><a href="#ziel">Ziel und Aufbau</a></li>
+    <li><a href="#kanal">Der Befehlskanal</a></li>
+    <li><a href="#start">Spielstart und Saat</a></li>
+    <li><a href="#balance">Liga-Balance</a></li>
+    <li><a href="#wirtschaft">Eroeffnung und Wirtschaft</a></li>
+    <li><a href="#assassinen">Assassinen</a></li>
+    <li><a href="#lord">Lord-Angriff</a></li>
+    <li><a href="#testen">So wird getestet</a></li>
+    <li><a href="#architektur">Zielarchitektur nach Sharky</a></li>
+    <li><a href="#offen">Offen</a></li>
+    <li><a href="#quellen">Dateien</a></li>
+  </ol>
+</nav>
+
+<main>
+<header>
+  <span class="marke">Stronghold Crusader &middot; UCP3 &middot; Stand 05.10.2026, 23:55</span>
+  <h1>Selfaware-AI Handbuch</h1>
+  <p>Alles, was die Selfaware-KI bisher gelernt hat: wie sie das Spiel steuert, was gemessen ist, was nur aus dem Spielcode abgelesen ist, und was noch offen ist. Jede Zahl stammt aus einem Testlauf oder aus einer Datei; Vermutungen sind als offen markiert.</p>
+  <div class="legende">
+    <span><span class="status gemessen">gemessen</span> im Spiel gemessen</span>
+    <span><span class="status abgelesen">abgelesen</span> aus Spielcode, Balance-Datei oder Handbuch</span>
+    <span><span class="status offen">offen</span> Vermutung oder ungeprueft</span>
+  </div>
+</header>
+
+<section id="ziel">
+  <h2><small>01</small>Ziel und Aufbau</h2>
+  <p>Eine selbst gebaute KI spielt Platz 1 auf <code>Liga_Grumpy Neighbors</code> gegen die Liga-KI Rotkaeppchen (Platz 2, Vanilla-Platz "Ratte") und soll ihren Lord toeten, ohne den eigenen zu verlieren. Gespielt wird mit den Liga-Bedingungen: 0 Gold, 150 Holz, je 15 von vier Nahrungssorten, Ausgleich 3.</p>
+  <p>Die Strategie stammt von Daniel und gilt in dieser Reihenfolge:</p>
+  <ul>
+    <li><b>So frueh wie moeglich raiden</b>, ohne Ruecksicht auf Verluste.</li>
+    <li><b>Parallel die Wirtschaft maximal aufbauen</b> (Farmen nicht vergessen). Apfel-Seasoning gleich am Anfang ist eine gute Investition, denn Nahrung ist fuer Beliebtheit und Verkauf unersetzlich.</li>
+    <li><b>Ihre Wirtschaft abreissen</b>, ihre Wachen im Kreis herumfuehren, bis wir die Uebermacht sind.</li>
+    <li><b>Mit allen Assassinen moeglichst gleichzeitig auf den Lord.</b></li>
+  </ul>
+  <p>Technisch: ein Python-Lenker (<code>erstes_spiel.py</code>) liest jede Runde das Lagebild aus dem Spielspeicher und schickt Befehle ueber ein UCP3-Lua-Modul ins Spiel. Er befiehlt nur eigene Einheiten und spielt nach den Regeln eines Menschen.</p>
+</section>
+
+<section id="kanal">
+  <h2><small>02</small>Der Befehlskanal</h2>
+  <p>Python schreibt <code>befehl.json</code>, das Lua-Modul (<code>logik.lua</code>, wird im laufenden Spiel neu geladen) liest die Datei in jedem Tick, fuehrt aus und antwortet im <code>ucp3.log</code>.</p>
+  <h3>Quittung statt fester Wartezeit <span class="status gemessen">gemessen</span></h3>
+  <p>Jeder Befehl traegt eine Nummer; das Modul schreibt nach der Ausfuehrung <code>QUITTUNG &lt;nr&gt;</code>. Der Kanal wartet genau darauf. Vorher wartete jede Abfrage fest eine Sekunde.</p>
+  <div class="tab"><table>
+    <tr><th>Abfrage</th><th class="z">feste Wartezeit</th><th class="z">mit Quittung</th></tr>
+    <tr><td>Vorrat lesen</td><td class="z">1,01 s</td><td class="z">0,034 s</td></tr>
+    <tr><td>Gebaeude einer Art lesen</td><td class="z">1,01 s</td><td class="z">0,030 s</td></tr>
+  </table></div>
+  <div class="merk"><b>Learning:</b> Bei Tempo 40 ist eine Sekunde 40 Spielticks. Feste Wartezeiten machten die Eroeffnung um tausende Ticks langsamer. Nie fest warten, immer auf eine Antwort oder auf eine Spielzeit.</div>
+  <h3>Spielbefehle wie ein Mensch <span class="status abgelesen">abgelesen</span></h3>
+  <ul>
+    <li>Auswahl: Spielbefehl 16 (MakeUnitSelection) mit freier Gruppennummer; dann Befehl 36 (ClickGiveUnitsInstruction) fuer Angreifen/Anhalten.</li>
+    <li>Laufen: Spielbefehl 17 (ClickMoveUnit). Nur dieser Weg bricht einen Nahkampf ab; reines Laufziel-Setzen (<code>setDestinationForUnit</code>) laesst den Kampfzustand stehen.</li>
+    <li>Bauen 28, Anwerben 31, Steuern 34, Rationen 35, Kaufen/Verkaufen 38, Abreissen 29.</li>
+    <li>Eine Testsperre je Spielkopie verhindert, dass zwei Sitzungen gleichzeitig steuern.</li>
+  </ul>
+</section>
+
+<section id="start">
+  <h2><small>03</small>Spielstart und feste Saat</h2>
+  <p>Jede Partie startet frisch ab Tick 0 (frueher: Laden eines Standes von Tick 600, Rotkaeppchen hatte 600 Ticks Vorsprung). Tempo wird vor dem Start gesetzt, die Startplaetze sind fest (Mensch Platz 0, Rotkaeppchen Platz 1), es gibt keine Pausen.</p>
+  <h3>Gleicher Zufall, gleiche Partie <span class="status gemessen">gemessen</span></h3>
+  <p>Nach dem Vorbild des Replay-Moduls <a href="https://github.com/Krarilotus/ucp_recorder">ucp_recorder</a> schreibt der Start Karten-Saat <code>0x01A279C4</code>, Zufallswerte <code>0x01A279C0/C2</code> und Zaehler <code>0x01A3160C/08</code>, nachdem die Zufallstabelle neu gefuellt wurde (<code>0x0046A760</code>).</p>
+  <div class="tab"><table>
+    <tr><th>Vergleich bei Tick ~3.015</th><th>Ergebnis</th></tr>
+    <tr><td>Gleiche Saat, zwei Partien</td><td>Rotkaeppchens 48 Gebaeude identisch nach Art und Ort; unser Lord startet am selben Feld</td></tr>
+    <tr><td>Andere Saat</td><td>Lord startet an anderem Feld, eine ihrer Apfelplantagen an anderer Stelle</td></tr>
+  </table></div>
+  <p>Restunterschiede entstehen durch unseren Lenker, der in Echtzeit reagiert. <span class="status offen">offen</span> Befehle auf einen genauen Tick planen (0x00480210 scheduleCommand, aus ucp_recorder) wuerde auch das angleichen.</p>
+</section>
+
+<section id="balance">
+  <h2><small>04</small>Liga-Balance</h2>
+  <p>Quelle: <code>Mod-KI-Team-Liga-2.0.2/resources/balance/liga_ai.json</code>, beide Spielkopien laden sie (rebalancer 1.1.3). <span class="status abgelesen">abgelesen</span></p>
+  <div class="tab"><table>
+    <tr><th>Wert</th><th>Liga</th><th>Bedeutung fuer uns</th></tr>
+    <tr><td>Assassine</td><td>12.500 Leben, 70 Gold, Schaden 250</td><td>gegen Bogenschuetzen 225, Speer 120, Lord nur 100 je Schlag</td></tr>
+    <tr><td>Lord</td><td>150.000 Leben <span class="status gemessen">gemessen</span></td><td>rund 1.500 Assassinen-Schlaege</td></tr>
+    <tr><td>Pfeil gegen Assassine</td><td>1.200 (Speertraeger: 3.000)</td><td>Assassinen halten Beschuss gut aus</td></tr>
+    <tr><td>Schussweite Bogen/Armbrust</td><td>40 Felder</td><td>Gefahrenzaehlung jetzt bis 40 (vorher 16)</td></tr>
+    <tr><td>Schrecken</td><td>Kampfkraft 80 % bis 140 %</td><td>Galgen 40 Gold - billiger Hebel <span class="status offen">offen</span></td></tr>
+    <tr><td>Hunde</td><td>Zwinger ab 16 Feinden</td><td>20 Assassinen vor ihrer Burg wecken die Hunde</td></tr>
+    <tr><td>Hoehenvorteil</td><td>reduce_height_advantage</td><td>wirkt bei uns nicht (nur Extreme), Mauerschuetzen voll</td></tr>
+    <tr><td>Schlagende Arbeiter</td><td>Holzfaeller/Steinmetz/Schmied 10, Jaeger 5</td><td>zaehlen bei der Uebermacht mit (Gewicht Schaden / 25)</td></tr>
+    <tr><td>Preise</td><td>Kaese 30, Brot 20, Apfel 15, Fleisch 5 je 5 Stueck</td><td>Fleisch behalten kostet fast nichts</td></tr>
+  </table></div>
+</section>
+
+<section id="wirtschaft">
+  <h2><small>05</small>Eroeffnung und Wirtschaft</h2>
+  <h3>Raid zuerst, ohne Pausen <span class="status gemessen">gemessen</span></h3>
+  <p>Alles, was nur Holz kostet, geht beim Start in einem Befehl raus (Kornspeicher, Markt, 14 Holzfaeller, Steinbruch, Ochsenjoch, Huetten). Sobald alle vier Nahrungssorten im Kornspeicher liegen, werden Kaese, Brot und Aepfel verkauft (Fleisch bleibt), das bringt rund 195 Gold. Seit 05.10. 23:45 kommen dann <b>Soeldnerposten und die drei A-Apfelplantagen in einem Befehl</b> (120 + 3 &times; 15 Gold); vorher kam zuerst der Assassine, die Plantagen danach (siehe Seasoning am Anfang). Die Zeiten unten stammen aus der alten Reihenfolge.</p>
+  <div class="tab"><table>
+    <tr><th>Schritt</th><th class="z">alte Eroeffnung</th><th class="z">neu, Tempo 40</th></tr>
+    <tr><td>Erster Baubefehl</td><td class="z">nach Laden bei 600</td><td class="z">106</td></tr>
+    <tr><td>Startnahrung da und verkauft</td><td class="z">~720</td><td class="z">137</td></tr>
+    <tr><td>Soeldnerposten + erster Assassine</td><td class="z">833 / 5.930 (1. Raid)</td><td class="z">372</td></tr>
+    <tr><td>Holz-Wirtschaft komplett</td><td class="z">~990</td><td class="z">391</td></tr>
+  </table></div>
+  <ul>
+    <li><b>Farmen nicht vergessen:</b> fehlende A-Plantagen werden nachgeholt, sobald 15 Gold und 3 Holz da sind; solange werden keine weiteren Assassinen angeworben. Ohne A wird A nie reif und B nie gesetzt.</li>
+    <li><b>Anwerben ab 70 Gold</b> (ein Assassine kostet 70); vorher lagen 30 Gold Ruecklage obendrauf, das Gold stand meist bei 40&ndash;97 und reichte nie (gewinn_2).</li>
+    <li><b>Nahrung:</b> sofort beim ersten Essen verkaufen ging schief (es kommt nach und nach an) - erst wenn alle vier Sorten da sind.</li>
+    <li><b>Ochsenjoche</b> nach Daniels Regel: erster Ochse beladen unterwegs, dann sofort das zweite; liegen dann noch mehr als 8 Steine am Haufen, ein weiteres; keine Obergrenze.</li>
+    <li><b>Ertrags-Planer:</b> baut nur, was sich bis Spielende bezahlt macht; Erträge werden im Spiel gemessen (Zugang = Bestandsaenderung + Verkauf + Verbaut). Holz wird nicht gekauft, sondern mit seinem Verkaufswert gerechnet; Stein bis auf den Bedarf der naechsten Eisenmine (6) verkauft.</li>
+  </ul>
+  <h3>Apfel-Seasoning <span class="status gemessen">gemessen</span></h3>
+  <p>Ein Apfelbaum durchlaeuft sechs Stufen (500 / 300 / 200 / 1.000 / 40 / 40 Ticks) und wird nur in Stufe 3 geerntet. Der Apfelbauer nimmt jeden reifen Baum im Umkreis von 30 Feldern, auch fremde. Daniels Regel: Gruppe B neben Gruppe A genau dann setzen, wenn A in Stufe 3 springt; dann versorgen sie sich gegenseitig.</p>
+  <h3>Seasoning am Anfang <span class="status gemessen">gemessen</span></h3>
+  <p>Ganze Partien ab Tick 0, Tempo 300, feste Saat; Werte aus <code>serie.werte</code>, jede Zeile ein Schritt mehr als die davor.</p>
+  <div class="tab"><table>
+    <tr><th>Partie</th><th>Stand</th><th class="z">A reif</th><th class="z">B steht</th><th class="z">1. / 10. Assassine</th><th class="z">Beliebtheit 5k / 10k / 20k</th><th>Ergebnis</th></tr>
+    <tr><td>gewinn_2</td><td>Anwerben ab 100 Gold, A-Baum-Fehler</td><td class="z">nie</td><td class="z">nie</td><td class="z">630 / 16.418</td><td class="z">78 / 72 / 64</td><td>Zeit um</td></tr>
+    <tr><td>gewinn_3</td><td>Anwerben ab 70, A-Baum wird neu gesucht</td><td class="z">2.325</td><td class="z">6.601</td><td class="z">646 / 13.443</td><td class="z">83 / 77 / 65</td><td>Sieg 26.081</td></tr>
+    <tr><td>gewinn_4</td><td>+ Planer legt B-Holz zurueck</td><td class="z">2.324</td><td class="z">5.158</td><td class="z">640 / 12.892</td><td class="z">77 / 71 / 61</td><td>Zeit um</td></tr>
+    <tr><td>gewinn_5</td><td>+ A-Plantagen mit dem Posten in der Eroeffnung</td><td class="z">1.500</td><td class="z">3.978</td><td class="z">nicht protokolliert / 12.218</td><td class="z">92 / 86 / 74</td><td>Sieg 24.935</td></tr>
+    <tr><td>gewinn_6</td><td>+ gemeinsame B-Ruecklage fuer alle Ausgeber</td><td class="z">1.473</td><td class="z">1.554</td><td class="z">3.778 / 13.571</td><td class="z">93 / 87 / 80</td><td>Sieg 23.336</td></tr>
+  </table></div>
+  <div class="merk"><b>Learnings:</b> (1) Eine Suche, die einmal nichts findet, darf sich das nicht fuer immer merken: Der A-Baum wurde beim Start gesucht, als noch keine A-Plantage stand; der Lenker merkte sich "keiner" und A wurde 28.700 Ticks lang nie reif. Jetzt wird gesucht, sobald eine A-Plantage steht. (2) Eine Ruecklage wirkt nur, wenn jeder Ausgeber sie abzieht: Erst als Anwerben, Planer und Huettenbau dieselbe B-Ruecklage (3 Holz + 15 Gold je offener B-Plantage, sobald alle A stehen) beachteten, stand B 81 Ticks nach der A-Reife statt 2.478&ndash;4.276. (3) Eigenes Essen haelt die Beliebtheit: mit Seasoning am Anfang 87 statt 70&ndash;77 bei Tick 10.000. (4) Preis: Nach Posten + A-Plantagen bleiben 30 Gold, der erste Assassine kam erst bei 3.778 statt ~640. <span class="status offen">offen</span> Erster Assassine trotzdem frueh (Daniel 23:51).</div>
+</section>
+
+<section id="assassinen">
+  <h2><small>06</small>Assassinen</h2>
+  <h3>Klettern <span class="status abgelesen">abgelesen</span></h3>
+  <p>Der Wegfinder sucht nur dann einen Kletterweg, wenn die befohlene Gruppe nur aus Assassinen besteht; der Laufbefehl 17 prueft das ausdruecklich (giveTribeMoveInstruction &rarr; findPathUsingClimbingWithHeightMargin16). Rotkaeppchen baut in dieser Karte kein Torhaus, nur Mauern um den Bergfried; ihr Lord steht oben auf dem Bergfried (Gebaeudehoehe 92).</p>
+  <h3>Ausweichen bei Uebermacht <span class="status gemessen">gemessen</span></h3>
+  <p>Mehr feindliche Nahkaempfer (plus schlagende Arbeiter) als eigene Assassinen im Umkreis 10 &rarr; sofort weg, per echtem Laufbefehl, Richtung eigener Truppen nur wenn die dort stark genug sind, sonst im Kreis um einen Punkt 35 Felder in Fluchtrichtung, nie unter feindliche Schuetzen. Flucht vorbei, wenn 30 Ticks kein Verfolger im Umkreis 15 ist; blockiert, wenn 30 Ticks kein Feldwechsel.</p>
+  <div class="tab"><table>
+    <tr><th>Stand (je Lauf bis Tick 8.000)</th><th class="z">zerstoert</th><th class="z">Assassinen tot</th><th class="z">eigene Soldaten tot</th></tr>
+    <tr><td>kein Ausweichen</td><td class="z">2</td><td class="z">1</td><td class="z">0</td></tr>
+    <tr><td>Wartebefehl / neuer Befehl jede Runde</td><td class="z">2</td><td class="z">1</td><td class="z">0</td></tr>
+    <tr><td>echter Laufbefehl, frueh erkennen, Leute im Weg</td><td class="z">8</td><td class="z">0</td><td class="z">1&ndash;6</td></tr>
+    <tr><td>+ Arbeiter-Gefahr, nach Hause nur wenn stark</td><td class="z">7&ndash;8</td><td class="z">0</td><td class="z">1&ndash;3</td></tr>
+    <tr><td>+ seitlich ins Leere (ohne Kreis)</td><td class="z">1</td><td class="z">1</td><td class="z">0</td></tr>
+  </table></div>
+  <div class="merk"><b>Learnings:</b> (1) Ein Wartebefehl bricht keinen Nahkampf ab, nur ein echter Laufbefehl. (2) Jeder neue Befehl ist ein kurzer Halt - nur neu befehlen, wenn er steht oder kaempft. (3) Ihre Verteidigungs-Assassinen sind gleich schnell und folgen 4.000 Ticks lang; abschuetteln geht nicht, nur wohin fuehren. (4) Unsere Speertraeger und Bogenschuetzen toeten getarnte Assassinen nicht (2 Laeufe, 13 Verteidiger, 0 Treffer) - nie Verfolger in die eigene Burg ziehen. (5) Regeln in Ticks, nicht in Lenker-Runden: als die Runden schneller wurden, wurde "2 Runden" zu 6 Ticks. (6) Ihre Burg ist tabu: In gewinn_1 starb ein Assassine auf der Flucht an ihrer Aussenmauer (13 Felder neben ihrem Lord, 14 Schuetzen im Umkreis 40). Fluchtpunkte und Kreismitte liegen jetzt mindestens 40 Felder von ihrem Lord entfernt.</div>
+</section>
+
+<section id="lord">
+  <h2><small>07</small>Lord-Angriff</h2>
+  <p><span class="status gemessen">gemessen</span> Serie a, 3 Laeufe, 5 Angriffe mit je 20 Assassinen: beim Befehl standen sie 12&ndash;91 Felder vom Lord entfernt, am Lord kamen gleichzeitig hoechstens 2 an, Verluste 14&ndash;17 je Angriff, Lord-Schaden nur einmal (150.000 &rarr; 106.300).</p>
+  <p><span class="status gemessen">gemessen</span> In den ganzen Partien greifen jeweils 20 Assassinen in zwei Wellen an. Die erste Welle opfert jedes Mal 17 (gewinn_3: Lord 75.000 &rarr; 58.500; gewinn_6: 75.000 &rarr; 32.700), erst die zweite toetet ihn (3 bzw. 6 tot). <span class="status offen">offen</span> Warum der Lord hier 75.000 Leben hat und in Serie a 150.000.</p>
+  <div class="merk"><b>Learning:</b> Gleichzeitig befohlen ist nicht gleichzeitig angekommen. Daniels Regel: erst raiden, bis eine kritische Menge auf dem ganzen Feld ist, dann alle zugleich - und der Schaden stapelt sich nur, wenn sie zusammen ankommen. <span class="status offen">offen</span> Sammelpunkt ausser Schussweite, dann gemeinsam los; wirksames Minimum je Angriff lernen.</div>
+</section>
+
+<section id="testen">
+  <h2><small>08</small>So wird getestet</h2>
+  <ul>
+    <li><b>Erst Wissen holen:</b> Handbuch, SHC-Wiki, Liga-Balance, Spielcode (Ghidra mit der OpenSHC-Benennung) - bevor ein Test laeuft.</li>
+    <li><b>Pruefung ohne Spiel:</b> jede Regel bekommt eine Attrappe mit vorher festgelegten Faellen (z. B. 21 Faelle fuer das Ausweichen). Gegenprobe: gegen den alten Code-Stand muessen die neuen Faelle rot sein, sonst ist das Gruen hohl.</li>
+    <li><b>Code-Kennung</b> in der ersten Zeile jeder Partie: Pruefsumme ueber alle beteiligten Dateien, damit nie unbemerkt alter Code getestet wird.</li>
+    <li><b>Kurze Laeufe</b> fuer Eroeffnungsfragen (bis Tick 8.000), feste Saat fuer Vergleiche, ganze Partien erst danach.</li>
+    <li><b>Sieg oder Niederlage schwankt trotz gleicher Saat</b> (gewinn_3 Sieg, gewinn_4 Zeit um), weil der Lenker in Echtzeit reagiert. Darum vergleicht <code>serie.werte</code> die stabileren Wirtschaftszahlen: A reif, B steht, 1./10./20. Assassine, Beliebtheit bei 5.000 / 10.000 / 20.000, Aepfel im Schnitt.</li>
+    <li><b>Flucht-Protokoll je Runde:</b> Ort, Zustand, Laufziel, Abstand zum Verfolger - so sieht man "er bleibt stehen" im Log und nicht nur am Bildschirm.</li>
+    <li><b>Gemessen schlaegt gerechnet:</b> die aus der Balance gerechnete Staerke unserer Speertraeger gegen Assassinen (0,21) war falsch; gemessen ist sie 0.</li>
+  </ul>
+</section>
+
+<section id="architektur">
+  <h2><small>09</small>Zielarchitektur nach Sharky</h2>
+  <p><a href="https://github.com/sharknice/Sharky">Sharky</a> ist ein Framework fuer StarCraft-II-Bots: eine Liste von Managern, die jeden Frame laufen und Befehle zurueckgeben; Bauphasen mit Uebergaengen; Mikro-Aufgaben, die Einheiten nach Prioritaet beanspruchen. Uebertragen auf unser Spiel:</p>
+  <div class="tab"><table>
+    <tr><th>Sharky</th><th>bei uns heute</th><th>Ziel</th></tr>
+    <tr><td>Manager mit OnStart / OnFrame / OnEnd</td><td>Wirtschaft, Ertragsplaner, Waechter, Assassinen - jedes mit eigener Schnittstelle</td><td>eine gemeinsame Form: <code>start()</code>, <code>runde(lage) &rarr; befehle</code>, <code>bericht()</code>; der Lenker ruft nur noch die Liste auf</td></tr>
+    <tr><td>UnitManager / MapDataManager</td><td>Lagebild, Feindlisten, Mauerkarte, Begehbarkeit verstreut</td><td>ein Lagebild-Objekt je Runde: Einheiten, Gebaeude, Gefahrenkarte (Schaden je Feld aus Schussweite 40 und Nahkampf), Wegnetz</td></tr>
+    <tr><td>BuildManager + BuildSequences + Transition</td><td>Eroeffnung (phase1) und Ertragsplaner getrennt</td><td>Daniels vier Phasen als Bauphasen mit Uebergangsbedingung: Raid-Start &rarr; Wirtschaft &rarr; Armee &rarr; Lord-Angriff</td></tr>
+    <tr><td>CounterTransition / EnemyStrategy</td><td>fehlt</td><td>Rotkaeppchens Muster erkennen (Grossangriff ab ~Tick 25.000, Wach-Assassinen) und gezielt umschalten</td></tr>
+    <tr><td>MicroManager + MicroTasks (beanspruchen Einheiten)</td><td>Rollen als lose Mengen: Ziel, Jagd, Warten, Flucht, Stapel, Lord-Trupp</td><td>Aufgaben mit Prioritaet; jede Einheit gehoert genau einer: Flucht &gt; Lord-Angriff &gt; Weglocken &gt; Stapel &gt; Raid &gt; Warten</td></tr>
+    <tr><td>IndividualMicroController je Einheitentyp</td><td>alles im Assassinen-Lenker</td><td>Verhalten je Typ: Assassine (klettern, ausweichen, kreisen), Speer, Bogen, Lord</td></tr>
+    <tr><td>AttackDataManager (lohnt der Kampf?)</td><td>Uebermacht und Staerke an zwei Stellen</td><td>eine Stelle fuer "wer ist staerker hier", gespeist aus gemessenen Werten</td></tr>
+    <tr><td>UnitCommander (kein Befehls-Spam)</td><td>einzeln nachgebaut (nur neu befehlen, wenn noetig)</td><td>fuer alle Einheiten: letzter Befehl je Einheit, neu nur bei Aenderung oder Stillstand</td></tr>
+    <tr><td>BuildDecisionService + Ergebnis-JSON</td><td>Serien-Auswertung, gelernte Ertraege</td><td>Eroeffnung nach Gewinnquote waehlen, mit fester Saat vergleichbar</td></tr>
+  </table></div>
+  <p><span class="status offen">offen</span> Vorschlag, noch nicht gebaut. Umbau Schritt fuer Schritt: zuerst die gemeinsame Manager-Form und das Lagebild-Objekt, dann die Aufgaben mit Prioritaet.</p>
+</section>
+
+<section id="offen">
+  <h2><small>10</small>Offen</h2>
+  <ul>
+    <li>Stufe 2 und 3 der Assassinen-Taktik: Wachen weglocken, waehrend andere raiden; sammeln bis zur eigenen Uebermacht, dann die Wachen schlagen.</li>
+    <li><b>Als Naechstes (Daniel 23:51):</b> ein gemeinsamer Lord-Angriff statt zwei Wellen - sammeln ausser Schussweite, bis wir klar ueberlegen sind, dann alle gleichzeitig; Kletterweg ueber Laufbefehl 17.</li>
+    <li><b>Als Naechstes (Daniel 23:51):</b> erster Assassine trotz Seasoning am Anfang wieder frueh (heute 3.778).</li>
+    <li>Eigenen Lord schuetzen: der Waechter schickt heute den Lord mit in den Kampf gegen Assassinen.</li>
+    <li>Beliebtheit faellt auch mit Seasoning noch (93 &rarr; 80 bis Tick 20.000): Essen wird bis auf einen kleinen Puffer verkauft. Mehr Plantagen-Paare oder weniger verkaufen - erst messen.</li>
+    <li>Befehle auf einen genauen Tick planen (scheduleCommand), damit gleiche Saat ganz gleiche Partien ergibt.</li>
+  </ul>
+</section>
+
+<section id="quellen">
+  <h2><small>11</small>Dateien</h2>
+  <div class="tab"><table>
+    <tr><th>Datei</th><th>Inhalt</th></tr>
+    <tr><td><code>Selfaware-AI/Spielwissen.md</code></td><td>Regeln, Liga-Balance, Replay-Modul, Rotkaeppchen</td></tr>
+    <tr><td><code>Selfaware-AI/Plan_Lord.md</code></td><td>Plan, Messreihen Raid zuerst und Ausweichen</td></tr>
+    <tr><td><code>Selfaware-AI/Meilensteine.md</code></td><td>alle Meilensteine mit Messungen</td></tr>
+    <tr><td><code>Selfaware-AI/werkzeug/</code></td><td>Lenker (<code>erstes_spiel.py</code>), Assassinen, Wirtschaft, Ertragsplaner, Pruefungen ohne Spiel</td></tr>
+    <tr><td><code>Selfaware-AI/daten/</code></td><td>Laufprotokolle, Saat, Spielcode-Auszuege (dekomp_*.c)</td></tr>
+    <tr><td><code>VillageStudio/doku/Wissensstand.md</code></td><td>Spielspeicher, Adressen, Strukturen</td></tr>
+  </table></div>
+</section>
+</main>
+</div>

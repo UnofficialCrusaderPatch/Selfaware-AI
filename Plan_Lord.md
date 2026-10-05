@@ -1,5 +1,9 @@
 # Plan: Rotkaeppchens Lord toeten (Stand 05.10.2026, 21:35)
 
+**Handbuch (Daniel 05.10. 23:54: "es soll immer sofort strukturiert eingetragen werden"):** jede neue Messung und jedes
+Learning sofort in `Handbuch.html` (Quelle, liegt hier im Projekt) eintragen und als Artifact neu veroeffentlichen:
+https://claude.ai/artifact/5Fg23CVXQwntBeSJ8XztYC (aus einer anderen Sitzung mit `url` veroeffentlichen, sonst entsteht ein neues).
+
 Anlass: Daniel 21:30 - "du hast komplett die Kontrolle verloren ... maximal unorganisiert". Zwischen 20:30 und 21:30
 neun Aenderungen hintereinander, jeder Fehler erst in einer ganzen Partie gefunden, fast jede Serie mit anderem Code.
 Ab jetzt gilt dieser Plan; gebaut wird erst nach Daniels Ja, und dann nur Schritt fuer Schritt.
