@@ -26,7 +26,7 @@ from speichern import speichere
 from waechter import Waechter, lies_lagebild, lies_gebaeude
 from assassinen import Angriffstrupp, Einzeln
 from befehl import sende, neue_id
-from wirtschaft import Wirtschaft, apfel_gruppen
+from wirtschaft import Wirtschaft, Ausbau, apfel_gruppen
 
 HIER = os.path.dirname(os.path.abspath(__file__))
 D = os.path.join(HIER, "..", "daten")
@@ -169,7 +169,7 @@ def eigene_gebaeude():
         orte += [(x + NACH_TYP[t]["b"] // 2, y + NACH_TYP[t]["b"] // 2) for _, x, y in gebaeude_von(SP, t)]
     return orte
 
-ESSEN_RESERVE, HOLZ_RESERVE, STEIN_RESERVE, GOLD_RESERVE = 60, 15, 0, 30   # Daniel 23:06: alles ueber dem Minimum verkaufen
+ESSEN_RESERVE, HOLZ_RESERVE, STEIN_RESERVE, GOLD_RESERVE = 60, 30, 10, 30   # Daniel 23:06: alles ueber dem Minimum verkaufen
 BASIS = "M19 Liga Start Grumpy T600"     # Liga-Bedingung: 0 Gold, 150 Holz (Daniel 05.10. 00:55; gemessen 18:38)
 BERGFRIED = (141, 269)                    # wird in main() aus dem Plan gesetzt (Bergfried-Eingang dieses Starts)
 # Verkaufspreise Liga, gemessen 05.10. 18:50 (daten/verkaufspreise_liga.txt), ein Verkauf = 5 Stueck
@@ -220,6 +220,7 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
     trupp = Einzeln(SP, pruefe_begehbar=pruefe_begehbar, wegtest=wegtest) if assassinen else None
     wirt = Wirtschaft(plan, SP, baue_schnell, [nr for nr, _, _ in gebaeude_von(SP, 10)])
     karte_laden()        # Begehbarkeit fuer kurze Rueckzuege - jetzt, solange das Spiel noch steht
+    ausbau = Ausbau(plan, SP, baue_schnell, wirt, s32(peek(PD + 0x2188)[0]))
     schreib("Wirtschaft: Apfel A %s, B %s; alte Lagerteile %s" % (wirt.A, wirt.B, sorted(wirt.alt)))
     soeldner, geworben = None, 0
     befehl({"kamera": list(plan["lager_mitte"])}, 0.8)
@@ -268,11 +269,11 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
         if trupp is not None:
             # Soeldnerlager (120 Gold) einmal bauen, dann Assassinen (Typ 73) anwerben bis zur Zahl; Mitglieder = alle eigenen 73er
             posten = [n for n, g in G.items() if g["besitzer"] == SP and g["typ"] == 8]
-            if not posten and (soeldner is None or runde % 10 == 0):
+            if not posten and (soeldner is None or runde % 10 == 0) and not ausbau.braucht_gold:
                 # nicht am Lagerplatz (9i: Markt/Soeldnerlager belegten ihn - 14 Holzfaeller warteten Tick 4500-9035)
                 soeldner = baue_schnell(8, BERGFRIED[0], BERGFRIED[1], 25)
                 ereignis.append("Soeldnerlager gesetzt %s (Gold %d)" % (soeldner, st["gold"]))
-            elif posten and st["gold"] >= 70 + GOLD_RESERVE and st["feuer"] >= 1 and (assassinen < 0 or geworben < assassinen):
+            elif posten and st["gold"] >= 70 + GOLD_RESERVE and st["feuer"] >= 1 and (assassinen < 0 or geworben < assassinen) and not ausbau.braucht_gold:   # erst rollen (Daniel 18:51/19:05)
                 befehl({"werbe": {"typ": 73, "gebaeude": posten[0]}}, 1.0, bis="WERBE")
                 geworben += 1
                 if geworben % 5 == 0:
@@ -308,6 +309,7 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                 feindlord[n] = e["leben"]
         tz = time.time()
         ereignis += wirt.schritt(st, L, G)
+        ereignis += ausbau.schritt(st, L, G, runde)
         tz = uhr("wirtschaft", tz)
         bedarf = sum(ARBEITER_JE[t] * st.get("G%d" % t, 0) for t in ARBEITER_JE)
         if st["holz"] >= 5 + 3 * len(wirt.B_offen) and (bedarf > st["platz"] or (trupp is not None and st["feuer"] == 0 and st["platz"] - st["leute"] <= 2)):
@@ -326,6 +328,7 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
         st.get("t"), runde, (time.time() - t0) / max(runde, 1), st.get("G19", 0), st.get("G3", 0), st.get("G32", 0),
         (("; Waechter: " + w.bericht()) if w else "") + (("; Angriff: " + trupp.bericht()) if trupp else "")))
     schreib("Wirtschaft: " + wirt.bericht())
+    schreib(ausbau.bericht())
 
 def fingerabdruck(plan):
     """Alles, was die Eroeffnung bestimmt: Plan, Phase-1-Code, Gruppenteilung, Bauwerkzeug. Gleich -> gleicher Stand."""

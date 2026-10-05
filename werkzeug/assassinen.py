@@ -21,8 +21,19 @@ from waechter import sicherster_ort
 ASSASSINE = 73
 TRUPPE = {22, 23, 24, 25, 26, 27, 28, 37, 55, 70, 71, 72, 73, 74, 75, 76}
 FERNKAMPF = {22, 23, 70, 72, 74, 76}
-WERT = {19: 100, 20: 60, 3: 50, 4: 40, 5: 40, 6: 30, 30: 30, 31: 30, 32: 25, 33: 25,
-        17: 20, 18: 20, 34: 20, 1: 10, 7: 10, 26: 5}
+WERT = {
+    # Daniel 05.10. 19:05: Ausbildungslager, Steinbrueche, Haeuser usw. sind mehr wert als Apfelplantagen und, wenn
+    # nicht allzu schwer bewacht, fast noch bessere Ziele. Kornspeicher-Bonus (04.10. 22:54). STARTWERTE, Rangfolge von Daniel.
+    9: 100, 8: 100,                     # Kaserne, Soeldnerlager (Ausbildungslager)
+    19: 100,                            # Kornspeicher
+    20: 80, 21: 60, 5: 70, 6: 60,       # Steinbruch, Steinlager am Bruch, Eisenmine, Pechgrube
+    11: 70, 12: 70, 13: 70, 14: 70, 15: 70,  # Waffenkammer und Waffenbauer
+    24: 60, 25: 50, 35: 40,             # Ingenieurs-, Tunnelgraebergilde, Stall
+    1: 60,                              # Huetten (Wohnraum = Arbeiter)
+    4: 50, 3: 50,                       # Ochsenjoch, Holzfaeller
+    22: 40, 18: 40, 17: 35, 34: 35, 33: 40, 30: 30, 36: 40, 37: 40, 38: 40,  # Wirtshaus, Brauerei, Baeckerei, Muehle, Milch, Weizen, Kirchen
+    32: 30, 7: 30,                      # Apfelplantage, Jaegerhuette
+    26: 20}
 GROESSE, FERN, NAH, MAX_WEG = 1, 16, 8, 30   # 1: jeder Assassine einzeln, eigene Gruppe (Daniel 23:32; Modul reserviert Gruppen je Takt)
 
 def schach(a, b):
@@ -452,7 +463,8 @@ class Einzeln:
             frei = [k for k in erreichbar if zahl.get(k[0], 0) < self.JE_GEBAEUDE]
             sicher = [k for k in frei if (k[7] == 0 if schwach else k[5] <= self.ZIEL_FERN_MAX)]
             if sicher:
-                gn, p, typ, _, f10, f20, f30, _ = min(sicher, key=lambda k: schach(ort, k[1]))
+                # Wert je Weg, abgeschwaecht durch Fernkaempfer am Ziel (Daniel 19:05: wertvoll UND nicht allzu schwer bewacht)
+                gn, p, typ, _, f10, f20, f30, _ = max(sicher, key=lambda k: WERT.get(k[2], 10) / ((schach(ort, k[1]) + 20.0) * (1 + k[5])))
                 self.ziel[n] = gn
                 self.ziel_typ[gn] = typ
                 zahl[gn] = zahl.get(gn, 0) + 1

@@ -131,7 +131,10 @@ class Wirtschaft:
                     ev.append("Seasoning: %d B-Plantagen noch offen (Holz %d, Gold %d)" % (len(self.B_offen), st.get("holz", 0), st.get("gold", 0)))
         # 2. Altes Lager abreissen, wenn B steht (oder keins geplant) und es leer ist
         alt_da = [n for n in self.alt if n in eigen]
-        if alt_da and not self.B_offen:
+        # Daniel 05.10. 19:09: in 9q stand das alte Lager bis Tick 6.175 (B wartete auf Gold), die Holzfaeller trugen
+        # alles zum Bergfried. Darum weg, sobald B steht ODER der erste Holzfaeller abliefern will - was zuerst kommt.
+        will_liefern = any(e["typ"] == HOLZFAELLER and e["zustand"] == 7 for e in einheiten.values())
+        if alt_da and (not self.B_offen or will_liefern):
             inhalt = {k: st.get(k, 0) for k in LAGERWAREN if st.get(k, 0) > 0}
             if sum(inhalt.values()) <= 20:
                 # 9o: 26 Holz blieben liegen, "nur wenn leer" kam nie - die Holzfaeller trugen alles 50-80 Felder zum alten
@@ -146,7 +149,7 @@ class Wirtschaft:
                                                                "hopfen": 3, "mehl": 16}[ware]]}}, 1.0, bis="SPIELBEFEHL")
                 ev.append("Altes Lager leeren: %s verkauft (Inhalt %s)" % (ware, inhalt))
         # 3. Neues Lager erst, wenn ein Holzfaeller abliefern will (Zustand 7)
-        teile = [n for n, g in eigen.items() if g["typ"] == LAGER]
+        teile = [n for n, g in eigen.items() if g["typ"] == LAGER and n not in self.alt and n not in alt_da]
         wollen = [n for n, e in einheiten.items() if e["typ"] == HOLZFAELLER and e["zustand"] == 7]
         if not teile and wollen and (self.lager_tick is None or t - self.lager_tick > 60):
             ort = self.baue_schnell(LAGER, self.lager_ort[0], self.lager_ort[1], 8)
@@ -181,3 +184,124 @@ class Wirtschaft:
                 "Lager gesetzt bei %s, gemessene Ladung je Gang %s" % (
                     len(self.A), len(self.B), self.A_reif_tick, self.B_tick, anteil(0, b), anteil(b, b + 1000),
                     anteil(b + 1000, 10 ** 9), anteil(5000, 12000), self.lager_tick, self.ladung_max or "keine"))
+
+
+class Ausbau:
+    """Wirtschaft im Lauf erweitern und nachbauen (Daniel 05.10. 19:05/19:06: Wirtschaftserweiterung - mehr
+    Steinbrueche/Eisen; Jagd - erkennen, dass Rehe da sind; nachbauen - Holzfaeller, Apfelplantagen, Haeuser; dazu
+    Haeuser vor der Wohngrenze und Steuern, wenn die Beliebtheit es hergibt). Alle ALLE Runden, in dieser Reihenfolge.
+    Solange ein Schritt Gold braucht, setzt er braucht_gold - dann wirbt der Lenker keine Assassinen (erst rollen).
+    Alle Schwellen sind STARTWERTE (gemessen sind nur die Kosten: Huette 5 Holz, Steinbruch 25, Ochsenjoch 5,
+    Eisenmine 20 Holz + 6 Stein, Jaeger 3 Holz + 60 Gold, Apfelplantage 3 Holz + 15 Gold)."""
+    ALLE = 10
+    STEUER_HOCH, STEUER_RUNTER, STEUER_MIN, STEUER_MAX = 97, 95, 3, 8
+    JAGD_REHE, JAGD_UMKREIS, JAGD_MAX, JAGD_WEG = 5, 15, 3, 70   # 9q: ein Jaeger landete 166 Felder weit weg
+    STEINBRUECHE, EISENMINEN = 2, 1
+
+    def __init__(self, plan, sp, baue_schnell, wirt, steuerstufe):
+        self.sp, self.plan, self.baue, self.wirt = sp, plan, baue_schnell, wirt
+        self.K = tuple(plan.get("bergfried_eingang", (165, 111)))
+        self.feinde = []
+        if plan.get("start"):
+            import json, os
+            d = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "daten")
+            info = json.load(open(os.path.join(d, "start_%s.json" % plan["start"]), encoding="utf-8"))
+            self.feinde = [tuple(v["eingang"]) for v in info["feind_bergfried"].values()]
+            z = open(os.path.join(d, "rohstoffe_%s.txt" % plan["start"])).read().splitlines()[1:]
+            self.stein = [(x, y) for y, r in enumerate(z) for x, c in enumerate(r) if c == "b" and self.eigene_seite((x, y))]
+            self.eisen = [(x, y) for y, r in enumerate(z) for x, c in enumerate(r) if c == "i" and self.eigene_seite((x, y))]
+        else:
+            self.stein, self.eisen = [], []
+        self.steuer = steuerstufe
+        self.steuer_runde = -99
+        self.braucht_gold = False
+        self.bilanz = {}
+
+    def eigene_seite(self, p):
+        d = schach(p, self.K)
+        return all(d < schach(p, f) for f in self.feinde)
+
+    def _naechster(self, punkte, zu):
+        return min(punkte, key=lambda p: schach(p, zu)) if punkte else None
+
+    def _bau(self, typ, x, y, r, was, ev):
+        ort = self.baue(typ, x, y, r)
+        ev.append("AUSBAU %s %s" % (was, ort))
+        if ort:
+            self.bilanz[was] = self.bilanz.get(was, 0) + 1
+        return ort
+
+    def schritt(self, st, L, G, runde):
+        if runde % self.ALLE:
+            return []
+        ev, self.braucht_gold = [], False
+        eigen = [g for g in G.values() if g["besitzer"] == self.sp]
+        b_offen = bool(self.wirt.B_offen)     # 9q: der Ausbau gab das Gold aus, B wartete 4.353 Ticks - B hat Vorrang
+        if b_offen:
+            self.braucht_gold = True          # 9r: auch Soeldnerlager und Assassinen warten, bis B steht
+        zahl = lambda t: sum(1 for g in eigen if g["typ"] == t)
+        holz, gold, stein = st.get("holz", 0), st.get("gold", 0), st.get("stein", 0)
+        # 1. Huetten vor der Wohngrenze
+        if st.get("leute", 0) >= st.get("platz", 0) - 2 and holz >= 5:
+            self._bau(1, self.K[0] - 7, self.K[1] - 2, 25, "Huette (Leute %d / Platz %d)" % (st.get("leute", 0), st.get("platz", 0)), ev)
+            holz -= 5
+        # 2. Steuern nach Beliebtheit
+        b = st.get("beliebt", 0) / 100.0
+        if runde - self.steuer_runde >= 2 * self.ALLE:
+            neu = self.steuer
+            if b >= self.STEUER_HOCH and self.steuer < self.STEUER_MAX and st.get("leute", 0) >= 15:
+                neu = self.steuer + 1
+            elif b < self.STEUER_RUNTER and self.steuer > self.STEUER_MIN:
+                neu = self.steuer - 1
+            if neu != self.steuer:
+                befehl({"spielbefehl": {"nr": 34, "werte": [neu]}}, 1.0, bis="SPIELBEFEHL")
+                ev.append("STEUER %d -> %d (Beliebtheit %.2f, Leute %d)" % (self.steuer, neu, b, st.get("leute", 0)))
+                self.steuer, self.steuer_runde = neu, runde
+        # 3. Jagd: Rehe auf unserer Seite erkennen
+        if zahl(7) < self.JAGD_MAX:
+            rehe = [(e["x"], e["y"]) for e in L.values() if e["typ"] == 44 and e["besitzer"] == 0 and self.eigene_seite((e["x"], e["y"]))
+                    and schach((e["x"], e["y"]), self.K) <= self.JAGD_WEG]
+            beste = max(((sum(1 for q in rehe if schach(p, q) <= self.JAGD_UMKREIS), p) for p in rehe), default=(0, None))
+            jaeger = [(g["x"], g["y"]) for g in eigen if g["typ"] == 7]
+            if beste[0] >= self.JAGD_REHE and not any(schach(beste[1], j) <= self.JAGD_UMKREIS for j in jaeger):
+                if gold >= 60 and holz >= 3 and not b_offen:
+                    self._bau(7, beste[1][0], beste[1][1], 12, "Jaeger an %d Rehen" % beste[0], ev)
+                    gold -= 60
+                else:
+                    self.braucht_gold = True
+        # 4. Nachbauen: Holzfaeller und Apfelplantagen aus dem Plan, die fehlen (Apfel erst, wenn B steht)
+        stehen = {t: [(g["x"], g["y"]) for g in eigen if g["typ"] == t] for t in (3, 32)}
+        for p in self.plan.get("holzfaeller", []):
+            if holz < 5:
+                break
+            if not any(schach(p, s) <= 2 for s in stehen[3]):
+                self._bau(3, p[0], p[1], 4, "Holzfaeller nachgebaut", ev)
+                holz -= 5
+                break
+        if not self.wirt.B_offen:
+            for p in self.plan.get("aepfel", []):
+                if not any(schach(p, s) <= 2 for s in stehen[32]):
+                    if gold >= 15 and holz >= 3:
+                        self._bau(32, p[0], p[1], 4, "Apfelplantage nachgebaut", ev)
+                        gold -= 15
+                    else:
+                        self.braucht_gold = True
+                    break
+        # 5. Steinbrueche + Ochsenjoche, dann Eisen
+        q = zahl(20)
+        if q < self.STEINBRUECHE and holz >= 25 and self.stein:
+            mitte = tuple(self.plan["stein"]["steinbruch"]) if self.plan.get("stein") else self.K
+            c = self._naechster(self.stein, mitte)
+            if self._bau(20, c[0], c[1], 15, "Steinbruch %d" % (q + 1), ev):
+                holz -= 25
+        elif zahl(4) < q and holz >= 5:
+            bruch = [(g["x"], g["y"]) for g in eigen if g["typ"] == 20]
+            self._bau(4, bruch[-1][0] + 3, bruch[-1][1] + 3, 8, "Ochsenjoch", ev)
+            holz -= 5
+        elif zahl(5) < self.EISENMINEN and holz >= 20 and stein >= 6 and self.eisen:
+            c = self._naechster(self.eisen, self.K)
+            self._bau(5, c[0], c[1], 12, "Eisenmine", ev)
+        return ev
+
+    def bericht(self):
+        return "Ausbau: %s, Steuerstufe zuletzt %d" % (self.bilanz or "nichts", self.steuer)
