@@ -1,0 +1,5 @@
+# Serie a, Einstellung waechter=ja assassinen=-1 bis_tick=28700 tempo=200 minuten=40
+Konsole                            Kennung  Ergebnis           Ende  Assa zerst   Gold   1.Mine  neg H/S/E    Fehler gesetzt
+partiea_1_i1_konsole.txt           39acda39 offen             28716    85    79   8300     5978  1/0/0 von 2395 nein   {'Ochsenjoch (Regel)': 10, 'Steinbruch+Ochsenjoch': 3, 'Eisenmine': 12, 'Apfelplantage': 5, 'Holzfaeller': 1, 'Jaegerhuette': 5}
+partiea_2_i1_konsole.txt           39acda39 offen             28712    80    77   8015     5959  1/0/0 von 2482 nein   {'Ochsenjoch (Regel)': 12, 'Steinbruch+Ochsenjoch': 3, 'Eisenmine': 10, 'Apfelplantage': 5, 'Holzfaeller': 1, 'Jaegerhuette': 6}
+partiea_3_i1_konsole.txt           39acda39 offen             28723    85    57   8250     6155  1/0/0 von 2410 nein   {'Ochsenjoch (Regel)': 11, 'Steinbruch+Ochsenjoch': 3, 'Eisenmine': 11, 'Apfelplantage': 5, 'Holzfaeller': 1, 'Jaegerhuette': 9}

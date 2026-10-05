@@ -48,6 +48,12 @@ S1 ausgefuehrt ab 05.10. 21:33 (Daniel: "ja, fang mit S1 an"). Vorher festgelegt
   und sonst die Ursache: kein Weg (Abstand faellt nicht) / abgefangen (Ziel ist ein anderer Feind) / unterwegs
   gestorben / angekommen ohne Schaden.
 
+**S1 ERGEBNIS (Serie a, 3 Laeufe, Kennung 39acda39, 05.10. 21:45):** 5 Angriffe zu je 20. Wegstrecke beim Befehl
+12-91 Felder -> sie kommen einzeln an: am Lord gleichzeitig hoechstens 0-2 von 20; Verluste je Angriff 14-17; Lord-Schaden
+nur in a2 (150.000 -> 106.300, -29 %), sonst 0. Ursache = **gleichzeitig befohlen ist nicht gleichzeitig angekommen.**
+Daniel 21:46 (Bild): Assassinen nehmen nicht das naechste Ziel, sondern folgen "stupide" den anderen; die Wirtschaft
+haette man viel frueher abreissen und dann gezielt auf den Lord gehen koennen.
+
 **S2 - Die eine Ursache aus S1 beheben, die die meisten Wellen stoppt.** Was genau, entscheidet die Messung aus S1 -
 nicht vorher raten. Abnahme: Lord-Schaden je Welle im Mittel ueber 3 Laeufe deutlich ueber der Basis (Zahl lege ich
 nach S1 fest, bevor gebaut wird).
