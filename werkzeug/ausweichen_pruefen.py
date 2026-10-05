@@ -190,6 +190,21 @@ def main():
     d = min(max(abs(lauf[0][0] - h[0]), abs(lauf[0][1] - h[1])) for h in ORTE) if lauf else -1
     pruefe(16, "Verfolger 12 Felder hinter ihm, zu Hause nur Speer/Bogen: Fluchtpunkt %s bleibt >= %d von der Burg (%d)" % (
         lauf, getattr(A.Einzeln, "HEIM_ABSTAND", 25), d), lauf and d >= getattr(A.Einzeln, "HEIM_ABSTAND", 25))
+    # 17. am Kartenrand steckengeblieben (raidzuerst_9): Zustand 1 (steht), Laufziel = eigenes Feld, Fluchtpunkt unerreichbar
+    #     -> nach 2 Runden ohne Feldwechsel ein Fluchtpunkt in ANDERER Richtung (nicht immer wieder derselbe)
+    t = neu()
+    L = {100: einheit(73, 1, 190, 270), 501: einheit(73, 2, 192, 270), 502: einheit(73, 2, 192, 271)}
+    t.aufnehmen([100])
+    t.schritt(L, G, sichere_orte=ORTE)
+    o = t.warte.get(100)
+    L[100].update(x=180, y=268, zustand=1, laufx=180, laufy=268)
+    for f, x in ((501, 191), (502, 191)):
+        L[f].update(x=x)
+    gesehen = []
+    for _ in range(4):
+        erg, bef = t.schritt(L, G, sichere_orte=ORTE)
+        gesehen += [tuple(b["angriff"]["lauf"]) for b in bef if "lauf" in b.get("angriff", {}) and 100 in b["angriff"]["einheiten"]]
+    pruefe(17, "steht 4 Runden fest (Zustand 1) mit Fluchtbefehl: wechselt die Richtung %s" % gesehen, len(set(gesehen)) >= 2)
     print("\n%d von %d gruen" % (sum(ok), len(ok)))
     return 0 if all(ok) else 1
 

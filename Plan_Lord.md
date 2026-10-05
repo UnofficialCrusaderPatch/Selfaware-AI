@@ -28,6 +28,18 @@ Offen: die Wirtschaft waechst NICHT mit (Daniel fragen, siehe Bericht 22:2x).
   Umkreis 5 -> kurz weg, kein Ziel, bis 2 Runden kein Verfolger im Umkreis 10, dann wieder angreifen. Anlass: der erste
   Assassine starb 1 gegen 3 ihrer Verteidigungs-Assassinen (Tick 2.429, Leben 11.720 -> 920 in ~50 Ticks), weil der
   Rueckzug nur Fernkaempfer kannte. Pruefung ohne Spiel `ausweichen_pruefen.py` 5/5 gruen, gegen alten Stand 3 rot.
+  Gemessen (je ein Lauf bis Tick 8.000, gleiche Eroeffnung):
+  | Lauf | Stand | zerstoert | Assassinen tot | eigene Soldaten tot |
+  |---|---|---|---|---|
+  | 1 | kein Ausweichen | 2 | 1 | 0 |
+  | 2-4 | halten / Laufbefehl je Runde | 2 | 1 | 0 |
+  | 5-6 | echter Laufbefehl, frueh (10 Felder), Leute im Weg | 8 | 0 | 1 / 6 |
+  | 7-8 | + Arbeiter-Gefahr, Heim nur wenn stark (Lauf 8: Speer/Bogen = 0) | 8 / 7 | 0 | 3 / 1 |
+  | 9 | + Verfolger bis 15 Felder, seitlich 60/90 Grad | 1 | 1 | 0 |
+  Erkenntnis Lauf 9: 2 Verfolger-Assassinen liefen 4.000 Ticks lang 10-11 Felder hinter ihm her bis an den Kartenrand -
+  gleich schnell, sie geben nicht auf. Reine Flucht schuettelt sie nie ab; Burg = eigene Verluste (Speer/Bogen toeten sie
+  nicht), ins Leere = Tod am Rand. Aber: 2-3 ihrer Wachen 4.000 Ticks weggelockt = Stufe T2. Stecken-bleiben-Fehler (Zustand 1)
+  danach behoben (Pruefung 18/18), im Spiel noch nicht gelaufen.
 - **T2 Weglocken:** einer lockt die Verteidiger weg (und weicht nach T1 aus), ein anderer greift derweil an.
 - **T3 Sammeln bis zur eigenen Uebermacht**, dann gegen die Verteidigung - "dann ist die Tuere frei fuer die anderen".
 

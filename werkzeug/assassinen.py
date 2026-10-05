@@ -594,7 +594,10 @@ class Einzeln:
                 f = self.flucht[n]
                 f["steht"] = f.get("steht", 0) + 1 if f.get("letzt") == ort else 0
                 f["letzt"] = ort
-                blockiert = laeuft_weg and f["steht"] >= 2
+                # raidzuerst_9: am Kartenrand (160,43) kam er nicht weiter, Zustand 1 (steht) statt 101 - "blockiert" griff nicht,
+                # er bekam immer wieder denselben unerreichbaren Punkt und wurde eingeholt. Blockiert = 2 Runden kein Feldwechsel,
+                # solange er nicht am Fluchtpunkt ist - egal welcher Zustand.
+                blockiert = o is not None and schach(ort, o) > 3 and f["steht"] >= 2
                 if laeuft_weg and not blockiert:
                     ziel = None
                 else:
