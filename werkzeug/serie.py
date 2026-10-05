@@ -58,6 +58,36 @@ def werte(pfad):
     z["fehler"] = "ja" if re.search(r"Traceback|ABBRUCH|TESTBEDINGUNG FEHLT", t) or z["ende"] is None else "nein"
     m = re.search(r"CODE-KENNUNG (\w+)", t)
     z["kennung"] = m.group(1) if m else "-"
+    z.update(wirtschaft_werte(t))
+    return z
+
+
+def wirtschaft_werte(t):
+    """Seasoning, Anwerben und Beliebtheit aus einer Konsole (Daniel 05.10. 23:41: Seasoning am Anfang, Nahrung fuer
+    Beliebtheit und Verkauf). Alles aus den Zeilen der Partie; fehlt eine Zeile, steht None."""
+    z = {}
+    m = re.search(r"A-Plantagen reif bei Tick (\d+)", t)
+    z["a_reif"] = int(m.group(1)) if m else None
+    m = re.search(r"alle \d+ B-Plantagen stehen \(Tick (\d+)", t)
+    z["b_steht"] = int(m.group(1)) if m else None
+    m = re.search(r"SEASONING FRUEH: (\d+) von (\d+) A-Plantagen mit dem Posten bei Tick (\d+)", t)
+    z["a_frueh"] = "%s/%s bei %s" % m.groups() if m else "-"
+    m = re.search(r"RAID ZUERST:.*?(\d+) Assassinen angeworben.*?Tick (\d+)", t)
+    erster = int(m.group(2)) if m and int(m.group(1)) > 0 else None
+    zeilen = re.findall(r"^ *(\d+) \|[^\n]*?\| *([0-9.]+) \|[^\n]*", t, re.M)
+    if erster is None:
+        m = re.search(r"^ *(\d+) \|[^\n]*\b1 Assassinen? angeworben", t, re.M)
+        erster = int(m.group(1)) if m else None
+    z["assa_1"] = erster
+    for n in (10, 20):
+        m = re.search(r"^ *(\d+) \|[^\n]*\b%d Assassinen angeworben" % n, t, re.M)
+        z["assa_%d" % n] = int(m.group(1)) if m else None
+    # Tabellenzeile: Tick | Holz Stein Eisen | Aepfel Brot | Beliebt | ...
+    tab = [(int(a), int(b), float(c)) for a, b, c in re.findall(r"^ *(\d+) \| +\d+ +\d+ +\d+ \| +(\d+) +\d+ \| +([0-9.]+) \|", t, re.M)]
+    for marke in (5000, 10000, 20000):
+        nach = [r for r in tab if r[0] >= marke]
+        z["beliebt_%d" % (marke // 1000)] = nach[0][2] if nach else None
+    z["aepfel_schnitt"] = round(sum(r[1] for r in tab) / len(tab), 1) if tab else None
     return z
 
 

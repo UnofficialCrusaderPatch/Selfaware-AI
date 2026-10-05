@@ -455,15 +455,13 @@ class Ertragsplaner:
             return ev
         beste = kand[0]
         self.letzte_wahl = beste
-        if st.get("feuer", 0) < beste["arbeiter"] and holz >= self.kosten[1]["holz"] and st.get("leute", 0) >= st.get("platz", 0) - 2:
+        R = self.wirt.ruecklage(G)          # B-Plantagen zuerst (gewinn_5: "Huette zuerst" verbaute das B-Holz)
+        if st.get("feuer", 0) < beste["arbeiter"] and holz - R["holz"] >= self.kosten[1]["holz"] and st.get("leute", 0) >= st.get("platz", 0) - 2:
             ev.append("PLANER Huette zuerst (Feuer %d, %s braucht %d) -> %s" % (st.get("feuer", 0), NAME[beste["typ"]], beste["arbeiter"],
                                                                               self.baue(1, self.K[0] - 7, self.K[1] - 2, 25)))
             return ev
-        reserve_gold = 15 if self.wirt.B_offen else 0
-        # B-Holz zuruecklegen: 3 je offener B-Plantage (gewinn_3: Holz 0 nach A-Reife, der Planer verbaute es - B stand
-        # erst 4.276 Ticks nach A-Reife; Daniel 23:29 "Seasoning zu langsam")
-        reserve_holz = 3 * len(self.wirt.B_offen)
-        habe = {"holz": holz - reserve_holz, "stein": stein, "gold": gold - reserve_gold}
+        # B-Ruecklage (Holz + Gold je offener B-Plantage) abziehen (Steinbruch-Kosten enthalten das Joch schon: kosten_von)
+        habe = {"holz": holz - R["holz"], "stein": stein, "gold": gold - R["gold"]}
         bezahlbar = lambda k: all(habe[w] >= k["kosten"][w] for w in habe)
         # Ausweichbau nur, wenn er nichts verbraucht, was der beste braucht (sonst schiebt er den besten weiter hinaus)
         stiehlt = lambda k: any(beste["kosten"][w] > 0 and habe[w] - k["kosten"][w] < beste["kosten"][w] for w in habe if k["kosten"][w] > 0)
@@ -473,7 +471,7 @@ class Ertragsplaner:
             wahl = beste if bezahlbar(beste) else next((k for k in kand[1:] if bezahlbar(k) and not stiehlt(k)), None)
         if wahl is None:
             # nur sparen, was fehlt: Gold zurueckhalten nur, wenn dem besten Bau Gold fehlt
-            if gold < beste["kosten"]["gold"] + reserve_gold:
+            if gold < beste["kosten"]["gold"] + R["gold"]:
                 self.braucht_gold = True
             if (runde - 1) % (5 * self.PLANEN) == 0:
                 ev.append("PLANER wartet auf %s (fehlt: %s)" % (NAME[beste["typ"]], ", ".join(

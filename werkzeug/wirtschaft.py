@@ -26,6 +26,7 @@ from laden import befehl, peek
 from befehl import ABZUG
 
 APFEL, HOLZFAELLER, LAGER, BAUER = 32, 3, 10, 13
+APFEL_HOLZ, APFEL_GOLD = 3, 15          # Apfelplantage (Liga, gemessen 05.10.)
 SUCHRADIUS_BAUER = 30                       # abgelesen: selectClosestTree nimmt Baeume naeher als 0x1E Felder
 BAUM_BASIS, BAUM_SCHRITT, BAUM_STUFE = 0xF2CC54, 156, 0x80
 REIF = 3
@@ -99,6 +100,14 @@ class Wirtschaft:
         return peek(BAUM_BASIS + self.apfelbaum * BAUM_SCHRITT + BAUM_STUFE)[0]
 
     # ---- eine Runde -----------------------------------------------------------------------------------------------
+    def ruecklage(self, G):
+        """Was fuer die offenen B-Plantagen zurueckliegt, sobald alle A stehen (B ist dann spaetestens ~1.000 Ticks
+        spaeter dran: Stufen 500 + 300 + 200). Jeder Ausgeber (Anwerben, Planer, Huetten) zieht das ab.
+        gewinn_5 (Daniel 23:41 "Seasoning am Anfang"): A stand bei 534, reif bei 1.500, die letzte B-Plantage wartete
+        bis 3.978 - Planer (Steinbruch + Joch, "Huette zuerst") und Huettenbau verbauten das Holz."""
+        n = 0 if self.a_offen(G) else len(self.B_offen)
+        return {"holz": APFEL_HOLZ * n, "gold": APFEL_GOLD * n}
+
     def a_offen(self, G):
         """A-Plaetze, an denen (noch) keine eigene Apfelplantage steht."""
         stehen = [(g["x"], g["y"]) for g in G.values() if g["besitzer"] == self.sp and g["typ"] == APFEL]
@@ -117,7 +126,7 @@ class Wirtschaft:
         #    Assassine nicht (gemessen live_4/5: 5 Gold, Plantage 15) - ohne A wird A nie reif und B nie gesetzt. Fehlende
         #    A-Plantage bauen, sobald 15 Gold + 3 Holz da sind; derselbe Platz erst nach 50 Ticks wieder (schnelle Runden).
         for o in self.a_offen(G):
-            if st.get("gold", 0) >= 15 and st.get("holz", 0) >= 3 and t - self.a_versucht.get(o, -999) >= 50:
+            if st.get("gold", 0) >= APFEL_GOLD and st.get("holz", 0) >= APFEL_HOLZ and t - self.a_versucht.get(o, -999) >= 50:
                 self.a_versucht[o] = t
                 ev.append("Apfelplantage A nachgeholt bei %s: %s (Gold %d, Holz %d)" % (o, self.baue_schnell(APFEL, o[0], o[1], 2),
                                                                                    st.get("gold", 0), st.get("holz", 0)))
@@ -140,9 +149,9 @@ class Wirtschaft:
                     if any(schach(o, s) <= 2 for s in stehen):
                         self.B_offen.remove(o)
                         continue
-                    if st.get("holz", 0) >= 3 and st.get("gold", 0) >= 15:
+                    if st.get("holz", 0) >= APFEL_HOLZ and st.get("gold", 0) >= APFEL_GOLD:
                         self.baue_schnell(APFEL, o[0], o[1], 2)
-                    elif st.get("holz", 0) < 3 and st.get("gold", 0) >= 60:
+                    elif st.get("holz", 0) < APFEL_HOLZ and st.get("gold", 0) >= 60:
                         # 9g: der Markt verbaute das zurueckgelegte B-Holz - dann kaufen (Spielbefehl 38, kaufen = 0, Holz = 2)
                         befehl({"spielbefehl": {"nr": 38, "werte": [0, 2]}}, 1.0, bis="SPIELBEFEHL")
                         ev.append("Holz fuer B gekauft (Holz %d, Gold %d)" % (st.get("holz", 0), st.get("gold", 0)))

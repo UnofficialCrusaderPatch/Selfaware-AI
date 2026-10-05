@@ -152,8 +152,14 @@ def phase1(plan, tempo):
         if warte_bis(lambda: vorrat(SP)["gold"] >= 190, "Gold fuer Posten + Assassine", 5, pflicht=False):
             break
     schreib("VERKAUFT bis Tick %d: %s Lose, Gold %d" % (tick(), lose, vorrat(SP)["gold"]))
-    gp, fp = baue_viele([(8, POSTEN[0], POSTEN[1])], SP, live=True)
-    posten = POSTEN if gp else baue_schnell(8, BERGFRIED[0], BERGFRIED[1], 25)
+    # Daniel 23:41: "Seasoning am Anfang ist eine gute Investition, da Nahrung fuer Beliebtheit und Verkauf unersetzlich
+    # ist". gewinn_3: A-Plantagen erst nach Posten + Assassine versucht (Tick 783, Gold 5 - alle gescheitert), erste A bei
+    # 1.315, letzte nach 3.865; ohne eigenes Essen fiel die Beliebtheit 98 -> 58. Jetzt: Posten und A-Plantagen in EINEM
+    # Befehl, sobald das Verkaufsgold da ist (Posten zuerst in der Liste, 120 + 3 x 15 von ~195 Gold).
+    gp, fp = baue_viele([(8, POSTEN[0], POSTEN[1])] + [(32, x, y) for (x, y) in A], SP, live=True)
+    posten = POSTEN if any(r[0] == 8 for r in gp) else baue_schnell(8, BERGFRIED[0], BERGFRIED[1], 25)
+    schreib("SEASONING FRUEH: %d von %d A-Plantagen mit dem Posten bei Tick %d, Gold jetzt %d" % (
+        sum(1 for r in gp if r[0] == 32), len(A), tick(), vorrat(SP)["gold"]))
     warte_bis(lambda: gebaeude_von(SP, 8), "Soeldnerposten", 20)
     geworben = 0
     nr_posten = [n for n, _, _ in gebaeude_von(SP, 8)]
@@ -167,7 +173,7 @@ def phase1(plan, tempo):
             "(freie Leute am Feuer jetzt %d) -> Gold %d, Nahrung uebrig %s, Tick %d" % (t_essen, lose, posten, geworben,
             s32(peek(PD + 136)[0]), v0["gold"], {k: v0.get(k, 0) for k in NAHRUNG_PREIS if v0.get(k, 0)}, tick()))
     # Apfelplantagen (Gold) und was beim ersten Befehl nicht ging - einmal nachholen; den Rest setzen Planer/Wirtschaft
-    nach = rest + [(32, x, y) for (x, y) in A]
+    nach = rest + [r for r in fp if r[0] == 32]
     g2, f2 = baue_viele(nach, SP, live=True) if nach else ([], [])
     v1 = vorrat(SP)
     schreib("NACHGEHOLT bei Tick %d: %d von %d (Apfelplantagen A + Rest); nicht gebaut: %s; Holz %d, Gold %d" % (
@@ -378,15 +384,15 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                 # nicht am Lagerplatz (9i: Markt/Soeldnerlager belegten ihn - 14 Holzfaeller warteten Tick 4500-9035)
                 soeldner = baue_schnell(8, BERGFRIED[0], BERGFRIED[1], 25)
                 ereignis.append("Soeldnerlager gesetzt %s (Gold %d)" % (soeldner, st["gold"]))
-            elif posten and st["gold"] >= 70 and st["feuer"] >= 1 and (assassinen < 0 or geworben < assassinen) and not ausbau.braucht_gold \
+            elif posten and st["gold"] >= 70 + wirt.ruecklage(G)["gold"] and st["feuer"] >= 1 and (assassinen < 0 or geworben < assassinen) and not ausbau.braucht_gold \
                     and not wirt.a_offen(G):   # Daniel 23:09: Farmen nicht vergessen - erst die fehlenden A-Plantagen (45 Gold)   # erst rollen (Daniel 18:51/19:05)
                 befehl({"werbe": {"typ": 73, "gebaeude": posten[0]}}, 1.0, bis="WERBE")
                 geworben += 1
-                if geworben % 5 == 0:
+                if geworben == 1 or geworben % 5 == 0:     # der erste zaehlt einzeln (gewinn_5: Zeitpunkt fehlte)
                     ereignis.append("%d Assassinen angeworben (Gold jetzt %d)" % (geworben, st["gold"]))
             if posten and runde % 50 == 0:     # ganz_1: in 28.700 Ticks nur 1 Assassine - welche Bedingung bremst?
                 ereignis.append("ANWERBEN-BREMSE: Gold %d (braucht %d), Feuer %d, Planer braucht Gold %s, A-Farmen offen %d" % (
-                    st["gold"], 70, st["feuer"], bool(ausbau.braucht_gold), len(wirt.a_offen(G))))
+                    st["gold"], 70 + wirt.ruecklage(G)["gold"], st["feuer"], bool(ausbau.braucht_gold), len(wirt.a_offen(G))))
             if not [n for n, g in G.items() if g["besitzer"] == SP and g["typ"] == 26] and runde % 20 == 2:
                 ereignis.append("Markt gesetzt %s" % (baue_schnell(26, BERGFRIED[0], BERGFRIED[1], 25),))
             elif runde % 3 == 0:
@@ -421,7 +427,7 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
         ereignis += ausbau.schritt(st, L, G, runde)
         tz = uhr("wirtschaft", tz)
         bedarf = sum(ARBEITER_JE[t] * st.get("G%d" % t, 0) for t in ARBEITER_JE)
-        if st["holz"] >= 5 + 3 * len(wirt.B_offen) and (bedarf > st["platz"] or (trupp is not None and st["feuer"] == 0 and st["platz"] - st["leute"] <= 2)):
+        if st["holz"] >= 5 + wirt.ruecklage(G)["holz"] and (bedarf > st["platz"] or (trupp is not None and st["feuer"] == 0 and st["platz"] - st["leute"] <= 2)):
             ereignis.append("Huette %s (Bedarf %d, Platz %d, Leute %d, Feuer %d)" % (baue_haus(), bedarf, st["platz"], st["leute"], st["feuer"]))
         zeile = "%5d | %3d %3d %3d | %3d %3d | %6.2f | %d/%d (%d) | %d %d | %s" % (
             st["t"], st["holz"], st["stein"], st["eisen"], st["apfel"], st["brot"], st["beliebt"] / 100.0, st["leute"],
