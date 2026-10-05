@@ -245,7 +245,11 @@ class Einzeln:
     # Gemessen raidzuerst_6: der Waechter warf bei Tick 2.954 alle 13 Verteidiger (Bogen, Speer UND Lord) gegen einen
     # Verfolger bei (166,262), bei 3.416 noch 9 gegen den naechsten; am Ende 6 eigene tot, 0 Verfolger tot. Mit diesen Werten
     # zaehlen 7 Speer + 5 Bogen 2.5 - die Rechnung ist ein Startwert; die FLUCHT-Zeilen schreiben sie mit, damit nachgemessen wird.
-    STAERKE = {24: 0.21, 25: 1.6, 26: 1.17, 27: 4.0, 28: 4.0, 75: 2.67, 73: 1.0, 22: 0.2, 23: 0.2, 70: 0.2, 72: 0.2, 74: 0.2, 55: 0.0}
+    # GEMESSEN schlaegt GERECHNET (raidzuerst_6 und _7): 13 bzw. 11 Verteidiger (Bogen 22, Speer 24, Lord) toeteten in zwei
+    # Laeufen 0 von 3 verfolgenden Assassinen und verloren 6 bzw. 3 Mann - vermutlich sehen sie die getarnten Assassinen gar
+    # nicht. Darum Speer/Bogen/Armbrust/arab. Bogen/Schleuder/Pferdebogen 0, bis ein Lauf zeigt, dass sie einen toeten.
+    # Pike/Streitkolben/Schwert/Ritter: gerechnet, nicht gemessen (wir haben keine).
+    STAERKE = {24: 0.0, 25: 1.6, 26: 1.17, 27: 4.0, 28: 4.0, 75: 2.67, 73: 1.0, 22: 0.0, 23: 0.0, 70: 0.0, 72: 0.0, 74: 0.0, 55: 0.0}
     HEIM_R, HEIM_ABSTAND = 15, 25   # eigene Truppen bis HEIM_R um Lager/Bergfried; zu schwach -> Fluchtpunkt mind. HEIM_ABSTAND weg
     ZUSCHLAGEN = 3
     ZIEL_FERN, ZIEL_FERN_MAX = 20, 2
@@ -344,7 +348,9 @@ class Einzeln:
         alle_heim = getattr(self, "_heim", [])
         # Daniel 22:37: nur nach Hause, wenn unsere Truppen dort die Verfolger schlagen koennen, sonst seitlich weg.
         # Gemessen raidzuerst_6: er zog 2-3 Assassinen bis an unsere Burg - 6 eigene Soldaten tot, kein Verfolger tot.
-        verfolger = self._staerke(t for _, p, t in nah if schach(ort, p) <= self.SICHER_NAH)
+        # Verfolger im selben Umkreis zaehlen, in dem er weiter flieht (FLUCHT_FREI) - raidzuerst_8: mit 10 zaehlte ein
+        # Verfolger 11 Felder hinter ihm als 0.0, "Heim ok", und er zog ihn doch wieder an die Burg
+        verfolger = self._staerke(t for _, p, t in nah if schach(ort, p) <= self.FLUCHT_FREI)
         heim, self._heimgrund = [], []
         for h in alle_heim:
             eigene = 1.0 + self._staerke(e["typ"] for m, e in (L or {}).items()
@@ -386,7 +392,9 @@ class Einzeln:
         """Kandidaten fuer einen KURZEN Rueckzug: 15/20/25 Felder weg vom Schwerpunkt der nahen Feinde, geradeaus und
         30 Grad links/rechts (Partie 9h: 210 Rueckzuege quer ueber die Karte nach Hause, 37 Assassinen starben im Laufen;
         Partie 2/5: kurz vom Angreifer weg war das Beste)."""
-        nahe = [p for _, p, _ in fern if schach(ort, p) <= self.RUECKZUG_FERN] + [p for _, p, _ in nah if schach(ort, p) <= self.SICHER_NAH]
+        # Nahkaempfer bis FLUCHT_FREI (15): solange einer so nah ist, flieht er (4a) - mit SICHER_NAH (10) gab es fuer einen
+        # Verfolger 11-15 Felder hinter ihm keinen einzigen Fluchtpunkt, er blieb stehen (Pruefung 16)
+        nahe = [p for _, p, _ in fern if schach(ort, p) <= self.RUECKZUG_FERN] + [p for _, p, _ in nah if schach(ort, p) <= max(self.SICHER_NAH, self.FLUCHT_FREI)]
         if not nahe:
             return []
         cx, cy = sum(p[0] for p in nahe) / len(nahe), sum(p[1] for p in nahe) / len(nahe)
@@ -395,7 +403,9 @@ class Einzeln:
         dx, dy = dx / lang, dy / lang
         aus = []
         for k in (20, 15, 25):
-            for w in (0.0, 0.52, -0.52):
+            # 0 / 30 / 60 / 90 Grad: seitlich (60/90) braucht 4a, wenn die eigene Burg genau in Fluchtrichtung liegt und zu
+            # schwach ist (Pruefung 16: alle Punkte geradeaus/30 Grad lagen 10-24 Felder vor der Burg)
+            for w in (0.0, 0.52, -0.52, 1.05, -1.05, 1.57, -1.57):
                 rx = dx * math.cos(w) - dy * math.sin(w)
                 ry = dx * math.sin(w) + dy * math.cos(w)
                 x, y = int(round(ort[0] + rx * k)), int(round(ort[1] + ry * k))

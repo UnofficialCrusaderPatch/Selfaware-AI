@@ -176,6 +176,20 @@ def main():
         schwach[0], abstand, schwach[1]), schwach[0] and schwach[1] >= abstand)
     pruefe(15, "Heim stark (3 Schwertkaempfer): Fluchtpunkt %s naeher an der Burg (%d) als bei zu schwach (%d)" % (
         staerke[0], staerke[1], schwach[1]), staerke[0] and staerke[1] < schwach[1])
+    # 16. Verfolger 12 Felder hinter ihm (ausserhalb 10, innerhalb FLUCHT_FREI 15), zu Hause nur Speer/Bogen -> NICHT zur Burg
+    t = neu()
+    L = {100: einheit(73, 1, 190, 270), 501: einheit(73, 2, 192, 270), 502: einheit(73, 2, 192, 271),
+         801: einheit(24, 1, 140, 269), 802: einheit(22, 1, 141, 270)}
+    t.aufnehmen([100])
+    t.schritt(L, G, sichere_orte=ORTE)                            # Flucht beginnt
+    L[100].update(x=175, y=268, zustand=106)                     # eingeholt? nein: Verfolger 12 hinter ihm, er steht
+    for f, x in ((501, 187), (502, 187)):
+        L[f].update(x=x)
+    erg, bef = t.schritt(L, G, sichere_orte=ORTE)
+    lauf = [b["angriff"]["lauf"] for b in bef if "lauf" in b.get("angriff", {}) and 100 in b["angriff"]["einheiten"]]
+    d = min(max(abs(lauf[0][0] - h[0]), abs(lauf[0][1] - h[1])) for h in ORTE) if lauf else -1
+    pruefe(16, "Verfolger 12 Felder hinter ihm, zu Hause nur Speer/Bogen: Fluchtpunkt %s bleibt >= %d von der Burg (%d)" % (
+        lauf, getattr(A.Einzeln, "HEIM_ABSTAND", 25), d), lauf and d >= getattr(A.Einzeln, "HEIM_ABSTAND", 25))
     print("\n%d von %d gruen" % (sum(ok), len(ok)))
     return 0 if all(ok) else 1
 
