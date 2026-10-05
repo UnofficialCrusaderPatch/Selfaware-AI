@@ -75,6 +75,7 @@ class Wirtschaft:
         self.bauern = []                          # (tick, Bauern, untaetig)
         self.versuche_B = 0
         self.a_versucht = {}                 # A-Platz -> Tick des letzten Bauversuchs (nachholen)
+        self.baum_gesucht = -999             # Tick der letzten Baumsuche
         # Baum gleich jetzt suchen, solange das Spiel noch steht (9g: die Kartensuche mitten im Lauf kostete ~600 Ticks)
         if self.B:
             self.apfelbaum = self._a_baum() or -1
@@ -121,11 +122,16 @@ class Wirtschaft:
                 ev.append("Apfelplantage A nachgeholt bei %s: %s (Gold %d, Holz %d)" % (o, self.baue_schnell(APFEL, o[0], o[1], 2),
                                                                                    st.get("gold", 0), st.get("holz", 0)))
                 break
+        # A-Baum suchen, sobald eine A-Plantage steht. gewinn_2 (Daniel 23:29 "Seasoning zu langsam"): die Raid-Eroeffnung
+        # baut A erst spaeter nach, die Suche beim Start fand keinen Baum, merkte sich -1 - A in 28.700 Ticks nie reif, B nie.
+        if (self.apfelbaum or -1) <= 0 and len(self.a_offen(G)) < len(self.A) and t - self.baum_gesucht >= 200:
+            self.baum_gesucht = t
+            self.apfelbaum = self._a_baum() or -1
+            ev.append("A-Baum gesucht: %s" % self.apfelbaum)
         # 1. Seasoning: B setzen, sobald A reif wird
         if self.B_offen:
             stufe = self.stufe_a() if self.B_tick is None else REIF
-            # Daniel 23:29 "Seasoning zu langsam": B nicht erst, wenn A reif ist, sondern sobald alle A-Plantagen stehen
-            if stufe == REIF or not self.a_offen(G):
+            if stufe == REIF:
                 if self.A_reif_tick is None:
                     self.A_reif_tick = t
                     ev.append("Seasoning: A-Plantagen reif bei Tick %d (Baum %d) - setze %d B-Plantagen" % (t, self.apfelbaum, len(self.B_offen)))

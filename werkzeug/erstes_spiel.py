@@ -386,7 +386,7 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                     ereignis.append("%d Assassinen angeworben (Gold jetzt %d)" % (geworben, st["gold"]))
             if posten and runde % 50 == 0:     # ganz_1: in 28.700 Ticks nur 1 Assassine - welche Bedingung bremst?
                 ereignis.append("ANWERBEN-BREMSE: Gold %d (braucht %d), Feuer %d, Planer braucht Gold %s, A-Farmen offen %d" % (
-                    st["gold"], 70 + GOLD_RESERVE, st["feuer"], bool(ausbau.braucht_gold), len(wirt.a_offen(G))))
+                    st["gold"], 70, st["feuer"], bool(ausbau.braucht_gold), len(wirt.a_offen(G))))
             if not [n for n, g in G.items() if g["besitzer"] == SP and g["typ"] == 26] and runde % 20 == 2:
                 ereignis.append("Markt gesetzt %s" % (baue_schnell(26, BERGFRIED[0], BERGFRIED[1], 25),))
             elif runde % 3 == 0:
