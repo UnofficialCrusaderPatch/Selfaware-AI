@@ -54,6 +54,24 @@ nur in a2 (150.000 -> 106.300, -29 %), sonst 0. Ursache = **gleichzeitig befohle
 Daniel 21:46 (Bild): Assassinen nehmen nicht das naechste Ziel, sondern folgen "stupide" den anderen; die Wirtschaft
 haette man viel frueher abreissen und dann gezielt auf den Lord gehen koennen.
 
+**Daniel 21:46-21:47 (Bilder), woertlich zusammengefasst:**
+- "Assassinen bleiben nach dem Auftrag auf den Lord einfach vor den Mauern stehen - das ist falsch, sie sollten aktiv
+  versuchen, weiter den Lord zu killen." "Jeder Tick, wo sie rumstehen, ist eine Sekunde mehr, wo der Gegner Einheiten
+  rekrutieren kann - und wo gegnerische Einheiten auf unsere schiessen koennen."
+- "Es sieht immer noch so aus, als wuerdest du Holz verkaufen, anstatt Eisenminen oder Steinbrueche zu bauen."
+  (gemessen frueher: ~90-100 Holz-Lose je Partie verkauft = rund 2.000 Holz)
+- Assassinen nehmen nicht das naechste Ziel, sondern folgen anderen; Wirtschaft frueher abreissen, dann gezielt Lord.
+
+**Neue Reihenfolge (je ein Schritt, Pruefung ohne Spiel, Serie, Abnahme - wie oben):**
+- **S2a Nie rumstehen beim Lord-Angriff:** wer im Angriff nicht den Lord angreift (steht, laeuft nicht), bekommt den
+  Befehl JEDE Runde neu; bleibt er vor einer Mauer haengen -> messen, wie Assassinen hineinkommen (Haken/Mauer
+  erklettern), dann diesen Weg nehmen. Abnahme: kein Angreifer laenger als 2 Runden ohne Ziel/Bewegung.
+- **S2b Holz investieren statt verkaufen:** messen, warum der Planer bei Holzueberschuss nicht baut (keine Plaetze?
+  Arbeiter? Horizont? Stein?), dann die Ursache beheben. Abnahme: Holz-Verkauf deutlich unter Basis, mehr Steinbrueche/Minen.
+- **S2c Gleichzeitig ankommen:** Treffpunkt kurz vor dem Lord ausser Schussweite, dann gemeinsam (S1: Weg 12-91 Felder,
+  am Lord hoechstens 2 von 20).
+- **S2d Raiden: naechstes Ziel, Wirtschaft zuerst** (nicht anderen folgen).
+
 **S2 - Die eine Ursache aus S1 beheben, die die meisten Wellen stoppt.** Was genau, entscheidet die Messung aus S1 -
 nicht vorher raten. Abnahme: Lord-Schaden je Welle im Mittel ueber 3 Laeufe deutlich ueber der Basis (Zahl lege ich
 nach S1 fest, bevor gebaut wird).
