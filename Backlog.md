@@ -10,6 +10,9 @@ bauen muss - **4.** wissen, warum und WANN man es bauen sollte - **5.** selbstae
 
 ## Jetzt dran
 - [ ] **Ertrags-Planer** (Daniel 19:11/19:14): erst Messpartie (Ertrag je Gebaeude je 1.000 Ticks, Verkaufspreis Stein/Eisen, Weglaenge), dann jede Runde die Aktion mit der schnellsten Amortisation bauen, ohne feste Stueckzahlen; Umgebung bestimmt alles. Stein und Eisen vermutlich vorne.
+- [ ] **Planer lernt im Spiel** (Befund 9t): Ertrag je Gebaeudeart aus dem laufenden Spiel messen (Bestand + Verkauf + Verbrauch je Ware, geteilt durch Zahl der Betriebe) und die Startwerte ersetzen - dann hoert er von selbst auf, Jaegerhuetten zu bauen, die nichts bringen.
+- [ ] **Zeithorizont fuer Investitionen** (Befund 9t): nur bauen, was sich innerhalb des Horizonts bezahlt macht; sonst geht das Gold in Truppen.
+- [ ] Apfelplantage und Holzfaeller ueber Platzkarten statt Raster/Baumliste (Befund 9t: 0 Apfelplantagen, Baum-Ziel 6-mal bebaut)
 
 ## Wirtschaft
 - [ ] Holzfaeller: 3 je Baum, Clusterung; Holzfaeller/Lager live umsetzen (04.10.)
