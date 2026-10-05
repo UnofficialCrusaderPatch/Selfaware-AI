@@ -1,0 +1,7 @@
+# 05.10.2026 18:50, Startstand M19 Liga Start Grumpy T600 (+ Kornspeicher + Markt), je ein Spielbefehl 38 [1, Ware]
+# Ware      Stueck je Verkauf   Gold   Gold je Stueck
+apfel       5                   +15    3
+brot        5                   +20    4
+kaese       5                   +30    6
+fleisch     5                   +5     1
+holz        20                  +20    1

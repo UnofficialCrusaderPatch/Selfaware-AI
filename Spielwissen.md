@@ -15,6 +15,7 @@ bis eine Messung es bestaetigt (Marke dahinter).
 ## Geld
 - Liga-Bedingung (Daniel 05.10. 00:55): Start mit **0 Gold**, nicht mit 2.000-4.000. Unsere bisherigen Testpartien hatten ~3.930 Gold - ihre Ergebnisse gelten nur fuer diesen Start.
 - Gemessen 05.10.: Liga-Start = 0 Gold, 150 Holz, je 15 Brot/Kaese/Fleisch/Aepfel (erst mit Kornspeicher sichtbar). Steuern bringen am Anfang fast nichts (10 Leute: hoechstens 10 Gold in 600 Ticks bei Stufe 11, Beliebtheit faellt dabei stark). Apfelplantage 15 Gold, Jaegerhuette 60 Gold, Soeldnerlager 120 Gold.
+- **Verkaufspreise Liga gemessen 05.10.** (ein Verkauf = 5 Nahrung bzw. 20 Holz; `daten/verkaufspreise_liga.txt`): Kaese 6, Brot 4, Aepfel 3, Fleisch 1, Holz 1 Gold je Stueck. Die Start-Nahrung (je 15) ist bis zu 210 Gold wert - **Nahrung verkaufen ist am Anfang die Goldquelle**, nicht Holz und nicht Steuern (Daniel 05.10. 18:48: "weisst du wie viel Gold du bekommst, wenn du Nahrung verkaufst?").
 - Immer wissen: wie viel Gold da ist, was hereinkommt, was jede Sache kostet. Passend sparen, genau ausgeben. (Daniel 04.10.)
 - Moeglichst viel Geld in Wirtschaft stecken - sie hat den hoechsten Hebel auf Geld und damit Waffen und Truppen. (Daniel 04.10.)
 - Beliebtheit erlaubt Steuern = Geld. Rohstoffe verkaufen bringt ebenfalls Geld. (Daniel 04.10.)
