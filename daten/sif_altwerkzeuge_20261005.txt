@@ -161,3 +161,16 @@ Den Ordner gibt es schon - nichts getan. Fuer den Modulstand: instanz_abgleich.p
 WIDERSPRUCH: Name villagestudio2 gehoert zu Instanz 2, SHC_INSTANZ sagt 1 - nichts getan.
 == Selfaware ohne SHC_INSTANZ: Pfade wie vorher
 C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme True True
+== 20:05:25 Programmpfad des erhoehten Spiels lesen (OpenProcess 0x1000 + QueryFullProcessImageNameW), nur lesend - Skript pfad_probe.py:
+2604 Pfad: C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme\Stronghold Crusader.exe | Start: 18:32:28
+Dauer 60 ms
+== Fensterplaetze im selben Augenblick, gemessen 20:02 (aus der Sitzungsausgabe uebertragen, Instanz 2 laeuft inzwischen nicht mehr):
+Gleicher Augenblick: Instanz 1 (Fenster 788524) Platz 8, Instanz 2 (Fenster 1641010) Platz 9, von 10
+== Abschluss: Sperren und Prozesse
+Instanz 1:
+Sperre gehoert: villagestudio
+   Zweck : SAI Partie 9v (lernender Planer Stand 3)
+   Alter : 0 Minuten
+Instanz 2:
+Sperre ist FREI.
+Instanz 1  Prozess 2604  Fenster 'Crusader'  C:\Program Files (x86)\Steam\steamapps\common\Stronghold Crusader Extreme
