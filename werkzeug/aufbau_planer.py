@@ -110,36 +110,54 @@ class Plan:
                             yield x, y, r, e
 
 
-def plane(k, n_schmiede, n_gerber, hof=None, r_max=16):
-    """Gibt (plan, bericht). hof = Feld am Milchviehhof (Kuh holen), sonst nur Waffenlager-Weg fuer Gerber."""
+def hoftore(x, y):
+    """Tore im Zaun eines Milchviehhofs (10x10, Grundriss 20:28): Mitte jeder Seite, je 2 Felder. Hier holt der Gerber
+    die Kuh (gemessen 20:33: Gerber stand bei (x, y+5))."""
+    return [(x + 4, y), (x + 5, y), (x, y + 4), (x, y + 5), (x + 9, y + 4), (x + 9, y + 5), (x + 4, y + 9), (x + 5, y + 9)]
+
+
+def plane(k, n_schmiede, n_gerber, eisen_teil=None, hoefe=(), r_max=16):
+    """Runde 2 (06.10. 20:47, nach A11/A12): Rundgang Schmied = Eingang -> Waffenlager -> EISENTEIL -> Eingang;
+    Gerber je 3 Leder = 2 x Weg zum naechsten Hoftor + 2 x Weg zum Waffenlager. eisen_teil = Lagerteil-Nummer mit Eisen
+    (Lagebild, Spalte ware), hoefe = [(x, y)] der Milchviehhoefe. Gibt (plan, bericht)."""
     p = Plan(k)
-    teile = [q for q, v in k["f"].items() if v[5] == LAGER]
-    mitte = (sum(q[0] for q in teile) // len(teile), sum(q[1] for q in teile) // len(teile))
-    bericht = {"mitte": mitte, "schmiede": [], "gerber": []}
-    # 1. Waffenlager: Eingang so nah wie moeglich am Lager
-    dl = p.lager_abstand()
+    alle_teile = [q for q, v in k["f"].items() if v[5] == LAGER]
+    eisen = [q for q, v in k["f"].items() if v[5] == LAGER and (eisen_teil is None or v[1] == eisen_teil)] or alle_teile
+    mitte = (sum(q[0] for q in eisen) // len(eisen), sum(q[1] for q in eisen) // len(eisen))
+    tore = [t for h in hoefe for t in hoftore(*h)]
+    bericht = {"mitte": mitte, "eisen_teil": eisen_teil, "tore": tore, "schmiede": [], "gerber": []}
+
+    def zum_eisen():                        # Abstand jedes Bodenfelds zum Eisenteil (ein Schritt auf das Teil dazu)
+        start = {n for t in eisen for n in ((t[0] + dx, t[1] + dy) for dx, dy in W.RICHTUNG.values()) if p.boden(n)}
+        return {q: v + 1 for q, v in p.abstand(sorted(start)).items()}
+
+    # 1. Waffenlager: Eingang so nah wie moeglich am Eisenteil (Schmiede laufen Waffenlager -> Eisen am Stueck)
+    de = zum_eisen()
     best = None
     for x, y, r, e in p.kandidaten(mitte, 10):
-        if e in dl and (best is None or dl[e] < best[0]):
-            best = (dl[e], x, y, r)
+        if e in de and (best is None or de[e] < best[0]):
+            best = (de[e], x, y, r)
     if best is None:
         raise RuntimeError("kein Platz fuer das Waffenlager")
     we = p.setze(WAFFENLAGER, best[1], best[2], best[3])
-    bericht["waffenlager"] = {"ort": best[1:3], "richtung": best[3], "eingang": we, "zum_lager": best[0]}
-    # 2. Schmieden: Rundgang Eingang -> Lager -> Waffenlager-Eingang -> Eingang
+    bericht["waffenlager"] = {"ort": best[1:3], "richtung": best[3], "eingang": we, "zum_eisen": best[0]}
+
+    def pruefe(ziel_eisen):
+        dw2, de2 = p.abstand(we), zum_eisen()
+        return all(e2 in dw2 for _, e2 in p.eingaenge) and all(e2 in de2 for a2, e2 in p.eingaenge if a2 == SCHMIEDE)
+
+    # 2. Schmieden
     for _ in range(n_schmiede):
-        dl, dw = p.lager_abstand(), p.abstand(we)
-        lager_zu_w = min((dw.get(n, 999) + 1) for t in teile for n in
-                         ((t[0] + dx, t[1] + dy) for dx, dy in W.RICHTUNG.values()) if p.boden(n))
+        de, dw = zum_eisen(), p.abstand(we)
+        w_zu_eisen = de.get(we, 999)
         best = None
         for x, y, r, e in p.kandidaten(mitte, r_max):
-            if e not in dl or e not in dw:
+            if e not in de or e not in dw:
                 continue
-            gang = dl[e] + lager_zu_w + dw[e]
+            gang = dw[e] + w_zu_eisen + de[e]
             if best is None or gang < best[0]:
                 p.setze(SCHMIEDE, x, y, r)
-                dl2 = p.lager_abstand()
-                ok = p.alle_erreichbar(we) and all(e2 in dl2 for _, e2 in p.eingaenge)
+                ok = pruefe(True)
                 p.zuruecknehmen()
                 if ok:
                     best = (gang, x, y, r)
@@ -148,21 +166,21 @@ def plane(k, n_schmiede, n_gerber, hof=None, r_max=16):
             continue
         e = p.setze(SCHMIEDE, best[1], best[2], best[3])
         bericht["schmiede"].append({"ort": best[1:3], "richtung": best[3], "eingang": e, "gang_felder": best[0],
-                                    "gang_ticks": best[0] * TICKS_JE_FELD,
                                     "zyklus_ticks": ARBEIT_SCHMIED + best[0] * TICKS_JE_FELD})
-    # 3. Gerbereien: Weg zum Waffenlager hin und zurueck (+ zum Hof, falls bekannt)
+    # 3. Gerbereien zwischen Hoftoren und Waffenlager
     for _ in range(n_gerber):
         dw = p.abstand(we)
-        dh = p.abstand(hof) if hof else {}
+        dt = p.abstand([t for t in tore if p.boden(t)]) if tore else {}
         best = None
-        for x, y, r, e in p.kandidaten(mitte, r_max + 6):
-            if e not in dw or (hof and e not in dh):
+        mitte_g = mitte if not tore else ((mitte[0] + sum(t[0] for t in tore) // len(tore)) // 2,
+                                          (mitte[1] + sum(t[1] for t in tore) // len(tore)) // 2)
+        for x, y, r, e in p.kandidaten(mitte_g, r_max + 14):
+            if e not in dw or (tore and e not in dt):
                 continue
-            gang = 2 * dw[e] + (2 * dh[e] if hof else 0)
+            gang = 2 * dw[e] + (2 * dt[e] if tore else 0)
             if best is None or gang < best[0]:
                 p.setze(GERBEREI, x, y, r)
-                dl2 = p.lager_abstand()
-                ok = p.alle_erreichbar(we) and all(e2 in dl2 for a, e2 in p.eingaenge if a == SCHMIEDE)
+                ok = pruefe(False)
                 p.zuruecknehmen()
                 if ok:
                     best = (gang, x, y, r)
@@ -171,7 +189,7 @@ def plane(k, n_schmiede, n_gerber, hof=None, r_max=16):
             continue
         e = p.setze(GERBEREI, best[1], best[2], best[3])
         bericht["gerber"].append({"ort": best[1:3], "richtung": best[3], "eingang": e, "gang_felder": best[0],
-                                  "gang_ticks": best[0] * TICKS_JE_FELD})
+                                  "zyklus_ticks": 1555 + best[0] * TICKS_JE_FELD})
     return p, bericht
 
 

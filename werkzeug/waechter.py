@@ -35,7 +35,9 @@ def lies_gebaeude():
                             "erreichbar": int(w[7]) if len(w) >= 8 else 1,
                             # Vorrat im Gebaeude, Hoechstmenge, Verbund (Steinbruch -> sein Steinhaufen Typ 21); seit 05.10. 20:35
                             "vorrat": int(w[8]) if len(w) >= 11 else None, "grenze": int(w[9]) if len(w) >= 11 else None,
-                            "verbund": int(w[10]) if len(w) >= 11 else None}
+                            "verbund": int(w[10]) if len(w) >= 11 else None,
+                            # Warenart des Lagerteils (+0x18C, 2 Holz, 4 Stein, 6 Eisen ...); seit 06.10. 20:45
+                            "ware": int(w[11]) if len(w) >= 12 else None}
     return G
 
 def lies_lagebild(neu_holen=True):

@@ -33,7 +33,12 @@ MAPPER = {P.WAFFENLAGER: 81, P.SCHMIEDE: 83, P.GERBEREI: 85}
 ARBEITER = {19: "Schmied", 21: "Gerber", 14: "Milchbauer"}
 
 
+def neue(typ, vorher):
+    return {nr: g for nr, g in E.runde_lesen()[2].items() if g["besitzer"] == SP and g["typ"] == typ and nr not in vorher}
+
+
 def main():
+    """Runde 2 (06.10. 20:48): Eisenteil auslesen, Hoefe + Kaserne vor dem Planen, laufend anwerben."""
     arg = dict(a.split("=", 1) for a in sys.argv[1:])
     n, dauer, hoefe, tempo = int(arg.get("n", 5)), int(arg.get("ticks", 12000)), int(arg.get("hoefe", 3)), int(arg.get("tempo", 300))
     E.LEERE_KI = True
@@ -41,34 +46,52 @@ def main():
     setze(GOLD, 20000)
     alt = kosten_nullen()
     stempel = time.strftime("%Y%m%d_%H%M%S")
-    erg = {"n": n, "kosten_alt": {"0x%08X" % a: v for a, v in alt.items()}, "bestand": [], "kuehe": [], "gebaut": []}
+    erg = {"n": n, "runde": 2, "kosten_alt": {"0x%08X" % a2: v for a2, v in alt.items()}, "bestand": [], "kuehe": [],
+           "gebaut": [], "kaempfer": []}
     try:
-        teile = [g for g in E.runde_lesen()[2].values() if g["besitzer"] == SP and g["typ"] == P.LAGER]
+        G0 = E.runde_lesen()[2]
+        teile = [g for g in G0.values() if g["besitzer"] == SP and g["typ"] == P.LAGER]
         lx, ly = teile[0]["x"], teile[0]["y"]
-        for typ, r in ((P.LAGER, 8), (26, 20)):              # Lager anbauen und Markt zuerst
+        for typ, r in ((P.LAGER, 8), (26, 20)):              # 1. Lager anbauen und Markt zuerst
             erg["gebaut"].append(["vorab", typ, E.baue_schnell(typ, lx, ly, r)])
             warte_ticks(8)
-        k = W.holen(max(lx - 30, 0), max(ly - 30, 0), min(lx + 30, 399), min(ly + 30, 399))
-        plan, bericht = P.plane(k, n, n)
+        for _ in range(6):                                    # 2. 30 Eisen - in welches Teil faellt es?
+            befehl({"spielbefehl": {"nr": 38, "werte": [0, EISEN]}}, 1.0, bis="SPIELBEFEHL")
+        warte_ticks(5)
+        G = E.runde_lesen()[2]
+        eisen_teil = next((nr for nr, g in G.items() if g["typ"] == P.LAGER and g.get("ware") == EISEN), None)
+        erg["eisen_teil"] = eisen_teil
+        erg["lagerteile"] = {nr: [g["x"], g["y"], g.get("ware"), g.get("vorrat")] for nr, g in G.items() if g["typ"] == P.LAGER}
+        print("Eisen liegt in Lagerteil", eisen_teil, erg["lagerteile"], flush=True)
+        vor = set(G)                                          # 3. Hoefe (Gruenland) und Kaserne vor dem Planen
+        for _ in range(hoefe):
+            E.baue_schnell(33, lx, ly, 45)
+            warte_ticks(8)
+        hof = neue(33, vor)
+        erg["hoefe"] = {nr: [g["x"], g["y"]] for nr, g in hof.items()}
+        E.baue_schnell(9, lx - 12, ly + 12, 25)
+        warte_ticks(8)
+        kas = neue(9, vor)
+        kaserne = min(kas) if kas else None
+        erg["kaserne"] = {nr: [g["x"], g["y"]] for nr, g in kas.items()}
+        print("Hoefe", erg["hoefe"], "Kaserne", erg["kaserne"], flush=True)
+        xs = [lx] + [g["x"] for g in hof.values()]
+        ys = [ly] + [g["y"] for g in hof.values()]
+        k = W.holen(max(min(xs) - 25, 0), max(min(ys) - 25, 0), min(max(xs) + 25, 399), min(max(ys) + 25, 399))
+        plan, bericht = P.plane(k, n, n, eisen_teil, [tuple(v) for v in erg["hoefe"].values()])   # 4. planen + bauen
         erg["plan"] = bericht
-        P.zeichne_plan(plan, os.path.join(D, "aufbau_%s_plan.png" % stempel), "Plan %d+%d" % (n, n))
+        P.zeichne_plan(plan, os.path.join(D, "aufbau_%s_plan.png" % stempel), "Plan Runde 2: %d+%d" % (n, n))
         for art, x, y, r, e in plan.bauten:
             befehl({"baue": {"mapper": MAPPER[art], "x": x, "y": y, "groesse": 4, "richtung": r}}, 0.8, bis="BAUE")
             warte_ticks(3)
         warte_ticks(5)
         k2 = W.holen(k["x0"], k["y0"], k["x1"], k["y1"])
-        steht = [(art, x, y, r) for art, x, y, r, e in plan.bauten if k2["f"].get((x, y), (0,) * 6)[5] == art]
+        steht = [1 for art, x, y, r, e in plan.bauten if k2["f"].get((x, y), (0,) * 6)[5] == art]
         erg["plan_gebaut"] = "%d von %d" % (len(steht), len(plan.bauten))
+        for s2 in bericht["schmiede"] + bericht["gerber"]:
+            print("  geplant", s2.get("ort"), "R", s2.get("richtung"), "Gang", s2.get("gang_felder"), "Zyklus", s2.get("zyklus_ticks"))
         print("Plan gebaut: %s" % erg["plan_gebaut"], flush=True)
-        # Milchviehhoefe nahe den Gerbereien (Gruenland: Platzsuche des Spiels)
-        ger = [(x, y) for art, x, y, r, e in plan.bauten if art == P.GERBEREI] or [(lx, ly)]
-        gx, gy = sum(p[0] for p in ger) // len(ger), sum(p[1] for p in ger) // len(ger)
-        for _ in range(hoefe):
-            erg["gebaut"].append(["hof", 33, E.baue_schnell(33, gx, gy, 45)])
-            warte_ticks(8)
-        print("Hoefe:", [g[2] for g in erg["gebaut"] if g[0] == "hof"], flush=True)
-        # Messumgebung (Daniel 20:41): Beliebtheit 100 halten - Kornspeicher und Huetten ABSEITS des Plans
-        bx0 = min(x for _, x, _, _, _ in plan.bauten)
+        bx0 = min(x for _, x, _, _, _ in plan.bauten)            # 5. Messumgebung abseits
         by1 = max(y for _, _, y, _, _ in plan.bauten)
         erg["messumgebung"] = M.vorbereiten(bx0 - 10, by1 + 10)
         warte_ticks(10)
@@ -76,11 +99,8 @@ def main():
         p4 = P.Plan(k4)
         we = next(e for art, x, y, r, e in plan.bauten if art == P.WAFFENLAGER)
         dw = p4.abstand(we)
-        zu = [e for art, x, y, r, e in plan.bauten if e not in dw]
-        erg["eingaenge_unerreichbar"] = zu
-        print("Messumgebung:", erg["messumgebung"], "| Eingaenge unerreichbar:", zu or "keine", flush=True)
-        for _ in range(6):                                    # 30 Eisen
-            befehl({"spielbefehl": {"nr": 38, "werte": [0, EISEN]}}, 1.0, bis="SPIELBEFEHL")
+        erg["eingaenge_unerreichbar"] = [e for art, x, y, r, e in plan.bauten if e not in dw]
+        print("Eingaenge unerreichbar:", erg["eingaenge_unerreichbar"] or "keine", flush=True)
         G = E.runde_lesen()[2]
         for nr, g in G.items():
             if g["besitzer"] == SP and g["typ"] == P.SCHMIEDE:
@@ -99,19 +119,22 @@ def main():
         befehl({"einheitwacht": {"nr": sorted(nummern), "alle": 2}}, 1.0, bis="EINHEITWACHT")
         t0 = peek(TICK)[0]
         erg["t0"] = t0
-        while peek(TICK)[0] - t0 < dauer:
+        while peek(TICK)[0] - t0 < dauer:                     # 6. messen und laufend anwerben
             b = bestand()
-            erg["bestand"].append({k3: b[k3] for k3 in ("t", "keule", "leder", "eisen")})
+            erg["bestand"].append({k3: b[k3] for k3 in ("t", "keule", "leder", "eisen", "gold")})
             erg["kuehe"].append([b["t"], b["einheiten"].get("T51", 0)])
+            erg["kaempfer"].append([b["t"], b["kaempfer"]])
+            if kaserne and b["keule"] and b["leder"] and (b.get("feuer") or 0) > 0:
+                befehl({"werbe": {"typ": 26, "gebaeude": kaserne}}, 1.0, bis="WERBE")
             if len(erg["bestand"]) % 10 == 0:
                 erg.setdefault("beliebt", []).append([b["t"], M.pflegen()])
             warte_ticks(50)
         befehl({"einheitwacht": False}, 1.0, bis="EINHEITWACHT")
         erg["ew"] = [z.split("INFO|", 1)[-1] for z in log_ab("EINHEITWACHT: scharf") if "EW " in z]
         k3 = W.holen(k["x0"], k["y0"], k["x1"], k["y1"])
-        W.zeichnen(k3, os.path.join(D, "aufbau_%s_spiel.png" % stempel), W.gebaeude_typen_aus(k3, {}), zelle=14,
-                   titel="Aufbau %d+%d im Spiel (Ende)" % (n, n))
-        print("EW-Zeilen:", len(erg["ew"]), "Bestand Ende:", erg["bestand"][-1], "Beliebtheit:",
+        W.zeichnen(k3, os.path.join(D, "aufbau_%s_spiel.png" % stempel), W.gebaeude_typen_aus(k3, {}), zelle=12,
+                   titel="Aufbau Runde 2 %d+%d im Spiel (Ende)" % (n, n))
+        print("Ende: Bestand", erg["bestand"][-1], "Kaempfer", erg["kaempfer"][-1], "Beliebtheit",
               [x[1]["beliebt"] for x in erg.get("beliebt", [])][::4], flush=True)
     finally:
         kosten_zurueck(alt)
