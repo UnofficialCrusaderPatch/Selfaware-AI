@@ -59,15 +59,24 @@ def main():
     E.LEERE_KI = True
     E.gefecht_starten(tempo)
     erg = {"ablauf": [], "proben": []}
-    for art, menge in ((GOLD, 20000), (HOLZ, 600), (STEIN, 300)):
-        setze(art, menge)
+    # Nur Gold ist eine reine Zahl. Stein/Holz/Eisen/Waffen liegen in Lagern: ein gesetzter Zaehler wird vom Spiel neu
+    # gezaehlt (Messpartie 2: Stein 0 -> 300 gesetzt, kurz darauf 0) - darum fehlte Kaserne (12 Stein), Schmiede (8),
+    # Gerberei (3), Daniel 19:54: "du brauchst gewisse Gueter, siehe Balance". Waren werden echt am Markt gekauft.
+    setze(GOLD, 20000)
     # Bauen nah am Lager (Daniel: Kaserne naeher zum Vorratslager, minimale Laufwege)
     orte = {}
     # Messpartie 1 (19:51): nach 5 Ticks war das vorige Gebaeude noch nicht eingetragen - die Platzsuche gab Schmiede,
     # Gerberei und Huette denselben Platz (90, 276); Milchviehhoefe (10x10) fanden im Umkreis 25 keinen Platz.
     # Darum: nach jedem Bau warten, bis das Gebaeude in der Liste steht; grosse Hoefe weiter weg suchen.
-    for typ, r in ((LAGER, 6), (WAFFENLAGER, 10), (KASERNE, 12), (MARKT, 20), (SCHMIEDE, 12), (GERBER, 12),
+    for typ, r in ((MARKT, 20), (WAFFENLAGER, 10), ("kaufen", 0), (KASERNE, 12), (SCHMIEDE, 12), (GERBER, 12),
                    (MILCH, 45), (MILCH, 45), (HUETTE, 20), (HUETTE, 20), (HUETTE, 20), (SCHMIEDE, 20)):
+        if typ == "kaufen":                       # nach dem Markt: Stein und Holz echt kaufen
+            for art, lose in ((STEIN, 10), (HOLZ, 10)):
+                for _ in range(lose):
+                    befehl({"spielbefehl": {"nr": 38, "werte": [0, art]}}, 1.0, bis="SPIELBEFEHL")
+            warte_ticks(10)
+            orte["gekauft"] = [bestand()]
+            continue
         vorher = sum(1 for g in E.runde_lesen()[2].values() if g["besitzer"] == SP and g["typ"] == typ)
         o = E.baue_schnell(typ, lx, ly, r)
         for _ in range(40):
@@ -96,7 +105,9 @@ def main():
         erg["ablauf"].append({"markt": name, "kauf": differenz(a, b), "verkauf": differenz(b, c)})
         print("MARKT %s: Kauf %s | Verkauf %s" % (name, differenz(a, b), differenz(b, c)), flush=True)
     # 2. Kaserne: ein Kaempfer mit gesetzter Keule und Leder
-    setze(KEULE, 5); setze(LEDER, 5)
+    for art in (KEULE, LEDER):                     # Waffen liegen im Waffenlager: echt kaufen statt setzen
+        befehl({"spielbefehl": {"nr": 38, "werte": [0, art]}}, 1.0, bis="SPIELBEFEHL")
+    warte_ticks(5)
     a = bestand()
     if kaserne:
         befehl({"werbe": {"typ": 26, "gebaeude": kaserne[0]}}, 1.0, bis="WERBE")
@@ -113,7 +124,8 @@ def main():
         erg["ablauf"].append({"abriss_schmiede": differenz(a, b)})
         print("ABRISS Schmiede: %s" % differenz(a, b), flush=True)
     # 4. Produktion: Eisen fuer die Schmiede, Keule/Leder auf 0, dann laufen lassen und mitschreiben
-    setze(KEULE, 0); setze(LEDER, 0); setze(EISEN, 20)
+    for _ in range(4):                              # Eisen fuer die Schmiede echt kaufen (Los zu 270 Gold)
+        befehl({"spielbefehl": {"nr": 38, "werte": [0, EISEN]}}, 1.0, bis="SPIELBEFEHL")
     t0 = peek(TICK)[0]
     while peek(TICK)[0] - t0 < dauer:
         p = bestand()

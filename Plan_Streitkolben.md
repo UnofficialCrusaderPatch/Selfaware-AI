@@ -52,3 +52,15 @@ Spiel gegenpruefen.
    anwerben sobald Keule + Harnisch + 20 Gold da sind; Marken 10/20/30/40/50 mit Tick.
 4. Gegenprobe: dieselben Marken mit Kauf am Markt (Keule 300 + Leder 160 + 20 je Kaempfer) - was ist schneller?
 5. Ueberschuessiges Gold: Essen kaufen (Beliebtheit -> hoehere Steuern) - erst wenn gemessen ist, dass Gold uebrig ist.
+
+## Messergebnisse (Messpartie 3, 06.10. 19:55, `daten/streitkolben_messung_20261006_195508.json`)
+- Gesetzte Zahlen wirken nur bei Gold. Stein/Holz/Eisen/Waffen liegen in Lagern; ein gesetzter Zaehler wird neu
+  gezaehlt (Stein 0 -> 300 gesetzt, kurz darauf 0). Darum fehlten Kaserne (12 Stein), Schmiede (8), Gerberei (3) -
+  Daniel 19:54: "du brauchst gewisse Gueter, siehe Balance". Waren echt am Markt kaufen.
+- Markt (je Kauf/Verkauf): 5 Keulen 300 / 150 Gold; 5 Leder 160 / 50; 5 Stein 50.
+- Kaserne: ein Streitkolbenkaempfer zieht 20 Gold + 1 Keule + 1 Lederharnisch ab (+1 Einheit Typ 26).
+- Gerberei: +3 Lederharnische je Kuh (zwei Spruenge 4->7 bei Tick 5.615, 7->10 bei 7.450; 2 Milchviehhoefe + 1 Gerberei).
+- Offen: Keulen je Eisen (Eisenkauf scheiterte, Gold blieb gleich - warum?), Holzkauf scheiterte ebenso;
+  Abriss einer frisch gebauten Schmiede gab in 10 Ticks nichts zurueck (zu frueh gemessen? im Bau?).
+- Naechster Schritt: Eisen-/Holzkauf klaeren (Lagerplatz? Spielbefehl?), Schmiede mit Eisen messen, Abriss nach
+  Fertigstellung und laengerer Wartezeit messen; dann Kette dimensionieren und erster Benchmark 10 Kaempfer.
