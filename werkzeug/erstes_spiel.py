@@ -508,7 +508,12 @@ def v14_steinpflicht(st, G, wirt):
         # produziert wird"): Joch i erst, wenn Steinbruch i steht UND auf seinem Steinhaufen (Verbund) Stein liegt
         auftraege = [(20, q, 0) for q in V14_PLAN["brueche"]]
         for q, j in zip(V14_PLAN["brueche"], V14_PLAN["joche"]):
-            if haufen_hat_stein(G, q) or steht_bei(G, 4, j, 3):
+            # 23:51 (Daniel: "der Timer zwischen Steinbruch und Ochsenjoch stimmt noch nicht"): Joch, sobald der Steinbruch voll
+            # BESETZT ist - der Ochsentreiber bekommt dann den naechsten Bauern und laeuft fast gleichzeitig mit den Steinmetzen
+            # (gleicher Weg ~1.200 Ticks); nach "erster Stein" kam er ~1.200 Ticks zu spaet
+            q_nr = steht_bei(G, 20, q)
+            besetzt = bool(q_nr) and BUCH is not None and BUCH.hat.get(q_nr[0], 0) >= ARBEITER_JE[20]
+            if besetzt or haufen_hat_stein(G, q) or steht_bei(G, 4, j, 3):
                 # Umkreis 3: kommt das Joch nach dem ersten Stein, liegt der Steinhaufen schon - Lernlauf 1 (23:18): Haufen
                 # bei (87,273) belegte den festen Joch-Platz (87,274), 501 Fehlversuche, 26 Steine nie abgeholt
                 auftraege.append((4, j, 3))
