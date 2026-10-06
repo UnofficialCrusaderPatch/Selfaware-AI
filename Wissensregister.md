@@ -168,6 +168,9 @@ Tick 4.731-7.737, Aufloesung 14,5 Ticks (`daten/lage_ablauf_fein_20261006_224521
 | L24 | Beliebtheit ist ein Vorrat: Stufe 11 kostet ~6 Punkte je 100 Ticks (93->56/600, 91->51/660, 97->52); bei 0 Massen-Wegzug (Lauf 26: 50 -> 29 -> 10 -> 4 Leute in ~2.000 Ticks, Gold reichte, kein Kaempfer); Erholung bei Stufe 0-2 kaum (3.000 Ticks bei 0-3) | gemessen | Lauf 21/23/26 | 07.10. |
 | L25 | Hoechststeuer im Wachstum zerstoert die Wirtschaft (Lauf 23, ab Tick 1.650 bei 26 Leuten: Beliebtheit 30, kein Zuzug, Arbeiter gehen, Ziel verfehlt); am Ende lohnt sie: Kasse ab "nichts lohnt mehr" bis Beliebtheit 50 -> 10.051 (Lauf 29, bester) | getestet | Lauf 23, 29 | 07.10. |
 | L26 | Spieltempo 1000 macht den Lenker blind: 1,2 s je Runde (Befehle warten auf Antwort), Phase 2 erst ab Tick ~1.850, 2 Runden bis Fruehabbruch - alle 8 Laeufe; bei 100 schaut er alle ~11 Ticks hin | gemessen | Lauf 30-37 (ungueltig markiert) | 07.10. |
+| L27 | Am Lagerfeuer warten hoechstens 24 Untaetige - dann zieht niemand mehr zu; Wachstum braucht Arbeitsplaetze (billigster: Holzfaeller, 3 Holz) | Daniel + gemessen | Daniel 07.10. 00:40; Lauf 41 (Ziel 70): ab Tick ~6.300 bei 54/66 Leuten stehen geblieben, 24 am Feuer | 07.10. |
+| L28 | Kasse mit Essen-Stopp: Lauf 38 9.395 (unter 1 Jahr), aber Kontrolllauf 39 verfehlt - unter der Grenze 50 blieben die Rationen aus, Beliebtheit bis 0, 34 -> 4 Leute. Seit 3245acc: unter der Grenze Rationen normal, kein Nahrungsverkauf | getestet | Lauf 38/39 | 07.10. |
+| L29 | Im Wachstum fehlt frueh das Holz fuer Huetten: Lauf 41 stand von Tick ~2.000 bis 4.400 bei 26/26 (erste Holzlieferung ~4.600) | gemessen | Lauf 41 | 07.10. |
 
 ## Bewaehrt / nicht bewaehrt (nach jedem Lauf eine Zeile, Daniel 21:05: "schauen, was hat sich bewaehrt und was nicht")
 
