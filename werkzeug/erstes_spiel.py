@@ -452,6 +452,7 @@ ENTSCHEIDER = "regeln"   # "kausal" (Daniel 23:27 "dynamische Antworten fuer all
 B_VERSATZ = None         # Lernkreis: B-Plantagen so viele Ticks nach "alle A stehen" (None = erst bei A-Reife)
 STEUER_RUNTER = 95       # Lernkreis: Steuer senken unter dieser Beliebtheit (Daniel 06.10. 23:53: Steuern als Geldquelle)
 BEV_ZIEL = 0             # Lernkreis: Huetten bauen, bis so viele Wohnplaetze stehen (0 = aus; Daniel 07.10. 00:17 "60-70")
+EINZELKAUF = False       # Lernkreis: fehlende 1-4 Waffen einzeln gutschreiben statt 5er kaufen (Daniel 01:35)
 AUFLOESEN = False        # Lernkreis: eigene Soldaten (ausser Streitkolbenkaempfern) zu Bauern aufloesen (Daniel 01:29)
 SCHUB = False            # Lernkreis: die ersten 5 Kaempfer schon waehrend der Kasse anwerben (Lauf 45/46: Verlust im Endspiel)
 KASSE_STUFE = 11         # Lernkreis: Steuerstufe der Kasse (11 = -40, 9 = -20, 7 = -11; Liga 4,00 / 2,00 / 1,30 Gold je Kopf)
@@ -769,6 +770,35 @@ def bilanz_schritt(st, L, G, ausbau, ziel, endspiel, runde, marken):
     v = vorrat(SP)
     kas = [n for n, g in eig.items() if g["typ"] == 9]
     n = ziel - st.get("T26", 0)
+    # Einzelkauf (Daniel 01:35: "wie eine KI im Backend, nicht ueber den Weg eines Spielers"): fehlen 1-4 Stueck, genau so
+    # viele gutschreiben (Warenzelle PlayerData +0x4D0 + Ware*4, Gold +0x50C) zum Stueckpreis des Marktes (300/5, 160/5)
+    # statt 5 zu kaufen. Ungeprueft, ob das Anwerben diese Waffen nimmt - EINZELKAUF-Zeile + KAEMPFER-Zeilen zeigen es
+    ek = marken.get("einzelkauf")
+    if ek and not marken.get("einzelkauf_aus") and st["t"] - ek["t"] > 200 and st.get("T26", 0) <= ek["t26"]:
+        # Rueckweg: 200 Ticks kein neuer Kaempfer -> Anwerben nimmt die gutgeschriebenen Waffen nicht. Zellen und Gold
+        # zurueck auf den Stand davor, ab jetzt wieder 5er kaufen
+        for ware, (name, vorher) in ek["vorher"].items():
+            sende({"player": 1, "poke": PD + 0x4D0 + ware * 4, "wert": vorher}, 0.5)
+            v[name] = vorher
+        sende({"player": 1, "poke": PD + 0x50C, "wert": v.get("gold", 0) + ek["gold"]}, 0.5)
+        v["gold"] = v.get("gold", 0) + ek["gold"]
+        marken["einzelkauf_aus"] = True
+        aus.append("EINZELKAUF GESCHEITERT (kein Kaempfer in 200 Ticks) - zurueckgesetzt, %d Gold zurueck" % ek["gold"])
+    if EINZELKAUF and n > 0 and not ek and not marken.get("einzelkauf_aus"):
+        neu_ek = {"t": st["t"], "t26": st.get("T26", 0), "vorher": {}, "gold": 0}
+        for ware, name in ((21, "keule"), (23, "leder")):
+            fehlt = n - v.get(name, 0) - (kommt if name == "leder" else 0)
+            stueck = LOS_PREIS[ware] // 5
+            if 1 <= fehlt <= 4 and v.get("gold", 0) >= fehlt * stueck + n * KAEMPFER_GOLD:
+                neu_ek["vorher"][ware] = (name, v.get(name, 0))
+                sende({"player": 1, "poke": PD + 0x4D0 + ware * 4, "wert": v.get(name, 0) + fehlt}, 0.5)
+                sende({"player": 1, "poke": PD + 0x50C, "wert": v.get("gold", 0) - fehlt * stueck}, 0.5)
+                v[name] = v.get(name, 0) + fehlt
+                v["gold"] -= fehlt * stueck
+                neu_ek["gold"] += fehlt * stueck
+                aus.append("EINZELKAUF %d %s fuer %d Gold" % (fehlt, name, fehlt * stueck))
+        if neu_ek["vorher"]:
+            marken["einzelkauf"] = neu_ek
     # alle noetigen Lose auf einmal (v6 kaufte nur eines je Ware und wartete dann), Gold fuer das Anwerben bleibt
     for ware, name in ((21, "keule"), (23, "leder")):
         while v.get(name, 0) + (kommt if name == "leder" else 0) < n and v.get("gold", 0) >= LOS_PREIS[ware] + n * KAEMPFER_GOLD:
@@ -1525,7 +1555,7 @@ def main():
     HOLZ_KAUFEN = arg.get("holz_kaufen", "nein") == "ja"
     global HOLZ_SPAM, STEIN_MAX, JOCH_NACH_STEIN, STEIN_PARALLEL, HUETTEN_VORAUS, VOLLBESCHAEFTIGUNG
     VOLLBESCHAEFTIGUNG = arg.get("vollbeschaeftigung", "nein") == "ja"
-    global ENTSCHEIDER, ZIEL_TICK, B_VERSATZ, STEUER_RUNTER, STEUER_ENDE, BEV_ZIEL, KASSE, KASSE_GRENZE, PENNER, KASSE_STUFE, SCHUB, AUFLOESEN
+    global ENTSCHEIDER, ZIEL_TICK, B_VERSATZ, STEUER_RUNTER, STEUER_ENDE, BEV_ZIEL, KASSE, KASSE_GRENZE, PENNER, KASSE_STUFE, SCHUB, AUFLOESEN, EINZELKAUF
     BEV_ZIEL = int(arg.get("bevoelkerung_ziel", 0))
     KASSE = arg.get("kasse", "nein")
     KASSE_GRENZE = int(arg.get("kasse_grenze", 50))
@@ -1533,6 +1563,7 @@ def main():
     KASSE_STUFE = int(arg.get("kasse_stufe", 11))
     SCHUB = arg.get("schub", "nein") == "ja"
     AUFLOESEN = arg.get("aufloesen", "nein") == "ja"
+    EINZELKAUF = arg.get("einzelkauf", "nein") == "ja"
     STEUER_RUNTER = int(arg.get("steuer_runter", 95))
     STEUER_ENDE = arg.get("steuer_ende", "nein")
     B_VERSATZ = None if arg.get("b_versatz", "reif") == "reif" else int(arg["b_versatz"])
