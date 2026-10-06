@@ -445,6 +445,8 @@ B_VERSATZ = None         # Lernkreis: B-Plantagen so viele Ticks nach "alle A st
 STEUER_RUNTER = 95       # Lernkreis: Steuer senken unter dieser Beliebtheit (Daniel 06.10. 23:53: Steuern als Geldquelle)
 STEUER_ENDE = "nein"     # Lernkreis: Hoechststeuer (Stufe 11), sobald sich nichts mehr amortisiert (Daniel 07.10. 00:0x)
 ZIEL_TICK = 9400         # Zieltick, bis zu dem das Kausalmodell Ertraege rechnet (unter 1 Jahr = 9.600, Endspiel davor)
+                         # 07.10.: Lernkreis setzt ihn auf das gemessene Ende der besten Strategie; gilt auch fuer den Planer
+                         # (vorher Planer bis bis_tick=13.000, Kausal bis 9.400 - zwei Zeitraeume fuer dieselbe Frage)
 
 def v16_holzfaeller(plan):
     """Plan-Holzfaeller nach Abstand zum neuen Lager, ohne die jenseits von HF_MAX."""
@@ -883,7 +885,7 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
     from lageprotokoll import Lageprotokoll
     lage = Lageprotokoll(os.path.join(D, "lage_%s_i%d.jsonl.gz" % (time.strftime("%Y%m%d_%H%M%S"), INSTANZ)))
     schreib("Lageprotokoll (jede Runde komplett): %s" % lage.pfad)
-    ausbau = Ertragsplaner(plan, SP, baue_schnell, wirt, s32(peek(PD + 0x2188)[0]), ende=bis_tick, protokoll=lernlog, wegtest=wegtest)   # lernt im Spiel (Daniel 19:44)
+    ausbau = Ertragsplaner(plan, SP, baue_schnell, wirt, s32(peek(PD + 0x2188)[0]), ende=ZIEL_TICK, protokoll=lernlog, wegtest=wegtest)   # lernt im Spiel (Daniel 19:44)
 
     def gold_bremst(st, G):
         """Es sollen Assassinen her, aber das Gold reicht nicht fuer den naechsten (70 + B-Ruecklage) - oder Gold ist selbst

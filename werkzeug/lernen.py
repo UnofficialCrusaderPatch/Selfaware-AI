@@ -136,11 +136,11 @@ def note_aus(text, bis_tick):
     return int(t1 + 1000.0 * max(0, b1 - h1) / rate), "geschaetzt (fehlt %d, Zuwachs %.0f je 1.000)" % (b1 - h1, rate)
 
 
-def lauf(strategie, bis_tick, nr):
+def lauf(strategie, bis_tick, nr, horizont=None):
     stempel = time.strftime("%Y%m%d_%H%M%S")
     aus = os.path.join(D, "lernen_lauf_%s_%d.txt" % (stempel, nr))
     args = [sys.executable, os.path.join(HIER, "erstes_spiel.py")] + FEST + ["bis_tick=%d" % bis_tick] + \
-        ["%s=%s" % kv for kv in sorted(strategie.items())]
+        ["%s=%s" % kv for kv in sorted(strategie.items())] + (["ziel_tick=%d" % horizont] if horizont else [])
     env = dict(os.environ, SHC_INSTANZ="1")
     with open(aus, "w", encoding="utf-8") as f:
         subprocess.run(args, stdout=f, stderr=subprocess.STDOUT, env=env, cwd=HIER, timeout=3600)
@@ -220,6 +220,7 @@ def main():
             # Code hat sich seit der Bestzeit geaendert -> beste Strategie einmal neu messen (keine Wiederholung im Sinne
             # gleicher Laeufe: anderer Code), danach wird gegen diesen Kontrolllauf verglichen
             s, knopf, kontrolle = dict(beste["strategie"]), "kontrolle", False
+            horizont = beste["note"]
             beste = None
         elif beste is None:
             s, knopf = dict(GRUND), None
@@ -231,7 +232,14 @@ def main():
         print("LERNEN Lauf %d: %s%s" % (len(alle) + 1, "Grundstrategie" if knopf is None else "Kontrolllauf der besten Strategie mit neuem Code"
               if knopf == "kontrolle" else "%s = %s (statt %s)" % (knopf, s[knopf], beste["strategie"][knopf]),
               "" if beste is None else ", beste Note bisher %d" % beste["note"]), flush=True)
-        r = lauf(s, bis_tick, nr_neu)
+        if knopf != "kontrolle":
+            horizont = beste["note"] if beste else None
+        # 07.10.: Rechenzeitraum des Kausalmodells = gemessenes Ende der besten Strategie, nicht das Wunschziel 9.400
+        # (Lauf 18: Holzfaeller ab ~6.000 liefern erst nach 9.400 -> "Holz ueberfluessig", das Spiel lief aber bis 11.502)
+        if horizont and horizont >= 30000:
+            horizont = None                      # abgebrochen - kein gemessenes Ende
+        r = lauf(s, bis_tick, nr_neu, horizont)
+        r["horizont"] = horizont
         nr_neu += 1
         r["geaendert"] = knopf
         r["vergleich"] = None if beste is None else {"gegen": beste["nr"], "note_vorher": beste["note"], "differenz": r["note"] - beste["note"]}
