@@ -340,6 +340,17 @@ class Ertragsplaner:
         return {t: (lager if START[t][6] == "lager" else speicher) for t in START}
 
     def _orte(self, typ, L, G):
+        """Kandidaten-Orte ohne gesperrte Flaechen (v14: Steinbrueche, Joche, Lager + Erweiterung, Hoefe, Gerberei,
+        Waffenlager haben feste Plaetze - v12/v13 setzte der Planer einen Steinbruch auf (81,268) und nahm beiden den Platz)."""
+        orte = self._orte_roh(typ, L, G)
+        sperr = getattr(self, "sperr", None)
+        if not sperr:
+            return orte
+        b = self.groesse.get(typ, 3)
+        return [p for p in orte if not any(p[0] <= r[2] and p[0] + b - 1 >= r[0] and p[1] <= r[3] and p[1] + b - 1 >= r[1]
+                                           for r in sperr)]
+
+    def _orte_roh(self, typ, L, G):
         """Kandidaten-Orte fuer typ (Ankerpunkte)."""
         eigen = [g for g in G.values() if g["besitzer"] == self.sp]
         gleich = [(g["x"], g["y"]) for g in eigen if g["typ"] == typ]
@@ -408,6 +419,8 @@ class Ertragsplaner:
         zl = self.ziele(G)
         aus = []
         for typ, (ware, _r0, _d0, _g, _a, arb, _z) in START.items():
+            if typ in getattr(self, "ohne", ()):         # v14: Steinbrueche baut die Pflicht an festen Plaetzen
+                continue
             ort, w = self._bester_ort(typ, L, G, zl)
             if ort is None:
                 continue

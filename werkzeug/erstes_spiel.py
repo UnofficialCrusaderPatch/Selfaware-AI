@@ -31,7 +31,7 @@ HIER = os.path.dirname(os.path.abspath(__file__))
 D = os.path.join(HIER, "..", "daten")
 SP = 1
 PD = 0x0115BDF8 + SP * 0x39F4
-ARBEITER_JE = {3: 1, 32: 1, 30: 1, 31: 1, 33: 1, 20: 3, 4: 1, 5: 2, 7: 1, 6: 1}   # Betrieb -> Arbeiter (Steinbruch 3, Mine 2: Annahme)
+ARBEITER_JE = {3: 1, 32: 1, 30: 1, 31: 1, 33: 1, 20: 3, 4: 1, 5: 2, 7: 1, 6: 1, 16: 1, 13: 1}   # Betrieb -> Arbeiter (Steinbruch 3, Mine 2: Annahme)
 LAGERWAREN = ("holz", "hopfen", "stein", "eisen", "pech", "weizen", "mehl")
 LOG = os.path.join(D, "erstes_spiel_log%s.txt" % ("" if INSTANZ == 1 else INSTANZ))   # je Instanz ein Protokoll
 
@@ -142,8 +142,14 @@ def phase1(plan, tempo, mit_posten=True):
     # Ochsenjoch, Huetten) an festen Plaetzen; sobald das Essen da ist verkaufen, Posten, Assassine; dann die Apfelplantagen
     # (die kosten Gold). Kontrolle einmal, waehrend wir sowieso aufs Essen warten.
     A, B = apfel_gruppen(plan["aepfel"])
-    holz_bauten = [(19, tuple(plan["kornspeicher"])), (26, MARKT)] + [(3, tuple(p)) for p in plan["holzfaeller"]]
-    if plan.get("stein"):
+    if V14:
+        # Daniel 22:05: "zwei Steinbrueche direkt neben dem Vorratslager, sofort gebaut, wenn die Ressourcen da sind" -
+        # vor den Holzfaellern (die Reihenfolge entscheidet, was beim ersten Holz (30 bei Tick 120) noch geht)
+        holz_bauten = [(19, tuple(plan["kornspeicher"])), (26, MARKT)] + [(20, q) for q in V14["brueche"]] + \
+                      [(4, j) for j in V14["joche"]] + [(3, tuple(p)) for p in plan["holzfaeller"]]
+    else:
+        holz_bauten = [(19, tuple(plan["kornspeicher"])), (26, MARKT)] + [(3, tuple(p)) for p in plan["holzfaeller"]]
+    if plan.get("stein") and not V14:
         holz_bauten += [(20, tuple(plan["stein"]["steinbruch"])), (4, tuple(plan["stein"]["ochsen"]))]
     holz_bauten += [(1, tuple(p)) for p in plan["huetten"]]
     t_bau = tick()
@@ -190,12 +196,18 @@ def phase1(plan, tempo, mit_posten=True):
             "(freie Leute am Feuer jetzt %d) -> Gold %d, Nahrung uebrig %s, Tick %d" % (t_essen, lose, posten, geworben,
             s32(peek(PD + 136)[0]), v0["gold"], {k: v0.get(k, 0) for k in NAHRUNG_PREIS if v0.get(k, 0)}, tick()))
     # Apfelplantagen (Gold) und was beim ersten Befehl nicht ging - einmal nachholen; den Rest setzen Planer/Wirtschaft
-    nach = rest + [r for r in fp if r[0] == 32]
+    if V14:
+        # erst die A-Plantagen (Seasoning), dann Steinbrueche/Joche, dann der Rest - in der Reihenfolge von holz_bauten
+        nach = [r for r in fp if r[0] == 32] + sorted(rest, key=lambda r: [t for t, _ in holz_bauten].index(r[0]))
+    else:
+        nach = rest + [r for r in fp if r[0] == 32]
     g2, f2 = baue_viele(nach, SP, live=True) if nach else ([], [])
-    # Steinbruch/Ochsenjoch am festen Platz gescheitert -> im Umkreis 8 weitersuchen (v9: (80,271) nie gebaut)
-    for typ, x, y in [r for r in f2 if r[0] in (20, 4)]:
-        schreib("Ersatzplatz %s bei (%d,%d): %s" % (NACH_TYP[typ]["name"], x, y, baue_schnell(typ, x, y, 8)))
-    f2 = [r for r in f2 if r[0] not in (20, 4)]
+    if not V14:
+        # Steinbruch/Ochsenjoch am festen Platz gescheitert -> im Umkreis 8 weitersuchen (v9: (80,271) nie gebaut)
+        # v14: NICHT - (81,268) aus dieser Suche nahm beiden festen Plaetzen den Boden; die Pflicht in Phase 2 baut genau
+        for typ, x, y in [r for r in f2 if r[0] in (20, 4)]:
+            schreib("Ersatzplatz %s bei (%d,%d): %s" % (NACH_TYP[typ]["name"], x, y, baue_schnell(typ, x, y, 8)))
+        f2 = [r for r in f2 if r[0] not in (20, 4)]
     v1 = vorrat(SP)
     schreib("NACHGEHOLT bei Tick %d: %d von %d (Apfelplantagen A + Rest); nicht gebaut: %s; Holz %d, Gold %d" % (
         tick(), len(g2), len(nach), [(NACH_TYP[t]["name"], x, y) for t, x, y in f2] or "keine", v1["holz"], v1["gold"]))
@@ -218,17 +230,38 @@ def haus_noetig(l, b):
     bedarf = sum(ARBEITER_JE[t] * k for t, k in b.items())
     return bedarf, bedarf > l["platz"]
 
-def baue_schnell(typ, x, y, r, mapper=None):
+BUCH = None          # Auftragsbuch (phase2): jeder Bau wird vorher gegen den Bestand geprueft und danach bestaetigt
+_KOSTEN_SPIEL = {}
+
+def kosten_spiel(typ):
+    if typ not in _KOSTEN_SPIEL:
+        from bauen import kosten
+        _KOSTEN_SPIEL[typ] = kosten(typ)
+    return _KOSTEN_SPIEL[typ]
+
+def baue_schnell(typ, x, y, r, mapper=None, zweck=""):
     """Im laufenden Spiel: Platz suchen und bauen OHNE zu blockieren (04.10.: das alte Bauwerkzeug wartete fest und
     auf einen genauen Tick - bei Tempo 1000 hing die Schleife ~20.000 Ticks, der Waechter kam nie dran).
-    Ob es steht, zeigt die naechste Runde (Gebaeudeliste)."""
+    Ob es steht, prueft das Auftragsbuch in den naechsten Runden (Gebaeudeliste). Daniel 22:08: "wie kann es sein, dass
+    irgendein Gebaeude ohne Pruefung gebaut wird?" - vorher kam der Platz zurueck, auch wenn das Holz fehlte (Serie:
+    "Ersatzplatz Steinbruch (80,271)" bei 8 Holz). Jetzt: reicht der Bestand nicht, wird gar nicht gesendet."""
     g = NACH_TYP[typ]
+    if BUCH is not None:
+        k, v = kosten_spiel(typ), vorrat(SP)
+        fehlt = ["%s %d" % (w, k[w] - v.get(w, 0)) for w in ("holz", "stein", "gold") if k.get(w, 0) > v.get(w, 0)]
+        if fehlt:
+            BUCH.ablehnen(typ, (x, y), "fehlt " + ", ".join(fehlt))
+            return None
     z = " ".join(befehl({"platzsuche": {"spieler": SP, "mapper": g["mapper"], "groesse": g["b"], "x": x, "y": y, "r": r, "max": 1}},
                         1.0, bis="PLATZSUCHE"))
     frei = [tuple(map(int, p)) for p in re.findall(r"\((\d+),(\d+)\)", z.split("geprueft:")[-1])]
     if not frei:
+        if BUCH is not None:
+            BUCH.ablehnen(typ, (x, y), "kein Platz im Umkreis %d" % r)
         return None
     befehl({"baue": {"mapper": g["mapper"], "x": frei[0][0], "y": frei[0][1], "groesse": g["b"], "richtung": 0}}, 1.0, bis="BAUE")
+    if BUCH is not None:
+        BUCH.vormerken(typ, frei[0], zweck)
     return frei[0]
 
 def baue_haus():
@@ -342,6 +375,93 @@ FRUEH_TICK = 2500           # bis hierhin muessen Steinbruch, Lagerumzug und B-S
 BASIS_LAGER = (145, 264)    # Startlager am Bergfried (Teil 6, gemessen) - steht dort noch ein Teil, ist das Lager nicht umgezogen
 LOS_PREIS = {21: 300, 23: 160}   # 5 Keulen / 5 Lederharnische am Markt (gemessen 06.10. Messpartie 8)
 
+# v14 (Daniel 22:04 "ja bau v14", 22:05 "zwei Steinbrueche direkt neben dem Vorratslager, sofort gebaut"). Plaetze aus den
+# Platzkarten des Spiels (start_M19_platz_*.txt, Rechnung scratchpad steinplatz.py/lederplatz.py 22:07-22:16):
+#  - auf das Steinfeld passen GENAU zwei Steinbrueche (Anker x 77-81, y 265-271): (80,265) + (80,271). Der Planer setzte
+#    in v12/v13 einen auf (81,268) - danach war fuer keinen zweiten mehr Platz.
+#  - Lager 5x5 bei (87,268): 1 Feld Gang zu beiden Steinbruechen (B4); Erweiterung nach Osten (93,268), (98,268) frei.
+#  - Joche 2x2 noerdlich/suedlich vom Lager, 1 Feld Abstand.
+#  - Leder (Plan_Streitkolben Bewertungskette, Daniel 22:04): Hof-Boden gibt es am Lager nicht (im Umkreis 30 kein
+#    Platz); der Gerber laeuft nur Hof <-> Gerberei <-> Waffenlager, das Lager braucht er nicht. Zwei Hoefe 8 Felder
+#    auseinander, Gerberei dazwischen (2 Felder zu beiden), Waffenlager 1 Feld neben der Gerberei.
+V14 = None
+V14_PLAN = {"brueche": [(80, 265), (80, 271)], "joche": [(87, 265), (87, 274)], "lager": (87, 268),
+            "erweiterung": [(93, 268), (98, 268)], "hoefe": [(172, 297), (181, 279)], "gerberei": (175, 291),
+            "waffenlager": (176, 286)}
+V14_GROESSE = {20: 6, 4: 2, 10: 5, 33: 10, 16: 4, 11: 4}
+V14_STEIN_BIS, V14_LAGER_BIS, V14_UMZUG_AB = 500, 800, 650   # Fruehabbruch-Marken; Startholz ist ab ~650 komplett da
+
+def v14_sperrflaechen():
+    """Rechtecke (x0, y0, x1, y1), die Planer und Wirtschaft nicht bebauen duerfen (1 Feld Rand)."""
+    p, r = V14_PLAN, []
+    for typ, orte in ((20, p["brueche"]), (4, p["joche"]), (10, [p["lager"]] + p["erweiterung"]), (33, p["hoefe"]),
+                      (16, [p["gerberei"]]), (11, [p["waffenlager"]])):
+        b = V14_GROESSE[typ]
+        r += [(x - 1, y - 1, x + b, y + b) for x, y in orte]
+    return r
+
+def steht_bei(G, typ, ort, r=1):
+    return [n for n, g in G.items() if g["besitzer"] == SP and g["typ"] == typ and max(abs(g["x"] - ort[0]), abs(g["y"] - ort[1])) <= r]
+
+def v14_steinpflicht(st, G, wirt):
+    """Beide Steinbrueche, dann beide Joche, genau an ihren Plaetzen (Umkreis 0), sobald das Holz reicht - vor allem
+    anderen in der Runde. Was noch fehlt, liegt als Ruecklage in wirt.extra (Planer, Huetten, Holzfaeller halten es frei)."""
+    ev, holz, offen = [], st.get("holz", 0), 0
+    for typ, ort in [(20, q) for q in V14_PLAN["brueche"]] + [(4, j) for j in V14_PLAN["joche"]]:
+        if steht_bei(G, typ, ort) or BUCH.offen_bei(typ, ort):
+            continue
+        k = kosten_spiel(typ)["holz"]
+        if holz >= k:
+            o = baue_schnell(typ, ort[0], ort[1], 0, zweck="v14 Steinpflicht")
+            ev.append("PFLICHT %s bei %s gesendet: %s (Holz %d)" % (NACH_TYP[typ]["name"], ort, o, holz))
+            if o:
+                holz -= k
+                continue
+        offen += k
+    wirt.extra = {"holz": offen, "gold": 0}
+    return ev
+
+class LederKette:
+    """v14: eigenes Leder statt 2 Lose (320 Gold) - Bewertungskette 22:03: netto ~80, spart 320.
+    Stufe 0: warten bis das B-Seasoning steht -> 2 Milchviehhoefe (7 H 15 G je Hof).
+    Stufe 1: Gerberei (15 H 3 S 75 G), sobald beide Hoefe bestaetigt stehen und der Bestand reicht.
+    Stufe 2: Waffenlager (5 H) erst, wenn die erste Kuh da ist (Daniel B13: nicht frueher als noetig) - vor dem
+             ersten Leder (Gerber braucht ~1.550 Ticks je Kuh).
+    Jeder Bau ueber baue_schnell -> Auftragsbuch; genau an den Plaetzen (Umkreis 2, Plaetze sind gesperrt)."""
+
+    def __init__(self, marken):
+        self.marken = marken
+
+    def schritt(self, st, G, wirt):
+        ev, p, t = [], V14_PLAN, st.get("t", 0)
+        if wirt.B_offen:
+            return ev
+        R = wirt.ruecklage(G)
+        habe = {w: st.get(w, 0) - R.get(w, 0) for w in ("holz", "stein", "gold")}
+        reicht = lambda typ: all(habe[w] >= kosten_spiel(typ).get(w, 0) for w in habe)
+        def bau(typ, ort):
+            if steht_bei(G, typ, ort, 2) or BUCH.offen_bei(typ, ort) or not reicht(typ):
+                return
+            o = baue_schnell(typ, ort[0], ort[1], 2, zweck="v14 Leder")
+            ev.append("LEDER %s bei %s gesendet: %s (Holz %d, Stein %d, Gold %d)" % (
+                NACH_TYP[typ]["name"], ort, o, st.get("holz", 0), st.get("stein", 0), st.get("gold", 0)))
+            if o:
+                for w in habe:
+                    habe[w] -= kosten_spiel(typ).get(w, 0)
+        for h in p["hoefe"]:
+            bau(33, h)
+        hoefe = sum(1 for h in p["hoefe"] if steht_bei(G, 33, h, 2))
+        if hoefe == 2:
+            bau(16, p["gerberei"])
+        if steht_bei(G, 16, p["gerberei"], 2) and st.get("T51", 0) >= 1:
+            bau(11, p["waffenlager"])
+        for name, ok in (("erste Kuh", st.get("T51", 0) >= 1), ("beide Hoefe", hoefe == 2),
+                         ("Gerberei steht", bool(steht_bei(G, 16, p["gerberei"], 2)))):
+            if ok and name not in self.marken:
+                self.marken[name] = t
+                ev.append("MARKE %s bei Tick %d" % (name, t))
+        return ev
+
 def ruestung_kaufen(st, G, wirt, ausbau, ziel, marken):
     """v2 (Daniel 06.10. 21:05: erst maximale Wirtschaft, den Rest kaufen): Waffenlager + Kaserne weit weg (B3), Keulen und
     Leder in 5er-Losen am Markt kaufen, sobald das Gold ueber der Ruecklage reicht, und anwerben (20 Gold, Bauer am Feuer).
@@ -395,15 +515,17 @@ _SPLITS = []
 ZIEL_FAKTOR = 11930 / 9600.0      # Bestzeit v5 -> Ziel unter 1 Jahr (9.600 Ticks)
 
 def bestzeit_split(tick_jetzt):
-    """Bilanz-Wert der Bestzeit (v5) beim letzten Tick <= tick_jetzt, aus deren Protokoll (BILANZ-Zeilen)."""
+    """Fortschritt der Bestzeit (v5) beim letzten Tick <= tick_jetzt: Bilanz-Wert / Bedarf (BILANZ-Zeilen ihres Protokolls).
+    v14: als Anteil statt in Gold - eigene Leder-Kette senkt den Bedarf um 2 Lose, kostet aber frueh ~150 (sonst bricht
+    der absolute Vergleich einen Lauf ab, der in Wahrheit vorne liegt)."""
     if not _SPLITS:
         pfad = os.path.join(D, "haertetest_v5_20261006.txt")
         if os.path.exists(pfad):
             for z in open(pfad, encoding="utf-8", errors="replace"):
-                m = re.match(r"\s*(\d+) \|.*BILANZ .*= (\d+) \| Bedarf", z)
+                m = re.match(r"\s*(\d+) \|.*BILANZ .*= (\d+) \| Bedarf (\d+)", z)
                 if m:
-                    _SPLITS.append((int(m.group(1)), int(m.group(2))))
-        _SPLITS.append((0, 0))
+                    _SPLITS.append((int(m.group(1)), int(m.group(2)) / float(max(1, int(m.group(3))))))
+        _SPLITS.append((0, 0.0))
         _SPLITS.sort()
     frueher = [h for t, h in _SPLITS if t <= tick_jetzt]
     return frueher[-1] if frueher else None
@@ -425,14 +547,29 @@ def bilanz_schritt(st, L, G, ausbau, ziel, endspiel, runde, marken):
     aus = []
     v = vorrat(SP)
     eig = {n: g for n, g in G.items() if g["besitzer"] == SP}
+    kommt, behalten = 0, ()
+    if V14:
+        # eigenes Leder: naechste Kuh je Gerber = 3 Leder. Nimmt der Gerber die Kuh, faellt sie aus der Zaehlung, bevor
+        # ihr Leder im Waffenlager ist -> Deckung (Leder + kommt + schon angeworben) ueber 1.600 Ticks (1 Gerber-Gang) glaetten
+        gerber = len(steht_bei(G, 16, V14_PLAN["gerberei"], 2))
+        deckung = v.get("leder", 0) + 3 * min(st.get("T51", 0), gerber) + st.get("T26", 0)
+        hist = endspiel.setdefault("deckung", [])
+        hist.append((st["t"], deckung))
+        hist[:] = [(tt, d) for tt, d in hist if st["t"] - tt <= 1600]
+        kommt = max(0, max(d for _, d in hist) - v.get("leder", 0) - st.get("T26", 0)) if gerber else 0
+        if v.get("leder", 0) < ziel - st.get("T26", 0):
+            behalten = (33, 16)                    # Hoefe + Gerberei liefern noch
+    endspiel["leder_kommt"] = kommt
     if not endspiel["fertig"]:
-        t = BZ.rechne(st, v, G, L, SP, ziel, lambda typ: kosten_aller(typ, ausbau))
+        t = BZ.rechne(st, v, G, L, SP, ziel, lambda typ: kosten_aller(typ, ausbau), kommt, behalten)
         endspiel["tabelle"] = t
-        # Zwischenzeiten wie beim TAS: Bilanz-Wert gegen die Bestzeit zum selben Tick; ab 3.000 mehr als 10 % dahinter -> Abbruch
-        # Ziel unter 1 Jahr (Daniel 21:58: "5 Versuche, um unter 1 Jahr zu kommen"): Tempo von v5 * 11.930/9.600 noetig
+        # Zwischenzeiten wie beim TAS: Fortschritt (Bilanz-Wert / Bedarf) gegen die Bestzeit zum selben Tick; ab 3.000 mehr
+        # als 10 % dahinter -> Abbruch. Ziel unter 1 Jahr (Daniel 21:58): Tempo von v5 * 11.930/9.600 noetig
         split = bestzeit_split(st["t"] * ZIEL_FAKTOR)
-        if split and st["t"] >= 3000 and t["habe_gold"] < 0.9 * split:
-            endspiel["abbruch"] = "Bilanz %d < 90 %% des Ziel-Tempos (%d) bei Tick %d" % (t["habe_gold"], split, st["t"])
+        anteil = t["habe_gold"] / float(max(1, t["bedarf_gold"]))
+        if split and st["t"] >= 3000 and anteil < 0.9 * split:
+            endspiel["abbruch"] = "Fortschritt %.2f (%d von %d) < 90 %% des Ziel-Tempos (%.2f) bei Tick %d" % (
+                anteil, t["habe_gold"], t["bedarf_gold"], split, st["t"])
         if runde % 10 == 0 or t["jetzt_erreichbar"]:
             aus.append(BZ.text(t))
         if not t["jetzt_erreichbar"]:
@@ -472,7 +609,7 @@ def bilanz_schritt(st, L, G, ausbau, ziel, endspiel, runde, marken):
         # mit dem ECHTEN Gold nach dem Verkauf nachrechnen; reicht es nicht sicher, NICHT abreissen - Wirtschaft laeuft weiter
         gold_echt = vorrat(SP)["gold"]
         n_rest = max(0, ziel - st.get("T26", 0))
-        noch = (-(-max(0, n_rest - v.get("keule", 0)) // 5)) * LOS_PREIS[21] + (-(-max(0, n_rest - v.get("leder", 0)) // 5)) * LOS_PREIS[23]             + n_rest * KAEMPFER_GOLD
+        noch = (-(-max(0, n_rest - v.get("keule", 0)) // 5)) * LOS_PREIS[21] + (-(-max(0, n_rest - v.get("leder", 0) - kommt) // 5)) * LOS_PREIS[23]             + n_rest * KAEMPFER_GOLD
         # Abriss nur zur Haelfte zaehlen + 20 Sicherheit (v9: 904 + 179 schien zu reichen, nach dem Abriss waren es 1.086
         # gegen 1.120 - das Abriss-Holz kommt beim Verkauf nicht voll an)
         if gold_echt + t["abriss_wert"] // 2 < noch + 20:
@@ -495,7 +632,7 @@ def bilanz_schritt(st, L, G, ausbau, ziel, endspiel, runde, marken):
     n = ziel - st.get("T26", 0)
     # alle noetigen Lose auf einmal (v6 kaufte nur eines je Ware und wartete dann), Gold fuer das Anwerben bleibt
     for ware, name in ((21, "keule"), (23, "leder")):
-        while v.get(name, 0) < n and v.get("gold", 0) >= LOS_PREIS[ware] + n * KAEMPFER_GOLD:
+        while v.get(name, 0) + (kommt if name == "leder" else 0) < n and v.get("gold", 0) >= LOS_PREIS[ware] + n * KAEMPFER_GOLD:
             befehl({"spielbefehl": {"nr": 38, "werte": [0, ware]}}, 1.0, bis="SPIELBEFEHL")
             v[name] = v.get(name, 0) + 5
             v["gold"] -= LOS_PREIS[ware]
@@ -648,6 +785,18 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
             return "verkauft", "kein Holzfaeller-/Huettenplatz (%s)" % text
         return ort, text
     wirt.holz_verbauen = holz_verwerten
+    global BUCH
+    leder = None
+    if V14:
+        from auftragsbuch import Auftragsbuch
+        BUCH = Auftragsbuch(SP, ARBEITER_JE, NACH_TYP)
+        wirt.umzug_ab, wirt.lager_genau, wirt.lager_ort = V14_UMZUG_AB, True, tuple(V14_PLAN["lager"])
+        ausbau.ohne, ausbau.sperr = {20}, v14_sperrflaechen()
+        leder = LederKette({})
+        schreib("v14: Auftragsbuch an; Steinbrueche %s, Joche %s, Lager %s (Umzug ab Tick %d), Leder: Hoefe %s, Gerberei %s, "
+                "Waffenlager %s; Fruehabbruch: Steinbrueche+Joche bis %d, neues Lager bis %d" % (
+                    V14_PLAN["brueche"], V14_PLAN["joche"], V14_PLAN["lager"], V14_UMZUG_AB, V14_PLAN["hoefe"],
+                    V14_PLAN["gerberei"], V14_PLAN["waffenlager"], V14_STEIN_BIS, V14_LAGER_BIS))
     schreib("Ertrags-Planer: Baukosten aus dem Spiel %s; Protokoll %s" % (
         {t: {w: v for w, v in k.items() if v} for t, k in ausbau.kosten.items()}, os.path.basename(lernlog)))
     schreib("Ertrags-Planer: " + ausbau.startwerte)
@@ -709,6 +858,13 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
         tz = time.time()
         ereignis = w.schritt(L, gebs, ausgenommen=trupp.mitglieder if trupp else ()) if w is not None else []
         tz = uhr("waechter", tz)
+        if BUCH is not None:
+            ereignis += BUCH.abgleich(G, L, st)            # jeder Bau bestaetigt oder gescheitert, jede Belegung
+            if runde % 10 == 1:
+                schreib(BUCH.stand(G, st))
+            if V14 and not endspiel["fertig"]:
+                ereignis += v14_steinpflicht(st, G, wirt)   # vor allem anderen (Daniel 22:05)
+            tz = uhr("auftragsbuch", tz)
         # Markt und Verkauf gehoeren zur Wirtschaft, nicht zu den Assassinen (gold10k_1: mit assassinen=0 wurde 60.000
         # Ticks lang nichts verkauft - der Block stand im Assassinen-Teil; Gold am Ende 1.013, nur aus Steuern)
         if not [n for n, g in G.items() if g["besitzer"] == SP and g["typ"] == 26] and runde % 20 == 2:
@@ -766,7 +922,29 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                         trainingsstand, len(angekommen), st["t"], pfad))
                     break
             tz = uhr("assassinen", tz)
-        if streitkolben and not fruehpruefung.get("ok4000"):
+        if V14 and streitkolben:
+            # v14-Fruehabbruch (Daniel 22:05: "ich brauche nicht noch einen Run, wo nicht zwei Steinbrueche direkt neben dem
+            # Vorratslager sind"): nach dem Holz-Zeitplan stehen beide Steinbrueche + Joche bei ~350 (30 Holz bei 120,
+            # +28 je 110 Ticks; Kornspeicher 5, Steinbruch 25, A-Plantagen 9, Joch 5, Steinbruch 25, Joch 5)
+            if st["t"] >= V14_STEIN_BIS and not fruehpruefung.get("stein"):
+                fehlt = ["%s %s" % (NACH_TYP[typ]["name"], o) for typ, o in [(20, q) for q in V14_PLAN["brueche"]] +
+                         [(4, j) for j in V14_PLAN["joche"]] if not steht_bei(G, typ, o)]
+                if fehlt:
+                    schreib("FRUEHABBRUCH bei Tick %d: fehlt %s" % (st["t"], ", ".join(fehlt)))
+                    break
+                fruehpruefung["stein"] = True
+                schreib("PRUEFUNG bestanden bei Tick %d: beide Steinbrueche + Joche stehen an den Plan-Plaetzen" % st["t"])
+            if st["t"] >= V14_LAGER_BIS and not fruehpruefung.get("lager"):
+                neu = steht_bei(G, 10, V14_PLAN["lager"])
+                alt = [n for n, g in G.items() if g["besitzer"] == SP and g["typ"] == 10 and
+                       max(abs(g["x"] - BASIS_LAGER[0]), abs(g["y"] - BASIS_LAGER[1])) <= 6]
+                if not neu or alt:
+                    schreib("FRUEHABBRUCH bei Tick %d: Lager nicht umgezogen (neu bei %s: %s, alt am Bergfried: %s)" % (
+                        st["t"], V14_PLAN["lager"], neu or "keins", alt or "weg"))
+                    break
+                fruehpruefung["lager"] = True
+                schreib("PRUEFUNG bestanden bei Tick %d: neues Lager steht bei %s, altes weg" % (st["t"], V14_PLAN["lager"]))
+        if streitkolben and not V14 and not fruehpruefung.get("ok4000"):
             # schaerfer (Daniel 21:56: "er baut nur einen Steinbruch, hier wuerde ich auch abbrechen ... gleiches fuer
             # andere nicht optimal platzierte Gebaeude"): genug Steinbrueche, keiner weit vom Lager
             lager_teile = [g for g in G.values() if g["besitzer"] == SP and g["typ"] == 10]
@@ -799,6 +977,8 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
             schreib("FRUEHABBRUCH bei Tick %d: %s" % (st["t"], endspiel["abbruch"]))
             break
         if streitkolben:
+            if leder is not None and not endspiel["fertig"]:
+                ereignis += leder.schritt(st, G, wirt)
             ereignis += bilanz_schritt(st, L, G, ausbau, streitkolben, endspiel, runde, kaempfer_marken)
             if not endspiel["fertig"] and weg != "bilanz":     # weg=bilanz: nur Wirtschaft + Bilanz-Endspiel (v5)
                 ereignis += prod.schritt(st, G, wirt) if prod else ruestung_kaufen(st, G, wirt, ausbau, streitkolben, kaempfer_marken)
@@ -842,6 +1022,9 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
         (("; Waechter: " + w.bericht()) if w else "") + (("; Angriff: " + trupp.bericht()) if trupp else "")))
     schreib("Wirtschaft: " + wirt.bericht())
     schreib(ausbau.bericht())
+    if BUCH is not None:
+        BUCH.abgleich(G, L, st)
+        schreib(BUCH.stand(G, st))
     ausbau.sichern(os.path.join(D, "ertrag_gelernt_%s_i%d.json" % (time.strftime("%Y%m%d_%H%M%S"), INSTANZ)))
 
 def main():
@@ -856,8 +1039,11 @@ def main():
     BERGFRIED = tuple(plan.get("bergfried_eingang", BERGFRIED))
     import waechter
     waechter.BERGFRIED_EINGANG = BERGFRIED
-    global LEERE_KI
+    global LEERE_KI, V14
     LEERE_KI = arg.get("leere_ki", "nein") == "ja"
+    if arg.get("v14", "nein") == "ja":
+        V14 = V14_PLAN
+        plan["lager"], plan["lager_mitte"] = list(V14_PLAN["lager"]), [V14_PLAN["lager"][0] + 2, V14_PLAN["lager"][1] + 2]
     if arg.get("start"):
         print("Tick", lade_stand(arg["start"], mit_bild=False))
         befehl({"eigenerPlatz": SP}, 0.8)

@@ -26,8 +26,10 @@ def abriss_wert(kosten):
     return sum((kosten.get(w, 0) // 2) * ROHSTOFF_WERT[w] for w in ROHSTOFF_WERT)
 
 
-def rechne(st, v, G, L, sp, ziel, kosten_von):
-    """Gibt die Tabelle (Zeilen) und ob das Ziel JETZT durch Abriss + Verkauf erreichbar ist."""
+def rechne(st, v, G, L, sp, ziel, kosten_von, leder_kommt=0, behalten=()):
+    """Gibt die Tabelle (Zeilen) und ob das Ziel JETZT durch Abriss + Verkauf erreichbar ist.
+    v14: leder_kommt = Leder der eigenen Kette, das bald im Waffenlager ist (naechste Kuh je Gerber, geglaettet);
+    behalten = Gebaeudearten, die nicht abgerissen werden (Hoefe + Gerberei, solange ihr Leder noch gebraucht wird)."""
     n = max(0, ziel - st.get("T26", 0))
     eig = {nr: g for nr, g in G.items() if g["besitzer"] == sp}
     zeilen = []
@@ -36,12 +38,12 @@ def rechne(st, v, G, L, sp, ziel, kosten_von):
         menge = st.get(w, 0)
         lager_wert += (menge // LOS[w]) * LOS[w] * p     # nur ganze Verkaufslose (v6)
         zeilen.append((w, menge, menge * p))
-    abriss = [nr for nr, g in eig.items() if g["typ"] not in BLEIBEN]
+    abriss = [nr for nr, g in eig.items() if g["typ"] not in BLEIBEN and g["typ"] not in behalten]
     abriss_gold = sum(abriss_wert(kosten_von(eig[nr]["typ"])) for nr in abriss)
     frei_werden = sum(1 for e in L.values() if e["besitzer"] == sp and e.get("arbeitsplatz") in abriss)
     keule, leder = v.get("keule", 0), v.get("leder", 0)
     lose_k = math.ceil(max(0, n - keule) / 5)
-    lose_l = math.ceil(max(0, n - leder) / 5)
+    lose_l = math.ceil(max(0, n - leder - leder_kommt) / 5)
     hat = {t: any(g["typ"] == t for g in eig.values()) for t in (9, 11, 26)}
     # Kaserne: aus eigenem Stein kostet sie nur dessen Verkaufswert (12 x 5), sonst gekauft (12 x 10); Waffenlager 5 Holz
     kaserne = 0 if hat[9] else (12 * PREIS["stein"] if st.get("stein", 0) >= 12 else 12 * 10)
@@ -51,7 +53,7 @@ def rechne(st, v, G, L, sp, ziel, kosten_von):
     ok = n > 0 and hat[26] and habe >= bedarf and bauern >= n            # exakt (v6), vorher 5 % Aufschlag
     tabelle = {"rest_kaempfer": n, "gold": st.get("gold", 0), "lager": zeilen, "lager_wert": lager_wert,
                "abriss_betriebe": len(abriss), "abriss_wert": abriss_gold, "keule": keule, "leder": leder,
-               "lose_keule": lose_k, "lose_leder": lose_l, "bedarf_gold": bedarf, "habe_gold": habe,
+               "lose_keule": lose_k, "lose_leder": lose_l, "leder_kommt": leder_kommt, "bedarf_gold": bedarf, "habe_gold": habe,
                "bauern_frei": st.get("feuer", 0), "bauern_nach_abriss": bauern, "jetzt_erreichbar": ok,
                "abriss_liste": abriss}
     return tabelle
@@ -60,8 +62,8 @@ def rechne(st, v, G, L, sp, ziel, kosten_von):
 def text(t):
     lager = ", ".join("%s %d (%d G)" % (w, m, g) for w, m, g in t["lager"] if m)
     return ("BILANZ Rest %d Kaempfer | Gold %d + Lager %d (%s) + Abriss %d Betriebe %d = %d | Bedarf %d (Keulen da %d, "
-            "Leder da %d, Lose %d+%d, Anwerben, Kaserne/Waffenlager) | Bauern frei %d, nach Abriss %d | %s" % (
+            "Leder da %d + kommt %d, Lose %d+%d, Anwerben, Kaserne/Waffenlager) | Bauern frei %d, nach Abriss %d | %s" % (
                 t["rest_kaempfer"], t["gold"], t["lager_wert"], lager or "leer", t["abriss_betriebe"], t["abriss_wert"],
-                t["habe_gold"], t["bedarf_gold"], t["keule"], t["leder"], t["lose_keule"], t["lose_leder"],
+                t["habe_gold"], t["bedarf_gold"], t["keule"], t["leder"], t.get("leder_kommt", 0), t["lose_keule"], t["lose_leder"],
                 t["bauern_frei"], t["bauern_nach_abriss"],
                 "JETZT ERREICHBAR" if t["jetzt_erreichbar"] else "fehlt %d Gold" % max(0, t["bedarf_gold"] - t["habe_gold"])))

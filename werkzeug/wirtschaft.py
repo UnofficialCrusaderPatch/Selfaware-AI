@@ -79,6 +79,9 @@ class Wirtschaft:
         self.a_versucht = {}                 # A-Platz -> Tick des letzten Bauversuchs (nachholen)
         self.holz_verbauen = None            # (st, L, G) -> (ergebnis, text): Holz verkaufen oder Holzfaeller (setzt der Lenker)
         self.baum_gesucht = -999             # Tick der letzten Baumsuche
+        self.extra = {}                      # Ruecklage einer Pflicht (v14), vom Lenker gesetzt
+        self.umzug_ab = None                 # v14: Tick, ab dem das alte Lager geraeumt wird (Startholz vollstaendig)
+        self.lager_genau = False             # v14: neues Lager genau am Plan-Platz (Umkreis 0)
         # Baum gleich jetzt suchen, solange das Spiel noch steht (9g: die Kartensuche mitten im Lauf kostete ~600 Ticks)
         if self.B:
             self.apfelbaum = self._a_baum() or -1
@@ -108,7 +111,8 @@ class Wirtschaft:
         gewinn_5 (Daniel 23:41 "Seasoning am Anfang"): A stand bei 534, reif bei 1.500, die letzte B-Plantage wartete
         bis 3.978 - Planer (Steinbruch + Joch, "Huette zuerst") und Huettenbau verbauten das Holz."""
         n = 0 if self.a_offen(G) else len(self.B_offen)
-        return {"holz": APFEL_HOLZ * n, "gold": APFEL_GOLD * n}
+        # extra: was eine Pflicht (v14: Steinbrueche + Joche) noch braucht - setzt der Lenker jede Runde
+        return {"holz": APFEL_HOLZ * n + self.extra.get("holz", 0), "gold": APFEL_GOLD * n + self.extra.get("gold", 0)}
 
     def a_offen(self, G):
         """A-Plaetze, an denen (noch) keine eigene Apfelplantage steht."""
@@ -184,7 +188,10 @@ class Wirtschaft:
         # Daniel 05.10. 19:09: in 9q stand das alte Lager bis Tick 6.175 (B wartete auf Gold), die Holzfaeller trugen
         # alles zum Bergfried. Darum weg, sobald B steht ODER der erste Holzfaeller abliefern will - was zuerst kommt.
         will_liefern = any(e["typ"] == HOLZFAELLER and e["zustand"] == 7 for e in einheiten.values())
-        if alt_da and (not self.B_offen or will_liefern):
+        # v14: fester Zeitpunkt statt "B steht / Holzfaeller will liefern" - das Startholz ist ab ~650 komplett da (Plan_
+        # Streitkolben: 30 bei 120, +28 je 110 Ticks, 150 ab ~650); danach liefern Steinbrueche und Holzfaeller ans neue Lager
+        raeumen = (t >= self.umzug_ab) if self.umzug_ab is not None else (not self.B_offen or will_liefern)
+        if alt_da and raeumen:
             inhalt = {k: st.get(k, 0) for k in LAGERWAREN if st.get(k, 0) > 0}
             if sum(inhalt.values()) < 5:
                 # Verkaeufe gehen nur in 5er-Losen, Bauten brauchen mindestens 5 Holz. Darum wird alles Verkaufbare
@@ -207,8 +214,11 @@ class Wirtschaft:
         # 3. Neues Lager erst, wenn ein Holzfaeller abliefern will (Zustand 7)
         teile = [n for n, g in eigen.items() if g["typ"] == LAGER and n not in self.alt and n not in alt_da]
         wollen = [n for n, e in einheiten.items() if e["typ"] == HOLZFAELLER and e["zustand"] == 7]
-        if not teile and wollen and (self.lager_tick is None or t - self.lager_tick > 60):
-            ort = self.baue_schnell(LAGER, self.lager_ort[0], self.lager_ort[1], 8)
+        # v14: sofort, sobald das alte weg ist (v12: abgerissen bei 1.314, neues erst bei 3.723 - ohne Lager lieferten die
+        # Holzfaeller nicht, Zustand 7 kam nie; Holz 0 von 1.453 bis 4.294)
+        jetzt = (not alt_da and not self.alt) if self.lager_genau else bool(wollen)
+        if not teile and jetzt and (self.lager_tick is None or t - self.lager_tick > (30 if self.lager_genau else 60)):
+            ort = self.baue_schnell(LAGER, self.lager_ort[0], self.lager_ort[1], 0 if self.lager_genau else 8)
             self.lager_tick = t
             ev.append("Lager gesetzt bei %s - %d Holzfaeller wollen abliefern (Tick %d)" % (ort, len(wollen), t))
         # 4. Rechtzeitig erweitern: Bestand + was unterwegs ist
