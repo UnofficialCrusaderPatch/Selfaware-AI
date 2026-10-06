@@ -108,3 +108,10 @@ Spiels abgelesen ist, aber noch nicht mit laufenden Einheiten geprueft, bleibt "
 |---|---|---|---|---|
 | B1 | Reihenfolge fuer den Aufbau von 0: Lager zuerst zu schnellem Holz umsetzen, dann Stein, dann Eisen, dann erst die Waffenproduktion; den Zeitpunkt so legen, dass moeglichst alle Lederharnische produziert werden koennen | Daniel | Daniel 20:52 | 06.10. |
 | B2 | Messungen ab jetzt immer von Tick 0 unter echten Bedingungen (kein gesetztes Gold, keine Gratis-Gebaeude), damit Daniel zuschauen kann | Daniel | Daniel 20:52 | 06.10. |
+| B3 | Kornspeicher nicht an die Hoefe; Huetten, Kaserne und Markt duerfen beliebig weit weg - der Platz am Lager gehoert der Waffenproduktion | Daniel | Daniel 20:54 (Bild Runde 3) | 06.10. |
+| B4 | Werkstaetten moeglichst nah am Lager, aber mit 1 Feld Abstand statt 0 - sonst laufen die Arbeiter ueber das Lager, das verlangsamt | Daniel | Daniel 20:54; passt zu W9 (Arbeiter treten auf Lagerteile) - Verlangsamung nicht gemessen | 06.10. |
+| B5 | Nur EIN Lagerteil geht nicht dauerhaft: jedes Teil fasst eine Warenart (<= 48), die Kette braucht mindestens Holz, Stein, Eisen -> Eisenteil zur Schmiede-Seite, Holz/Stein abgewandt | getestet (S6) + Folgerung | Antwort auf Daniels Frage 20:54 | 06.10. |
+| B6 | Erster Haertetest: Zeit von Tick 0 bis zu den ersten 10 ausgebildeten Streitkolbenkaempfern, Liga-Start (0 Gold, 150 Holz, Startessen) | Daniel | Daniel 20:54 | 06.10. |
+| B7 | Der schnellste Weg zu EINER Streitkolben-Werkstatt ist NICHT der schnellste zu 10 Kaempfern - der Aufbau braucht die ganze Wirtschaft: Apfelplantagen, Holzfaeller, Jaeger usw. | Daniel | Daniel 21:01 (Test v1 abgebrochen) | 06.10. |
+| B8 | Kaese nicht fuer die Nahrung nutzen - es kommt zu langsam herein | Daniel | Daniel 21:01 | 06.10. |
+| B9 | Haertetest v1 (Lager am Bergfried, ohne Nahrungswirtschaft), abgebrochen bei Tick 20.845: Steinbruch ab 646 -> erster Stein 5.246; Eisenmine ab 5.323 -> erstes Eisen 11.823; bis 20.845 keine Keule und kein Leder trotz 6 Kuehen (Ursache nicht gesucht); Beliebtheit 82, Leute 26, Gold 120 | getestet | `daten/haertetest_v1_abgebrochen_20261006.txt` | 06.10. |

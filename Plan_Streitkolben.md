@@ -123,3 +123,26 @@ hat einen Parameter rueckgabe (Standard 0, Spielbefehl 29 {nr, rueckgabe, uid}) 
   Datei) - Gerberei 15/3/75 -> 7/1/37 (zweimal gleich, kein gemerkter Rest), Milchviehhof 7/0/15 -> 3/0/7, Kaserne
   0/12 -> 6, Huette 5 -> 2. Es wird ABGERUNDET. daten/abriss_messung_20261006_201248.json.
   Aus dem Code (nicht gemessen): kein Lagerplatz -> Rueckgabe verloren; Mauern sammeln Bruchteile ueber Abrisse.
+
+## Haertetest ab Tick 0 (Daniel 06.10. 20:52/20:54)
+Daniel: "immer direkt von 0 anfangen ... dann kann ich zuschauen"; erster Haertetest = Zeit von Tick 0 bis zu den ersten
+10 ausgebildeten Streitkolbenkaempfern, realistische Startbedingungen (0 Gold, normale Ressourcen). Reihenfolge (B1):
+Lager zu schnellem Holz umsetzen -> Stein -> Eisen -> Waffenproduktion, Zeitpunkt so, dass moeglichst alle
+Lederharnische produziert werden. Bauregeln (B3/B4): Kornspeicher/Huetten/Kaserne/Markt weit weg, Werkstaetten 1 Feld
+vom Lager.
+
+Gemessen vor dem Start (20:56-20:58, `erkunden.py`, Start ohne Eingriff):
+- Startholz kommt nach und nach: 30 bei Tick 120, +~28 je 110 Ticks, 150 ab Tick ~650; Bauern 2 -> 10 bis Tick 566;
+  Beliebtheit startet bei 100 und sinkt ohne Essen (97,75 bei 231, 93,25 bei 678).
+- Karte (Bergfried 141,265): Wald knapp (76 Baeume im Umkreis 75), Waelder O (191,265) und SO (163,311); Hof ab 27
+  Feldern (172,297); Mine ab 48 (141,317); Steinbruch nur im Westen ab 56 (81,267).
+- Kosten (Spieltabelle): Huette 5 H, Holzfaeller 5 H, Eisenmine 20 H 6 S, Kaserne 12 S, Waffenlager 5 H, Schmiede
+  20 H 8 S, Gerberei 15 H 3 S 75 G, Kornspeicher 5 H, Steinbruch 25 H, Ochsenjoch 5 H, Markt 0, Milchviehhof 7 H 15 G.
+- Verkauf (verkaufspreise_liga.txt): Kaese 6, Brot 4, Aepfel 3, Fleisch 1, Holz 1 Gold je Stueck.
+
+Bauordnung v1 (`haertetest.py`, Grundlinie - Lager bleibt am Bergfried, Test 2 versetzt es und misst den Gewinn):
+Kornspeicher + Markt -> Kaese/Brot verkaufen (+150) -> 2 Milchviehhoefe -> Steinbruch + Ochsenjoch -> 2 Huetten ->
+Gerberei / Eisenmine / Waffenlager / Schmiede (Aufbauplaner) -> Kaserne. Bedarf: 109 Holz, 29 Stein, 305 Gold.
+- v1 abgebrochen 21:01 (Daniel): nicht optimiert - es fehlen Apfelplantagen, Holzfaeller, Jaeger; der schnellste Weg
+  zu einer einzelnen Streitkolben-Werkstatt ist nicht der schnellste zu 10; Kaese kommt als Nahrung zu langsam (B7/B8).
+  Gemessen bis dahin: erster Stein 5.246, erstes Eisen 11.823, keine Keule/kein Leder bis 20.845 (B9).

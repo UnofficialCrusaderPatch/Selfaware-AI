@@ -1,0 +1,52 @@
+Zuruecksetzen: Ansicht 14 (Partie vorbei: 0) -> Hauptmenue, pausiert
+LEERE KI: Spieler 2 ohne Waren und Gold (jede Runde)
+SAAT fest aus saat_liga.json (Modul meldet {'karte': 1788115329, 'partie': 1788115329, 'wert1': 7474, 'wert2': 22872, 'zaehler1': 1, 'zaehler2': 118})
+Partie laeuft seit Tick 106: Lords da, unser Lord bei (142, 268), {'Ansicht': 14, 'gameOver': 0, 'Mensch': 1, 'Platz': 1}
+BAU Kornspeicher bei (129, 257) Tick 207
+BAU Markt        bei (129, 269) Tick 289
+MARKE Essen verkauft     Tick    371
+BAU Milchviehhof bei (172, 297) Tick 478
+BAU Milchviehhof bei (168, 307) Tick 563
+PLAN {'Gerberei': (143, 275, 4), 'Waffenlager': (140, 263, 6), 'Schmiede': (144, 270, 4)}
+BAU Steinbruch   bei (81, 267) Tick 646
+BAU Ochsenjoch   bei (90, 267) Tick 878
+BAU Huette       bei (125, 263) Tick 962
+BAU Huette       bei (121, 259) Tick 1045
+MARKE erste Kuh          Tick   2188
+MARKE erster Stein       Tick   5246
+BAU Gerberei     bei (143, 275) Tick 5246
+BAU Eisenmine    bei (141, 317) Tick 5323
+BAU Waffenlager  bei (140, 263) Tick 5408
+BAU Schmiede     bei (144, 270) Tick 8537
+BAU Kaserne      bei (127, 281) Tick 8614
+MARKE erstes Eisen       Tick  11823
+Traceback (most recent call last):
+  File "C:\Users\danie\Documents\PC_Affe\Games\Stronghold_Crusader\Stronghold Crusader Modding\Tools\Selfaware-AI\werkzeug\haertetest.py", line 174, in main
+    warte_ticks(40)
+  File "C:\Users\danie\Documents\PC_Affe\Games\Stronghold_Crusader\Stronghold Crusader Modding\Tools\Selfaware-AI\werkzeug\streitkolben_messen.py", line 50, in warte_ticks
+    while peek(TICK)[0] - t0 < n:
+          ^^^^^^^^^^
+  File "C:\Users\danie\Documents\PC_Affe\Games\Stronghold_Crusader\Stronghold Crusader Modding\Tools\Selfaware-AI\werkzeug\laden.py", line 44, in peek
+    for z in sende({"player": 1, "peek": adr, "worte": n}, 0.6, bis="PEEK 0x%08X" % adr):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\danie\Documents\PC_Affe\Games\Stronghold_Crusader\Stronghold Crusader Modding\Tools\Selfaware-AI\werkzeug\befehl.py", line 89, in sende
+    _kanal_frei()
+  File "C:\Users\danie\Documents\PC_Affe\Games\Stronghold_Crusader\Stronghold Crusader Modding\Tools\Selfaware-AI\werkzeug\befehl.py", line 83, in _kanal_frei
+    raise RuntimeError("KANAL BELEGT: ein Lauf (Prozess %s) benutzt den Befehlskanal von Instanz %d gerade (vor %.0f s gemeldet)" % (pid, INSTANZ, alter))
+RuntimeError: KANAL BELEGT: ein Lauf (Prozess 33244) benutzt den Befehlskanal von Instanz 1 gerade (vor 0 s gemeldet)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\danie\Documents\PC_Affe\Games\Stronghold_Crusader\Stronghold Crusader Modding\Tools\Selfaware-AI\werkzeug\haertetest.py", line 188, in <module>
+    main()
+  File "C:\Users\danie\Documents\PC_Affe\Games\Stronghold_Crusader\Stronghold Crusader Modding\Tools\Selfaware-AI\werkzeug\haertetest.py", line 176, in main
+    befehl({"pause": True}, 0.5)
+  File "C:\Users\danie\Documents\PC_Affe\Games\Stronghold_Crusader\Stronghold Crusader Modding\Tools\Selfaware-AI\werkzeug\laden.py", line 40, in befehl
+    return sende({"befehle": [c]}, warte, bis=bis)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\danie\Documents\PC_Affe\Games\Stronghold_Crusader\Stronghold Crusader Modding\Tools\Selfaware-AI\werkzeug\befehl.py", line 89, in sende
+    _kanal_frei()
+  File "C:\Users\danie\Documents\PC_Affe\Games\Stronghold_Crusader\Stronghold Crusader Modding\Tools\Selfaware-AI\werkzeug\befehl.py", line 83, in _kanal_frei
+    raise RuntimeError("KANAL BELEGT: ein Lauf (Prozess %s) benutzt den Befehlskanal von Instanz %d gerade (vor %.0f s gemeldet)" % (pid, INSTANZ, alter))
+RuntimeError: KANAL BELEGT: ein Lauf (Prozess 33244) benutzt den Befehlskanal von Instanz 1 gerade (vor 0 s gemeldet)

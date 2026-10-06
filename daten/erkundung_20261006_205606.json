@@ -1,0 +1,112 @@
+{
+ "bergfried": [
+  141,
+  265
+ ],
+ "fenster": [
+  66,
+  190,
+  216,
+  340
+ ],
+ "baeume": 76,
+ "holz_im_umkreis": 579,
+ "naechster_baum": [
+  9999,
+  [
+   68,
+   244
+  ]
+ ],
+ "naechster_stein": [
+  44,
+  [
+   138,
+   314
+  ]
+ ],
+ "naechstes_eisen": [
+  46,
+  [
+   126,
+   316
+  ]
+ ],
+ "plaetze": {
+  "hof": 998,
+  "mine": 242,
+  "steinbruch": 104,
+  "holzfaeller": 16044
+ },
+ "naechster_hofplatz": [
+  27,
+  [
+   172,
+   297
+  ]
+ ],
+ "naechster_minenplatz": [
+  48,
+  [
+   141,
+   317
+  ]
+ ],
+ "naechster_steinbruch": [
+  56,
+  [
+   81,
+   267
+  ]
+ ],
+ "wald": [
+  {
+   "mitte": [
+    191,
+    265
+   ],
+   "holzeinheiten": 54,
+   "weg_vom_berg": null
+  },
+  {
+   "mitte": [
+    204,
+    211
+   ],
+   "holzeinheiten": 49,
+   "weg_vom_berg": null
+  },
+  {
+   "mitte": [
+    163,
+    311
+   ],
+   "holzeinheiten": 45,
+   "weg_vom_berg": null
+  },
+  {
+   "mitte": [
+    73,
+    250
+   ],
+   "holzeinheiten": 45,
+   "weg_vom_berg": null
+  },
+  {
+   "mitte": [
+    78,
+    233
+   ],
+   "holzeinheiten": 36,
+   "weg_vom_berg": null
+  },
+  {
+   "mitte": [
+    185,
+    199
+   ],
+   "holzeinheiten": 31,
+   "weg_vom_berg": null
+  }
+ ]
+}
