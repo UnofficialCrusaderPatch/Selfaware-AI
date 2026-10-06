@@ -308,7 +308,7 @@ def nahrung_auf_kante(bestand, puffer, hoechstens=12):
     return lose
 WAREN_NR = {"holz": 2, "stein": 4, "eisen": 6, "pech": 7, "apfel": 13, "brot": 10, "kaese": 11, "fleisch": 12, "weizen": 9, "hopfen": 3, "mehl": 16}
 
-def verkaufen(st, stein_reserve=None, messer=None, holz_verkaufen=False):
+def verkaufen(st, stein_reserve=None, messer=None, holz_verkaufen=False, eisen_reserve=0):
     """Je Runde hoechstens ein Verkauf je Ware (Spielbefehl 38, verkaufen=1). Gibt Text oder None.
     stein_reserve: Bedarf der naechsten geplanten Eisenmine (Daniel 05.10. 19:44: Stein bis darauf verkaufen);
     messer: Ertragsmesser - bekommt jedes verkaufte Los (fuer die Buchfuehrung Zugang = Bestand + Verkauft + Verbaut)."""
@@ -317,7 +317,7 @@ def verkaufen(st, stein_reserve=None, messer=None, holz_verkaufen=False):
     # 06.10.: erst "statt Holz verkaufen mehr Holzfaeller", nach holz_partie_1/2 (20. Assassine ~4.000 Ticks spaeter,
     # kein Sieg) 19:33 "ja, vorerst" - gegen mehrere Gegner braucht es spaeter stabiles Wachstum statt Verkauf.
     holz = (("holz", HOLZ_RESERVE),) if holz_verkaufen else ()
-    for ware, reserve in holz + (("stein", STEIN_RESERVE if stein_reserve is None else stein_reserve), ("eisen", 0),
+    for ware, reserve in holz + (("stein", STEIN_RESERVE if stein_reserve is None else stein_reserve), ("eisen", eisen_reserve),
                           ("pech", 0), ("weizen", 0), ("hopfen", 0), ("mehl", 0)):
         if st.get(ware, 0) > reserve + 4:
             befehl({"spielbefehl": {"nr": 38, "werte": [1, WAREN_NR[ware]]}}, 1.0, bis="SPIELBEFEHL"); teile.append(ware)
@@ -376,8 +376,81 @@ def ruestung_kaufen(st, G, wirt, ausbau, ziel, marken):
             aus.append("KAEMPFER %d bei Tick %d" % (n, st["t"]))
     return aus
 
+class Produktion:
+    """v3 (Daniel 06.10. 21:11-21:14): eigene Waffenproduktion moeglichst frueh, aber nicht fruehestmoeglich - erst wenn das
+    Seasoning (B) steht; Kauf nur aus echtem Ueberschuss (B19); Anwerben erst, wenn Waffen da sind (B21: fruehes Anwerben
+    nimmt der Wirtschaft das Gold); Kaserne erst bei Bedarf (B13). Eisen der Minen wird behalten (verkaufen eisen_reserve).
+    Stufen: 0 warten -> 1 zwei Milchviehhoefe (Kuehe brauchen Zeit) -> 2 Gerberei + Schmiede + Waffenlager nach dem
+    Aufbauplaner (Eisenteil, Hoftore, 1 Feld vom Lager) -> anwerben."""
+    UEBERSCHUSS = 800              # Gold ueber der Ruecklage, ab dem ein fehlendes Los gekauft werden darf
+
+    def __init__(self, ziel, marken):
+        self.ziel, self.marken, self.stufe, self.umgestellt = ziel, marken, 0, set()
+
+    def stein_bedarf(self):
+        return {0: 0, 1: 11, 2: 12}.get(self.stufe, 0)
+
+    def lager(self, G, wirt):
+        teile = [g for n, g in G.items() if g["besitzer"] == SP and g["typ"] == 10 and n not in wirt.alt]
+        if not teile:
+            return None
+        return (sum(g["x"] for g in teile) // len(teile) + 1, sum(g["y"] for g in teile) // len(teile) + 1)
+
+    def schritt(self, st, G, wirt):
+        import aufbau_planer as P
+        import wegkarte as W
+        aus = []
+        eig = {n: g for n, g in G.items() if g["besitzer"] == SP}
+        rl = wirt.ruecklage(G)
+        gold, holz, stein, feuer = st["gold"] - rl["gold"], st["holz"] - rl["holz"], st["stein"], st.get("feuer", 0)
+        mitte = self.lager(G, wirt)
+        hoefe = [g for g in eig.values() if g["typ"] == 33]
+        if self.stufe == 0 and mitte and not wirt.B_offen and gold >= 30 and holz >= 14 and feuer >= 1:
+            for _ in range(2):
+                aus.append("PRODUKTION Milchviehhof %s" % (baue_schnell(33, mitte[0], mitte[1], 45),))
+            self.stufe = 1
+        elif self.stufe == 1 and len(hoefe) >= 2 and gold >= 75 and holz >= 40 and stein >= 11 and feuer >= 2 and mitte:
+            k = W.holen(max(mitte[0] - 30, 0), max(mitte[1] - 30, 0), min(mitte[0] + 30, 399), min(mitte[1] + 30, 399))
+            eisen = next((n for n, g in eig.items() if g["typ"] == 10 and g.get("ware") == 6), None)
+            plan, bericht = P.plane(k, 1, 1, eisen, [(g["x"], g["y"]) for g in hoefe])
+            for art, x, y, r, e in plan.bauten:
+                befehl({"baue": {"mapper": {11: 81, 13: 83, 16: 85}[art], "x": x, "y": y, "groesse": 4, "richtung": r}}, 0.8, bis="BAUE")
+            aus.append("PRODUKTION Werkstaetten nach Plan: %s" % [(NACH_TYP[a]["name"], x, y, r) for a, x, y, r, e in plan.bauten])
+            self.stufe = 2
+        if self.stufe < 2:
+            return aus
+        for n, g in eig.items():
+            if g["typ"] == 13 and n not in self.umgestellt:
+                befehl({"spielbefehl": {"nr": 33, "werte": [n, 21, g.get("uid", 0)]}}, 1.0, bis="SPIELBEFEHL")
+                self.umgestellt.add(n)
+        v = vorrat(SP)
+        kas = [n for n, g in eig.items() if g["typ"] == 9]
+        if not kas and v.get("keule", 0) and v.get("leder", 0) and stein >= 12:
+            aus.append("PRODUKTION Kaserne %s" % (baue_schnell(9, BERGFRIED[0] - 16, BERGFRIED[1] + 18, 30),))
+        if kas:
+            for ware, name in ((21, "keule"), (23, "leder")):
+                if v.get(name, 0) == 0 and gold >= self.UEBERSCHUSS + LOS_PREIS[ware]:
+                    befehl({"spielbefehl": {"nr": 38, "werte": [0, ware]}}, 1.0, bis="SPIELBEFEHL")
+                    gold -= LOS_PREIS[ware]
+                    v[name] = 5
+                    aus.append("PRODUKTION 5 %s aus Ueberschuss gekauft" % name)
+            werben = min(v.get("keule", 0), v.get("leder", 0), feuer, max(gold, 0) // KAEMPFER_GOLD, self.ziel - st.get("T26", 0))
+            for _ in range(max(werben, 0)):
+                befehl({"werbe": {"typ": 26, "gebaeude": kas[0]}}, 1.0, bis="WERBE")
+            if werben > 0:
+                aus.append("%d Streitkolbenkaempfer angeworben" % werben)
+        for n in range(1, self.ziel + 1):
+            if st.get("T26", 0) >= n and n not in self.marken:
+                self.marken[n] = st["t"]
+                aus.append("KAEMPFER %d bei Tick %d" % (n, st["t"]))
+        for name, wert in (("erste Keule", v.get("keule", 0)), ("erstes Leder", v.get("leder", 0))):
+            if wert and name not in self.marken:
+                self.marken[name] = st["t"]
+                aus.append("MARKE %s bei Tick %d" % (name, st["t"]))
+        return aus
+
 def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0, trainingsstand=None, trainingsstand_ab=40,
-           gold_ziel=None, streitkolben=0):
+           gold_ziel=None, streitkolben=0, weg="kauf"):
     schreib("== Phase 2: Echtzeit, Tempo %d, %d Minuten, Waechter %s" % (tempo, minuten, "an" if mit_waechter else "aus"))
     partie_pruefen()
     # Halte-Liste des Moduls ueberlebt das Laden einer Partie (04.10.: alte Eintraege zogen neue Assassinen mit
@@ -433,6 +506,7 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
         return time.time()
     gold_marke = 1000
     kaempfer_marken = {}
+    prod = Produktion(streitkolben, kaempfer_marken) if streitkolben and weg == "produktion" else None
     while time.time() < ende and not os.path.exists(os.path.join(HIER, "STOP")):
         tz = time.time()
         befehlskanal.belege()
@@ -483,7 +557,8 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
             # 12 Stein fuer die Kaserne nicht verkaufen, solange sie fehlt (v2 Tick 5.246: "verkauft: stein" und "Kaserne
             # gesetzt" in derselben Runde - danach reichte der Stein nicht mehr)
             kas_fehlt = streitkolben and not [n for n, g in G.items() if g["besitzer"] == SP and g["typ"] == 9]
-            v = verkaufen(st, ausbau.reserve()["stein"] + (12 if kas_fehlt else 0), ausbau.messer, holz_verkaufen=bremst)
+            v = verkaufen(st, ausbau.reserve()["stein"] + (12 if kas_fehlt else 0) + (prod.stein_bedarf() if prod else 0),
+                          ausbau.messer, holz_verkaufen=bremst, eisen_reserve=10 ** 6 if prod else 0)
             if v:
                 ereignis.append(v)
             if not bremst and st["holz"] > HOLZ_RESERVE + 4:     # Gold reicht: Holzueberschuss -> Holzfaeller
@@ -531,7 +606,7 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                     break
             tz = uhr("assassinen", tz)
         if streitkolben:
-            ereignis += ruestung_kaufen(st, G, wirt, ausbau, streitkolben, kaempfer_marken)
+            ereignis += prod.schritt(st, G, wirt) if prod else ruestung_kaufen(st, G, wirt, ausbau, streitkolben, kaempfer_marken)
             if st.get("T26", 0) >= streitkolben:
                 schreib("ZIEL %d Streitkolbenkaempfer erreicht bei Tick %d" % (streitkolben, st["t"]))
                 break
@@ -595,7 +670,7 @@ def main():
         phase2(plan, int(arg.get("minuten", 10)), int(arg.get("tempo", 40)), arg.get("waechter", "nein") == "ja",
                int(arg["bis_tick"]) if arg.get("bis_tick") else None, int(arg.get("assassinen", 0)), arg.get("trainingsstand"),
                int(arg.get("trainingsstand_ab", 40)), int(arg["gold_ziel"]) if arg.get("gold_ziel") else None,
-               int(arg.get("streitkolben", 0)))
+               int(arg.get("streitkolben", 0)), arg.get("weg", "kauf"))
     except RuntimeError as e:
         # Modulfehler (befehl.pruefe): Spiel anhalten, damit der Zustand fuer die Ursachensuche stehen bleibt
         import befehl as befehlskanal

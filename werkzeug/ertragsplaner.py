@@ -114,6 +114,7 @@ def gold_wert(kosten):
 
 
 MAX_LAGERTEILE = 8                 # 2 Lagerplaetze zu je 4 Teilen (Daniel 06.10. 21:11)
+STEUER_MIN = 0                     # Bestechung erlaubt (Liga Stufe 0: +225 Beliebtheit, 1,50 Gold je Kopf)
 
 
 class Ertragsmesser:
@@ -345,13 +346,21 @@ class Ertragsplaner:
         gesperrt = lambda p: any(t == typ and schach(p, q) <= 8 for (t, q) in self.fehlschlag)
         frei = lambda p: all(schach(p, q) >= b for q in gleich) and not gesperrt(p)
         if typ in (5, 20, 32):
-            return [p for p in self.platz[typ] if frei(p)]
+            orte = [p for p in self.platz[typ] if frei(p)]
+            if typ == 32 and self.wirt.B_offen:
+                # Seasoning (v2b, B23): der Planer setzte vor der A-Reife eigene Plantagen auf/neben die B-Plaetze -
+                # 2 von 3 B fanden danach keinen Platz, B blieb die ganze Partie offen. B-Plaetze bleiben frei, bis B steht.
+                orte = [p for p in orte if all(schach(p, b) > 6 for b in self.wirt.B_offen)]
+            return orte
         if typ == 3:
             hf = [(x + 1, y + 1) for (x, y) in gleich]
             return list({p for baum, p in self.baum_platz.items()
                          if all(schach(baum, h) > BAUM_FREI for h in hf) and frei(p)})
         rehe = [(e["x"], e["y"]) for e in L.values() if e["typ"] == 44 and e["besitzer"] == 0 and self.eigene_seite((e["x"], e["y"]))]
-        return [p for p in rehe if sum(1 for q in rehe if schach(p, q) <= 15) >= 5 and frei(p)]
+        # Saettigung (v2b, B22: 59 Jaegerhuetten, meist an derselben Herde): je Huette 5 Rehe im Umkreis 15,
+        # bestehende Jaegerhuetten im Umkreis mitgezaehlt
+        return [p for p in rehe if sum(1 for q in rehe if schach(p, q) <= 15) >= 5 * (1 + sum(1 for h in gleich if schach(p, h) <= 15))
+                and frei(p)]
 
     # ---- Kandidaten -----------------------------------------------------------------------------------------------
     def _bester_ort(self, typ, L, G, zl=None):
@@ -454,7 +463,9 @@ class Ertragsplaner:
         # Steuern nach Beliebtheit (Regel bleibt, bis der Planer sie mitrechnet)
         bel = st.get("beliebt", 0) / 100.0
         if runde - self.steuer_runde >= 2 * self.PLANEN:
-            neu = self.steuer + 1 if (bel >= 97 and self.steuer < 8 and st.get("leute", 0) >= 15) else self.steuer - 1 if (bel < 95 and self.steuer > 3) else self.steuer
+            # Untergrenze 0 statt 3 (Daniel 21:13, B17: "Beliebtheit wirklich ueber 95 halten, damit die Bevoelkerung schnell
+            # genug nachkommt" - v2b fiel bei Stufe 3 auf 59, dann 38): unter 95 bis zur Bestechung herunter
+            neu = self.steuer + 1 if (bel >= 97 and self.steuer < 8 and st.get("leute", 0) >= 15) else self.steuer - 1 if (bel < 95 and self.steuer > STEUER_MIN) else self.steuer
             if neu != self.steuer:
                 befehl({"spielbefehl": {"nr": 34, "werte": [neu]}}, 1.0, bis="SPIELBEFEHL")
                 ev.append("STEUER %d -> %d (Beliebtheit %.2f)" % (self.steuer, neu, bel))
@@ -490,6 +501,12 @@ class Ertragsplaner:
         if st.get("feuer", 0) < beste["arbeiter"] and holz - R["holz"] >= self.kosten[1]["holz"] and st.get("leute", 0) >= st.get("platz", 0) - 2:
             ev.append("PLANER Huette zuerst (Feuer %d, %s braucht %d) -> %s" % (st.get("feuer", 0), NAME[beste["typ"]], beste["arbeiter"],
                                                                               self.baue(1, self.K[0] - 7, self.K[1] - 2, 25)))
+            return ev
+        # Arbeiterpruefung (v2b, B22): nie einen Betrieb setzen, fuer den kein freier Bauer am Feuer steht - sonst
+        # stehen Dutzende Werkstaetten leer (57 Jaegerhuetten bei Feuer 0, Beliebtheit 38)
+        if st.get("feuer", 0) < beste["arbeiter"]:
+            if (runde - 1) % (5 * self.PLANEN) == 0:
+                ev.append("PLANER wartet auf Arbeiter fuer %s (Feuer %d, braucht %d)" % (NAME[beste["typ"]], st.get("feuer", 0), beste["arbeiter"]))
             return ev
         # B-Ruecklage (Holz + Gold je offener B-Plantage) abziehen (Steinbruch-Kosten enthalten das Joch schon: kosten_von)
         habe = {"holz": holz - R["holz"], "stein": stein, "gold": gold - R["gold"]}
