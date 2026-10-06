@@ -376,6 +376,16 @@ def ruestung_kaufen(st, G, wirt, ausbau, ziel, marken):
             aus.append("KAEMPFER %d bei Tick %d" % (n, st["t"]))
     return aus
 
+_KOSTEN = {}
+
+def kosten_aller(typ, ausbau):
+    """Baukosten jeder Art (v4 21:25: KeyError 21 - der Steinhaufen fehlt in der Tabelle des Planers): erst der Planer,
+    sonst einmal aus der Kostentabelle des Spiels (bauen.kosten), danach gemerkt."""
+    if typ not in _KOSTEN:
+        from bauen import kosten
+        _KOSTEN[typ] = ausbau.kosten_von(typ) if typ in ausbau.kosten else kosten(typ)
+    return _KOSTEN[typ]
+
 def bilanz_schritt(st, L, G, ausbau, ziel, endspiel, runde, marken):
     """Daniel 21:21: komplette Tabelle - was ist drin, was kommt, was braucht man WIRKLICH - und dann abreissen und das
     Ziel erfuellen. Rechnung in bilanz.py; hier: Tabelle ins Protokoll, Endspiel ausfuehren, danach anwerben."""
@@ -384,7 +394,7 @@ def bilanz_schritt(st, L, G, ausbau, ziel, endspiel, runde, marken):
     v = vorrat(SP)
     eig = {n: g for n, g in G.items() if g["besitzer"] == SP}
     if not endspiel["fertig"]:
-        t = BZ.rechne(st, v, G, L, SP, ziel, ausbau.kosten_von)
+        t = BZ.rechne(st, v, G, L, SP, ziel, lambda typ: kosten_aller(typ, ausbau))
         endspiel["tabelle"] = t
         if runde % 10 == 0 or t["jetzt_erreichbar"]:
             aus.append(BZ.text(t))
