@@ -181,16 +181,23 @@ def main():
     gespielt = {schluessel(r["strategie"]) for r in alle}
     gueltig = [r for r in alle if r["strategie"].get("v14", "ja") == "ja"]     # nur Laeufe auf dem einen Weg zaehlen
     beste = min(gueltig, key=lambda r: r["note"]) if gueltig else None
+    kontrolle = arg.get("kontrolle") == "ja"
     for i in range(laeufe):
-        if beste is None:
+        if kontrolle and beste is not None:
+            # Code hat sich seit der Bestzeit geaendert -> beste Strategie einmal neu messen (keine Wiederholung im Sinne
+            # gleicher Laeufe: anderer Code), danach wird gegen diesen Kontrolllauf verglichen
+            s, knopf, kontrolle = dict(beste["strategie"]), "kontrolle", False
+            beste = None
+        elif beste is None:
             s, knopf = dict(GRUND), None
         else:
             s, knopf = naechste(beste["strategie"], gespielt, beste.get("nachschau"))
             if s is None:
                 print("Alle Nachbarn der besten Strategie gespielt - Ende", flush=True)
                 break
-        print("LERNEN Lauf %d: %s%s" % (len(alle) + 1, "Grundstrategie" if knopf is None else "%s = %s (statt %s)" % (
-            knopf, s[knopf], beste["strategie"][knopf]), "" if beste is None else ", beste Note bisher %d" % beste["note"]), flush=True)
+        print("LERNEN Lauf %d: %s%s" % (len(alle) + 1, "Grundstrategie" if knopf is None else "Kontrolllauf der besten Strategie mit neuem Code"
+              if knopf == "kontrolle" else "%s = %s (statt %s)" % (knopf, s[knopf], beste["strategie"][knopf]),
+              "" if beste is None else ", beste Note bisher %d" % beste["note"]), flush=True)
         r = lauf(s, bis_tick, len(alle) + 1)
         r["geaendert"] = knopf
         r["vergleich"] = None if beste is None else {"gegen": beste["nr"], "note_vorher": beste["note"], "differenz": r["note"] - beste["note"]}
@@ -208,7 +215,7 @@ def main():
         # Wissen: je Knopfwert die beobachteten Differenzen
         wissen = {}
         for x in alle:
-            if x.get("geaendert") and x.get("vergleich"):
+            if x.get("geaendert") and x.get("geaendert") != "kontrolle" and x.get("vergleich"):
                 k = "%s=%s" % (x["geaendert"], x["strategie"][x["geaendert"]])
                 wissen.setdefault(k, []).append(x["vergleich"]["differenz"])
         json.dump({"beste": beste, "wirkung_je_knopfwert": wissen}, open(os.path.join(D, "lernen_wissen.json"), "w", encoding="utf-8"),
