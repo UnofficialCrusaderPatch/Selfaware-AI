@@ -299,7 +299,9 @@ def verkaufen(st, stein_reserve=None, messer=None):
     stein_reserve: Bedarf der naechsten geplanten Eisenmine (Daniel 05.10. 19:44: Stein bis darauf verkaufen);
     messer: Ertragsmesser - bekommt jedes verkaufte Los (fuer die Buchfuehrung Zugang = Bestand + Verkauft + Verbaut)."""
     teile = []
-    for ware, reserve in (("holz", HOLZ_RESERVE), ("stein", STEIN_RESERVE if stein_reserve is None else stein_reserve), ("eisen", 0),
+    # Holz wird nicht mehr verkauft (Daniel 06.10.: "statt Holz verkaufen einfach mehr Holzfaeller, weil Holz kann man
+    # spaeter immer brauchen") - der Ueberschuss geht in Holzfaeller (Ertragsplaner.holzfaeller_statt_verkauf)
+    for ware, reserve in (("stein", STEIN_RESERVE if stein_reserve is None else stein_reserve), ("eisen", 0),
                           ("pech", 0), ("weizen", 0), ("hopfen", 0), ("mehl", 0)):
         if st.get(ware, 0) > reserve + 4:
             befehl({"spielbefehl": {"nr": 38, "werte": [1, WAREN_NR[ware]]}}, 1.0, bis="SPIELBEFEHL"); teile.append(ware)
@@ -333,6 +335,7 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
         trupp.gelaende = list(_KARTE)   # einmal im Angriffsprotokoll: Gelände darf als Einfluss nicht vorab verschwinden
     lernlog = os.path.join(D, "ertrag_live_%s_i%d.jsonl" % (time.strftime("%Y%m%d_%H%M%S"), INSTANZ))   # je Instanz: Serien laufen parallel
     ausbau = Ertragsplaner(plan, SP, baue_schnell, wirt, s32(peek(PD + 0x2188)[0]), ende=bis_tick, protokoll=lernlog, wegtest=wegtest)   # lernt im Spiel (Daniel 19:44)
+    wirt.holz_verbauen = ausbau.holzfaeller_statt_verkauf    # altes Lager: Holzfaeller statt Holz verkaufen (Daniel 06.10.)
     schreib("Ertrags-Planer: Baukosten aus dem Spiel %s; Protokoll %s" % (
         {t: {w: v for w, v in k.items() if v} for t, k in ausbau.kosten.items()}, os.path.basename(lernlog)))
     schreib("Ertrags-Planer: " + ausbau.startwerte)
@@ -404,6 +407,10 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                 v = verkaufen(st, ausbau.reserve()["stein"], ausbau.messer)
                 if v:
                     ereignis.append(v)
+                if st["holz"] > HOLZ_RESERVE + 4:       # frueher: verkauft; jetzt ein Holzfaeller mehr
+                    ort, text = ausbau.holzfaeller_statt_verkauf(st, L, G)
+                    if ort:
+                        ereignis.append("Holzfaeller statt Holzverkauf bei %s (Holz %d; %s)" % (ort, st["holz"], text))
             tz = uhr("bauen_werben_verkauf", tz)
             trupp.aufnehmen([n for n, e in L.items() if e["besitzer"] == SP and e["typ"] == 73])
             # nur begehbare Plaetze (9g: Gebaeudemitten waren nicht begehbar - die Wartenden blieben im Schussfeld)

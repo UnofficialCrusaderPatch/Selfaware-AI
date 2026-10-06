@@ -351,6 +351,35 @@ class Ertragsplaner:
         return [p for p in rehe if sum(1 for q in rehe if schach(p, q) <= 15) >= 5 and frei(p)]
 
     # ---- Kandidaten -----------------------------------------------------------------------------------------------
+    def _bester_ort(self, typ, L, G, zl=None):
+        """Naechster erreichbarer Bauplatz dieser Art zu ihrem Ziel (Lager, Kornspeicher ...): (ort, weg) oder (None, None)."""
+        zl = zl or self.ziele(G)
+        orte = self._orte(typ, L, G)
+        if not orte:
+            return None, None
+        b = self.groesse.get(typ, 2) // 2
+        weg = lambda p: min(schach((p[0] + b, p[1] + b), z) for z in zl[typ])
+        ort = self._erreichbarer(sorted(orte, key=weg), L)
+        return (ort, weg(ort)) if ort is not None else (None, None)
+
+    def holzfaeller_statt_verkauf(self, st, L, G):
+        """Daniel 06.10.: \"statt Holz verkaufen einfach mehr Holzfaeller, weil Holz kann man spaeter immer brauchen\".
+        Baut EINEN Holzfaeller am besten Platz, wenn das Holz ueber der B-Ruecklage reicht und ein Arbeiter am Feuer frei
+        ist. Gibt (ort, text): ort None -> das Holz bleibt liegen (verkauft wird es nicht mehr)."""
+        k = self.kosten_von(3)
+        R = self.wirt.ruecklage(G)
+        if st.get("holz", 0) - R["holz"] < k["holz"] or st.get("gold", 0) - R["gold"] < k["gold"]:
+            return None, "Holz/Gold reicht nach B-Ruecklage nicht"
+        if st.get("feuer", 0) < 1:
+            return None, "kein freier Arbeiter am Feuer"
+        ort, w = self._bester_ort(3, L, G)
+        if ort is None:
+            return None, "kein erreichbarer Holzfaeller-Platz"
+        gebaut = self.baue(3, ort[0], ort[1], 3)
+        if gebaut:
+            self.gesetzt["Holzfaeller statt Verkauf"] = self.gesetzt.get("Holzfaeller statt Verkauf", 0) + 1
+        return gebaut, "Platz %s, Weg %d" % (ort, w)
+
     def kandidaten(self, st, L, G):
         """Alle Arten an ihrem besten Ort, mit Horizont-Pruefung. Sortiert nach Gewinn bis Partieende (ohne Ende: Amortisation)."""
         t = st.get("t", 0)
@@ -358,15 +387,9 @@ class Ertragsplaner:
         zl = self.ziele(G)
         aus = []
         for typ, (ware, _r0, _d0, _g, _a, arb, _z) in START.items():
-            orte = self._orte(typ, L, G)
-            if not orte:
-                continue
-            b = self.groesse.get(typ, 2) // 2
-            weg = lambda p: min(schach((p[0] + b, p[1] + b), z) for z in zl[typ])
-            ort = self._erreichbarer(sorted(orte, key=weg), L)
+            ort, w = self._bester_ort(typ, L, G, zl)
             if ort is None:
                 continue
-            w = weg(ort)
             if w > 70:
                 continue
             rate = self.messer.rate(typ) * self.messer.wegfaktor(typ, w)
