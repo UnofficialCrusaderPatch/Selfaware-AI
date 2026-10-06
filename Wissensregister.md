@@ -156,6 +156,7 @@ Tick 4.731-7.737, Aufloesung 14,5 Ticks (`daten/lage_ablauf_fein_20261006_224521
 | L12 | Startholz-Nachlieferung (bis ~650) landet im NEUEN Lager - frueher Umzug kostet nur den Rest im alten Lager (E1: 10 Holz) | getestet | E1: Holz 0 -> 48 von Tick 419 bis 652 im neuen Lager | 06.10. |
 | L13 | Startholz komplett in Holzfaeller (E4b): kein Holz fuer Huetten -> Wohnraum 26/26 von Tick 1.358 bis ~6.000, Bevoelkerung 4.600 Ticks eingefroren; Steinbrueche erst ab 5.075, bis 7.006 kein Stein | getestet | versuch_E4b_20261006.txt, Lageprotokoll | 06.10. |
 | L14 | Folgerung: alles, was vor ~9.400 noch Ertrag bringen soll, muss vor ~1.500 stehen UND besetzt sein (Verzoegerung ~4.000); spaeter gebaute Holzfaeller/Steinbrueche zahlen sich bis zum Endspiel nicht mehr aus | gerechnet aus L10/L13 | - | 06.10. |
+| L15 | Gebaeude-Feld "erreichbar" (gebaeude.txt) ist kein Beweis: frisch gebaut kurz 0 (Wegnetz hoechstens alle 200 Ticks neu), Apfelplantagen (101,200)/(100,190) auch nach 260 Ticks 0, obwohl der Wegtest einen Weg fand. Beweis fuer unerreichbar: 600 Ticks kein Arbeiter bei freien Bauern | getestet (Lernlaeufe 9/11) + Daniel 23:37/23:41 | lernen_lauf_20261006_234044_9.txt | 06.10. |
 
 ## Bewaehrt / nicht bewaehrt (nach jedem Lauf eine Zeile, Daniel 21:05: "schauen, was hat sich bewaehrt und was nicht")
 
