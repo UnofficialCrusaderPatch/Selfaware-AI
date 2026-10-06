@@ -43,7 +43,7 @@ KNOEPFE = {
     "vollbeschaeftigung": ["ja", "nein"],
     "entscheider": ["regeln", "kausal"],
     "b_versatz": ["reif", 0, 300, 600],
-    "steuer_ende": ["nein", "ja"],
+    "steuer_ende": ["nein", "wohnraum", "ja"],   # wohnraum zuerst: Daniel 07.10. 00:04
     "steuer_runter": [95, 90, 85, 80],
     "stein_max": ["nein", "ja"],
 }
