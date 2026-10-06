@@ -1,0 +1,2318 @@
+{
+ "ergebnis": {
+  "quelle": "lage_ablauf_fein_20261006_224521_i1.jsonl.gz",
+  "von": 4731,
+  "bis": 7737,
+  "runden": 208,
+  "aufloesung_ticks": 14.5,
+  "zustaende": {
+   "Apfelbauer": {
+    "z1": {
+     "anteil_zeit": 0.287,
+     "dauer_median": 388,
+     "dauer_mittel": 523,
+     "n": 3,
+     "felder_je_tick": 0.0
+    },
+    "z2": {
+     "anteil_zeit": 0.072,
+     "dauer_median": 71,
+     "dauer_mittel": 103.54,
+     "n": 13,
+     "felder_je_tick": 0.066
+    },
+    "z3": {
+     "anteil_zeit": 0.17,
+     "dauer_median": 72.0,
+     "dauer_mittel": 71.72,
+     "n": 46,
+     "felder_je_tick": 0.0
+    },
+    "z4": {
+     "anteil_zeit": 0.002,
+     "dauer_median": 42,
+     "dauer_mittel": 42,
+     "n": 1,
+     "felder_je_tick": 0.071
+    },
+    "z5": {
+     "anteil_zeit": 0.213,
+     "dauer_median": 244.5,
+     "dauer_mittel": 223.71,
+     "n": 14,
+     "felder_je_tick": 0.063
+    },
+    "z6": {
+     "anteil_zeit": 0.0,
+     "dauer_median": 14,
+     "dauer_mittel": 14,
+     "n": 1,
+     "felder_je_tick": 0.0
+    },
+    "z7+Last": {
+     "anteil_zeit": 0.192,
+     "dauer_median": 239.5,
+     "dauer_mittel": 234.14,
+     "n": 14,
+     "felder_je_tick": 0.058
+    },
+    "z8": {
+     "anteil_zeit": 0.064,
+     "dauer_median": 30,
+     "dauer_mittel": 43.4,
+     "n": 35,
+     "felder_je_tick": 0.065
+    }
+   },
+   "Lord": {
+    "z13": {
+     "anteil_zeit": 1.0,
+     "dauer_median": null,
+     "dauer_mittel": null,
+     "n": 0,
+     "felder_je_tick": 0.0
+    }
+   },
+   "Steinmetz": {
+    "z1": {
+     "anteil_zeit": 1.0,
+     "dauer_median": null,
+     "dauer_mittel": null,
+     "n": 0,
+     "felder_je_tick": 0.0
+    }
+   },
+   "Holzfaeller": {
+    "z0": {
+     "anteil_zeit": 0.0,
+     "dauer_median": 14.0,
+     "dauer_mittel": 14.25,
+     "n": 4,
+     "felder_je_tick": 0.0
+    },
+    "z1": {
+     "anteil_zeit": 0.0,
+     "dauer_median": 16,
+     "dauer_mittel": 15.67,
+     "n": 3,
+     "felder_je_tick": 0.0
+    },
+    "z10": {
+     "anteil_zeit": 0.005,
+     "dauer_median": 50.5,
+     "dauer_mittel": 48.83,
+     "n": 6,
+     "felder_je_tick": 0.0
+    },
+    "z3": {
+     "anteil_zeit": 0.076,
+     "dauer_median": 485.0,
+     "dauer_mittel": 455.33,
+     "n": 6,
+     "felder_je_tick": 0.0
+    },
+    "z4": {
+     "anteil_zeit": 0.0,
+     "dauer_median": 29,
+     "dauer_mittel": 29,
+     "n": 1,
+     "felder_je_tick": 0.071
+    },
+    "z5": {
+     "anteil_zeit": 0.247,
+     "dauer_median": 385,
+     "dauer_mittel": 384.9,
+     "n": 21,
+     "felder_je_tick": 0.0
+    },
+    "z6": {
+     "anteil_zeit": 0.031,
+     "dauer_median": 44.0,
+     "dauer_mittel": 48,
+     "n": 34,
+     "felder_je_tick": 0.0
+    },
+    "z7": {
+     "anteil_zeit": 0.024,
+     "dauer_median": 21.5,
+     "dauer_mittel": 21.4,
+     "n": 10,
+     "felder_je_tick": 0.0
+    },
+    "z8+Last": {
+     "anteil_zeit": 0.375,
+     "dauer_median": 1183.0,
+     "dauer_mittel": 1219,
+     "n": 10,
+     "felder_je_tick": 0.039
+    },
+    "z9": {
+     "anteil_zeit": 0.241,
+     "dauer_median": 833,
+     "dauer_mittel": 853.6,
+     "n": 5,
+     "felder_je_tick": 0.04
+    }
+   },
+   "Einheit 22": {
+    "z0": {
+     "anteil_zeit": 0.144,
+     "dauer_median": 17.0,
+     "dauer_mittel": 37.65,
+     "n": 80,
+     "felder_je_tick": 0.0
+    },
+    "z11": {
+     "anteil_zeit": 0.856,
+     "dauer_median": 27.0,
+     "dauer_mittel": 35.82,
+     "n": 78,
+     "felder_je_tick": 0.0
+    }
+   },
+   "Einheit 63": {
+    "z1": {
+     "anteil_zeit": 0.506,
+     "dauer_median": 292.0,
+     "dauer_mittel": 440.5,
+     "n": 6,
+     "felder_je_tick": 0.0
+    },
+    "z120": {
+     "anteil_zeit": 0.022,
+     "dauer_median": 158,
+     "dauer_mittel": 158,
+     "n": 1,
+     "felder_je_tick": 0.043
+    },
+    "z4": {
+     "anteil_zeit": 0.423,
+     "dauer_median": 504.0,
+     "dauer_mittel": 499.67,
+     "n": 6,
+     "felder_je_tick": 0.0
+    },
+    "z7": {
+     "anteil_zeit": 0.026,
+     "dauer_median": 84,
+     "dauer_mittel": 90,
+     "n": 3,
+     "felder_je_tick": 0.049
+    },
+    "z8": {
+     "anteil_zeit": 0.023,
+     "dauer_median": 63.0,
+     "dauer_mittel": 63.5,
+     "n": 4,
+     "felder_je_tick": 0.0
+    }
+   },
+   "Bauer": {
+    "z8": {
+     "anteil_zeit": 1.0,
+     "dauer_median": null,
+     "dauer_mittel": null,
+     "n": 0,
+     "felder_je_tick": 0.0
+    }
+   },
+   "Einheit 24": {
+    "z0": {
+     "anteil_zeit": 0.0,
+     "dauer_median": 14.5,
+     "dauer_mittel": 14.5,
+     "n": 4,
+     "felder_je_tick": 0.0
+    },
+    "z1": {
+     "anteil_zeit": 1.0,
+     "dauer_median": null,
+     "dauer_mittel": null,
+     "n": 0,
+     "felder_je_tick": 0.0
+    }
+   },
+   "Einheit 64": {
+    "z0": {
+     "anteil_zeit": 0.0,
+     "dauer_median": 14,
+     "dauer_mittel": 13.67,
+     "n": 3,
+     "felder_je_tick": 0.0
+    },
+    "z1": {
+     "anteil_zeit": 0.1,
+     "dauer_median": 201.0,
+     "dauer_mittel": 216.88,
+     "n": 8,
+     "felder_je_tick": 0.0
+    },
+    "z101": {
+     "anteil_zeit": 0.098,
+     "dauer_median": 320.0,
+     "dauer_mittel": 246.83,
+     "n": 6,
+     "felder_je_tick": 0.044
+    },
+    "z120": {
+     "anteil_zeit": 0.193,
+     "dauer_median": 446,
+     "dauer_mittel": 429,
+     "n": 7,
+     "felder_je_tick": 0.045
+    },
+    "z14": {
+     "anteil_zeit": 0.016,
+     "dauer_median": null,
+     "dauer_mittel": null,
+     "n": 0,
+     "felder_je_tick": 0.064
+    },
+    "z15": {
+     "anteil_zeit": 0.033,
+     "dauer_median": null,
+     "dauer_mittel": null,
+     "n": 0,
+     "felder_je_tick": 0.052
+    },
+    "z16": {
+     "anteil_zeit": 0.016,
+     "dauer_median": 291,
+     "dauer_mittel": 291,
+     "n": 1,
+     "felder_je_tick": 0.0
+    },
+    "z17": {
+     "anteil_zeit": 0.013,
+     "dauer_median": 232,
+     "dauer_mittel": 232,
+     "n": 1,
+     "felder_je_tick": 0.032
+    },
+    "z18": {
+     "anteil_zeit": 0.186,
+     "dauer_median": 541.0,
+     "dauer_mittel": 541,
+     "n": 2,
+     "felder_je_tick": 0.063
+    },
+    "z6": {
+     "anteil_zeit": 0.077,
+     "dauer_median": 87.5,
+     "dauer_mittel": 86.44,
+     "n": 18,
+     "felder_je_tick": 0.0
+    },
+    "z7": {
+     "anteil_zeit": 0.096,
+     "dauer_median": 411.0,
+     "dauer_mittel": 421.5,
+     "n": 4,
+     "felder_je_tick": 0.046
+    },
+    "z8": {
+     "anteil_zeit": 0.095,
+     "dauer_median": 403.0,
+     "dauer_mittel": 417.5,
+     "n": 4,
+     "felder_je_tick": 0.0
+    },
+    "z9": {
+     "anteil_zeit": 0.077,
+     "dauer_median": 88.0,
+     "dauer_mittel": 87.11,
+     "n": 18,
+     "felder_je_tick": 0.0
+    }
+   },
+   "Steinbrucharbeiter": {
+    "z1": {
+     "anteil_zeit": 0.0,
+     "dauer_median": 14.5,
+     "dauer_mittel": 14.25,
+     "n": 4,
+     "felder_je_tick": 0.0
+    },
+    "z1+Last": {
+     "anteil_zeit": 0.007,
+     "dauer_median": 14.5,
+     "dauer_mittel": 15.65,
+     "n": 26,
+     "felder_je_tick": 0.0
+    },
+    "z101": {
+     "anteil_zeit": 0.464,
+     "dauer_median": 85,
+     "dauer_mittel": 88.11,
+     "n": 27,
+     "felder_je_tick": 0.063
+    },
+    "z101+Last": {
+     "anteil_zeit": 0.418,
+     "dauer_median": 72,
+     "dauer_mittel": 81.26,
+     "n": 27,
+     "felder_je_tick": 0.063
+    },
+    "z2": {
+     "anteil_zeit": 0.003,
+     "dauer_median": 14,
+     "dauer_mittel": 14.89,
+     "n": 27,
+     "felder_je_tick": 0.0
+    },
+    "z3+Last": {
+     "anteil_zeit": 0.051,
+     "dauer_median": 124.5,
+     "dauer_mittel": 124.5,
+     "n": 2,
+     "felder_je_tick": 0.05
+    },
+    "z4": {
+     "anteil_zeit": 0.058,
+     "dauer_median": 111.0,
+     "dauer_mittel": 111,
+     "n": 2,
+     "felder_je_tick": 0.056
+    }
+   },
+   "Kuh": {
+    "z0": {
+     "anteil_zeit": 0.906,
+     "dauer_median": null,
+     "dauer_mittel": null,
+     "n": 0,
+     "felder_je_tick": 0.0
+    },
+    "z109": {
+     "anteil_zeit": 0.003,
+     "dauer_median": 27.5,
+     "dauer_mittel": 27.5,
+     "n": 2,
+     "felder_je_tick": 0.0
+    },
+    "z3": {
+     "anteil_zeit": 0.091,
+     "dauer_median": 829,
+     "dauer_mittel": 829,
+     "n": 1,
+     "felder_je_tick": 0.0
+    }
+   },
+   "Milchbauer": {
+    "z1": {
+     "anteil_zeit": 0.093,
+     "dauer_median": 187,
+     "dauer_mittel": 187,
+     "n": 1,
+     "felder_je_tick": 0.0
+    },
+    "z2": {
+     "anteil_zeit": 0.174,
+     "dauer_median": null,
+     "dauer_mittel": null,
+     "n": 0,
+     "felder_je_tick": 0.063
+    },
+    "z3": {
+     "anteil_zeit": 0.287,
+     "dauer_median": 855,
+     "dauer_mittel": 855,
+     "n": 1,
+     "felder_je_tick": 0.0
+    },
+    "z4": {
+     "anteil_zeit": 0.0,
+     "dauer_median": 13,
+     "dauer_mittel": 13,
+     "n": 1,
+     "felder_je_tick": 0.0
+    },
+    "z5+Last": {
+     "anteil_zeit": 0.446,
+     "dauer_median": 1326,
+     "dauer_mittel": 1326,
+     "n": 1,
+     "felder_je_tick": 0.062
+    }
+   },
+   "Steinochse": {
+    "z1+Last": {
+     "anteil_zeit": 0.085,
+     "dauer_median": 227.5,
+     "dauer_mittel": 227.5,
+     "n": 2,
+     "felder_je_tick": 0.034
+    },
+    "z2+Last": {
+     "anteil_zeit": 0.0,
+     "dauer_median": 15,
+     "dauer_mittel": 15.33,
+     "n": 3,
+     "felder_je_tick": 0.0
+    },
+    "z3": {
+     "anteil_zeit": 0.042,
+     "dauer_median": 86,
+     "dauer_mittel": 96.67,
+     "n": 3,
+     "felder_je_tick": 0.061
+    },
+    "z4": {
+     "anteil_zeit": 0.873,
+     "dauer_median": 1634,
+     "dauer_mittel": 1634,
+     "n": 1,
+     "felder_je_tick": 0.0
+    }
+   },
+   "Einheit 62": {
+    "z0": {
+     "anteil_zeit": 0.0,
+     "dauer_median": 15.0,
+     "dauer_mittel": 15,
+     "n": 2,
+     "felder_je_tick": 0.0
+    },
+    "z1": {
+     "anteil_zeit": 0.591,
+     "dauer_median": 90.0,
+     "dauer_mittel": 247.65,
+     "n": 20,
+     "felder_je_tick": 0.0
+    },
+    "z101": {
+     "anteil_zeit": 0.06,
+     "dauer_median": 101.5,
+     "dauer_mittel": 97.5,
+     "n": 6,
+     "felder_je_tick": 0.061
+    },
+    "z109": {
+     "anteil_zeit": 0.003,
+     "dauer_median": null,
+     "dauer_mittel": null,
+     "n": 0,
+     "felder_je_tick": 0.0
+    },
+    "z120": {
+     "anteil_zeit": 0.155,
+     "dauer_median": 204,
+     "dauer_mittel": 223,
+     "n": 5,
+     "felder_je_tick": 0.066
+    },
+    "z2": {
+     "anteil_zeit": 0.191,
+     "dauer_median": 88.0,
+     "dauer_mittel": 89.15,
+     "n": 20,
+     "felder_je_tick": 0.0
+    }
+   },
+   "Einheit 57": {
+    "z1+Last": {
+     "anteil_zeit": 0.257,
+     "dauer_median": 744,
+     "dauer_mittel": 744,
+     "n": 1,
+     "felder_je_tick": 0.062
+    },
+    "z109": {
+     "anteil_zeit": 0.005,
+     "dauer_median": 31,
+     "dauer_mittel": 31,
+     "n": 1,
+     "felder_je_tick": 0.0
+    },
+    "z109+Last": {
+     "anteil_zeit": 0.0,
+     "dauer_median": 14,
+     "dauer_mittel": 14,
+     "n": 1,
+     "felder_je_tick": 0.0
+    },
+    "z2+Last": {
+     "anteil_zeit": 0.132,
+     "dauer_median": 391,
+     "dauer_mittel": 391,
+     "n": 1,
+     "felder_je_tick": 0.0
+    },
+    "z3": {
+     "anteil_zeit": 0.228,
+     "dauer_median": 664,
+     "dauer_mittel": 664,
+     "n": 1,
+     "felder_je_tick": 0.063
+    },
+    "z3+Last": {
+     "anteil_zeit": 0.307,
+     "dauer_median": 406.5,
+     "dauer_mittel": 406.5,
+     "n": 2,
+     "felder_je_tick": 0.05
+    },
+    "z4": {
+     "anteil_zeit": 0.0,
+     "dauer_median": 16,
+     "dauer_mittel": 16,
+     "n": 1,
+     "felder_je_tick": 0.0
+    },
+    "z4+Last": {
+     "anteil_zeit": 0.071,
+     "dauer_median": 108.0,
+     "dauer_mittel": 108,
+     "n": 2,
+     "felder_je_tick": 0.0
+    }
+   }
+  },
+  "gehen": {
+   "Apfelbauer": {
+    "mit": {
+     "ticks_je_feld": 14.6,
+     "felder": 179,
+     "ticks": 2614
+    },
+    "ohne": {
+     "ticks_je_feld": 14.6,
+     "felder": 361,
+     "ticks": 5254
+    }
+   },
+   "Holzfaeller": {
+    "mit": {
+     "ticks_je_feld": 14.6,
+     "felder": 543,
+     "ticks": 7940
+    },
+    "ohne": {
+     "ticks_je_feld": 14.6,
+     "felder": 360,
+     "ticks": 5265
+    }
+   },
+   "Einheit 63": {
+    "mit": {
+     "ticks_je_feld": null,
+     "felder": 0,
+     "ticks": 0
+    },
+    "ohne": {
+     "ticks_je_feld": 14.2,
+     "felder": 19,
+     "ticks": 270
+    }
+   },
+   "Einheit 64": {
+    "mit": {
+     "ticks_je_feld": null,
+     "felder": 0,
+     "ticks": 0
+    },
+    "ohne": {
+     "ticks_je_feld": 14.5,
+     "felder": 543,
+     "ticks": 7899
+    }
+   },
+   "Steinbrucharbeiter": {
+    "mit": {
+     "ticks_je_feld": 14.5,
+     "felder": 124,
+     "ticks": 1801
+    },
+    "ohne": {
+     "ticks_je_feld": 14.5,
+     "felder": 139,
+     "ticks": 2020
+    }
+   },
+   "Milchbauer": {
+    "mit": {
+     "ticks_je_feld": 14.8,
+     "felder": 81,
+     "ticks": 1200
+    },
+    "ohne": {
+     "ticks_je_feld": 14.7,
+     "felder": 32,
+     "ticks": 469
+    }
+   },
+   "Steinochse": {
+    "mit": {
+     "ticks_je_feld": 14.5,
+     "felder": 17,
+     "ticks": 247
+    },
+    "ohne": {
+     "ticks_je_feld": 14.5,
+     "felder": 15,
+     "ticks": 218
+    }
+   },
+   "Einheit 62": {
+    "mit": {
+     "ticks_je_feld": null,
+     "felder": 0,
+     "ticks": 0
+    },
+    "ohne": {
+     "ticks_je_feld": 14.6,
+     "felder": 114,
+     "ticks": 1662
+    }
+   },
+   "Einheit 57": {
+    "mit": {
+     "ticks_je_feld": 14.4,
+     "felder": 89,
+     "ticks": 1286
+    },
+    "ohne": {
+     "ticks_je_feld": 14.8,
+     "felder": 41,
+     "ticks": 606
+    }
+   }
+  },
+  "ablieferungen": {
+   "Apfelbauer": {
+    "anzahl": 32,
+    "menge": 68,
+    "abstand": [
+     14,
+     15,
+     921,
+     14,
+     1163,
+     15,
+     15,
+     1396,
+     14,
+     16,
+     15,
+     816,
+     14,
+     1019,
+     14,
+     555,
+     13,
+     15,
+     1090,
+     14,
+     1040,
+     15,
+     14,
+     1360,
+     15,
+     1354,
+     15
+    ],
+    "abstand_median": 15,
+    "menge_je_gang": 2.1
+   },
+   "Holzfaeller": {
+    "anzahl": 52,
+    "menge": 207,
+    "abstand": [
+     14,
+     14,
+     15,
+     14,
+     14,
+     14,
+     15,
+     15,
+     13,
+     15,
+     14,
+     14,
+     100,
+     15,
+     15,
+     16,
+     14,
+     14,
+     16,
+     14,
+     14,
+     16,
+     16,
+     14,
+     15,
+     15,
+     14,
+     16,
+     14,
+     72,
+     16,
+     15,
+     13,
+     14,
+     14,
+     16,
+     14,
+     16,
+     15,
+     15
+    ],
+    "abstand_median": 15.0,
+    "menge_je_gang": 4.0
+   },
+   "Steinbrucharbeiter": {
+    "anzahl": 27,
+    "menge": 27,
+    "abstand": [
+     198,
+     184,
+     218,
+     185,
+     447,
+     327,
+     337,
+     192,
+     193,
+     205,
+     187,
+     189,
+     159,
+     170,
+     146,
+     442,
+     350,
+     153,
+     276,
+     264,
+     164,
+     160,
+     161,
+     158,
+     164
+    ],
+    "abstand_median": 189,
+    "menge_je_gang": 1.0
+   },
+   "Milchbauer": {
+    "anzahl": 3,
+    "menge": 6,
+    "abstand": [
+     14,
+     16
+    ],
+    "abstand_median": 15.0,
+    "menge_je_gang": 2.0
+   },
+   "Steinochse": {
+    "anzahl": 6,
+    "menge": 36,
+    "abstand": [
+     16,
+     15,
+     1939,
+     15
+    ],
+    "abstand_median": 15.5,
+    "menge_je_gang": 6.0
+   },
+   "Einheit 57": {
+    "anzahl": 1,
+    "menge": 5,
+    "abstand": [],
+    "abstand_median": null,
+    "menge_je_gang": 5.0
+   }
+  },
+  "vorrat": {
+   "Lagerplatz 7 (92, 270) ware 2": {
+    "zugang": 21,
+    "abgang": 0,
+    "zugang_je_1000": 7.0,
+    "zugaenge": 8,
+    "groesse_je_zugang": 3.0
+   },
+   "Kornspeicher 20 (90, 230) ware 13": {
+    "zugang": 69,
+    "abgang": 15,
+    "zugang_je_1000": 23.0,
+    "zugaenge": 33,
+    "groesse_je_zugang": 2
+   },
+   "21 23 (87, 267) ware 4": {
+    "zugang": 12,
+    "abgang": 13,
+    "zugang_je_1000": 4.0,
+    "zugaenge": 12,
+    "groesse_je_zugang": 1.0
+   },
+   "21 40 (87, 276) ware 4": {
+    "zugang": 11,
+    "abgang": 12,
+    "zugang_je_1000": 3.7,
+    "zugaenge": 11,
+    "groesse_je_zugang": 1
+   },
+   "Holzfaellerhuette 27 (69, 252) ware 2": {
+    "zugang": 4,
+    "abgang": 3,
+    "zugang_je_1000": 1.3,
+    "zugaenge": 4,
+    "groesse_je_zugang": 1.0
+   },
+   "Holzfaellerhuette 28 (72, 247) ware 2": {
+    "zugang": 4,
+    "abgang": 4,
+    "zugang_je_1000": 1.3,
+    "zugaenge": 4,
+    "groesse_je_zugang": 1.0
+   },
+   "Holzfaellerhuette 46 (65, 259) ware 1": {
+    "zugang": 3,
+    "abgang": 2,
+    "zugang_je_1000": 1.0,
+    "zugaenge": 3,
+    "groesse_je_zugang": 1
+   },
+   "Holzfaellerhuette 48 (62, 235) ware 1": {
+    "zugang": 3,
+    "abgang": 2,
+    "zugang_je_1000": 1.0,
+    "zugaenge": 3,
+    "groesse_je_zugang": 1
+   },
+   "Lagerplatz 6 (89, 270) ware 4": {
+    "zugang": 36,
+    "abgang": 0,
+    "zugang_je_1000": 12.0,
+    "zugaenge": 6,
+    "groesse_je_zugang": 6.0
+   },
+   "Holzfaellerhuette 50 (87, 231) ware 1": {
+    "zugang": 2,
+    "abgang": 1,
+    "zugang_je_1000": 0.7,
+    "zugaenge": 2,
+    "groesse_je_zugang": 1.0
+   },
+   "Holzfaellerhuette 55 (54, 216) ware 1": {
+    "zugang": 4,
+    "abgang": 3,
+    "zugang_je_1000": 1.3,
+    "zugaenge": 4,
+    "groesse_je_zugang": 1.0
+   },
+   "Holzfaellerhuette 58 (109, 204) ware 1": {
+    "zugang": 3,
+    "abgang": 2,
+    "zugang_je_1000": 1.0,
+    "zugaenge": 3,
+    "groesse_je_zugang": 1
+   },
+   "Holzfaellerhuette 49 (61, 231) ware 1": {
+    "zugang": 3,
+    "abgang": 2,
+    "zugang_je_1000": 1.0,
+    "zugaenge": 3,
+    "groesse_je_zugang": 1
+   },
+   "Holzfaellerhuette 47 (68, 245) ware 1": {
+    "zugang": 3,
+    "abgang": 3,
+    "zugang_je_1000": 1.0,
+    "zugaenge": 3,
+    "groesse_je_zugang": 1
+   },
+   "Holzfaellerhuette 56 (163, 316) ware 2": {
+    "zugang": 1,
+    "abgang": 0,
+    "zugang_je_1000": 0.3,
+    "zugaenge": 1,
+    "groesse_je_zugang": 1
+   },
+   "Holzfaellerhuette 25 (97, 287) ware 1": {
+    "zugang": 5,
+    "abgang": 5,
+    "zugang_je_1000": 1.7,
+    "zugaenge": 5,
+    "groesse_je_zugang": 1
+   },
+   "Lagerplatz 8 (89, 273) ware 2": {
+    "zugang": 48,
+    "abgang": 0,
+    "zugang_je_1000": 16.0,
+    "zugaenge": 20,
+    "groesse_je_zugang": 3.0
+   },
+   "Holzfaellerhuette 26 (108, 303) ware 1": {
+    "zugang": 5,
+    "abgang": 5,
+    "zugang_je_1000": 1.7,
+    "zugaenge": 5,
+    "groesse_je_zugang": 1
+   },
+   "Lagerplatz 9 (92, 273) ware 2": {
+    "zugang": 48,
+    "abgang": 0,
+    "zugang_je_1000": 16.0,
+    "zugaenge": 19,
+    "groesse_je_zugang": 3
+   }
+  },
+  "waren_je_1000": {
+   "holz": 38.92,
+   "stein": 11.98,
+   "eisen": 0.0,
+   "gold": -15.97,
+   "apfel": 16.63,
+   "brot": 0.0,
+   "kaese": 1.33,
+   "fleisch": 0.0
+  },
+  "vergabe": [],
+  "besetzung_mittel": {
+   "Apfelplantage": 6,
+   "Bergfried": 2,
+   "Steinbruch": 6,
+   "Holzfaellerhuette": 13,
+   "Huette": 9,
+   "Ochsenkarren": 4,
+   "Milchviehhof": 4
+  }
+ },
+ "ablieferungen": [
+  {
+   "nr": 1,
+   "typ": 13,
+   "t": 5156,
+   "menge": 2,
+   "ort": [
+    92,
+    234
+   ],
+   "arbeitsplatz": 29
+  },
+  {
+   "nr": 1,
+   "typ": 13,
+   "t": 5170,
+   "menge": 2,
+   "ort": [
+    92,
+    234
+   ],
+   "arbeitsplatz": 29
+  },
+  {
+   "nr": 1,
+   "typ": 13,
+   "t": 5185,
+   "menge": 1,
+   "ort": [
+    92,
+    235
+   ],
+   "arbeitsplatz": 29
+  },
+  {
+   "nr": 1,
+   "typ": 13,
+   "t": 6106,
+   "menge": 1,
+   "ort": [
+    92,
+    234
+   ],
+   "arbeitsplatz": 29
+  },
+  {
+   "nr": 1,
+   "typ": 13,
+   "t": 6120,
+   "menge": 3,
+   "ort": [
+    92,
+    234
+   ],
+   "arbeitsplatz": 29
+  },
+  {
+   "nr": 1,
+   "typ": 13,
+   "t": 7283,
+   "menge": 3,
+   "ort": [
+    92,
+    234
+   ],
+   "arbeitsplatz": 29
+  },
+  {
+   "nr": 1,
+   "typ": 13,
+   "t": 7298,
+   "menge": 2,
+   "ort": [
+    92,
+    235
+   ],
+   "arbeitsplatz": 29
+  },
+  {
+   "nr": 139,
+   "typ": 13,
+   "t": 4873,
+   "menge": 1,
+   "ort": [
+    92,
+    234
+   ],
+   "arbeitsplatz": 30
+  },
+  {
+   "nr": 139,
+   "typ": 13,
+   "t": 4888,
+   "menge": 3,
+   "ort": [
+    92,
+    234
+   ],
+   "arbeitsplatz": 30
+  },
+  {
+   "nr": 139,
+   "typ": 13,
+   "t": 6284,
+   "menge": 1,
+   "ort": [
+    92,
+    234
+   ],
+   "arbeitsplatz": 30
+  },
+  {
+   "nr": 139,
+   "typ": 13,
+   "t": 6298,
+   "menge": 3,
+   "ort": [
+    92,
+    234
+   ],
+   "arbeitsplatz": 30
+  },
+  {
+   "nr": 139,
+   "typ": 13,
+   "t": 6314,
+   "menge": 1,
+   "ort": [
+    92,
+    235
+   ],
+   "arbeitsplatz": 30
+  },
+  {
+   "nr": 162,
+   "typ": 3,
+   "t": 4746,
+   "menge": 3,
+   "ort": [
+    92,
+    272
+   ],
+   "arbeitsplatz": 26
+  },
+  {
+   "nr": 162,
+   "typ": 3,
+   "t": 4760,
+   "menge": 3,
+   "ort": [
+    92,
+    272
+   ],
+   "arbeitsplatz": 26
+  },
+  {
+   "nr": 162,
+   "typ": 3,
+   "t": 4774,
+   "menge": 3,
+   "ort": [
+    92,
+    272
+   ],
+   "arbeitsplatz": 26
+  },
+  {
+   "nr": 166,
+   "typ": 3,
+   "t": 5700,
+   "menge": 1,
+   "ort": [
+    89,
+    275
+   ],
+   "arbeitsplatz": 27
+  },
+  {
+   "nr": 166,
+   "typ": 3,
+   "t": 5715,
+   "menge": 3,
+   "ort": [
+    89,
+    275
+   ],
+   "arbeitsplatz": 27
+  },
+  {
+   "nr": 166,
+   "typ": 3,
+   "t": 5729,
+   "menge": 2,
+   "ort": [
+    89,
+    275
+   ],
+   "arbeitsplatz": 27
+  },
+  {
+   "nr": 166,
+   "typ": 3,
+   "t": 5743,
+   "menge": 3,
+   "ort": [
+    89,
+    275
+   ],
+   "arbeitsplatz": 27
+  },
+  {
+   "nr": 166,
+   "typ": 3,
+   "t": 5757,
+   "menge": 3,
+   "ort": [
+    89,
+    275
+   ],
+   "arbeitsplatz": 27
+  },
+  {
+   "nr": 166,
+   "typ": 3,
+   "t": 5772,
+   "menge": 3,
+   "ort": [
+    89,
+    275
+   ],
+   "arbeitsplatz": 27
+  },
+  {
+   "nr": 166,
+   "typ": 3,
+   "t": 5787,
+   "menge": 3,
+   "ort": [
+    89,
+    275
+   ],
+   "arbeitsplatz": 27
+  },
+  {
+   "nr": 168,
+   "typ": 3,
+   "t": 5473,
+   "menge": 3,
+   "ort": [
+    92,
+    272
+   ],
+   "arbeitsplatz": 28
+  },
+  {
+   "nr": 168,
+   "typ": 3,
+   "t": 5486,
+   "menge": 3,
+   "ort": [
+    92,
+    272
+   ],
+   "arbeitsplatz": 28
+  },
+  {
+   "nr": 168,
+   "typ": 3,
+   "t": 5501,
+   "menge": 3,
+   "ort": [
+    92,
+    272
+   ],
+   "arbeitsplatz": 28
+  },
+  {
+   "nr": 168,
+   "typ": 3,
+   "t": 5515,
+   "menge": 2,
+   "ort": [
+    92,
+    272
+   ],
+   "arbeitsplatz": 28
+  },
+  {
+   "nr": 168,
+   "typ": 3,
+   "t": 5529,
+   "menge": 1,
+   "ort": [
+    92,
+    272
+   ],
+   "arbeitsplatz": 28
+  },
+  {
+   "nr": 168,
+   "typ": 3,
+   "t": 5629,
+   "menge": 2,
+   "ort": [
+    89,
+    275
+   ],
+   "arbeitsplatz": 28
+  },
+  {
+   "nr": 168,
+   "typ": 3,
+   "t": 5644,
+   "menge": 3,
+   "ort": [
+    89,
+    275
+   ],
+   "arbeitsplatz": 28
+  },
+  {
+   "nr": 168,
+   "typ": 3,
+   "t": 5659,
+   "menge": 1,
+   "ort": [
+    90,
+    275
+   ],
+   "arbeitsplatz": 28
+  },
+  {
+   "nr": 197,
+   "typ": 8,
+   "t": 4859,
+   "menge": 1,
+   "ort": [
+    89,
+    265
+   ],
+   "arbeitsplatz": 24
+  },
+  {
+   "nr": 197,
+   "typ": 8,
+   "t": 5057,
+   "menge": 1,
+   "ort": [
+    89,
+    266
+   ],
+   "arbeitsplatz": 24
+  },
+  {
+   "nr": 197,
+   "typ": 8,
+   "t": 5241,
+   "menge": 1,
+   "ort": [
+    89,
+    265
+   ],
+   "arbeitsplatz": 24
+  },
+  {
+   "nr": 197,
+   "typ": 8,
+   "t": 5459,
+   "menge": 1,
+   "ort": [
+    89,
+    266
+   ],
+   "arbeitsplatz": 24
+  },
+  {
+   "nr": 197,
+   "typ": 8,
+   "t": 5644,
+   "menge": 1,
+   "ort": [
+    89,
+    265
+   ],
+   "arbeitsplatz": 24
+  },
+  {
+   "nr": 197,
+   "typ": 8,
+   "t": 6091,
+   "menge": 1,
+   "ort": [
+    89,
+    265
+   ],
+   "arbeitsplatz": 24
+  },
+  {
+   "nr": 197,
+   "typ": 8,
+   "t": 6418,
+   "menge": 1,
+   "ort": [
+    89,
+    272
+   ],
+   "arbeitsplatz": 24
+  },
+  {
+   "nr": 197,
+   "typ": 8,
+   "t": 6755,
+   "menge": 1,
+   "ort": [
+    89,
+    265
+   ],
+   "arbeitsplatz": 24
+  },
+  {
+   "nr": 197,
+   "typ": 8,
+   "t": 6947,
+   "menge": 1,
+   "ort": [
+    89,
+    265
+   ],
+   "arbeitsplatz": 24
+  },
+  {
+   "nr": 197,
+   "typ": 8,
+   "t": 7140,
+   "menge": 1,
+   "ort": [
+    89,
+    265
+   ],
+   "arbeitsplatz": 24
+  },
+  {
+   "nr": 197,
+   "typ": 8,
+   "t": 7345,
+   "menge": 1,
+   "ort": [
+    89,
+    266
+   ],
+   "arbeitsplatz": 24
+  },
+  {
+   "nr": 197,
+   "typ": 8,
+   "t": 7532,
+   "menge": 1,
+   "ort": [
+    89,
+    266
+   ],
+   "arbeitsplatz": 24
+  },
+  {
+   "nr": 197,
+   "typ": 8,
+   "t": 7721,
+   "menge": 1,
+   "ort": [
+    89,
+    266
+   ],
+   "arbeitsplatz": 24
+  },
+  {
+   "nr": 199,
+   "typ": 13,
+   "t": 5099,
+   "menge": 2,
+   "ort": [
+    92,
+    234
+   ],
+   "arbeitsplatz": 51
+  },
+  {
+   "nr": 199,
+   "typ": 13,
+   "t": 5114,
+   "menge": 3,
+   "ort": [
+    92,
+    234
+   ],
+   "arbeitsplatz": 51
+  },
+  {
+   "nr": 199,
+   "typ": 13,
+   "t": 5930,
+   "menge": 2,
+   "ort": [
+    92,
+    234
+   ],
+   "arbeitsplatz": 51
+  },
+  {
+   "nr": 199,
+   "typ": 13,
+   "t": 5944,
+   "menge": 2,
+   "ort": [
+    92,
+    234
+   ],
+   "arbeitsplatz": 51
+  },
+  {
+   "nr": 199,
+   "typ": 13,
+   "t": 6963,
+   "menge": 3,
+   "ort": [
+    92,
+    234
+   ],
+   "arbeitsplatz": 51
+  },
+  {
+   "nr": 199,
+   "typ": 13,
+   "t": 6977,
+   "menge": 2,
+   "ort": [
+    92,
+    235
+   ],
+   "arbeitsplatz": 51
+  },
+  {
+   "nr": 199,
+   "typ": 13,
+   "t": 7532,
+   "menge": 2,
+   "ort": [
+    92,
+    234
+   ],
+   "arbeitsplatz": 51
+  },
+  {
+   "nr": 199,
+   "typ": 13,
+   "t": 7545,
+   "menge": 2,
+   "ort": [
+    92,
+    234
+   ],
+   "arbeitsplatz": 51
+  },
+  {
+   "nr": 209,
+   "typ": 13,
+   "t": 5329,
+   "menge": 3,
+   "ort": [
+    92,
+    234
+   ],
+   "arbeitsplatz": 52
+  },
+  {
+   "nr": 209,
+   "typ": 13,
+   "t": 5344,
+   "menge": 1,
+   "ort": [
+    92,
+    235
+   ],
+   "arbeitsplatz": 52
+  },
+  {
+   "nr": 209,
+   "typ": 13,
+   "t": 6434,
+   "menge": 3,
+   "ort": [
+    92,
+    234
+   ],
+   "arbeitsplatz": 52
+  },
+  {
+   "nr": 209,
+   "typ": 13,
+   "t": 6448,
+   "menge": 2,
+   "ort": [
+    92,
+    235
+   ],
+   "arbeitsplatz": 52
+  },
+  {
+   "nr": 209,
+   "typ": 13,
+   "t": 7488,
+   "menge": 3,
+   "ort": [
+    92,
+    234
+   ],
+   "arbeitsplatz": 52
+  },
+  {
+   "nr": 209,
+   "typ": 13,
+   "t": 7503,
+   "menge": 1,
+   "ort": [
+    92,
+    235
+   ],
+   "arbeitsplatz": 52
+  },
+  {
+   "nr": 211,
+   "typ": 3,
+   "t": 7663,
+   "menge": 18,
+   "ort": [
+    90,
+    275
+   ],
+   "arbeitsplatz": 55
+  },
+  {
+   "nr": 212,
+   "typ": 13,
+   "t": 4760,
+   "menge": 3,
+   "ort": [
+    92,
+    234
+   ],
+   "arbeitsplatz": 53
+  },
+  {
+   "nr": 212,
+   "typ": 13,
+   "t": 4774,
+   "menge": 2,
+   "ort": [
+    92,
+    234
+   ],
+   "arbeitsplatz": 53
+  },
+  {
+   "nr": 212,
+   "typ": 13,
+   "t": 6134,
+   "menge": 3,
+   "ort": [
+    92,
+    234
+   ],
+   "arbeitsplatz": 53
+  },
+  {
+   "nr": 212,
+   "typ": 13,
+   "t": 6149,
+   "menge": 1,
+   "ort": [
+    92,
+    235
+   ],
+   "arbeitsplatz": 53
+  },
+  {
+   "nr": 212,
+   "typ": 13,
+   "t": 7503,
+   "menge": 2,
+   "ort": [
+    92,
+    234
+   ],
+   "arbeitsplatz": 53
+  },
+  {
+   "nr": 212,
+   "typ": 13,
+   "t": 7518,
+   "menge": 3,
+   "ort": [
+    92,
+    234
+   ],
+   "arbeitsplatz": 53
+  },
+  {
+   "nr": 213,
+   "typ": 14,
+   "t": 7196,
+   "menge": 2,
+   "ort": [
+    92,
+    234
+   ],
+   "arbeitsplatz": 57
+  },
+  {
+   "nr": 213,
+   "typ": 14,
+   "t": 7210,
+   "menge": 2,
+   "ort": [
+    92,
+    234
+   ],
+   "arbeitsplatz": 57
+  },
+  {
+   "nr": 213,
+   "typ": 14,
+   "t": 7226,
+   "menge": 2,
+   "ort": [
+    93,
+    234
+   ],
+   "arbeitsplatz": 57
+  },
+  {
+   "nr": 214,
+   "typ": 3,
+   "t": 6785,
+   "menge": 2,
+   "ort": [
+    92,
+    275
+   ],
+   "arbeitsplatz": 46
+  },
+  {
+   "nr": 214,
+   "typ": 3,
+   "t": 6801,
+   "menge": 3,
+   "ort": [
+    92,
+    275
+   ],
+   "arbeitsplatz": 46
+  },
+  {
+   "nr": 214,
+   "typ": 3,
+   "t": 6815,
+   "menge": 3,
+   "ort": [
+    92,
+    275
+   ],
+   "arbeitsplatz": 46
+  },
+  {
+   "nr": 214,
+   "typ": 3,
+   "t": 6829,
+   "menge": 3,
+   "ort": [
+    92,
+    275
+   ],
+   "arbeitsplatz": 46
+  },
+  {
+   "nr": 214,
+   "typ": 3,
+   "t": 6845,
+   "menge": 3,
+   "ort": [
+    92,
+    275
+   ],
+   "arbeitsplatz": 46
+  },
+  {
+   "nr": 214,
+   "typ": 3,
+   "t": 6859,
+   "menge": 3,
+   "ort": [
+    92,
+    275
+   ],
+   "arbeitsplatz": 46
+  },
+  {
+   "nr": 214,
+   "typ": 3,
+   "t": 6873,
+   "menge": 1,
+   "ort": [
+    92,
+    275
+   ],
+   "arbeitsplatz": 46
+  },
+  {
+   "nr": 215,
+   "typ": 3,
+   "t": 6314,
+   "menge": 2,
+   "ort": [
+    89,
+    275
+   ],
+   "arbeitsplatz": 47
+  },
+  {
+   "nr": 215,
+   "typ": 3,
+   "t": 6330,
+   "menge": 3,
+   "ort": [
+    89,
+    275
+   ],
+   "arbeitsplatz": 47
+  },
+  {
+   "nr": 215,
+   "typ": 3,
+   "t": 6346,
+   "menge": 3,
+   "ort": [
+    89,
+    275
+   ],
+   "arbeitsplatz": 47
+  },
+  {
+   "nr": 215,
+   "typ": 3,
+   "t": 6360,
+   "menge": 3,
+   "ort": [
+    89,
+    275
+   ],
+   "arbeitsplatz": 47
+  },
+  {
+   "nr": 215,
+   "typ": 3,
+   "t": 6375,
+   "menge": 3,
+   "ort": [
+    89,
+    275
+   ],
+   "arbeitsplatz": 47
+  },
+  {
+   "nr": 215,
+   "typ": 3,
+   "t": 6390,
+   "menge": 3,
+   "ort": [
+    89,
+    275
+   ],
+   "arbeitsplatz": 47
+  },
+  {
+   "nr": 215,
+   "typ": 3,
+   "t": 6404,
+   "menge": 1,
+   "ort": [
+    89,
+    275
+   ],
+   "arbeitsplatz": 47
+  },
+  {
+   "nr": 218,
+   "typ": 3,
+   "t": 6917,
+   "menge": 18,
+   "ort": [
+    92,
+    275
+   ],
+   "arbeitsplatz": 48
+  },
+  {
+   "nr": 219,
+   "typ": 9,
+   "t": 6520,
+   "menge": 7,
+   "ort": [
+    89,
+    272
+   ],
+   "arbeitsplatz": 24
+  },
+  {
+   "nr": 219,
+   "typ": 9,
+   "t": 6536,
+   "menge": 5,
+   "ort": [
+    89,
+    272
+   ],
+   "arbeitsplatz": 24
+  },
+  {
+   "nr": 220,
+   "typ": 9,
+   "t": 4816,
+   "menge": 11,
+   "ort": [
+    89,
+    272
+   ],
+   "arbeitsplatz": 32
+  },
+  {
+   "nr": 220,
+   "typ": 9,
+   "t": 4831,
+   "menge": 1,
+   "ort": [
+    89,
+    272
+   ],
+   "arbeitsplatz": 32
+  },
+  {
+   "nr": 220,
+   "typ": 9,
+   "t": 6770,
+   "menge": 10,
+   "ort": [
+    89,
+    272
+   ],
+   "arbeitsplatz": 32
+  },
+  {
+   "nr": 220,
+   "typ": 9,
+   "t": 6785,
+   "menge": 2,
+   "ort": [
+    90,
+    272
+   ],
+   "arbeitsplatz": 32
+  },
+  {
+   "nr": 221,
+   "typ": 3,
+   "t": 7079,
+   "menge": 18,
+   "ort": [
+    89,
+    275
+   ],
+   "arbeitsplatz": 49
+  },
+  {
+   "nr": 222,
+   "typ": 3,
+   "t": 6418,
+   "menge": 2,
+   "ort": [
+    89,
+    275
+   ],
+   "arbeitsplatz": 50
+  },
+  {
+   "nr": 222,
+   "typ": 3,
+   "t": 6434,
+   "menge": 3,
+   "ort": [
+    89,
+    275
+   ],
+   "arbeitsplatz": 50
+  },
+  {
+   "nr": 222,
+   "typ": 3,
+   "t": 6448,
+   "menge": 1,
+   "ort": [
+    89,
+    275
+   ],
+   "arbeitsplatz": 50
+  },
+  {
+   "nr": 222,
+   "typ": 3,
+   "t": 6520,
+   "menge": 1,
+   "ort": [
+    92,
+    275
+   ],
+   "arbeitsplatz": 50
+  },
+  {
+   "nr": 222,
+   "typ": 3,
+   "t": 6536,
+   "menge": 4,
+   "ort": [
+    92,
+    275
+   ],
+   "arbeitsplatz": 50
+  },
+  {
+   "nr": 222,
+   "typ": 3,
+   "t": 6551,
+   "menge": 3,
+   "ort": [
+    92,
+    275
+   ],
+   "arbeitsplatz": 50
+  },
+  {
+   "nr": 222,
+   "typ": 3,
+   "t": 6564,
+   "menge": 2,
+   "ort": [
+    92,
+    275
+   ],
+   "arbeitsplatz": 50
+  },
+  {
+   "nr": 222,
+   "typ": 3,
+   "t": 6578,
+   "menge": 2,
+   "ort": [
+    92,
+    275
+   ],
+   "arbeitsplatz": 50
+  },
+  {
+   "nr": 223,
+   "typ": 3,
+   "t": 6606,
+   "menge": 1,
+   "ort": [
+    92,
+    275
+   ],
+   "arbeitsplatz": 54
+  },
+  {
+   "nr": 223,
+   "typ": 3,
+   "t": 6620,
+   "menge": 3,
+   "ort": [
+    92,
+    275
+   ],
+   "arbeitsplatz": 54
+  },
+  {
+   "nr": 223,
+   "typ": 3,
+   "t": 6636,
+   "menge": 3,
+   "ort": [
+    92,
+    275
+   ],
+   "arbeitsplatz": 54
+  },
+  {
+   "nr": 223,
+   "typ": 3,
+   "t": 6650,
+   "menge": 3,
+   "ort": [
+    92,
+    275
+   ],
+   "arbeitsplatz": 54
+  },
+  {
+   "nr": 223,
+   "typ": 3,
+   "t": 6666,
+   "menge": 3,
+   "ort": [
+    92,
+    275
+   ],
+   "arbeitsplatz": 54
+  },
+  {
+   "nr": 223,
+   "typ": 3,
+   "t": 6681,
+   "menge": 3,
+   "ort": [
+    92,
+    275
+   ],
+   "arbeitsplatz": 54
+  },
+  {
+   "nr": 223,
+   "typ": 3,
+   "t": 6696,
+   "menge": 2,
+   "ort": [
+    92,
+    275
+   ],
+   "arbeitsplatz": 54
+  },
+  {
+   "nr": 224,
+   "typ": 3,
+   "t": 6873,
+   "menge": 18,
+   "ort": [
+    92,
+    272
+   ],
+   "arbeitsplatz": 56
+  },
+  {
+   "nr": 225,
+   "typ": 3,
+   "t": 7518,
+   "menge": 18,
+   "ort": [
+    89,
+    275
+   ],
+   "arbeitsplatz": 58
+  },
+  {
+   "nr": 226,
+   "typ": 8,
+   "t": 4970,
+   "menge": 1,
+   "ort": [
+    89,
+    275
+   ],
+   "arbeitsplatz": 32
+  },
+  {
+   "nr": 226,
+   "typ": 8,
+   "t": 5129,
+   "menge": 1,
+   "ort": [
+    89,
+    275
+   ],
+   "arbeitsplatz": 32
+  },
+  {
+   "nr": 226,
+   "typ": 8,
+   "t": 5299,
+   "menge": 1,
+   "ort": [
+    89,
+    276
+   ],
+   "arbeitsplatz": 32
+  },
+  {
+   "nr": 226,
+   "typ": 8,
+   "t": 5445,
+   "menge": 1,
+   "ort": [
+    89,
+    275
+   ],
+   "arbeitsplatz": 32
+  },
+  {
+   "nr": 226,
+   "typ": 8,
+   "t": 5887,
+   "menge": 1,
+   "ort": [
+    90,
+    275
+   ],
+   "arbeitsplatz": 32
+  },
+  {
+   "nr": 226,
+   "typ": 8,
+   "t": 6237,
+   "menge": 1,
+   "ort": [
+    89,
+    276
+   ],
+   "arbeitsplatz": 32
+  },
+  {
+   "nr": 226,
+   "typ": 8,
+   "t": 6390,
+   "menge": 1,
+   "ort": [
+    89,
+    275
+   ],
+   "arbeitsplatz": 32
+  },
+  {
+   "nr": 226,
+   "typ": 8,
+   "t": 6666,
+   "menge": 1,
+   "ort": [
+    89,
+    272
+   ],
+   "arbeitsplatz": 32
+  },
+  {
+   "nr": 226,
+   "typ": 8,
+   "t": 6930,
+   "menge": 1,
+   "ort": [
+    89,
+    276
+   ],
+   "arbeitsplatz": 32
+  },
+  {
+   "nr": 226,
+   "typ": 8,
+   "t": 7094,
+   "menge": 1,
+   "ort": [
+    89,
+    276
+   ],
+   "arbeitsplatz": 32
+  },
+  {
+   "nr": 226,
+   "typ": 8,
+   "t": 7254,
+   "menge": 1,
+   "ort": [
+    89,
+    276
+   ],
+   "arbeitsplatz": 32
+  },
+  {
+   "nr": 226,
+   "typ": 8,
+   "t": 7415,
+   "menge": 1,
+   "ort": [
+    89,
+    276
+   ],
+   "arbeitsplatz": 32
+  },
+  {
+   "nr": 226,
+   "typ": 8,
+   "t": 7573,
+   "menge": 1,
+   "ort": [
+    89,
+    276
+   ],
+   "arbeitsplatz": 32
+  },
+  {
+   "nr": 226,
+   "typ": 8,
+   "t": 7737,
+   "menge": 1,
+   "ort": [
+    90,
+    275
+   ],
+   "arbeitsplatz": 32
+  },
+  {
+   "nr": 243,
+   "typ": 57,
+   "t": 6134,
+   "menge": 5,
+   "ort": [
+    141,
+    269
+   ],
+   "arbeitsplatz": 1
+  }
+ ]
+}

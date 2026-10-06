@@ -135,6 +135,22 @@ Spiels abgelesen ist, aber noch nicht mit laufenden Einheiten geprueft, bleibt "
 | B26 | Eine Eisenmine zu bauen ist fast immer besser, als Holz und Stein nur zu verkaufen | Daniel | Daniel 21:34; steht gegen unsere Messung (v4: 11 Minen bis Tick 14.000 kein Eisen, Anlauf 6.664; v5: 359 Holz ungenutzt im Endspiel) -> Verdacht: unsere Minen sind falsch gesetzt/unbesetzt/Eisen sofort verkauft - Diagnose offen | 06.10. |
 | B28 | "Gruende" wie fehlendes Holz/Arbeiter sind keine Gruende: entweder fehlen dem Planer Informationen oder er nutzt sie nicht. Planer entscheidet gierig je Runde statt vorauszuplanen (spart nicht auf den besten Bau, erfaehrt nicht, dass ein fester Platz gescheitert ist) | Daniel | Daniel 21:52; umgesetzt v11: Holz fuer den besten Bau zurueckhalten, Steinbruch am Stein weitersuchen - Vorausplanung (Reservierung von Arbeitern, Huetten vorab) offen | 06.10. |
 
+## Ablaeufe (automatisch gemessen, Daniel 06.10. 22:44: "ALLES festhalten")
+Quelle jeder Zeile: Lageprotokoll (`werkzeug/lageprotokoll.py`, jede Runde der komplette Abzug) + `werkzeug/ablaufanalyse.py`;
+alle Einzelwerte maschinenlesbar in `daten/wissen_ablauf.jsonl` (waechst mit jedem Lauf). Mitschnitt v15b ohne Eingriff,
+Tick 4.731-7.737, Aufloesung 14,5 Ticks (`daten/lage_ablauf_fein_20261006_224521_i1.jsonl.gz`).
+
+| Nr | Erkenntnis | Stufe | Beleg | Datum |
+|---|---|---|---|---|
+| L1 | Gehen: alle Arbeiterarten ~14,5 Ticks je Feld, mit und ohne Last gleich (Holzfaeller 903 Felder, Apfelbauer 540, Ochse 32). Der grobe Mitschnitt (31 Ticks) ergab 24 - Messfehler durch Stillstand zwischen zwei Runden | getestet | ablauf_lage_ablauf_fein | 06.10. |
+| L2 | Holzfaeller verbringt 62 % seiner Zeit mit Gehen (38 % beladen, Abschnitt Median 1.183 Ticks; 24 % leer, 833); 25 % an der Huette (Zustand 5, Median 385) | getestet | dito, 13 Holzfaeller | 06.10. |
+| L3 | Ein Holzfaeller bringt 18 Holz je Gang (Abladen in Schritten von 2-6); 13 Holzfaeller lieferten 207 Holz in 3.000 Ticks = 5,3 je Holzfaeller und 1.000 Ticks - bei 55-75 Feldern Weg | getestet | dito | 06.10. |
+| L4 | Stein: Steinbrucharbeiter (Typ 8, Arbeitsplatz = Joch) tragen 1 Stein je 189 Ticks zum Haufen; Ochse bringt 6 je Gang (einmal 12); netto 12 Stein je 1.000 Ticks mit 2 Steinbruechen | getestet | dito | 06.10. |
+| L5 | Die 6 Steinmetze (Typ 7, Arbeitsplatz = Steinbruch) stehen 100 % der Zeit in Zustand 1. Daniel 22:44: "liegt daran, dass sie erstmal Stein benoetigen" - Ablauf noch nicht vermessen | ungeprueft (Daniel) | dito | 06.10. |
+| L6 | Lager: 1 Platz = 4 Teile je 3x3 (6x6), jedes Teil 48 Stueck einer Ware | getestet | lage_v15b_weiter (Teile 6-9 bei (89-92, 270-273)) | 06.10. |
+| L7 | Bauern kommen ~1 je 52 Ticks, sammeln sich zu viert am Feuer und gehen gemeinsam; Arbeit geht erst an Holzfaeller, dann Steinbruch, dann Joch (12 von 12 neue Arbeiter zu Holzfaellern) | getestet + Daniel (Reihenfolge) | arbeitsvergabe_messung_20261006.txt; v15b: Steinbruch voll 904, Joche 1.100 | 06.10. |
+| L8 | Ein Steinbruch legt seinen Steinhaufen (Typ 21) selbst daneben - (80,265) -> (87,267), (80,271) -> (87,276); er belegt Bauplatz | getestet | v15 Abbruch, Gebaeudeliste Tick 1.650 | 06.10. |
+
 ## Bewaehrt / nicht bewaehrt (nach jedem Lauf eine Zeile, Daniel 21:05: "schauen, was hat sich bewaehrt und was nicht")
 
 | Lauf | Was | Bewaehrt? | Messwert |

@@ -1073,6 +1073,14 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
     if BUCH is not None:
         BUCH.abgleich(G, L, st)
         schreib(BUCH.stand(G, st))
+    try:
+        # Daniel 22:44: "ALLES festhalten" - jeder Lauf wird vermessen und sein Wissen an daten/wissen_ablauf.jsonl gehaengt
+        import ablaufanalyse as AA
+        erg, _ = AA.analyse(lage.pfad, SP)
+        schreib(AA.text(erg))
+        schreib("Wissen angehaengt: %s" % AA.wissen_anhaengen(erg))
+    except Exception as ex:
+        schreib("ABLAUFANALYSE fehlgeschlagen: %r" % ex)
     ausbau.sichern(os.path.join(D, "ertrag_gelernt_%s_i%d.json" % (time.strftime("%Y%m%d_%H%M%S"), INSTANZ)))
 
 def main():
