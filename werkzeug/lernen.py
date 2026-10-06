@@ -120,13 +120,16 @@ def lauf(strategie, bis_tick, nr):
 
 
 def schluessel(s):
-    return json.dumps(s, sort_keys=True)
+    # fehlende Knoepfe (aeltere Laeufe kannten sie nicht) zaehlen mit ihrem Grundwert - sonst haelt der Kreis eine schon
+    # gespielte Strategie fuer neu (23:21: Lauf 3 wiederholte Lauf 2, weil "vollbeschaeftigung" fehlte)
+    return json.dumps(dict(GRUND, **s), sort_keys=True)
 
 
 def naechste(beste, gespielt, ns):
     """23:24: nicht wuerfeln. Die Verluste der besten Strategie der Groesse nach; je Verlust seine Knoepfe in Rangfolge;
     der erste Knopf mit einem noch nicht gespielten Wert gewinnt (logische Konsequenz aus der Nachschau). Erst wenn alle
     passenden Knoepfe durch sind, zufaellig."""
+    beste = dict(GRUND, **beste)            # aeltere Laeufe kennen neue Knoepfe nicht -> Grundwert
     if ns:
         anteil = {v: ns.get(v, 0) / float(max(1, ns.get("ticks", 1))) for v in VERLUST_KNOEPFE}
         for verlust in sorted(anteil, key=anteil.get, reverse=True):
