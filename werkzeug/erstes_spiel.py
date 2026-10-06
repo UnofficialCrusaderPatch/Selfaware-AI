@@ -354,7 +354,10 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
     ausbau = Ertragsplaner(plan, SP, baue_schnell, wirt, s32(peek(PD + 0x2188)[0]), ende=bis_tick, protokoll=lernlog, wegtest=wegtest)   # lernt im Spiel (Daniel 19:44)
 
     def gold_bremst(st, G):
-        """Es sollen Assassinen her, aber das Gold reicht nicht fuer den naechsten (70 + B-Ruecklage)."""
+        """Es sollen Assassinen her, aber das Gold reicht nicht fuer den naechsten (70 + B-Ruecklage) - oder Gold ist selbst
+        das Ziel (gold_ziel, Testpartie gegen die leere KI)."""
+        if gold_ziel and st.get("gold", 0) < gold_ziel:
+            return True
         return bool(assassinen) and (assassinen < 0 or geworben < assassinen) and st.get("gold", 0) < 70 + wirt.ruecklage(G)["gold"]
 
     def holz_verwerten(st, L, G):
@@ -422,6 +425,19 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
         tz = time.time()
         ereignis = w.schritt(L, gebs, ausgenommen=trupp.mitglieder if trupp else ()) if w is not None else []
         tz = uhr("waechter", tz)
+        # Markt und Verkauf gehoeren zur Wirtschaft, nicht zu den Assassinen (gold10k_1: mit assassinen=0 wurde 60.000
+        # Ticks lang nichts verkauft - der Block stand im Assassinen-Teil; Gold am Ende 1.013, nur aus Steuern)
+        if not [n for n, g in G.items() if g["besitzer"] == SP and g["typ"] == 26] and runde % 20 == 2:
+            ereignis.append("Markt gesetzt %s" % (baue_schnell(26, BERGFRIED[0], BERGFRIED[1], 25),))
+        elif runde % 3 == 0:
+            bremst = gold_bremst(st, G)
+            v = verkaufen(st, ausbau.reserve()["stein"], ausbau.messer, holz_verkaufen=bremst)
+            if v:
+                ereignis.append(v)
+            if not bremst and st["holz"] > HOLZ_RESERVE + 4:     # Gold reicht: Holzueberschuss -> Holzfaeller
+                ort, text = ausbau.holzfaeller_statt_verkauf(st, L, G)
+                if ort:
+                    ereignis.append("Holzfaeller statt Holzverkauf bei %s (Holz %d; %s)" % (ort, st["holz"], text))
         if trupp is not None:
             # Soeldnerlager (120 Gold) einmal bauen, dann Assassinen (Typ 73) anwerben bis zur Zahl; Mitglieder = alle eigenen 73er
             posten = [n for n, g in G.items() if g["besitzer"] == SP and g["typ"] == 8]
@@ -438,17 +454,6 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
             if posten and runde % 50 == 0:     # ganz_1: in 28.700 Ticks nur 1 Assassine - welche Bedingung bremst?
                 ereignis.append("ANWERBEN-BREMSE: Gold %d (braucht %d), Feuer %d, Planer braucht Gold %s, A-Farmen offen %d" % (
                     st["gold"], 70 + wirt.ruecklage(G)["gold"], st["feuer"], bool(ausbau.braucht_gold), len(wirt.a_offen(G))))
-            if not [n for n, g in G.items() if g["besitzer"] == SP and g["typ"] == 26] and runde % 20 == 2:
-                ereignis.append("Markt gesetzt %s" % (baue_schnell(26, BERGFRIED[0], BERGFRIED[1], 25),))
-            elif runde % 3 == 0:
-                bremst = gold_bremst(st, G)
-                v = verkaufen(st, ausbau.reserve()["stein"], ausbau.messer, holz_verkaufen=bremst)
-                if v:
-                    ereignis.append(v)
-                if not bremst and st["holz"] > HOLZ_RESERVE + 4:     # Gold reicht: Holzueberschuss -> Holzfaeller
-                    ort, text = ausbau.holzfaeller_statt_verkauf(st, L, G)
-                    if ort:
-                        ereignis.append("Holzfaeller statt Holzverkauf bei %s (Holz %d; %s)" % (ort, st["holz"], text))
             tz = uhr("bauen_werben_verkauf", tz)
             trupp.aufnehmen([n for n, e in L.items() if e["besitzer"] == SP and e["typ"] == 73])
             # nur begehbare Plaetze (9g: Gebaeudemitten waren nicht begehbar - die Wartenden blieben im Schussfeld)
