@@ -391,6 +391,23 @@ def kaserne_am_feuer(G):
     x, y = (feuer["x"] + 3, feuer["y"] + 3) if feuer else (BERGFRIED[0], BERGFRIED[1] + 6)
     return baue_schnell(9, x, y, 20)
 
+_SPLITS = []
+ZIEL_FAKTOR = 11930 / 9600.0      # Bestzeit v5 -> Ziel unter 1 Jahr (9.600 Ticks)
+
+def bestzeit_split(tick_jetzt):
+    """Bilanz-Wert der Bestzeit (v5) beim letzten Tick <= tick_jetzt, aus deren Protokoll (BILANZ-Zeilen)."""
+    if not _SPLITS:
+        pfad = os.path.join(D, "haertetest_v5_20261006.txt")
+        if os.path.exists(pfad):
+            for z in open(pfad, encoding="utf-8", errors="replace"):
+                m = re.match(r"\s*(\d+) \|.*BILANZ .*= (\d+) \| Bedarf", z)
+                if m:
+                    _SPLITS.append((int(m.group(1)), int(m.group(2))))
+        _SPLITS.append((0, 0))
+        _SPLITS.sort()
+    frueher = [h for t, h in _SPLITS if t <= tick_jetzt]
+    return frueher[-1] if frueher else None
+
 _KOSTEN = {}
 
 def kosten_aller(typ, ausbau):
@@ -411,6 +428,11 @@ def bilanz_schritt(st, L, G, ausbau, ziel, endspiel, runde, marken):
     if not endspiel["fertig"]:
         t = BZ.rechne(st, v, G, L, SP, ziel, lambda typ: kosten_aller(typ, ausbau))
         endspiel["tabelle"] = t
+        # Zwischenzeiten wie beim TAS: Bilanz-Wert gegen die Bestzeit zum selben Tick; ab 3.000 mehr als 10 % dahinter -> Abbruch
+        # Ziel unter 1 Jahr (Daniel 21:58: "5 Versuche, um unter 1 Jahr zu kommen"): Tempo von v5 * 11.930/9.600 noetig
+        split = bestzeit_split(st["t"] * ZIEL_FAKTOR)
+        if split and st["t"] >= 3000 and t["habe_gold"] < 0.9 * split:
+            endspiel["abbruch"] = "Bilanz %d < 90 %% des Ziel-Tempos (%d) bei Tick %d" % (t["habe_gold"], split, st["t"])
         if runde % 10 == 0 or t["jetzt_erreichbar"]:
             aus.append(BZ.text(t))
         if not t["jetzt_erreichbar"]:
@@ -750,12 +772,13 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
             lager_teile = [g for g in G.values() if g["besitzer"] == SP and g["typ"] == 10]
             weit = [(g["x"], g["y"]) for g in G.values() if g["besitzer"] == SP and g["typ"] == 20 and lager_teile and
                     min(max(abs(g["x"] - l["x"]), abs(g["y"] - l["y"])) for l in lager_teile) > 40]
-            soll = 3 if st["t"] >= 4000 else 2 if st["t"] >= FRUEH_TICK else 0
+            # strenger (Daniel 21:57: "wenn das so frueh passiert und die Gewinnmarge so gering ist, musst du strenger sein")
+            soll = 3 if st["t"] >= FRUEH_TICK else 2 if st["t"] >= 1500 else 0
             if st.get("G20", 0) < soll or (weit and st["t"] >= FRUEH_TICK):
                 schreib("FRUEHABBRUCH bei Tick %d: %d Steinbrueche (soll %d)%s" % (st["t"], st.get("G20", 0), soll,
                         ", weit vom Lager: %s" % weit if weit else ""))
                 break
-            if st["t"] >= 4000:
+            if st["t"] >= FRUEH_TICK:
                 fruehpruefung["ok4000"] = True
         if streitkolben and st["t"] >= FRUEH_TICK and not fruehpruefung.get("ok"):
             # Fruehabbruch (Daniel 21:55: "wenn du merkst, dass schon der Steinbruch nicht richtig gesetzt ist, muesstest du
@@ -772,6 +795,9 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                 break
             fruehpruefung["ok"] = True
             schreib("FRUEHPRUEFUNG bestanden bei Tick %d (Steinbruch, Lager umgezogen, B-Seasoning)" % st["t"])
+        if streitkolben and endspiel.get("abbruch"):
+            schreib("FRUEHABBRUCH bei Tick %d: %s" % (st["t"], endspiel["abbruch"]))
+            break
         if streitkolben:
             ereignis += bilanz_schritt(st, L, G, ausbau, streitkolben, endspiel, runde, kaempfer_marken)
             if not endspiel["fertig"] and weg != "bilanz":     # weg=bilanz: nur Wirtschaft + Bilanz-Endspiel (v5)
