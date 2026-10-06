@@ -56,7 +56,8 @@ GRUND = {"v14": "ja", "umzug": "frueh", "holzfaeller_vorab": 4, "holz_spam": 20,
          "steuer_ende": "nein", "steuer_runter": 95, "stein_max": "nein",
          "kasse": "nein", "bevoelkerung_ziel": 0, "kasse_grenze": 50}
 FEST = ["leere_ki=ja", "minuten=60", "streitkolben=10", "weg=bilanz", "experiment=ja"]
-TEMPO = 1000     # Daniel 07.10. 00:27 "Spielgeschwindigkeit maximal" (vorher 100); je Lauf gespeichert, Kontrolllauf misst die Wirkung
+TEMPO = 100      # 07.10. 00:31: 1000 getestet (Daniel 00:27) - der Lenker braucht dann 1,2 s je Runde, alle 8 Laeufe brachen ab;
+                 # das Tempo bestimmt, wie oft der Lenker hinsieht (bei 100 alle ~11 Ticks). Je Lauf gespeichert.
 # 23:26 (Daniel: Ochse vor Steinbruch, Lager nicht umgezogen - in der v5-Bauweise galten die alten Regeln): EIN Weg.
 # v14 ist fest; der Kreis aendert nur Werte, keine Bauweisen ("zwei Wege zum selben Ziel sind immer ein Fehler")
 HINWEISE = ["kasse", "bevoelkerung_ziel", "kasse_grenze", "steuer_ende", "steuer_runter", "stein_max", "b_versatz"]   # 07.10.: Steuern, dritter Steinbruch     # Daniel 23:30: "Seasoning passiert immer noch zu spaet ... jede Wartezeit der Apfelbauern ist unproduktiv"
