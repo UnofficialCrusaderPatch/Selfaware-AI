@@ -43,18 +43,22 @@ KNOEPFE = {
     "vollbeschaeftigung": ["ja", "nein"],
     "entscheider": ["regeln", "kausal"],
     "b_versatz": ["reif", 0, 300, 600],
-    "steuer_ende": ["nein", "wohnraum", "ja"],   # wohnraum zuerst: Daniel 07.10. 00:04
+    "steuer_ende": ["nein", "ja"],   # "wohnraum" (Lauf 23) gestrichen: Hoechststeuer ab Tick 1.650 -> Beliebtheit 30, Arbeiter weg, Ziel verfehlt
+    "kasse": ["nein", "steuer", "steuer_essen"],     # Daniel 07.10. 00:17/00:20
+    "bevoelkerung_ziel": [0, 50, 60, 70],
+    "kasse_grenze": [50, 35, 25],     # Lauf 26: Beliebtheit 0 -> 50 auf 4 Leute, kein Kaempfer; Beliebtheit ist ein Vorrat
     "steuer_runter": [95, 90, 85, 80],
     "stein_max": ["nein", "ja"],
 }
 GRUND = {"v14": "ja", "umzug": "frueh", "holzfaeller_vorab": 4, "holz_spam": 20, "holzfaeller_je_baum": 4, "holzfaeller_max": 30,
          "steinbruch_zuerst": "nein", "stein_parallel": "ja", "joch_nach_stein": "ja", "huetten_voraus": "ja",
          "holz_kaufen": "ja", "je_arbeiter": "ja", "vollbeschaeftigung": "nein", "entscheider": "regeln", "b_versatz": "reif",
-         "steuer_ende": "nein", "steuer_runter": 95, "stein_max": "nein"}
+         "steuer_ende": "nein", "steuer_runter": 95, "stein_max": "nein",
+         "kasse": "nein", "bevoelkerung_ziel": 0, "kasse_grenze": 50}
 FEST = ["leere_ki=ja", "tempo=100", "minuten=60", "streitkolben=10", "weg=bilanz", "experiment=ja"]
 # 23:26 (Daniel: Ochse vor Steinbruch, Lager nicht umgezogen - in der v5-Bauweise galten die alten Regeln): EIN Weg.
 # v14 ist fest; der Kreis aendert nur Werte, keine Bauweisen ("zwei Wege zum selben Ziel sind immer ein Fehler")
-HINWEISE = ["steuer_ende", "steuer_runter", "stein_max", "b_versatz"]   # 07.10.: Steuern, dritter Steinbruch     # Daniel 23:30: "Seasoning passiert immer noch zu spaet ... jede Wartezeit der Apfelbauern ist unproduktiv"
+HINWEISE = ["kasse", "bevoelkerung_ziel", "kasse_grenze", "steuer_ende", "steuer_runter", "stein_max", "b_versatz"]   # 07.10.: Steuern, dritter Steinbruch     # Daniel 23:30: "Seasoning passiert immer noch zu spaet ... jede Wartezeit der Apfelbauern ist unproduktiv"
 # welche Knoepfe zu welchem gemessenen Verlust gehoeren (Vorwissen; die Wirkung misst der Kreis selbst)
 VERLUST_KNOEPFE = {
     "wohnraum_voll": ["entscheider", "huetten_voraus", "holz_kaufen"],
@@ -124,12 +128,18 @@ def note_aus(text, bis_tick):
     r = re.search(r"KAEMPFER 10 bei Tick (\d+)", text) or re.search(r"ZIEL 10 Streitkolbenkaempfer erreicht bei Tick (\d+)", text)
     if r:
         return int(r.group(1)), "erreicht"
+    if re.search(r"ABBRUCH - Testbedingung weg", text):
+        # 07.10.: Lauf 24/27 - Spielansicht von aussen geaendert; Lauf 27 wurde hochgerechnet und galt als beste (8.562)
+        return 30000, "ungueltig: Testbedingung weg (Spielansicht von aussen geaendert)"
     if re.search(r"FRUEHABBRUCH|ABBRUCH - Spiel angehalten|Traceback", text):
         return 30000, "abgebrochen"
     bil = [(int(t), int(h), int(b)) for t, h, b in re.findall(r"^\s*(\d+) \|.*BILANZ .*= (\d+) \| Bedarf (\d+)", text, re.M)]
     if not bil:
         return 30000, "keine Bilanz"
     t1, h1, b1 = bil[-1]
+    if b1 - h1 <= 0:
+        # Lauf 26: Gold reichte, aber nur noch 4 Leute (Beliebtheit 0) - keine Kaempfer; hochrechnen waere Unsinn
+        return 30000, "nicht erreicht (Gold reicht bei Tick %d, Ziel trotzdem verfehlt)" % t1
     frueh = [x for x in bil if x[0] <= t1 - 2000] or bil[:1]
     t0, h0, _ = frueh[-1]
     rate = max(1.0, (h1 - h0) * 1000.0 / max(1, t1 - t0))
@@ -243,9 +253,12 @@ def main():
         nr_neu += 1
         r["geaendert"] = knopf
         r["vergleich"] = None if beste is None else {"gegen": beste["nr"], "note_vorher": beste["note"], "differenz": r["note"] - beste["note"]}
-        alle.append(r)
+        if r["art"].startswith("ungueltig"):
+            r["ungueltig"] = r["art"]                # von aussen gestoert - daraus wird nichts gelernt, darf wieder gespielt werden
+        else:
+            alle.append(r)
+            gespielt.add(schluessel(s))
         alle_roh.append(r)
-        gespielt.add(schluessel(s))
         with open(pfad, "a", encoding="utf-8") as f:
             f.write(json.dumps(r, ensure_ascii=False) + "\n")
         print("LERNEN Ergebnis Lauf %d: Note %d (%s)%s | Nachschau %s" % (
@@ -261,7 +274,7 @@ def main():
             w_r.append("Holz lag %d Ticks, waehrend >= 2 Bauern warteten" % ns_r["holz_liegt_bauern_warten"])
         if w_r:
             print("LERNEN WIDERSPRUCH Lauf %d: %s" % (r["nr"], "; ".join(w_r)), flush=True)
-        if beste is None or r["note"] < beste["note"]:
+        if not r.get("ungueltig") and (beste is None or r["note"] < beste["note"]):
             beste = r
             print("LERNEN neue beste Strategie (Lauf %d)" % r["nr"], flush=True)
         # Wissen: je Knopfwert die beobachteten Differenzen

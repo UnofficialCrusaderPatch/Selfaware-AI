@@ -443,6 +443,9 @@ VOLLBESCHAEFTIGUNG = False   # Lernkreis: jeder Bauer am Feuer bekommt sofort ei
 ENTSCHEIDER = "regeln"   # "kausal" (Daniel 23:27 "dynamische Antworten fuer alles"): Kausalmodell entscheidet Betriebe + Huetten
 B_VERSATZ = None         # Lernkreis: B-Plantagen so viele Ticks nach "alle A stehen" (None = erst bei A-Reife)
 STEUER_RUNTER = 95       # Lernkreis: Steuer senken unter dieser Beliebtheit (Daniel 06.10. 23:53: Steuern als Geldquelle)
+BEV_ZIEL = 0             # Lernkreis: Huetten bauen, bis so viele Wohnplaetze stehen (0 = aus; Daniel 07.10. 00:17 "60-70")
+KASSE_GRENZE = 50        # Lernkreis: Kasse nur, solange die Beliebtheit darueber liegt (Lauf 26: bei 0 Massen-Wegzug)
+KASSE = "nein"           # Lernkreis: "steuer" / "steuer_essen" - ab Ziel-Bevoelkerung (oder wenn nichts mehr lohnt) Stufe 11 bis zum Ende
 STEUER_ENDE = "nein"     # Lernkreis: Hoechststeuer (Stufe 11), sobald sich nichts mehr amortisiert (Daniel 07.10. 00:0x)
 ZIEL_TICK = 9400         # Zieltick, bis zu dem das Kausalmodell Ertraege rechnet (unter 1 Jahr = 9.600, Endspiel davor)
                          # 07.10.: Lernkreis setzt ihn auf das gemessene Ende der besten Strategie; gilt auch fuer den Planer
@@ -934,6 +937,8 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
     BUCH = Auftragsbuch(SP, ARBEITER_JE, NACH_TYP)
     ausbau.holz_max, ausbau.je_arbeiter, ausbau.huetten_je_baum = HF_MAX, JE_ARBEITER, HUETTEN_JE_BAUM
     ausbau.steuer_runter, ausbau.steuer_ende = STEUER_RUNTER, STEUER_ENDE
+    ausbau.kasse, kasse = False, {"an": None}
+    ausbau.kasse_grenze = KASSE_GRENZE
     if V14:
         wirt.umzug_ab, wirt.lager_genau, wirt.lager_ort = None, True, tuple(V14_PLAN["lager"])
         wirt.umzug_nach_b = UMZUG == "nachb"
@@ -1075,6 +1080,27 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                 frei_wohn = st.get("platz", 0) - st.get("leute", 0)
                 if fehlt_w and st["holz"] >= 5 and not any(a["typ"] == 1 for a in BUCH.offen):
                     ereignis.append("HUETTE VORAUS (frei %d, offene Arbeitsplaetze %d): %s" % (frei_wohn, offene, baue_haus()))
+            # Daniel 07.10. 00:17/00:20: "maximal viel Bevoelkerung und Holzfaeller, dann relativ frueh bei 60-70 Leuten -40
+            # Steuern, Essen stoppen und verkaufen". Wachstum: Huetten, bis BEV_ZIEL Plaetze stehen (nur wenn fast voll).
+            if BEV_ZIEL and not endspiel["fertig"] and not kasse["an"]:
+                frei_w = st.get("platz", 0) - st.get("leute", 0)
+                if st.get("platz", 0) < BEV_ZIEL and frei_w <= 2 and st["holz"] >= kosten_spiel(1)["holz"]                         and not any(a["typ"] == 1 for a in BUCH.offen):
+                    ereignis.append("WACHSTUM Huette (Platz %d, Ziel %d, frei %d): %s" % (st.get("platz", 0), BEV_ZIEL, frei_w, baue_haus()))
+            if KASSE != "nein" and not kasse["an"] and not endspiel["fertig"] and (
+                    (BEV_ZIEL and st.get("leute", 0) >= BEV_ZIEL) or fruehpruefung.get("holz_ueberfluessig")):
+                kasse["an"] = st["t"]
+                ausbau.kasse = True
+                ereignis.append("KASSE ab Tick %d (%s): Steuer 11 bis zum Ende, Leute %d, Beliebtheit %.1f%s" % (
+                    st["t"], "Ziel-Bevoelkerung" if BEV_ZIEL and st.get("leute", 0) >= BEV_ZIEL else "nichts lohnt mehr",
+                    st.get("leute", 0), st.get("beliebt", 0) / 100.0, ", keine Rationen, Nahrung wird verkauft" if KASSE == "steuer_essen" else ""))
+                if KASSE == "steuer_essen":
+                    befehl({"spielbefehl": {"nr": 35, "werte": [0]}}, 1.0, bis="SPIELBEFEHL")
+            if kasse["an"] and KASSE == "steuer_essen" and runde % 3 == 1:
+                lose_n = [{"player": 1, "id": neue_id(), "spielbefehl": {"nr": 38, "werte": [1, WAREN_NR[w]]}}
+                          for w in ("apfel", "brot", "kaese", "fleisch") for _ in range(st.get(w, 0) // 5)]
+                if lose_n:
+                    sende({"befehle": lose_n}, 1.0, bis="SPIELBEFEHL")
+                    ereignis.append("KASSE Nahrung verkauft: %d Lose" % len(lose_n))
             if runde % 10 == 1:
                 schreib(BUCH.stand(G, st))
             hf_jetzt = sum(1 for g in G.values() if g["besitzer"] == SP and g["typ"] == 3) + \
@@ -1357,7 +1383,10 @@ def main():
     HOLZ_KAUFEN = arg.get("holz_kaufen", "nein") == "ja"
     global HOLZ_SPAM, STEIN_MAX, JOCH_NACH_STEIN, STEIN_PARALLEL, HUETTEN_VORAUS, VOLLBESCHAEFTIGUNG
     VOLLBESCHAEFTIGUNG = arg.get("vollbeschaeftigung", "nein") == "ja"
-    global ENTSCHEIDER, ZIEL_TICK, B_VERSATZ, STEUER_RUNTER, STEUER_ENDE
+    global ENTSCHEIDER, ZIEL_TICK, B_VERSATZ, STEUER_RUNTER, STEUER_ENDE, BEV_ZIEL, KASSE, KASSE_GRENZE
+    BEV_ZIEL = int(arg.get("bevoelkerung_ziel", 0))
+    KASSE = arg.get("kasse", "nein")
+    KASSE_GRENZE = int(arg.get("kasse_grenze", 50))
     STEUER_RUNTER = int(arg.get("steuer_runter", 95))
     STEUER_ENDE = arg.get("steuer_ende", "nein")
     B_VERSATZ = None if arg.get("b_versatz", "reif") == "reif" else int(arg["b_versatz"])

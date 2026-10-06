@@ -543,7 +543,13 @@ class Ertragsplaner:
             wohnraum_voll = st.get("platz", 0) > 0 and st.get("leute", 0) >= st.get("platz", 0)
             # "wohnraum" (Daniel 07.10. 00:04 "ja, ab vollem Wohnraum Hoechststeuer testen"): voller Wohnraum = kein Zuzug
             # moeglich, Beliebtheit bringt dann nichts - Stufe 11, bis wieder Platz frei ist (neue Huette) oder unter 55
-            if ((ende == "ja" and getattr(self, "endphase", False)) or (ende == "wohnraum" and wohnraum_voll)) and bel >= 55:
+            if getattr(self, "kasse", False):
+                # Kasse (Daniel 07.10. 00:17/00:20): Stufe 11 bis zum Ende, OHNE Beliebtheits-Schutz - der Spielcode zahlt die
+                # Steuer unabhaengig von der Beliebtheit (updateTaxing: Stufe x Koepfe, je Monat ~800 Ticks). ABER Lauf 26:
+                # Beliebtheit 0 -> Massen-Wegzug (Liga gathering_rate -40 bei 0-4), 50 -> 4 Leute, kein Kaempfer. Darum Grenze
+                # (Knopf kasse_grenze): darunter Stufe 2 (keine Steuer, +1/Monat) - Beliebtheit ist ein Vorrat, keiner der nachwaechst
+                neu = 11 if bel >= getattr(self, "kasse_grenze", 50) else 2
+            elif ((ende == "ja" and getattr(self, "endphase", False)) or (ende == "wohnraum" and wohnraum_voll)) and bel >= 55:
                 # Daniel 07.10. 00:0x: "wenn du eh keine Produktion mehr baust, weil sie sich nicht mehr amortisiert, kannst du
                 # einfach -24 Steuern machen" - Endphase = Kausalmodell findet keine Handlung mit Wert mehr (holz_ueberfluessig);
                 # Wohnraum ist dann voll, Zuzug egal; unter 55 Beliebtheit zurueck auf die Regel (unter 50 gehen Leute)
