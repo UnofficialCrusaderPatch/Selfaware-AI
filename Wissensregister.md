@@ -117,6 +117,8 @@ Spiels abgelesen ist, aber noch nicht mit laufenden Einheiten geprueft, bleibt "
 | B9 | Haertetest v1 (Lager am Bergfried, ohne Nahrungswirtschaft), abgebrochen bei Tick 20.845: Steinbruch ab 646 -> erster Stein 5.246; Eisenmine ab 5.323 -> erstes Eisen 11.823; bis 20.845 keine Keule und kein Leder trotz 6 Kuehen (Ursache nicht gesucht); Beliebtheit 82, Leute 26, Gold 120 | getestet | `daten/haertetest_v1_abgebrochen_20261006.txt` | 06.10. |
 | B10 | Kurzes und langes Ziel trennen: Stein/Eisen so schnell wie moeglich ist "jain" - das Ziel braucht nicht nur schnell, sondern viel. Erst maximale Wirtschaft mit maximal viel Gold, im Notfall Waffen kaufen und Werkstaetten aus dem Ueberschuss finanzieren -> nach wenigen Monaten gleichauf, danach exponentiell schneller | Daniel | Daniel 21:05 | 06.10. |
 | B11 | Bauordnung v2 = Apfel-Eroeffnung (Phase 1/2 aus erstes_spiel.py) + Waffen am Markt kaufen (5 Keulen 300, 5 Leder 160, Anwerben 20 = 112 je Kaempfer); v3 = + Werkstaetten, sobald sie sich ueber den Horizont rechnen | Plan | `erstes_spiel.py streitkolben=10` | 06.10. |
+| B12 | Nicht scheu sein, MEHR zu bauen - mehr ist besser, aber schlau; schlau + mehr ist optimal. Aber nicht immer: beim Rush gibt es einen Zeitpunkt, ab dem man nicht mehr in Wirtschaft, sondern in Militaer investiert, spaeter vielleicht wieder in Wirtschaft - dynamisch, teilweise parallel | Daniel | Daniel 21:07 ("nur ein Gist von hunderten Stunden") | 06.10. |
+| B13 | Waffenlager (und Kaserne) nicht frueh bauen - sie haben keinen Wert, bevor Waffen reinkommen; das Holz/der Stein fehlt sonst in der Wirtschaft | Daniel | Daniel 21:07 (Bild v2, Tick ~2.600); umgesetzt: erst wenn Gold fuer das erste Los (300 + 160 + 20 ueber Ruecklage) da ist | 06.10. |
 
 ## Bewaehrt / nicht bewaehrt (nach jedem Lauf eine Zeile, Daniel 21:05: "schauen, was hat sich bewaehrt und was nicht")
 
@@ -128,3 +130,4 @@ Spiels abgelesen ist, aber noch nicht mit laufenden Einheiten geprueft, bleibt "
 | Aufbau 5+5 Runde 3 | Lager ans Gruenland versetzt | bewaehrt | 10->40 Kaempfer 31 % schneller |
 | Aufbauplaner Runde 1 | naechstes Lagerteil statt Eisenteil angenommen | NICHT bewaehrt | Gaenge doppelt so lang wie geplant |
 | Haertetest v1 | nur Waffenkette ab Tick 0, ohne Nahrungswirtschaft, Kaese verkauft | NICHT bewaehrt | erster Stein 5.246, erstes Eisen 11.823, keine Keule bis 20.845; Daniel brach ab |
+| Haertetest v2 (laeuft) | Waffenlager bei Tick 887 gebaut, lange bevor Waffen kamen | NICHT bewaehrt (Daniel B13) | 5 Holz frueh gebunden; fuer v2b geaendert |

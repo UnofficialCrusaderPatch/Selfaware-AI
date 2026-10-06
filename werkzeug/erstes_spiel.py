@@ -342,10 +342,15 @@ def ruestung_kaufen(st, G, wirt, ausbau, ziel, marken):
     waf = [n for n, g in eig.items() if g["typ"] == 11]
     kas = [n for n, g in eig.items() if g["typ"] == 9]
     rl = wirt.ruecklage(G)
-    if not waf and st["holz"] >= 5 + rl["holz"]:
-        aus.append("Waffenlager gesetzt %s" % (baue_schnell(11, BERGFRIED[0] - 14, BERGFRIED[1] + 14, 25),))
-    if not kas and st["stein"] >= 12:
-        aus.append("Kaserne gesetzt %s" % (baue_schnell(9, BERGFRIED[0] - 16, BERGFRIED[1] + 18, 30),))
+    # Daniel 21:07 (Bild v2, Tick ~2.600): "macht keinen Sinn, so frueh eine Waffenkammer zu bauen, die hat jetzt keinen
+    # Wert, bevor nicht Waffen reinkommen" - Waffenlager und Kaserne erst, wenn das Gold fuer das erste Los Keulen + Leder
+    # + Anwerben ueber der Ruecklage liegt; gekauft wird in der Runde danach.
+    erstes_los = LOS_PREIS[21] + LOS_PREIS[23] + KAEMPFER_GOLD + rl["gold"]
+    if st["gold"] >= erstes_los or (waf and kas):
+        if not waf and st["holz"] >= 5 + rl["holz"]:
+            aus.append("Waffenlager gesetzt %s (Gold %d)" % (baue_schnell(11, BERGFRIED[0] - 14, BERGFRIED[1] + 14, 25), st["gold"]))
+        if not kas and st["stein"] >= 12:
+            aus.append("Kaserne gesetzt %s (Gold %d)" % (baue_schnell(9, BERGFRIED[0] - 16, BERGFRIED[1] + 18, 30), st["gold"]))
     if not (waf and kas) or not [n for n, g in eig.items() if g["typ"] == 26]:
         return aus
     v = vorrat(SP)
