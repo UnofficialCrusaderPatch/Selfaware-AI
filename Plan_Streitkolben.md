@@ -146,3 +146,15 @@ Gerberei / Eisenmine / Waffenlager / Schmiede (Aufbauplaner) -> Kaserne. Bedarf:
 - v1 abgebrochen 21:01 (Daniel): nicht optimiert - es fehlen Apfelplantagen, Holzfaeller, Jaeger; der schnellste Weg
   zu einer einzelnen Streitkolben-Werkstatt ist nicht der schnellste zu 10; Kaese kommt als Nahrung zu langsam (B7/B8).
   Gemessen bis dahin: erster Stein 5.246, erstes Eisen 11.823, keine Keule/kein Leder bis 20.845 (B9).
+
+## Bewertungskette fuer "unter 1 Jahr" (Daniel 21:58/21:59: 5 Versuche; "keine Bewertungskette oder kritische Befragung")
+Stand 21:59, Bestzeit v5 11.930 (Endspiel 11.416). Ziel < 9.600 -> Endspiel bei ~9.400 mit Bedarf ~1.185 Gold-Wert;
+v5 hatte bei 9.400 erst ~900 -> es fehlen ~30 %.
+1. Schnellere Eroeffnung (v11/v12: Seasoning B 1.215 statt 1.720) + schnelleres Endspiel -> grob 11.000. Reicht NICHT.
+2. Groesster Hebel = Bedarf senken: von 1.120 gehen 600 an Keulen, 320 an Leder.
+   - eigenes Leder: 2 Hoefe + 1 Gerberei direkt nach dem Seasoning (~105 Gold) spart 320 (0,46 Kuehe/Hof/1000, 3 Leder/Kuh).
+   - eigene Keulen aus GEKAUFTEM Eisen: 7 Eisen x 54 = 378 -> 10 Keulen (1,5/Eisen) spart ~220 gegen 600.
+   -> Bedarf ~30 % kleiner = genau die Luecke. Gegenprobe Zeit: Hoefe ab ~1.300 -> ~7 Kuehe bis 9.000 (21 Leder);
+      Schmiede 1,5 Keulen je ~1.100 Ticks -> ~10 bis 8.000. Nur gerechnet (ungeprueft).
+3. Gleiche Fassung mehrfach laufen lassen ist KEIN Weg (Daniel) - erst Aenderung mit Rechnung, dann Versuch.
+Naechster Schritt v14: weg=bilanz + fruehe Leder-Kette + Schmiede mit Markt-Eisen; Bilanz rechnet eigene Waffen gegen.
