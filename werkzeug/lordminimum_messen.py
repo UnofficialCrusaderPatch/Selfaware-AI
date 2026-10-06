@@ -33,12 +33,7 @@ def auswahl(L, groesse):
 def vorbereiten(stand, groesse):
     """Trainingsstand laden, pruefen und die Gruppe freigeben; die uebrigen bleiben ausser Schussweite stehen.
     Gibt (status, einheiten, gebaeude, truppe, lord_nr, lord). Auch von zielfeld_suchen.py benutzt."""
-    try:
-        lade_stand(stand, mit_bild=False)
-    except RuntimeError:
-        # Wenn vorher exakt derselbe Tick angezeigt wurde, kann der Lade-Waechter den Sprung nicht sehen; der Stand
-        # ist dennoch geladen. Die harten Bedingungen unten (Ansicht, Lord, 40 Assassinen) entscheiden.
-        pass
+    lade_stand(stand, mit_bild=False)   # 06.10.: die Lade-Pruefung wartet jetzt auf die Lade-Meldung (laden.py)
     befehl({"eigenerPlatz": SP}, 0.8)
     st, L, G = runde_lesen()
     lords = [(n, e) for n, e in L.items() if e["typ"] == 55 and e["besitzer"] not in (0, SP)]

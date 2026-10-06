@@ -84,7 +84,9 @@ def lade_stand(ziel, mit_bild=True):
     antwort = sende({"befehle": [
         {"id": neue_id(), "player": 1, "poke": SCROLL, "wert": scroll},
         {"id": neue_id(), "player": 1, "poke": MARKIERT, "wert": zeile},
-        {"id": neue_id(), "player": 1, "laden": 2}]}, 4.0)
+        {"id": neue_id(), "player": 1, "laden": 2}]}, 4.0, bis="LADEPAUSE: Laden erkannt")
+    # 06.10.: auf die Lade-Meldung warten, nicht auf die Quittung - die kommt im selben Tick wie der Knopfdruck, das
+    # Laden selbst erst danach (seit der Quittung 05.10. 23:01 meldete jedes Laden "kein Laden erkannt")
     print(antwort)
     befehl({"pause": True})                                       # Sicherheitsnetz
     befehl({"ladepause": "aus"})                                  # nichts scharf zuruecklassen
