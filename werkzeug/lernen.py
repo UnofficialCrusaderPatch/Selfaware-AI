@@ -206,6 +206,11 @@ def main():
     alle = [r for r in alle if not r.get("ungueltig")]       # Fehler im Lenker - daraus wird nichts gelernt
     gespielt = {schluessel(r["strategie"]) for r in alle}
     gueltig = [r for r in alle if r["strategie"].get("v14", "ja") == "ja"]     # nur Laeufe auf dem einen Weg zaehlen
+    # 07.10.: der letzte Kontrolllauf setzt den Massstab - aeltere Laeufe liefen mit anderem Code (Lauf 11 alt 10.543,
+    # dieselbe Strategie im Kontrolllauf 18 mit neuem Code 11.502). Neustart ohne kontrolle=ja vergleicht ab dort.
+    k_idx = [i for i, r in enumerate(gueltig) if r.get("geaendert") == "kontrolle"]
+    if k_idx and arg.get("kontrolle") != "ja":
+        gueltig = gueltig[k_idx[-1]:]
     beste = min(gueltig, key=lambda r: r["note"]) if gueltig else None
     kontrolle = arg.get("kontrolle") == "ja"
     # 07.10.: Nummer aus ALLEN Laeufen (vorher len(alle) ohne ungueltige -> 8 bis 11 doppelt vergeben)
