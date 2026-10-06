@@ -257,7 +257,16 @@ def platz_sauber(typ, frei):
     except Exception:
         return frei
     b = GROESSE_IST.get(typ, NACH_TYP[typ]["b"])
-    leute = [(e["x"], e["y"]) for e in L.values() if e["besitzer"] == SP]
+    # Daniel 23:35: "nicht nur gerade steht, sondern zum Zeitpunkt des Bauens stehen wird" - jede eigene Einheit mit ihrem
+    # ganzen Weg bis zum Laufziel (laufx/laufy aus dem Lagebild), Feld fuer Feld auf der Geraden
+    leute = []
+    for e in L.values():
+        if e["besitzer"] != SP:
+            continue
+        x0, y0 = e["x"], e["y"]
+        x1, y1 = (e["laufx"], e["laufy"]) if e.get("laufx", 0) > 0 and e.get("laufy", 0) > 0 else (x0, y0)
+        n = max(abs(x1 - x0), abs(y1 - y0), 1)
+        leute += [(x0 + round((x1 - x0) * i / float(n)), y0 + round((y1 - y0) * i / float(n))) for i in range(n + 1)]
     gang_zu = {10: (20, 21, 4), 4: (10, 20)}.get(typ, ())
     hindernis = [(gg["x"], gg["y"], GROESSE_IST.get(gg["typ"], NACH_TYP.get(gg["typ"], {"b": 3})["b"]))
                  for gg in G.values() if gg["besitzer"] == SP and gg["typ"] in gang_zu]
