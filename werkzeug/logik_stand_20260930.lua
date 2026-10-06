@@ -1795,8 +1795,9 @@ local function einzelbefehl(cmd)
 
   --   { "abreissen": { "nr": 6 } }   Gebaeude abreissen wie der Mensch per Klick: Spielbefehl 29
   --   (ClickDestroyBuilding: Nummer, Rueckgabe in Prozent, uid). Das Spiel prueft den Besitzer NICHT -
-  --   darum hier: nur Gebaeude des eigenen Platzes (Fairness-Regel). Rueckgabe 0 %: welchen Wert der
-  --   Mensch-Klick schickt, ist nicht gefunden (04.10.) - so bekommen wir nie mehr als ein Mensch.
+  --   darum hier: nur Gebaeude des eigenen Platzes (Fairness-Regel). Rueckgabe 50 %: genau das traegt der
+  --   Abriss-Knopf ein (MenuItemActionHandler_BuildMenu_DeleteAction 0x00438ad9: Param1 = 0x32, gefunden 06.10.);
+  --   hoeher als 50 wird gedeckelt - nie mehr als ein Mensch.
   --   uid = Referenz +0xD8 -> hier +0xEC (siehe Kopf: alle Gebaeude-Offsets + 0x14).
   if cmd.abreissen ~= nil and type(cmd.abreissen) == "table" then
     local nr = tonumber(cmd.abreissen.nr) or 0
@@ -1810,7 +1811,7 @@ local function einzelbefehl(cmd)
         tostring(core.readSmallInteger(b + G_ZUSTAND))))
       return true
     end
-    local ok = befehlAbsetzen(29, { nr, tonumber(cmd.abreissen.rueckgabe) or 0, uid })
+    local ok = befehlAbsetzen(29, { nr, math.max(0, math.min(50, tonumber(cmd.abreissen.rueckgabe) or 50)), uid })
     log(INFO, string.format("ABREISSEN Tick %d: Nr %d (Typ %d, uid %d) - abgesetzt=%s", tick(), nr, typ, uid, tostring(ok)))
     return true
   end

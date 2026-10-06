@@ -1,0 +1,207 @@
+{
+ "erwartet": [
+  [
+   "Gerberei",
+   16,
+   {
+    "holz": 7,
+    "stein": 1,
+    "gold": 37
+   }
+  ],
+  [
+   "Gerberei 2",
+   16,
+   {
+    "holz": 7,
+    "stein": 1,
+    "gold": 37
+   }
+  ],
+  [
+   "Milchviehhof",
+   33,
+   {
+    "holz": 3,
+    "stein": 0,
+    "gold": 7
+   }
+  ],
+  [
+   "Kaserne",
+   9,
+   {
+    "holz": 0,
+    "stein": 6,
+    "gold": 0
+   }
+  ],
+  [
+   "Huette",
+   1,
+   {
+    "holz": 2,
+    "stein": 0,
+    "gold": 0
+   }
+  ]
+ ],
+ "gebaut": [
+  [
+   10,
+   [
+    145,
+    259
+   ]
+  ],
+  [
+   26,
+   [
+    145,
+    269
+   ]
+  ],
+  [
+   "Gerberei",
+   [
+    150,
+    259
+   ]
+  ],
+  [
+   "Gerberei 2",
+   [
+    150,
+    263
+   ]
+  ],
+  [
+   "Milchviehhof",
+   [
+    174,
+    296
+   ]
+  ],
+  [
+   "Kaserne",
+   [
+    150,
+    267
+   ]
+  ],
+  [
+   "Huette",
+   [
+    139,
+    258
+   ]
+  ]
+ ],
+ "abriss": [
+  {
+   "name": "Gerberei",
+   "nr": 33,
+   "diff": {
+    "gold": 37,
+    "keule": 0,
+    "leder": 0,
+    "eisen": 0,
+    "holz": 7,
+    "stein": 1,
+    "feuer": 2,
+    "kaempfer": 0
+   },
+   "soll": {
+    "holz": 7,
+    "stein": 1,
+    "gold": 37
+   },
+   "passt": true,
+   "gebaeude_weg": true
+  },
+  {
+   "name": "Gerberei 2",
+   "nr": 34,
+   "diff": {
+    "gold": 37,
+    "keule": 0,
+    "leder": 0,
+    "eisen": 0,
+    "holz": 7,
+    "stein": 1,
+    "feuer": 2,
+    "kaempfer": 0
+   },
+   "soll": {
+    "holz": 7,
+    "stein": 1,
+    "gold": 37
+   },
+   "passt": true,
+   "gebaeude_weg": true
+  },
+  {
+   "name": "Milchviehhof",
+   "nr": 35,
+   "diff": {
+    "gold": 7,
+    "keule": 0,
+    "leder": 0,
+    "eisen": 0,
+    "holz": 3,
+    "stein": 0,
+    "feuer": 3,
+    "kaempfer": 0
+   },
+   "soll": {
+    "holz": 3,
+    "stein": 0,
+    "gold": 7
+   },
+   "passt": true,
+   "gebaeude_weg": true
+  },
+  {
+   "name": "Kaserne",
+   "nr": 36,
+   "diff": {
+    "gold": 0,
+    "keule": 0,
+    "leder": 0,
+    "eisen": 0,
+    "holz": 0,
+    "stein": 6,
+    "feuer": 1,
+    "kaempfer": 0
+   },
+   "soll": {
+    "holz": 0,
+    "stein": 6,
+    "gold": 0
+   },
+   "passt": true,
+   "gebaeude_weg": true
+  },
+  {
+   "name": "Huette",
+   "nr": 40,
+   "diff": {
+    "gold": 0,
+    "keule": 0,
+    "leder": 0,
+    "eisen": 0,
+    "holz": 2,
+    "stein": 0,
+    "feuer": 0,
+    "kaempfer": 0
+   },
+   "soll": {
+    "holz": 2,
+    "stein": 0,
+    "gold": 0
+   },
+   "passt": true,
+   "gebaeude_weg": true
+  }
+ ]
+}

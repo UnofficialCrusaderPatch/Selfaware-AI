@@ -115,3 +115,11 @@ hat einen Parameter rueckgabe (Standard 0, Spielbefehl 29 {nr, rueckgabe, uid}) 
 - Messpartie 7 (20:07): Abriss mit rueckgabe=1 -> wieder 0 Holz/Stein/Gold nach 150 Ticks. Offen; zu pruefen: wurde die
   zweite Schmiede ueberhaupt fertig/abgerissen (Gebaeudeliste vorher/nachher), war das Holz-Lager voll (195 = 4 Teile),
   was param_3 in giveBackResourceForDestroyedBuilding bedeutet (daten/dekomp_abriss_rueckgabe.c ganz lesen).
+- GELOEST 20:10: param_3 ist ein Prozentwert (Kosten * Prozent / 100); der Abriss-Knopf schickt 50 (Ghidra
+  QueueAufrufe.java: MenuItemActionHandler_BuildMenu_DeleteAction 0x00438ad9 MOV [Param1], 0x32). Modul logik.lua:
+  abreissen jetzt Standard 50, gedeckelt bei 50 (Sicherung logik.lua.bak-abriss50-20261006). Messpartie 8: Schmiede
+  20/8 -> 10 Holz / 4 Stein zurueck - Daniel bestaetigt.
+- Daniel 20:11 "schau mal bei geraden/ungeraden Ressourcen/Abriss": abriss_messen.py (Erwartung vorher im Kopf der
+  Datei) - Gerberei 15/3/75 -> 7/1/37 (zweimal gleich, kein gemerkter Rest), Milchviehhof 7/0/15 -> 3/0/7, Kaserne
+  0/12 -> 6, Huette 5 -> 2. Es wird ABGERUNDET. daten/abriss_messung_20261006_201248.json.
+  Aus dem Code (nicht gemessen): kein Lagerplatz -> Rueckgabe verloren; Mauern sammeln Bruchteile ueber Abrisse.
