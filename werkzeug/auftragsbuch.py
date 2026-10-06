@@ -88,20 +88,23 @@ class Auftragsbuch:
                           "jetzt Holz %d Stein %d Gold %d)" % (
                               self.name(a["typ"]), a["ort"], a["tick"], ", %s" % a["zweck"] if a["zweck"] else "",
                               t - a["tick"], st.get("holz", 0), st.get("stein", 0), st.get("gold", 0)))
+        ev_beleg = self._belegung(eig, L)          # Arbeiter je Betrieb JETZT (fuer den Beweis unten)
         for n, (t0, typ0, ort0) in list(self.erreichbar_pruefen.items()):
-            if n not in eig:
+            # 23:41 (Daniel: "laesst immer noch Apfelplantagen abreissen" - das Flag stand nach 260 Ticks noch auf 0, der
+            # Wegtest des Planers fand aber einen Weg): Beweis statt Flag - unerreichbar erst, wenn nach 600 Ticks KEIN
+            # Arbeiter da ist, obwohl Bauern am Feuer frei stehen. Hat er einen Arbeiter, ist er erreichbar.
+            if n not in eig or self.hat.get(n, 0) > 0 or not self.arbeiter_je.get(typ0):
                 del self.erreichbar_pruefen[n]
-            elif eig[n].get("erreichbar") != 0:
-                del self.erreichbar_pruefen[n]
-            elif t - t0 >= 250:
+            elif t - t0 >= 600 and st.get("feuer", 0) > 0:
                 del self.erreichbar_pruefen[n]
                 self.unerreichbar.append((n, typ0, ort0))
-                ev.append("BAU UNERREICHBAR %s Nr %d bei %s auch nach %d Ticks - wird abgerissen" % (self.name(typ0), n, ort0, t - t0))
+                ev.append("BAU UNERREICHBAR %s Nr %d bei %s: %d Ticks ohne Arbeiter bei %d freien Bauern - wird abgerissen" % (
+                    self.name(typ0), n, ort0, t - t0, st.get("feuer", 0)))
         for n, g in neu.items():                       # ohne Auftrag aufgetaucht: still aufnehmen
             self.bekannt[n] = (g["typ"], g["x"], g["y"])
         for n in [n for n in self.bekannt if n not in eig]:
             del self.bekannt[n]
-        ev += self._belegung(eig, L)
+        ev += ev_beleg
         return ev
 
     def _belegung(self, eig, L):
