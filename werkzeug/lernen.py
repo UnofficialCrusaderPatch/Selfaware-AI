@@ -226,7 +226,9 @@ def main():
     # 07.10.: der letzte Kontrolllauf setzt den Massstab - aeltere Laeufe liefen mit anderem Code (Lauf 11 alt 10.543,
     # dieselbe Strategie im Kontrolllauf 18 mit neuem Code 11.502). Neustart ohne kontrolle=ja vergleicht ab dort.
     k_idx = [i for i, r in enumerate(gueltig) if r.get("geaendert") == "kontrolle"]
-    if k_idx and arg.get("kontrolle") != "ja":
+    if k_idx:
+        # 07.10. 01:20: auch der Kontrolllauf nimmt die beste Strategie seit dem letzten Massstab - vorher die beste aller
+        # Zeiten (Lauf 38, 9.395, Gluecksfall mit altem Code) statt Lauf 54 (9.796); Kontrolle 56 lief so mit Grenze 50
         gueltig = gueltig[k_idx[-1]:]
     beste = min(gueltig, key=lambda r: r["note"]) if gueltig else None
     kontrolle = arg.get("kontrolle") == "ja"
