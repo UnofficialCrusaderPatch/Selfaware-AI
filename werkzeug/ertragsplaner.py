@@ -549,7 +549,13 @@ class Ertragsplaner:
                 # Beliebtheit 0 -> Massen-Wegzug (Liga gathering_rate -40 bei 0-4), 50 -> 4 Leute, kein Kaempfer. Darum Grenze
                 # (Knopf kasse_grenze): darunter Stufe 2 (keine Steuer, +1/Monat) - Beliebtheit ist ein Vorrat, keiner der nachwaechst
                 neu = 11 if bel >= getattr(self, "kasse_grenze", 50) else 2
-            elif ((ende == "ja" and getattr(self, "endphase", False)) or (ende == "wohnraum" and wohnraum_voll)) and bel >= 55:
+            elif getattr(self, "wachstum", False):
+                # Daniel 00:38 "die Steuer wird schon VIEL zu frueh genommen" (Lauf 40: Stufe 7 im Wachstum, dann steuer_ende
+                # Stufe 11 bei 29/34 Leuten -> Beliebtheit 28, Zuzug weg, bei 38 stehen geblieben): bis zur Ziel-Bevoelkerung
+                # keine Steuer (Stufe 2) - Zuzug haengt an der Beliebtheit (Liga gathering_rate +40 bei 95-100, +5 bei 50-54)
+                neu = 2
+            elif getattr(self, "kasse_modus", "nein") == "nein" and (
+                    (ende == "ja" and getattr(self, "endphase", False)) or (ende == "wohnraum" and wohnraum_voll)) and bel >= 55:
                 # Daniel 07.10. 00:0x: "wenn du eh keine Produktion mehr baust, weil sie sich nicht mehr amortisiert, kannst du
                 # einfach -24 Steuern machen" - Endphase = Kausalmodell findet keine Handlung mit Wert mehr (holz_ueberfluessig);
                 # Wohnraum ist dann voll, Zuzug egal; unter 55 Beliebtheit zurueck auf die Regel (unter 50 gehen Leute)

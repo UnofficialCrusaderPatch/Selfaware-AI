@@ -947,6 +947,8 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
     ausbau.steuer_runter, ausbau.steuer_ende = STEUER_RUNTER, STEUER_ENDE
     ausbau.kasse, kasse = False, {"an": None}
     ausbau.kasse_grenze = KASSE_GRENZE
+    ausbau.kasse_modus = KASSE                       # ist die Kasse eingestellt, setzt NUR sie Stufe 11 (steuer_ende schweigt)
+    ausbau.wachstum = bool(BEV_ZIEL)                 # bis zur Ziel-Bevoelkerung keine Steuer
     if V14:
         wirt.umzug_ab, wirt.lager_genau, wirt.lager_ort = None, True, tuple(V14_PLAN["lager"])
         wirt.umzug_nach_b = UMZUG == "nachb"
@@ -1105,7 +1107,7 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                     (BEV_ZIEL and st.get("leute", 0) >= BEV_ZIEL)
                     or (fruehpruefung.get("holz_ueberfluessig") and (not BEV_ZIEL or stillstand))):
                 kasse["an"] = st["t"]
-                ausbau.kasse = True
+                ausbau.kasse, ausbau.wachstum = True, False
                 ereignis.append("KASSE ab Tick %d (%s): Steuer 11 bis zum Ende, Leute %d, Beliebtheit %.1f%s" % (
                     st["t"], "Ziel-Bevoelkerung" if BEV_ZIEL and st.get("leute", 0) >= BEV_ZIEL else "nichts lohnt mehr" + (", Bevoelkerung steht seit Tick %d" % kasse["wuchs_tick"] if BEV_ZIEL else ""),
                     st.get("leute", 0), st.get("beliebt", 0) / 100.0, ", keine Rationen, Nahrung wird verkauft" if KASSE == "steuer_essen" else ""))
