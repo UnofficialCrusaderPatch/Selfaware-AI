@@ -158,6 +158,8 @@ def main():
     laeufe, bis_tick = int(arg.get("laeufe", 5)), int(arg.get("bis_tick", 14000))
     pfad = os.path.join(D, "lernen.jsonl")
     alle = [json.loads(z) for z in open(pfad, encoding="utf-8")] if os.path.exists(pfad) else []
+    for r in alle:
+        r["strategie"] = dict(GRUND, **r["strategie"])     # aeltere Laeufe: neue Knoepfe mit Grundwert (KeyError 23:21)
     gespielt = {schluessel(r["strategie"]) for r in alle}
     beste = min(alle, key=lambda r: r["note"]) if alle else None
     for i in range(laeufe):

@@ -436,6 +436,16 @@ def v14_sperrflaechen():
 def steht_bei(G, typ, ort, r=1):
     return [n for n, g in G.items() if g["besitzer"] == SP and g["typ"] == typ and max(abs(g["x"] - ort[0]), abs(g["y"] - ort[1])) <= r]
 
+def wohnraum_fehlt(st, G):
+    """Daniel 23:21 "du baust Haeuser ohne Ende ohne Grund": eine Huette bringt nur etwas, wenn es fuer den neuen Bauern
+    Arbeit gibt. Bedarf = offene Arbeitsplaetze - Bauern am Feuer (die koennen sofort arbeiten). Huette, wenn Bedarf + 2
+    (Spawnzeit, Daniel 23:10 Punkt 3) groesser ist als der freie Wohnraum. Vorher: "weniger als 6 frei" -> Schleife aus
+    Huetten, untaetigen Bauern und neuen Huetten."""
+    offene = sum(max(0, ARBEITER_JE.get(g["typ"], 0) - (BUCH.hat.get(n, 0) if BUCH is not None else 0))
+                 for n, g in G.items() if g["besitzer"] == SP)
+    bedarf = offene - st.get("feuer", 0)
+    return bedarf > 0 and bedarf + 2 > st.get("platz", 0) - st.get("leute", 0), offene
+
 def haufen_hat_stein(G, q):
     """Liegt auf dem Steinhaufen (Verbund) des Steinbruchs bei q schon Stein?"""
     n = steht_bei(G, 20, q)
@@ -838,7 +848,7 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
             ausbau.messer.verkauft("holz")
             return "verkauft", "Gold bremst das Anwerben"
         ort, text = ausbau.holzfaeller_statt_verkauf(st, L, G)
-        if ort is None and streitkolben and V14:
+        if ort is None and streitkolben:          # 23:21: auch in der v5-Bauweise keine Huette als Holz-Abfluss
             # v15 (Daniel 22:29: "10 Haeuser helfen nur bedingt"; v14 baute 11 Huetten fuer 15 Leute, Platz 98): keine Huette
             # als Holz-Abfluss - Huetten nur als Puffer (Platz - Leute < 6). Holz bleibt fuer B (Seasoning vor der ersten
             # Holzlieferung), ein volles 20er-Los wird verkauft, wenn das Holz ueber der Ruecklage liegt.
@@ -962,9 +972,9 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
             if HUETTEN_VORAUS and not endspiel["fertig"]:
                 # v18 (Daniel 23:10 Punkt 3: "Haeuser bauen, bevor du Menschen brauchst, weil sie Spawnzeit brauchen"):
                 # freie Wohnplaetze >= offene Arbeitsplaetze + 4 (mind. 6)
-                offene = sum(max(0, ARBEITER_JE.get(g["typ"], 0) - BUCH.hat.get(n, 0)) for n, g in G.items() if g["besitzer"] == SP)
+                fehlt_w, offene = wohnraum_fehlt(st, G)
                 frei_wohn = st.get("platz", 0) - st.get("leute", 0)
-                if frei_wohn < max(6, offene + 4) and st["holz"] >= 5 and not any(a["typ"] == 1 for a in BUCH.offen):
+                if fehlt_w and st["holz"] >= 5 and not any(a["typ"] == 1 for a in BUCH.offen):
                     ereignis.append("HUETTE VORAUS (frei %d, offene Arbeitsplaetze %d): %s" % (frei_wohn, offene, baue_haus()))
             if runde % 10 == 1:
                 schreib(BUCH.stand(G, st))
@@ -1195,8 +1205,8 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
             ereignis += ausbau.schritt(st, L, G, runde)
         tz = uhr("wirtschaft", tz)
         bedarf = sum(ARBEITER_JE[t] * st.get("G%d" % t, 0) for t in ARBEITER_JE)
-        puffer = streitkolben and st["platz"] - st["leute"] < 6 and not (endspiel["fertig"])   # Huetten vorab (Daniel 21:55)
-        if st["holz"] >= 5 + wirt.ruecklage(G)["holz"] and (bedarf > st["platz"] or puffer or (trupp is not None and st["feuer"] == 0 and st["platz"] - st["leute"] <= 2)):
+        puffer = streitkolben and not endspiel["fertig"] and wohnraum_fehlt(st, G)[0]   # Huetten vorab, aber nur mit Arbeit (23:21)
+        if st["holz"] >= 5 + wirt.ruecklage(G)["holz"] and ((bedarf > st["platz"] and st["feuer"] < 2) or puffer or (trupp is not None and st["feuer"] == 0 and st["platz"] - st["leute"] <= 2)):
             ereignis.append("Huette %s (Bedarf %d, Platz %d, Leute %d, Feuer %d)" % (baue_haus(), bedarf, st["platz"], st["leute"], st["feuer"]))
         zeile = "%5d | %3d %3d %3d | %3d %3d | %6.2f | %d/%d (%d) | %d %d | %s" % (
             st["t"], st["holz"], st["stein"], st["eisen"], st["apfel"], st["brot"], st["beliebt"] / 100.0, st["leute"],
