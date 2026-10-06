@@ -65,3 +65,10 @@ bauen muss - **4.** wissen, warum und WANN man es bauen sollte - **5.** selbstae
 ## Spaeter
 - [ ] **Echtes Selbstlernen** ueber tausende Partien statt Codeaenderungen (05.10. 00:57)
 - [ ] **Challenges** (05.10. 19:14): kein Markt; keine arabischen Einheiten; schnellste Kathedrale; schnellster Kill; weitere nach Daniels Wahl
+
+## 06.10.2026 21:10 - B-Apfelplantagen werden nicht gesetzt (gefunden in Haertetest v2)
+Gemessen (`daten/haertetest_v2_20261006.txt`): "Seasoning: A 3 / B 3 Plantagen, A reif bei 1699, B gesetzt bei None";
+die Wirtschaft kaufte mehrmals "Holz fuer B" (Tick 3.781 Gold 181, 3.808 Gold 166 ...), das Holz wurde anderswo verbaut,
+B nie gesetzt. Folge: ausbau.braucht_gold die ganze Partie True (Seasoning-B hat Vorrang) - blockierte den Waffenkauf
+(in v2b umgangen durch den Kipppunkt) und haelt Gold als Ruecklage fest. Zu klaeren: warum B nicht gesetzt wird
+(Platz? Holz-Reservierung gegen den Ertragsplaner?), Holzkauf fuer B nur, wenn B danach sicher gesetzt wird.
