@@ -100,6 +100,25 @@ def main():
         for g in gaenge:
             print("   Gang %-16s -> %-16s %5d Ticks, %3d Felder, kuerzest %s" % (g["von"], g["nach"], g["ticks"], g["felder"],
                                                                                  g["kuerzest"]))
+    # Plan gegen Messung (aufbau_bauen.py): Arbeitsfeld = laengster Halt; Plan-Eingang mit Abstand <= 1 zuordnen
+    if "plan" in erg:
+        geplant = [("Schmiede", s2) for s2 in erg["plan"].get("schmiede", []) if "eingang" in s2] +                   [("Gerberei", s2) for s2 in erg["plan"].get("gerber", []) if "eingang" in s2]
+        vergleich = []
+        for nr, e in aus["arbeiter"].items():
+            if not e["halte"] or not e["gaenge"]:
+                continue
+            arbeit = max(e["halte"], key=lambda h: h["dauer"])["feld"]
+            treffer = [(a, s2) for a, s2 in geplant if max(abs(s2["eingang"][0] - arbeit[0]), abs(s2["eingang"][1] - arbeit[1])) <= 1]
+            gemessen = sorted(g["felder"] for g in e["gaenge"])
+            mitte = gemessen[len(gemessen) // 2]
+            arbeitszeit = sorted(h["dauer"] for h in e["halte"])[len(e["halte"]) // 2]
+            v = {"arbeiter": nr, "name": e["name"], "arbeitsfeld": arbeit, "gaenge": len(gemessen),
+                 "gang_felder_median": mitte, "arbeit_median": arbeitszeit,
+                 "geplant": treffer[0][1].get("gang_felder") if treffer else None}
+            vergleich.append(v)
+            print("VERGLEICH %-8s %s Feld %s: Gang gemessen %s Felder (Median aus %d), geplant %s; Halt-Median %s Ticks" % (
+                e["name"], nr, tuple(arbeit), mitte, len(gemessen), v["geplant"], arbeitszeit))
+        aus["vergleich"] = vergleich
     b = erg.get("bestand", [])
     if b:
         aus["bestand"] = [b[0], b[-1]]

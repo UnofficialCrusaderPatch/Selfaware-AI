@@ -1,0 +1,2403 @@
+{
+ "datei": "aufbau_20261006_204359.json",
+ "halt_ab": 60,
+ "arbeiter": {
+  "1": {
+   "name": "Schmied",
+   "felder": 57,
+   "laufzeit_gerade": [
+    [
+     24,
+     29
+    ],
+    [
+     30,
+     3
+    ],
+    [
+     28,
+     2
+    ]
+   ],
+   "laufzeit_schraeg": [
+    [
+     30,
+     3
+    ],
+    [
+     58,
+     2
+    ],
+    [
+     26,
+     2
+    ]
+   ],
+   "verstoesse": [],
+   "halte": [
+    {
+     "von": 3294,
+     "bis": 3354,
+     "dauer": 60,
+     "feld": [
+      145,
+      261
+     ],
+     "bei": "Bergfried 1",
+     "abstand": 1
+    },
+    {
+     "von": 3432,
+     "bis": 4352,
+     "dauer": 920,
+     "feld": [
+      144,
+      257
+     ],
+     "bei": "Waffenlager 39",
+     "abstand": 1
+    },
+    {
+     "von": 4558,
+     "bis": 5478,
+     "dauer": 920,
+     "feld": [
+      144,
+      257
+     ],
+     "bei": "Waffenlager 39",
+     "abstand": 1
+    },
+    {
+     "von": 5686,
+     "bis": 6608,
+     "dauer": 922,
+     "feld": [
+      144,
+      257
+     ],
+     "bei": "Waffenlager 39",
+     "abstand": 1
+    },
+    {
+     "von": 6682,
+     "bis": 6742,
+     "dauer": 60,
+     "feld": [
+      145,
+      261
+     ],
+     "bei": "Bergfried 1",
+     "abstand": 1
+    },
+    {
+     "von": 6816,
+     "bis": 7738,
+     "dauer": 922,
+     "feld": [
+      144,
+      257
+     ],
+     "bei": "Waffenlager 39",
+     "abstand": 1
+    },
+    {
+     "von": 7958,
+     "bis": 8878,
+     "dauer": 920,
+     "feld": [
+      144,
+      257
+     ],
+     "bei": "Waffenlager 39",
+     "abstand": 1
+    },
+    {
+     "von": 8954,
+     "bis": 9014,
+     "dauer": 60,
+     "feld": [
+      145,
+      261
+     ],
+     "bei": "Bergfried 1",
+     "abstand": 1
+    },
+    {
+     "von": 9092,
+     "bis": 10012,
+     "dauer": 920,
+     "feld": [
+      144,
+      257
+     ],
+     "bei": "Waffenlager 39",
+     "abstand": 1
+    },
+    {
+     "von": 10090,
+     "bis": 10150,
+     "dauer": 60,
+     "feld": [
+      145,
+      261
+     ],
+     "bei": "Bergfried 1",
+     "abstand": 1
+    },
+    {
+     "von": 10228,
+     "bis": 15294,
+     "dauer": 5066,
+     "feld": [
+      144,
+      257
+     ],
+     "bei": "Waffenlager 39",
+     "abstand": 1
+    }
+   ],
+   "gaenge": [
+    {
+     "von": "Bergfried 1",
+     "nach": "Waffenlager 39",
+     "ticks": 78,
+     "felder": 3,
+     "kuerzest": 4
+    },
+    {
+     "von": "Waffenlager 39",
+     "nach": "Waffenlager 39",
+     "ticks": 206,
+     "felder": 7,
+     "kuerzest": 0
+    },
+    {
+     "von": "Waffenlager 39",
+     "nach": "Waffenlager 39",
+     "ticks": 208,
+     "felder": 7,
+     "kuerzest": 0
+    },
+    {
+     "von": "Waffenlager 39",
+     "nach": "Bergfried 1",
+     "ticks": 74,
+     "felder": 3,
+     "kuerzest": 4
+    },
+    {
+     "von": "Bergfried 1",
+     "nach": "Waffenlager 39",
+     "ticks": 74,
+     "felder": 3,
+     "kuerzest": 4
+    },
+    {
+     "von": "Waffenlager 39",
+     "nach": "Waffenlager 39",
+     "ticks": 220,
+     "felder": 7,
+     "kuerzest": 0
+    },
+    {
+     "von": "Waffenlager 39",
+     "nach": "Bergfried 1",
+     "ticks": 76,
+     "felder": 3,
+     "kuerzest": 4
+    },
+    {
+     "von": "Bergfried 1",
+     "nach": "Waffenlager 39",
+     "ticks": 78,
+     "felder": 3,
+     "kuerzest": 4
+    },
+    {
+     "von": "Waffenlager 39",
+     "nach": "Bergfried 1",
+     "ticks": 78,
+     "felder": 3,
+     "kuerzest": 4
+    },
+    {
+     "von": "Bergfried 1",
+     "nach": "Waffenlager 39",
+     "ticks": 78,
+     "felder": 3,
+     "kuerzest": 4
+    }
+   ]
+  },
+  "132": {
+   "name": "Milchbauer",
+   "felder": 429,
+   "laufzeit_gerade": [
+    [
+     16,
+     164
+    ],
+    [
+     2,
+     127
+    ],
+    [
+     14,
+     127
+    ]
+   ],
+   "laufzeit_schraeg": [
+    [
+     16,
+     5
+    ]
+   ],
+   "verstoesse": [
+    {
+     "t": 10398,
+     "von": [
+      117,
+      269
+     ],
+     "nach": [
+      117,
+      270
+     ],
+     "nach_gebaeude": "Hue"
+    },
+    {
+     "t": 10400,
+     "von": [
+      117,
+      270
+     ],
+     "nach": [
+      116,
+      270
+     ],
+     "nach_gebaeude": "Boden"
+    },
+    {
+     "t": 10666,
+     "von": [
+      116,
+      270
+     ],
+     "nach": [
+      117,
+      270
+     ],
+     "nach_gebaeude": "Hue"
+    },
+    {
+     "t": 10668,
+     "von": [
+      117,
+      270
+     ],
+     "nach": [
+      117,
+      269
+     ],
+     "nach_gebaeude": "Boden"
+    },
+    {
+     "t": 10970,
+     "von": [
+      135,
+      255
+     ],
+     "nach": [
+      136,
+      255
+     ],
+     "nach_gebaeude": "Ger"
+    },
+    {
+     "t": 10972,
+     "von": [
+      136,
+      255
+     ],
+     "nach": [
+      136,
+      254
+     ],
+     "nach_gebaeude": "Boden"
+    },
+    {
+     "t": 11066,
+     "von": [
+      141,
+      253
+     ],
+     "nach": [
+      142,
+      253
+     ],
+     "nach_gebaeude": "Sch"
+    },
+    {
+     "t": 11068,
+     "von": [
+      142,
+      253
+     ],
+     "nach": [
+      142,
+      252
+     ],
+     "nach_gebaeude": "Boden"
+    },
+    {
+     "t": 11162,
+     "von": [
+      147,
+      250
+     ],
+     "nach": [
+      148,
+      250
+     ],
+     "nach_gebaeude": "Ger"
+    },
+    {
+     "t": 11164,
+     "von": [
+      148,
+      250
+     ],
+     "nach": [
+      148,
+      249
+     ],
+     "nach_gebaeude": "Boden"
+    },
+    {
+     "t": 14154,
+     "von": [
+      117,
+      269
+     ],
+     "nach": [
+      117,
+      270
+     ],
+     "nach_gebaeude": "Hue"
+    },
+    {
+     "t": 14156,
+     "von": [
+      117,
+      270
+     ],
+     "nach": [
+      116,
+      270
+     ],
+     "nach_gebaeude": "Boden"
+    },
+    {
+     "t": 14422,
+     "von": [
+      116,
+      270
+     ],
+     "nach": [
+      117,
+      270
+     ],
+     "nach_gebaeude": "Hue"
+    },
+    {
+     "t": 14424,
+     "von": [
+      117,
+      270
+     ],
+     "nach": [
+      117,
+      269
+     ],
+     "nach_gebaeude": "Boden"
+    },
+    {
+     "t": 14726,
+     "von": [
+      135,
+      255
+     ],
+     "nach": [
+      136,
+      255
+     ],
+     "nach_gebaeude": "Ger"
+    },
+    {
+     "t": 14728,
+     "von": [
+      136,
+      255
+     ],
+     "nach": [
+      136,
+      254
+     ],
+     "nach_gebaeude": "Boden"
+    },
+    {
+     "t": 14822,
+     "von": [
+      141,
+      253
+     ],
+     "nach": [
+      142,
+      253
+     ],
+     "nach_gebaeude": "Sch"
+    },
+    {
+     "t": 14824,
+     "von": [
+      142,
+      253
+     ],
+     "nach": [
+      142,
+      252
+     ],
+     "nach_gebaeude": "Boden"
+    },
+    {
+     "t": 14918,
+     "von": [
+      147,
+      250
+     ],
+     "nach": [
+      148,
+      250
+     ],
+     "nach_gebaeude": "Ger"
+    },
+    {
+     "t": 14920,
+     "von": [
+      148,
+      250
+     ],
+     "nach": [
+      148,
+      249
+     ],
+     "nach_gebaeude": "Boden"
+    }
+   ],
+   "halte": [
+    {
+     "von": 3644,
+     "bis": 9406,
+     "dauer": 5762,
+     "feld": [
+      179,
+      243
+     ],
+     "bei": "Milchviehhof 51",
+     "abstand": 0
+    },
+    {
+     "von": 11660,
+     "bis": 13162,
+     "dauer": 1502,
+     "feld": [
+      179,
+      243
+     ],
+     "bei": "Milchviehhof 51",
+     "abstand": 0
+    }
+   ],
+   "gaenge": [
+    {
+     "von": "Milchviehhof 51",
+     "nach": "Milchviehhof 51",
+     "ticks": 2254,
+     "felder": 193,
+     "kuerzest": null
+    }
+   ]
+  },
+  "139": {
+   "name": "Schmied",
+   "felder": 73,
+   "laufzeit_gerade": [
+    [
+     24,
+     35
+    ],
+    [
+     4,
+     10
+    ],
+    [
+     20,
+     5
+    ]
+   ],
+   "laufzeit_schraeg": [
+    [
+     58,
+     1
+    ],
+    [
+     48,
+     1
+    ],
+    [
+     56,
+     1
+    ]
+   ],
+   "verstoesse": [
+    {
+     "t": 3302,
+     "von": [
+      147,
+      259
+     ],
+     "nach": [
+      148,
+      259
+     ],
+     "nach_gebaeude": "Lag"
+    },
+    {
+     "t": 4504,
+     "von": [
+      147,
+      259
+     ],
+     "nach": [
+      148,
+      259
+     ],
+     "nach_gebaeude": "Lag"
+    },
+    {
+     "t": 5716,
+     "von": [
+      147,
+      259
+     ],
+     "nach": [
+      148,
+      259
+     ],
+     "nach_gebaeude": "Lag"
+    },
+    {
+     "t": 6920,
+     "von": [
+      147,
+      259
+     ],
+     "nach": [
+      148,
+      259
+     ],
+     "nach_gebaeude": "Lag"
+    },
+    {
+     "t": 8128,
+     "von": [
+      147,
+      259
+     ],
+     "nach": [
+      148,
+      259
+     ],
+     "nach_gebaeude": "Lag"
+    },
+    {
+     "t": 9330,
+     "von": [
+      147,
+      259
+     ],
+     "nach": [
+      148,
+      259
+     ],
+     "nach_gebaeude": "Lag"
+    }
+   ],
+   "halte": [
+    {
+     "von": 3304,
+     "bis": 4228,
+     "dauer": 924,
+     "feld": [
+      148,
+      258
+     ],
+     "bei": "Lager 29",
+     "abstand": 1
+    },
+    {
+     "von": 4508,
+     "bis": 5432,
+     "dauer": 924,
+     "feld": [
+      148,
+      258
+     ],
+     "bei": "Lager 29",
+     "abstand": 1
+    },
+    {
+     "von": 5580,
+     "bis": 5640,
+     "dauer": 60,
+     "feld": [
+      145,
+      261
+     ],
+     "bei": "Bergfried 1",
+     "abstand": 1
+    },
+    {
+     "von": 5720,
+     "bis": 6644,
+     "dauer": 924,
+     "feld": [
+      148,
+      258
+     ],
+     "bei": "Lager 29",
+     "abstand": 1
+    },
+    {
+     "von": 6924,
+     "bis": 7848,
+     "dauer": 924,
+     "feld": [
+      148,
+      258
+     ],
+     "bei": "Lager 29",
+     "abstand": 1
+    },
+    {
+     "von": 8132,
+     "bis": 9056,
+     "dauer": 924,
+     "feld": [
+      148,
+      258
+     ],
+     "bei": "Lager 29",
+     "abstand": 1
+    },
+    {
+     "von": 9334,
+     "bis": 15294,
+     "dauer": 5960,
+     "feld": [
+      148,
+      258
+     ],
+     "bei": "Lager 29",
+     "abstand": 1
+    }
+   ],
+   "gaenge": [
+    {
+     "von": "Lager 29",
+     "nach": "Lager 29",
+     "ticks": 280,
+     "felder": 12,
+     "kuerzest": 0
+    },
+    {
+     "von": "Lager 29",
+     "nach": "Bergfried 1",
+     "ticks": 148,
+     "felder": 6,
+     "kuerzest": 4
+    },
+    {
+     "von": "Bergfried 1",
+     "nach": "Lager 29",
+     "ticks": 80,
+     "felder": 5,
+     "kuerzest": 4
+    },
+    {
+     "von": "Lager 29",
+     "nach": "Lager 29",
+     "ticks": 280,
+     "felder": 12,
+     "kuerzest": 0
+    },
+    {
+     "von": "Lager 29",
+     "nach": "Lager 29",
+     "ticks": 284,
+     "felder": 12,
+     "kuerzest": 0
+    },
+    {
+     "von": "Lager 29",
+     "nach": "Lager 29",
+     "ticks": 278,
+     "felder": 12,
+     "kuerzest": 0
+    }
+   ]
+  },
+  "143": {
+   "name": "Schmied",
+   "felder": 102,
+   "laufzeit_gerade": [
+    [
+     24,
+     71
+    ],
+    [
+     28,
+     5
+    ],
+    [
+     2,
+     4
+    ]
+   ],
+   "laufzeit_schraeg": [
+    [
+     54,
+     2
+    ],
+    [
+     52,
+     1
+    ],
+    [
+     56,
+     1
+    ]
+   ],
+   "verstoesse": [
+    {
+     "t": 3264,
+     "von": [
+      148,
+      258
+     ],
+     "nach": [
+      148,
+      259
+     ],
+     "nach_gebaeude": "Lag"
+    }
+   ],
+   "halte": [
+    {
+     "von": 3546,
+     "bis": 4470,
+     "dauer": 924,
+     "feld": [
+      150,
+      258
+     ],
+     "bei": "Lager 29",
+     "abstand": 1
+    },
+    {
+     "von": 4872,
+     "bis": 5796,
+     "dauer": 924,
+     "feld": [
+      150,
+      258
+     ],
+     "bei": "Lager 29",
+     "abstand": 1
+    },
+    {
+     "von": 6196,
+     "bis": 7120,
+     "dauer": 924,
+     "feld": [
+      150,
+      258
+     ],
+     "bei": "Lager 29",
+     "abstand": 1
+    },
+    {
+     "von": 7518,
+     "bis": 8442,
+     "dauer": 924,
+     "feld": [
+      150,
+      258
+     ],
+     "bei": "Lager 29",
+     "abstand": 1
+    },
+    {
+     "von": 8844,
+     "bis": 9768,
+     "dauer": 924,
+     "feld": [
+      150,
+      258
+     ],
+     "bei": "Lager 29",
+     "abstand": 1
+    },
+    {
+     "von": 10166,
+     "bis": 15294,
+     "dauer": 5128,
+     "feld": [
+      150,
+      258
+     ],
+     "bei": "Lager 29",
+     "abstand": 1
+    }
+   ],
+   "gaenge": [
+    {
+     "von": "Lager 29",
+     "nach": "Lager 29",
+     "ticks": 402,
+     "felder": 16,
+     "kuerzest": 0
+    },
+    {
+     "von": "Lager 29",
+     "nach": "Lager 29",
+     "ticks": 400,
+     "felder": 16,
+     "kuerzest": 0
+    },
+    {
+     "von": "Lager 29",
+     "nach": "Lager 29",
+     "ticks": 398,
+     "felder": 16,
+     "kuerzest": 0
+    },
+    {
+     "von": "Lager 29",
+     "nach": "Lager 29",
+     "ticks": 402,
+     "felder": 16,
+     "kuerzest": 0
+    },
+    {
+     "von": "Lager 29",
+     "nach": "Lager 29",
+     "ticks": 398,
+     "felder": 16,
+     "kuerzest": 0
+    }
+   ]
+  },
+  "145": {
+   "name": "Schmied",
+   "felder": 71,
+   "laufzeit_gerade": [
+    [
+     24,
+     35
+    ],
+    [
+     28,
+     4
+    ],
+    [
+     32,
+     3
+    ]
+   ],
+   "laufzeit_schraeg": [
+    [
+     24,
+     8
+    ],
+    [
+     48,
+     4
+    ],
+    [
+     54,
+     2
+    ]
+   ],
+   "verstoesse": [],
+   "halte": [
+    {
+     "von": 3192,
+     "bis": 3634,
+     "dauer": 442,
+     "feld": [
+      150,
+      262
+     ],
+     "bei": "Lager 31",
+     "abstand": 1
+    },
+    {
+     "von": 3882,
+     "bis": 4808,
+     "dauer": 926,
+     "feld": [
+      150,
+      262
+     ],
+     "bei": "Lager 31",
+     "abstand": 1
+    },
+    {
+     "von": 5214,
+     "bis": 6140,
+     "dauer": 926,
+     "feld": [
+      150,
+      262
+     ],
+     "bei": "Lager 31",
+     "abstand": 1
+    },
+    {
+     "von": 6548,
+     "bis": 7476,
+     "dauer": 928,
+     "feld": [
+      150,
+      262
+     ],
+     "bei": "Lager 31",
+     "abstand": 1
+    },
+    {
+     "von": 7878,
+     "bis": 8806,
+     "dauer": 928,
+     "feld": [
+      150,
+      262
+     ],
+     "bei": "Lager 31",
+     "abstand": 1
+    },
+    {
+     "von": 9220,
+     "bis": 15294,
+     "dauer": 6074,
+     "feld": [
+      150,
+      262
+     ],
+     "bei": "Lager 31",
+     "abstand": 1
+    }
+   ],
+   "gaenge": [
+    {
+     "von": "Lager 31",
+     "nach": "Lager 31",
+     "ticks": 248,
+     "felder": 9,
+     "kuerzest": 0
+    },
+    {
+     "von": "Lager 31",
+     "nach": "Lager 31",
+     "ticks": 406,
+     "felder": 14,
+     "kuerzest": 0
+    },
+    {
+     "von": "Lager 31",
+     "nach": "Lager 31",
+     "ticks": 408,
+     "felder": 14,
+     "kuerzest": 0
+    },
+    {
+     "von": "Lager 31",
+     "nach": "Lager 31",
+     "ticks": 402,
+     "felder": 14,
+     "kuerzest": 0
+    },
+    {
+     "von": "Lager 31",
+     "nach": "Lager 31",
+     "ticks": 414,
+     "felder": 14,
+     "kuerzest": 0
+    }
+   ]
+  },
+  "162": {
+   "name": "Schmied",
+   "felder": 110,
+   "laufzeit_gerade": [
+    [
+     24,
+     66
+    ],
+    [
+     28,
+     6
+    ],
+    [
+     30,
+     3
+    ]
+   ],
+   "laufzeit_schraeg": [
+    [
+     24,
+     14
+    ],
+    [
+     54,
+     2
+    ],
+    [
+     30,
+     1
+    ]
+   ],
+   "verstoesse": [],
+   "halte": [
+    {
+     "von": 3648,
+     "bis": 4574,
+     "dauer": 926,
+     "feld": [
+      150,
+      266
+     ],
+     "bei": "Lager 7",
+     "abstand": 1
+    },
+    {
+     "von": 5170,
+     "bis": 6096,
+     "dauer": 926,
+     "feld": [
+      150,
+      266
+     ],
+     "bei": "Lager 7",
+     "abstand": 1
+    },
+    {
+     "von": 6696,
+     "bis": 7624,
+     "dauer": 928,
+     "feld": [
+      150,
+      266
+     ],
+     "bei": "Lager 7",
+     "abstand": 1
+    },
+    {
+     "von": 7976,
+     "bis": 8036,
+     "dauer": 60,
+     "feld": [
+      145,
+      261
+     ],
+     "bei": "Bergfried 1",
+     "abstand": 1
+    },
+    {
+     "von": 8234,
+     "bis": 9162,
+     "dauer": 928,
+     "feld": [
+      150,
+      266
+     ],
+     "bei": "Lager 7",
+     "abstand": 1
+    },
+    {
+     "von": 9760,
+     "bis": 15294,
+     "dauer": 5534,
+     "feld": [
+      150,
+      266
+     ],
+     "bei": "Lager 7",
+     "abstand": 1
+    }
+   ],
+   "gaenge": [
+    {
+     "von": "Lager 7",
+     "nach": "Lager 7",
+     "ticks": 596,
+     "felder": 22,
+     "kuerzest": 0
+    },
+    {
+     "von": "Lager 7",
+     "nach": "Lager 7",
+     "ticks": 600,
+     "felder": 22,
+     "kuerzest": 0
+    },
+    {
+     "von": "Lager 7",
+     "nach": "Bergfried 1",
+     "ticks": 352,
+     "felder": 13,
+     "kuerzest": 8
+    },
+    {
+     "von": "Bergfried 1",
+     "nach": "Lager 7",
+     "ticks": 198,
+     "felder": 8,
+     "kuerzest": 8
+    },
+    {
+     "von": "Lager 7",
+     "nach": "Lager 7",
+     "ticks": 598,
+     "felder": 22,
+     "kuerzest": 0
+    }
+   ]
+  },
+  "164": {
+   "name": "Gerber",
+   "felder": 159,
+   "laufzeit_gerade": [
+    [
+     4,
+     48
+    ],
+    [
+     20,
+     45
+    ],
+    [
+     24,
+     42
+    ]
+   ],
+   "laufzeit_schraeg": [
+    [
+     24,
+     13
+    ],
+    [
+     42,
+     1
+    ]
+   ],
+   "verstoesse": [],
+   "halte": [
+    {
+     "von": 3192,
+     "bis": 4576,
+     "dauer": 1384,
+     "feld": [
+      138,
+      259
+     ],
+     "bei": "Gerberei 46",
+     "abstand": 1
+    },
+    {
+     "von": 5620,
+     "bis": 5728,
+     "dauer": 108,
+     "feld": [
+      178,
+      245
+     ],
+     "bei": "Milchviehhof 51",
+     "abstand": 0
+    },
+    {
+     "von": 6974,
+     "bis": 8530,
+     "dauer": 1556,
+     "feld": [
+      138,
+      259
+     ],
+     "bei": "Gerberei 46",
+     "abstand": 1
+    },
+    {
+     "von": 8906,
+     "bis": 15294,
+     "dauer": 6388,
+     "feld": [
+      138,
+      259
+     ],
+     "bei": "Gerberei 46",
+     "abstand": 1
+    }
+   ],
+   "gaenge": [
+    {
+     "von": "Gerberei 46",
+     "nach": "Milchviehhof 51",
+     "ticks": 1044,
+     "felder": 65,
+     "kuerzest": null
+    },
+    {
+     "von": "Milchviehhof 51",
+     "nach": "Gerberei 46",
+     "ticks": 1246,
+     "felder": 73,
+     "kuerzest": null
+    },
+    {
+     "von": "Gerberei 46",
+     "nach": "Gerberei 46",
+     "ticks": 376,
+     "felder": 17,
+     "kuerzest": 0
+    }
+   ]
+  },
+  "166": {
+   "name": "Gerber",
+   "felder": 112,
+   "laufzeit_gerade": [
+    [
+     24,
+     40
+    ],
+    [
+     4,
+     3
+    ],
+    [
+     26,
+     2
+    ]
+   ],
+   "laufzeit_schraeg": [
+    [
+     24,
+     59
+    ],
+    [
+     22,
+     1
+    ]
+   ],
+   "verstoesse": [],
+   "halte": [
+    {
+     "von": 3192,
+     "bis": 4580,
+     "dauer": 1388,
+     "feld": [
+      137,
+      260
+     ],
+     "bei": "Gerberei 47",
+     "abstand": 1
+    },
+    {
+     "von": 5588,
+     "bis": 5728,
+     "dauer": 140,
+     "feld": [
+      169,
+      301
+     ],
+     "bei": "Milchviehhof 53",
+     "abstand": 0
+    },
+    {
+     "von": 6814,
+     "bis": 8374,
+     "dauer": 1560,
+     "feld": [
+      137,
+      260
+     ],
+     "bei": "Gerberei 47",
+     "abstand": 1
+    },
+    {
+     "von": 8808,
+     "bis": 15294,
+     "dauer": 6486,
+     "feld": [
+      137,
+      260
+     ],
+     "bei": "Gerberei 47",
+     "abstand": 1
+    }
+   ],
+   "gaenge": [
+    {
+     "von": "Gerberei 47",
+     "nach": "Milchviehhof 53",
+     "ticks": 1008,
+     "felder": 42,
+     "kuerzest": null
+    },
+    {
+     "von": "Milchviehhof 53",
+     "nach": "Gerberei 47",
+     "ticks": 1086,
+     "felder": 47,
+     "kuerzest": null
+    },
+    {
+     "von": "Gerberei 47",
+     "nach": "Gerberei 47",
+     "ticks": 434,
+     "felder": 19,
+     "kuerzest": 0
+    }
+   ]
+  },
+  "168": {
+   "name": "Gerber",
+   "felder": 149,
+   "laufzeit_gerade": [
+    [
+     24,
+     47
+    ],
+    [
+     4,
+     24
+    ],
+    [
+     2,
+     24
+    ]
+   ],
+   "laufzeit_schraeg": [
+    [
+     24,
+     2
+    ]
+   ],
+   "verstoesse": [],
+   "halte": [
+    {
+     "von": 3192,
+     "bis": 4608,
+     "dauer": 1416,
+     "feld": [
+      150,
+      254
+     ],
+     "bei": "Schmiede 41",
+     "abstand": 1
+    },
+    {
+     "von": 6560,
+     "bis": 8118,
+     "dauer": 1558,
+     "feld": [
+      150,
+      254
+     ],
+     "bei": "Schmiede 41",
+     "abstand": 1
+    },
+    {
+     "von": 8548,
+     "bis": 15294,
+     "dauer": 6746,
+     "feld": [
+      150,
+      254
+     ],
+     "bei": "Schmiede 41",
+     "abstand": 1
+    }
+   ],
+   "gaenge": [
+    {
+     "von": "Schmiede 41",
+     "nach": "Schmiede 41",
+     "ticks": 1952,
+     "felder": 127,
+     "kuerzest": 0
+    },
+    {
+     "von": "Schmiede 41",
+     "nach": "Schmiede 41",
+     "ticks": 430,
+     "felder": 19,
+     "kuerzest": 0
+    }
+   ]
+  },
+  "182": {
+   "name": "Gerber",
+   "felder": 192,
+   "laufzeit_gerade": [
+    [
+     24,
+     59
+    ],
+    [
+     2,
+     38
+    ],
+    [
+     22,
+     37
+    ]
+   ],
+   "laufzeit_schraeg": [
+    [
+     24,
+     3
+    ]
+   ],
+   "verstoesse": [
+    {
+     "t": 4704,
+     "von": [
+      151,
+      255
+     ],
+     "nach": [
+      151,
+      256
+     ],
+     "nach_gebaeude": "Sch"
+    },
+    {
+     "t": 4706,
+     "von": [
+      151,
+      256
+     ],
+     "nach": [
+      150,
+      256
+     ],
+     "nach_gebaeude": "Boden"
+    },
+    {
+     "t": 9314,
+     "von": [
+      151,
+      255
+     ],
+     "nach": [
+      151,
+      256
+     ],
+     "nach_gebaeude": "Sch"
+    },
+    {
+     "t": 9318,
+     "von": [
+      151,
+      256
+     ],
+     "nach": [
+      150,
+      256
+     ],
+     "nach_gebaeude": "Boden"
+    }
+   ],
+   "halte": [
+    {
+     "von": 3192,
+     "bis": 4680,
+     "dauer": 1488,
+     "feld": [
+      151,
+      254
+     ],
+     "bei": "Gerberei 48",
+     "abstand": 1
+    },
+    {
+     "von": 5644,
+     "bis": 6118,
+     "dauer": 474,
+     "feld": [
+      178,
+      245
+     ],
+     "bei": "Milchviehhof 51",
+     "abstand": 0
+    },
+    {
+     "von": 7730,
+     "bis": 9290,
+     "dauer": 1560,
+     "feld": [
+      151,
+      254
+     ],
+     "bei": "Gerberei 48",
+     "abstand": 1
+    },
+    {
+     "von": 9714,
+     "bis": 15294,
+     "dauer": 5580,
+     "feld": [
+      151,
+      254
+     ],
+     "bei": "Gerberei 48",
+     "abstand": 1
+    }
+   ],
+   "gaenge": [
+    {
+     "von": "Gerberei 48",
+     "nach": "Milchviehhof 51",
+     "ticks": 964,
+     "felder": 64,
+     "kuerzest": null
+    },
+    {
+     "von": "Milchviehhof 51",
+     "nach": "Gerberei 48",
+     "ticks": 1612,
+     "felder": 103,
+     "kuerzest": null
+    },
+    {
+     "von": "Gerberei 48",
+     "nach": "Gerberei 48",
+     "ticks": 424,
+     "felder": 21,
+     "kuerzest": 0
+    }
+   ]
+  },
+  "184": {
+   "name": "Gerber",
+   "felder": 109,
+   "laufzeit_gerade": [
+    [
+     24,
+     26
+    ],
+    [
+     4,
+     8
+    ],
+    [
+     20,
+     6
+    ]
+   ],
+   "laufzeit_schraeg": [
+    [
+     24,
+     63
+    ]
+   ],
+   "verstoesse": [
+    {
+     "t": 8026,
+     "von": [
+      137,
+      262
+     ],
+     "nach": [
+      138,
+      262
+     ],
+     "nach_gebaeude": "Berg"
+    },
+    {
+     "t": 8030,
+     "von": [
+      138,
+      262
+     ],
+     "nach": [
+      138,
+      261
+     ],
+     "nach_gebaeude": "Boden"
+    },
+    {
+     "t": 8446,
+     "von": [
+      138,
+      261
+     ],
+     "nach": [
+      138,
+      262
+     ],
+     "nach_gebaeude": "Berg"
+    },
+    {
+     "t": 8450,
+     "von": [
+      138,
+      262
+     ],
+     "nach": [
+      137,
+      262
+     ],
+     "nach_gebaeude": "Boden"
+    }
+   ],
+   "halte": [
+    {
+     "von": 3192,
+     "bis": 4560,
+     "dauer": 1368,
+     "feld": [
+      135,
+      264
+     ],
+     "bei": "Gerberei 50",
+     "abstand": 1
+    },
+    {
+     "von": 6418,
+     "bis": 7978,
+     "dauer": 1560,
+     "feld": [
+      135,
+      264
+     ],
+     "bei": "Gerberei 50",
+     "abstand": 1
+    },
+    {
+     "von": 8498,
+     "bis": 15294,
+     "dauer": 6796,
+     "feld": [
+      135,
+      264
+     ],
+     "bei": "Gerberei 50",
+     "abstand": 1
+    }
+   ],
+   "gaenge": [
+    {
+     "von": "Gerberei 50",
+     "nach": "Gerberei 50",
+     "ticks": 1858,
+     "felder": 77,
+     "kuerzest": 0
+    },
+    {
+     "von": "Gerberei 50",
+     "nach": "Gerberei 50",
+     "ticks": 520,
+     "felder": 29,
+     "kuerzest": 0
+    }
+   ]
+  },
+  "204": {
+   "name": "Milchbauer",
+   "felder": 547,
+   "laufzeit_gerade": [
+    [
+     2,
+     206
+    ],
+    [
+     14,
+     204
+    ],
+    [
+     16,
+     123
+    ]
+   ],
+   "laufzeit_schraeg": [
+    [
+     16,
+     6
+    ]
+   ],
+   "verstoesse": [
+    {
+     "t": 3346,
+     "von": [
+      147,
+      267
+     ],
+     "nach": [
+      148,
+      267
+     ],
+     "nach_gebaeude": "Lag"
+    },
+    {
+     "t": 10036,
+     "von": [
+      117,
+      269
+     ],
+     "nach": [
+      117,
+      270
+     ],
+     "nach_gebaeude": "Hue"
+    },
+    {
+     "t": 10038,
+     "von": [
+      117,
+      270
+     ],
+     "nach": [
+      116,
+      270
+     ],
+     "nach_gebaeude": "Boden"
+    },
+    {
+     "t": 10304,
+     "von": [
+      116,
+      270
+     ],
+     "nach": [
+      117,
+      270
+     ],
+     "nach_gebaeude": "Hue"
+    },
+    {
+     "t": 10306,
+     "von": [
+      117,
+      270
+     ],
+     "nach": [
+      117,
+      269
+     ],
+     "nach_gebaeude": "Boden"
+    },
+    {
+     "t": 10608,
+     "von": [
+      135,
+      255
+     ],
+     "nach": [
+      136,
+      255
+     ],
+     "nach_gebaeude": "Ger"
+    },
+    {
+     "t": 10610,
+     "von": [
+      136,
+      255
+     ],
+     "nach": [
+      136,
+      254
+     ],
+     "nach_gebaeude": "Boden"
+    },
+    {
+     "t": 10704,
+     "von": [
+      141,
+      253
+     ],
+     "nach": [
+      142,
+      253
+     ],
+     "nach_gebaeude": "Sch"
+    },
+    {
+     "t": 10706,
+     "von": [
+      142,
+      253
+     ],
+     "nach": [
+      142,
+      252
+     ],
+     "nach_gebaeude": "Boden"
+    },
+    {
+     "t": 10800,
+     "von": [
+      147,
+      250
+     ],
+     "nach": [
+      148,
+      250
+     ],
+     "nach_gebaeude": "Ger"
+    },
+    {
+     "t": 10802,
+     "von": [
+      148,
+      250
+     ],
+     "nach": [
+      148,
+      249
+     ],
+     "nach_gebaeude": "Boden"
+    },
+    {
+     "t": 13826,
+     "von": [
+      117,
+      269
+     ],
+     "nach": [
+      117,
+      270
+     ],
+     "nach_gebaeude": "Hue"
+    },
+    {
+     "t": 13828,
+     "von": [
+      117,
+      270
+     ],
+     "nach": [
+      116,
+      270
+     ],
+     "nach_gebaeude": "Boden"
+    },
+    {
+     "t": 14094,
+     "von": [
+      116,
+      270
+     ],
+     "nach": [
+      117,
+      270
+     ],
+     "nach_gebaeude": "Hue"
+    },
+    {
+     "t": 14096,
+     "von": [
+      117,
+      270
+     ],
+     "nach": [
+      117,
+      269
+     ],
+     "nach_gebaeude": "Boden"
+    },
+    {
+     "t": 14398,
+     "von": [
+      135,
+      255
+     ],
+     "nach": [
+      136,
+      255
+     ],
+     "nach_gebaeude": "Ger"
+    },
+    {
+     "t": 14400,
+     "von": [
+      136,
+      255
+     ],
+     "nach": [
+      136,
+      254
+     ],
+     "nach_gebaeude": "Boden"
+    },
+    {
+     "t": 14494,
+     "von": [
+      141,
+      253
+     ],
+     "nach": [
+      142,
+      253
+     ],
+     "nach_gebaeude": "Sch"
+    },
+    {
+     "t": 14496,
+     "von": [
+      142,
+      253
+     ],
+     "nach": [
+      142,
+      252
+     ],
+     "nach_gebaeude": "Boden"
+    },
+    {
+     "t": 14590,
+     "von": [
+      147,
+      250
+     ],
+     "nach": [
+      148,
+      250
+     ],
+     "nach_gebaeude": "Ger"
+    },
+    {
+     "t": 14592,
+     "von": [
+      148,
+      250
+     ],
+     "nach": [
+      148,
+      249
+     ],
+     "nach_gebaeude": "Boden"
+    }
+   ],
+   "halte": [
+    {
+     "von": 4116,
+     "bis": 9028,
+     "dauer": 4912,
+     "feld": [
+      180,
+      226
+     ],
+     "bei": "Milchviehhof 52",
+     "abstand": 0
+    },
+    {
+     "von": 11314,
+     "bis": 12818,
+     "dauer": 1504,
+     "feld": [
+      180,
+      226
+     ],
+     "bei": "Milchviehhof 52",
+     "abstand": 0
+    },
+    {
+     "von": 15104,
+     "bis": 15294,
+     "dauer": 190,
+     "feld": [
+      180,
+      226
+     ],
+     "bei": "Milchviehhof 52",
+     "abstand": 0
+    }
+   ],
+   "gaenge": [
+    {
+     "von": "Milchviehhof 52",
+     "nach": "Milchviehhof 52",
+     "ticks": 2286,
+     "felder": 229,
+     "kuerzest": null
+    },
+    {
+     "von": "Milchviehhof 52",
+     "nach": "Milchviehhof 52",
+     "ticks": 2286,
+     "felder": 229,
+     "kuerzest": null
+    }
+   ]
+  },
+  "205": {
+   "name": "Milchbauer",
+   "felder": 267,
+   "laufzeit_gerade": [
+    [
+     16,
+     101
+    ],
+    [
+     2,
+     10
+    ],
+    [
+     14,
+     9
+    ]
+   ],
+   "laufzeit_schraeg": [
+    [
+     16,
+     140
+    ]
+   ],
+   "verstoesse": [
+    {
+     "t": 10246,
+     "von": [
+      116,
+      275
+     ],
+     "nach": [
+      117,
+      275
+     ],
+     "nach_gebaeude": "Hue"
+    },
+    {
+     "t": 10248,
+     "von": [
+      117,
+      275
+     ],
+     "nach": [
+      117,
+      274
+     ],
+     "nach_gebaeude": "Boden"
+    },
+    {
+     "t": 10454,
+     "von": [
+      116,
+      270
+     ],
+     "nach": [
+      117,
+      270
+     ],
+     "nach_gebaeude": "Hue"
+    },
+    {
+     "t": 10456,
+     "von": [
+      117,
+      270
+     ],
+     "nach": [
+      117,
+      269
+     ],
+     "nach_gebaeude": "Boden"
+    },
+    {
+     "t": 13590,
+     "von": [
+      116,
+      275
+     ],
+     "nach": [
+      117,
+      275
+     ],
+     "nach_gebaeude": "Hue"
+    },
+    {
+     "t": 13592,
+     "von": [
+      117,
+      275
+     ],
+     "nach": [
+      117,
+      274
+     ],
+     "nach_gebaeude": "Boden"
+    },
+    {
+     "t": 13794,
+     "von": [
+      116,
+      270
+     ],
+     "nach": [
+      117,
+      270
+     ],
+     "nach_gebaeude": "Hue"
+    },
+    {
+     "t": 13796,
+     "von": [
+      117,
+      270
+     ],
+     "nach": [
+      117,
+      269
+     ],
+     "nach_gebaeude": "Boden"
+    }
+   ],
+   "halte": [
+    {
+     "von": 3636,
+     "bis": 9398,
+     "dauer": 5762,
+     "feld": [
+      166,
+      301
+     ],
+     "bei": "Milchviehhof 53",
+     "abstand": 0
+    },
+    {
+     "von": 11240,
+     "bis": 12742,
+     "dauer": 1502,
+     "feld": [
+      166,
+      301
+     ],
+     "bei": "Milchviehhof 53",
+     "abstand": 0
+    },
+    {
+     "von": 14580,
+     "bis": 15294,
+     "dauer": 714,
+     "feld": [
+      166,
+      301
+     ],
+     "bei": "Milchviehhof 53",
+     "abstand": 0
+    }
+   ],
+   "gaenge": [
+    {
+     "von": "Milchviehhof 53",
+     "nach": "Milchviehhof 53",
+     "ticks": 1842,
+     "felder": 117,
+     "kuerzest": null
+    },
+    {
+     "von": "Milchviehhof 53",
+     "nach": "Milchviehhof 53",
+     "ticks": 1838,
+     "felder": 117,
+     "kuerzest": null
+    }
+   ]
+  }
+ },
+ "vergleich": [
+  {
+   "arbeiter": "1",
+   "name": "Schmied",
+   "arbeitsfeld": [
+    144,
+    257
+   ],
+   "gaenge": 10,
+   "gang_felder_median": 3,
+   "arbeit_median": 920,
+   "geplant": 4
+  },
+  {
+   "arbeiter": "132",
+   "name": "Milchbauer",
+   "arbeitsfeld": [
+    179,
+    243
+   ],
+   "gaenge": 1,
+   "gang_felder_median": 193,
+   "arbeit_median": 5762,
+   "geplant": null
+  },
+  {
+   "arbeiter": "139",
+   "name": "Schmied",
+   "arbeitsfeld": [
+    148,
+    258
+   ],
+   "gaenge": 6,
+   "gang_felder_median": 12,
+   "arbeit_median": 924,
+   "geplant": 6
+  },
+  {
+   "arbeiter": "143",
+   "name": "Schmied",
+   "arbeitsfeld": [
+    150,
+    258
+   ],
+   "gaenge": 5,
+   "gang_felder_median": 16,
+   "arbeit_median": 924,
+   "geplant": 8
+  },
+  {
+   "arbeiter": "145",
+   "name": "Schmied",
+   "arbeitsfeld": [
+    150,
+    262
+   ],
+   "gaenge": 5,
+   "gang_felder_median": 14,
+   "arbeit_median": 928,
+   "geplant": 9
+  },
+  {
+   "arbeiter": "162",
+   "name": "Schmied",
+   "arbeitsfeld": [
+    150,
+    266
+   ],
+   "gaenge": 5,
+   "gang_felder_median": 22,
+   "arbeit_median": 928,
+   "geplant": 13
+  },
+  {
+   "arbeiter": "164",
+   "name": "Gerber",
+   "arbeitsfeld": [
+    138,
+    259
+   ],
+   "gaenge": 3,
+   "gang_felder_median": 65,
+   "arbeit_median": 1556,
+   "geplant": 16
+  },
+  {
+   "arbeiter": "166",
+   "name": "Gerber",
+   "arbeitsfeld": [
+    137,
+    260
+   ],
+   "gaenge": 3,
+   "gang_felder_median": 42,
+   "arbeit_median": 1560,
+   "geplant": 16
+  },
+  {
+   "arbeiter": "168",
+   "name": "Gerber",
+   "arbeitsfeld": [
+    150,
+    254
+   ],
+   "gaenge": 2,
+   "gang_felder_median": 127,
+   "arbeit_median": 1558,
+   "geplant": 18
+  },
+  {
+   "arbeiter": "182",
+   "name": "Gerber",
+   "arbeitsfeld": [
+    151,
+    254
+   ],
+   "gaenge": 3,
+   "gang_felder_median": 64,
+   "arbeit_median": 1560,
+   "geplant": 18
+  },
+  {
+   "arbeiter": "184",
+   "name": "Gerber",
+   "arbeitsfeld": [
+    135,
+    264
+   ],
+   "gaenge": 2,
+   "gang_felder_median": 77,
+   "arbeit_median": 1560,
+   "geplant": 22
+  },
+  {
+   "arbeiter": "204",
+   "name": "Milchbauer",
+   "arbeitsfeld": [
+    180,
+    226
+   ],
+   "gaenge": 2,
+   "gang_felder_median": 229,
+   "arbeit_median": 1504,
+   "geplant": null
+  },
+  {
+   "arbeiter": "205",
+   "name": "Milchbauer",
+   "arbeitsfeld": [
+    166,
+    301
+   ],
+   "gaenge": 2,
+   "gang_felder_median": 117,
+   "arbeit_median": 1502,
+   "geplant": null
+  }
+ ],
+ "bestand": [
+  {
+   "t": 3231,
+   "keule": 0,
+   "leder": 0,
+   "eisen": 30
+  },
+  {
+   "t": 15201,
+   "keule": 35,
+   "leder": 15,
+   "eisen": 1
+  }
+ ]
+}

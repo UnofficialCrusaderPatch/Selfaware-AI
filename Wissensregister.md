@@ -79,10 +79,21 @@ Spiels abgelesen ist, aber noch nicht mit laufenden Einheiten geprueft, bleibt "
 | G3 | Schmied arbeitet 927 Ticks je Keule (926-928 in 9 Zyklen) | getestet | dieselbe Messung | 06.10. |
 | G4 | Schmied laeuft je Zyklus EINEN Rundgang: Schmiede -> Lager (Eisen) -> Waffenlager (Keule) -> Schmiede; nah 24 Felder = 588 Ticks, fern 72 Felder = 1.692 Ticks | getestet | dieselbe Messung | 06.10. |
 | G5 | Gerber arbeitet ~1.550 Ticks je Kuh und bringt die 3 Lederharnische in EINEM Gang zum Waffenlager | getestet | Leder +3 bei Tick 5.931 und 9.243 (Abstand 3.312 = 1.550 Arbeit + 77 Felder x 24) | 06.10. |
-| G6 | Keulen je Eisen: 13 Keulen aus 11 Eisen - mehr als 1:1, ungeklaert (Abgabe manchmal +2) | getestet (offen) | Bestand alle 100 Ticks; feiner messen | 06.10. |
-| G7 | Woher der Gerber nach der ersten Kuh die naechsten bekommt, ist ungeklaert (nur ein Gang zum Hof gesehen) | offen | Kuehe (Typ 51) beim naechsten Mal mitschreiben | 06.10. |
+| G6 | Eine Schmiede macht aus einem Eisen abwechselnd 1 und 2 Keulen - im Mittel 1,5 je Eisen | Daniel | Daniel 20:43; passt zu den Messungen 13 aus 11 (Abgaben +2) und 43 aus 30 Eisen (Aufbau 20:40, 2 evtl. noch in Arbeit) - Abwechslung je Schmied noch nicht einzeln gesehen | 06.10. |
+| G7 | Woher der Gerber nach der ersten Kuh die naechsten bekommt, ist ungeklaert (nur ein Gang zum Hof gesehen); Aufbau 20:40: 0 Kuehe in 12.000 Ticks, weil Beliebtheit 0 / Leute 4 die Hoefe unbesetzt liess (Daniel 20:41) | offen | Kuehe (Typ 51) beim naechsten Mal mitschreiben | 06.10. |
 | G8 | Eingang (wo der Arbeiter steht): Schmiede und Gerberei unten Mitte (x+2, y+4); Waffenlager links (x-1, y+2) | getestet | Haltefelder der Arbeiter, Bau-Richtung 0 | 06.10. |
 | G9 | Ein Gerber schafft rechnerisch so viel wie ~2 Schmiede (3 Leder je ~1.700-3.300 Ticks gegen 1 Keule je ~1.500-2.600) | ungeprueft | abgeleitet aus G3-G5, nicht im Spiel gegeneinander gemessen | 06.10. |
 | G10 | Bau-Richtung dreht den Eingang (4x4: Schmiede, Gerberei, Waffenlager, Huette gleich): 0 unten (x+2,y+4), 2 links (x-1,y+2), 4 oben (x+1,y-1), 6 rechts (x+4,y+1) | getestet | `eingang_messen.py` 20:37, `daten/eingang_20261006_203700.json` | 06.10. |
 | G11 | Eingang mit einer Huette zugebaut: der GESPEICHERTE Eingang (+0x112) bleibt gleich - ob Arbeiter einen anderen Zugang nehmen (Daniel W20), ist nicht getestet | getestet (Teil) | dieselbe Messung, Bild `daten/wege_abstand/eingang_blockiert.png` | 06.10. |
 | G12 | Ein zweiter Markt wurde in keiner Richtung gebaut | getestet | dieselbe Messung; Grund nicht nachgesehen | 06.10. |
+| G13 | Mit Beliebtheit 0 sinkt die Bevoelkerung auf das Minimum 4 und Gebaeude bleiben unbesetzt - Messpartien muessen die Beliebtheit hoch halten (Essen kaufen) | Daniel | Daniel 20:41; gemessen am Ende der Aufbau-Messung: Beliebtheit 0, Leute 4, Wohnplatz 10 | 06.10. |
+
+## Aufbau 5+5 (aufbau_bauen.py, Beliebtheit 100 durch Messumgebung, `daten/aufbau_20261006_204359*.json`)
+
+| Nr | Aussage | Stufe | Grundlage | Stand |
+|---|---|---|---|---|
+| A8 | Messumgebung haelt die Beliebtheit bei 100 (Essen 4 Sorten nachkaufen, doppelte Rationen, Bestechung, Start gesetzt): alle 13 Arbeitsplaetze besetzt | getestet | Beliebtheit 100/100/100 ueber 12.000 Ticks | 06.10. |
+| A9 | Ein Waffenlager fasst vermutlich 50 Waffen: Keulen + Leder blieben ab Tick 10.079 bei genau 50, obwohl Eisen und 9 Kuehe da waren | getestet (Indiz) | Verlauf im Bestand; Fuellstand des Waffenlagers selbst noch nicht ausgelesen | 06.10. |
+| A10 | Milchviehhof: ~0,46 Kuehe je Hof und 1.000 Ticks (3 Hoefe, 9 Kuehe in ~6.500 Ticks); je Kuh genau 3 Leder (5 Kuehe -> 15) | getestet | Kuehe (Typ 51) alle 50 Ticks | 06.10. |
+| A11 | Schmied holt das Eisen am Lagerteil MIT Eisen, nicht am naechsten; Reihenfolge Werkstatt -> Waffenlager -> Eisenteil -> Werkstatt; am Eisenteil Wartezeiten (32+56+34 Ticks) | getestet | Schmied 139 Feld fuer Feld; Plan rechnete 6 Felder, gelaufen 12 | 06.10. |
+| A12 | Aufbauplaner Runde 1 unterschaetzt die Gaenge um den Faktor ~2 (Schmiede 12-22 statt 6-13, Gerber 42-127 statt 16-22) - Gruende A11 und weite Hoefe | getestet | VERGLEICH in der Auswertung | 06.10. |
