@@ -442,7 +442,9 @@ def bilanz_schritt(st, L, G, ausbau, ziel, endspiel, runde, marken):
         gold_echt = vorrat(SP)["gold"]
         n_rest = max(0, ziel - st.get("T26", 0))
         noch = (-(-max(0, n_rest - v.get("keule", 0)) // 5)) * LOS_PREIS[21] + (-(-max(0, n_rest - v.get("leder", 0)) // 5)) * LOS_PREIS[23]             + n_rest * KAEMPFER_GOLD
-        if gold_echt + t["abriss_wert"] < noch:
+        # Abriss nur zur Haelfte zaehlen + 20 Sicherheit (v9: 904 + 179 schien zu reichen, nach dem Abriss waren es 1.086
+        # gegen 1.120 - das Abriss-Holz kommt beim Verkauf nicht voll an)
+        if gold_echt + t["abriss_wert"] // 2 < noch + 20:
             aus.append("ENDSPIEL VERSCHOBEN: Gold nach Verkauf %d + Abriss %d < %d - Wirtschaft laeuft weiter" % (
                 gold_echt, t["abriss_wert"], noch))
             return aus

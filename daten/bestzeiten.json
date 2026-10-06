@@ -101,5 +101,19 @@
    "fehler": false
   },
   "notiz": "alle Exerzierplatz-Teile bleiben"
+ },
+ {
+  "name": "v9",
+  "marken": {
+   "kaempfer_1": 14481,
+   "kaempfer_2": 14481,
+   "kaempfer_3": 14481,
+   "kaempfer_4": 14481,
+   "kaempfer_5": 14501,
+   "seasoning_b": 1726,
+   "endspiel": 14255,
+   "fehler": false
+  },
+  "notiz": "zweistufiges Endspiel (echtes Gold)"
  }
 ]
