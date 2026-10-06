@@ -747,9 +747,10 @@ def bilanz_schritt(st, L, G, ausbau, ziel, endspiel, runde, marken):
         noch = (-(-max(0, n_rest - v.get("keule", 0)) // 5)) * LOS_PREIS[21] + (-(-max(0, n_rest - v.get("leder", 0) - kommt) // 5)) * LOS_PREIS[23]             + n_rest * KAEMPFER_GOLD
         # Abriss nur zur Haelfte zaehlen + 20 Sicherheit (v9: 904 + 179 schien zu reichen, nach dem Abriss waren es 1.086
         # gegen 1.120 - das Abriss-Holz kommt beim Verkauf nicht voll an)
-        # 07.10.: Abriss mit einem Drittel statt der Haelfte - gemessen kamen ~35 % an (L16: 47 Holz von 128-136); Lauf 43
-        # startete das Endspiel mit 66 Betrieben zu frueh, Gold reichte fuer 7 von 10
-        if gold_echt + t["abriss_wert"] // 3 < noch + 20:
+        # 07.10. 01:18: Abriss mit 80 % - gemessen kommen 82-114 % an (Gold vor/nach Endspiel-Verkauf: Lauf 12 +111/136,
+        # 15 +109/128, 18 +116/128, 52 +211/186, 54 ~+205/182). Die Drittel-Rechnung beruhte auf einem Messfehler (L16 zaehlte
+        # nur das nach dem Verkauf uebrige Holz) und liess Lauf 54 ~270 Ticks auf Gold warten
+        if gold_echt + int(t["abriss_wert"] * 0.8) < noch + 20:
             aus.append("ENDSPIEL VERSCHOBEN: Gold nach Verkauf %d + Abriss %d < %d - Wirtschaft laeuft weiter" % (
                 gold_echt, t["abriss_wert"], noch))
             return aus
