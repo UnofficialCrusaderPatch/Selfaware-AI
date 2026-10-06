@@ -99,4 +99,12 @@ Spiels abgelesen ist, aber noch nicht mit laufenden Einheiten geprueft, bleibt "
 | A12 | Aufbauplaner Runde 1 unterschaetzt die Gaenge um den Faktor ~2 (Schmiede 12-22 statt 6-13, Gerber 42-127 statt 16-22) - Gruende A11 und weite Hoefe | getestet | VERGLEICH in der Auswertung | 06.10. |
 | A13 | Runde 2 (Eisenteil + Hoftore im Plan, laufend anwerben): 44 Kaempfer aus 30 Eisen; 10 nach 5.262, 20 nach 6.539, 30 nach 7.889, 40 nach 10.611 Ticks (ab Messbeginn); Eisen nach 6.425 leer; Schmied-Gaenge 3/7/16/19/14 gegen geplant 4/6/11/12/12 | getestet | `daten/aufbau_20261006_204739.json` | 06.10. |
 | A14 | Bester Lagerplatz (Weg-Ebene + Platzkarte des Spiels): heute am Bergfried Kuhweg 27 + Eisenweg 45 = 72 Felder; mit Minen bei (193,309) 1 + 6 = 7; mit Markt-Eisen bei (167,295) Kuhweg 0 | ungeprueft | `standort.py`, `daten/standort_20261006_205012.*`; Naeherung "naechster Hof", 3 Hoefe + Werkstaetten-Platz nicht geprueft | 06.10. |
-| A15 | Das Vorratslager umzusetzen ist effektiver, als es am Bergfried zu lassen | Daniel | Daniel 20:48 ("100 % sicher"); A14 rechnet in dieselbe Richtung | 06.10. |
+| A15 | Das Vorratslager umzusetzen ist effektiver, als es am Bergfried zu lassen | Daniel + getestet (A16) - wartet auf Daniels Bestaetigung fuer "fest" | Daniel 20:48 ("100 % sicher"); A14 rechnet in dieselbe Richtung | 06.10. |
+| A16 | Lager versetzt nach (167,295) an das Gruenland (Runde 3, Messumgebung, 30 Eisen gekauft): 10 -> 40 Kaempfer in 3.665 Ticks statt 5.349 am Bergfried (-31 %), obwohl nur 9 von 11 Gebaeuden standen (4 Schmieden, 4 Gerbereien); Leder nicht mehr Engpass (43 uebrig), jetzt Eisen/Schmieden | getestet | `daten/aufbau_20261006_205123.json` gegen `..._204739.json`; Vergleich ueber die Spanne 10-40, weil die Arbeiter unterschiedlich frueh besetzt waren | 06.10. |
+
+## Aufbau ab Tick 0 (Daniel 06.10. 20:52)
+
+| Nr | Aussage | Stufe | Grundlage | Stand |
+|---|---|---|---|---|
+| B1 | Reihenfolge fuer den Aufbau von 0: Lager zuerst zu schnellem Holz umsetzen, dann Stein, dann Eisen, dann erst die Waffenproduktion; den Zeitpunkt so legen, dass moeglichst alle Lederharnische produziert werden koennen | Daniel | Daniel 20:52 | 06.10. |
+| B2 | Messungen ab jetzt immer von Tick 0 unter echten Bedingungen (kein gesetztes Gold, keine Gratis-Gebaeude), damit Daniel zuschauen kann | Daniel | Daniel 20:52 | 06.10. |

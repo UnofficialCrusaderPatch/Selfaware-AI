@@ -36,7 +36,8 @@ KOSTEN = 0x01124CF4
 ART = {"Schmiede": (13, 83, 4), "Gerberei": (16, 85, 4), "Kaserne": (9, 87, 5), "Waffenlager": (11, 81, 4),
        "Huette": (1, 54, 4), "Lagerplatz": (10, 52, 5), "Markt": (26, 77, 5), "Milchviehhof": (33, 73, 10),
        "Apfelplantage": (32, 72, 10), "Muehle": (34, 74, 3), "Kapelle": (36, 95, 6), "Wachturm": (74, 110, 3),
-       "Verteidigungsturm": (75, 111, 4), "Kleines Torhaus NS": (46, 144, 5), "Soeldnerposten": (8, 86, 5)}
+       "Verteidigungsturm": (75, 111, 4), "Kleines Torhaus NS": (46, 144, 5), "Soeldnerposten": (8, 86, 5),
+       "Kornspeicher": (19, 80, 4), "Eisenmine": (5, 90, 4)}
 SUCHEN = {}                    # Name -> Suchmitte; wird in main() auf das Lager gesetzt (Lagerplatz, Hoefe)
 PAARE = [("Schmiede", "Schmiede"), ("Kaserne", "Kaserne"), ("Schmiede", "Kaserne"), ("Waffenlager", "Waffenlager"),
          ("Verteidigungsturm", "Verteidigungsturm"), ("Huette", "Schmiede")]

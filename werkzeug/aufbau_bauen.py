@@ -8,7 +8,7 @@ Waffenlager/Schmieden/Gerbereien genau nach Plan (Ort + Richtung), Milchviehhoef
 Eisen kaufen, Schmieden auf Keulen. Dann mitschreiben: alle Arbeiter (einheitwacht alle 2 Ticks), Kuehe (Typ 51) und
 Bestand alle 50 Ticks.
 Vergleich danach: gemessener Rundgang je Schmiede gegen den geplanten (arbeitsgang_auswerten + plan in der Datei).
-Aufruf: python werkzeug/aufbau_bauen.py [n=5] [ticks=12000] [hoefe=3] [tempo=300]
+Aufruf: python werkzeug/aufbau_bauen.py [n=5] [ticks=12000] [hoefe=3] [tempo=300] [lager=x,y] [kaserne=x,y]
 """
 import json
 import os
@@ -52,6 +52,18 @@ def main():
         G0 = E.runde_lesen()[2]
         teile = [g for g in G0.values() if g["besitzer"] == SP and g["typ"] == P.LAGER]
         lx, ly = teile[0]["x"], teile[0]["y"]
+        if "lager" in arg:                                    # Runde 3 (Daniel 20:48): Lager versetzen
+            for nr in [nr for nr, g in G0.items() if g["besitzer"] == SP and g["typ"] == P.LAGER]:
+                befehl({"abreissen": {"nr": nr}}, 0.6, bis="ABREISSEN")
+            warte_ticks(5)
+            lx, ly = map(int, arg["lager"].split(","))
+            befehl({"baue": {"mapper": 52, "x": lx, "y": ly, "groesse": 5, "richtung": 0}}, 0.8, bis="BAUE")
+            warte_ticks(6)
+            neu_teile = [g for g in E.runde_lesen()[2].values() if g["besitzer"] == SP and g["typ"] == P.LAGER]
+            erg["lager_versetzt"] = {"nach": [lx, ly], "teile": len(neu_teile), "alt": [teile[0]["x"], teile[0]["y"]]}
+            print("Lager versetzt nach", (lx, ly), "-", len(neu_teile), "Teile", flush=True)
+            if not neu_teile:
+                raise RuntimeError("neues Lager nicht gebaut")
         for typ, r in ((P.LAGER, 8), (26, 20)):              # 1. Lager anbauen und Markt zuerst
             erg["gebaut"].append(["vorab", typ, E.baue_schnell(typ, lx, ly, r)])
             warte_ticks(8)
@@ -69,7 +81,8 @@ def main():
             warte_ticks(8)
         hof = neue(33, vor)
         erg["hoefe"] = {nr: [g["x"], g["y"]] for nr, g in hof.items()}
-        E.baue_schnell(9, lx - 12, ly + 12, 25)
+        kx, ky = map(int, arg["kaserne"].split(",")) if "kaserne" in arg else (lx - 12, ly + 12)
+        E.baue_schnell(9, kx, ky, 25)
         warte_ticks(8)
         kas = neue(9, vor)
         kaserne = min(kas) if kas else None
