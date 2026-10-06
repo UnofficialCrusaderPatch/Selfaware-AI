@@ -41,17 +41,18 @@ KNOEPFE = {
     "holz_kaufen": ["ja", "nein"],
     "je_arbeiter": ["ja", "nein"],
     "vollbeschaeftigung": ["ja", "nein"],
+    "entscheider": ["regeln", "kausal"],
 }
 GRUND = {"v14": "ja", "umzug": "frueh", "holzfaeller_vorab": 4, "holz_spam": 20, "holzfaeller_je_baum": 4, "holzfaeller_max": 30,
          "steinbruch_zuerst": "nein", "stein_parallel": "ja", "joch_nach_stein": "ja", "huetten_voraus": "ja",
-         "holz_kaufen": "ja", "je_arbeiter": "ja", "vollbeschaeftigung": "nein"}
+         "holz_kaufen": "ja", "je_arbeiter": "ja", "vollbeschaeftigung": "nein", "entscheider": "regeln"}
 FEST = ["leere_ki=ja", "tempo=100", "minuten=60", "streitkolben=10", "weg=bilanz", "experiment=ja"]
 # 23:26 (Daniel: Ochse vor Steinbruch, Lager nicht umgezogen - in der v5-Bauweise galten die alten Regeln): EIN Weg.
 # v14 ist fest; der Kreis aendert nur Werte, keine Bauweisen ("zwei Wege zum selben Ziel sind immer ein Fehler")
 # welche Knoepfe zu welchem gemessenen Verlust gehoeren (Vorwissen; die Wirkung misst der Kreis selbst)
 VERLUST_KNOEPFE = {
-    "wohnraum_voll": ["huetten_voraus", "holz_kaufen"],
-    "bauern_untaetig": ["vollbeschaeftigung", "holz_kaufen", "holz_spam", "holzfaeller_je_baum", "je_arbeiter"],
+    "wohnraum_voll": ["entscheider", "huetten_voraus", "holz_kaufen"],
+    "bauern_untaetig": ["entscheider", "vollbeschaeftigung", "holz_kaufen", "holz_spam", "holzfaeller_je_baum", "je_arbeiter"],
     "gold_liegt_holz_fehlt": ["holz_kaufen", "holz_spam"],
     "ohne_holz": ["holz_spam", "holzfaeller_vorab", "holzfaeller_je_baum", "holzfaeller_max", "umzug"],
     "stein_spaet": ["steinbruch_zuerst", "stein_parallel", "joch_nach_stein", "umzug"],

@@ -403,6 +403,8 @@ JOCH_NACH_STEIN = False  # v18: Joch erst, wenn der Steinhaufen seines Steinbruc
 STEIN_PARALLEL = False   # v18: Steinbrueche sofort (vor allem), Holzfaeller-Spam mit dem Rest - nicht erst nach dem Spam
 HUETTEN_VORAUS = False   # v18: Huetten vor dem Bedarf (Daniel 23:10 Punkt 3: Bauern brauchen Spawnzeit)
 VOLLBESCHAEFTIGUNG = False   # Lernkreis: jeder Bauer am Feuer bekommt sofort einen Arbeitsplatz (Lernlauf 1: 93 % untaetig)
+ENTSCHEIDER = "regeln"   # "kausal" (Daniel 23:27 "dynamische Antworten fuer alles"): Kausalmodell entscheidet Betriebe + Huetten
+ZIEL_TICK = 9400         # Zieltick, bis zu dem das Kausalmodell Ertraege rechnet (unter 1 Jahr = 9.600, Endspiel davor)
 
 def v16_holzfaeller(plan):
     """Plan-Holzfaeller nach Abstand zum neuen Lager, ohne die jenseits von HF_MAX."""
@@ -971,7 +973,26 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                 n_u, typ_u, ort_u = BUCH.unerreichbar.pop()
                 befehl({"abreissen": {"nr": n_u}}, 0.8, bis="ABREISSEN")
                 ausbau.fehlschlag[(typ_u, ort_u)] = ausbau.fehlschlag.get((typ_u, ort_u), 0) + 1
-            if HUETTEN_VORAUS and not endspiel["fertig"]:
+            if ENTSCHEIDER == "kausal" and not endspiel["fertig"]:
+                # Kausalmodell (kausal.py): fuer jede Handlung die Wirkungskette bis ZIEL_TICK aus der aktuellen Lage
+                import kausal as KM
+                ausbau.kausal = True
+                feuer_g = next(((g["x"] + 1, g["y"] + 1) for g in G.values() if g["besitzer"] == SP and g["typ"] == 55), BERGFRIED)
+                lager_m = tuple(plan["lager"])
+                speicher_m = tuple(plan["kornspeicher"])
+                kand_k = [(k["typ"], k["ort"], k["kosten"], k["arbeiter"]) for k in ausbau.kandidaten(st, L, G) if k["typ"] in (3, 32, 7)]
+                R_k = wirt.ruecklage(G)
+                st_k = dict(st, holz=st["holz"] - R_k["holz"], gold=st["gold"] - R_k["gold"])
+                for w_k, typ_k, ort_k, text_k in KM.entscheide(st["t"], ZIEL_TICK, st_k, kand_k, feuer_g,
+                                                                {3: lager_m, 32: speicher_m, 7: speicher_m}, kosten_spiel(1)["holz"]):
+                    if typ_k == 1:
+                        o_k = baue_haus()
+                    else:
+                        o_k = baue_schnell(typ_k, ort_k[0], ort_k[1], 3, zweck="kausal")
+                        if not o_k:
+                            ausbau.fehlschlag[(typ_k, ort_k)] = ausbau.fehlschlag.get((typ_k, ort_k), 0) + 1
+                    ereignis.append("KAUSAL %s bei %s: %s -> %s" % (NACH_TYP[typ_k]["name"], ort_k, text_k, o_k))
+            if HUETTEN_VORAUS and not endspiel["fertig"] and ENTSCHEIDER != "kausal":
                 # v18 (Daniel 23:10 Punkt 3: "Haeuser bauen, bevor du Menschen brauchst, weil sie Spawnzeit brauchen"):
                 # freie Wohnplaetze >= offene Arbeitsplaetze + 4 (mind. 6)
                 fehlt_w, offene = wohnraum_fehlt(st, G)
@@ -1000,7 +1021,7 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                 vor = vorrat(SP)["gold"]
                 befehl({"spielbefehl": {"nr": 38, "werte": [0, 2]}}, 1.0, bis="SPIELBEFEHL")
                 ereignis.append("HOLZ GEKAUFT (Feuer %d untaetig, Holz %d): Gold %d -> %d" % (st["feuer"], st["holz"], vor, vorrat(SP)["gold"]))
-            if VOLLBESCHAEFTIGUNG and not endspiel["fertig"] and st.get("feuer", 0) >= 2:
+            if VOLLBESCHAEFTIGUNG and ENTSCHEIDER != "kausal" and not endspiel["fertig"] and st.get("feuer", 0) >= 2:
                 # Lernlauf 1 (23:22): 93 % der Zeit >= 4 Bauern untaetig, am Ende 448 Holz + 510 Gold ungenutzt - ein Bauer am
                 # Feuer bringt 0. Jede freie Hand bekommt sofort einen Arbeitsplatz (beste Art je Platz laut Planer, ohne
                 # Horizont-Pruefung), bis zu 3 je Runde, Kosten ueber den Ruecklagen
@@ -1207,7 +1228,7 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
             ereignis += ausbau.schritt(st, L, G, runde)
         tz = uhr("wirtschaft", tz)
         bedarf = sum(ARBEITER_JE[t] * st.get("G%d" % t, 0) for t in ARBEITER_JE)
-        puffer = streitkolben and not endspiel["fertig"] and wohnraum_fehlt(st, G)[0]   # Huetten vorab, aber nur mit Arbeit (23:21)
+        puffer = streitkolben and not endspiel["fertig"] and ENTSCHEIDER != "kausal" and wohnraum_fehlt(st, G)[0]   # Huetten vorab, aber nur mit Arbeit (23:21)
         if st["holz"] >= 5 + wirt.ruecklage(G)["holz"] and ((bedarf > st["platz"] and st["feuer"] < 2) or puffer or (trupp is not None and st["feuer"] == 0 and st["platz"] - st["leute"] <= 2)):
             ereignis.append("Huette %s (Bedarf %d, Platz %d, Leute %d, Feuer %d)" % (baue_haus(), bedarf, st["platz"], st["leute"], st["feuer"]))
         zeile = "%5d | %3d %3d %3d | %3d %3d | %6.2f | %d/%d (%d) | %d %d | %s" % (
@@ -1257,6 +1278,9 @@ def main():
     HOLZ_KAUFEN = arg.get("holz_kaufen", "nein") == "ja"
     global HOLZ_SPAM, STEIN_MAX, JOCH_NACH_STEIN, STEIN_PARALLEL, HUETTEN_VORAUS, VOLLBESCHAEFTIGUNG
     VOLLBESCHAEFTIGUNG = arg.get("vollbeschaeftigung", "nein") == "ja"
+    global ENTSCHEIDER, ZIEL_TICK
+    ENTSCHEIDER = arg.get("entscheider", "regeln")
+    ZIEL_TICK = int(arg.get("ziel_tick", 9400))
     HOLZ_SPAM = int(arg.get("holz_spam", 0))
     STEIN_MAX = arg.get("stein_max", "nein") == "ja"
     JOCH_NACH_STEIN = arg.get("joch_nach_stein", "nein") == "ja"

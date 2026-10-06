@@ -558,6 +558,9 @@ class Ertragsplaner:
                 schl = (NAME[k["typ"]], k["grund"].split(" (")[0])
                 self.abgelehnt[schl] = self.abgelehnt.get(schl, 0) + 1
         kand = [k for k in alle if not k["grund"]]
+        if getattr(self, "kausal", False):
+            # Entscheider = kausal (23:28): Holzfaeller, Apfel, Jaeger baut nur das Kausalmodell - EIN Entscheider je Sache
+            kand = [k for k in kand if k["typ"] not in (3, 32, 7)]
         # Stein-Reserve: Bedarf der naechsten Eisenmine, solange sich eine Mine noch lohnt
         self.stein_reserve = self.kosten[5]["stein"] if any(k["typ"] == 5 for k in kand) else 0
         if (runde - 1) % (5 * self.PLANEN) == 0:
