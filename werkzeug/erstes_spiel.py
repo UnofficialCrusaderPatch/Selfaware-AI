@@ -788,6 +788,10 @@ def bilanz_schritt(st, L, G, ausbau, ziel, endspiel, runde, marken):
         aus.append("ENDSPIEL Holz verkauft (%d Holz)" % v["holz"])
     if kas:
         werben = min(v.get("keule", 0), v.get("leder", 0), st.get("feuer", 0), v.get("gold", 0) // KAEMPFER_GOLD, n)
+        # 07.10. 01:25: hoechstens EINE Anwerbung je Runde (~11 Ticks). Lauf 45/46/52/57: von 5 gleichzeitig bezahlten kamen
+        # oft nur 4 an (Waffen weg, Bauer nie losgelaufen) - Vermutung: zwei Befehle im selben Tick waehlen denselben Bauern.
+        # Die Waffen werden beim Befehl abgezogen, darum zaehlt die naechste Runde richtig weiter
+        werben = min(werben, 1)
         for _ in range(max(werben, 0)):
             befehl({"werbe": {"typ": 26, "gebaeude": kas[0]}}, 1.0, bis="WERBE")
         if werben > 0:
@@ -1189,18 +1193,21 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
             # Schub (07.10., Daniel 01:07 "macht was ihr koennt"): Lauf 45/46 - im Endspiel bei Beliebtheit 0 ging der 10.
             # Angeworbene auf dem Weg verloren, Nachkauf 460 Gold = ~1.100 Ticks. Die ersten 5 Kaempfer darum schon waehrend
             # der Kasse, solange die Beliebtheit hoeher ist (Liga-Wegzug -5 bei 25-29 statt -40 bei 0-4)
-            if SCHUB and kasse["an"] and not endspiel["fertig"] and st.get("T26", 0) == 0 and kasse.get("schub") != "geworben":
+            if SCHUB and kasse["an"] and not endspiel["fertig"] and (st.get("T26", 0) == 0 or kasse.get("schub") == "gekauft")                     and kasse.get("schub") != "geworben":
                 v_s = vorrat(SP)
                 kas_s = [n for n, g in G.items() if g["besitzer"] == SP and g["typ"] == 9]
                 wl_s = [n for n, g in G.items() if g["besitzer"] == SP and g["typ"] == 11]
                 bedarf_s = LOS_PREIS[21] + LOS_PREIS[23] + 5 * KAEMPFER_GOLD
                 if kasse.get("schub") == "gekauft":
-                    werben_s = min(v_s.get("keule", 0), v_s.get("leder", 0), st.get("feuer", 0), v_s.get("gold", 0) // KAEMPFER_GOLD, 5)
+                    # eine Anwerbung je Runde, bis die Waffen aufgebraucht sind (siehe Endspiel, 01:25)
+                    werben_s = min(v_s.get("keule", 0), v_s.get("leder", 0), st.get("feuer", 0), v_s.get("gold", 0) // KAEMPFER_GOLD)
                     if kas_s and werben_s > 0:
-                        for _ in range(werben_s):
-                            befehl({"werbe": {"typ": 26, "gebaeude": kas_s[0]}}, 1.0, bis="WERBE")
+                        befehl({"werbe": {"typ": 26, "gebaeude": kas_s[0]}}, 1.0, bis="WERBE")
+                        kasse["schub_n"] = kasse.get("schub_n", 0) + 1
+                        ereignis.append("SCHUB %d. Streitkolbenkaempfer angeworben (Beliebtheit %.1f, Wartende %d)" % (
+                            kasse["schub_n"], st.get("beliebt", 0) / 100.0, st.get("feuer", 0)))
+                    elif kasse.get("schub_n"):
                         kasse["schub"] = "geworben"
-                        ereignis.append("SCHUB %d Streitkolbenkaempfer angeworben (Beliebtheit %.1f)" % (werben_s, st.get("beliebt", 0) / 100.0))
                 elif v_s.get("gold", 0) >= bedarf_s and st.get("feuer", 0) >= 5:
                     if not kas_s:
                         if st.get("stein", 0) < 12:
