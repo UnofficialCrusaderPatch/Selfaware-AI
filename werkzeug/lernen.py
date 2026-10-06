@@ -46,7 +46,7 @@ KNOEPFE = {
     "steuer_ende": ["nein", "ja"],   # "wohnraum" (Lauf 23) gestrichen: Hoechststeuer ab Tick 1.650 -> Beliebtheit 30, Arbeiter weg, Ziel verfehlt
     "kasse": ["nein", "steuer", "steuer_essen"],     # Daniel 07.10. 00:17/00:20
     "bevoelkerung_ziel": [70, 80, 90, 60, 50, 0],     # Reihenfolge = Testfolge (naechste nimmt den ersten ungespielten)
-    "kasse_grenze": [50, 35, 25, 0],
+    "kasse_grenze": [0],   # Daniel 01:39: "Steuern nicht bei 20 oder irgendeiner Nummer halten" - Kasse immer -40 bis zum Ende
     "penner": [2, 20, 12],
     "einzelkauf": ["nein", "ja"],   # fehlende Waffen einzeln (Daniel 01:35)
     "aufloesen": ["nein", "ja"],   # Daniel 01:29: Start-Soldaten zu Bauern
@@ -65,7 +65,7 @@ TEMPO = 100      # 07.10. 00:31: 1000 getestet (Daniel 00:27) - der Lenker brauc
                  # das Tempo bestimmt, wie oft der Lenker hinsieht (bei 100 alle ~11 Ticks). Je Lauf gespeichert.
 # 23:26 (Daniel: Ochse vor Steinbruch, Lager nicht umgezogen - in der v5-Bauweise galten die alten Regeln): EIN Weg.
 # v14 ist fest; der Kreis aendert nur Werte, keine Bauweisen ("zwei Wege zum selben Ziel sind immer ein Fehler")
-HINWEISE = ["aufloesen", "kasse_grenze", "schub", "bevoelkerung_ziel", "penner", "kasse", "steuer_ende", "steuer_runter", "stein_max", "b_versatz"]   # 07.10.: Steuern, dritter Steinbruch     # Daniel 23:30: "Seasoning passiert immer noch zu spaet ... jede Wartezeit der Apfelbauern ist unproduktiv"
+HINWEISE = ["aufloesen", "schub", "bevoelkerung_ziel", "penner", "kasse", "steuer_ende", "steuer_runter", "stein_max", "b_versatz"]   # 07.10.: Steuern, dritter Steinbruch     # Daniel 23:30: "Seasoning passiert immer noch zu spaet ... jede Wartezeit der Apfelbauern ist unproduktiv"
 # welche Knoepfe zu welchem gemessenen Verlust gehoeren (Vorwissen; die Wirkung misst der Kreis selbst)
 VERLUST_KNOEPFE = {
     "wohnraum_voll": ["entscheider", "huetten_voraus", "holz_kaufen"],
