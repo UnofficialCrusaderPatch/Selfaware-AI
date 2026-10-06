@@ -55,7 +55,8 @@ GRUND = {"v14": "ja", "umzug": "frueh", "holzfaeller_vorab": 4, "holz_spam": 20,
          "holz_kaufen": "ja", "je_arbeiter": "ja", "vollbeschaeftigung": "nein", "entscheider": "regeln", "b_versatz": "reif",
          "steuer_ende": "nein", "steuer_runter": 95, "stein_max": "nein",
          "kasse": "nein", "bevoelkerung_ziel": 0, "kasse_grenze": 50}
-FEST = ["leere_ki=ja", "tempo=100", "minuten=60", "streitkolben=10", "weg=bilanz", "experiment=ja"]
+FEST = ["leere_ki=ja", "minuten=60", "streitkolben=10", "weg=bilanz", "experiment=ja"]
+TEMPO = 1000     # Daniel 07.10. 00:27 "Spielgeschwindigkeit maximal" (vorher 100); je Lauf gespeichert, Kontrolllauf misst die Wirkung
 # 23:26 (Daniel: Ochse vor Steinbruch, Lager nicht umgezogen - in der v5-Bauweise galten die alten Regeln): EIN Weg.
 # v14 ist fest; der Kreis aendert nur Werte, keine Bauweisen ("zwei Wege zum selben Ziel sind immer ein Fehler")
 HINWEISE = ["kasse", "bevoelkerung_ziel", "kasse_grenze", "steuer_ende", "steuer_runter", "stein_max", "b_versatz"]   # 07.10.: Steuern, dritter Steinbruch     # Daniel 23:30: "Seasoning passiert immer noch zu spaet ... jede Wartezeit der Apfelbauern ist unproduktiv"
@@ -149,7 +150,7 @@ def note_aus(text, bis_tick):
 def lauf(strategie, bis_tick, nr, horizont=None):
     stempel = time.strftime("%Y%m%d_%H%M%S")
     aus = os.path.join(D, "lernen_lauf_%s_%d.txt" % (stempel, nr))
-    args = [sys.executable, os.path.join(HIER, "erstes_spiel.py")] + FEST + ["bis_tick=%d" % bis_tick] + \
+    args = [sys.executable, os.path.join(HIER, "erstes_spiel.py")] + FEST + ["tempo=%d" % TEMPO, "bis_tick=%d" % bis_tick] + \
         ["%s=%s" % kv for kv in sorted(strategie.items())] + (["ziel_tick=%d" % horizont] if horizont else [])
     env = dict(os.environ, SHC_INSTANZ="1")
     with open(aus, "w", encoding="utf-8") as f:
@@ -208,6 +209,8 @@ def naechste(beste, gespielt, ns):
 def main():
     arg = dict(a.split("=", 1) for a in sys.argv[1:])
     laeufe, bis_tick = int(arg.get("laeufe", 5)), int(arg.get("bis_tick", 14000))
+    global TEMPO
+    TEMPO = int(arg.get("tempo", TEMPO))
     pfad = os.path.join(D, "lernen.jsonl")
     alle = [json.loads(z) for z in open(pfad, encoding="utf-8")] if os.path.exists(pfad) else []
     for r in alle:
@@ -239,7 +242,7 @@ def main():
             if s is None:
                 print("Alle Nachbarn der besten Strategie gespielt - Ende", flush=True)
                 break
-        print("LERNEN Lauf %d: %s%s" % (len(alle) + 1, "Grundstrategie" if knopf is None else "Kontrolllauf der besten Strategie mit neuem Code"
+        print("LERNEN Lauf %d: %s%s" % (nr_neu, "Grundstrategie" if knopf is None else "Kontrolllauf der besten Strategie mit neuem Code"
               if knopf == "kontrolle" else "%s = %s (statt %s)" % (knopf, s[knopf], beste["strategie"][knopf]),
               "" if beste is None else ", beste Note bisher %d" % beste["note"]), flush=True)
         if knopf != "kontrolle":
@@ -250,6 +253,7 @@ def main():
             horizont = None                      # abgebrochen - kein gemessenes Ende
         r = lauf(s, bis_tick, nr_neu, horizont)
         r["horizont"] = horizont
+        r["tempo"] = TEMPO
         nr_neu += 1
         r["geaendert"] = knopf
         r["vergleich"] = None if beste is None else {"gegen": beste["nr"], "note_vorher": beste["note"], "differenz": r["note"] - beste["note"]}
