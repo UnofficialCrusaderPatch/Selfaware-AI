@@ -399,18 +399,23 @@ def bilanz_schritt(st, L, G, ausbau, ziel, endspiel, runde, marken):
             aus.append("Kaserne %s" % (baue_schnell(9, BERGFRIED[0] - 16, BERGFRIED[1] + 18, 30),))
         if not any(g["typ"] == 11 for g in eig.values()):
             aus.append("Waffenlager %s" % (baue_schnell(11, BERGFRIED[0] - 14, BERGFRIED[1] + 14, 25),))
+        # Reihenfolge (Daniel 21:24: "sie geht verloren, wenn du abreisst und kein Platz ist"): ERST alles verkaufen,
+        # damit die Lagerteile leer sind, DANN abreissen, dann die Rueckgabe noch einmal verkaufen
+        verkauft = {}
+        def alles_verkaufen():
+            for w, los in BZ.LOS.items():
+                for _ in range(60):
+                    if vorrat(SP).get(w, 0) < los:
+                        break
+                    befehl({"spielbefehl": {"nr": 38, "werte": [1, BZ.WARE_NR[w]]}}, 1.0, bis="SPIELBEFEHL")
+                    verkauft[w] = verkauft.get(w, 0) + 1
+        alles_verkaufen()
         for nr in t["abriss_liste"]:
             befehl({"abreissen": {"nr": nr}}, 0.6, bis="ABREISSEN")
         tick0 = tick()
         while tick() - tick0 < 10:                     # Abriss-Rueckgabe ins Lager
             time.sleep(0.05)
-        verkauft = {}
-        for w, los in BZ.LOS.items():
-            for _ in range(60):
-                if vorrat(SP).get(w, 0) < los:
-                    break
-                befehl({"spielbefehl": {"nr": 38, "werte": [1, BZ.WARE_NR[w]]}}, 1.0, bis="SPIELBEFEHL")
-                verkauft[w] = verkauft.get(w, 0) + 1
+        alles_verkaufen()
         aus.append("ENDSPIEL verkauft (Lose): %s, Gold jetzt %d" % (verkauft, vorrat(SP)["gold"]))
         endspiel["fertig"] = True
         marken["endspiel"] = st["t"]

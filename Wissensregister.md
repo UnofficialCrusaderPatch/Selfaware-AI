@@ -20,7 +20,7 @@ Spiels abgelesen ist, aber noch nicht mit laufenden Einheiten geprueft, bleibt "
 | A1 | Der Abriss-Knopf gibt die Haelfte der Baukosten zurueck | **fest** | Daniel 20:06 ("die Haelfte"); Code: Knopf schickt 50 % (0x00438ad9); getestet Messpartie 8 (Schmiede 20/8 -> 10/4) | 06.10. |
 | A2 | Es wird je Ware abgerundet, kein Rest wird gemerkt (3 -> 1, 15 -> 7) | getestet | `abriss_messen.py`, 6 von 6 wie vorhergesagt, `daten/abriss_messung_20261006_201248.json` | 06.10. |
 | A3 | Der Zustand (Schaden) aendert die Rueckgabe nicht | Daniel | Daniel 20:06; Code-Formel hat keinen Zustand-Anteil (ungeprueft) - mit beschaedigtem Gebaeude nicht getestet | 06.10. |
-| A4 | Ohne Lagerplatz fuer die Ware ist die Rueckgabe weg (nur Ton "kein Platz") | ungeprueft | Code `giveBackResourceForDestroyedBuilding` | 06.10. |
+| A4 | Ohne Lagerplatz fuer die Ware ist die Rueckgabe weg (nur Ton "kein Platz") | Daniel | Daniel 21:24 ("sie geht verloren, wenn du abreisst und kein Platz ist"); Code `giveBackResourceForDestroyedBuilding` passt - Endspiel verkauft darum VOR dem Abriss | 06.10. |
 | A5 | Gratis gebaute Gebaeude (kein Holz und kein Holzfaeller) geben beim Abriss nichts zurueck | ungeprueft | Code `placeBuilding`: Marke +0x288 = 1, ClickDestroyBuilding gibt nur bei 0 zurueck | 06.10. |
 | A6 | Torhaus/Turm: abreissen und neu bauen kann billiger sein als reparieren | Daniel | Daniel 20:06 | 06.10. |
 | A7 | Mauern sammeln Bruchteile ueber mehrere Abrisse | ungeprueft | Code (Weg -1/-2 mit stoneGainedFraction/woodGainedFraction) | 06.10. |
