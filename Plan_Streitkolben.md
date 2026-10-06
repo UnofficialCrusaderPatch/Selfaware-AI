@@ -199,3 +199,24 @@ Kaufen gesamt ~2.800 Gold. Mit eigenem Leder + Keulen aus Markt-Eisen (1,5-Fall)
 ### 5. Offen (vor dem ersten 25er-Lauf messen)
 - Keulen je Eisen (S4 1:1 aus 3 Stueck gegen Daniels 1,5) - entscheidet 1.080 gegen 1.350.
 - Waffenlager-Groesse (~50, Indiz) - bei 25 + 25 reicht eins?
+
+## Stand 07.10.2026 01:57 (Ende der Nacht-Sitzung) - Weiter morgen mit 25 Streitkolbenkaempfern
+
+**Ergebnis 10 Streitis:** bester sicherer Lauf 64 = 9.718 Ticks (Ziel 70 Leute, Kasse -40 ohne Grenze, Schub 5, Aufloesen
+nach Bedarf, Abwander-Schutz); unter 1 Jahr nur einmal (Lauf 38 = 9.395, Kontrolle verfehlt). Letzter Massstab Lauf 69 = 10.006
+(aufloesen=ende, abriss=nein, schub=ja, kasse_grenze=0, bevoelkerung_ziel=70, penner=20).
+
+**Was wirkt (Wissensregister L21-L33):** Steuer ohne Beliebtheits-Bedingung (4 Gold/Kopf/Monat bei -40, Monat ~800 Ticks);
+Wachstum bis 70, dann Kasse -40 + Essen-Stopp; Start-Soldaten (5 Bogen + 7 Speer) als Bauern; Anwerben eines nach dem anderen und
+nie, wenn der Bauer mit der kleinsten Nummer abwandert (Zustand 110, Spielcode euroRecruit); Endspiel ohne Abriss
+(Abriss verlor ~190 Holz unterwegs).
+
+**Offen / naechste Hebel:**
+1. Einzelkauf wie die KI: AICState::buyGoods(Spieler, Ware, Menge) (0x004cc000 Grundversion) - braucht neuen Befehl im
+   villagestudio-Modul (gehoert der VillageStudio-Sitzung - Daniel fragen). Speicher-Gutschrift wirkt NICHT (L33).
+2. Bauern beim Anwerben gezielt waehlen (Modul-Befehl statt werbe) - spart die Wartezeit bei Beliebtheit 0 (250-600 Ticks).
+3. Endspiel zaehlt Holz unterwegs (Ladung der Holzfaeller) noch nicht mit.
+4. Grosse Streuung zwischen Laeufen gleicher Strategie (54: 9.796 / 57: verfehlt) - je Strategie mehrere Laeufe noetig.
+
+**Fuer 25 Streitis:** gleiche Kette, aber 25 x (60+32 Waffen + 20 Anwerben) = 2.800 Gold - Kasse mit mehr Leuten/laenger;
+Anwerben ueber mehrere Schuebe solange Beliebtheit hoch (L30/L32).
