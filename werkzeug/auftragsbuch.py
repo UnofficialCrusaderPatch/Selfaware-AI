@@ -37,6 +37,7 @@ class Auftragsbuch:
         self.tick = 0
         self.gescheitert = []        # (tick, typ, ort, zweck) - fuer die Fruehpruefung
         self.unerreichbar = []       # (nr, typ, ort) - bestaetigt, aber laut Spiel nicht erreichbar; der Lenker reisst ab
+        self.erreichbar_pruefen = {} # nr -> (tick, typ, ort): frisch gebaut mit erreichbar=0, Nachpruefung nach 250 Ticks
         self.hat = {}
 
     def name(self, typ):
@@ -75,10 +76,10 @@ class Auftragsbuch:
                 ev.append("BAU BESTAETIGT %s Nr %d bei (%d,%d) nach %d Ticks%s" % (
                     self.name(a["typ"]), n, g["x"], g["y"], t - a["tick"], " [%s]" % a["zweck"] if a["zweck"] else ""))
                 if g.get("erreichbar") == 0:
-                    # Daniel 23:10 "Holzfaeller sollten alle zugaenglich sein": das Spiel fuehrt je Gebaeude ein Feld erreichbar
-                    # (E4b: Joch (90,206) = 0). Der Lenker reisst es ab und sperrt den Platz.
-                    self.unerreichbar.append((n, g["typ"], (g["x"], g["y"])))
-                    ev.append("BAU UNERREICHBAR %s Nr %d bei (%d,%d) - wird abgerissen" % (self.name(a["typ"]), n, g["x"], g["y"]))
+                    # Daniel 23:10 "Holzfaeller sollten alle zugaenglich sein" - ABER das Spiel rechnet sein Wegnetz hoechstens
+                    # alle 200 Ticks neu (Register W): frisch gebaut steht "erreichbar" kurz auf 0. 23:37 (Daniel: "Apfelplantage
+                    # oben platziert und direkt wieder geloescht, sogar zweimal"): erst nach 250 Ticks erneut pruefen.
+                    self.erreichbar_pruefen[n] = (t, g["typ"], (g["x"], g["y"]))
             elif t - a["tick"] > self.WARTEN:
                 self.offen.remove(a)
                 self.zahl["gescheitert"] += 1
@@ -87,6 +88,15 @@ class Auftragsbuch:
                           "jetzt Holz %d Stein %d Gold %d)" % (
                               self.name(a["typ"]), a["ort"], a["tick"], ", %s" % a["zweck"] if a["zweck"] else "",
                               t - a["tick"], st.get("holz", 0), st.get("stein", 0), st.get("gold", 0)))
+        for n, (t0, typ0, ort0) in list(self.erreichbar_pruefen.items()):
+            if n not in eig:
+                del self.erreichbar_pruefen[n]
+            elif eig[n].get("erreichbar") != 0:
+                del self.erreichbar_pruefen[n]
+            elif t - t0 >= 250:
+                del self.erreichbar_pruefen[n]
+                self.unerreichbar.append((n, typ0, ort0))
+                ev.append("BAU UNERREICHBAR %s Nr %d bei %s auch nach %d Ticks - wird abgerissen" % (self.name(typ0), n, ort0, t - t0))
         for n, g in neu.items():                       # ohne Auftrag aufgetaucht: still aufnehmen
             self.bekannt[n] = (g["typ"], g["x"], g["y"])
         for n in [n for n in self.bekannt if n not in eig]:
