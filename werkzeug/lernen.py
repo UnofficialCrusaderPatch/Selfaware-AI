@@ -46,7 +46,7 @@ KNOEPFE = {
     "steuer_ende": ["nein", "ja"],   # "wohnraum" (Lauf 23) gestrichen: Hoechststeuer ab Tick 1.650 -> Beliebtheit 30, Arbeiter weg, Ziel verfehlt
     "kasse": ["nein", "steuer", "steuer_essen"],     # Daniel 07.10. 00:17/00:20
     "bevoelkerung_ziel": [0, 70, 60, 50],     # Daniel 00:34: 60-70 zuerst
-    "kasse_grenze": [50, 35, 25],     # Lauf 26: Beliebtheit 0 -> 50 auf 4 Leute, kein Kaempfer; Beliebtheit ist ein Vorrat
+    "kasse_grenze": [50, 35, 25, 0],   # 0 = immer -40 ab Kasse-Start (Daniel 00:51: "erst gehen nur die im Pennergraben")     # Lauf 26: Beliebtheit 0 -> 50 auf 4 Leute, kein Kaempfer; Beliebtheit ist ein Vorrat
     "steuer_runter": [95, 90, 85, 80],
     "stein_max": ["nein", "ja"],
 }
