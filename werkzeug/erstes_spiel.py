@@ -87,6 +87,8 @@ def saat_merken(gelesen, datei=SAAT_DATEI):
     json.dump(saat, open(datei, "w", encoding="utf-8"), indent=1)
     return saat
 
+LEERE_KI = False      # leere_ki=ja: Rotkaeppchen (Spieler 2) bekommt jede Runde alle Waren und Gold auf 0 (Modul leereKI)
+
 def gefecht_starten(tempo):
     """Frisches Liga-Gefecht ab Tick 0 mit festem Tempo und fester Saat, ohne Pausen (Daniel 22:52-23:13). Wartet bei
     laufendem Spiel auf beide Lords und prueft Startplatz + Testbedingung. Gibt den Tick, ab dem beide Lords da sind.
@@ -96,6 +98,16 @@ def gefecht_starten(tempo):
     schreib("Zuruecksetzen: %s" % zuruecksetzen())
     befehl({"tempo": tempo}, 1.0, bis="TEMPO")
     kanal.sende({"player": SP, "pause": False}, 0.5)
+    if LEERE_KI:
+        # Daniel 06.10.: Testpartie gegen eine leere KI (ohne Gegner endet das Gefecht sofort als Sieg, gemessen).
+        # Erst NACH dem Aufheben der Pause senden - pausiert nimmt das Modul im Hauptmenue keine Befehle an (gemessen).
+        z = kanal.sende({"player": SP, "leereKI": [2]}, 3.0, bis="LEERE KI")
+        if not any("LEERE KI" in x for x in z):
+            raise SystemExit("LEERE KI nicht bestaetigt: %s" % z[-3:])
+        schreib("LEERE KI: Spieler 2 ohne Waren und Gold (jede Runde)")
+    else:
+        # der Modulzustand ueberdauert das Gefecht - sonst haette die naechste normale Partie eine leere Rotkaeppchen
+        kanal.sende({"player": SP, "leereKI": False}, 3.0, bis="LEERE KI")
     saat = saat_laden()
     zeilen = kanal.sende(dict(LIGA_GEFECHT, **({"saat": saat} if saat else {})), 4, bis="LaunchSkirmishGame zurueck")
     gelesen = saat_lesen(zeilen)
@@ -114,7 +126,7 @@ def gefecht_starten(tempo):
     schreib("Partie laeuft seit Tick %d: Lords da, unser Lord bei %s, %s" % (t_lords, eigener[0], zustand))
     return t_lords
 
-def phase1(plan, tempo):
+def phase1(plan, tempo, mit_posten=True):
     """Neue Partie ab Tick 0 (Daniel 05.10. 22:52: "warum laesst du der KI so einen Vorlauf? starte das Spiel bei Tick 0",
     "Neustart komplett"; 22:54: "ohne komische Pausen, ein Spiel, das live mit gleicher Geschwindigkeit laeuft").
     Vorher: jede Partie lud den Startstand "M19 Liga Start Grumpy T600" - Rotkaeppchen hatte 600 Ticks Vorsprung, dazu
@@ -156,8 +168,8 @@ def phase1(plan, tempo):
     # ist". gewinn_3: A-Plantagen erst nach Posten + Assassine versucht (Tick 783, Gold 5 - alle gescheitert), erste A bei
     # 1.315, letzte nach 3.865; ohne eigenes Essen fiel die Beliebtheit 98 -> 58. Jetzt: Posten und A-Plantagen in EINEM
     # Befehl, sobald das Verkaufsgold da ist (Posten zuerst in der Liste, 120 + 3 x 15 von ~195 Gold).
-    gp, fp = baue_viele([(8, POSTEN[0], POSTEN[1])] + [(32, x, y) for (x, y) in A], SP, live=True)
-    posten = POSTEN if any(r[0] == 8 for r in gp) else baue_schnell(8, BERGFRIED[0], BERGFRIED[1], 25)
+    gp, fp = baue_viele(([(8, POSTEN[0], POSTEN[1])] if mit_posten else []) + [(32, x, y) for (x, y) in A], SP, live=True)
+    posten = (POSTEN if any(r[0] == 8 for r in gp) else baue_schnell(8, BERGFRIED[0], BERGFRIED[1], 25)) if mit_posten else None
     schreib("SEASONING FRUEH: %d von %d A-Plantagen mit dem Posten bei Tick %d, Gold jetzt %d" % (
         sum(1 for r in gp if r[0] == 32), len(A), tick(), vorrat(SP)["gold"]))
     warte_bis(lambda: gebaeude_von(SP, 8), "Soeldnerposten", 20)
@@ -316,7 +328,8 @@ def verkaufen(st, stein_reserve=None, messer=None, holz_verkaufen=False):
     teile += ["%s x%d" % (w, k) for w, k in lose.items()]
     return ("verkauft: " + ",".join(teile)) if teile else None
 
-def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0, trainingsstand=None, trainingsstand_ab=40):
+def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0, trainingsstand=None, trainingsstand_ab=40,
+           gold_ziel=None):
     schreib("== Phase 2: Echtzeit, Tempo %d, %d Minuten, Waechter %s" % (tempo, minuten, "an" if mit_waechter else "aus"))
     partie_pruefen()
     # Halte-Liste des Moduls ueberlebt das Laden einer Partie (04.10.: alte Eintraege zogen neue Assassinen mit
@@ -365,12 +378,20 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
         zeiten[name] = zeiten.get(name, 0.0) + time.time() - t0
         diese_runde[name] = time.time() - t0
         return time.time()
+    gold_marke = 1000
     while time.time() < ende and not os.path.exists(os.path.join(HIER, "STOP")):
         tz = time.time()
         befehlskanal.belege()
         st, L, G = runde_lesen()
         tz = uhr("lesen", tz)
         if bis_tick and st.get("t", 0) >= bis_tick:
+            break
+        # Goldmarken (Daniel 06.10.: "wie man am schnellsten 10k Gold bekommt") - jede 1.000 einmal, am Ziel Schluss
+        while gold_ziel and st.get("gold", 0) >= gold_marke and gold_marke <= gold_ziel:
+            schreib("GOLD-MARKE %d bei Tick %d" % (gold_marke, st.get("t", 0)))
+            gold_marke += 1000
+        if gold_ziel and st.get("gold", 0) >= gold_ziel:
+            schreib("GOLD-ZIEL %d erreicht bei Tick %d" % (gold_ziel, st.get("t", 0)))
             break
         runde += 1
         if not st:
@@ -498,15 +519,17 @@ def main():
     BERGFRIED = tuple(plan.get("bergfried_eingang", BERGFRIED))
     import waechter
     waechter.BERGFRIED_EINGANG = BERGFRIED
+    global LEERE_KI
+    LEERE_KI = arg.get("leere_ki", "nein") == "ja"
     if arg.get("start"):
         print("Tick", lade_stand(arg["start"], mit_bild=False))
         befehl({"eigenerPlatz": SP}, 0.8)
     elif arg.get("nur_phase2", "nein") != "ja":
-        phase1(plan, int(arg.get("tempo", 40)))      # Daniel 22:52: "Neustart komplett" - jede Partie ab Tick 0
+        phase1(plan, int(arg.get("tempo", 40)), mit_posten=int(arg.get("assassinen", 0)) != 0)   # Daniel 22:52: jede Partie ab Tick 0
     try:
         phase2(plan, int(arg.get("minuten", 10)), int(arg.get("tempo", 40)), arg.get("waechter", "nein") == "ja",
                int(arg["bis_tick"]) if arg.get("bis_tick") else None, int(arg.get("assassinen", 0)), arg.get("trainingsstand"),
-               int(arg.get("trainingsstand_ab", 40)))
+               int(arg.get("trainingsstand_ab", 40)), int(arg["gold_ziel"]) if arg.get("gold_ziel") else None)
     except RuntimeError as e:
         # Modulfehler (befehl.pruefe): Spiel anhalten, damit der Zustand fuer die Ursachensuche stehen bleibt
         import befehl as befehlskanal

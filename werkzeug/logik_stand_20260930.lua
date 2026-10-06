@@ -102,6 +102,17 @@ local function wareSetzen(spieler, art, menge)
   core.writeInteger(SPIELERDATEN + spieler * SD_SCHRITT + SD_WAREN + art * 4, menge)
 end
 
+-- Leere KI (06.10.2026, Daniel: "Spiel gegen eine leere KI um zu testen, wie man am schnellsten 10k Gold bekommt").
+-- Ohne Gegner endet ein Gefecht sofort als Sieg (gemessen 06.10.: gameOver 1, Endbildschirm bei Tick 2.665). Darum
+-- spielt ein echter Gegner mit, dem jede Runde alle Waren 2-24 (Holz bis Ruestung, Gold = 15) auf 0 gesetzt werden:
+-- sein Lord steht, er kann aber nichts bauen und nichts anwerben.
+local leereKI = {}
+local function leereKITick()
+  for sp, _ in pairs(leereKI) do
+    for w = 2, 24 do wareSetzen(sp, w, 0) end
+  end
+end
+
 local function tick()
   return core.readInteger(TICKZAEHLER) or 0
 end
@@ -2696,6 +2707,23 @@ local function einzelbefehl(cmd)
     return true
   end
 
+  --   { "leereKI": [2] }  diese Spieler bekommen jede Runde alle Waren auf 0; { "leereKI": false } hebt das auf.
+  if cmd.leereKI ~= nil then
+    if cmd.leereKI == false then
+      leereKI = {}
+      log(INFO, "LEERE KI: aus")
+      return true
+    end
+    local liste = {}
+    for _, sp in ipairs(cmd.leereKI) do
+      sp = tonumber(sp)
+      if sp ~= nil and sp >= 1 and sp <= 8 then leereKI[sp] = true; table.insert(liste, tostring(sp)) end
+    end
+    leereKITick()
+    log(INFO, "LEERE KI: Spieler " .. table.concat(liste, ", ") .. " ohne Waren und Gold (jede Runde)")
+    return true
+  end
+
   if cmd.gold ~= nil then
     local alt = ware(spieler, 15)
     if type(cmd.gold) == "number" then wareSetzen(spieler, 15, cmd.gold) end
@@ -3336,6 +3364,7 @@ end
 
 local function everyTick()
   pcall(ladePauseTick)        -- zuerst: die Pause soll vor allem anderen greifen
+  pcall(leereKITick)
   pcall(zickzackTick)
   pcall(tickPauseTick)
   pcall(lordWachtTick)
