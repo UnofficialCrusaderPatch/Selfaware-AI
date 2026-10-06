@@ -689,7 +689,7 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
             tz = uhr("assassinen", tz)
         if streitkolben:
             ereignis += bilanz_schritt(st, L, G, ausbau, streitkolben, endspiel, runde, kaempfer_marken)
-            if not endspiel["fertig"]:
+            if not endspiel["fertig"] and weg != "bilanz":     # weg=bilanz: nur Wirtschaft + Bilanz-Endspiel (v5)
                 ereignis += prod.schritt(st, G, wirt) if prod else ruestung_kaufen(st, G, wirt, ausbau, streitkolben, kaempfer_marken)
             if st.get("T26", 0) >= streitkolben:
                 schreib("ZIEL %d Streitkolbenkaempfer erreicht bei Tick %d" % (streitkolben, st["t"]))

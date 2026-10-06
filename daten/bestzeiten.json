@@ -1,0 +1,43 @@
+[
+ {
+  "name": "v2b",
+  "marken": {
+   "kaempfer_1": 12446,
+   "kaempfer_2": 12702,
+   "kaempfer_3": 13290,
+   "kaempfer_4": 13672,
+   "kaempfer_5": 14079,
+   "fehler": true
+  },
+  "notiz": "Kauf, Jaeger-Fehler, abgebrochen 26.281"
+ },
+ {
+  "name": "v3",
+  "marken": {
+   "seasoning_b": 1720,
+   "produktion_hoefe": 4378,
+   "fehler": false
+  },
+  "notiz": "Produktion startete nie (Lager-Nummern)"
+ },
+ {
+  "name": "v4",
+  "marken": {
+   "kaempfer_1": 14586,
+   "kaempfer_2": 14586,
+   "kaempfer_3": 14586,
+   "kaempfer_4": 14620,
+   "kaempfer_5": 14620,
+   "kaempfer_6": 14620,
+   "kaempfer_7": 14636,
+   "seasoning_b": 1719,
+   "endspiel": 14000,
+   "ziel": 14648,
+   "produktion_hoefe": 1730,
+   "produktion_werkstaetten": 5827,
+   "kaempfer_10": 14648,
+   "fehler": false
+  },
+  "notiz": "Apfel-Eroeffnung + Produktion (lieferte 0) + Bilanz-Endspiel bei 14.000"
+ }
+]
