@@ -17,6 +17,7 @@ Grenzen (offen): Reichweiten FERN/NAH sind Startwerte, nicht gemessen; Tuerme ni
 import math
 from laden import befehl
 from waechter import sicherster_ort
+from bedrohung import fingerabdruck, bedarf as lage_bedarf, lagen_laden
 
 ASSASSINE = 73
 TRUPPE = {22, 23, 24, 25, 26, 27, 28, 37, 55, 70, 71, 72, 73, 74, 75, 76}
@@ -274,14 +275,12 @@ class Einzeln:
     LORD_PRUEFEN = 5       # alle 5 Runden (~150 Ticks bei Tempo 1000)
     LORD_WENIG_FEINDE = 5  # Daniel: "auf jeden Fall, wenn keine oder nur noch ein paar Einheiten im Spiel sind"
     # Daniel 05.10. 21:05: je gestapelter sie ankommen, desto wirksamer (Schaden stackt, der Lord trifft nur einen).
-    # Gemessen gewinn_3/6: eine 20er-Welle verliert je 17, erst die zweite 20er-Welle toetet den Lord. Daniel 23:51:
-    # ausser Schussweite sammeln, bis klar ueberlegen, dann alle gleichzeitig. Darum beginnt das Sammeln bei der alten
-    # Angriffsschwelle 20; angegriffen wird mit den belegten zwei Wellen gemeinsam (= 40). Ob weniger reicht, bleibt offen.
-    LORD_SAMMELN_AB = 20
-    LORD_KRITISCH = 40
-    LORD_SAMMEL_R = 8       # alle muessen am Treffpunkt sein; erst dann geht EIN gemeinsamer Befehl heraus
+    # Wie viele noetig sind, steht nicht mehr als feste Zahl hier (bis 06.10.: sammeln ab 20, Angriff ab 40 - gemeinsam_1
+    # griff mit 47-60 an, weil jeder Nachzuegler erst ankommen musste). Daniel 06.10.: nicht pauschal sammeln, die Lage
+    # entscheidet, Zeit ist kritisch. Den Bedarf liefert bedrohung.bedarf aus gemessenen Lagen (oder vorlaeufig).
+    LORD_SAMMEL_R = 8       # wer so nah am Treffpunkt steht, zaehlt als angekommen
     LORD_SAMMEL_ABSTAND = SCHUSSWEITE + 5
-    LORD_REST = 3          # weniger Ueberlebende aus dem Angriff -> vorbei, wieder raiden bis LORD_KRITISCH
+    LORD_REST = 3          # weniger Ueberlebende aus dem Angriff -> vorbei, wieder raiden bis zum naechsten Bedarf
 
     def __init__(self, sp=1, pruefe_begehbar=None, wegtest=None):
         self.sp = sp
@@ -302,6 +301,9 @@ class Einzeln:
         self._gelaende_geschrieben = False
         self.runde, self.gemessen, self.ohne_ziel_zuletzt = 0, 0, None
         self.bilanz = {"gebaeude": {}, "verluste": set(), "neu_befohlen": 0, "rueckzug": 0, "zuschlagen": 0}
+        self.lagen = lagen_laden()           # gemessene Lagen (daten/lagen_belegt.json) fuer den Lord-Bedarf
+        self.angriff_aus = False             # Trainingsstand: nur sammeln, nie angreifen (setzt erstes_spiel.py)
+        self.bedarf_zuletzt = None
 
     def aufnehmen(self, nummern):
         self.mitglieder |= set(n for n in nummern if n not in self.bilanz["verluste"])
@@ -425,6 +427,25 @@ class Einzeln:
         fallback = [q for q in heime if schach(q, lord) > SCHUSSWEITE
                     and all(schach(q, p) > SCHUSSWEITE for _, p, _ in fern)]
         return min(fallback, key=lambda q: schach(q, lord)) if fallback else None
+
+    def _lord_bedarf(self, L, G, ereignis):
+        """Bedarf fuer den Lord-Angriff in dieser Lage: (Zahl, Art, Gruppenleben). Meldet jede Aenderung einmal."""
+        n, art, grund, gruppe_leben = lage_bedarf(fingerabdruck(L, G, self.sp), self.lagen)
+        if (n, art) != self.bedarf_zuletzt:
+            self.bedarf_zuletzt = (n, art)
+            ereignis.append("LORD-BEDARF: %s %s - %s" % (n, "belegt" if art == "belegt" else "VORLAEUFIG", grund))
+        return n, art, gruppe_leben
+
+    @staticmethod
+    def _lord_gruppe(L, angekommen, n, gruppe_leben):
+        """Die kleinste ausreichende Gruppe aus den Angekommenen: die gesuendesten zuerst (so wurde gemessen), mindestens
+        n, und zusammen mindestens so viel Leben wie die gemessene Gruppe. None, solange es nicht reicht."""
+        reihe = sorted(angekommen, key=lambda k: (-L[k]["leben"], k))
+        for k in range(n, len(reihe) + 1):
+            gruppe = reihe[:k]
+            if gruppe_leben is None or sum(L[g]["leben"] for g in gruppe) >= gruppe_leben:
+                return gruppe
+        return None
 
     @staticmethod
     def _im_weg(von, nach, L, ich):
@@ -754,10 +775,10 @@ class Einzeln:
                 if neu_o:
                     self._warten(n, neu_o, halten)
                 self.bilanz["warten_neu"] = self.bilanz.get("warten_neu", 0) + 1
-        # 5a. GEMEINSAM AUF DEN LORD (Daniel 05.10. 23:51): ab der alten Angriffsschwelle ausser Schussweite sammeln;
-        # erst wenn die zwei nachweislich noetigen 20er-Wellen GEMEINSAM am Treffpunkt stehen, geht EIN Angriffsbefehl
-        # mit allen heraus. Damit bestimmt eine Regel Sammeln, Ankunft und Angriff; verstreute Assassinen greifen nie
-        # vorzeitig an. Unter LORD_REST Ueberlebenden beginnt der Ablauf wieder mit Raids.
+        # 5a. GEMEINSAM AUF DEN LORD (Daniel 05.10. 23:51, 06.10.): sobald so viele leben, wie die Lage braucht, ausser
+        # Schussweite sammeln; sobald die kleinste ausreichende Gruppe AM TREFFPUNKT steht, geht EIN Angriffsbefehl an genau
+        # diese heraus - Nachzuegler werden nicht abgewartet, sie raiden weiter. Unter LORD_REST Ueberlebenden beginnt der
+        # Ablauf wieder mit Raids.
         lord_befehl = None
         lt = self.lordtrupp
         lt["mitglieder"] = {n for n in lt["mitglieder"] if n in self.mitglieder}
@@ -767,13 +788,14 @@ class Einzeln:
         else:
             ln, le = lords[0]
             lp = (le["x"], le["y"])
+            n_bedarf, bedarf_art, gruppe_leben = self._lord_bedarf(L, G, ereignis)
             if lt["mitglieder"] and len(lt["mitglieder"]) < self.LORD_REST:
                 ereignis.append("GEMEINSAMER LORD-ANGRIFF vorbei: noch %d leben, Lord-Leben %d - wieder raiden bis %d" % (
-                    len(lt["mitglieder"]), le["leben"], self.LORD_SAMMELN_AB))
+                    len(lt["mitglieder"]), le["leben"], n_bedarf))
                 for n in list(lt["mitglieder"]):
                     self._vergessen(n)
                 lt.update(mitglieder=set(), phase=None, sammelpunkt=None)
-            if lt["phase"] is None and len(self.mitglieder) >= self.LORD_SAMMELN_AB:
+            if lt["phase"] is None and len(self.mitglieder) >= n_bedarf:
                 punkt = self._lord_sammelpunkt(lp, sichere_orte, fern)
                 if punkt is not None:
                     alle = sorted(self.mitglieder)
@@ -782,8 +804,8 @@ class Einzeln:
                         self._warten(n, punkt, halten)
                     self.stapel["mitglieder"], self.stapel["ziel"] = set(), None
                     lt.update(mitglieder=set(alle), seit=self.runde, lord=ln, phase="sammeln", sammelpunkt=punkt)
-                    ereignis.append("LORD-SAMMELN: %d Assassinen nach %s (ausser Schussweite), Angriff gemeinsam ab %d" % (
-                        len(alle), punkt, self.LORD_KRITISCH))
+                    ereignis.append("LORD-SAMMELN: %d Assassinen nach %s (ausser Schussweite), Angriff ab %d am Treffpunkt (%s)" % (
+                        len(alle), punkt, n_bedarf, bedarf_art))
             elif lt["phase"] == "sammeln":
                 # Neue Anwerbungen gehoeren sofort dazu. Bereits Laufende nicht jede Runde neu befehlen: jeder neue
                 # Befehl ist ein kurzer Halt. Die bestehende Warten-Gegenprobe schickt nur bei Stillstand erneut.
@@ -794,10 +816,12 @@ class Einzeln:
                     self._vergessen(n)
                     self._warten(n, punkt, halten)
                 angekommen = {n for n in lt["mitglieder"] if schach((L[n]["x"], L[n]["y"]), punkt) <= self.LORD_SAMMEL_R}
-                if len(lt["mitglieder"]) >= self.LORD_KRITISCH and angekommen == lt["mitglieder"]:
-                    alle = sorted(lt["mitglieder"])
-                    for n in alle:
-                        self._vergessen(n)
+                gruppe = None if self.angriff_aus else self._lord_gruppe(L, angekommen, n_bedarf, gruppe_leben)
+                if gruppe:
+                    alle = sorted(gruppe)
+                    for n in lt["mitglieder"]:
+                        self._vergessen(n)           # wer nicht in der Gruppe ist, raidet ab jetzt wieder
+                    lt["mitglieder"] = set(alle)
                     lt["phase"], lt["seit"] = "angriff", self.runde
                     lord_befehl = {"angriff": {"einheiten": alle, "ziel": ln}}
                     self.bilanz["lordtrupps"] = self.bilanz.get("lordtrupps", 0) + 1
@@ -805,13 +829,14 @@ class Einzeln:
                     self.angriffe.append({"runde": self.runde, "groesse": len(alle), "lord_vorher": le["leben"], "lord_nachher": le["leben"],
                                           "fern": self._anzahl(lp, fern, self.LORD_UMKREIS), "nah": self._anzahl(lp, nah, self.LORD_UMKREIS),
                                           "weg_min": wege[0], "weg_max": wege[-1], "am_lord_max": 0, "erreicht_runde": None,
-                                          "anderes": {}, "truppe": set(alle), "verluste": 0})
-                    ereignis.append("GEMEINSAM-AUF-LORD: %d Assassinen zusammen von %s (Leben %d, Fern %d / Nah %d um ihn, Weg %d-%d)" % (
-                        len(alle), punkt, le["leben"], self._anzahl(lp, fern, self.LORD_UMKREIS),
-                        self._anzahl(lp, nah, self.LORD_UMKREIS), wege[0], wege[-1]))
+                                          "anderes": {}, "truppe": set(alle), "verluste": 0,
+                                          "bedarf": n_bedarf, "bedarf_art": bedarf_art})
+                    ereignis.append("GEMEINSAM-AUF-LORD: %d Assassinen zusammen von %s (Bedarf %d %s, %d Nachzuegler raiden weiter; Leben %d, Fern %d / Nah %d um ihn, Weg %d-%d)" % (
+                        len(alle), punkt, n_bedarf, bedarf_art, len(self.mitglieder) - len(alle), le["leben"],
+                        self._anzahl(lp, fern, self.LORD_UMKREIS), self._anzahl(lp, nah, self.LORD_UMKREIS), wege[0], wege[-1]))
                 elif neu or self.runde % 10 == 0:
-                    ereignis.append("LORD-SAMMELN: %d/%d da, %d lebend (Angriff ab %d)" % (
-                        len(angekommen), len(lt["mitglieder"]), len(self.mitglieder), self.LORD_KRITISCH))
+                    ereignis.append("LORD-SAMMELN: %d/%d da, %d lebend (Angriff ab %d am Treffpunkt, %s)" % (
+                        len(angekommen), len(lt["mitglieder"]), len(self.mitglieder), n_bedarf, bedarf_art))
             elif lt["phase"] == "angriff" and lt["mitglieder"]:
                 # S2a (Daniel 21:46: "jeder Tick, wo sie rumstehen, ist eine Sekunde mehr, wo der Gegner rekrutieren und auf
                 # unsere schiessen kann"): wer nicht den Lord angreift, bekommt den Befehl JEDE Runde neu (vorher erst nach NEU_NACH)

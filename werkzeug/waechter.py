@@ -48,7 +48,9 @@ def lies_lagebild(neu_holen=True):
             L[int(w[0])] = {"besitzer": int(w[1]), "typ": int(w[2]), "x": int(w[3]), "y": int(w[4]), "leben": int(w[5]),
                             "zustand": int(w[6]), "zielart": int(w[7]), "zieleinheit": int(w[8]), "laufx": int(w[14]), "laufy": int(w[15]),
                             "ladung": int(w[20]) if len(w) >= 22 else 0, "arbeitsplatz": int(w[21]) if len(w) >= 22 else 0,
-                            "erreichbar": int(w[22]) if len(w) >= 23 else -1}
+                            "erreichbar": int(w[22]) if len(w) >= 23 else -1,
+                            # Nahkampf (06.10.): wen diese Einheit gerade schlaegt / wie viele sie gerade schlagen
+                            "nahziel": int(w[23]) if len(w) >= 25 else -1, "nahangreifer": int(w[24]) if len(w) >= 25 else -1}
     return L
 
 def schach(a, b):

@@ -1658,7 +1658,7 @@ local function einzelbefehl(cmd)
     local NL = string.char(10)
     local E = 0x0138854C
     local f = io.open("ucp/villagestudio/abzug/lagebild.txt", "w")
-    f:write(string.format("tick %d", tick()) .. NL .. "nr besitzer typ x y leben zustand zielart zieleinheit zieluid zielgebaeude ziel zielx ziely laufx laufy auswahlvon auswahlmarke gruppe gruppenuid ladung arbeitsplatz erreichbar" .. NL)
+    f:write(string.format("tick %d", tick()) .. NL .. "nr besitzer typ x y leben zustand zielart zieleinheit zieluid zielgebaeude ziel zielx ziely laufx laufy auswahlvon auswahlmarke gruppe gruppenuid ladung arbeitsplatz erreichbar nahziel nahangreifer" .. NL)
     local WEGNETZ = 0x01DF6FD8
     local kannHin = core.exposeCode(0x004A5320, 5, 1)
     local function feld(x, y) return (core.readInteger(0x023372F8 + y * 12 + 8) or 0) + x end
@@ -1687,7 +1687,7 @@ local function einzelbefehl(cmd)
             end
           end
         end
-        f:write(string.format("%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d", i, core.readSmallInteger(u + 0x96) or -1, typ,
+        f:write(string.format("%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d", i, core.readSmallInteger(u + 0x96) or -1, typ,
           (core.readSmallInteger(u + 0xB6) or 0) // 8, (core.readSmallInteger(u + 0xB8) or 0) // 8,
           core.readInteger(u + 968) or -1, core.readSmallInteger(u + 704) or -1, core.readSmallInteger(u + 924) or -1,
           core.readSmallInteger(u + 926) or -1, core.readInteger(u + 928) or -1, core.readSmallInteger(u + 822) or -1,
@@ -1697,7 +1697,10 @@ local function einzelbefehl(cmd)
           core.readSmallInteger(u + 178) or -1, core.readSmallInteger(u + 180) or -1,
           core.readSmallInteger(u + 728) or -1, core.readInteger(u + 740) or -1,
           -- Ladung und Arbeitsplatz (05.10.: Lager erst bauen, wenn der erste Traeger abliefern will; rechtzeitig erweitern)
-          core.readSmallInteger(u + 904) or -1, core.readSmallInteger(u + 824) or -1, erreichbarE) .. NL)
+          core.readSmallInteger(u + 904) or -1, core.readSmallInteger(u + 824) or -1, erreichbarE,
+          -- Nahkampf (06.10., gemessen zielfeld_20261006_190019: bei Feinden zeigt +830 attackedUnitID auf das Opfer,
+          -- 16 von 16 Treffern, 0 Fehlgriffe; beim Opfer zaehlt +942 attackedBy, wie viele es gerade angreifen)
+          core.readSmallInteger(u + 830) or -1, core.readSmallInteger(u + 942) or -1) .. NL)
       end
     end
     f:close()

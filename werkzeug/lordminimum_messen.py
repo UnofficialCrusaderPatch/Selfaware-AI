@@ -30,7 +30,9 @@ def auswahl(L, groesse):
     return sorted(alle, key=lambda n: (-L[n]["leben"], n))[:groesse]
 
 
-def lauf(stand, groesse, nummer, tempo, dauer):
+def vorbereiten(stand, groesse):
+    """Trainingsstand laden, pruefen und die Gruppe freigeben; die uebrigen bleiben ausser Schussweite stehen.
+    Gibt (status, einheiten, gebaeude, truppe, lord_nr, lord). Auch von zielfeld_suchen.py benutzt."""
     try:
         lade_stand(stand, mit_bild=False)
     except RuntimeError:
@@ -57,7 +59,11 @@ def lauf(stand, groesse, nummer, tempo, dauer):
         liste.append({"halten": {"nr": uebrig, "x": sx, "y": sy}})
     liste.append({"halten": {"los": truppe}})
     sende({"befehle": [dict(x, player=SP, id=neue_id()) for x in liste]}, 1.0, bis="HALTEN")
+    return st, L, G, truppe, ln, le
 
+
+def lauf(stand, groesse, nummer, tempo, dauer):
+    st, L, G, truppe, ln, le = vorbereiten(stand, groesse)
     pfad = os.path.join(D, "lordminimum_%02d_%d_%s_i%d.jsonl" % (
         groesse, nummer, time.strftime("%Y%m%d_%H%M%S"), INSTANZ))
     mess = Einzeln(SP, pruefe_begehbar=pruefe_begehbar, wegtest=wegtest)

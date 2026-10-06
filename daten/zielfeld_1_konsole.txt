@@ -1,0 +1,43 @@
+Eintrag 0 'SAI Lordminimum Basis 2026-10-06' -> Scrollstand 0, Zeile 0; Spielzeit vorher 26425
+['[villagestudio]: LADEPAUSE: scharf (jetzt Tick 26425, pausiert).', '[villagestudio]: QUITTUNG 1791580166']
+['[villagestudio]: POKE 0x01126628: 0 -> 0', '[villagestudio]: POKE 0x01126624: 0 -> 0', '[villagestudio]: LADEN: Knopf 2 gedrueckt, ok=true', '[villagestudio]: logik: 3 von 3 Befehlen ausgefuehrt, 0 schon erledigt.', '[villagestudio]: QUITTUNG 1791580170']
+Spielzeit nachher 24551 / 24551, Pause 1
+Moment 1 bei Tick 25222: 1 getroffen, 25 Feinde im Umkreis 45
+Moment 2 bei Tick 25354: 1 getroffen, 25 Feinde im Umkreis 45
+Moment 3 bei Tick 25365: 1 getroffen, 25 Feinde im Umkreis 45
+Moment 4 bei Tick 25376: 1 getroffen, 25 Feinde im Umkreis 45
+Moment 5 bei Tick 25387: 2 getroffen, 25 Feinde im Umkreis 45
+Moment 6 bei Tick 25397: 1 getroffen, 25 Feinde im Umkreis 45
+Moment 7 bei Tick 25408: 1 getroffen, 25 Feinde im Umkreis 45
+Moment 8 bei Tick 25419: 2 getroffen, 25 Feinde im Umkreis 45
+Moment 9 bei Tick 25429: 2 getroffen, 25 Feinde im Umkreis 45
+Moment 10 bei Tick 25440: 1 getroffen, 25 Feinde im Umkreis 45
+Moment 11 bei Tick 25450: 1 getroffen, 24 Feinde im Umkreis 45
+Moment 12 bei Tick 25460: 1 getroffen, 24 Feinde im Umkreis 45
+Momente mit Schaden: 12
+Feind-Feld zeigt auf getroffenen / auf unbeteiligten Assassinen (Treffer-Regel erfuellt):
+   16 Bit @0x33E ( 830): 16 / 0
+   32 Bit @0x340 ( 832): 16 / 0
+   16 Bit @0x0C4 ( 196): 13 / 0
+   16 Bit @0x0E0 ( 224): 13 / 0
+   16 Bit @0x0C8 ( 200): 12 / 0
+   16 Bit @0x0EC ( 236): 12 / 0
+   16 Bit @0x2DC ( 732): 12 / 0
+   16 Bit @0x2A2 ( 674): 6 / 1
+Feld des getroffenen Assassinen zeigt auf einen Feind im Umkreis:
+   16 Bit @0x00C (  12): 15
+   16 Bit @0x08C ( 140): 15
+   16 Bit @0x400 (1024): 15
+   16 Bit @0x436 (1078): 15
+   32 Bit @0x00C (  12): 15
+   32 Bit @0x400 (1024): 15
+   16 Bit @0x39E ( 926): 14
+   32 Bit @0x3A0 ( 928): 14
+   16 Bit @0x0F6 ( 246): 12
+   16 Bit @0x2B4 ( 692): 11
+   16 Bit @0x33E ( 830): 11
+   16 Bit @0x412 (1042): 11
+   32 Bit @0x340 ( 832): 11
+   16 Bit @0x054 (  84): 10
+   16 Bit @0x2B6 ( 694): 7
+Rohdaten: C:\Users\danie\Documents\PC_Affe\Games\Stronghold_Crusader\Stronghold Crusader Modding\Tools\Selfaware-AI\werkzeug\..\daten\zielfeld_20261006_190019_i1.json
