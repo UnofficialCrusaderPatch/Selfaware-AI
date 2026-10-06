@@ -356,7 +356,10 @@ def ruestung_kaufen(st, G, wirt, ausbau, ziel, marken):
     v = vorrat(SP)
     gold = st["gold"] - rl["gold"]
     for ware, name in ((21, "keule"), (23, "leder")):
-        if v.get(name, 0) == 0 and gold >= LOS_PREIS[ware] + KAEMPFER_GOLD and not ausbau.braucht_gold:
+        # Kipppunkt (Daniel 21:07 B12): ab hier hat das Militaer Vorrang - nicht mehr auf ausbau.braucht_gold warten
+        # (v2: B-Plantagen die ganze Partie "offen" -> braucht_gold immer True -> bei bis zu 2.220 Gold nie gekauft);
+        # die Ruecklage rl (B-Plantagen) ist oben schon abgezogen.
+        if v.get(name, 0) == 0 and gold >= LOS_PREIS[ware] + KAEMPFER_GOLD:
             befehl({"spielbefehl": {"nr": 38, "werte": [0, ware]}}, 1.0, bis="SPIELBEFEHL")
             gold -= LOS_PREIS[ware]
             v[name] = 5
@@ -477,7 +480,10 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
             ereignis.append("Markt gesetzt %s" % (baue_schnell(26, BERGFRIED[0], BERGFRIED[1], 25),))
         elif runde % 3 == 0:
             bremst = gold_bremst(st, G)
-            v = verkaufen(st, ausbau.reserve()["stein"], ausbau.messer, holz_verkaufen=bremst)
+            # 12 Stein fuer die Kaserne nicht verkaufen, solange sie fehlt (v2 Tick 5.246: "verkauft: stein" und "Kaserne
+            # gesetzt" in derselben Runde - danach reichte der Stein nicht mehr)
+            kas_fehlt = streitkolben and not [n for n, g in G.items() if g["besitzer"] == SP and g["typ"] == 9]
+            v = verkaufen(st, ausbau.reserve()["stein"] + (12 if kas_fehlt else 0), ausbau.messer, holz_verkaufen=bremst)
             if v:
                 ereignis.append(v)
             if not bremst and st["holz"] > HOLZ_RESERVE + 4:     # Gold reicht: Holzueberschuss -> Holzfaeller

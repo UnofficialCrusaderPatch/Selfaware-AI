@@ -131,3 +131,4 @@ Spiels abgelesen ist, aber noch nicht mit laufenden Einheiten geprueft, bleibt "
 | Aufbauplaner Runde 1 | naechstes Lagerteil statt Eisenteil angenommen | NICHT bewaehrt | Gaenge doppelt so lang wie geplant |
 | Haertetest v1 | nur Waffenkette ab Tick 0, ohne Nahrungswirtschaft, Kaese verkauft | NICHT bewaehrt | erster Stein 5.246, erstes Eisen 11.823, keine Keule bis 20.845; Daniel brach ab |
 | Haertetest v2 (laeuft) | Waffenlager bei Tick 887 gebaut, lange bevor Waffen kamen | NICHT bewaehrt (Daniel B13) | 5 Holz frueh gebunden; fuer v2b geaendert |
+| Haertetest v2 | Apfel-Eroeffnung + Waffen kaufen, bis Tick 18.829 (Ende: Ansicht 16) | NICHT bewaehrt | 0 Kaempfer: Kauf wartete auf ausbau.braucht_gold, das wegen nie gesetzter B-Plantagen immer True war (Gold bis 2.220); Stein fuer die Kaserne wurde verkauft; Planer setzte 15 Eisenminen. Wirtschaft selbst: 86 Leute, 19 Holzfaeller, 11 Apfelplantagen bei Tick 18.300 - `daten/haertetest_v2_20261006.txt` |
