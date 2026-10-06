@@ -12,7 +12,7 @@ Phase 2 (Echtzeit): Tempo 40, laeuft. Alle paar Sekunden: Lage mitschreiben und 
 Fehlerkontrolle (Daniel): vorab Gefecht/Mensch/gameOver; laufend: steht die Spielzeit oder ist gameOver 1 -> Abbruch.
 
 Waechter (M15, Daniel 22:42): mit waechter=ja liest jede Runde das Lagebild und schickt Verteidiger (waechter.py).
-Aufruf:  python erstes_spiel.py [minuten=10] [tempo=40] [nur_phase2=nein] [waechter=nein] [start=<Spielstand>] [bis_tick=N] [assassinen=N; -1 = ohne Grenze] [trainingsstand=<Name>]
+Aufruf:  python erstes_spiel.py [minuten=10] [tempo=40] [nur_phase2=nein] [waechter=nein] [start=<Spielstand>] [bis_tick=N] [assassinen=N; -1 = ohne Grenze] [trainingsstand=<Name>] [trainingsstand_ab=40]
          Tests mit Hoechstgeschwindigkeit (Daniel 22:55): tempo=1000 bis_tick=...
 Stop von aussen: Datei werkzeug/STOP anlegen.
 """
@@ -312,7 +312,7 @@ def verkaufen(st, stein_reserve=None, messer=None):
     teile += ["%s x%d" % (w, k) for w, k in lose.items()]
     return ("verkauft: " + ",".join(teile)) if teile else None
 
-def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0, trainingsstand=None):
+def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0, trainingsstand=None, trainingsstand_ab=40):
     schreib("== Phase 2: Echtzeit, Tempo %d, %d Minuten, Waechter %s" % (tempo, minuten, "an" if mit_waechter else "aus"))
     partie_pruefen()
     # Halte-Liste des Moduls ueberlebt das Laden einer Partie (04.10.: alte Eintraege zogen neue Assassinen mit
@@ -418,7 +418,9 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                 punkt = trupp.lordtrupp.get("sammelpunkt")
                 angekommen = [n for n in trupp.lordtrupp["mitglieder"] if n in L and max(
                     abs(L[n]["x"] - punkt[0]), abs(L[n]["y"] - punkt[1])) <= trupp.LORD_SAMMEL_R]
-                if len(angekommen) >= 40:
+                # trainingsstand_ab: so viele muessen am Treffpunkt stehen (bedarf_partie_2: in der ganzen Partie kamen nie
+                # 40 zusammen, hoechstens 27 - die Lage, in der wirklich angegriffen wuerde, braucht einen eigenen Stand)
+                if len(angekommen) >= trainingsstand_ab:
                     befehl({"pause": True}, 0.5)
                     from speichern import speichere
                     pfad = speichere(trainingsstand)
@@ -481,7 +483,8 @@ def main():
         phase1(plan, int(arg.get("tempo", 40)))      # Daniel 22:52: "Neustart komplett" - jede Partie ab Tick 0
     try:
         phase2(plan, int(arg.get("minuten", 10)), int(arg.get("tempo", 40)), arg.get("waechter", "nein") == "ja",
-               int(arg["bis_tick"]) if arg.get("bis_tick") else None, int(arg.get("assassinen", 0)), arg.get("trainingsstand"))
+               int(arg["bis_tick"]) if arg.get("bis_tick") else None, int(arg.get("assassinen", 0)), arg.get("trainingsstand"),
+               int(arg.get("trainingsstand_ab", 40)))
     except RuntimeError as e:
         # Modulfehler (befehl.pruefe): Spiel anhalten, damit der Zustand fuer die Ursachensuche stehen bleibt
         import befehl as befehlskanal

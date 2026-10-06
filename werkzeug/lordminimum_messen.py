@@ -30,7 +30,7 @@ def auswahl(L, groesse):
     return sorted(alle, key=lambda n: (-L[n]["leben"], n))[:groesse]
 
 
-def vorbereiten(stand, groesse):
+def vorbereiten(stand, groesse, mindestens=None):
     """Trainingsstand laden, pruefen und die Gruppe freigeben; die uebrigen bleiben ausser Schussweite stehen.
     Gibt (status, einheiten, gebaeude, truppe, lord_nr, lord). Auch von zielfeld_suchen.py benutzt."""
     lade_stand(stand, mit_bild=False)   # 06.10.: die Lade-Pruefung wartet jetzt auf die Lade-Meldung (laden.py)
@@ -40,8 +40,8 @@ def vorbereiten(stand, groesse):
     if st.get("ansicht") != 14 or st.get("over") != 0 or not lords:
         raise RuntimeError("Trainingsstand ungueltig: %s, feindliche Lords %d" % (st, len(lords)))
     vorhanden = [n for n, e in L.items() if e["besitzer"] == SP and e["typ"] == 73]
-    if len(vorhanden) < 40:
-        raise RuntimeError("Trainingsstand hat nur %d Assassinen" % len(vorhanden))
+    if len(vorhanden) < (mindestens or groesse):
+        raise RuntimeError("Trainingsstand hat nur %d Assassinen (gebraucht %d)" % (len(vorhanden), mindestens or groesse))
     ln, le = lords[0]
     lp = (le["x"], le["y"])
     truppe = auswahl(L, groesse)
