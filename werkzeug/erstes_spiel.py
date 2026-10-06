@@ -744,7 +744,9 @@ def bilanz_schritt(st, L, G, ausbau, ziel, endspiel, runde, marken):
         noch = (-(-max(0, n_rest - v.get("keule", 0)) // 5)) * LOS_PREIS[21] + (-(-max(0, n_rest - v.get("leder", 0) - kommt) // 5)) * LOS_PREIS[23]             + n_rest * KAEMPFER_GOLD
         # Abriss nur zur Haelfte zaehlen + 20 Sicherheit (v9: 904 + 179 schien zu reichen, nach dem Abriss waren es 1.086
         # gegen 1.120 - das Abriss-Holz kommt beim Verkauf nicht voll an)
-        if gold_echt + t["abriss_wert"] // 2 < noch + 20:
+        # 07.10.: Abriss mit einem Drittel statt der Haelfte - gemessen kamen ~35 % an (L16: 47 Holz von 128-136); Lauf 43
+        # startete das Endspiel mit 66 Betrieben zu frueh, Gold reichte fuer 7 von 10
+        if gold_echt + t["abriss_wert"] // 3 < noch + 20:
             aus.append("ENDSPIEL VERSCHOBEN: Gold nach Verkauf %d + Abriss %d < %d - Wirtschaft laeuft weiter" % (
                 gold_echt, t["abriss_wert"], noch))
             return aus
@@ -1094,7 +1096,9 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                     ereignis.append("HUETTE VORAUS (frei %d, offene Arbeitsplaetze %d): %s" % (frei_wohn, offene, baue_haus()))
             # Daniel 07.10. 00:17/00:20: "maximal viel Bevoelkerung und Holzfaeller, dann relativ frueh bei 60-70 Leuten -40
             # Steuern, Essen stoppen und verkaufen". Wachstum: Huetten, bis BEV_ZIEL Plaetze stehen (nur wenn fast voll).
-            if BEV_ZIEL and not endspiel["fertig"] and not kasse["an"]:
+            # Daniel 00:48: "einfach maximal Bevoelkerung, aber bei 70 anfangen auf -40, dann kommen wir eher auf 80-90" -
+            # das Wachstum laeuft nach dem Kasse-Start weiter, solange noch Leute zuziehen (Beliebtheit >= 50, Liga +5 bei 50-54)
+            if BEV_ZIEL and not endspiel["fertig"] and (not kasse["an"] or st.get("beliebt", 0) >= 5000):
                 # Daniel 00:40: "ohne ausreichend Holzfaeller werden niemals 70 erreicht, da maximal 24 Leute im Pennerhof sind" -
                 # am Lagerfeuer warten hoechstens 24, dann zieht niemand mehr zu. Wartende bekommen sofort Arbeit: der billigste
                 # Arbeitsplatz ist der Holzfaeller (3 Holz, 1 Arbeiter, liefert Holz fuer Huetten und Verkauf)
@@ -1128,7 +1132,7 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                         ereignis.append("WACHSTUM wartet: %d am Feuer, Holz %d (Ruecklage %d), Gold %d (Ruecklage %d)" % (
                             st["feuer"], st["holz"], R_w["holz"], st["gold"], R_w["gold"]))
                 frei_w = st.get("platz", 0) - st.get("leute", 0)
-                if st.get("platz", 0) < BEV_ZIEL and frei_w <= 4 and st["holz"] >= kosten_spiel(1)["holz"]                         and not any(a["typ"] == 1 for a in BUCH.offen):
+                if frei_w <= 4 and st["holz"] >= kosten_spiel(1)["holz"]                         and not any(a["typ"] == 1 for a in BUCH.offen):
                     ereignis.append("WACHSTUM Huette (Platz %d, Ziel %d, frei %d): %s" % (st.get("platz", 0), BEV_ZIEL, frei_w, baue_haus()))
             # mit Ziel-Bevoelkerung wartet die Kasse auf das Ziel (Daniel 00:34 "erst 60-70, dann -40"); frueher nur, wenn die
             # Bevoelkerung einen Monat (~800 Ticks, L23) nicht mehr gewachsen ist und nichts mehr lohnt
@@ -1159,6 +1163,7 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                 if lose_n:
                     sende({"befehle": lose_n}, 1.0, bis="SPIELBEFEHL")
                     ereignis.append("KASSE Nahrung verkauft: %d Lose" % len(lose_n))
+            ausbau.nach_abriss = bool(endspiel["fertig"])
             if runde % 10 == 1:
                 schreib(BUCH.stand(G, st))
             hf_jetzt = sum(1 for g in G.values() if g["besitzer"] == SP and g["typ"] == 3) + \

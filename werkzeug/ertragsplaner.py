@@ -543,7 +543,11 @@ class Ertragsplaner:
             wohnraum_voll = st.get("platz", 0) > 0 and st.get("leute", 0) >= st.get("platz", 0)
             # "wohnraum" (Daniel 07.10. 00:04 "ja, ab vollem Wohnraum Hoechststeuer testen"): voller Wohnraum = kein Zuzug
             # moeglich, Beliebtheit bringt dann nichts - Stufe 11, bis wieder Platz frei ist (neue Huette) oder unter 55
-            if getattr(self, "kasse", False):
+            if getattr(self, "nach_abriss", False):
+                # Lauf 43: nach dem Endspiel-Abriss 7 Kaempfer, dann fehlte Gold - keine Produktion mehr, Steuer bei 0 (Grenze 50),
+                # die letzten 3 kamen 1.700 Ticks spaeter. Nach dem Abriss gibt es nichts mehr zu schuetzen: immer Stufe 11
+                neu = 11
+            elif getattr(self, "kasse", False):
                 # Kasse (Daniel 07.10. 00:17/00:20): Stufe 11 bis zum Ende, OHNE Beliebtheits-Schutz - der Spielcode zahlt die
                 # Steuer unabhaengig von der Beliebtheit (updateTaxing: Stufe x Koepfe, je Monat ~800 Ticks). ABER Lauf 26:
                 # Beliebtheit 0 -> Massen-Wegzug (Liga gathering_rate -40 bei 0-4), 50 -> 4 Leute, kein Kaempfer. Darum Grenze
