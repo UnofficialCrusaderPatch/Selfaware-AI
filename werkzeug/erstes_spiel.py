@@ -677,6 +677,15 @@ def kosten_aller(typ, ausbau):
         _KOSTEN[typ] = ausbau.kosten_von(typ) if typ in ausbau.kosten else kosten(typ)
     return _KOSTEN[typ]
 
+def abwanderer_zuerst(L):
+    """Spielcode euroRecruit (0x0052e960): angeworben wird der Bauer mit der KLEINSTEN Einheiten-Nummer ohne Arbeitsplatz,
+    egal ob er abwandert. Lauf 63/64: Abwanderer haben Zustand 110. Gefahr nur, wenn ein Abwanderer vor dem ersten
+    brauchbaren wartenden Bauern liegt (Daniel 01:45: "einfach einen anderen nehmen")."""
+    eig = [(n, e) for n, e in L.items() if e["besitzer"] == SP and e["typ"] == 1 and not e.get("arbeitsplatz")]
+    weg = [n for n, e in eig if e.get("zustand") == 110]
+    gut = [n for n, e in eig if e.get("zustand") not in (110, 109)]
+    return bool(weg) and (not gut or min(weg) < min(gut))
+
 def bilanz_schritt(st, L, G, ausbau, ziel, endspiel, runde, marken):
     """Daniel 21:21: komplette Tabelle - was ist drin, was kommt, was braucht man WIRKLICH - und dann abreissen und das
     Ziel erfuellen. Rechnung in bilanz.py; hier: Tabelle ins Protokoll, Endspiel ausfuehren, danach anwerben."""
@@ -835,7 +844,7 @@ def bilanz_schritt(st, L, G, ausbau, ziel, endspiel, runde, marken):
         # 01:43 (Lauf 63): bei niedriger Beliebtheit gibt es Bauern im Zustand 110 (bei Beliebtheit 100 nie) - vermutlich
         # abwandernd. Die Anwerbung aus der Runde mit einem 110-Bauern kam nie an, die 4 spaeteren ohne 110 alle. Darum nur
         # anwerben, wenn gerade keiner abwandert
-        if any(e["besitzer"] == SP and e["typ"] == 1 and e.get("zustand") == 110 for e in L.values()):
+        if abwanderer_zuerst(L):
             werben = 0
             aus.append("ANWERBEN wartet: Bauer wandert gerade ab (Zustand 110)")
         for _ in range(max(werben, 0)):
@@ -1252,7 +1261,7 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                 if kasse.get("schub") == "gekauft":
                     # eine Anwerbung je Runde, bis die Waffen aufgebraucht sind (siehe Endspiel, 01:25)
                     werben_s = min(v_s.get("keule", 0), v_s.get("leder", 0), st.get("feuer", 0), v_s.get("gold", 0) // KAEMPFER_GOLD)
-                    if any(e["besitzer"] == SP and e["typ"] == 1 and e.get("zustand") == 110 for e in L.values()):
+                    if abwanderer_zuerst(L):
                         werben_s = 0                     # Bauer wandert gerade ab (Zustand 110) - eine Runde warten
                     if kas_s and werben_s > 0:
                         befehl({"werbe": {"typ": 26, "gebaeude": kas_s[0]}}, 1.0, bis="WERBE")
