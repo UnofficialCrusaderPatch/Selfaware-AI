@@ -273,15 +273,20 @@ class Einzeln:
     LORD_ALLEIN, LORD_NORMAL, LORD_JE_FERN, LORD_JE_NAH, LORD_UMKREIS = 5, 10, 2, 1, 15
     LORD_PRUEFEN = 5       # alle 5 Runden (~150 Ticks bei Tempo 1000)
     LORD_WENIG_FEINDE = 5  # Daniel: "auf jeden Fall, wenn keine oder nur noch ein paar Einheiten im Spiel sind"
-    # Daniel 05.10. 21:05: lieber 20 auf einmal als 5 - je gestapelter sie ankommen, desto wirksamer (Schaden stackt,
-    # der Lord trifft nur einen). 21:34: raiden, bei kritischer Menge auf dem ganzen Feld ALLE zugleich auf den Lord.
-    LORD_KRITISCH = 20     # so viele lebende Assassinen loesen den Angriff aus (Startwert, das Minimum lernen wir spaeter)
+    # Daniel 05.10. 21:05: je gestapelter sie ankommen, desto wirksamer (Schaden stackt, der Lord trifft nur einen).
+    # Gemessen gewinn_3/6: eine 20er-Welle verliert je 17, erst die zweite 20er-Welle toetet den Lord. Daniel 23:51:
+    # ausser Schussweite sammeln, bis klar ueberlegen, dann alle gleichzeitig. Darum beginnt das Sammeln bei der alten
+    # Angriffsschwelle 20; angegriffen wird mit den belegten zwei Wellen gemeinsam (= 40). Ob weniger reicht, bleibt offen.
+    LORD_SAMMELN_AB = 20
+    LORD_KRITISCH = 40
+    LORD_SAMMEL_R = 8       # alle muessen am Treffpunkt sein; erst dann geht EIN gemeinsamer Befehl heraus
+    LORD_SAMMEL_ABSTAND = SCHUSSWEITE + 5
     LORD_REST = 3          # weniger Ueberlebende aus dem Angriff -> vorbei, wieder raiden bis LORD_KRITISCH
 
     def __init__(self, sp=1, pruefe_begehbar=None, wegtest=None):
         self.sp = sp
         self.wegtest = wegtest                     # Funktion(nr, punkte) -> [bool] (Modulbefehl "wegtest", Wegfinder des Spiels)
-        self.lordtrupp = {"lord": None, "mitglieder": set(), "seit": 0}
+        self.lordtrupp = {"lord": None, "mitglieder": set(), "seit": 0, "phase": None, "sammelpunkt": None}
         self.pruefe_begehbar = pruefe_begehbar     # Funktion(punkte) -> Menge begehbarer Punkte (Modulbefehl "begehbar")
         self._kand, self._begehbar = {}, set()
         self.mitglieder = set()
@@ -293,6 +298,8 @@ class Einzeln:
         self.leben, self.umfeld = {}, {}
         self.angriffe = []                   # je Alle-auf-den-Lord: Groesse, Weg, wer kam an, was hielt auf, Lord-Leben
         self.wellen_protokoll = None         # Datei fuer die S1-Messung je Runde (setzt erstes_spiel.py)
+        self.gelaende = None                 # unveraenderte Kartenzeilen; einmal je Angriffsprotokoll geschrieben
+        self._gelaende_geschrieben = False
         self.runde, self.gemessen, self.ohne_ziel_zuletzt = 0, 0, None
         self.bilanz = {"gebaeude": {}, "verluste": set(), "neu_befohlen": 0, "rueckzug": 0, "zuschlagen": 0}
 
@@ -389,6 +396,36 @@ class Einzeln:
         """True, wenn q naeher als SCHUSSWEITE an einem feindlichen Lord (ihrer Burg) liegt."""
         return any(schach(q, b) < SCHUSSWEITE for b in getattr(self, "_feindburg", []))
 
+    def _lord_sammelpunkt(self, lord, sichere_orte, fern):
+        """Begehbarer Treffpunkt auf unserer Seite, ausser Schussweite von Lord und feindlichen Fernkaempfern.
+
+        Die Richtung kommt vom naechsten bekannten sicheren Ort (Lager/Bergfried). Mehrere Ringe und Winkel sind die
+        Gegenprobe gegen ein blockiertes Feld; wenn vor der Burg nichts sicher begehbar ist, faellt die Regel auf den
+        naechsten bereits bekannten sicheren Ort zurueck statt einen Sonderfall mitten im Kampf zu erfinden.
+        """
+        heime = list(sichere_orte or [])
+        heim = min(heime, key=lambda h: schach(h, lord)) if heime else (lord[0] - self.LORD_SAMMEL_ABSTAND, lord[1])
+        vx, vy = heim[0] - lord[0], heim[1] - lord[1]
+        norm = max(abs(vx), abs(vy), 1)
+        ux, uy = vx / norm, vy / norm
+        kandidaten = []
+        for r in (self.LORD_SAMMEL_ABSTAND, self.LORD_SAMMEL_ABSTAND + 5, self.LORD_SAMMEL_ABSTAND + 10):
+            for w in (0.0, 0.35, -0.35, 0.7, -0.7):
+                rx = ux * math.cos(w) - uy * math.sin(w)
+                ry = ux * math.sin(w) + uy * math.cos(w)
+                q = (int(round(lord[0] + rx * r)), int(round(lord[1] + ry * r)))
+                if 2 <= q[0] <= 397 and 2 <= q[1] <= 397 and schach(q, lord) > SCHUSSWEITE \
+                        and all(schach(q, p) > SCHUSSWEITE for _, p, _ in fern):
+                    kandidaten.append(q)
+        if self.pruefe_begehbar and kandidaten:
+            begehbar = self.pruefe_begehbar(kandidaten)
+            kandidaten = [q for q in kandidaten if q in begehbar]
+        if kandidaten:
+            return min(kandidaten, key=lambda q: (schach(q, heim), schach(q, lord)))
+        fallback = [q for q in heime if schach(q, lord) > SCHUSSWEITE
+                    and all(schach(q, p) > SCHUSSWEITE for _, p, _ in fern)]
+        return min(fallback, key=lambda q: schach(q, lord)) if fallback else None
+
     @staticmethod
     def _im_weg(von, nach, L, ich):
         """Wie viele Einheiten (jeder Besitzer, auch Arbeiter) stehen auf der Strecke von -> nach (1 Feld breit) oder
@@ -448,7 +485,7 @@ class Einzeln:
                     ort[0], ort[1], L[n]["zustand"], feind[2], feind[0], nf[2], nf[0],
                     FERN, self._anzahl(ort, fern, FERN), NAH, self._anzahl(ort, nah, NAH), gb[1], gb[0], z, zd))
 
-    def _lord_messen(self, L, ln, le, lp, fern, nah):
+    def _lord_messen(self, L, G, ln, le, lp, fern, nah):
         """S1 (Plan_Lord.md): je Runde, was der Angriff tut - leben, Abstand zum Lord, wer greift den Lord an, wer etwas
         anderes (welcher Einheitentyp), wer hat kein Ziel. Protokoll nach self.wellen_protokoll, Kennzahlen in self.angriffe."""
         a = self.angriffe[-1]
@@ -472,11 +509,34 @@ class Einzeln:
             a["anderes"][t] = max(a["anderes"].get(t, 0), k)
         if self.wellen_protokoll:
             import json
+            # Daniel 06.10.: Nicht vorher festlegen, was Einfluss haben darf. Darum werden alle Menschen/Einheiten,
+            # alle bestehenden Gebaeude und die ganze Geländekarte als Rohdaten bewahrt. "Gefahr" ist erst belegt,
+            # wenn spaeter Schaden, Ablenkung, Sichtkontakt, Blockade oder Umweg damit zusammenfaellt.
+            if self.gelaende is not None and not self._gelaende_geschrieben:
+                with open(self.wellen_protokoll, "a", encoding="utf-8") as f:
+                    f.write(json.dumps({"art": "gelaende", "zeilen": list(self.gelaende)}) + chr(10))
+                self._gelaende_geschrieben = True
+            leben_alt = a.setdefault("leben_zuletzt", {})
+            angreifer = [{"nr": n, "x": L[n]["x"], "y": L[n]["y"], "leben": L[n]["leben"],
+                          "schaden": max(0, leben_alt.get(n, L[n]["leben"]) - L[n]["leben"]),
+                          "zustand": L[n].get("zustand"), "zielart": L[n].get("zielart"),
+                          "ziel": L[n].get("zieleinheit")} for n in lebend]
+            leben_alt.update({n: L[n]["leben"] for n in lebend})
+            alle_einheiten = [{"nr": n, "typ": e.get("typ"), "besitzer": e.get("besitzer"),
+                               "x": e.get("x"), "y": e.get("y"), "leben": e.get("leben"),
+                               "zustand": e.get("zustand"), "zielart": e.get("zielart"),
+                               "ziel": e.get("zieleinheit"),
+                               "zielt_auf_angreifer": e.get("zielart") == 4 and e.get("zieleinheit") in a["truppe"]}
+                              for n, e in sorted(L.items())]
+            alle_gebaeude = [{"nr": n, "typ": g.get("typ"), "besitzer": g.get("besitzer"),
+                              "x": g.get("x"), "y": g.get("y"), "leben": g.get("leben"),
+                              "erreichbar": g.get("erreichbar")} for n, g in sorted(G.items())]
             with open(self.wellen_protokoll, "a", encoding="utf-8") as f:
-                f.write(json.dumps({"runde": self.runde, "angriff": len(self.angriffe), "lord_leben": le["leben"], "leben": len(lebend),
+                f.write(json.dumps({"art": "runde", "runde": self.runde, "angriff": len(self.angriffe), "lord_leben": le["leben"], "leben": len(lebend),
                                     "abst_min": abst[0], "abst_mitte": abst[len(abst) // 2], "am_lord": len(am_lord),
                                     "anderes": anderes, "ohne_ziel": ohne, "stehen_nah": stehen_nah, "fern_um_lord": self._anzahl(lp, fern, self.LORD_UMKREIS),
-                                    "nah_um_lord": self._anzahl(lp, nah, self.LORD_UMKREIS)}) + chr(10))
+                                    "nah_um_lord": self._anzahl(lp, nah, self.LORD_UMKREIS), "angreifer": angreifer,
+                                    "einheiten": alle_einheiten, "gebaeude": alle_gebaeude}) + chr(10))
 
     def _vergessen(self, n):
         self.ziel.pop(n, None); self.jagd.pop(n, None); self.warte.pop(n, None); self.warte_seit.pop(n, None)
@@ -694,48 +754,73 @@ class Einzeln:
                 if neu_o:
                     self._warten(n, neu_o, halten)
                 self.bilanz["warten_neu"] = self.bilanz.get("warten_neu", 0) + 1
-        # 5a. ALLE AUF DEN LORD (Daniel 05.10. 21:34): "du raidest eh schon mit Assassinen, dann wartest du, bis du eine
-        # kritische Menge auf dem kompletten Feld hast, und alle greifen dann gleichzeitig den Lord an" - so viele wie
-        # moeglich, so gleichzeitig wie moeglich. Ersetzt Sammelpunkt, Wellen und Rueckzug-Mikro (Stand 2, 20:39-21:30,
-        # meine Konstruktion: 20 standen untaetig am Bergfried). Ablauf: raiden; leben LORD_KRITISCH, geht EIN Befehl mit
-        # allen an den Lord; sind von diesem Angriff weniger als LORD_REST uebrig, raiden die Neuen wieder bis zur Schwelle.
+        # 5a. GEMEINSAM AUF DEN LORD (Daniel 05.10. 23:51): ab der alten Angriffsschwelle ausser Schussweite sammeln;
+        # erst wenn die zwei nachweislich noetigen 20er-Wellen GEMEINSAM am Treffpunkt stehen, geht EIN Angriffsbefehl
+        # mit allen heraus. Damit bestimmt eine Regel Sammeln, Ankunft und Angriff; verstreute Assassinen greifen nie
+        # vorzeitig an. Unter LORD_REST Ueberlebenden beginnt der Ablauf wieder mit Raids.
         lord_befehl = None
         lt = self.lordtrupp
         lt["mitglieder"] = {n for n in lt["mitglieder"] if n in self.mitglieder}
         lords = [(n, e) for n, e in L.items() if e["typ"] == 55 and e["besitzer"] not in (0, self.sp)]
         if not lords:
-            lt["mitglieder"] = set()
+            lt.update(mitglieder=set(), phase=None, sammelpunkt=None)
         else:
             ln, le = lords[0]
             lp = (le["x"], le["y"])
             if lt["mitglieder"] and len(lt["mitglieder"]) < self.LORD_REST:
-                ereignis.append("ALLE-AUF-LORD vorbei: noch %d leben, Lord-Leben %d - wieder raiden bis %d" % (
-                    len(lt["mitglieder"]), le["leben"], self.LORD_KRITISCH))
-                lt["mitglieder"] = set()
-            if not lt["mitglieder"] and len(self.mitglieder) >= self.LORD_KRITISCH:
-                alle = sorted(self.mitglieder)
-                for n in alle:
+                ereignis.append("GEMEINSAMER LORD-ANGRIFF vorbei: noch %d leben, Lord-Leben %d - wieder raiden bis %d" % (
+                    len(lt["mitglieder"]), le["leben"], self.LORD_SAMMELN_AB))
+                for n in list(lt["mitglieder"]):
                     self._vergessen(n)
-                self.stapel["mitglieder"], self.stapel["ziel"] = set(), None
-                lt["mitglieder"], lt["seit"], lt["lord"] = set(alle), self.runde, ln
-                lord_befehl = {"angriff": {"einheiten": alle, "ziel": ln}}
-                self.bilanz["lordtrupps"] = self.bilanz.get("lordtrupps", 0) + 1
-                wege = sorted(schach((L[n]["x"], L[n]["y"]), lp) for n in alle)
-                self.angriffe.append({"runde": self.runde, "groesse": len(alle), "lord_vorher": le["leben"], "lord_nachher": le["leben"],
-                                      "fern": self._anzahl(lp, fern, self.LORD_UMKREIS), "nah": self._anzahl(lp, nah, self.LORD_UMKREIS),
-                                      "weg_min": wege[0], "weg_max": wege[-1], "am_lord_max": 0, "erreicht_runde": None,
-                                      "anderes": {}, "truppe": set(alle), "verluste": 0})
-                ereignis.append("ALLE-AUF-LORD: %d Assassinen mit einem Befehl auf den Lord (Leben %d, Fern %d / Nah %d um ihn, Weg %d-%d Felder)" % (
-                    len(alle), le["leben"], self._anzahl(lp, fern, self.LORD_UMKREIS), self._anzahl(lp, nah, self.LORD_UMKREIS), wege[0], wege[-1]))
-            elif lt["mitglieder"]:
+                lt.update(mitglieder=set(), phase=None, sammelpunkt=None)
+            if lt["phase"] is None and len(self.mitglieder) >= self.LORD_SAMMELN_AB:
+                punkt = self._lord_sammelpunkt(lp, sichere_orte, fern)
+                if punkt is not None:
+                    alle = sorted(self.mitglieder)
+                    for n in alle:
+                        self._vergessen(n)
+                        self._warten(n, punkt, halten)
+                    self.stapel["mitglieder"], self.stapel["ziel"] = set(), None
+                    lt.update(mitglieder=set(alle), seit=self.runde, lord=ln, phase="sammeln", sammelpunkt=punkt)
+                    ereignis.append("LORD-SAMMELN: %d Assassinen nach %s (ausser Schussweite), Angriff gemeinsam ab %d" % (
+                        len(alle), punkt, self.LORD_KRITISCH))
+            elif lt["phase"] == "sammeln":
+                # Neue Anwerbungen gehoeren sofort dazu. Bereits Laufende nicht jede Runde neu befehlen: jeder neue
+                # Befehl ist ein kurzer Halt. Die bestehende Warten-Gegenprobe schickt nur bei Stillstand erneut.
+                neu = self.mitglieder - lt["mitglieder"]
+                lt["mitglieder"] |= self.mitglieder
+                punkt = lt["sammelpunkt"]
+                for n in sorted(neu):
+                    self._vergessen(n)
+                    self._warten(n, punkt, halten)
+                angekommen = {n for n in lt["mitglieder"] if schach((L[n]["x"], L[n]["y"]), punkt) <= self.LORD_SAMMEL_R}
+                if len(lt["mitglieder"]) >= self.LORD_KRITISCH and angekommen == lt["mitglieder"]:
+                    alle = sorted(lt["mitglieder"])
+                    for n in alle:
+                        self._vergessen(n)
+                    lt["phase"], lt["seit"] = "angriff", self.runde
+                    lord_befehl = {"angriff": {"einheiten": alle, "ziel": ln}}
+                    self.bilanz["lordtrupps"] = self.bilanz.get("lordtrupps", 0) + 1
+                    wege = sorted(schach((L[n]["x"], L[n]["y"]), lp) for n in alle)
+                    self.angriffe.append({"runde": self.runde, "groesse": len(alle), "lord_vorher": le["leben"], "lord_nachher": le["leben"],
+                                          "fern": self._anzahl(lp, fern, self.LORD_UMKREIS), "nah": self._anzahl(lp, nah, self.LORD_UMKREIS),
+                                          "weg_min": wege[0], "weg_max": wege[-1], "am_lord_max": 0, "erreicht_runde": None,
+                                          "anderes": {}, "truppe": set(alle), "verluste": 0})
+                    ereignis.append("GEMEINSAM-AUF-LORD: %d Assassinen zusammen von %s (Leben %d, Fern %d / Nah %d um ihn, Weg %d-%d)" % (
+                        len(alle), punkt, le["leben"], self._anzahl(lp, fern, self.LORD_UMKREIS),
+                        self._anzahl(lp, nah, self.LORD_UMKREIS), wege[0], wege[-1]))
+                elif neu or self.runde % 10 == 0:
+                    ereignis.append("LORD-SAMMELN: %d/%d da, %d lebend (Angriff ab %d)" % (
+                        len(angekommen), len(lt["mitglieder"]), len(self.mitglieder), self.LORD_KRITISCH))
+            elif lt["phase"] == "angriff" and lt["mitglieder"]:
                 # S2a (Daniel 21:46: "jeder Tick, wo sie rumstehen, ist eine Sekunde mehr, wo der Gegner rekrutieren und auf
                 # unsere schiessen kann"): wer nicht den Lord angreift, bekommt den Befehl JEDE Runde neu (vorher erst nach NEU_NACH)
                 abseits = [n for n in lt["mitglieder"] if not (L[n]["zielart"] == 4 and L[n].get("zieleinheit") == ln)]
                 if abseits:
                     lord_befehl = {"angriff": {"einheiten": sorted(abseits), "ziel": ln}}
                     lt["seit"] = self.runde
-            if lt["mitglieder"] and self.angriffe:
-                self._lord_messen(L, ln, le, lp, fern, nah)
+            if lt["phase"] == "angriff" and lt["mitglieder"] and self.angriffe:
+                self._lord_messen(L, G, ln, le, lp, fern, nah)
         # 5. Ziele verteilen (Gefahr am Gebaeude beachten); wer keins bekommt, wartet ausser Reichweite
         zahl = {}
         for z in self.ziel.values():

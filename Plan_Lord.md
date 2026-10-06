@@ -65,6 +65,19 @@ Offen: die Wirtschaft waechst NICHT mit (Daniel fragen, siehe Bericht 22:2x).
   2. Erster Assassine trotz Seasoning frueh: gewinn_6 erst bei Tick 3.778 (vorher ~640), weil nach Posten + A-Plantagen
      nur 30 Gold bleiben. Seasoning am Anfang bleibt (Daniel 23:41) - das Gold fuer den Assassinen anders finden.
   Pruefen wie bisher: feste Saat, Tempo 300, `serie.werte` gegen gewinn_6.
+  Stand 06.10. 19:05: (1) von Codex gebaut (Sammeln ab 20 ausser Schussweite, Angriff mit allen ab 40 Angekommenen):
+  Serie gemeinsam_1 3 Siege (27.347 / 26.666 / 26.385), Verluste 10-18 statt 31, aber ~3.000 Ticks spaeter als
+  gewinn_6 und weniger zerstoert (44-54); angegriffen mit 47-60, weil Nachzuegler erst ankommen muessen.
+  Trainingsstand (Tick 24.521, 40 gesammelt, Lord 150.000): 5 tot, 10 Zeit um, 15-17 unsicher, 18 2/3, 19-40 je 3/3 -
+  gilt NUR fuer diese Lage (`daten/lordminimum_ergebnis_20261006_18*.json`). (2) erster Assassine im Trainingslauf 3.207.
+- **Naechste Schritte (Daniel 06.10., Uebergabe von Codex):**
+  1. Bedrohungs-/Einfluss-Fingerabdruck aus gemessenem Schaden, Weg, Sicht, Gebaeuden, Gelaende - keine Formel aus
+     Lord-Leben oder Fern/Nah-Zahl. Zuerst Messluecke schliessen: KI-Einheiten haben Zielart 3, ihr Ziel steht nicht
+     im gelesenen Feld (Lauf 20/1: 123.400 Schaden, 0 einem sichtbar zielenden Feind zuzuordnen).
+  2. Unbekannte Lage: keine unbelegte Zahl; vorsichtiger Ersatzwert nur als vorlaeufig gekennzeichnet.
+  3. Mit der kleinsten ausreichend sicheren Truppe angreifen, nicht auf Nachzuegler warten.
+  4. Holz: zusaetzliche Holzfaeller nur, wenn sie den Ausbau beschleunigen; sonst verkaufen statt verlieren.
+  5. Erster Assassine frueher (3.207 / 3.778).
 - **T2 Weglocken:** einer lockt die Verteidiger weg (und weicht nach T1 aus), ein anderer greift derweil an.
 - **T3 Sammeln bis zur eigenen Uebermacht**, dann gegen die Verteidigung - "dann ist die Tuere frei fuer die anderen".
 

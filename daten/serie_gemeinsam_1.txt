@@ -1,0 +1,5 @@
+# Serie gemeinsam_1, Einstellung waechter=ja assassinen=-1 bis_tick=28700 tempo=300 minuten=30
+Konsole                            Kennung  Ergebnis           Ende  Assa zerst   Gold   1.Mine  neg H/S/E    Fehler gesetzt
+partiegemeinsam_1_1_i1_konsole.txt 8c9ab5c0 SIEG 27347        27379    70    44   6135     6480  3/0/0 von 1214 nein   {'Ochsenjoch (Regel)': 11, 'Steinbruch+Ochsenjoch': 3, 'Eisenmine': 12, 'Apfelplantage': 5, 'Holzfaeller': 1, 'Jaegerhuette': 1}
+partiegemeinsam_1_2_i1_konsole.txt 8c9ab5c0 SIEG 26666        26699    70    54   6175     6148  1/0/0 von 1195 nein   {'Ochsenjoch (Regel)': 12, 'Steinbruch+Ochsenjoch': 3, 'Eisenmine': 11, 'Apfelplantage': 5, 'Holzfaeller': 1, 'Jaegerhuette': 1}
+partiegemeinsam_1_3_i1_konsole.txt 8c9ab5c0 SIEG 26385        26414    75    44   6520     6038  1/0/0 von 1171 nein   {'Ochsenjoch (Regel)': 13, 'Steinbruch+Ochsenjoch': 3, 'Eisenmine': 13, 'Holzfaeller': 1, 'Apfelplantage': 5, 'Jaegerhuette': 4}

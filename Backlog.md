@@ -18,8 +18,21 @@ bauen muss - **4.** wissen, warum und WANN man es bauen sollte - **5.** selbstae
 - [ ] Startwerte aus frueheren Partien (`daten/ertrag_gelernt_*.json`) - erster Schritt zum Selbstlernen
 - [ ] Horizont in echten Partien ohne festes Ende (bis zum geplanten Angriff?) - Daniel fragen
 
+## Angriff (Daniel 06.10., Uebergabe Codex)
+- [x] Gemeinsamer Lord-Angriff statt zwei Wellen (Codex 06.10.; gemeinsam_1: 3 Siege, Verluste 10-18, aber ~3.000 Ticks spaeter)
+- [x] Trainingsstand + Lord-Minimum-Messung (Codex 06.10.; diese Lage: 19 stabil, 15-18 unsicher)
+- [x] Angriffsprotokoll ohne Vorfilter: alle Einheiten, Gebaeude, Gelaende (Codex 06.10.)
+- [ ] Echtes Zielfeld der KI-Einheiten lesen (Zielart 3: Ziel nicht im gelesenen Feld) - Voraussetzung fuer den Fingerabdruck
+- [ ] Bedrohungs-/Einfluss-Fingerabdruck aus gemessenem Schaden, Weg, Sicht, Gebaeuden, Gelaende
+- [ ] Kleinste ausreichend sichere Truppe, nicht auf Nachzuegler warten; unbekannte Lage: vorlaeufiger Ersatzwert
+- [ ] Erster Assassine frueher (gewinn_6 3.778, Trainingslauf 3.207)
+- [ ] Warum ihr Lord in ganzen Partien 75.000 Leben meldet, im Trainingsstand 150.000
+
 ## Wirtschaft
 - [ ] Holzfaeller: 3 je Baum, Clusterung; Holzfaeller/Lager live umsetzen (04.10.)
+- [x] Altes Lager: Holz in 5er-Losen verkaufen statt mit abreissen (Codex 06.10.; nur Rest 1-4 geht verloren)
+- [x] B-Plantage erst bestaetigt, wenn das Gebaeude steht (Codex 06.10.)
+- [ ] Zusaetzliche Holzfaeller nur, wenn sie den Ausbau beschleunigen; sonst Holz verkaufen (Daniel 06.10.)
 - [x] Apfel-Seasoning (05.10., `wirtschaft.py`; untaetig 40 % -> 11-35 %)
 - [ ] Ochsenjoche am Steinbruch, wenn das Abtragen zu langsam ist - vorausschauend (05.10. 00:26)
 - [ ] Wirtschaft erweitern: Stein, Eisen, Pech bis zum Maximum (05.10. 00:26, 19:05, 19:11)

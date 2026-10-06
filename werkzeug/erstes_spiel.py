@@ -12,7 +12,7 @@ Phase 2 (Echtzeit): Tempo 40, laeuft. Alle paar Sekunden: Lage mitschreiben und 
 Fehlerkontrolle (Daniel): vorab Gefecht/Mensch/gameOver; laufend: steht die Spielzeit oder ist gameOver 1 -> Abbruch.
 
 Waechter (M15, Daniel 22:42): mit waechter=ja liest jede Runde das Lagebild und schickt Verteidiger (waechter.py).
-Aufruf:  python erstes_spiel.py [minuten=10] [tempo=40] [nur_phase2=nein] [waechter=nein] [start=<Spielstand>] [bis_tick=N] [assassinen=N; -1 = ohne Grenze]
+Aufruf:  python erstes_spiel.py [minuten=10] [tempo=40] [nur_phase2=nein] [waechter=nein] [start=<Spielstand>] [bis_tick=N] [assassinen=N; -1 = ohne Grenze] [trainingsstand=<Name>]
          Tests mit Hoechstgeschwindigkeit (Daniel 22:55): tempo=1000 bis_tick=...
 Stop von aussen: Datei werkzeug/STOP anlegen.
 """
@@ -312,7 +312,7 @@ def verkaufen(st, stein_reserve=None, messer=None):
     teile += ["%s x%d" % (w, k) for w, k in lose.items()]
     return ("verkauft: " + ",".join(teile)) if teile else None
 
-def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0):
+def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0, trainingsstand=None):
     schreib("== Phase 2: Echtzeit, Tempo %d, %d Minuten, Waechter %s" % (tempo, minuten, "an" if mit_waechter else "aus"))
     partie_pruefen()
     # Halte-Liste des Moduls ueberlebt das Laden einer Partie (04.10.: alte Eintraege zogen neue Assassinen mit
@@ -322,10 +322,15 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
     befehlskanal.STRENG = True     # ab hier bricht jeder Modulfehler den Lauf laut ab
     w = Waechter(SP, posten=plan["lager_mitte"]) if mit_waechter else None
     trupp = Einzeln(SP, pruefe_begehbar=pruefe_begehbar, wegtest=wegtest) if assassinen else None
+    if trupp is not None and trainingsstand:
+        # Kein Angriff: erst einen wiederholbaren Stand mit mindestens 40 gemeinsam angekommenen Assassinen sichern.
+        trupp.LORD_KRITISCH = 10 ** 6
     if trupp is not None:   # S1 (Plan_Lord.md): was tut der Angriff auf den Lord, Runde fuer Runde
         trupp.wellen_protokoll = os.path.join(D, "angriff_live_%s_i%d.jsonl" % (time.strftime("%Y%m%d_%H%M%S"), INSTANZ))
     wirt = Wirtschaft(plan, SP, baue_schnell, [nr for nr, _, _ in gebaeude_von(SP, 10)])
     karte_laden()        # Begehbarkeit fuer kurze Rueckzuege - jetzt, solange das Spiel noch steht
+    if trupp is not None:
+        trupp.gelaende = list(_KARTE)   # einmal im Angriffsprotokoll: Gelände darf als Einfluss nicht vorab verschwinden
     lernlog = os.path.join(D, "ertrag_live_%s_i%d.jsonl" % (time.strftime("%Y%m%d_%H%M%S"), INSTANZ))   # je Instanz: Serien laufen parallel
     ausbau = Ertragsplaner(plan, SP, baue_schnell, wirt, s32(peek(PD + 0x2188)[0]), ende=bis_tick, protokoll=lernlog, wegtest=wegtest)   # lernt im Spiel (Daniel 19:44)
     schreib("Ertrags-Planer: Baukosten aus dem Spiel %s; Protokoll %s" % (
@@ -409,6 +414,17 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                     sende({"befehle": [dict(b, player=1, id=neue_id()) for b in liste]}, 1.0,
                           bis="ANGRIFF" if any("angriff" in b for b in liste) else "HALTEN")
             ereignis += erg
+            if trainingsstand and trupp.lordtrupp.get("phase") == "sammeln":
+                punkt = trupp.lordtrupp.get("sammelpunkt")
+                angekommen = [n for n in trupp.lordtrupp["mitglieder"] if n in L and max(
+                    abs(L[n]["x"] - punkt[0]), abs(L[n]["y"] - punkt[1])) <= trupp.LORD_SAMMEL_R]
+                if len(angekommen) >= 40:
+                    befehl({"pause": True}, 0.5)
+                    from speichern import speichere
+                    pfad = speichere(trainingsstand)
+                    schreib("TRAININGSSTAND gesichert: %s mit %d gemeinsam angekommenen Assassinen bei Tick %d -> %s" % (
+                        trainingsstand, len(angekommen), st["t"], pfad))
+                    break
             tz = uhr("assassinen", tz)
         # Feindlicher Lord: jede Runde mit Lebensverlust mitschreiben - wer steht bei ihm? (9i/9j: Sieg ohne Befehl auf ihn)
         for n, e in L.items():
@@ -465,7 +481,7 @@ def main():
         phase1(plan, int(arg.get("tempo", 40)))      # Daniel 22:52: "Neustart komplett" - jede Partie ab Tick 0
     try:
         phase2(plan, int(arg.get("minuten", 10)), int(arg.get("tempo", 40)), arg.get("waechter", "nein") == "ja",
-               int(arg["bis_tick"]) if arg.get("bis_tick") else None, int(arg.get("assassinen", 0)))
+               int(arg["bis_tick"]) if arg.get("bis_tick") else None, int(arg.get("assassinen", 0)), arg.get("trainingsstand"))
     except RuntimeError as e:
         # Modulfehler (befehl.pruefe): Spiel anhalten, damit der Zustand fuer die Ursachensuche stehen bleibt
         import befehl as befehlskanal

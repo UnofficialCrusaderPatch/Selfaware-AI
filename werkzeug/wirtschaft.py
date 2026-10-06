@@ -69,6 +69,7 @@ class Wirtschaft:
         self.sp, self.baue_schnell = sp, baue_schnell
         self.A, self.B = apfel_gruppen(plan["aepfel"])
         self.B_offen = list(self.B)
+        self.B_erwartet = {}                    # B-Sollplatz -> (gemeldeter Bauort, Tick); erst echtes Gebaeude bestaetigt
         self.lager_ort = tuple(plan["lager"])
         self.alt = set(alte_lager)               # Lagerteile aus der Eroeffnung (behalten B-Holz bis B steht)
         self.apfelbaum, self.B_tick, self.A_reif_tick = None, None, None
@@ -145,16 +146,31 @@ class Wirtschaft:
                     self.A_reif_tick = t
                     ev.append("Seasoning: A-Plantagen reif bei Tick %d (Baum %d) - setze %d B-Plantagen" % (t, self.apfelbaum, len(self.B_offen)))
                 stehen = [(g["x"], g["y"]) for g in eigen.values() if g["typ"] == APFEL]
+                holz_frei, gold_frei = st.get("holz", 0), st.get("gold", 0)
                 for o in list(self.B_offen):
-                    if any(schach(o, s) <= 2 for s in stehen):
+                    erwartet = self.B_erwartet.get(o)
+                    bestaetigt = any(schach(o, s) <= 2 for s in stehen) or (erwartet and any(
+                        schach(erwartet[0], s) <= 2 for s in stehen))
+                    if bestaetigt:
                         self.B_offen.remove(o)
+                        self.B_erwartet.pop(o, None)
                         continue
-                    if st.get("holz", 0) >= APFEL_HOLZ and st.get("gold", 0) >= APFEL_GOLD:
-                        self.baue_schnell(APFEL, o[0], o[1], 2)
-                    elif st.get("holz", 0) < APFEL_HOLZ and st.get("gold", 0) >= 60:
+                    if erwartet and t - erwartet[1] < 50:
+                        continue                         # Auftrag gesendet; naechstes echtes Lagebild abwarten
+                    if holz_frei >= APFEL_HOLZ and gold_frei >= APFEL_GOLD:
+                        # Ist der Sollplatz dauerhaft belegt, darf die Suche ausweichen - aber nur so weit, dass die
+                        # neue Plantage nach der Dreiecksregel weiterhin hoechstens 30 Felder von mindestens einer
+                        # A-Plantage liegt. Damit bleibt der gemessene Baum-Suchradius garantiert erhalten.
+                        spielraum = max(2, SUCHRADIUS_BAUER - min((schach(o, a) for a in self.A), default=SUCHRADIUS_BAUER - 2))
+                        ort = self.baue_schnell(APFEL, o[0], o[1], spielraum)
+                        if ort is not None:
+                            self.B_erwartet[o] = (tuple(ort), t)
+                            holz_frei -= APFEL_HOLZ
+                            gold_frei -= APFEL_GOLD
+                    elif holz_frei < APFEL_HOLZ and gold_frei >= 60:
                         # 9g: der Markt verbaute das zurueckgelegte B-Holz - dann kaufen (Spielbefehl 38, kaufen = 0, Holz = 2)
                         befehl({"spielbefehl": {"nr": 38, "werte": [0, 2]}}, 1.0, bis="SPIELBEFEHL")
-                        ev.append("Holz fuer B gekauft (Holz %d, Gold %d)" % (st.get("holz", 0), st.get("gold", 0)))
+                        ev.append("Holz fuer B gekauft (Holz %d, Gold %d)" % (holz_frei, gold_frei))
                         break
                 self.versuche_B += 1
                 if not self.B_offen:
@@ -169,9 +185,9 @@ class Wirtschaft:
         will_liefern = any(e["typ"] == HOLZFAELLER and e["zustand"] == 7 for e in einheiten.values())
         if alt_da and (not self.B_offen or will_liefern):
             inhalt = {k: st.get(k, 0) for k in LAGERWAREN if st.get(k, 0) > 0}
-            if sum(inhalt.values()) <= 20:
-                # 9o: 26 Holz blieben liegen, "nur wenn leer" kam nie - die Holzfaeller trugen alles 50-80 Felder zum alten
-                # Lager am Bergfried. Rest bis 20 wird in Kauf genommen (hoechstens 20 Gold).
+            if sum(inhalt.values()) < 5:
+                # Verkaeufe gehen nur in 5er-Losen, Bauten brauchen mindestens 5 Holz. Darum wird alles Verkaufbare
+                # zuerst geleert; nur ein technisch weder verkauf- noch verbaubarer Gesamt-Rest von 1-4 darf fallen.
                 for n in alt_da:
                     befehl({"abreissen": {"nr": n}}, 0.8, bis="ABREISSEN")
                 ev.append("Altes Lager abgerissen (%d Teile, Rest %s) bei Tick %d" % (len(alt_da), inhalt or "leer", t))
