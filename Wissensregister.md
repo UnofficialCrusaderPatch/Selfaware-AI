@@ -49,7 +49,7 @@ Spiels abgelesen ist, aber noch nicht mit laufenden Einheiten geprueft, bleibt "
 | W6 | Am Wassergraben kommt man schraeg durch | Daniel | Daniel 20:22; Code: Graben sperrt gerade, ist aber keine Ecksperre (ungeprueft); laut Code ebenso Wasser, Baeume, Felsen | 06.10. |
 | W7 | Kaserne hat einen begehbaren Vorhof; Milchviehhof ein Gitter; Apfelplantage begehbar, nur die Huette nicht | Daniel | Daniel 20:21 | 06.10. |
 | W8 | Gebaeude genau aneinander gebaut lassen Laeufer durch | Daniel | Daniel 20:05 | 06.10. |
-| W9 | Lagerteile: herunter kommt man, von aussen hinauf nicht (Einbahn) | ungeprueft | Weg-Ebene abgelesen (wegkarte_test0, Tick 1830); Code-Lesart passt; nicht mit Laeufern geprueft | 06.10. |
+| W9 | ~~Lagerteile: von aussen hinauf nicht (Einbahn)~~ WIDERLEGT 20:36: Arbeiter treten zum Abholen/Abliefern sehr wohl vom Boden auf Lagerteile (19 von 19 'verbotenen' Schritten), obwohl die Weg-Ebene es nicht erlaubt | getestet (widerlegt) | Weg-Ebene abgelesen (wegkarte_test0, Tick 1830); Code-Lesart passt; nicht mit Laeufern geprueft | 06.10. |
 | W10 | Markt ganz gesperrt; Lagerfeuer begehbar bis auf die Raute in der Mitte; Bergfried oben eigene Ebene ohne Verbindung zum Boden | ungeprueft | Weg-Ebene abgelesen (wegkarte_test0) | 06.10. |
 | W11 | Das Wegnetz (welche Gebiete zusammenhaengen) baut das Spiel hoechstens alle 200 Takte neu | ungeprueft | Code `updateSeparateAreaTileMap` (counterForUpdatingSeparateAreaTileMaps = 200) | 06.10. |
 | W12 | Arbeiter gehen nicht durch Gebaeude; zugebaute Lager-Eingaenge stoeren | ungeprueft | Fremdquelle (Steam-Forum, Websuche 20:15) | 06.10. |
@@ -69,3 +69,17 @@ Spiels abgelesen ist, aber noch nicht mit laufenden Einheiten geprueft, bleibt "
 | W26 | Huette neben Schmiede: in 3 Lagen (N-S 0, Eck NO 0-0 und 1-0) wurde die Schmiede nicht gebaut - Grund unbekannt | getestet | Abstandsreihe 20:30; offen | 06.10. |
 | W27 | Schmiede neben Kaserne: bei jedem Abstand (auch 0) ein Weg - ueber den Exerzierplatz | ungeprueft | Weg-Ebene, Abstandsreihe 20:32 (`daten/wege_abstand_20261006_203223.json`) | 06.10. |
 | W28 | Schmiede neben Waffenlager: gerade ohne Abstand kein Durchgang; Ecke an Ecke schraeg durch (nur eine Seite ist Ecksperre) | ungeprueft | Weg-Ebene, Abstandsreihe 20:32; deckt sich mit W3 | 06.10. |
+
+## Arbeitsgaenge (gemessen mit einheitwacht alle 2 Ticks, `arbeitsgang_messen.py` 20:33, Auswertung `arbeitsgang_auswerten.py`)
+
+| Nr | Aussage | Stufe | Grundlage | Stand |
+|---|---|---|---|---|
+| G1 | Arbeiter laufen 24 Ticks je Feld - gerade und schraeg gleich schnell | getestet | 2 Schmiede + 1 Gerber, 263+188+98 gerade / 75+117+30 schraeg Felder mit genau 24 Ticks (`daten/arbeitsgang_20261006_203334*.json`) | 06.10. |
+| G2 | Der Milchbauer laeuft 16 Ticks je Feld | getestet | 31 Felder, nur einer | 06.10. |
+| G3 | Schmied arbeitet 927 Ticks je Keule (926-928 in 9 Zyklen) | getestet | dieselbe Messung | 06.10. |
+| G4 | Schmied laeuft je Zyklus EINEN Rundgang: Schmiede -> Lager (Eisen) -> Waffenlager (Keule) -> Schmiede; nah 24 Felder = 588 Ticks, fern 72 Felder = 1.692 Ticks | getestet | dieselbe Messung | 06.10. |
+| G5 | Gerber arbeitet ~1.550 Ticks je Kuh und bringt die 3 Lederharnische in EINEM Gang zum Waffenlager | getestet | Leder +3 bei Tick 5.931 und 9.243 (Abstand 3.312 = 1.550 Arbeit + 77 Felder x 24) | 06.10. |
+| G6 | Keulen je Eisen: 13 Keulen aus 11 Eisen - mehr als 1:1, ungeklaert (Abgabe manchmal +2) | getestet (offen) | Bestand alle 100 Ticks; feiner messen | 06.10. |
+| G7 | Woher der Gerber nach der ersten Kuh die naechsten bekommt, ist ungeklaert (nur ein Gang zum Hof gesehen) | offen | Kuehe (Typ 51) beim naechsten Mal mitschreiben | 06.10. |
+| G8 | Eingang (wo der Arbeiter steht): Schmiede und Gerberei unten Mitte (x+2, y+4); Waffenlager links (x-1, y+2) | getestet | Haltefelder der Arbeiter, Bau-Richtung 0 | 06.10. |
+| G9 | Ein Gerber schafft rechnerisch so viel wie ~2 Schmiede (3 Leder je ~1.700-3.300 Ticks gegen 1 Keule je ~1.500-2.600) | ungeprueft | abgeleitet aus G3-G5, nicht im Spiel gegeneinander gemessen | 06.10. |

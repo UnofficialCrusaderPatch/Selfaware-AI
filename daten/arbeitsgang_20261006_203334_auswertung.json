@@ -1,0 +1,628 @@
+{
+ "datei": "arbeitsgang_20261006_203334.json",
+ "halt_ab": 60,
+ "arbeiter": {
+  "1": {
+   "name": "Schmied",
+   "felder": 177,
+   "laufzeit_gerade": [
+    [
+     24,
+     98
+    ],
+    [
+     20,
+     9
+    ],
+    [
+     4,
+     5
+    ]
+   ],
+   "laufzeit_schraeg": [
+    [
+     24,
+     30
+    ],
+    [
+     52,
+     2
+    ],
+    [
+     42,
+     2
+    ]
+   ],
+   "verstoesse": [
+    {
+     "t": 1636,
+     "von": [
+      147,
+      267
+     ],
+     "nach": [
+      148,
+      267
+     ],
+     "nach_gebaeude": "Lag"
+    },
+    {
+     "t": 3398,
+     "von": [
+      147,
+      262
+     ],
+     "nach": [
+      148,
+      262
+     ],
+     "nach_gebaeude": "Lag"
+    },
+    {
+     "t": 4912,
+     "von": [
+      147,
+      262
+     ],
+     "nach": [
+      148,
+      262
+     ],
+     "nach_gebaeude": "Lag"
+    },
+    {
+     "t": 6430,
+     "von": [
+      147,
+      262
+     ],
+     "nach": [
+      148,
+      262
+     ],
+     "nach_gebaeude": "Lag"
+    },
+    {
+     "t": 7944,
+     "von": [
+      147,
+      262
+     ],
+     "nach": [
+      148,
+      262
+     ],
+     "nach_gebaeude": "Lag"
+    },
+    {
+     "t": 9460,
+     "von": [
+      147,
+      262
+     ],
+     "nach": [
+      148,
+      262
+     ],
+     "nach_gebaeude": "Lag"
+    },
+    {
+     "t": 10974,
+     "von": [
+      147,
+      262
+     ],
+     "nach": [
+      148,
+      262
+     ],
+     "nach_gebaeude": "Lag"
+    }
+   ],
+   "halte": [
+    {
+     "von": 2250,
+     "bis": 3178,
+     "dauer": 928,
+     "feld": [
+      152,
+      267
+     ],
+     "bei": "Schmiede 35",
+     "abstand": 1
+    },
+    {
+     "von": 3764,
+     "bis": 4692,
+     "dauer": 928,
+     "feld": [
+      152,
+      267
+     ],
+     "bei": "Schmiede 35",
+     "abstand": 1
+    },
+    {
+     "von": 5282,
+     "bis": 6208,
+     "dauer": 926,
+     "feld": [
+      152,
+      267
+     ],
+     "bei": "Schmiede 35",
+     "abstand": 1
+    },
+    {
+     "von": 6796,
+     "bis": 7722,
+     "dauer": 926,
+     "feld": [
+      152,
+      267
+     ],
+     "bei": "Schmiede 35",
+     "abstand": 1
+    },
+    {
+     "von": 8312,
+     "bis": 9240,
+     "dauer": 928,
+     "feld": [
+      152,
+      267
+     ],
+     "bei": "Schmiede 35",
+     "abstand": 1
+    },
+    {
+     "von": 9826,
+     "bis": 10754,
+     "dauer": 928,
+     "feld": [
+      152,
+      267
+     ],
+     "bei": "Schmiede 35",
+     "abstand": 1
+    },
+    {
+     "von": 11344,
+     "bis": 11746,
+     "dauer": 402,
+     "feld": [
+      152,
+      267
+     ],
+     "bei": "Schmiede 35",
+     "abstand": 1
+    }
+   ],
+   "gaenge": [
+    {
+     "von": "Schmiede 35",
+     "nach": "Schmiede 35",
+     "ticks": 586,
+     "felder": 24,
+     "kuerzest": 0
+    },
+    {
+     "von": "Schmiede 35",
+     "nach": "Schmiede 35",
+     "ticks": 590,
+     "felder": 24,
+     "kuerzest": 0
+    },
+    {
+     "von": "Schmiede 35",
+     "nach": "Schmiede 35",
+     "ticks": 588,
+     "felder": 24,
+     "kuerzest": 0
+    },
+    {
+     "von": "Schmiede 35",
+     "nach": "Schmiede 35",
+     "ticks": 590,
+     "felder": 24,
+     "kuerzest": 0
+    },
+    {
+     "von": "Schmiede 35",
+     "nach": "Schmiede 35",
+     "ticks": 586,
+     "felder": 24,
+     "kuerzest": 0
+    },
+    {
+     "von": "Schmiede 35",
+     "nach": "Schmiede 35",
+     "ticks": 590,
+     "felder": 24,
+     "kuerzest": 0
+    }
+   ]
+  },
+  "139": {
+   "name": "Milchbauer",
+   "felder": 34,
+   "laufzeit_gerade": [
+    [
+     16,
+     2
+    ],
+    [
+     2,
+     1
+    ]
+   ],
+   "laufzeit_schraeg": [
+    [
+     16,
+     29
+    ]
+   ],
+   "verstoesse": [],
+   "halte": [
+    {
+     "von": 2132,
+     "bis": 11746,
+     "dauer": 9614,
+     "feld": [
+      175,
+      299
+     ],
+     "bei": "Milchviehhof 38",
+     "abstand": 0
+    }
+   ],
+   "gaenge": []
+  },
+  "143": {
+   "name": "Schmied",
+   "felder": 323,
+   "laufzeit_gerade": [
+    [
+     24,
+     188
+    ],
+    [
+     2,
+     15
+    ],
+    [
+     22,
+     14
+    ]
+   ],
+   "laufzeit_schraeg": [
+    [
+     24,
+     75
+    ],
+    [
+     28,
+     1
+    ],
+    [
+     20,
+     1
+    ]
+   ],
+   "verstoesse": [
+    {
+     "t": 3144,
+     "von": [
+      148,
+      258
+     ],
+     "nach": [
+      148,
+      259
+     ],
+     "nach_gebaeude": "Lag"
+    },
+    {
+     "t": 3348,
+     "von": [
+      147,
+      259
+     ],
+     "nach": [
+      148,
+      259
+     ],
+     "nach_gebaeude": "Lag"
+    },
+    {
+     "t": 5664,
+     "von": [
+      148,
+      258
+     ],
+     "nach": [
+      148,
+      259
+     ],
+     "nach_gebaeude": "Lag"
+    },
+    {
+     "t": 5966,
+     "von": [
+      147,
+      259
+     ],
+     "nach": [
+      148,
+      259
+     ],
+     "nach_gebaeude": "Lag"
+    },
+    {
+     "t": 8282,
+     "von": [
+      148,
+      258
+     ],
+     "nach": [
+      148,
+      259
+     ],
+     "nach_gebaeude": "Lag"
+    },
+    {
+     "t": 8586,
+     "von": [
+      147,
+      259
+     ],
+     "nach": [
+      148,
+      259
+     ],
+     "nach_gebaeude": "Lag"
+    },
+    {
+     "t": 10902,
+     "von": [
+      148,
+      258
+     ],
+     "nach": [
+      148,
+      259
+     ],
+     "nach_gebaeude": "Lag"
+    },
+    {
+     "t": 11222,
+     "von": [
+      147,
+      259
+     ],
+     "nach": [
+      148,
+      259
+     ],
+     "nach_gebaeude": "Lag"
+    }
+   ],
+   "halte": [
+    {
+     "von": 4044,
+     "bis": 4970,
+     "dauer": 926,
+     "feld": [
+      177,
+      268
+     ],
+     "bei": "Schmiede 37",
+     "abstand": 1
+    },
+    {
+     "von": 6662,
+     "bis": 7588,
+     "dauer": 926,
+     "feld": [
+      177,
+      268
+     ],
+     "bei": "Schmiede 37",
+     "abstand": 1
+    },
+    {
+     "von": 9282,
+     "bis": 10210,
+     "dauer": 928,
+     "feld": [
+      177,
+      268
+     ],
+     "bei": "Schmiede 37",
+     "abstand": 1
+    }
+   ],
+   "gaenge": [
+    {
+     "von": "Schmiede 37",
+     "nach": "Schmiede 37",
+     "ticks": 1692,
+     "felder": 72,
+     "kuerzest": 0
+    },
+    {
+     "von": "Schmiede 37",
+     "nach": "Schmiede 37",
+     "ticks": 1694,
+     "felder": 72,
+     "kuerzest": 0
+    }
+   ]
+  },
+  "145": {
+   "name": "Gerber",
+   "felder": 197,
+   "laufzeit_gerade": [
+    [
+     24,
+     56
+    ],
+    [
+     22,
+     7
+    ],
+    [
+     2,
+     4
+    ]
+   ],
+   "laufzeit_schraeg": [
+    [
+     24,
+     117
+    ],
+    [
+     30,
+     1
+    ],
+    [
+     20,
+     1
+    ]
+   ],
+   "verstoesse": [
+    {
+     "t": 5758,
+     "von": [
+      147,
+      262
+     ],
+     "nach": [
+      148,
+      262
+     ],
+     "nach_gebaeude": "Lag"
+    },
+    {
+     "t": 5848,
+     "von": [
+      148,
+      261
+     ],
+     "nach": [
+      148,
+      262
+     ],
+     "nach_gebaeude": "Lag"
+    },
+    {
+     "t": 9144,
+     "von": [
+      147,
+      262
+     ],
+     "nach": [
+      148,
+      262
+     ],
+     "nach_gebaeude": "Lag"
+    },
+    {
+     "t": 9228,
+     "von": [
+      148,
+      261
+     ],
+     "nach": [
+      148,
+      262
+     ],
+     "nach_gebaeude": "Lag"
+    }
+   ],
+   "halte": [
+    {
+     "von": 2248,
+     "bis": 3080,
+     "dauer": 832,
+     "feld": [
+      172,
+      296
+     ],
+     "bei": "Gerberei 39",
+     "abstand": 1
+    },
+    {
+     "von": 3302,
+     "bis": 4864,
+     "dauer": 1562,
+     "feld": [
+      172,
+      296
+     ],
+     "bei": "Gerberei 39",
+     "abstand": 1
+    },
+    {
+     "von": 6712,
+     "bis": 8250,
+     "dauer": 1538,
+     "feld": [
+      172,
+      296
+     ],
+     "bei": "Gerberei 39",
+     "abstand": 1
+    },
+    {
+     "von": 10092,
+     "bis": 11678,
+     "dauer": 1586,
+     "feld": [
+      172,
+      296
+     ],
+     "bei": "Gerberei 39",
+     "abstand": 1
+    }
+   ],
+   "gaenge": [
+    {
+     "von": "Gerberei 39",
+     "nach": "Gerberei 39",
+     "ticks": 222,
+     "felder": 9,
+     "kuerzest": 0
+    },
+    {
+     "von": "Gerberei 39",
+     "nach": "Gerberei 39",
+     "ticks": 1848,
+     "felder": 77,
+     "kuerzest": 0
+    },
+    {
+     "von": "Gerberei 39",
+     "nach": "Gerberei 39",
+     "ticks": 1842,
+     "felder": 77,
+     "kuerzest": 0
+    }
+   ]
+  }
+ },
+ "bestand": [
+  {
+   "t": 1671,
+   "keule": 0,
+   "leder": 0,
+   "eisen": 20
+  },
+  {
+   "t": 11605,
+   "keule": 13,
+   "leder": 6,
+   "eisen": 9
+  }
+ ]
+}
