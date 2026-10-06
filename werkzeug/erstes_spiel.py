@@ -173,7 +173,8 @@ def phase1(plan, tempo, mit_posten=True):
     posten = (POSTEN if any(r[0] == 8 for r in gp) else baue_schnell(8, BERGFRIED[0], BERGFRIED[1], 25)) if mit_posten else None
     schreib("SEASONING FRUEH: %d von %d A-Plantagen mit dem Posten bei Tick %d, Gold jetzt %d" % (
         sum(1 for r in gp if r[0] == 32), len(A), tick(), vorrat(SP)["gold"]))
-    warte_bis(lambda: gebaeude_von(SP, 8), "Soeldnerposten", 20)
+    if mit_posten:
+        warte_bis(lambda: gebaeude_von(SP, 8), "Soeldnerposten", 20)
     geworben = 0
     nr_posten = [n for n, _, _ in gebaeude_von(SP, 8)]
     while nr_posten and vorrat(SP)["gold"] >= 70 and s32(peek(PD + 136)[0]) >= 1:
