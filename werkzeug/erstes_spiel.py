@@ -192,6 +192,10 @@ def phase1(plan, tempo, mit_posten=True):
     # Apfelplantagen (Gold) und was beim ersten Befehl nicht ging - einmal nachholen; den Rest setzen Planer/Wirtschaft
     nach = rest + [r for r in fp if r[0] == 32]
     g2, f2 = baue_viele(nach, SP, live=True) if nach else ([], [])
+    # Steinbruch/Ochsenjoch am festen Platz gescheitert -> im Umkreis 8 weitersuchen (v9: (80,271) nie gebaut)
+    for typ, x, y in [r for r in f2 if r[0] in (20, 4)]:
+        schreib("Ersatzplatz %s bei (%d,%d): %s" % (NACH_TYP[typ]["name"], x, y, baue_schnell(typ, x, y, 8)))
+    f2 = [r for r in f2 if r[0] not in (20, 4)]
     v1 = vorrat(SP)
     schreib("NACHGEHOLT bei Tick %d: %d von %d (Apfelplantagen A + Rest); nicht gebaut: %s; Holz %d, Gold %d" % (
         tick(), len(g2), len(nach), [(NACH_TYP[t]["name"], x, y) for t, x, y in f2] or "keine", v1["holz"], v1["gold"]))

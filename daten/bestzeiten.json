@@ -115,5 +115,25 @@
    "fehler": false
   },
   "notiz": "zweistufiges Endspiel (echtes Gold)"
+ },
+ {
+  "name": "v10a",
+  "marken": {
+   "kaempfer_1": 12221,
+   "kaempfer_2": 12221,
+   "kaempfer_3": 12221,
+   "kaempfer_4": 12221,
+   "kaempfer_5": 12231,
+   "kaempfer_6": 12231,
+   "kaempfer_7": 12250,
+   "kaempfer_8": 12250,
+   "kaempfer_9": 12250,
+   "seasoning_b": 1718,
+   "endspiel": 11206,
+   "ziel": 12259,
+   "kaempfer_10": 12259,
+   "fehler": false
+  },
+  "notiz": "Abriss halb + Sicherheit"
  }
 ]

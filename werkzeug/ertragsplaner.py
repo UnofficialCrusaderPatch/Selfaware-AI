@@ -385,6 +385,11 @@ class Ertragsplaner:
             return None, "Holz/Gold reicht nach B-Ruecklage nicht"
         if st.get("feuer", 0) < 1:
             return None, "kein freier Arbeiter am Feuer"
+        # Auf den besten Bau sparen (Daniel 21:52: "entweder fehlen ihm Informationen oder er nutzt sie nicht"): fehlt dem
+        # zuletzt gewaehlten besten Bau Holz, darf dieser Holzfaeller es nicht verbauen (v9: Steinbruch wartete 8x auf 3-8 Holz)
+        b = self.letzte_wahl
+        if b and b["typ"] != 3 and st.get("holz", 0) - R["holz"] - k["holz"] < b["kosten"]["holz"]:
+            return None, "Holz fuer %s zurueckgehalten" % NAME[b["typ"]]
         ort, w = self._bester_ort(3, L, G)
         if ort is None:
             return None, "kein erreichbarer Holzfaeller-Platz"
@@ -532,7 +537,8 @@ class Ertragsplaner:
         # Widerlegung b) mitschreiben statt nur behaupten: Bau, der laut eigener Rechnung nicht mehr rechnet
         if wahl["rest"] is not None and wahl["anlauf"] + wahl["amort"] > wahl["rest"]:
             self.verstoss.append((st.get("t"), NAME[wahl["typ"]]))
-        r = 3 if wahl["typ"] in (5, 20, 32, 3) else 10
+        # Steinbruch: am Stein im Umkreis 8 weitersuchen (v9: bester Platz (80,265) "-> None", danach nur 64-67 Felder weit)
+        r = 8 if wahl["typ"] == 20 else 3 if wahl["typ"] in (5, 32, 3) else 10
         ort = self.baue(wahl["typ"], wahl["ort"][0], wahl["ort"][1], r)
         if ort is None:
             self.fehlschlag[(wahl["typ"], wahl["ort"])] = self.fehlschlag.get((wahl["typ"], wahl["ort"]), 0) + 1
