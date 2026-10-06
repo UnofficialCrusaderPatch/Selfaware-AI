@@ -113,6 +113,9 @@ def gold_wert(kosten):
     return sum(VERKAUF[w] * kosten.get(w, 0) for w in KOSTEN_WAREN)
 
 
+MAX_LAGERTEILE = 8                 # 2 Lagerplaetze zu je 4 Teilen (Daniel 06.10. 21:11)
+
+
 class Ertragsmesser:
     """Buchfuehrung je Ware und Lernwerte je Gebaeudeart (Kopf, Teil 1)."""
 
@@ -461,7 +464,9 @@ class Ertragsplaner:
         if teile and not [n for n in self.wirt.alt if n in G]:
             belegt = sum(-(-st.get(w, 0) // JE_TEIL) for w in ("holz", "stein", "eisen", "pech", "hopfen", "weizen", "mehl"))
             voll = [w for w in ("holz", "stein", "eisen") if st.get(w, 0) % JE_TEIL >= JE_TEIL - 8]
-            if voll and belegt >= teile:
+            # hoechstens 2 Lagerplaetze = 8 Teile (Daniel 21:11: "du brauchst nur 3 Plaetze - Holz, Stein, Eisen - wenn du
+            # optimal platzierst und verkaufst; bei zwei bist du selbst bei doppelten Plaetzen auf der sicheren Seite")
+            if voll and belegt >= teile and teile < MAX_LAGERTEILE:
                 l = self.ziele(G)[5][0]
                 ev.append("PLANER Lager anbauen (%s fast voll, %d Teile) -> %s" % (voll, teile, self.baue(10, l[0], l[1], 10)))
         ev += self.ochsen_nach_stau(st, G, holz)
