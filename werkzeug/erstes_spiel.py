@@ -376,6 +376,66 @@ def ruestung_kaufen(st, G, wirt, ausbau, ziel, marken):
             aus.append("KAEMPFER %d bei Tick %d" % (n, st["t"]))
     return aus
 
+def bilanz_schritt(st, L, G, ausbau, ziel, endspiel, runde, marken):
+    """Daniel 21:21: komplette Tabelle - was ist drin, was kommt, was braucht man WIRKLICH - und dann abreissen und das
+    Ziel erfuellen. Rechnung in bilanz.py; hier: Tabelle ins Protokoll, Endspiel ausfuehren, danach anwerben."""
+    import bilanz as BZ
+    aus = []
+    v = vorrat(SP)
+    eig = {n: g for n, g in G.items() if g["besitzer"] == SP}
+    if not endspiel["fertig"]:
+        t = BZ.rechne(st, v, G, L, SP, ziel, ausbau.kosten_von)
+        endspiel["tabelle"] = t
+        if runde % 10 == 0 or t["jetzt_erreichbar"]:
+            aus.append(BZ.text(t))
+        if not t["jetzt_erreichbar"]:
+            return aus
+        # ENDSPIEL: Kaserne/Waffenlager sichern, abreissen, alles verkaufen, kaufen
+        aus.append("ENDSPIEL bei Tick %d: %d Betriebe abreissen, alles verkaufen, %d+%d Lose kaufen" % (
+            st["t"], len(t["abriss_liste"]), t["lose_keule"], t["lose_leder"]))
+        if not any(g["typ"] == 9 for g in eig.values()):
+            for _ in range(max(0, -(-(12 - st.get("stein", 0)) // 5))):
+                befehl({"spielbefehl": {"nr": 38, "werte": [0, 4]}}, 1.0, bis="SPIELBEFEHL")
+            aus.append("Kaserne %s" % (baue_schnell(9, BERGFRIED[0] - 16, BERGFRIED[1] + 18, 30),))
+        if not any(g["typ"] == 11 for g in eig.values()):
+            aus.append("Waffenlager %s" % (baue_schnell(11, BERGFRIED[0] - 14, BERGFRIED[1] + 14, 25),))
+        for nr in t["abriss_liste"]:
+            befehl({"abreissen": {"nr": nr}}, 0.6, bis="ABREISSEN")
+        tick0 = tick()
+        while tick() - tick0 < 10:                     # Abriss-Rueckgabe ins Lager
+            time.sleep(0.05)
+        verkauft = {}
+        for w, los in BZ.LOS.items():
+            for _ in range(60):
+                if vorrat(SP).get(w, 0) < los:
+                    break
+                befehl({"spielbefehl": {"nr": 38, "werte": [1, BZ.WARE_NR[w]]}}, 1.0, bis="SPIELBEFEHL")
+                verkauft[w] = verkauft.get(w, 0) + 1
+        aus.append("ENDSPIEL verkauft (Lose): %s, Gold jetzt %d" % (verkauft, vorrat(SP)["gold"]))
+        endspiel["fertig"] = True
+        marken["endspiel"] = st["t"]
+    # nach dem Endspiel: fehlende Lose kaufen, anwerben
+    v = vorrat(SP)
+    kas = [n for n, g in eig.items() if g["typ"] == 9]
+    n = ziel - st.get("T26", 0)
+    for ware, name in ((21, "keule"), (23, "leder")):
+        if v.get(name, 0) < n and v.get(name, 0) == 0 and v.get("gold", 0) >= LOS_PREIS[ware] + KAEMPFER_GOLD:
+            befehl({"spielbefehl": {"nr": 38, "werte": [0, ware]}}, 1.0, bis="SPIELBEFEHL")
+            v[name] = v.get(name, 0) + 5
+            v["gold"] -= LOS_PREIS[ware]
+            aus.append("5 %s gekauft" % name)
+    if kas:
+        werben = min(v.get("keule", 0), v.get("leder", 0), st.get("feuer", 0), v.get("gold", 0) // KAEMPFER_GOLD, n)
+        for _ in range(max(werben, 0)):
+            befehl({"werbe": {"typ": 26, "gebaeude": kas[0]}}, 1.0, bis="WERBE")
+        if werben > 0:
+            aus.append("%d Streitkolbenkaempfer angeworben" % werben)
+    for k in range(1, ziel + 1):
+        if st.get("T26", 0) >= k and k not in marken:
+            marken[k] = st["t"]
+            aus.append("KAEMPFER %d bei Tick %d" % (k, st["t"]))
+    return aus
+
 class Produktion:
     """v3 (Daniel 06.10. 21:11-21:14): eigene Waffenproduktion moeglichst frueh, aber nicht fruehestmoeglich - erst wenn das
     Seasoning (B) steht; Kauf nur aus echtem Ueberschuss (B19); Anwerben erst, wenn Waffen da sind (B21: fruehes Anwerben
@@ -384,14 +444,20 @@ class Produktion:
     Aufbauplaner (Eisenteil, Hoftore, 1 Feld vom Lager) -> anwerben."""
     UEBERSCHUSS = 800              # Gold ueber der Ruecklage, ab dem ein fehlendes Los gekauft werden darf
 
-    def __init__(self, ziel, marken):
+    def __init__(self, ziel, marken, plan_lager=None):
         self.ziel, self.marken, self.stufe, self.umgestellt = ziel, marken, 0, set()
+        self.plan_lager = tuple(plan_lager) if plan_lager else None
 
     def stein_bedarf(self):
         return {0: 0, 1: 11, 2: 12}.get(self.stufe, 0)
 
     def lager(self, G, wirt):
-        teile = [g for n, g in G.items() if g["besitzer"] == SP and g["typ"] == 10 and n not in wirt.alt]
+        # ueber die LAGE, nicht die Nummer (v3, 21:20: das neue Lager bekam nach dem Abriss wieder die Nummern 6-9, der
+        # Filter "nicht in wirt.alt" fand nie ein Lager - die Produktion startete die ganze Partie nicht)
+        teile = [g for n, g in G.items() if g["besitzer"] == SP and g["typ"] == 10]
+        if self.plan_lager:
+            nah = [g for g in teile if max(abs(g["x"] - self.plan_lager[0]), abs(g["y"] - self.plan_lager[1])) <= 10]
+            teile = nah or teile
         if not teile:
             return None
         return (sum(g["x"] for g in teile) // len(teile) + 1, sum(g["y"] for g in teile) // len(teile) + 1)
@@ -506,7 +572,8 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
         return time.time()
     gold_marke = 1000
     kaempfer_marken = {}
-    prod = Produktion(streitkolben, kaempfer_marken) if streitkolben and weg == "produktion" else None
+    prod = Produktion(streitkolben, kaempfer_marken, plan.get("lager")) if streitkolben and weg == "produktion" else None
+    endspiel = {"fertig": False, "tabelle": None}
     while time.time() < ende and not os.path.exists(os.path.join(HIER, "STOP")):
         tz = time.time()
         befehlskanal.belege()
@@ -606,7 +673,9 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                     break
             tz = uhr("assassinen", tz)
         if streitkolben:
-            ereignis += prod.schritt(st, G, wirt) if prod else ruestung_kaufen(st, G, wirt, ausbau, streitkolben, kaempfer_marken)
+            ereignis += bilanz_schritt(st, L, G, ausbau, streitkolben, endspiel, runde, kaempfer_marken)
+            if not endspiel["fertig"]:
+                ereignis += prod.schritt(st, G, wirt) if prod else ruestung_kaufen(st, G, wirt, ausbau, streitkolben, kaempfer_marken)
             if st.get("T26", 0) >= streitkolben:
                 schreib("ZIEL %d Streitkolbenkaempfer erreicht bei Tick %d" % (streitkolben, st["t"]))
                 break

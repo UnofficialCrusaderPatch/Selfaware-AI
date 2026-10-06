@@ -114,6 +114,7 @@ def gold_wert(kosten):
 
 
 MAX_LAGERTEILE = 8                 # 2 Lagerplaetze zu je 4 Teilen (Daniel 06.10. 21:11)
+MAX_AMORT = 6000                   # ohne Partieende nichts mit laengerer Amortisation (v3, 21:20)
 STEUER_MIN = 0                     # Bestechung erlaubt (Liga Stufe 0: +225 Beliebtheit, 1,50 Gold je Kopf)
 
 
@@ -416,6 +417,9 @@ class Ertragsplaner:
             grund = None
             if rest is not None and anl + amort > rest:
                 grund = "Horizont (Anlauf %d + Amortisation %.0f > Rest %d)" % (anl, amort, rest)
+            elif rest is None and amort > MAX_AMORT:
+                # ohne Partieende baute er alles, was sich irgendwann bezahlt (v3: 25 Jaegerhuetten mit 10.000-18.800 Ticks)
+                grund = "Amortisation %.0f > %d" % (amort, MAX_AMORT)
             aus.append({"typ": typ, "ort": ort, "weg": w, "gold_je_1000": round(1000 * gold_je_tick, 1), "amort": amort,
                         "gewinn": gewinn, "anlauf": anl, "rest": rest, "kosten": k, "arbeiter": arb, "grund": grund})
         if rest is None:

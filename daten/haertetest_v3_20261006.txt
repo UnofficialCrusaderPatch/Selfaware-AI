@@ -1,0 +1,1237 @@
+CODE-KENNUNG 3809768f (18 Dateien: assassinen.py 5977c6, aufbau_planer.py 59270b, bauen.py fe647a, bedrohung.py 5585cf, befehl.py f9d5aa, erstes_spiel.py 84dd83, ertrag_startwerte_M19.json b566ad, ertragsplaner.py 3fcc95, farmen_mischen.py f28949, kennung.py c1d186, laden.py f8c499, logik.lua 58d59d, serie.py 665cfa, speichern.py 00a42e, steuerkarte.py 57bd5a, waechter.py cfbded, wegkarte.py 29ee1f, wirtschaft.py 566395)
+== Phase 1: neue Partie ab Tick 0, Tempo 100 durchgehend, ohne Pausen (Plan eroeffnung_plan_M19.json)
+Zuruecksetzen: Ansicht 14 (Partie vorbei: 0) -> Hauptmenue, pausiert
+LEERE KI: Spieler 2 ohne Waren und Gold (jede Runde)
+SAAT fest aus saat_liga.json (Modul meldet {'karte': 1788115329, 'partie': 1788115329, 'wert1': 7474, 'wert2': 22872, 'zaehler1': 1, 'zaehler2': 118})
+Partie laeuft seit Tick 99: Lords da, unser Lord bei (141, 269), {'Ansicht': 14, 'gameOver': 0, 'Mensch': 1, 'Platz': 1}
+ERSTE BAUBEFEHLE bei Tick 115: 16 von 20 Holz-Bauten stehen bei Tick 167 (Kornspeicher, Markt, Holzfaeller, Steinbruch, Ochsenjoch, Huetten); nicht gebaut: [('Steinbruch', 80, 271), ('Ochsenkarren', 87, 278), ('Huette', 134, 267), ('Huette', 134, 262)]
+VERKAUFT bis Tick 704: {'kaese': 3, 'brot': 3, 'apfel': 3} Lose, Gold 195
+SEASONING FRUEH: 3 von 3 A-Plantagen mit dem Posten bei Tick 725, Gold jetzt 150
+RAID ZUERST: Nahrung da bei Tick 181, {'kaese': 3, 'brot': 3, 'apfel': 3} verkauft (Lose zu 5); Soeldnerposten None; 0 Assassinen angeworben (freie Leute am Feuer jetzt 1) -> Gold 150, Nahrung uebrig {'fleisch': 15}, Tick 739
+NACHGEHOLT bei Tick 771: 3 von 4 (Apfelplantagen A + Rest); nicht gebaut: [('Huette', 134, 267)]; Holz 71, Gold 150
+Apfelplantagen A 3, B 3 spaeter [(89, 235), (80, 225), (70, 223)]; altes Lager bleibt mit {'holz': 71}
+== Phase 2: Echtzeit, Tempo 100, 95 Minuten, Waechter aus
+Ertrags-Planer: Baukosten aus dem Spiel {1: {'holz': 5}, 3: {'holz': 5}, 4: {'holz': 5}, 5: {'holz': 20, 'stein': 6}, 7: {'holz': 3, 'gold': 60}, 10: {}, 19: {'holz': 5}, 20: {'holz': 25}, 32: {'holz': 3, 'gold': 15}}; Protokoll ertrag_live_20261006_211710_i1.jsonl
+Ertrags-Planer: Startwerte aus 10 frueheren Partien: Eisenmine 0.61 (Gewicht 63177, Anlauf 6664); Steinbruch+Ochsenjoch 6.72 (Gewicht 54086, Anlauf 3644); Apfelplantage 3.25 (Gewicht 131019, Anlauf 2224); Jaegerhuette 3.07 (Gewicht 82848, Anlauf 4427); Holzfaeller 13.24 (Gewicht 151124, Anlauf 4000)
+Wirtschaft: Apfel A [(79, 237), (82, 247), (92, 245)], B [(89, 235), (80, 225), (70, 223)]; alte Lagerteile [6, 7, 8, 9]
+Tick | Holz Stein Eisen | Aepfel Brot | Beliebt | Leute/Platz (Feuer) | Holzf. Apfelb. | Ereignis
+  884 |  71   0   0 |   0   0 | 100.00 | 13/18 (1) | 9 0 | PLANER Lage (Gewinn bis Ende / Amortisation): Holzfaeller -/988, Steinbruch+Ochsenjoch -/1020, Apfelplantage -/3467, Eisenmine -/3869, Jaegerhuette -/9552 | Stein-Reserve 6; PLANER Holzfaeller bei (87, 231) (Weg 48, 5.1 Gold/1000, Anlauf 4000, Amortisation 988, Gewinn bis Ende -) -> (87, 231); Huette (132, 266) (Bedarf 21, Platz 18, Leute 13, Feuer 1)
+  926 |  61   0   0 |   0   0 | 100.00 | 14/26 (0) | 9 0 | verkauft: fleisch x2
+  968 |  61   0   0 |   0   0 | 100.00 | 15/26 (1) | 9 1 | Holzfaeller statt Holzverkauf bei (54, 216) (Holz 61; Platz (54, 216), Weg 63)
+ZEITEN nach 10 Runden: wirtschaft 0.48 s, lesen 0.39 s, ruestung 0.13 s, haus_lager_zeile 0.06 s, waechter 0.00 s
+  990 |  56   0   0 |   0   0 | 100.00 | 15/26 (1) | 9 1 | STEUER 2 -> 3 (Beliebtheit 100.00)
+ 1003 |  56   0   0 |   0   0 |  99.75 | 15/26 (1) | 9 1 | Holzfaeller statt Holzverkauf bei (109, 204) (Holz 56; Platz (109, 204), Weg 75)
+ 1029 |  51   0   0 |   0   0 |  99.75 | 16/26 (2) | 9 1 | Holzfaeller statt Holzverkauf bei (175, 200) (Holz 51; Platz (175, 200), Weg 82)
+ZEITEN nach 20 Runden: wirtschaft 0.82 s, lesen 0.77 s, ruestung 0.31 s, haus_lager_zeile 0.06 s, waechter 0.00 s
+ 1080 |  46   0   0 |   0   0 |  99.75 | 17/26 (3) | 9 1 | -
+ZEITEN nach 30 Runden: lesen 1.15 s, wirtschaft 1.10 s, ruestung 0.31 s, haus_lager_zeile 0.06 s, waechter 0.00 s
+ 1147 |  46   0   0 |   0   0 |  99.75 | 18/26 (1) | 10 3 | STEUER 3 -> 4 (Beliebtheit 99.75)
+ZEITEN nach 40 Runden: lesen 1.53 s, wirtschaft 1.41 s, ruestung 0.32 s, haus_lager_zeile 0.06 s, waechter 0.00 s
+ 1215 |  46   0   0 |   0   0 |  99.00 | 20/26 (3) | 10 3 | -
+ZEITEN nach 50 Runden: lesen 1.89 s, wirtschaft 1.68 s, ruestung 0.32 s, haus_lager_zeile 0.06 s, waechter 0.00 s
+ 1280 |  46   0   0 |   0   0 |  99.00 | 21/26 (4) | 10 3 | STEUER 4 -> 5 (Beliebtheit 99.00); PLANER Lage (Gewinn bis Ende / Amortisation): Steinbruch+Ochsenjoch -/1020, Apfelplantage -/3467, Eisenmine -/3869, Jaegerhuette -/9552 | Stein-Reserve 6; PLANER Steinbruch+Ochsenjoch bei (80, 265) (Weg 12, 29.4 Gold/1000, Anlauf 3644, Amortisation 1020, Gewinn bis Ende -) -> (80, 265)
+ 1303 |  16   0   0 |   0   0 |  99.00 | 21/26 (0) | 10 3 | Huette (131, 271) (Bedarf 29, Platz 26, Leute 21, Feuer 0)
+ZEITEN nach 60 Runden: lesen 2.27 s, wirtschaft 2.11 s, ruestung 0.32 s, haus_lager_zeile 0.12 s, waechter 0.00 s
+ 1368 |  11   0   0 |   0   0 |  99.00 | 23/34 (2) | 14 3 | -
+ZEITEN nach 70 Runden: lesen 2.64 s, wirtschaft 2.42 s, ruestung 0.32 s, haus_lager_zeile 0.12 s, waechter 0.00 s
+ 1435 |  11   0   0 |   0   0 |  97.75 | 24/34 (3) | 14 3 | STEUER 5 -> 6 (Beliebtheit 97.75)
+ZEITEN nach 80 Runden: lesen 3.02 s, wirtschaft 2.72 s, ruestung 0.32 s, haus_lager_zeile 0.12 s, waechter 0.00 s
+ 1504 |  11   0   0 |   0   0 |  97.75 | 25/34 (0) | 14 3 | -
+ZEITEN nach 90 Runden: lesen 3.39 s, wirtschaft 3.00 s, ruestung 0.32 s, haus_lager_zeile 0.12 s, waechter 0.00 s
+ 1568 |  11   0   0 |   0   0 |  97.75 | 27/34 (2) | 18 3 | STEUER 6 -> 7 (Beliebtheit 97.75)
+ZEITEN nach 100 Runden: lesen 3.76 s, wirtschaft 3.30 s, ruestung 0.32 s, haus_lager_zeile 0.12 s, waechter 0.00 s
+ 1636 |  11   0   0 |   0   0 |  95.00 | 28/34 (3) | 18 3 | PLANER Lage (Gewinn bis Ende / Amortisation): Steinbruch+Ochsenjoch -/2679, Apfelplantage -/3467, Eisenmine -/3869, Jaegerhuette -/9552 | Stein-Reserve 6; PLANER wartet auf Arbeiter fuer Steinbruch+Ochsenjoch (Feuer 3, braucht 4)
+ 1695 |  11   0   0 |   0   0 |  95.00 | 29/34 (4) | 18 3 | Seasoning: A-Plantagen reif bei Tick 1695 (Baum 417) - setze 3 B-Plantagen
+ZEITEN nach 110 Runden: lesen 4.14 s, wirtschaft 3.76 s, ruestung 0.32 s, haus_lager_zeile 0.12 s, waechter 0.00 s
+ 1720 |   2   0   0 |   0   0 |  95.00 | 30/34 (1) | 18 3 | Seasoning: alle 3 B-Plantagen stehen (Tick 1720, 25 Ticks nach A-Reife); Altes Lager abgerissen (4 Teile, Rest {'holz': 2}) bei Tick 1720
+ZEITEN nach 120 Runden: lesen 4.53 s, wirtschaft 4.00 s, ruestung 0.32 s, haus_lager_zeile 0.12 s, waechter 0.00 s
+ 1784 |   0   0   0 |   0   0 |  95.00 | 31/34 (2) | 18 3 | -
+ZEITEN nach 130 Runden: lesen 4.91 s, wirtschaft 4.00 s, ruestung 0.32 s, haus_lager_zeile 0.12 s, waechter 0.00 s
+ 1821 |   0   0   0 |   0   0 |  89.75 | 32/34 (3) | 18 3 | STEUER 7 -> 6 (Beliebtheit 89.75)
+ZEITEN nach 140 Runden: lesen 5.28 s, wirtschaft 4.04 s, ruestung 0.32 s, haus_lager_zeile 0.12 s, waechter 0.00 s
+ 1863 |   0   0   0 |   0   0 |  89.75 | 32/34 (4) | 18 3 | -
+ZEITEN nach 150 Runden: lesen 5.65 s, wirtschaft 4.05 s, ruestung 0.32 s, haus_lager_zeile 0.12 s, waechter 0.00 s
+ 1900 |   0   0   0 |   0   0 |  89.75 | 33/34 (0) | 18 3 | STEUER 6 -> 5 (Beliebtheit 89.75); PLANER Lage (Gewinn bis Ende / Amortisation): Steinbruch+Ochsenjoch -/2679, Apfelplantage -/3467, Eisenmine -/3869, Jaegerhuette -/9552 | Stein-Reserve 6; PLANER wartet auf Arbeiter fuer Steinbruch+Ochsenjoch (Feuer 0, braucht 4)
+ZEITEN nach 160 Runden: lesen 6.03 s, wirtschaft 4.09 s, ruestung 0.32 s, haus_lager_zeile 0.12 s, waechter 0.00 s
+ 1943 |   0   0   0 |   0   0 |  89.75 | 34/34 (1) | 18 6 | -
+ZEITEN nach 170 Runden: lesen 6.42 s, wirtschaft 4.09 s, ruestung 0.32 s, haus_lager_zeile 0.12 s, waechter 0.00 s
+ 1982 |   0   0   0 |   0   0 |  89.75 | 34/34 (2) | 18 6 | STEUER 5 -> 4 (Beliebtheit 89.75)
+ZEITEN nach 180 Runden: lesen 6.80 s, wirtschaft 4.13 s, ruestung 0.32 s, haus_lager_zeile 0.12 s, waechter 0.00 s
+ 2024 |   0   0   0 |   0   0 |  86.50 | 34/34 (3) | 18 6 | -
+ZEITEN nach 190 Runden: lesen 7.18 s, wirtschaft 4.14 s, ruestung 0.32 s, haus_lager_zeile 0.12 s, waechter 0.00 s
+ 2062 |   0   0   0 |   0   0 |  86.50 | 34/34 (3) | 18 6 | STEUER 4 -> 3 (Beliebtheit 86.50)
+ZEITEN nach 200 Runden: lesen 7.55 s, wirtschaft 4.17 s, ruestung 0.32 s, haus_lager_zeile 0.12 s, waechter 0.00 s
+ 2104 |   0   0   0 |   0   0 |  86.50 | 34/34 (1) | 18 6 | PLANER Lage (Gewinn bis Ende / Amortisation): Steinbruch+Ochsenjoch -/2679, Apfelplantage -/3467, Eisenmine -/3869, Jaegerhuette -/9552 | Stein-Reserve 6; PLANER wartet auf Arbeiter fuer Steinbruch+Ochsenjoch (Feuer 1, braucht 4)
+ZEITEN nach 210 Runden: lesen 7.93 s, wirtschaft 4.18 s, ruestung 0.32 s, haus_lager_zeile 0.12 s, waechter 0.00 s
+ 2141 |   0   0   0 |   0   0 |  86.50 | 34/34 (2) | 18 6 | STEUER 3 -> 2 (Beliebtheit 86.50)
+ZEITEN nach 220 Runden: lesen 8.30 s, wirtschaft 4.21 s, ruestung 0.32 s, haus_lager_zeile 0.12 s, waechter 0.00 s
+ 2184 |   0   0   0 |   0   0 |  86.50 | 34/34 (2) | 18 6 | -
+ZEITEN nach 230 Runden: lesen 8.67 s, wirtschaft 4.22 s, ruestung 0.32 s, haus_lager_zeile 0.12 s, waechter 0.00 s
+ 2221 |   0   0   0 |   0   0 |  84.25 | 34/34 (2) | 18 6 | STEUER 2 -> 1 (Beliebtheit 84.25)
+ZEITEN nach 240 Runden: lesen 9.04 s, wirtschaft 4.26 s, ruestung 0.32 s, haus_lager_zeile 0.12 s, waechter 0.00 s
+ 2261 |   0   0   0 |   0   0 |  84.25 | 34/34 (2) | 18 6 | -
+ZEITEN nach 250 Runden: lesen 9.41 s, wirtschaft 4.26 s, ruestung 0.32 s, haus_lager_zeile 0.12 s, waechter 0.00 s
+ 2298 |   0   0   0 |   0   0 |  84.25 | 34/34 (2) | 18 6 | STEUER 1 -> 0 (Beliebtheit 84.25); PLANER Lage (Gewinn bis Ende / Amortisation): Steinbruch+Ochsenjoch -/2679, Apfelplantage -/3467, Eisenmine -/3869, Jaegerhuette -/9552 | Stein-Reserve 6; PLANER wartet auf Arbeiter fuer Steinbruch+Ochsenjoch (Feuer 2, braucht 4)
+ZEITEN nach 260 Runden: lesen 9.78 s, wirtschaft 4.30 s, ruestung 0.32 s, haus_lager_zeile 0.12 s, waechter 0.00 s
+ 2340 |   0   0   0 |   0   0 |  84.25 | 34/34 (2) | 18 6 | -
+ZEITEN nach 270 Runden: lesen 10.17 s, wirtschaft 4.30 s, ruestung 0.32 s, haus_lager_zeile 0.12 s, waechter 0.00 s
+ 2379 |   0   0   0 |   0   0 |  84.25 | 34/34 (2) | 18 6 | -
+ZEITEN nach 280 Runden: lesen 10.55 s, wirtschaft 4.31 s, ruestung 0.32 s, haus_lager_zeile 0.12 s, waechter 0.00 s
+ 2418 |   0   0   0 |   0   0 |  84.00 | 34/34 (2) | 18 6 | -
+ZEITEN nach 290 Runden: lesen 10.92 s, wirtschaft 4.32 s, ruestung 0.32 s, haus_lager_zeile 0.12 s, waechter 0.00 s
+ 2455 |   0   0   0 |   0   0 |  84.00 | 34/34 (2) | 18 6 | -
+ZEITEN nach 300 Runden: lesen 11.29 s, wirtschaft 4.32 s, ruestung 0.33 s, haus_lager_zeile 0.12 s, waechter 0.00 s
+ 2494 |   0   0   0 |   0   0 |  84.00 | 34/34 (2) | 18 6 | PLANER Lage (Gewinn bis Ende / Amortisation): Steinbruch+Ochsenjoch -/2679, Apfelplantage -/3467, Eisenmine -/3869, Jaegerhuette -/9552 | Stein-Reserve 6; PLANER wartet auf Arbeiter fuer Steinbruch+Ochsenjoch (Feuer 2, braucht 4)
+ZEITEN nach 310 Runden: lesen 11.66 s, wirtschaft 4.33 s, ruestung 0.33 s, haus_lager_zeile 0.12 s, waechter 0.00 s
+ 2531 |   0   0   0 |   0   0 |  84.00 | 34/34 (2) | 18 6 | -
+ZEITEN nach 320 Runden: lesen 12.04 s, wirtschaft 4.33 s, ruestung 0.33 s, haus_lager_zeile 0.12 s, waechter 0.00 s
+ 2568 |   0   0   0 |   0   0 |  84.00 | 34/34 (2) | 18 6 | -
+ZEITEN nach 330 Runden: lesen 12.43 s, wirtschaft 4.34 s, ruestung 0.33 s, haus_lager_zeile 0.12 s, waechter 0.00 s
+ 2610 |   0   0   0 |   2   0 |  83.75 | 34/34 (2) | 18 6 | -
+ZEITEN nach 340 Runden: lesen 12.80 s, wirtschaft 4.35 s, ruestung 0.33 s, haus_lager_zeile 0.12 s, waechter 0.00 s
+ 2648 |   0   0   0 |   4   0 |  83.75 | 34/34 (2) | 18 6 | -
+ZEITEN nach 350 Runden: lesen 13.18 s, wirtschaft 4.36 s, ruestung 0.33 s, haus_lager_zeile 0.12 s, waechter 0.00 s
+ 2686 |   0   0   0 |   4   0 |  83.75 | 34/34 (2) | 18 6 | PLANER Lage (Gewinn bis Ende / Amortisation): Steinbruch+Ochsenjoch -/2679, Apfelplantage -/3471, Eisenmine -/3869, Jaegerhuette -/9552 | Stein-Reserve 6; PLANER wartet auf Arbeiter fuer Steinbruch+Ochsenjoch (Feuer 2, braucht 4)
+ZEITEN nach 360 Runden: lesen 13.55 s, wirtschaft 4.36 s, ruestung 0.33 s, haus_lager_zeile 0.12 s, waechter 0.00 s
+ 2724 |   0   0   0 |   4   0 |  83.75 | 34/34 (2) | 18 6 | -
+ZEITEN nach 370 Runden: lesen 13.92 s, wirtschaft 4.37 s, ruestung 0.33 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 2761 |   0   0   0 |   3   0 |  83.75 | 34/34 (2) | 18 6 | -
+ZEITEN nach 380 Runden: lesen 14.30 s, wirtschaft 4.37 s, ruestung 0.33 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 2801 |   0   0   0 |   6   0 |  86.00 | 34/34 (2) | 18 6 | -
+ZEITEN nach 390 Runden: lesen 14.69 s, wirtschaft 4.38 s, ruestung 0.33 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 2840 |   0   0   0 |   7   0 |  86.00 | 34/34 (2) | 18 6 | -
+ZEITEN nach 400 Runden: lesen 15.06 s, wirtschaft 4.39 s, ruestung 0.33 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 2879 |   0   0   0 |   7   0 |  86.00 | 34/34 (2) | 18 6 | PLANER Lage (Gewinn bis Ende / Amortisation): Steinbruch+Ochsenjoch -/2679, Apfelplantage -/3482, Eisenmine -/3869, Jaegerhuette -/9552 | Stein-Reserve 6; PLANER wartet auf Arbeiter fuer Steinbruch+Ochsenjoch (Feuer 2, braucht 4)
+ZEITEN nach 410 Runden: lesen 15.44 s, wirtschaft 4.39 s, ruestung 0.33 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 2916 |   0   0   0 |   6   0 |  86.00 | 34/34 (2) | 18 6 | -
+ZEITEN nach 420 Runden: lesen 15.81 s, wirtschaft 4.40 s, ruestung 0.33 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 2955 |   0   0   0 |   6   0 |  86.00 | 34/34 (2) | 18 6 | -
+ZEITEN nach 430 Runden: lesen 16.20 s, wirtschaft 4.40 s, ruestung 0.33 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 2995 |   0   0   0 |   6   0 |  86.00 | 34/34 (2) | 18 6 | -
+ZEITEN nach 440 Runden: lesen 16.58 s, wirtschaft 4.41 s, ruestung 0.33 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 3033 |   0   0   0 |   6   0 |  88.25 | 34/34 (2) | 18 6 | -
+ZEITEN nach 450 Runden: lesen 16.96 s, wirtschaft 4.41 s, ruestung 0.33 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 3072 |   0   0   0 |   5   0 |  88.25 | 34/34 (2) | 18 6 | PLANER Lage (Gewinn bis Ende / Amortisation): Steinbruch+Ochsenjoch -/2679, Apfelplantage -/3493, Eisenmine -/3869, Jaegerhuette -/9552 | Stein-Reserve 6; PLANER wartet auf Arbeiter fuer Steinbruch+Ochsenjoch (Feuer 2, braucht 4)
+ZEITEN nach 460 Runden: lesen 17.34 s, wirtschaft 4.42 s, ruestung 0.33 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 3111 |   0   0   0 |   5   0 |  88.25 | 34/34 (2) | 18 6 | -
+ZEITEN nach 470 Runden: lesen 17.73 s, wirtschaft 4.43 s, ruestung 0.33 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 3151 |   0   0   0 |   5   0 |  88.25 | 34/34 (2) | 18 6 | -
+ZEITEN nach 480 Runden: lesen 18.12 s, wirtschaft 4.44 s, ruestung 0.33 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 3190 |   0   0   0 |   5   0 |  88.25 | 34/34 (2) | 18 6 | -
+ZEITEN nach 490 Runden: lesen 18.50 s, wirtschaft 4.44 s, ruestung 0.33 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 3229 |   0   0   0 |   4   0 |  90.50 | 34/34 (2) | 18 6 | -
+ZEITEN nach 500 Runden: lesen 18.89 s, wirtschaft 4.45 s, ruestung 0.33 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 3269 |   0   0   0 |   4   0 |  90.50 | 34/34 (2) | 18 6 | PLANER Lage (Gewinn bis Ende / Amortisation): Steinbruch+Ochsenjoch -/2679, Apfelplantage -/3504, Eisenmine -/3869, Jaegerhuette -/9552 | Stein-Reserve 6; PLANER wartet auf Arbeiter fuer Steinbruch+Ochsenjoch (Feuer 2, braucht 4)
+ZEITEN nach 510 Runden: lesen 19.27 s, wirtschaft 4.46 s, ruestung 0.33 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 3308 |   0   0   0 |   4   0 |  90.50 | 34/34 (2) | 18 6 | -
+ZEITEN nach 520 Runden: lesen 19.64 s, wirtschaft 4.46 s, ruestung 0.33 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 3345 |   0   0   0 |   3   0 |  90.50 | 34/34 (2) | 18 6 | -
+ZEITEN nach 530 Runden: lesen 20.05 s, wirtschaft 4.47 s, ruestung 0.33 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 3387 |   0   0   0 |   7   0 |  90.50 | 34/34 (2) | 18 6 | -
+ZEITEN nach 540 Runden: lesen 20.43 s, wirtschaft 4.47 s, ruestung 0.33 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 3427 |   0   0   0 |   7   0 |  92.75 | 34/34 (2) | 18 6 | -
+ZEITEN nach 550 Runden: lesen 20.81 s, wirtschaft 4.48 s, ruestung 0.33 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 3465 |   0   0   0 |   7   0 |  92.75 | 34/34 (2) | 18 6 | PLANER Lage (Gewinn bis Ende / Amortisation): Steinbruch+Ochsenjoch -/2679, Apfelplantage -/3519, Eisenmine -/3869, Jaegerhuette -/9552 | Stein-Reserve 6; PLANER wartet auf Arbeiter fuer Steinbruch+Ochsenjoch (Feuer 2, braucht 4)
+ZEITEN nach 560 Runden: lesen 21.18 s, wirtschaft 4.49 s, ruestung 0.33 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 3502 |   0   0   0 |   6   0 |  92.75 | 34/34 (2) | 18 6 | -
+ZEITEN nach 570 Runden: lesen 21.55 s, wirtschaft 4.50 s, ruestung 0.33 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 3541 |   0   0   0 |   6   0 |  92.75 | 34/34 (2) | 18 6 | -
+ZEITEN nach 580 Runden: lesen 21.93 s, wirtschaft 4.50 s, ruestung 0.33 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 3580 |   0   0   0 |   6   0 |  92.75 | 34/34 (2) | 18 6 | -
+ZEITEN nach 590 Runden: lesen 22.30 s, wirtschaft 4.51 s, ruestung 0.33 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 3618 |   0   0   0 |   6   0 |  95.00 | 34/34 (2) | 18 6 | -
+ZEITEN nach 600 Runden: lesen 22.69 s, wirtschaft 4.52 s, ruestung 0.33 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 3657 |   0   0   0 |  10   0 |  95.00 | 34/34 (2) | 18 6 | PLANER Lage (Gewinn bis Ende / Amortisation): Steinbruch+Ochsenjoch -/2679, Apfelplantage -/3526, Eisenmine -/3869, Jaegerhuette -/9552 | Stein-Reserve 6; PLANER wartet auf Arbeiter fuer Steinbruch+Ochsenjoch (Feuer 2, braucht 4)
+ 3677 |   0   0   0 |  10   0 |  95.00 | 34/34 (2) | 18 6 | Lager gesetzt bei (94, 280) - 1 Holzfaeller wollen abliefern (Tick 3677)
+ZEITEN nach 610 Runden: lesen 23.07 s, wirtschaft 4.58 s, ruestung 0.33 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 3702 |   0   0   0 |  10   0 |  95.00 | 34/34 (2) | 18 6 | -
+ 3732 |   0   0   0 |  11   0 |  95.00 | 34/34 (2) | 18 6 | verkauft: apfel x1
+ZEITEN nach 620 Runden: lesen 23.46 s, wirtschaft 4.62 s, ruestung 0.36 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 3747 |   0   0   0 |   9   0 |  95.00 | 34/34 (2) | 18 6 | -
+ZEITEN nach 630 Runden: lesen 23.84 s, wirtschaft 4.62 s, ruestung 0.36 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 3787 |   0   0   0 |   8   0 |  95.00 | 34/34 (2) | 18 6 | -
+ZEITEN nach 640 Runden: lesen 24.23 s, wirtschaft 4.63 s, ruestung 0.36 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 3826 |   0   0   0 |   8   0 |  97.25 | 34/34 (2) | 18 6 | STEUER 0 -> 1 (Beliebtheit 97.25)
+ 3858 |   0   0   0 |  11   0 |  97.25 | 34/34 (2) | 18 6 | verkauft: apfel x1
+ZEITEN nach 650 Runden: lesen 24.63 s, wirtschaft 4.67 s, ruestung 0.39 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 3873 |   0   0   0 |   8   0 |  97.25 | 34/34 (2) | 18 6 | PLANER Lage (Gewinn bis Ende / Amortisation): Steinbruch+Ochsenjoch -/2742, Apfelplantage -/3518, Eisenmine -/3572, Jaegerhuette -/9552 | Stein-Reserve 6; PLANER wartet auf Arbeiter fuer Steinbruch+Ochsenjoch (Feuer 2, braucht 4)
+ZEITEN nach 660 Runden: lesen 25.01 s, wirtschaft 4.68 s, ruestung 0.39 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 3912 |   3   0   0 |   8   0 |  97.25 | 34/34 (2) | 18 6 | STEUER 1 -> 2 (Beliebtheit 97.25)
+ZEITEN nach 670 Runden: lesen 25.41 s, wirtschaft 4.71 s, ruestung 0.39 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 3956 |  11   0   0 |   7   0 |  97.25 | 34/34 (2) | 18 6 | PLANER Ochsenjoch an Steinbruch 47: erster Ochse beladen unterwegs -> sofort der zweite (Joche 1, Haufen 1) -> (86, 264); PLANER Huette zuerst (Feuer 2, Steinbruch+Ochsenjoch braucht 4) -> (129, 262)
+ZEITEN nach 680 Runden: lesen 25.79 s, wirtschaft 4.84 s, ruestung 0.39 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 4006 |   8   0   0 |   7   0 |  97.50 | 35/42 (2) | 18 6 | STEUER 2 -> 3 (Beliebtheit 97.50)
+ZEITEN nach 690 Runden: lesen 26.16 s, wirtschaft 4.87 s, ruestung 0.39 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 4047 |   8   0   0 |   7   0 |  97.50 | 36/42 (2) | 18 6 | -
+ZEITEN nach 700 Runden: lesen 26.55 s, wirtschaft 4.88 s, ruestung 0.39 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 4087 |   8   0   0 |  10   0 |  97.50 | 37/42 (2) | 18 6 | STEUER 3 -> 4 (Beliebtheit 97.50); PLANER Lage (Gewinn bis Ende / Amortisation): Steinbruch+Ochsenjoch -/2742, Apfelplantage -/3560, Eisenmine -/3572, Jaegerhuette -/9552 | Stein-Reserve 6; PLANER wartet auf Arbeiter fuer Steinbruch+Ochsenjoch (Feuer 2, braucht 4)
+ZEITEN nach 710 Runden: lesen 26.93 s, wirtschaft 4.91 s, ruestung 0.39 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 4130 |   8   0   0 |  10   0 |  97.50 | 38/42 (1) | 18 6 | -
+ZEITEN nach 720 Runden: lesen 27.32 s, wirtschaft 4.92 s, ruestung 0.39 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 4168 |   8   0   0 |  10   0 |  97.50 | 38/42 (1) | 18 6 | STEUER 4 -> 5 (Beliebtheit 97.50)
+ZEITEN nach 730 Runden: lesen 27.70 s, wirtschaft 4.95 s, ruestung 0.39 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 4211 |   8   0   0 |   9   0 |  96.25 | 39/42 (2) | 18 6 | -
+ZEITEN nach 740 Runden: lesen 28.08 s, wirtschaft 4.96 s, ruestung 0.39 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 4250 |   8   0   0 |   9   0 |  96.25 | 40/42 (3) | 18 6 | PLANER Huette zuerst (Feuer 3, Steinbruch+Ochsenjoch braucht 4) -> (128, 267)
+ZEITEN nach 750 Runden: lesen 28.46 s, wirtschaft 5.03 s, ruestung 0.39 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 4295 |   3   0   0 |   9   0 |  96.25 | 41/50 (4) | 18 6 | PLANER Lage (Gewinn bis Ende / Amortisation): Steinbruch+Ochsenjoch -/2742, Eisenmine -/3572, Apfelplantage -/3584, Jaegerhuette -/9552 | Stein-Reserve 6; PLANER Apfelplantage bei (101, 200) (Weg 27, 5.0 Gold/1000, Anlauf 1681, Amortisation 3584, Gewinn bis Ende -) statt Steinbruch+Ochsenjoch -> None
+ZEITEN nach 760 Runden: lesen 28.85 s, wirtschaft 5.06 s, ruestung 0.39 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 4338 |   6   0   0 |   8   0 |  96.25 | 42/50 (5) | 18 6 | -
+ 4378 |  14   0   0 |   8   0 |  96.25 | 43/50 (6) | 18 6 | PRODUKTION Milchviehhof None; PRODUKTION Milchviehhof None
+ZEITEN nach 770 Runden: lesen 29.26 s, wirtschaft 5.10 s, ruestung 0.49 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 4392 |  17   0   0 |   8   0 |  96.25 | 43/50 (6) | 18 6 | -
+ZEITEN nach 780 Runden: lesen 29.65 s, wirtschaft 5.11 s, ruestung 0.49 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 4431 |  21   0   0 |   8   0 |  95.00 | 44/50 (7) | 18 6 | -
+ZEITEN nach 790 Runden: lesen 30.04 s, wirtschaft 5.11 s, ruestung 0.49 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 4471 |  21   0   0 |   7   0 |  95.00 | 44/50 (7) | 18 6 | -
+ZEITEN nach 800 Runden: lesen 30.41 s, wirtschaft 5.12 s, ruestung 0.49 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 4510 |  21   0   0 |   7   0 |  95.00 | 45/50 (8) | 18 6 | PLANER Lage (Gewinn bis Ende / Amortisation): Steinbruch+Ochsenjoch -/2742, Eisenmine -/3572, Apfelplantage -/4300, Jaegerhuette -/9552 | Stein-Reserve 6; PLANER wartet auf Steinbruch+Ochsenjoch (fehlt: holz 9)
+ZEITEN nach 810 Runden: lesen 30.80 s, wirtschaft 5.13 s, ruestung 0.49 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 4548 |  21   0   0 |   7   0 |  95.00 | 46/50 (9) | 18 6 | -
+ZEITEN nach 820 Runden: lesen 31.18 s, wirtschaft 5.14 s, ruestung 0.49 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 4588 |  21   0   0 |   7   0 |  95.00 | 47/50 (10) | 18 6 | -
+ 4617 |  21   0   0 |  13   0 |  93.75 | 47/50 (10) | 18 6 | verkauft: apfel x1
+ZEITEN nach 830 Runden: lesen 31.58 s, wirtschaft 5.14 s, ruestung 0.52 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 4632 |  21   0   0 |  10   0 |  93.75 | 48/50 (11) | 18 6 | STEUER 5 -> 4 (Beliebtheit 93.75)
+ZEITEN nach 840 Runden: lesen 31.97 s, wirtschaft 5.18 s, ruestung 0.52 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 4675 |  21   0   0 |   9   0 |  93.75 | 48/50 (12) | 18 6 | -
+ZEITEN nach 850 Runden: lesen 32.36 s, wirtschaft 5.19 s, ruestung 0.52 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 4715 |  21   0   0 |   9   0 |  93.75 | 49/50 (12) | 18 6 | STEUER 4 -> 3 (Beliebtheit 93.75); PLANER Lage (Gewinn bis Ende / Amortisation): Steinbruch+Ochsenjoch -/2750, Eisenmine -/3572, Apfelplantage -/4240, Jaegerhuette -/9552 | Stein-Reserve 6; PLANER wartet auf Steinbruch+Ochsenjoch (fehlt: holz 9)
+ZEITEN nach 860 Runden: lesen 32.74 s, wirtschaft 5.22 s, ruestung 0.53 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 4756 |  21   0   0 |   9   0 |  93.75 | 50/50 (13) | 18 6 | -
+ZEITEN nach 870 Runden: lesen 33.12 s, wirtschaft 5.23 s, ruestung 0.53 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 4796 |  21   0   0 |   8   0 |  93.75 | 50/50 (14) | 18 6 | STEUER 3 -> 2 (Beliebtheit 93.75)
+ZEITEN nach 880 Runden: lesen 33.51 s, wirtschaft 5.27 s, ruestung 0.53 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 4836 |  21   0   0 |   8   0 |  93.50 | 50/50 (15) | 18 6 | -
+ 4866 |  21   0   0 |  13   0 |  93.50 | 50/50 (15) | 18 6 | verkauft: apfel x1
+ZEITEN nach 890 Runden: lesen 33.89 s, wirtschaft 5.27 s, ruestung 0.56 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 4881 |  21   0   0 |   7   0 |  93.50 | 50/50 (15) | 18 6 | STEUER 2 -> 1 (Beliebtheit 93.50)
+ZEITEN nach 900 Runden: lesen 34.28 s, wirtschaft 5.31 s, ruestung 0.56 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 4922 |  21   0   0 |   7   0 |  93.50 | 50/50 (16) | 18 6 | PLANER Lage (Gewinn bis Ende / Amortisation): Steinbruch+Ochsenjoch -/2759, Eisenmine -/3572, Apfelplantage -/4220, Jaegerhuette -/9552 | Stein-Reserve 6; PLANER wartet auf Steinbruch+Ochsenjoch (fehlt: holz 9)
+ZEITEN nach 910 Runden: lesen 34.66 s, wirtschaft 5.32 s, ruestung 0.56 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 4961 |  21   0   0 |   7   0 |  93.50 | 50/50 (17) | 18 6 | STEUER 1 -> 0 (Beliebtheit 93.50)
+ZEITEN nach 920 Runden: lesen 35.04 s, wirtschaft 5.35 s, ruestung 0.56 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 5004 |  21   0   0 |   6   0 |  95.75 | 50/50 (17) | 18 6 | -
+ZEITEN nach 930 Runden: lesen 35.42 s, wirtschaft 5.36 s, ruestung 0.56 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 5042 |  21   0   0 |   6   0 |  95.75 | 50/50 (17) | 18 6 | -
+ZEITEN nach 940 Runden: lesen 35.81 s, wirtschaft 5.37 s, ruestung 0.56 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 5082 |  21   0   0 |   5   0 |  95.75 | 50/50 (17) | 18 6 | -
+ 5110 |  21   0   0 |   5   0 |  95.75 | 50/50 (17) | 18 6 | Lager erweitert (89, 276): Bestand 21, Holz unterwegs 144 + bald 36, Teile 4 -> noetig 5
+ZEITEN nach 950 Runden: lesen 36.20 s, wirtschaft 5.43 s, ruestung 0.56 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 5128 |  21   0   0 |   5   0 |  95.75 | 50/50 (17) | 18 6 | PLANER Lage (Gewinn bis Ende / Amortisation): Steinbruch+Ochsenjoch -/2647, Eisenmine -/3572, Apfelplantage -/4248, Jaegerhuette -/9552 | Stein-Reserve 6; PLANER wartet auf Steinbruch+Ochsenjoch (fehlt: holz 9)
+ZEITEN nach 960 Runden: lesen 36.58 s, wirtschaft 5.44 s, ruestung 0.56 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 5168 |  21   0   0 |   5   0 |  95.75 | 50/50 (17) | 18 6 | -
+ZEITEN nach 970 Runden: lesen 36.96 s, wirtschaft 5.45 s, ruestung 0.56 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 5206 |  21   0   0 |   4   0 |  98.00 | 50/50 (17) | 18 6 | STEUER 0 -> 1 (Beliebtheit 98.00)
+ZEITEN nach 980 Runden: lesen 37.36 s, wirtschaft 5.49 s, ruestung 0.56 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 5250 |  21   0   0 |   4   0 |  98.00 | 50/50 (17) | 18 6 | -
+ZEITEN nach 990 Runden: lesen 37.75 s, wirtschaft 5.50 s, ruestung 0.56 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 5290 |  21  12   0 |   3   0 |  98.00 | 50/50 (17) | 18 6 | STEUER 1 -> 2 (Beliebtheit 98.00); PLANER Eisenmine bei (135, 323) (Weg 40, 14.0 Gold/1000, Anlauf 6664, Amortisation 3572, Gewinn bis Ende -) statt Steinbruch+Ochsenjoch -> (135, 323)
+ZEITEN nach 1000 Runden: lesen 38.13 s, wirtschaft 5.59 s, ruestung 0.56 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 5338 |   1   6   0 |   3   0 |  98.00 | 50/50 (17) | 18 6 | PLANER Lage (Gewinn bis Ende / Amortisation): Steinbruch+Ochsenjoch -/2581, Eisenmine -/3631, Apfelplantage -/4277, Jaegerhuette -/9552 | Stein-Reserve 6; PLANER wartet auf Steinbruch+Ochsenjoch (fehlt: holz 29)
+ZEITEN nach 1010 Runden: lesen 38.62 s, wirtschaft 5.63 s, ruestung 0.56 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 5391 |   1   6   0 |   2   0 |  98.00 | 50/50 (17) | 18 6 | STEUER 2 -> 3 (Beliebtheit 98.00)
+ZEITEN nach 1020 Runden: lesen 38.99 s, wirtschaft 5.66 s, ruestung 0.56 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 5433 |   1   6   0 |   2   0 |  97.75 | 50/50 (17) | 18 6 | -
+ZEITEN nach 1030 Runden: lesen 39.38 s, wirtschaft 5.67 s, ruestung 0.56 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 5473 |   1   6   0 |   2   0 |  97.75 | 50/50 (17) | 18 6 | STEUER 3 -> 4 (Beliebtheit 97.75)
+ZEITEN nach 1040 Runden: lesen 39.79 s, wirtschaft 5.71 s, ruestung 0.56 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 5518 |   1   6   0 |   1   0 |  97.75 | 50/50 (15) | 18 6 | -
+ZEITEN nach 1050 Runden: lesen 40.20 s, wirtschaft 5.72 s, ruestung 0.56 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 5559 |  10   6   0 |   1   0 |  97.75 | 50/50 (15) | 18 6 | STEUER 4 -> 5 (Beliebtheit 97.75); PLANER Lage (Gewinn bis Ende / Amortisation): Steinbruch+Ochsenjoch -/2601, Eisenmine -/3631, Apfelplantage -/4306, Jaegerhuette -/9552 | Stein-Reserve 6; PLANER wartet auf Steinbruch+Ochsenjoch (fehlt: holz 20)
+ZEITEN nach 1060 Runden: lesen 40.61 s, wirtschaft 5.75 s, ruestung 0.56 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 5604 |  28   6   0 |   0   0 |  94.00 | 50/50 (15) | 18 6 | PLANER Eisenmine bei (138, 319) (Weg 41, 13.8 Gold/1000, Anlauf 6664, Amortisation 3631, Gewinn bis Ende -) statt Steinbruch+Ochsenjoch -> (138, 319)
+ZEITEN nach 1070 Runden: lesen 41.02 s, wirtschaft 5.82 s, ruestung 0.56 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 5652 |  17   0   0 |   5   0 |  94.00 | 50/50 (15) | 18 6 | STEUER 5 -> 4 (Beliebtheit 94.00)
+ZEITEN nach 1080 Runden: lesen 41.42 s, wirtschaft 5.89 s, ruestung 0.56 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 5699 |  17   0   0 |   9   0 |  94.00 | 50/50 (13) | 18 6 | -
+ZEITEN nach 1090 Runden: lesen 41.80 s, wirtschaft 5.90 s, ruestung 0.56 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 5738 |  17   0   0 |   8   0 |  94.00 | 50/50 (13) | 18 6 | STEUER 4 -> 3 (Beliebtheit 94.00)
+ZEITEN nach 1100 Runden: lesen 42.17 s, wirtschaft 5.93 s, ruestung 0.56 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 5780 |  17   0   0 |   8   0 |  94.00 | 50/50 (13) | 18 6 | PLANER Lage (Gewinn bis Ende / Amortisation): Steinbruch+Ochsenjoch -/2621, Eisenmine -/3869, Apfelplantage -/4250, Jaegerhuette -/9552 | Stein-Reserve 6; PLANER wartet auf Steinbruch+Ochsenjoch (fehlt: holz 13)
+ZEITEN nach 1110 Runden: lesen 42.55 s, wirtschaft 5.94 s, ruestung 0.56 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 5819 |  19   0   0 |   8   0 |  93.75 | 50/50 (13) | 18 6 | STEUER 3 -> 2 (Beliebtheit 93.75)
+ZEITEN nach 1120 Runden: lesen 42.97 s, wirtschaft 5.98 s, ruestung 0.56 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 5864 |  36   0   0 |   7   0 |  93.75 | 50/50 (13) | 18 6 | PLANER Steinbruch+Ochsenjoch bei (62, 213) (Weg 62, 11.4 Gold/1000, Anlauf 3550, Amortisation 2629, Gewinn bis Ende -) -> (62, 213)
+ZEITEN nach 1130 Runden: lesen 43.38 s, wirtschaft 6.10 s, ruestung 0.56 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 5918 |  34   0   0 |  11   0 |  93.75 | 50/50 (9) | 18 6 | STEUER 2 -> 1 (Beliebtheit 93.75); PLANER Steinbruch+Ochsenjoch bei (74, 210) (Weg 65, 11.0 Gold/1000, Anlauf 3550, Amortisation 2730, Gewinn bis Ende -) -> (74, 210)
+ZEITEN nach 1140 Runden: lesen 43.76 s, wirtschaft 6.29 s, ruestung 0.56 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 5976 |  11   0   0 |  10   0 |  93.75 | 50/50 (9) | 18 6 | PLANER Apfelplantage bei (104, 191) (Weg 36, 4.2 Gold/1000, Anlauf 1681, Amortisation 4239, Gewinn bis Ende -) statt Steinbruch+Ochsenjoch -> (104, 191)
+ZEITEN nach 1150 Runden: lesen 44.14 s, wirtschaft 6.38 s, ruestung 0.56 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 6023 |   8   0   0 |   9   0 |  95.00 | 50/50 (9) | 18 6 | PLANER Lage (Gewinn bis Ende / Amortisation): Steinbruch+Ochsenjoch -/2869, Eisenmine -/3869, Apfelplantage -/5003, Jaegerhuette -/9552 | Stein-Reserve 6; PLANER wartet auf Steinbruch+Ochsenjoch (fehlt: holz 22)
+ZEITEN nach 1160 Runden: lesen 44.53 s, wirtschaft 6.42 s, ruestung 0.56 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 6067 |   8   0   0 |  13   0 |  95.00 | 50/50 (9) | 18 6 | verkauft: apfel x1
+ZEITEN nach 1170 Runden: lesen 44.92 s, wirtschaft 6.43 s, ruestung 0.59 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 6109 |   8   0   0 |   9   0 |  95.00 | 50/50 (4) | 18 6 | -
+ZEITEN nach 1180 Runden: lesen 45.30 s, wirtschaft 6.44 s, ruestung 0.59 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 6148 |   8   0   0 |   8   0 |  95.00 | 50/50 (4) | 18 7 | -
+ZEITEN nach 1190 Runden: lesen 45.71 s, wirtschaft 6.45 s, ruestung 0.59 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 6190 |   8   0   0 |   8   0 |  95.00 | 50/50 (4) | 18 7 | -
+ZEITEN nach 1200 Runden: lesen 46.12 s, wirtschaft 6.45 s, ruestung 0.59 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 6233 |   8   0   0 |   7   0 |  96.25 | 50/50 (4) | 18 7 | PLANER Lage (Gewinn bis Ende / Amortisation): Steinbruch+Ochsenjoch -/2889, Eisenmine -/3869, Apfelplantage -/4981, Jaegerhuette -/9552 | Stein-Reserve 6; PLANER wartet auf Steinbruch+Ochsenjoch (fehlt: holz 22)
+ZEITEN nach 1210 Runden: lesen 46.53 s, wirtschaft 6.46 s, ruestung 0.59 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 6273 |  14   0   0 |   7   0 |  96.25 | 50/50 (4) | 18 7 | -
+ZEITEN nach 1220 Runden: lesen 46.94 s, wirtschaft 6.47 s, ruestung 0.59 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 6317 |  23   0   0 |   7   0 |  96.25 | 50/50 (4) | 18 7 | -
+ZEITEN nach 1230 Runden: lesen 47.33 s, wirtschaft 6.48 s, ruestung 0.59 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 6358 |  26   0   0 |   6   0 |  96.25 | 50/50 (4) | 18 7 | -
+ZEITEN nach 1240 Runden: lesen 47.71 s, wirtschaft 6.49 s, ruestung 0.59 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 6397 |  26   0   0 |   6   0 |  96.25 | 50/50 (4) | 18 7 | -
+ZEITEN nach 1250 Runden: lesen 48.11 s, wirtschaft 6.50 s, ruestung 0.59 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 6438 |  33   0   0 |   5   0 |  97.50 | 50/50 (4) | 18 7 | STEUER 1 -> 2 (Beliebtheit 97.50); PLANER Lage (Gewinn bis Ende / Amortisation): Steinbruch+Ochsenjoch -/2909, Eisenmine -/3869, Apfelplantage -/5012, Jaegerhuette -/9552 | Stein-Reserve 6; PLANER Steinbruch+Ochsenjoch bei (86, 206) (Weg 69, 10.3 Gold/1000, Anlauf 3550, Amortisation 2909, Gewinn bis Ende -) -> (86, 206)
+ZEITEN nach 1260 Runden: lesen 48.53 s, wirtschaft 6.65 s, ruestung 0.59 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 6495 |  15   0   0 |   5   0 |  97.50 | 50/50 (4) | 18 7 | PLANER Apfelplantage bei (104, 181) (Weg 46, 3.6 Gold/1000, Anlauf 1681, Amortisation 5021, Gewinn bis Ende -) statt Eisenmine -> (104, 181)
+ 6508 |  14   0   0 |   5   0 |  97.50 | 50/50 (0) | 18 7 | Huette (127, 271) (Bedarf 51, Platz 50, Leute 50, Feuer 0)
+ZEITEN nach 1270 Runden: lesen 48.93 s, wirtschaft 6.75 s, ruestung 0.60 s, haus_lager_zeile 0.19 s, waechter 0.00 s
+ 6551 |  23   0   0 |   4   0 |  97.50 | 51/58 (0) | 18 7 | STEUER 2 -> 3 (Beliebtheit 97.50)
+ZEITEN nach 1280 Runden: lesen 49.33 s, wirtschaft 6.82 s, ruestung 0.60 s, haus_lager_zeile 0.19 s, waechter 0.00 s
+ 6599 |  46   0   0 |   8   0 |  97.50 | 52/58 (0) | 18 7 | -
+ZEITEN nach 1290 Runden: lesen 49.71 s, wirtschaft 6.83 s, ruestung 0.60 s, haus_lager_zeile 0.19 s, waechter 0.00 s
+ 6638 |  48   0   0 |   7   0 |  97.25 | 53/58 (0) | 18 7 | STEUER 3 -> 4 (Beliebtheit 97.25)
+ZEITEN nach 1300 Runden: lesen 50.08 s, wirtschaft 6.87 s, ruestung 0.60 s, haus_lager_zeile 0.19 s, waechter 0.00 s
+ 6679 |  49   0   0 |   7   0 |  97.25 | 54/58 (0) | 18 7 | PLANER Lage (Gewinn bis Ende / Amortisation): Eisenmine -/3869, Apfelplantage -/5764, Jaegerhuette -/9552 | Stein-Reserve 6; PLANER wartet auf Arbeiter fuer Eisenmine (Feuer 0, braucht 2)
+ZEITEN nach 1310 Runden: lesen 50.48 s, wirtschaft 6.87 s, ruestung 0.60 s, haus_lager_zeile 0.19 s, waechter 0.00 s
+ 6720 |  56   0   0 |   6   0 |  97.25 | 55/58 (1) | 18 7 | STEUER 4 -> 5 (Beliebtheit 97.25)
+ZEITEN nach 1320 Runden: lesen 50.87 s, wirtschaft 6.91 s, ruestung 0.60 s, haus_lager_zeile 0.19 s, waechter 0.00 s
+ 6764 |  60   0   0 |   6   0 |  97.25 | 55/58 (1) | 18 7 | -
+ZEITEN nach 1330 Runden: lesen 51.25 s, wirtschaft 6.92 s, ruestung 0.61 s, haus_lager_zeile 0.19 s, waechter 0.00 s
+ 6803 |  60   0   0 |   6   0 |  96.00 | 56/58 (2) | 18 7 | PLANER Apfelplantage bei (105, 171) (Weg 56, 3.1 Gold/1000, Anlauf 1681, Amortisation 5786, Gewinn bis Ende -) statt Eisenmine -> (105, 171)
+ZEITEN nach 1340 Runden: lesen 51.65 s, wirtschaft 6.99 s, ruestung 0.61 s, haus_lager_zeile 0.19 s, waechter 0.00 s
+ 6850 |  57   0   0 |   9   0 |  96.00 | 57/58 (3) | 18 7 | PLANER Apfelplantage bei (94, 171) (Weg 56, 3.1 Gold/1000, Anlauf 1681, Amortisation 5757, Gewinn bis Ende -) statt Eisenmine -> (94, 171)
+ZEITEN nach 1350 Runden: lesen 52.03 s, wirtschaft 7.09 s, ruestung 0.62 s, haus_lager_zeile 0.19 s, waechter 0.00 s
+ 6899 |  54   0   0 |   8   0 |  96.00 | 58/58 (1) | 18 7 | PLANER Lage (Gewinn bis Ende / Amortisation): Eisenmine -/3869, Jaegerhuette -/9552 | Stein-Reserve 6; PLANER Huette zuerst (Feuer 1, Eisenmine braucht 2) -> (134, 275)
+ZEITEN nach 1360 Runden: lesen 52.45 s, wirtschaft 7.19 s, ruestung 0.62 s, haus_lager_zeile 0.19 s, waechter 0.00 s
+ 6951 |  56   0   0 |   8   0 |  96.00 | 59/66 (2) | 18 10 | -
+ZEITEN nach 1370 Runden: lesen 52.85 s, wirtschaft 7.19 s, ruestung 0.62 s, haus_lager_zeile 0.19 s, waechter 0.00 s
+ 6991 |  60   0   0 |   8   0 |  96.00 | 60/66 (3) | 18 10 | -
+ZEITEN nach 1380 Runden: lesen 53.25 s, wirtschaft 7.20 s, ruestung 0.63 s, haus_lager_zeile 0.19 s, waechter 0.00 s
+ 7034 |  60  12   0 |  12   0 |  94.75 | 61/66 (4) | 18 10 | STEUER 5 -> 4 (Beliebtheit 94.75); PLANER Eisenmine bei (142, 321) (Weg 45, 12.9 Gold/1000, Anlauf 6664, Amortisation 3869, Gewinn bis Ende -) -> (142, 321)
+ZEITEN nach 1390 Runden: lesen 53.66 s, wirtschaft 7.30 s, ruestung 0.63 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 7084 |  47   6   0 |  11   0 |  94.75 | 62/66 (5) | 18 10 | PLANER Eisenmine bei (141, 328) (Weg 45, 12.9 Gold/1000, Anlauf 6664, Amortisation 3869, Gewinn bis Ende -) -> (141, 328)
+ZEITEN nach 1400 Runden: lesen 54.05 s, wirtschaft 7.40 s, ruestung 0.63 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 7134 |  27   0   0 |  11   0 |  94.75 | 63/66 (4) | 18 10 | STEUER 4 -> 3 (Beliebtheit 94.75); PLANER Lage (Gewinn bis Ende / Amortisation): Eisenmine -/4048, Jaegerhuette -/9552 | Stein-Reserve 6; PLANER wartet auf Eisenmine (fehlt: stein 6)
+ZEITEN nach 1410 Runden: lesen 54.43 s, wirtschaft 7.47 s, ruestung 0.63 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 7178 |  27   0   0 |  10   0 |  94.75 | 63/66 (5) | 18 10 | -
+ZEITEN nach 1420 Runden: lesen 54.81 s, wirtschaft 7.47 s, ruestung 0.63 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 7217 |  27   0   0 |  10   0 |  94.50 | 64/66 (5) | 18 10 | STEUER 3 -> 2 (Beliebtheit 94.50)
+ZEITEN nach 1430 Runden: lesen 55.18 s, wirtschaft 7.51 s, ruestung 0.63 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 7258 |  27   0   0 |   9   0 |  94.50 | 65/66 (6) | 18 10 | -
+ZEITEN nach 1440 Runden: lesen 55.56 s, wirtschaft 7.52 s, ruestung 0.63 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 7298 |  27   0   0 |   9   0 |  94.50 | 65/66 (5) | 18 10 | STEUER 2 -> 1 (Beliebtheit 94.50)
+ZEITEN nach 1450 Runden: lesen 55.95 s, wirtschaft 7.56 s, ruestung 0.63 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 7341 |  27   2   0 |  11   0 |  94.50 | 66/66 (6) | 18 10 | PLANER Lage (Gewinn bis Ende / Amortisation): Eisenmine -/4048, Jaegerhuette -/9552 | Stein-Reserve 6; PLANER wartet auf Eisenmine (fehlt: stein 4)
+ZEITEN nach 1460 Runden: lesen 56.35 s, wirtschaft 7.57 s, ruestung 0.63 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 7383 |  30  12   0 |  11   0 |  94.50 | 66/66 (6) | 18 10 | STEUER 1 -> 0 (Beliebtheit 94.50); PLANER Eisenmine bei (145, 331) (Weg 48, 12.4 Gold/1000, Anlauf 6664, Amortisation 4048, Gewinn bis Ende -) -> (145, 331)
+ZEITEN nach 1470 Runden: lesen 56.76 s, wirtschaft 7.67 s, ruestung 0.63 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 7435 |  28   6   0 |  11   0 |  96.75 | 66/66 (7) | 18 10 | PLANER Eisenmine bei (141, 332) (Weg 49, 12.2 Gold/1000, Anlauf 6664, Amortisation 4107, Gewinn bis Ende -) -> (141, 332)
+ZEITEN nach 1480 Runden: lesen 57.17 s, wirtschaft 7.77 s, ruestung 0.64 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 7485 |  22   0   0 |  10   0 |  96.75 | 66/66 (8) | 18 10 | -
+ 7517 |  23   0   0 |  15   0 |  96.75 | 66/66 (5) | 18 10 | verkauft: apfel x1
+ZEITEN nach 1490 Runden: lesen 57.57 s, wirtschaft 7.81 s, ruestung 0.67 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 7532 |  23   0   0 |   9   0 |  96.75 | 66/66 (5) | 18 10 | -
+ZEITEN nach 1500 Runden: lesen 57.94 s, wirtschaft 7.81 s, ruestung 0.67 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 7571 |  24   0   0 |   9   0 |  96.75 | 66/66 (5) | 18 10 | PLANER Lage (Gewinn bis Ende / Amortisation): Eisenmine -/4107, Jaegerhuette -/9552 | Stein-Reserve 6; PLANER wartet auf Eisenmine (fehlt: stein 6)
+ZEITEN nach 1510 Runden: lesen 58.35 s, wirtschaft 7.82 s, ruestung 0.67 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 7612 |  32   0   0 |   8   0 |  99.00 | 66/66 (5) | 18 10 | STEUER 0 -> 1 (Beliebtheit 99.00)
+ZEITEN nach 1520 Runden: lesen 58.76 s, wirtschaft 7.86 s, ruestung 0.67 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 7657 |  49   0   0 |   8   0 |  99.00 | 66/66 (5) | 18 10 | -
+ZEITEN nach 1530 Runden: lesen 59.16 s, wirtschaft 7.87 s, ruestung 0.67 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 7700 |  57   0   0 |   7   0 |  99.00 | 66/66 (5) | 18 10 | STEUER 1 -> 2 (Beliebtheit 99.00)
+ZEITEN nach 1540 Runden: lesen 59.53 s, wirtschaft 7.91 s, ruestung 0.68 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 7742 |  59   0   0 |   9   0 |  99.00 | 66/66 (5) | 18 10 | -
+ZEITEN nach 1550 Runden: lesen 59.94 s, wirtschaft 7.92 s, ruestung 0.68 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 7783 |  64   0   0 |  11   0 |  99.00 | 66/66 (5) | 18 10 | STEUER 2 -> 3 (Beliebtheit 99.00); PLANER Lage (Gewinn bis Ende / Amortisation): Eisenmine -/4107, Jaegerhuette -/9552 | Stein-Reserve 6; PLANER wartet auf Eisenmine (fehlt: stein 6)
+ZEITEN nach 1560 Runden: lesen 60.34 s, wirtschaft 7.96 s, ruestung 0.69 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 7829 |  73   0   0 |  11   0 |  98.75 | 66/66 (5) | 18 10 | -
+ZEITEN nach 1570 Runden: lesen 60.74 s, wirtschaft 7.97 s, ruestung 0.69 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 7870 |  77   0   0 |  10   0 |  98.75 | 66/66 (5) | 18 10 | STEUER 3 -> 4 (Beliebtheit 98.75)
+ZEITEN nach 1580 Runden: lesen 61.13 s, wirtschaft 8.01 s, ruestung 0.69 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 7913 |  77   0   0 |   9   0 |  98.75 | 66/66 (5) | 18 10 | -
+ZEITEN nach 1590 Runden: lesen 61.54 s, wirtschaft 8.01 s, ruestung 0.70 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 7955 |  84  12   0 |   9   0 |  98.75 | 66/66 (5) | 17 10 | STEUER 4 -> 5 (Beliebtheit 98.75); PLANER Eisenmine bei (146, 327) (Weg 49, 12.2 Gold/1000, Anlauf 6664, Amortisation 4107, Gewinn bis Ende -) -> (146, 327)
+ZEITEN nach 1600 Runden: lesen 61.94 s, wirtschaft 8.11 s, ruestung 0.70 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 8007 |  74   6   0 |  11   0 |  97.50 | 66/66 (5) | 17 10 | PLANER Lage (Gewinn bis Ende / Amortisation): Eisenmine -/4226, Jaegerhuette -/9552 | Stein-Reserve 6; PLANER Eisenmine bei (148, 320) (Weg 51, 11.8 Gold/1000, Anlauf 6664, Amortisation 4226, Gewinn bis Ende -) -> (148, 320)
+ZEITEN nach 1610 Runden: lesen 62.34 s, wirtschaft 8.21 s, ruestung 0.71 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 8057 |  55   0   0 |  15   0 |  97.50 | 66/66 (5) | 17 10 | verkauft: apfel x1; STEUER 5 -> 6 (Beliebtheit 97.50)
+ZEITEN nach 1620 Runden: lesen 62.74 s, wirtschaft 8.28 s, ruestung 0.74 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 8106 |  60   0   0 |  10   0 |  97.50 | 66/66 (0) | 17 10 | PLANER Ochsenjoch an Steinbruch 80: erster Ochse beladen unterwegs -> sofort der zweite (Joche 1, Haufen 1) -> (90, 201); PLANER Huette zuerst (Feuer 0, Eisenmine braucht 2) -> (125, 258)
+ZEITEN nach 1630 Runden: lesen 63.16 s, wirtschaft 8.41 s, ruestung 0.74 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 8163 |  61   0   0 |   9   0 |  97.50 | 65/74 (1) | 18 10 | STEUER 6 -> 7 (Beliebtheit 97.50)
+ZEITEN nach 1640 Runden: lesen 63.56 s, wirtschaft 8.44 s, ruestung 0.75 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 8207 |  63   0   0 |   9   0 |  94.75 | 66/74 (1) | 18 10 | -
+ZEITEN nach 1650 Runden: lesen 63.95 s, wirtschaft 8.45 s, ruestung 0.75 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 8247 |  63   0   0 |   8   0 |  94.75 | 67/74 (1) | 18 10 | STEUER 7 -> 6 (Beliebtheit 94.75); PLANER Lage (Gewinn bis Ende / Amortisation): Eisenmine -/4286, Jaegerhuette -/9552 | Stein-Reserve 6; PLANER wartet auf Arbeiter fuer Eisenmine (Feuer 1, braucht 2)
+ZEITEN nach 1660 Runden: lesen 64.32 s, wirtschaft 8.49 s, ruestung 0.76 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 8289 |  63   0   0 |   8   0 |  94.75 | 68/74 (1) | 18 10 | -
+ZEITEN nach 1670 Runden: lesen 64.71 s, wirtschaft 8.50 s, ruestung 0.76 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 8330 |  63   0   0 |   7   0 |  94.75 | 68/74 (1) | 18 10 | STEUER 6 -> 5 (Beliebtheit 94.75)
+ZEITEN nach 1680 Runden: lesen 65.09 s, wirtschaft 8.54 s, ruestung 0.76 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 8373 |  63   0   0 |   6   0 |  94.75 | 69/74 (1) | 18 10 | -
+ZEITEN nach 1690 Runden: lesen 65.47 s, wirtschaft 8.55 s, ruestung 0.77 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 8411 |  63   0   0 |   6   0 |  93.50 | 70/74 (2) | 18 10 | STEUER 5 -> 4 (Beliebtheit 93.50)
+ZEITEN nach 1700 Runden: lesen 65.86 s, wirtschaft 8.58 s, ruestung 0.77 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 8454 |  63   0   0 |  10   0 |  93.50 | 71/74 (3) | 18 10 | PLANER Lage (Gewinn bis Ende / Amortisation): Eisenmine -/4286, Jaegerhuette -/9552 | Stein-Reserve 6; PLANER wartet auf Eisenmine (fehlt: stein 6)
+ZEITEN nach 1710 Runden: lesen 66.25 s, wirtschaft 8.59 s, ruestung 0.77 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 8495 |  63   0   0 |  10   0 |  93.50 | 71/74 (4) | 18 10 | STEUER 4 -> 3 (Beliebtheit 93.50); PLANER Ochsenjoch an Steinbruch 73: erster Ochse beladen unterwegs -> sofort der zweite (Joche 1, Haufen 4) -> (63, 210)
+ZEITEN nach 1720 Runden: lesen 66.63 s, wirtschaft 8.69 s, ruestung 0.78 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 8543 |  58   0   0 |   9   0 |  93.50 | 72/74 (2) | 18 10 | -
+ZEITEN nach 1730 Runden: lesen 67.03 s, wirtschaft 8.70 s, ruestung 0.78 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 8584 |  58   0   0 |   8   0 |  93.50 | 73/74 (3) | 18 10 | STEUER 3 -> 2 (Beliebtheit 93.50)
+ZEITEN nach 1740 Runden: lesen 67.41 s, wirtschaft 8.74 s, ruestung 0.79 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 8628 |  58   0   0 |  12   0 |  93.75 | 74/74 (4) | 18 10 | -
+ 8660 |  58   0   0 |  15   0 |  93.75 | 74/74 (5) | 18 10 | verkauft: apfel x1
+ZEITEN nach 1750 Runden: lesen 67.80 s, wirtschaft 8.75 s, ruestung 0.82 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 8670 |  58   0   0 |  10   0 |  93.75 | 74/74 (5) | 18 10 | STEUER 2 -> 1 (Beliebtheit 93.75); PLANER Lage (Gewinn bis Ende / Amortisation): Eisenmine -/4286, Jaegerhuette -/9552 | Stein-Reserve 6; PLANER wartet auf Eisenmine (fehlt: stein 6)
+ZEITEN nach 1760 Runden: lesen 68.16 s, wirtschaft 8.79 s, ruestung 0.82 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 8712 |  58   0   0 |  10   0 |  93.75 | 74/74 (4) | 18 10 | -
+ZEITEN nach 1770 Runden: lesen 68.53 s, wirtschaft 8.80 s, ruestung 0.83 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 8749 |  58   0   0 |   9   0 |  93.75 | 74/74 (5) | 18 10 | STEUER 1 -> 0 (Beliebtheit 93.75)
+ZEITEN nach 1780 Runden: lesen 68.92 s, wirtschaft 8.83 s, ruestung 0.83 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 8794 |  58   0   0 |   8   0 |  93.75 | 74/74 (6) | 18 10 | -
+ZEITEN nach 1790 Runden: lesen 69.30 s, wirtschaft 8.84 s, ruestung 0.84 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 8833 |  58   0   0 |   8   0 |  96.00 | 74/74 (7) | 18 10 | -
+ZEITEN nach 1800 Runden: lesen 69.70 s, wirtschaft 8.85 s, ruestung 0.84 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 8874 |  58   0   0 |   7   0 |  96.00 | 74/74 (7) | 18 10 | PLANER Lage (Gewinn bis Ende / Amortisation): Eisenmine -/4286, Jaegerhuette -/9552 | Stein-Reserve 6; PLANER wartet auf Eisenmine (fehlt: stein 6)
+ZEITEN nach 1810 Runden: lesen 70.08 s, wirtschaft 8.86 s, ruestung 0.85 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 8914 |  62   0   0 |   7   0 |  96.00 | 74/74 (7) | 18 10 | -
+ZEITEN nach 1820 Runden: lesen 70.48 s, wirtschaft 8.87 s, ruestung 0.85 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 8956 |  70   0   0 |   6   0 |  96.00 | 74/74 (7) | 18 10 | -
+ZEITEN nach 1830 Runden: lesen 70.89 s, wirtschaft 8.88 s, ruestung 0.86 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 8998 |  76   0   0 |   5   0 |  96.00 | 74/74 (7) | 18 10 | -
+ZEITEN nach 1840 Runden: lesen 71.28 s, wirtschaft 8.89 s, ruestung 0.86 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 9038 |  76   0   0 |  10   0 |  98.25 | 74/74 (7) | 18 10 | STEUER 0 -> 1 (Beliebtheit 98.25)
+ZEITEN nach 1850 Runden: lesen 71.67 s, wirtschaft 8.92 s, ruestung 0.86 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 9082 |  76   0   0 |   9   0 |  98.25 | 74/74 (7) | 18 10 | PLANER Lage (Gewinn bis Ende / Amortisation): Eisenmine -/4286, Jaegerhuette -/9552 | Stein-Reserve 6; PLANER wartet auf Eisenmine (fehlt: stein 6)
+ZEITEN nach 1860 Runden: lesen 72.06 s, wirtschaft 8.94 s, ruestung 0.87 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 9122 |  76   0   0 |  14   0 |  98.25 | 74/74 (7) | 18 10 | STEUER 1 -> 2 (Beliebtheit 98.25)
+ZEITEN nach 1870 Runden: lesen 72.44 s, wirtschaft 8.97 s, ruestung 0.88 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 9166 |  76   0   0 |  13   0 |  98.25 | 74/74 (7) | 18 10 | -
+ZEITEN nach 1880 Runden: lesen 72.83 s, wirtschaft 8.98 s, ruestung 0.88 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 9206 |  76   0   0 |  12   0 |  98.50 | 74/74 (7) | 18 10 | STEUER 2 -> 3 (Beliebtheit 98.50)
+ZEITEN nach 1890 Runden: lesen 73.20 s, wirtschaft 9.02 s, ruestung 0.88 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 9249 |  76   0   0 |  12   0 |  98.50 | 74/74 (7) | 18 10 | -
+ZEITEN nach 1900 Runden: lesen 73.60 s, wirtschaft 9.03 s, ruestung 0.89 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 9290 |  76   0   0 |  11   0 |  98.50 | 74/74 (7) | 18 10 | STEUER 3 -> 4 (Beliebtheit 98.50); PLANER Lage (Gewinn bis Ende / Amortisation): Eisenmine -/4286, Jaegerhuette -/9552 | Stein-Reserve 6; PLANER wartet auf Eisenmine (fehlt: stein 6)
+ZEITEN nach 1910 Runden: lesen 73.97 s, wirtschaft 9.07 s, ruestung 0.89 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 9331 |  76   0   0 |  10   0 |  98.50 | 74/74 (7) | 18 10 | -
+ZEITEN nach 1920 Runden: lesen 74.35 s, wirtschaft 9.08 s, ruestung 0.90 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 9370 |  76   0   0 |  10   0 |  98.50 | 74/74 (7) | 18 10 | STEUER 4 -> 5 (Beliebtheit 98.50)
+ZEITEN nach 1930 Runden: lesen 74.72 s, wirtschaft 9.12 s, ruestung 0.90 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 9413 |  76   0   0 |   9   0 |  97.25 | 74/74 (7) | 18 10 | -
+ZEITEN nach 1940 Runden: lesen 75.12 s, wirtschaft 9.13 s, ruestung 0.90 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 9454 |  82   0   0 |   9   0 |  97.25 | 74/74 (7) | 18 10 | STEUER 5 -> 6 (Beliebtheit 97.25)
+ZEITEN nach 1950 Runden: lesen 75.54 s, wirtschaft 9.17 s, ruestung 0.91 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 9500 |  91   0   0 |  12   0 |  97.25 | 74/74 (7) | 18 10 | PLANER Ochsenjoch an Steinbruch 76: erster Ochse beladen unterwegs -> sofort der zweite (Joche 1, Haufen 7) -> (75, 206); PLANER Lage (Gewinn bis Ende / Amortisation): Eisenmine -/4286, Jaegerhuette -/9552 | Stein-Reserve 6; PLANER wartet auf Eisenmine (fehlt: stein 6)
+ZEITEN nach 1960 Runden: lesen 75.93 s, wirtschaft 9.23 s, ruestung 0.91 s, haus_lager_zeile 0.20 s, waechter 0.00 s
+ 9547 |  89   0   0 |  12   0 |  97.25 | 74/74 (7) | 18 10 | STEUER 6 -> 7 (Beliebtheit 97.25)
+ZEITEN nach 1970 Runden: lesen 76.31 s, wirtschaft 9.27 s, ruestung 0.92 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+ 9589 |  89   0   0 |  12   0 |  97.25 | 74/74 (7) | 18 10 | -
+ZEITEN nach 1980 Runden: lesen 76.68 s, wirtschaft 9.28 s, ruestung 0.92 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+ 9628 |  89   0   0 |  11   0 |  94.50 | 74/74 (7) | 18 10 | STEUER 7 -> 6 (Beliebtheit 94.50)
+ZEITEN nach 1990 Runden: lesen 77.05 s, wirtschaft 9.32 s, ruestung 0.93 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+ 9669 |  89   0   0 |  10   0 |  94.50 | 74/74 (7) | 18 10 | -
+ZEITEN nach 2000 Runden: lesen 77.43 s, wirtschaft 9.33 s, ruestung 0.94 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+ 9708 |  89   0   0 |  10   0 |  94.50 | 74/74 (6) | 18 10 | STEUER 6 -> 5 (Beliebtheit 94.50); PLANER Lage (Gewinn bis Ende / Amortisation): Eisenmine -/4286, Jaegerhuette -/9552 | Stein-Reserve 6; PLANER wartet auf Eisenmine (fehlt: stein 6)
+ZEITEN nach 2010 Runden: lesen 77.81 s, wirtschaft 9.37 s, ruestung 0.94 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+ 9751 |  89   0   0 |  12   0 |  94.50 | 74/74 (6) | 18 10 | -
+ZEITEN nach 2020 Runden: lesen 78.20 s, wirtschaft 9.37 s, ruestung 0.95 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+ 9793 |  89   0   0 |  13   0 |  94.50 | 74/74 (6) | 18 10 | STEUER 5 -> 4 (Beliebtheit 94.50)
+ZEITEN nach 2030 Runden: lesen 78.61 s, wirtschaft 9.41 s, ruestung 0.95 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+ 9836 |  89   0   0 |  17   0 |  93.75 | 74/74 (6) | 18 10 | verkauft: apfel x1
+ZEITEN nach 2040 Runden: lesen 78.99 s, wirtschaft 9.42 s, ruestung 0.99 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+ 9880 |  89   0   0 |  11   0 |  93.75 | 74/74 (6) | 18 10 | STEUER 4 -> 3 (Beliebtheit 93.75)
+ 9904 |  89   0   0 |  15   0 |  93.75 | 74/74 (6) | 18 10 | verkauft: apfel x1
+ZEITEN nach 2050 Runden: lesen 79.39 s, wirtschaft 9.46 s, ruestung 1.02 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+ 9927 |  91   0   0 |  10   0 |  93.75 | 74/74 (6) | 18 10 | PLANER Lage (Gewinn bis Ende / Amortisation): Eisenmine -/4286, Jaegerhuette -/9552 | Stein-Reserve 6; PLANER wartet auf Eisenmine (fehlt: stein 6)
+ZEITEN nach 2060 Runden: lesen 79.78 s, wirtschaft 9.47 s, ruestung 1.03 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+ 9968 |  95   0   0 |   9   0 |  93.75 | 74/74 (6) | 18 10 | STEUER 3 -> 2 (Beliebtheit 93.75)
+ZEITEN nach 2070 Runden: lesen 80.18 s, wirtschaft 9.51 s, ruestung 1.03 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+10012 |  95   0   0 |  12   0 |  94.00 | 74/74 (6) | 18 10 | -
+10034 |  96   0   0 |  16   0 |  94.00 | 74/74 (6) | 18 10 | verkauft: apfel x1
+ZEITEN nach 2080 Runden: lesen 80.58 s, wirtschaft 9.51 s, ruestung 1.06 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+10056 |  96   0   0 |  11   0 |  94.00 | 74/74 (6) | 18 10 | STEUER 2 -> 1 (Beliebtheit 94.00)
+ZEITEN nach 2090 Runden: lesen 80.96 s, wirtschaft 9.55 s, ruestung 1.07 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+10099 |  96   0   0 |  10   0 |  94.00 | 74/74 (6) | 18 10 | -
+ZEITEN nach 2100 Runden: lesen 81.35 s, wirtschaft 9.56 s, ruestung 1.07 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+10140 | 100   0   0 |  10   0 |  94.00 | 74/74 (6) | 18 10 | STEUER 1 -> 0 (Beliebtheit 94.00); PLANER Lage (Gewinn bis Ende / Amortisation): Eisenmine -/4286, Jaegerhuette -/9552 | Stein-Reserve 6; PLANER wartet auf Eisenmine (fehlt: stein 6)
+ZEITEN nach 2110 Runden: lesen 81.77 s, wirtschaft 9.60 s, ruestung 1.08 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+10187 | 116   0   0 |   9   0 |  94.00 | 74/74 (6) | 18 10 | -
+ZEITEN nach 2120 Runden: lesen 82.18 s, wirtschaft 9.61 s, ruestung 1.08 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+10229 | 124   0   0 |   8   0 |  96.25 | 74/74 (6) | 18 10 | -
+ZEITEN nach 2130 Runden: lesen 82.57 s, wirtschaft 9.62 s, ruestung 1.08 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+10271 | 125   0   0 |   8   0 |  96.25 | 74/74 (6) | 18 10 | -
+ZEITEN nach 2140 Runden: lesen 82.98 s, wirtschaft 9.63 s, ruestung 1.09 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+10312 | 125   0   0 |   9   0 |  96.25 | 74/74 (6) | 18 10 | -
+10343 | 125   0   0 |  15   0 |  96.25 | 74/74 (6) | 18 10 | verkauft: apfel x1
+ZEITEN nach 2150 Runden: lesen 83.39 s, wirtschaft 9.64 s, ruestung 1.12 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+10357 | 125   0   0 |   9   0 |  96.25 | 74/74 (6) | 18 10 | PLANER Lage (Gewinn bis Ende / Amortisation): Eisenmine -/4286, Jaegerhuette -/9552 | Stein-Reserve 6; PLANER wartet auf Eisenmine (fehlt: stein 6)
+ZEITEN nach 2160 Runden: lesen 83.79 s, wirtschaft 9.64 s, ruestung 1.13 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+10400 | 125   0   0 |  14   0 |  98.50 | 74/74 (6) | 18 10 | STEUER 0 -> 1 (Beliebtheit 98.50)
+ZEITEN nach 2170 Runden: lesen 84.17 s, wirtschaft 9.68 s, ruestung 1.13 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+10442 | 125   0   0 |  13   0 |  98.50 | 74/74 (6) | 18 10 | -
+ZEITEN nach 2180 Runden: lesen 84.56 s, wirtschaft 9.69 s, ruestung 1.14 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+10483 | 125   0   0 |  12   0 |  98.50 | 74/74 (6) | 18 10 | STEUER 1 -> 2 (Beliebtheit 98.50)
+ZEITEN nach 2190 Runden: lesen 84.93 s, wirtschaft 9.73 s, ruestung 1.14 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+10524 | 125   0   0 |  12   0 |  98.50 | 74/74 (6) | 18 10 | -
+ZEITEN nach 2200 Runden: lesen 85.31 s, wirtschaft 9.74 s, ruestung 1.15 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+10564 | 125   0   0 |  11   0 |  98.50 | 74/74 (6) | 18 10 | STEUER 2 -> 3 (Beliebtheit 98.50); PLANER Lage (Gewinn bis Ende / Amortisation): Eisenmine -/4286, Jaegerhuette -/9552 | Stein-Reserve 6; PLANER wartet auf Eisenmine (fehlt: stein 6)
+ZEITEN nach 2210 Runden: lesen 85.69 s, wirtschaft 9.78 s, ruestung 1.15 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+10606 | 125   0   0 |  11   0 |  98.25 | 74/74 (6) | 18 10 | -
+ZEITEN nach 2220 Runden: lesen 86.08 s, wirtschaft 9.79 s, ruestung 1.16 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+10648 | 125   0   0 |  10   0 |  98.25 | 74/74 (6) | 18 10 | STEUER 3 -> 4 (Beliebtheit 98.25)
+ZEITEN nach 2230 Runden: lesen 86.47 s, wirtschaft 9.83 s, ruestung 1.16 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+10692 | 125   0   0 |   9   0 |  98.25 | 74/74 (6) | 18 10 | -
+ZEITEN nach 2240 Runden: lesen 86.85 s, wirtschaft 9.84 s, ruestung 1.16 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+10731 | 125   0   0 |   9   0 |  98.25 | 74/74 (6) | 18 10 | STEUER 4 -> 5 (Beliebtheit 98.25)
+ZEITEN nach 2250 Runden: lesen 87.23 s, wirtschaft 9.87 s, ruestung 1.17 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+10773 | 125   0   0 |   8   0 |  98.25 | 74/74 (6) | 18 10 | PLANER Lage (Gewinn bis Ende / Amortisation): Eisenmine -/4286, Jaegerhuette -/9552 | Stein-Reserve 6; PLANER wartet auf Eisenmine (fehlt: stein 6)
+ZEITEN nach 2260 Runden: lesen 87.62 s, wirtschaft 9.88 s, ruestung 1.17 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+10814 | 126   0   0 |   8   0 |  97.00 | 74/74 (6) | 18 10 | STEUER 5 -> 6 (Beliebtheit 97.00)
+ZEITEN nach 2270 Runden: lesen 88.02 s, wirtschaft 9.93 s, ruestung 1.18 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+10859 | 135   0   0 |  11   0 |  97.00 | 74/74 (6) | 18 10 | -
+ZEITEN nach 2280 Runden: lesen 88.44 s, wirtschaft 9.94 s, ruestung 1.18 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+10902 | 143   0   0 |  10   0 |  97.00 | 74/74 (6) | 18 10 | STEUER 6 -> 7 (Beliebtheit 97.00)
+ZEITEN nach 2290 Runden: lesen 88.84 s, wirtschaft 9.97 s, ruestung 1.19 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+10948 | 144   0   0 |  10   0 |  97.00 | 74/74 (6) | 18 10 | -
+ZEITEN nach 2300 Runden: lesen 89.23 s, wirtschaft 9.98 s, ruestung 1.19 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+10987 | 144   7   0 |   9   0 |  97.00 | 74/74 (6) | 18 10 | STEUER 7 -> 8 (Beliebtheit 97.00); PLANER Lage (Gewinn bis Ende / Amortisation): Eisenmine -/4286, Jaegerhuette -/9552 | Stein-Reserve 6; PLANER Eisenmine bei (149, 334) (Weg 52, 11.7 Gold/1000, Anlauf 6664, Amortisation 4286, Gewinn bis Ende -) -> (149, 334)
+ZEITEN nach 2310 Runden: lesen 89.63 s, wirtschaft 10.08 s, ruestung 1.20 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+11040 | 124   6   0 |  13   0 |  93.25 | 74/74 (6) | 18 10 | PLANER Eisenmine bei (152, 319) (Weg 55, 11.2 Gold/1000, Anlauf 6664, Amortisation 4464, Gewinn bis Ende -) -> (152, 319)
+ZEITEN nach 2320 Runden: lesen 90.05 s, wirtschaft 10.18 s, ruestung 1.20 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+11092 | 119   0   0 |  13   0 |  93.25 | 74/74 (6) | 18 10 | STEUER 8 -> 7 (Beliebtheit 93.25)
+ZEITEN nach 2330 Runden: lesen 90.46 s, wirtschaft 10.25 s, ruestung 1.20 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+11141 | 139   0   0 |  12   0 |  93.25 | 74/74 (2) | 18 10 | -
+11178 | 146   0   0 |  15   0 |  93.25 | 74/74 (2) | 18 10 | verkauft: apfel x1
+ZEITEN nach 2340 Runden: lesen 90.87 s, wirtschaft 10.26 s, ruestung 1.24 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+11186 | 148   0   0 |  11   0 |  93.25 | 74/74 (2) | 18 10 | STEUER 7 -> 6 (Beliebtheit 93.25)
+ZEITEN nach 2350 Runden: lesen 91.30 s, wirtschaft 10.29 s, ruestung 1.24 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+11233 | 157   0   0 |  10   0 |  91.25 | 74/74 (2) | 18 10 | PLANER Ochsenjoch an Steinbruch 76: juengster Ochse unterwegs und noch 10 am Haufen (> 8) (Joche 2, Haufen 10) -> (78, 208); PLANER Lage (Gewinn bis Ende / Amortisation): Eisenmine -/4464, Jaegerhuette -/9552 | Stein-Reserve 6; PLANER wartet auf Eisenmine (fehlt: stein 6)
+ZEITEN nach 2360 Runden: lesen 91.70 s, wirtschaft 10.36 s, ruestung 1.25 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+11280 | 161   0   0 |  10   0 |  91.25 | 74/74 (2) | 18 10 | STEUER 6 -> 5 (Beliebtheit 91.25)
+ZEITEN nach 2370 Runden: lesen 92.12 s, wirtschaft 10.40 s, ruestung 1.25 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+11328 | 170   0   0 |   9   0 |  91.25 | 74/74 (1) | 18 10 | PLANER Huette zuerst (Feuer 1, Eisenmine braucht 2) -> (125, 275)
+ZEITEN nach 2380 Runden: lesen 92.50 s, wirtschaft 10.47 s, ruestung 1.26 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+11373 | 165   0   0 |   8   0 |  91.25 | 75/82 (1) | 18 10 | STEUER 5 -> 4 (Beliebtheit 91.25)
+ZEITEN nach 2390 Runden: lesen 92.88 s, wirtschaft 10.51 s, ruestung 1.26 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+11416 | 165   0   0 |   8   0 |  90.50 | 76/82 (1) | 18 10 | -
+ZEITEN nach 2400 Runden: lesen 93.26 s, wirtschaft 10.52 s, ruestung 1.26 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+11456 | 165   0   0 |   7   0 |  90.50 | 77/82 (1) | 18 10 | STEUER 4 -> 3 (Beliebtheit 90.50); PLANER Lage (Gewinn bis Ende / Amortisation): Eisenmine -/4464, Jaegerhuette -/9552 | Stein-Reserve 6; PLANER wartet auf Arbeiter fuer Eisenmine (Feuer 1, braucht 2)
+ZEITEN nach 2410 Runden: lesen 93.66 s, wirtschaft 10.56 s, ruestung 1.27 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+11500 | 165   4   0 |   6   0 |  90.50 | 77/82 (1) | 18 10 | -
+ZEITEN nach 2420 Runden: lesen 94.07 s, wirtschaft 10.57 s, ruestung 1.27 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+11542 | 165  12   0 |   6   0 |  90.50 | 78/82 (1) | 18 10 | STEUER 3 -> 2 (Beliebtheit 90.50)
+ZEITEN nach 2430 Runden: lesen 94.45 s, wirtschaft 10.61 s, ruestung 1.28 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+11586 | 165  12   0 |   5   0 |  90.50 | 79/82 (2) | 18 10 | PLANER Eisenmine bei (150, 338) (Weg 55, 11.2 Gold/1000, Anlauf 6664, Amortisation 4464, Gewinn bis Ende -) -> (150, 338)
+ZEITEN nach 2440 Runden: lesen 94.85 s, wirtschaft 10.67 s, ruestung 1.28 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+11633 | 145   6   0 |   4   0 |  90.75 | 80/82 (3) | 18 10 | STEUER 2 -> 1 (Beliebtheit 90.75); PLANER Eisenmine bei (153, 331) (Weg 56, 11.1 Gold/1000, Anlauf 6664, Amortisation 4524, Gewinn bis Ende -) -> (153, 331)
+ZEITEN nach 2450 Runden: lesen 95.24 s, wirtschaft 10.80 s, ruestung 1.29 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+11686 | 125  12   0 |   4   0 |  90.75 | 81/82 (4) | 18 10 | PLANER Lage (Gewinn bis Ende / Amortisation): Eisenmine -/4762, Jaegerhuette -/9552 | Stein-Reserve 6; PLANER Eisenmine bei (157, 329) (Weg 60, 10.5 Gold/1000, Anlauf 6664, Amortisation 4762, Gewinn bis Ende -) -> (157, 329)
+ZEITEN nach 2460 Runden: lesen 95.65 s, wirtschaft 10.89 s, ruestung 1.29 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+11737 | 105   6   0 |   3   0 |  90.75 | 82/82 (1) | 18 10 | STEUER 1 -> 0 (Beliebtheit 90.75); PLANER Huette zuerst (Feuer 1, Eisenmine braucht 2) -> (125, 263)
+ZEITEN nach 2470 Runden: lesen 96.07 s, wirtschaft 11.02 s, ruestung 1.29 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+11791 | 100   6   0 |   6   0 |  90.75 | 83/90 (2) | 18 10 | PLANER Eisenmine bei (132, 212) (Weg 64, 10.0 Gold/1000, Anlauf 6664, Amortisation 5000, Gewinn bis Ende -) -> (132, 212)
+ZEITEN nach 2480 Runden: lesen 96.46 s, wirtschaft 11.09 s, ruestung 1.30 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+11839 |  80   0   0 |   5   0 |  93.00 | 83/90 (3) | 18 10 | -
+ZEITEN nach 2490 Runden: lesen 96.84 s, wirtschaft 11.13 s, ruestung 1.31 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+11882 |  80   0   1 |   4   0 |  93.00 | 84/90 (3) | 18 10 | -
+ZEITEN nach 2500 Runden: lesen 97.27 s, wirtschaft 11.14 s, ruestung 1.31 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+11926 |  88   0   2 |   9   0 |  93.00 | 85/90 (0) | 18 10 | PLANER Lage (Gewinn bis Ende / Amortisation): Eisenmine -/5062, Jaegerhuette -/9552 | Stein-Reserve 6; PLANER wartet auf Arbeiter fuer Eisenmine (Feuer 0, braucht 2)
+ZEITEN nach 2510 Runden: lesen 97.68 s, wirtschaft 11.15 s, ruestung 1.31 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+11968 |  96   0   4 |  12   0 |  93.00 | 86/90 (1) | 18 10 | -
+ZEITEN nach 2520 Runden: lesen 98.08 s, wirtschaft 11.16 s, ruestung 1.32 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+12010 |  98   0   4 |  11   0 |  95.25 | 87/90 (3) | 18 10 | -
+ZEITEN nach 2530 Runden: lesen 98.47 s, wirtschaft 11.17 s, ruestung 1.32 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+12051 |  98  12   4 |  11   0 |  95.25 | 87/90 (3) | 18 10 | PLANER Eisenmine bei (162, 333) (Weg 65, 9.8 Gold/1000, Anlauf 6384, Amortisation 5078, Gewinn bis Ende -) -> (162, 333)
+ZEITEN nach 2540 Runden: lesen 98.85 s, wirtschaft 11.24 s, ruestung 1.32 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+12098 |  78   6   4 |  10   0 |  95.25 | 88/90 (1) | 18 10 | PLANER Huette zuerst (Feuer 1, Eisenmine braucht 2) -> (129, 258)
+ZEITEN nach 2550 Runden: lesen 99.26 s, wirtschaft 11.34 s, ruestung 1.33 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+12148 |  73   6   4 |  13   0 |  95.25 | 89/98 (2) | 18 10 | PLANER Lage (Gewinn bis Ende / Amortisation): Eisenmine -/5151, Jaegerhuette -/9552 | Stein-Reserve 6; PLANER Eisenmine bei (128, 210) (Weg 66, 9.7 Gold/1000, Anlauf 6384, Amortisation 5151, Gewinn bis Ende -) -> (128, 210)
+ZEITEN nach 2560 Runden: lesen 99.65 s, wirtschaft 11.41 s, ruestung 1.33 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+12195 |  53   0   4 |  13   0 |  95.25 | 90/98 (3) | 18 10 | -
+12216 |  53   0   4 |  17   0 |  97.50 | 91/98 (3) | 18 10 | verkauft: apfel x1
+ZEITEN nach 2570 Runden: lesen 100.06 s, wirtschaft 11.45 s, ruestung 1.37 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+12245 |  53   0   4 |  11   0 |  97.50 | 91/98 (4) | 18 10 | STEUER 0 -> 1 (Beliebtheit 97.50)
+ZEITEN nach 2580 Runden: lesen 100.44 s, wirtschaft 11.49 s, ruestung 1.37 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+12287 |  53   0   4 |  10   0 |  97.50 | 90/98 (5) | 18 10 | -
+ZEITEN nach 2590 Runden: lesen 100.83 s, wirtschaft 11.50 s, ruestung 1.38 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+12327 |  53   0   4 |  15   0 |  97.50 | 89/98 (1) | 18 10 | STEUER 1 -> 2 (Beliebtheit 97.50)
+ZEITEN nach 2600 Runden: lesen 101.22 s, wirtschaft 11.54 s, ruestung 1.38 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+12371 |  53   0   4 |  14   0 |  97.50 | 90/98 (2) | 18 10 | PLANER Lage (Gewinn bis Ende / Amortisation): Eisenmine -/5302, Jaegerhuette -/9552 | Stein-Reserve 6; PLANER wartet auf Eisenmine (fehlt: stein 6)
+ZEITEN nach 2610 Runden: lesen 101.62 s, wirtschaft 11.54 s, ruestung 1.38 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+12412 |  53   0   4 |  13   0 |  97.75 | 91/98 (3) | 18 10 | STEUER 2 -> 3 (Beliebtheit 97.75)
+ZEITEN nach 2620 Runden: lesen 102.01 s, wirtschaft 11.58 s, ruestung 1.39 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+12456 |  53   0   4 |  12   0 |  97.75 | 91/98 (3) | 18 10 | -
+ZEITEN nach 2630 Runden: lesen 102.42 s, wirtschaft 11.59 s, ruestung 1.39 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+12498 |  53   0   4 |  12   0 |  97.75 | 92/98 (3) | 18 10 | STEUER 3 -> 4 (Beliebtheit 97.75)
+ZEITEN nach 2640 Runden: lesen 102.80 s, wirtschaft 11.63 s, ruestung 1.39 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+12541 |  53   0   4 |  11   0 |  97.75 | 93/98 (4) | 18 10 | -
+ZEITEN nach 2650 Runden: lesen 103.20 s, wirtschaft 11.64 s, ruestung 1.40 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+12583 |  53  12   4 |  14   0 |  97.75 | 94/98 (5) | 18 10 | STEUER 4 -> 5 (Beliebtheit 97.75); PLANER Lage (Gewinn bis Ende / Amortisation): Eisenmine -/5332, Jaegerhuette -/9552 | Stein-Reserve 6; PLANER Eisenmine bei (133, 208) (Weg 68, 9.4 Gold/1000, Anlauf 6384, Amortisation 5332, Gewinn bis Ende -) -> (133, 208)
+ZEITEN nach 2660 Runden: lesen 103.59 s, wirtschaft 11.74 s, ruestung 1.40 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+12632 |  33   6   4 |  13   0 |  96.50 | 95/98 (6) | 18 10 | PLANER Eisenmine bei (137, 207) (Weg 69, 9.3 Gold/1000, Anlauf 6384, Amortisation 5399, Gewinn bis Ende -) -> (137, 207)
+ZEITEN nach 2670 Runden: lesen 104.00 s, wirtschaft 11.84 s, ruestung 1.40 s, haus_lager_zeile 0.21 s, waechter 0.00 s
+12683 |  23   0   4 |  12   0 |  96.50 | 96/98 (7) | 18 10 | PLANER Jaegerhuette bei (77, 236) (Weg 14, 6.6 Gold/1000, Anlauf 4427, Amortisation 9552, Gewinn bis Ende -) -> (78, 234)
+ZEITEN nach 2680 Runden: lesen 104.40 s, wirtschaft 11.94 s, ruestung 1.40 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+12733 |  28   0   4 |  13   0 |  96.50 | 97/98 (3) | 18 10 | PLANER Ochsenjoch an Steinbruch 76: juengster Ochse unterwegs und noch 10 am Haufen (> 8) (Joche 3, Haufen 10) -> (79, 205); PLANER Jaegerhuette bei (115, 206) (Weg 25, 5.0 Gold/1000, Anlauf 4427, Amortisation 12642, Gewinn bis Ende -) -> (114, 207)
+ZEITEN nach 2690 Runden: lesen 104.79 s, wirtschaft 12.10 s, ruestung 1.40 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+12789 |  20   0   4 |  16   0 |  96.50 | 98/98 (4) | 18 10 | -
+12805 |  20  12   4 |  20   0 |  95.25 | 98/98 (4) | 18 10 | verkauft: apfel x1
+ZEITEN nach 2700 Runden: lesen 105.18 s, wirtschaft 12.14 s, ruestung 1.43 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+12835 |  20  12   4 |  14   0 |  95.25 | 98/98 (5) | 18 10 | PLANER Lage (Gewinn bis Ende / Amortisation): Jaegerhuette -/12923 | Stein-Reserve 0; PLANER wartet auf Jaegerhuette (fehlt: gold 13)
+ZEITEN nach 2710 Runden: lesen 105.58 s, wirtschaft 12.15 s, ruestung 1.43 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+12876 |  20  12   4 |  13   0 |  95.25 | 98/98 (6) | 18 10 | -
+ZEITEN nach 2720 Runden: lesen 105.96 s, wirtschaft 12.16 s, ruestung 1.43 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+12916 |  20  12   4 |  13   0 |  95.25 | 98/98 (5) | 18 10 | -
+12941 |  20  12   4 |  17   0 |  95.25 | 98/98 (5) | 18 10 | verkauft: apfel x1
+ZEITEN nach 2730 Runden: lesen 106.37 s, wirtschaft 12.17 s, ruestung 1.46 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+12960 |  20  12   4 |  13   0 |  95.25 | 98/98 (5) | 18 10 | PLANER Jaegerhuette bei (117, 206) (Weg 26, 4.9 Gold/1000, Anlauf 4427, Amortisation 12923, Gewinn bis Ende -) -> (117, 208)
+ZEITEN nach 2740 Runden: lesen 106.76 s, wirtschaft 12.23 s, ruestung 1.46 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+13008 |  17  12   4 |  16   0 |  94.00 | 98/98 (6) | 18 10 | STEUER 5 -> 4 (Beliebtheit 94.00)
+13031 |  17  12   4 |  17   0 |  94.00 | 98/98 (6) | 18 10 | verkauft: apfel x1
+ZEITEN nach 2750 Runden: lesen 107.15 s, wirtschaft 12.30 s, ruestung 1.49 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+13057 |  17  12   4 |  15   0 |  94.00 | 98/98 (6) | 18 10 | PLANER Lage (Gewinn bis Ende / Amortisation): Jaegerhuette -/20508 | Stein-Reserve 0; PLANER wartet auf Jaegerhuette (fehlt: gold 43)
+ZEITEN nach 2760 Runden: lesen 107.55 s, wirtschaft 12.31 s, ruestung 1.49 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+13097 |  17  12   4 |  14   0 |  94.00 | 98/98 (5) | 18 10 | STEUER 4 -> 3 (Beliebtheit 94.00)
+ZEITEN nach 2770 Runden: lesen 107.93 s, wirtschaft 12.35 s, ruestung 1.49 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+13141 |  17  12   4 |  13   0 |  94.00 | 98/98 (5) | 18 10 | -
+ZEITEN nach 2780 Runden: lesen 108.31 s, wirtschaft 12.36 s, ruestung 1.49 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+13180 |  17  12   4 |  13   0 |  94.00 | 98/98 (5) | 18 10 | STEUER 3 -> 2 (Beliebtheit 94.00)
+ZEITEN nach 2790 Runden: lesen 108.71 s, wirtschaft 12.40 s, ruestung 1.49 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+13224 |  17  12   4 |  12   0 |  94.25 | 98/98 (5) | 18 10 | -
+ZEITEN nach 2800 Runden: lesen 109.10 s, wirtschaft 12.41 s, ruestung 1.49 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+13264 |  17  12   4 |  11   0 |  94.25 | 98/98 (5) | 18 10 | STEUER 2 -> 1 (Beliebtheit 94.25); PLANER Lage (Gewinn bis Ende / Amortisation): Jaegerhuette -/20508 | Stein-Reserve 0; PLANER wartet auf Jaegerhuette (fehlt: gold 43)
+ZEITEN nach 2810 Runden: lesen 109.49 s, wirtschaft 12.45 s, ruestung 1.49 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+13308 |  19  12   4 |  10   0 |  94.25 | 98/98 (5) | 18 10 | -
+ZEITEN nach 2820 Runden: lesen 109.89 s, wirtschaft 12.46 s, ruestung 1.49 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+13349 |  30  12   4 |   9   0 |  94.25 | 98/98 (5) | 18 10 | STEUER 1 -> 0 (Beliebtheit 94.25)
+13361 |  36  24   4 |   9   0 |  94.25 | 98/98 (5) | 18 10 | verkauft: holz
+ZEITEN nach 2830 Runden: lesen 110.31 s, wirtschaft 12.50 s, ruestung 1.52 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+13398 |  52  24   4 |   8   0 |  94.25 | 98/98 (5) | 18 10 | -
+ZEITEN nach 2840 Runden: lesen 110.73 s, wirtschaft 12.51 s, ruestung 1.53 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+13441 |  63  24   4 |   8   0 |  96.50 | 98/98 (5) | 18 10 | -
+13480 |  63  28   6 |   7   0 |  96.50 | 98/98 (5) | 18 10 | verkauft: stein
+ZEITEN nach 2850 Runden: lesen 111.13 s, wirtschaft 12.52 s, ruestung 1.56 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+13486 |  63  33   6 |   7   0 |  96.50 | 98/98 (5) | 18 10 | PLANER Ochsenjoch an Steinbruch 80: juengster Ochse unterwegs und noch 9 am Haufen (> 8) (Joche 2, Haufen 9) -> (87, 200); PLANER Lage (Gewinn bis Ende / Amortisation): Jaegerhuette -/20508 | Stein-Reserve 0; PLANER wartet auf Jaegerhuette (fehlt: gold 13)
+13501 |  58  43   6 |   6   0 |  96.50 | 98/98 (4) | 18 10 | verkauft: stein
+13517 |  61  38   6 |   6   0 |  96.50 | 98/98 (4) | 18 10 | verkauft: stein
+13532 |  61  33   6 |   6   0 |  96.50 | 98/98 (4) | 18 10 | verkauft: stein
+ZEITEN nach 2860 Runden: lesen 111.53 s, wirtschaft 12.59 s, ruestung 1.66 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+13544 |  61  28   6 |   6   0 |  96.50 | 98/98 (4) | 18 10 | PLANER Jaegerhuette bei (87, 284) (Weg 53, 3.1 Gold/1000, Anlauf 4427, Amortisation 20508, Gewinn bis Ende -) -> (89, 282)
+13554 |  58  28   6 |   5   0 |  96.50 | 98/98 (4) | 18 10 | verkauft: stein
+ZEITEN nach 2870 Runden: lesen 111.92 s, wirtschaft 12.66 s, ruestung 1.69 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+13592 |  58  23   6 |   5   0 |  96.50 | 98/98 (4) | 18 10 | PLANER Jaegerhuette bei (93, 284) (Weg 53, 3.1 Gold/1000, Anlauf 4427, Amortisation 20508, Gewinn bis Ende -) -> (94, 285)
+13610 |  55  23   6 |   4   0 |  96.75 | 98/98 (4) | 18 10 | verkauft: holz
+13625 |  46  23   6 |   4   0 |  96.75 | 98/98 (4) | 18 10 | verkauft: holz
+13641 |  44  23   6 |   4   0 |  96.75 | 98/98 (4) | 18 10 | verkauft: holz
+ZEITEN nach 2880 Runden: lesen 112.31 s, wirtschaft 12.73 s, ruestung 1.78 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+13647 |  41  23   6 |   4   0 |  96.75 | 98/98 (4) | 18 10 | -
+ZEITEN nach 2890 Runden: lesen 112.71 s, wirtschaft 12.73 s, ruestung 1.79 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+13690 |  49  23   6 |   3   0 |  96.75 | 98/98 (4) | 18 10 | -
+ZEITEN nach 2900 Runden: lesen 113.11 s, wirtschaft 12.74 s, ruestung 1.79 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+13731 |  53  23   6 |   4   0 |  96.75 | 98/98 (2) | 18 10 | PLANER Lage (Gewinn bis Ende / Amortisation): Jaegerhuette -/20789 | Stein-Reserve 0; PLANER wartet auf Jaegerhuette (fehlt: gold 40)
+ZEITEN nach 2910 Runden: lesen 113.50 s, wirtschaft 12.75 s, ruestung 1.79 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+13773 |  53  23   6 |   5   0 |  96.75 | 98/98 (2) | 18 10 | -
+ZEITEN nach 2920 Runden: lesen 113.89 s, wirtschaft 12.76 s, ruestung 1.80 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+13811 |  53  23   6 |   4   0 |  99.00 | 98/98 (2) | 18 10 | STEUER 0 -> 1 (Beliebtheit 99.00)
+ZEITEN nach 2930 Runden: lesen 114.29 s, wirtschaft 12.80 s, ruestung 1.80 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+13856 |  53  23   6 |   9   0 |  99.00 | 98/98 (2) | 18 10 | -
+ZEITEN nach 2940 Runden: lesen 114.70 s, wirtschaft 12.81 s, ruestung 1.81 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+13900 |  62  23   6 |  15   0 |  99.00 | 98/98 (2) | 18 10 | STEUER 1 -> 2 (Beliebtheit 99.00)
+ZEITEN nach 2950 Runden: lesen 115.12 s, wirtschaft 12.86 s, ruestung 1.81 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+13947 |  71  23   6 |  14   0 |  99.00 | 98/98 (2) | 18 10 | PLANER Ochsenjoch an Steinbruch 73: juengster Ochse unterwegs und noch 9 am Haufen (> 8) (Joche 2, Haufen 9) -> (65, 207); PLANER Lage (Gewinn bis Ende / Amortisation): Jaegerhuette -/20789 | Stein-Reserve 0; PLANER wartet auf Jaegerhuette (fehlt: gold 40)
+13982 |  66  33   6 |  13   0 |  99.00 | 98/98 (2) | 18 10 | verkauft: stein
+ZEITEN nach 2960 Runden: lesen 115.52 s, wirtschaft 12.93 s, ruestung 1.84 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+13997 |  66  30   6 |  13   0 |  99.00 | 98/98 (2) | 18 10 | verkauft: stein; STEUER 2 -> 3 (Beliebtheit 99.00)
+ZEITEN nach 2970 Runden: lesen 115.92 s, wirtschaft 12.96 s, ruestung 1.88 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+14045 |  66  25   6 |  12   0 |  99.25 | 98/98 (2) | 18 10 | PLANER Jaegerhuette bei (89, 285) (Weg 54, 3.0 Gold/1000, Anlauf 4427, Amortisation 20789, Gewinn bis Ende -) -> (85, 281)
+14060 |  63  25   8 |  12   0 |  99.25 | 98/98 (2) | 18 10 | verkauft: holz
+ZEITEN nach 2980 Runden: lesen 116.32 s, wirtschaft 13.03 s, ruestung 1.91 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+14095 |  53  28   8 |  11   0 |  99.25 | 98/98 (2) | 18 10 | STEUER 3 -> 4 (Beliebtheit 99.25)
+14104 |  53  37   8 |  11   0 |  99.25 | 98/98 (0) | 18 10 | verkauft: stein
+14118 |  53  32   8 |  11   0 |  99.25 | 98/98 (0) | 18 10 | verkauft: stein
+ZEITEN nach 2990 Runden: lesen 116.71 s, wirtschaft 13.07 s, ruestung 1.97 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+14145 |  53  27   8 |  10   0 |  99.25 | 98/98 (0) | 18 10 | PLANER Huette zuerst (Feuer 0, Jaegerhuette braucht 1) -> (130, 275)
+ZEITEN nach 3000 Runden: lesen 117.11 s, wirtschaft 13.14 s, ruestung 1.97 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+14191 |  48  27   8 |   9   0 |  99.25 | 99/106 (0) | 18 10 | STEUER 4 -> 5 (Beliebtheit 99.25); PLANER Lage (Gewinn bis Ende / Amortisation): Jaegerhuette -/20789 | Stein-Reserve 0; PLANER wartet auf Arbeiter fuer Jaegerhuette (Feuer 0, braucht 1)
+ZEITEN nach 3010 Runden: lesen 117.49 s, wirtschaft 13.18 s, ruestung 1.97 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+14235 |  48  27   8 |  11   0 |  98.00 | 100/106 (0) | 18 10 | -
+ZEITEN nach 3020 Runden: lesen 117.90 s, wirtschaft 13.19 s, ruestung 1.97 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+14277 |  52  27   8 |  12   0 |  98.00 | 101/106 (0) | 18 10 | STEUER 5 -> 6 (Beliebtheit 98.00)
+ZEITEN nach 3030 Runden: lesen 118.31 s, wirtschaft 13.23 s, ruestung 1.97 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+14322 |  61  27   8 |  11   0 |  98.00 | 100/106 (0) | 16 10 | -
+ZEITEN nach 3040 Runden: lesen 118.72 s, wirtschaft 13.24 s, ruestung 1.97 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+14365 |  66  27   8 |  16   0 |  98.00 | 101/106 (1) | 16 10 | STEUER 6 -> 7 (Beliebtheit 98.00); PLANER Jaegerhuette bei (89, 285) (Weg 54, 3.0 Gold/1000, Anlauf 4427, Amortisation 20789, Gewinn bis Ende -) -> (95, 291)
+14379 |  63  27   8 |  15   0 |  98.00 | 101/106 (1) | 16 10 | verkauft: holz
+ZEITEN nach 3050 Runden: lesen 119.11 s, wirtschaft 13.34 s, ruestung 2.00 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+14418 |  53  27   8 |  15   0 |  95.25 | 102/106 (2) | 16 10 | PLANER Lage (Gewinn bis Ende / Amortisation): Jaegerhuette -/20789 | Stein-Reserve 0; PLANER wartet auf Jaegerhuette (fehlt: gold 26)
+ZEITEN nach 3060 Runden: lesen 119.50 s, wirtschaft 13.35 s, ruestung 2.01 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+14458 |  53  27   8 |  14   0 |  95.25 | 103/106 (3) | 16 10 | -
+ZEITEN nach 3070 Runden: lesen 119.89 s, wirtschaft 13.36 s, ruestung 2.01 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+14499 |  53  27   8 |  13   0 |  95.25 | 103/106 (0) | 16 10 | -
+ZEITEN nach 3080 Runden: lesen 120.26 s, wirtschaft 13.37 s, ruestung 2.02 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+14538 |  53  27   8 |  12   0 |  95.25 | 104/106 (1) | 18 10 | -
+ZEITEN nach 3090 Runden: lesen 120.65 s, wirtschaft 13.37 s, ruestung 2.02 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+14577 |  53  27   8 |  11   0 |  95.25 | 105/106 (2) | 18 10 | -
+ZEITEN nach 3100 Runden: lesen 121.03 s, wirtschaft 13.38 s, ruestung 2.02 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+14618 |  53  27   8 |  10   0 |  92.50 | 106/106 (3) | 18 10 | STEUER 7 -> 6 (Beliebtheit 92.50); PLANER Lage (Gewinn bis Ende / Amortisation): Jaegerhuette -/20789 | Stein-Reserve 0; PLANER wartet auf Jaegerhuette (fehlt: gold 26)
+ZEITEN nach 3110 Runden: lesen 121.43 s, wirtschaft 13.45 s, ruestung 2.03 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+14666 |  61  27   8 |   9   0 |  92.50 | 106/106 (4) | 18 10 | -
+ZEITEN nach 3120 Runden: lesen 121.87 s, wirtschaft 13.49 s, ruestung 2.03 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+14714 |  71  27   8 |   8   0 |  92.50 | 106/106 (4) | 17 10 | STEUER 6 -> 5 (Beliebtheit 92.50)
+ZEITEN nach 3130 Runden: lesen 122.25 s, wirtschaft 13.56 s, ruestung 2.04 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+14760 |  71  27   8 |   7   0 |  92.50 | 106/106 (5) | 18 10 | -
+ZEITEN nach 3140 Runden: lesen 122.64 s, wirtschaft 13.58 s, ruestung 2.05 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+14799 |  71  27   8 |   7   0 |  92.50 | 106/106 (5) | 18 10 | STEUER 5 -> 4 (Beliebtheit 92.50)
+ZEITEN nach 3150 Runden: lesen 123.03 s, wirtschaft 13.62 s, ruestung 2.05 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+14843 |  71  27  10 |   6   0 |  91.25 | 106/106 (6) | 18 10 | PLANER Lage (Gewinn bis Ende / Amortisation): Jaegerhuette -/20789 | Stein-Reserve 0; PLANER wartet auf Jaegerhuette (fehlt: gold 26)
+ZEITEN nach 3160 Runden: lesen 123.44 s, wirtschaft 13.63 s, ruestung 2.05 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+14887 |  71  27  10 |   5   0 |  91.25 | 106/106 (6) | 18 10 | STEUER 4 -> 3 (Beliebtheit 91.25)
+ZEITEN nach 3170 Runden: lesen 123.83 s, wirtschaft 13.70 s, ruestung 2.06 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+14934 |  71  27  10 |   4   0 |  91.25 | 106/106 (7) | 18 10 | -
+ZEITEN nach 3180 Runden: lesen 124.24 s, wirtschaft 13.71 s, ruestung 2.06 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+14976 |  71  27  10 |   8   0 |  91.25 | 106/106 (7) | 17 10 | STEUER 3 -> 2 (Beliebtheit 91.25)
+ZEITEN nach 3190 Runden: lesen 124.62 s, wirtschaft 13.75 s, ruestung 2.07 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+15019 |  71  27  10 |  11   0 |  91.50 | 106/106 (7) | 17 10 | -
+ZEITEN nach 3200 Runden: lesen 125.01 s, wirtschaft 13.79 s, ruestung 2.07 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+15063 |  71  27  10 |  10   0 |  91.50 | 106/106 (7) | 17 10 | STEUER 2 -> 1 (Beliebtheit 91.50); PLANER Lage (Gewinn bis Ende / Amortisation): Jaegerhuette -/19384 | Stein-Reserve 0; PLANER wartet auf Jaegerhuette (fehlt: gold 26)
+ZEITEN nach 3210 Runden: lesen 125.42 s, wirtschaft 13.86 s, ruestung 2.07 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+15111 |  78  27  10 |  10   0 |  91.50 | 106/106 (6) | 17 10 | -
+15124 |  80  32  10 |  13   0 |  91.50 | 106/106 (6) | 17 10 | verkauft: stein
+15140 |  83  34  10 |  14   0 |  91.50 | 106/106 (6) | 18 10 | verkauft: stein
+15155 |  86  29  10 |  13   0 |  91.50 | 106/106 (6) | 17 10 | verkauft: stein
+ZEITEN nach 3220 Runden: lesen 125.83 s, wirtschaft 13.90 s, ruestung 2.17 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+15167 |  88  24  10 |  13   0 |  91.50 | 106/106 (7) | 17 10 | STEUER 1 -> 0 (Beliebtheit 91.50); PLANER Jaegerhuette bei (95, 275) (Weg 44, 3.5 Gold/1000, Anlauf 4427, Amortisation 17979, Gewinn bis Ende -) -> (94, 276)
+15208 |  85  32  10 |  12   0 |  93.75 | 106/106 (7) | 17 10 | verkauft: stein
+ZEITEN nach 3230 Runden: lesen 126.25 s, wirtschaft 14.03 s, ruestung 2.20 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+15224 |  85  31  10 |  16   0 |  93.75 | 106/106 (7) | 17 10 | verkauft: stein; PLANER Jaegerhuette bei (101, 279) (Weg 48, 3.3 Gold/1000, Anlauf 4427, Amortisation 19103, Gewinn bis Ende -) -> (102, 278)
+ZEITEN nach 3240 Runden: lesen 126.64 s, wirtschaft 14.13 s, ruestung 2.24 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+15277 |  82  26  12 |  17   0 |  93.75 | 106/106 (7) | 17 10 | -
+15291 |  82  26  12 |  18   0 |  93.75 | 106/106 (7) | 17 10 | verkauft: apfel x1
+ZEITEN nach 3250 Runden: lesen 127.05 s, wirtschaft 14.18 s, ruestung 2.27 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+15326 |  83  26  12 |  13   0 |  93.75 | 106/106 (4) | 17 10 | PLANER Lage (Gewinn bis Ende / Amortisation): Jaegerhuette -/17979 | Stein-Reserve 0; PLANER Jaegerhuette bei (103, 275) (Weg 44, 3.5 Gold/1000, Anlauf 4427, Amortisation 17979, Gewinn bis Ende -) -> (104, 274)
+15337 |  80  26  12 |  12   0 |  93.75 | 106/106 (4) | 18 10 | verkauft: holz
+15353 |  70  26  12 |  12   0 |  93.75 | 106/106 (4) | 18 10 | verkauft: holz
+ZEITEN nach 3260 Runden: lesen 127.45 s, wirtschaft 14.25 s, ruestung 2.33 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+15380 |  60  26  12 |  12   0 |  93.75 | 106/106 (5) | 18 10 | -
+ZEITEN nach 3270 Runden: lesen 127.84 s, wirtschaft 14.29 s, ruestung 2.33 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+15424 |  60  26  12 |  11   0 |  96.00 | 106/106 (5) | 18 10 | -
+ZEITEN nach 3280 Runden: lesen 128.23 s, wirtschaft 14.30 s, ruestung 2.34 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+15465 |  60  26  14 |  10   0 |  96.00 | 106/106 (5) | 18 10 | -
+ZEITEN nach 3290 Runden: lesen 128.64 s, wirtschaft 14.31 s, ruestung 2.34 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+15508 |  61  26  14 |  13   0 |  96.00 | 106/106 (4) | 18 10 | -
+ZEITEN nach 3300 Runden: lesen 129.04 s, wirtschaft 14.32 s, ruestung 2.34 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+15549 |  70  26  14 |  12   0 |  96.00 | 106/106 (4) | 18 10 | PLANER Lage (Gewinn bis Ende / Amortisation):  | Stein-Reserve 0
+ZEITEN nach 3310 Runden: lesen 129.45 s, wirtschaft 14.36 s, ruestung 2.35 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+15594 |  78  26  14 |  11   0 |  96.00 | 106/106 (4) | 18 10 | -
+ZEITEN nach 3320 Runden: lesen 129.82 s, wirtschaft 14.37 s, ruestung 2.35 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+15634 |  78  26  14 |  10   0 |  98.25 | 106/106 (4) | 18 10 | STEUER 0 -> 1 (Beliebtheit 98.25)
+ZEITEN nach 3330 Runden: lesen 130.21 s, wirtschaft 14.41 s, ruestung 2.35 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+15678 |  78  26  14 |   9   0 |  98.25 | 106/106 (4) | 18 10 | -
+15691 |  78  32  14 |   9   0 |  98.25 | 106/106 (4) | 18 10 | verkauft: stein
+15707 |  78  33  14 |   9   0 |  98.25 | 106/106 (4) | 18 10 | verkauft: stein
+15722 |  78  28  14 |   8   0 |  98.25 | 106/106 (4) | 18 10 | verkauft: stein
+ZEITEN nach 3340 Runden: lesen 130.63 s, wirtschaft 14.44 s, ruestung 2.45 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+15733 |  78  23  14 |   8   0 |  98.25 | 106/106 (4) | 18 10 | STEUER 1 -> 2 (Beliebtheit 98.25); PLANER Jaegerhuette bei (106, 291) (Weg 60, 2.8 Gold/1000, Anlauf 4427, Amortisation 22474, Gewinn bis Ende -) -> (105, 292)
+ZEITEN nach 3350 Runden: lesen 131.03 s, wirtschaft 14.57 s, ruestung 2.45 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+15787 |  78  23  14 |   7   0 |  98.25 | 106/106 (4) | 18 10 | PLANER Lage (Gewinn bis Ende / Amortisation):  | Stein-Reserve 0
+ZEITEN nach 3360 Runden: lesen 131.44 s, wirtschaft 14.59 s, ruestung 2.46 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+15830 |  87  23  14 |   6   0 |  98.50 | 106/106 (4) | 18 10 | STEUER 2 -> 3 (Beliebtheit 98.50)
+ZEITEN nach 3370 Runden: lesen 131.84 s, wirtschaft 14.62 s, ruestung 2.46 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+15874 |  89  23  14 |   5   0 |  98.50 | 106/106 (4) | 18 10 | -
+ZEITEN nach 3380 Runden: lesen 132.24 s, wirtschaft 14.63 s, ruestung 2.47 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+15917 |  89  23  14 |   8   0 |  98.50 | 106/106 (3) | 18 10 | STEUER 3 -> 4 (Beliebtheit 98.50)
+ZEITEN nach 3390 Runden: lesen 132.63 s, wirtschaft 14.67 s, ruestung 2.47 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+15959 |  89  23  14 |   8   0 |  98.50 | 106/106 (3) | 18 10 | -
+ZEITEN nach 3400 Runden: lesen 133.02 s, wirtschaft 14.68 s, ruestung 2.48 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+16000 |  93  23  14 |   7   0 |  97.75 | 106/106 (3) | 18 10 | STEUER 4 -> 5 (Beliebtheit 97.75); PLANER Lage (Gewinn bis Ende / Amortisation):  | Stein-Reserve 0
+16008 |  93  23  14 |   6   0 |  97.75 | 106/106 (3) | 18 10 | verkauft: holz
+16024 |  83  23  14 |   6   0 |  97.75 | 106/106 (3) | 18 10 | verkauft: holz
+ZEITEN nach 3410 Runden: lesen 133.42 s, wirtschaft 14.72 s, ruestung 2.54 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+16050 |  73  23  14 |  10   0 |  97.75 | 106/106 (3) | 18 10 | -
+ZEITEN nach 3420 Runden: lesen 133.85 s, wirtschaft 14.74 s, ruestung 2.54 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+16096 |  73  23  14 |  14   0 |  97.75 | 106/106 (3) | 18 10 | STEUER 5 -> 6 (Beliebtheit 97.75)
+ZEITEN nach 3430 Runden: lesen 134.24 s, wirtschaft 14.78 s, ruestung 2.55 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+16138 |  73  23  14 |  13   0 |  97.75 | 106/106 (3) | 18 10 | -
+ZEITEN nach 3440 Runden: lesen 134.64 s, wirtschaft 14.79 s, ruestung 2.55 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+16180 |  82  23  14 |  12   0 |  97.75 | 106/106 (3) | 18 10 | STEUER 6 -> 7 (Beliebtheit 97.75)
+ZEITEN nach 3450 Runden: lesen 135.06 s, wirtschaft 14.83 s, ruestung 2.56 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+16228 |  91  23  14 |  11   0 |  95.00 | 106/106 (3) | 18 10 | PLANER Lage (Gewinn bis Ende / Amortisation):  | Stein-Reserve 0
+ZEITEN nach 3460 Runden: lesen 135.47 s, wirtschaft 14.84 s, ruestung 2.56 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+16269 |  91  23  14 |  10   0 |  95.00 | 106/106 (3) | 18 10 | -
+ZEITEN nach 3470 Runden: lesen 135.88 s, wirtschaft 14.85 s, ruestung 2.56 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+16312 |  91  23  14 |   9   0 |  95.00 | 106/106 (3) | 18 10 | -
+ZEITEN nach 3480 Runden: lesen 136.29 s, wirtschaft 14.86 s, ruestung 2.57 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+16355 |  98  23  14 |   8   0 |  95.00 | 106/106 (3) | 18 10 | -
+ZEITEN nach 3490 Runden: lesen 136.74 s, wirtschaft 14.87 s, ruestung 2.57 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+16401 | 107  23  14 |  11   0 |  92.25 | 106/106 (3) | 18 10 | STEUER 7 -> 6 (Beliebtheit 92.25)
+ZEITEN nach 3500 Runden: lesen 137.16 s, wirtschaft 14.91 s, ruestung 2.58 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+16447 | 109  23  14 |  10   0 |  92.25 | 106/106 (3) | 18 10 | PLANER Lage (Gewinn bis Ende / Amortisation):  | Stein-Reserve 0
+ZEITEN nach 3510 Runden: lesen 137.55 s, wirtschaft 14.92 s, ruestung 2.58 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+16487 | 109  23  14 |  10   0 |  92.25 | 106/106 (3) | 18 10 | STEUER 6 -> 5 (Beliebtheit 92.25)
+ZEITEN nach 3520 Runden: lesen 137.96 s, wirtschaft 14.96 s, ruestung 2.59 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+16534 | 109  23  14 |   9   0 |  92.25 | 106/106 (3) | 18 10 | -
+ZEITEN nach 3530 Runden: lesen 138.39 s, wirtschaft 14.97 s, ruestung 2.59 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+16578 | 109  23  14 |  12   0 |  92.25 | 106/106 (3) | 18 10 | STEUER 5 -> 4 (Beliebtheit 92.25)
+ZEITEN nach 3540 Runden: lesen 138.78 s, wirtschaft 15.01 s, ruestung 2.59 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+16622 | 109  23  14 |  11   0 |  91.50 | 106/106 (3) | 18 10 | -
+ZEITEN nach 3550 Runden: lesen 139.16 s, wirtschaft 15.02 s, ruestung 2.60 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+16662 | 109  23  14 |  10   0 |  91.50 | 106/106 (3) | 18 10 | STEUER 4 -> 3 (Beliebtheit 91.50); PLANER Lage (Gewinn bis Ende / Amortisation): Jaegerhuette -/17979 | Stein-Reserve 0; PLANER wartet auf Jaegerhuette (fehlt: gold 40)
+16699 | 109  35  14 |   9   0 |  91.50 | 106/106 (3) | 18 10 | verkauft: stein
+ZEITEN nach 3560 Runden: lesen 139.57 s, wirtschaft 15.09 s, ruestung 2.63 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+16714 | 109  30  14 |   9   0 |  91.50 | 106/106 (3) | 18 10 | verkauft: stein; PLANER Ochsenjoch an Steinbruch 76: juengster Ochse unterwegs und noch 9 am Haufen (> 8) (Joche 4, Haufen 9) -> (75, 208)
+ZEITEN nach 3570 Runden: lesen 139.97 s, wirtschaft 15.20 s, ruestung 2.66 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+16767 | 104  25  14 |   8   0 |  91.50 | 106/106 (3) | 18 10 | STEUER 3 -> 2 (Beliebtheit 91.50); PLANER Jaegerhuette bei (107, 275) (Weg 44, 3.5 Gold/1000, Anlauf 4427, Amortisation 17979, Gewinn bis Ende -) -> (108, 276)
+16787 | 101  25  14 |   7   0 |  91.50 | 106/106 (3) | 18 10 | verkauft: holz
+ZEITEN nach 3580 Runden: lesen 140.39 s, wirtschaft 15.32 s, ruestung 2.69 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+16824 |  81  25  14 |   6   0 |  91.75 | 106/106 (3) | 18 10 | -
+ZEITEN nach 3590 Runden: lesen 140.80 s, wirtschaft 15.33 s, ruestung 2.70 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+16868 |  81  25  14 |   6   0 |  91.75 | 106/106 (3) | 17 10 | STEUER 2 -> 1 (Beliebtheit 91.75); PLANER Jaegerhuette bei (106, 269) (Weg 38, 3.9 Gold/1000, Anlauf 4427, Amortisation 16294, Gewinn bis Ende -) -> (104, 267)
+ZEITEN nach 3600 Runden: lesen 141.21 s, wirtschaft 15.46 s, ruestung 2.70 s, haus_lager_zeile 0.22 s, waechter 0.00 s
+16922 |  78  25  16 |   4   0 |  91.75 | 106/106 (0) | 17 10 | PLANER Lage (Gewinn bis Ende / Amortisation):  | Stein-Reserve 0
+ZEITEN nach 3610 Runden: lesen 141.61 s, wirtschaft 15.47 s, ruestung 2.70 s, haus_lager_zeile 0.23 s, waechter 0.00 s
+16964 |  78  25  16 |   8   0 |  91.75 | 106/106 (0) | 18 10 | STEUER 1 -> 0 (Beliebtheit 91.75)
+ZEITEN nach 3620 Runden: lesen 142.00 s, wirtschaft 15.51 s, ruestung 2.70 s, haus_lager_zeile 0.23 s, waechter 0.00 s
+17007 |  78  25  16 |   9   0 |  94.00 | 106/106 (0) | 18 10 | -
+ZEITEN nach 3630 Runden: lesen 142.39 s, wirtschaft 15.52 s, ruestung 2.70 s, haus_lager_zeile 0.23 s, waechter 0.00 s
+17048 |  78  25  16 |  12   0 |  94.00 | 106/106 (1) | 18 10 | -
+ZEITEN nach 3640 Runden: lesen 142.80 s, wirtschaft 15.56 s, ruestung 2.71 s, haus_lager_zeile 0.23 s, waechter 0.00 s
+17093 |  78  25  16 |  15   0 |  94.00 | 106/106 (1) | 18 10 | -
+17109 |  78  34  16 |  15   0 |  94.00 | 106/106 (0) | 18 10 | verkauft: stein
+17125 |  78  32  16 |  14   0 |  94.00 | 106/106 (0) | 18 10 | verkauft: stein
+ZEITEN nach 3650 Runden: lesen 143.20 s, wirtschaft 15.57 s, ruestung 2.77 s, haus_lager_zeile 0.23 s, waechter 0.00 s
+17140 |  78  27  16 |  14   0 |  94.00 | 106/106 (0) | 18 10 | PLANER Lage (Gewinn bis Ende / Amortisation): Jaegerhuette -/11804 | Stein-Reserve 0; PLANER Huette zuerst (Feuer 0, Jaegerhuette braucht 1) -> (134, 258)
+17162 |  73  39  16 |  13   0 |  94.00 | 107/114 (0) | 18 10 | verkauft: stein
+17178 |  73  34  16 |  13   0 |  94.00 | 107/114 (0) | 18 10 | verkauft: stein
+17193 |  73  29  16 |  13   0 |  94.00 | 107/114 (0) | 18 10 | verkauft: stein
+ZEITEN nach 3660 Runden: lesen 143.62 s, wirtschaft 15.67 s, ruestung 2.87 s, haus_lager_zeile 0.23 s, waechter 0.00 s
+17202 |  73  24  16 |  13   0 |  96.25 | 107/114 (0) | 18 10 | -
+17227 |  73  24  16 |  13   0 |  96.25 | 108/114 (0) | 18 10 | verkauft: apfel x1
+ZEITEN nach 3670 Runden: lesen 144.03 s, wirtschaft 15.71 s, ruestung 2.90 s, haus_lager_zeile 0.23 s, waechter 0.00 s
+17250 |  73  24  16 |   8   0 |  96.25 | 108/114 (0) | 18 10 | -
+17255 |  73  24  16 |   7   0 |  96.25 | 108/114 (0) | 18 10 | verkauft: apfel x1
+17283 |  73  36  16 |   2   0 |  96.25 | 109/114 (0) | 18 10 | verkauft: stein,fleisch x1
+ZEITEN nach 3680 Runden: lesen 144.44 s, wirtschaft 15.72 s, ruestung 2.99 s, haus_lager_zeile 0.23 s, waechter 0.00 s
+17302 |  73  31  16 |   6   0 |  96.25 | 109/114 (0) | 18 10 | verkauft: stein,apfel x1,fleisch x1
+17324 |  73  26  16 |   2   0 |  96.25 | 110/114 (0) | 18 10 | verkauft: fleisch x1
+17339 |  73  26  16 |   2   0 |  96.25 | 110/114 (0) | 18 10 | verkauft: fleisch x1
+ZEITEN nach 3690 Runden: lesen 144.86 s, wirtschaft 15.76 s, ruestung 3.11 s, haus_lager_zeile 0.23 s, waechter 0.00 s
+17360 |  73  26  16 |   1   0 |  96.25 | 111/114 (0) | 18 10 | -
+17370 |  73  26  16 |   1   0 |  96.25 | 111/114 (1) | 18 10 | verkauft: fleisch x1
+ZEITEN nach 3700 Runden: lesen 145.26 s, wirtschaft 15.77 s, ruestung 3.14 s, haus_lager_zeile 0.23 s, waechter 0.00 s
+17404 |  73  26  16 |   1   0 |  98.75 | 111/114 (1) | 18 10 | STEUER 0 -> 1 (Beliebtheit 98.75); PLANER Lage (Gewinn bis Ende / Amortisation): Jaegerhuette -/11654 | Stein-Reserve 0; PLANER Jaegerhuette bei (108, 210) (Weg 21, 5.4 Gold/1000, Anlauf 4496, Amortisation 11654, Gewinn bis Ende -) -> (107, 211)
+17422 |  70  35  16 |   1   0 |  98.75 | 112/114 (2) | 18 10 | verkauft: stein
+17437 |  70  33  16 |   0   0 |  98.75 | 112/114 (2) | 18 10 | verkauft: stein
+17452 |  72  28  16 |   0   0 |  98.75 | 112/114 (2) | 18 10 | verkauft: stein
+ZEITEN nach 3710 Runden: lesen 145.67 s, wirtschaft 15.90 s, ruestung 3.24 s, haus_lager_zeile 0.23 s, waechter 0.00 s
+17468 |  76  23  16 |   0   0 |  98.75 | 113/114 (3) | 18 10 | PLANER Jaegerhuette bei (95, 260) (Weg 29, 4.5 Gold/1000, Anlauf 4496, Amortisation 13970, Gewinn bis Ende -) -> (93, 258)
+ZEITEN nach 3720 Runden: lesen 146.09 s, wirtschaft 15.99 s, ruestung 3.24 s, haus_lager_zeile 0.23 s, waechter 0.00 s
+17521 |  83  23  18 |   0   0 |  98.75 | 114/114 (2) | 18 10 | STEUER 1 -> 2 (Beliebtheit 98.75); PLANER Jaegerhuette bei (123, 199) (Weg 32, 4.2 Gold/1000, Anlauf 4496, Amortisation 14876, Gewinn bis Ende -) -> (120, 199)
+ZEITEN nach 3730 Runden: lesen 146.48 s, wirtschaft 16.09 s, ruestung 3.24 s, haus_lager_zeile 0.23 s, waechter 0.00 s
+17570 |  82  23  18 |   0   0 |  98.75 | 114/114 (3) | 18 10 | PLANER Jaegerhuette bei (113, 262) (Weg 31, 4.3 Gold/1000, Anlauf 4496, Amortisation 14636, Gewinn bis Ende -) -> (112, 263)
+17608 |  79  23  18 |   0   0 |  99.00 | 114/114 (3) | 18 10 | verkauft: holz
+ZEITEN nach 3740 Runden: lesen 146.88 s, wirtschaft 16.19 s, ruestung 3.28 s, haus_lager_zeile 0.23 s, waechter 0.00 s
+17623 |  69  23  18 |   0   0 |  99.00 | 114/114 (4) | 18 10 | STEUER 2 -> 3 (Beliebtheit 99.00)
+ZEITEN nach 3750 Runden: lesen 147.28 s, wirtschaft 16.26 s, ruestung 3.28 s, haus_lager_zeile 0.23 s, waechter 0.00 s
+17670 |  69  23  18 |   0   0 |  99.00 | 114/114 (5) | 18 10 | PLANER Lage (Gewinn bis Ende / Amortisation): Jaegerhuette -/9820 | Stein-Reserve 0; PLANER wartet auf Jaegerhuette (fehlt: gold 39)
+ZEITEN nach 3760 Runden: lesen 147.66 s, wirtschaft 16.27 s, ruestung 3.28 s, haus_lager_zeile 0.23 s, waechter 0.00 s
+17712 |  69  23  18 |   4   0 |  99.00 | 114/114 (4) | 18 10 | STEUER 3 -> 4 (Beliebtheit 99.00)
+ZEITEN nach 3770 Runden: lesen 148.05 s, wirtschaft 16.31 s, ruestung 3.29 s, haus_lager_zeile 0.23 s, waechter 0.00 s
+17755 |  69  23  18 |   4   0 |  99.00 | 114/114 (4) | 18 10 | -
+ZEITEN nach 3780 Runden: lesen 148.45 s, wirtschaft 16.32 s, ruestung 3.29 s, haus_lager_zeile 0.23 s, waechter 0.00 s
+17796 |  69  23  18 |   5   0 |  99.00 | 114/114 (4) | 18 10 | STEUER 4 -> 5 (Beliebtheit 99.00)
+ZEITEN nach 3790 Runden: lesen 148.86 s, wirtschaft 16.36 s, ruestung 3.30 s, haus_lager_zeile 0.23 s, waechter 0.00 s
+17843 |  76  23  18 |   8   0 |  98.50 | 114/114 (4) | 18 10 | -
+ZEITEN nach 3800 Runden: lesen 149.28 s, wirtschaft 16.37 s, ruestung 3.30 s, haus_lager_zeile 0.23 s, waechter 0.00 s
+17886 |  85  24  18 |   7   0 |  98.50 | 114/114 (4) | 18 10 | STEUER 5 -> 6 (Beliebtheit 98.50); PLANER Lage (Gewinn bis Ende / Amortisation): Jaegerhuette -/9956 | Stein-Reserve 0; PLANER wartet auf Jaegerhuette (fehlt: gold 39)
+17903 |  87  35  18 |   7   0 |  98.50 | 114/114 (3) | 18 10 | verkauft: stein
+17918 |  87  30  18 |   7   0 |  98.50 | 114/114 (3) | 18 10 | verkauft: stein
+ZEITEN nach 3810 Runden: lesen 149.69 s, wirtschaft 16.41 s, ruestung 3.36 s, haus_lager_zeile 0.23 s, waechter 0.00 s
+17937 |  87  25  18 |  10   0 |  98.50 | 114/114 (3) | 18 10 | PLANER Jaegerhuette bei (77, 238) (Weg 14, 6.3 Gold/1000, Anlauf 4496, Amortisation 9988, Gewinn bis Ende -) -> (74, 241)
+17953 |  84  25  18 |  11   0 |  98.50 | 114/114 (3) | 18 10 | verkauft: holz,apfel x1
+ZEITEN nach 3820 Runden: lesen 150.09 s, wirtschaft 16.48 s, ruestung 3.42 s, haus_lager_zeile 0.23 s, waechter 0.00 s
+17992 |  74  25  18 |   7   0 |  98.50 | 114/114 (4) | 18 10 | STEUER 6 -> 7 (Beliebtheit 98.50)
+18014 |  74  25  18 |  14   0 |  96.00 | 114/114 (4) | 18 10 | verkauft: apfel x1
+ZEITEN nach 3830 Runden: lesen 150.51 s, wirtschaft 16.52 s, ruestung 3.46 s, haus_lager_zeile 0.23 s, waechter 0.00 s
+18042 |  74  25  18 |  10   0 |  96.00 | 114/114 (4) | 18 10 | -
+ZEITEN nach 3840 Runden: lesen 150.92 s, wirtschaft 16.53 s, ruestung 3.46 s, haus_lager_zeile 0.23 s, waechter 0.00 s
+18084 |  74  25  18 |   9   0 |  96.00 | 114/114 (4) | 18 10 | -
+18117 |  74  25  18 |  13   0 |  96.00 | 114/114 (3) | 18 10 | verkauft: apfel x1
+ZEITEN nach 3850 Runden: lesen 151.31 s, wirtschaft 16.54 s, ruestung 3.50 s, haus_lager_zeile 0.23 s, waechter 0.00 s
+18128 |  74  25  18 |   8   0 |  96.00 | 114/114 (3) | 18 10 | PLANER Lage (Gewinn bis Ende / Amortisation):  | Stein-Reserve 0
+ZEITEN nach 3860 Runden: lesen 151.71 s, wirtschaft 16.56 s, ruestung 3.50 s, haus_lager_zeile 0.23 s, waechter 0.00 s
+18170 |  74  33  18 |   7   0 |  96.00 | 114/114 (3) | 18 10 | verkauft: stein
+18187 |  74  32  18 |   7   0 |  96.00 | 114/114 (3) | 18 10 | verkauft: stein
+ZEITEN nach 3870 Runden: lesen 152.12 s, wirtschaft 16.56 s, ruestung 3.57 s, haus_lager_zeile 0.23 s, waechter 0.00 s
+18219 |  74  27  18 |   7   0 |  93.50 | 114/114 (3) | 18 10 | STEUER 7 -> 6 (Beliebtheit 93.50)
+ZEITEN nach 3880 Runden: lesen 152.51 s, wirtschaft 16.60 s, ruestung 3.57 s, haus_lager_zeile 0.23 s, waechter 0.00 s
+18263 |  74  27  18 |   6   0 |  93.50 | 114/114 (3) | 18 10 | PLANER Jaegerhuette bei (110, 257) (Weg 26, 4.5 Gold/1000, Anlauf 4496, Amortisation 13850, Gewinn bis Ende -) -> (110, 257)
+ZEITEN nach 3890 Runden: lesen 152.90 s, wirtschaft 16.70 s, ruestung 3.57 s, haus_lager_zeile 0.23 s, waechter 0.00 s
+18312 |  71  27  18 |   6   0 |  93.50 | 114/114 (2) | 18 10 | STEUER 6 -> 5 (Beliebtheit 93.50)
+ZEITEN nach 3900 Runden: lesen 153.30 s, wirtschaft 16.75 s, ruestung 3.58 s, haus_lager_zeile 0.23 s, waechter 0.00 s
+18357 |  71  27  20 |   5   0 |  93.50 | 114/114 (2) | 18 10 | PLANER Lage (Gewinn bis Ende / Amortisation):  | Stein-Reserve 0
+ZEITEN nach 3910 Runden: lesen 153.73 s, wirtschaft 16.76 s, ruestung 3.58 s, haus_lager_zeile 0.23 s, waechter 0.00 s
+18401 |  71  27  20 |   5   0 |  92.50 | 114/114 (2) | 18 10 | STEUER 5 -> 4 (Beliebtheit 92.50)
+ZEITEN nach 3920 Runden: lesen 154.13 s, wirtschaft 16.80 s, ruestung 3.59 s, haus_lager_zeile 0.23 s, waechter 0.00 s
+18447 |  71  27  22 |   8   0 |  92.50 | 114/114 (2) | 18 10 | PLANER Ochsenjoch an Steinbruch 80: juengster Ochse unterwegs und noch 9 am Haufen (> 8) (Joche 3, Haufen 9) -> (90, 203)
+ZEITEN nach 3930 Runden: lesen 154.54 s, wirtschaft 16.86 s, ruestung 3.60 s, haus_lager_zeile 0.23 s, waechter 0.00 s
+18494 |  71  27  22 |   8   0 |  92.50 | 114/114 (2) | 18 10 | STEUER 4 -> 3 (Beliebtheit 92.50)
+ZEITEN nach 3940 Runden: lesen 154.93 s, wirtschaft 16.90 s, ruestung 3.60 s, haus_lager_zeile 0.23 s, waechter 0.00 s
+18539 |  71  27  22 |   7   0 |  92.50 | 114/114 (2) | 18 10 | PLANER Jaegerhuette bei (118, 190) (Weg 41, 3.4 Gold/1000, Anlauf 4496, Amortisation 18793, Gewinn bis Ende -) -> (117, 191)
+ZEITEN nach 3950 Runden: lesen 155.36 s, wirtschaft 17.00 s, ruestung 3.60 s, haus_lager_zeile 0.23 s, waechter 0.00 s
+18591 |  68  27  22 |   6   0 |  92.50 | 114/114 (2) | 18 10 | STEUER 3 -> 2 (Beliebtheit 92.50); PLANER Lage (Gewinn bis Ende / Amortisation):  | Stein-Reserve 0
+ZEITEN nach 3960 Runden: lesen 155.75 s, wirtschaft 17.04 s, ruestung 3.61 s, haus_lager_zeile 0.23 s, waechter 0.00 s
+18636 |  68  27  22 |  11   0 |  93.00 | 114/114 (2) | 18 10 | -
+18670 |  68  32  24 |  11   0 |  93.00 | 114/114 (2) | 18 10 | verkauft: stein
+ZEITEN nach 3970 Runden: lesen 156.16 s, wirtschaft 17.06 s, ruestung 3.65 s, haus_lager_zeile 0.23 s, waechter 0.00 s
+18682 |  68  34  24 |  10   0 |  93.00 | 114/114 (2) | 18 10 | STEUER 2 -> 1 (Beliebtheit 93.00)
+18689 |  68  34  24 |  10   0 |  93.00 | 114/114 (2) | 18 10 | verkauft: stein
+18706 |  68  29  24 |  10   0 |  93.00 | 114/114 (1) | 18 10 | verkauft: stein
+ZEITEN nach 3980 Runden: lesen 156.56 s, wirtschaft 17.10 s, ruestung 3.71 s, haus_lager_zeile 0.23 s, waechter 0.00 s
+18733 |  68  24  26 |  10   0 |  93.00 | 114/114 (1) | 18 10 | PLANER Jaegerhuette bei (110, 191) (Weg 40, 3.3 Gold/1000, Anlauf 4496, Amortisation 18818, Gewinn bis Ende -) -> (114, 187)
+ZEITEN nach 3990 Runden: lesen 156.97 s, wirtschaft 17.19 s, ruestung 3.72 s, haus_lager_zeile 0.23 s, waechter 0.00 s
+18784 |  72  24  26 |  13   0 |  93.00 | 114/114 (1) | 18 10 | STEUER 1 -> 0 (Beliebtheit 93.00)
+ZEITEN nach 4000 Runden: lesen 157.38 s, wirtschaft 17.24 s, ruestung 3.72 s, haus_lager_zeile 0.23 s, waechter 0.00 s
+18830 |  81  24  27 |  12   0 |  95.25 | 114/114 (1) | 18 10 | PLANER Lage (Gewinn bis Ende / Amortisation):  | Stein-Reserve 0
+ZEITEN nach 4010 Runden: lesen 157.79 s, wirtschaft 17.25 s, ruestung 3.72 s, haus_lager_zeile 0.23 s, waechter 0.00 s
+18872 |  83  24  28 |  11   0 |  95.25 | 114/114 (1) | 18 10 | -
+ZEITEN nach 4020 Runden: lesen 158.23 s, wirtschaft 17.26 s, ruestung 3.72 s, haus_lager_zeile 0.23 s, waechter 0.00 s
+18917 |  83  24  28 |  10   0 |  95.25 | 114/114 (0) | 18 10 | -
+18952 |  89  24  30 |  10   0 |  95.25 | 114/114 (0) | 18 10 | verkauft: apfel x1
+ZEITEN nach 4030 Runden: lesen 158.65 s, wirtschaft 17.27 s, ruestung 3.75 s, haus_lager_zeile 0.23 s, waechter 0.00 s
+18964 |  92  24  30 |   5   0 |  95.25 | 114/114 (0) | 18 10 | PLANER Ochsenjoch an Steinbruch 76: juengster Ochse unterwegs und noch 9 am Haufen (> 8) (Joche 5, Haufen 9) -> (80, 207); PLANER Huette zuerst (Feuer 0, Jaegerhuette braucht 1) -> (138, 258)
+18985 |  86  24  30 |   4   0 |  95.25 | 115/122 (0) | 18 10 | verkauft: fleisch x1
+19013 |  91  24  30 |   4   0 |  97.75 | 115/122 (0) | 18 10 | verkauft: fleisch x1
+ZEITEN nach 4040 Runden: lesen 159.06 s, wirtschaft 17.43 s, ruestung 3.81 s, haus_lager_zeile 0.23 s, waechter 0.00 s
+19028 |  91  24  30 |   4   0 |  97.75 | 115/122 (0) | 18 10 | STEUER 0 -> 1 (Beliebtheit 97.75)
+ZEITEN nach 4050 Runden: lesen 159.46 s, wirtschaft 17.47 s, ruestung 3.81 s, haus_lager_zeile 0.23 s, waechter 0.00 s
+19072 |  91  24  30 |   3   0 |  97.75 | 116/122 (0) | 18 10 | PLANER Lage (Gewinn bis Ende / Amortisation): Jaegerhuette -/16214 | Stein-Reserve 0; PLANER wartet auf Arbeiter fuer Jaegerhuette (Feuer 0, braucht 1)
+19081 |  91  30  30 |   3   0 |  97.75 | 116/122 (0) | 18 10 | verkauft: stein
+19097 |  91  31  30 |   4   0 |  97.75 | 117/122 (0) | 18 10 | verkauft: stein
+ZEITEN nach 4060 Runden: lesen 159.87 s, wirtschaft 17.48 s, ruestung 3.87 s, haus_lager_zeile 0.23 s, waechter 0.00 s
+19120 |  91  26  30 |   7   0 |  97.75 | 117/122 (0) | 18 10 | STEUER 1 -> 2 (Beliebtheit 97.75)
+ZEITEN nach 4070 Runden: lesen 160.28 s, wirtschaft 17.51 s, ruestung 3.87 s, haus_lager_zeile 0.23 s, waechter 0.00 s
+19167 |  91  26  30 |   6   0 |  97.75 | 118/122 (0) | 18 10 | -
+ZEITEN nach 4080 Runden: lesen 160.67 s, wirtschaft 17.52 s, ruestung 3.88 s, haus_lager_zeile 0.23 s, waechter 0.00 s
+19207 |  91  26  30 |   6   0 |  98.25 | 119/122 (1) | 18 10 | STEUER 2 -> 3 (Beliebtheit 98.25); PLANER Jaegerhuette bei (88, 261) (Weg 30, 3.8 Gold/1000, Anlauf 4496, Amortisation 16456, Gewinn bis Ende -) -> (89, 262)
+19249 |  89  26  32 |  12   0 |  98.25 | 120/122 (2) | 18 10 | verkauft: apfel x1
+ZEITEN nach 4090 Runden: lesen 161.07 s, wirtschaft 17.63 s, ruestung 3.91 s, haus_lager_zeile 0.23 s, waechter 0.00 s
+19261 |  91  26  32 |   8   0 |  98.25 | 120/122 (2) | 18 10 | -
+ZEITEN nach 4100 Runden: lesen 161.50 s, wirtschaft 17.64 s, ruestung 3.91 s, haus_lager_zeile 0.23 s, waechter 0.00 s
+19305 | 100  26  34 |   8   0 |  98.25 | 121/122 (1) | 18 10 | STEUER 3 -> 4 (Beliebtheit 98.25); PLANER Lage (Gewinn bis Ende / Amortisation):  | Stein-Reserve 0
+19348 | 106  26  36 |   7   0 |  98.25 | 122/122 (2) | 18 10 | verkauft: apfel x1
+ZEITEN nach 4110 Runden: lesen 161.92 s, wirtschaft 17.68 s, ruestung 3.95 s, haus_lager_zeile 0.23 s, waechter 0.00 s
+19355 | 106  26  36 |   2   0 |  98.25 | 122/122 (2) | 18 10 | -
+19378 | 106  26  36 |   2   0 |  98.25 | 122/122 (2) | 18 10 | verkauft: fleisch x1
+ZEITEN nach 4120 Runden: lesen 162.35 s, wirtschaft 17.69 s, ruestung 3.98 s, haus_lager_zeile 0.23 s, waechter 0.00 s
+19404 | 106  26  38 |   2   0 |  97.75 | 122/122 (3) | 18 10 | STEUER 4 -> 5 (Beliebtheit 97.75)
+19412 | 106  26  38 |   1   0 |  97.75 | 122/122 (3) | 18 10 | verkauft: fleisch x1
+ZEITEN nach 4130 Runden: lesen 162.77 s, wirtschaft 17.73 s, ruestung 4.02 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+19453 | 106  26  38 |   1   0 |  97.75 | 122/122 (4) | 18 10 | -
+ZEITEN nach 4140 Runden: lesen 163.16 s, wirtschaft 17.74 s, ruestung 4.02 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+19493 | 106  26  39 |   0   0 |  97.75 | 122/122 (5) | 18 10 | STEUER 5 -> 6 (Beliebtheit 97.75)
+ZEITEN nach 4150 Runden: lesen 163.56 s, wirtschaft 17.77 s, ruestung 4.03 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+19538 | 106  26  40 |   0   0 |  97.75 | 122/122 (6) | 18 10 | PLANER Lage (Gewinn bis Ende / Amortisation):  | Stein-Reserve 0
+ZEITEN nach 4160 Runden: lesen 163.95 s, wirtschaft 17.78 s, ruestung 4.03 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+19577 | 106  26  42 |   0   0 |  97.75 | 122/122 (6) | 18 10 | STEUER 6 -> 7 (Beliebtheit 97.75)
+ZEITEN nach 4170 Runden: lesen 164.35 s, wirtschaft 17.82 s, ruestung 4.04 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+19623 | 106  26  42 |   3   0 |  95.00 | 122/122 (6) | 18 10 | -
+ZEITEN nach 4180 Runden: lesen 164.75 s, wirtschaft 17.83 s, ruestung 4.04 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+19666 | 110  26  42 |   3   0 |  95.00 | 122/122 (6) | 18 10 | -
+ZEITEN nach 4190 Runden: lesen 165.18 s, wirtschaft 17.84 s, ruestung 4.05 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+19710 | 111  26  42 |   2   0 |  95.00 | 122/122 (6) | 18 10 | -
+19747 | 111  31  42 |   2   0 |  95.00 | 122/122 (6) | 18 10 | verkauft: stein
+ZEITEN nach 4200 Runden: lesen 165.57 s, wirtschaft 17.85 s, ruestung 4.08 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+19755 | 111  33  42 |   2   0 |  95.00 | 122/122 (6) | 18 10 | PLANER Lage (Gewinn bis Ende / Amortisation):  | Stein-Reserve 0
+19763 | 111  33  42 |   2   0 |  95.00 | 122/122 (6) | 18 10 | verkauft: stein
+19779 | 111  28  42 |   1   0 |  95.00 | 122/122 (6) | 18 10 | verkauft: stein
+ZEITEN nach 4210 Runden: lesen 166.00 s, wirtschaft 17.87 s, ruestung 4.14 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+19804 | 112  23  42 |   1   0 |  92.50 | 122/122 (6) | 18 10 | STEUER 7 -> 6 (Beliebtheit 92.50)
+ZEITEN nach 4220 Runden: lesen 166.43 s, wirtschaft 17.90 s, ruestung 4.15 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+19853 | 114  23  42 |   1   0 |  92.50 | 122/122 (6) | 18 10 | verkauft: fleisch x1
+19883 | 114  23  44 |   0   0 |  92.50 | 122/122 (6) | 18 10 | verkauft: fleisch x1
+ZEITEN nach 4230 Runden: lesen 166.85 s, wirtschaft 17.91 s, ruestung 4.21 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+19903 | 114  23  44 |   0   0 |  92.50 | 122/122 (6) | 18 10 | STEUER 6 -> 5 (Beliebtheit 92.50)
+19915 | 114  23  44 |   0   0 |  92.50 | 122/122 (6) | 18 10 | verkauft: fleisch x1
+19931 | 114  28  44 |   0   0 |  92.50 | 122/122 (6) | 18 10 | verkauft: stein,fleisch x1
+19950 | 114  30  44 |   0   0 |  92.50 | 122/122 (6) | 18 10 | verkauft: stein,fleisch x1
+ZEITEN nach 4240 Runden: lesen 167.27 s, wirtschaft 17.95 s, ruestung 4.36 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+19964 | 114  27  44 |   0   0 |  92.50 | 122/122 (6) | 18 10 | -
+19969 | 114  32  44 |   0   0 |  92.50 | 122/122 (6) | 18 10 | verkauft: stein
+19985 | 114  32  44 |   0   0 |  92.50 | 122/122 (6) | 18 10 | verkauft: stein,fleisch x1
+20004 | 116  27  44 |   0   0 |  91.25 | 122/122 (6) | 18 10 | verkauft: fleisch x1
+ZEITEN nach 4250 Runden: lesen 167.70 s, wirtschaft 17.96 s, ruestung 4.49 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+20020 | 120  27  44 |   0   0 |  91.25 | 122/122 (6) | 18 10 | STEUER 5 -> 4 (Beliebtheit 91.25); PLANER Lage (Gewinn bis Ende / Amortisation):  | Stein-Reserve 0
+ZEITEN nach 4260 Runden: lesen 168.12 s, wirtschaft 18.00 s, ruestung 4.49 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+20067 | 138  27  44 |   0   0 |  91.25 | 122/122 (6) | 18 10 | -
+ZEITEN nach 4270 Runden: lesen 168.51 s, wirtschaft 18.01 s, ruestung 4.50 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+20108 | 144  27  44 |   0   0 |  91.25 | 122/122 (6) | 18 10 | STEUER 4 -> 3 (Beliebtheit 91.25)
+ZEITEN nach 4280 Runden: lesen 168.94 s, wirtschaft 18.05 s, ruestung 4.50 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+20156 | 144  27  44 |   0   0 |  91.25 | 122/122 (6) | 18 10 | -
+ZEITEN nach 4290 Runden: lesen 169.34 s, wirtschaft 18.06 s, ruestung 4.51 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+20199 | 144  27  44 |   3   0 |  91.25 | 122/122 (6) | 18 10 | STEUER 3 -> 2 (Beliebtheit 91.25)
+ZEITEN nach 4300 Runden: lesen 169.74 s, wirtschaft 18.10 s, ruestung 4.51 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+20243 | 144  27  44 |   3   0 |  91.25 | 122/122 (6) | 18 10 | PLANER Lage (Gewinn bis Ende / Amortisation):  | Stein-Reserve 0
+20260 | 144  27  44 |   7   0 |  91.25 | 122/122 (6) | 18 10 | verkauft: apfel x1
+20276 | 144  27  44 |   7   0 |  91.25 | 122/122 (6) | 18 10 | verkauft: apfel x1
+ZEITEN nach 4310 Runden: lesen 170.16 s, wirtschaft 18.11 s, ruestung 4.57 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+20292 | 144  27  44 |   4   0 |  91.25 | 122/122 (6) | 18 10 | STEUER 2 -> 1 (Beliebtheit 91.25)
+ZEITEN nach 4320 Runden: lesen 170.56 s, wirtschaft 18.15 s, ruestung 4.58 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+20337 | 144  27  44 |   6   0 |  91.25 | 122/122 (6) | 18 10 | -
+ZEITEN nach 4330 Runden: lesen 171.00 s, wirtschaft 18.16 s, ruestung 4.58 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+20382 | 157  27  46 |   5   0 |  91.25 | 122/122 (6) | 18 10 | STEUER 1 -> 0 (Beliebtheit 91.25)
+ZEITEN nach 4340 Runden: lesen 171.41 s, wirtschaft 18.20 s, ruestung 4.59 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+20429 | 160  30  46 |   5   0 |  93.75 | 122/122 (6) | 18 10 | verkauft: stein
+20445 | 160  34  46 |   4   0 |  93.75 | 122/122 (6) | 18 10 | verkauft: stein
+20461 | 160  29  46 |   4   0 |  93.75 | 122/122 (6) | 18 10 | verkauft: stein
+ZEITEN nach 4350 Runden: lesen 171.82 s, wirtschaft 18.21 s, ruestung 4.68 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+20481 | 160  24  46 |   4   0 |  93.75 | 122/122 (6) | 18 10 | PLANER Lage (Gewinn bis Ende / Amortisation):  | Stein-Reserve 0
+20503 | 160  24  46 |  10   0 |  93.75 | 122/122 (6) | 18 10 | verkauft: apfel x1
+ZEITEN nach 4360 Runden: lesen 172.23 s, wirtschaft 18.22 s, ruestung 4.72 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+20526 | 160  24  46 |   8   0 |  93.75 | 122/122 (6) | 18 10 | -
+ZEITEN nach 4370 Runden: lesen 172.62 s, wirtschaft 18.23 s, ruestung 4.72 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+20568 | 160  24  46 |   8   0 |  93.75 | 122/122 (6) | 18 10 | -
+20573 | 160  24  46 |   8   0 |  93.75 | 122/122 (6) | 18 10 | Lager erweitert (99, 282): Bestand 230, Holz unterwegs 126 + bald 18, Teile 8 -> noetig 9
+20612 | 160  24  46 |   7   0 |  96.25 | 122/122 (6) | 18 10 | verkauft: apfel x1
+ZEITEN nach 4380 Runden: lesen 173.02 s, wirtschaft 18.30 s, ruestung 4.77 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+20621 | 160  24  46 |   2   0 |  96.25 | 122/122 (6) | 18 10 | -
+20630 | 160  24  46 |   2   0 |  96.25 | 122/122 (6) | 18 10 | verkauft: fleisch x1
+20645 | 160  24  46 |   2   0 |  96.25 | 122/122 (6) | 18 10 | verkauft: fleisch x1
+20660 | 160  24  46 |   2   0 |  96.25 | 122/122 (6) | 18 10 | verkauft: fleisch x1
+ZEITEN nach 4390 Runden: lesen 173.42 s, wirtschaft 18.31 s, ruestung 4.87 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+20670 | 160  24  46 |   2   0 |  96.25 | 122/122 (6) | 18 10 | PLANER Jaegerhuette bei (88, 257) (Weg 26, 3.7 Gold/1000, Anlauf 4496, Amortisation 16926, Gewinn bis Ende -) -> (85, 257)
+20685 | 157  24  46 |   1   0 |  96.25 | 122/122 (6) | 18 10 | verkauft: fleisch x3
+20701 | 157  24  46 |   1   0 |  96.25 | 122/122 (5) | 18 10 | verkauft: fleisch x2
+20717 | 157  24  46 |   1   0 |  96.25 | 122/122 (5) | 18 10 | verkauft: fleisch x1
+ZEITEN nach 4400 Runden: lesen 173.83 s, wirtschaft 18.41 s, ruestung 4.97 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+20733 | 157  24  46 |   1   0 |  96.25 | 122/122 (5) | 18 10 | verkauft: fleisch x1; PLANER Lage (Gewinn bis Ende / Amortisation):  | Stein-Reserve 0
+20749 | 157  24  46 |   1   0 |  96.25 | 122/122 (5) | 18 10 | verkauft: fleisch x1
+20777 | 157  24  46 |   0   0 |  96.25 | 122/122 (5) | 18 10 | verkauft: fleisch x1
+ZEITEN nach 4410 Runden: lesen 174.24 s, wirtschaft 18.42 s, ruestung 5.06 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+20783 | 157  24  46 |   0   0 |  96.25 | 122/122 (5) | 18 10 | -
+20793 | 157  24  46 |   0   0 |  96.25 | 122/122 (5) | 18 10 | verkauft: fleisch x1
+ZEITEN nach 4420 Runden: lesen 174.65 s, wirtschaft 18.44 s, ruestung 5.09 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+20830 | 157  24  46 |   0   0 |  98.50 | 122/122 (5) | 18 10 | STEUER 0 -> 1 (Beliebtheit 98.50)
+20837 | 157  24  46 |   0   0 |  98.50 | 122/122 (5) | 18 10 | verkauft: fleisch x1
+20853 | 157  24  46 |   0   0 |  98.50 | 122/122 (5) | 18 10 | verkauft: fleisch x2
+20869 | 157  24  46 |   0   0 |  98.50 | 122/122 (5) | 18 10 | verkauft: fleisch x1
+ZEITEN nach 4430 Runden: lesen 175.07 s, wirtschaft 18.48 s, ruestung 5.19 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+20885 | 157  24  46 |   0   0 |  98.50 | 122/122 (5) | 18 10 | verkauft: fleisch x1
+20902 | 157  24  46 |   0   0 |  98.50 | 122/122 (5) | 18 10 | verkauft: fleisch x1
+20918 | 157  24  46 |   1   0 |  98.50 | 122/122 (5) | 18 10 | verkauft: fleisch x2
+20934 | 157  24  46 |   3   0 |  98.50 | 122/122 (5) | 18 10 | verkauft: fleisch x2
+ZEITEN nach 4440 Runden: lesen 175.49 s, wirtschaft 18.49 s, ruestung 5.32 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+20942 | 159  24  46 |   3   0 |  98.50 | 122/122 (5) | 18 10 | STEUER 1 -> 2 (Beliebtheit 98.50)
+20955 | 160  24  46 |   3   0 |  98.50 | 122/122 (5) | 18 10 | verkauft: fleisch x2
+20970 | 160  24  46 |   3   0 |  98.50 | 122/122 (5) | 18 10 | verkauft: fleisch x1
+20986 | 160  24  46 |   3   0 |  98.50 | 122/122 (5) | 18 10 | verkauft: fleisch x2
+ZEITEN nach 4450 Runden: lesen 175.91 s, wirtschaft 18.53 s, ruestung 5.44 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+21001 | 160  24  46 |   3   0 |  99.00 | 122/122 (5) | 18 10 | PLANER Lage (Gewinn bis Ende / Amortisation):  | Stein-Reserve 0
+21005 | 160  24  46 |   2   0 |  99.00 | 122/122 (5) | 18 10 | verkauft: fleisch x1
+ZEITEN nach 4460 Runden: lesen 176.31 s, wirtschaft 18.54 s, ruestung 5.47 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+21045 | 160  24  48 |   2   0 |  99.00 | 122/122 (5) | 18 10 | STEUER 2 -> 3 (Beliebtheit 99.00)
+ZEITEN nach 4470 Runden: lesen 176.70 s, wirtschaft 18.58 s, ruestung 5.48 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+21089 | 160  24  48 |   1   0 |  99.00 | 122/122 (5) | 18 10 | -
+ZEITEN nach 4480 Runden: lesen 177.10 s, wirtschaft 18.59 s, ruestung 5.48 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+21130 | 164  24  48 |   1   0 |  99.00 | 122/122 (5) | 18 10 | STEUER 3 -> 4 (Beliebtheit 99.00)
+ZEITEN nach 4490 Runden: lesen 177.52 s, wirtschaft 18.63 s, ruestung 5.49 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+21177 | 173  24  48 |   0   0 |  99.00 | 122/122 (5) | 18 10 | -
+21219 | 175  24  48 |   0   0 |  98.50 | 122/122 (5) | 18 10 | verkauft: fleisch x1
+ZEITEN nach 4500 Runden: lesen 177.97 s, wirtschaft 18.65 s, ruestung 5.53 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+21225 | 175  24  48 |   0   0 |  98.50 | 122/122 (5) | 18 10 | STEUER 4 -> 5 (Beliebtheit 98.50); PLANER Lage (Gewinn bis Ende / Amortisation):  | Stein-Reserve 0
+21239 | 175  24  48 |   0   0 |  98.50 | 122/122 (5) | 18 10 | verkauft: fleisch x1
+21268 | 175  24  48 |   0   0 |  98.50 | 122/122 (5) | 18 10 | verkauft: fleisch x1
+ZEITEN nach 4510 Runden: lesen 178.39 s, wirtschaft 18.69 s, ruestung 5.59 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+21279 | 175  24  48 |   2   0 |  98.50 | 122/122 (5) | 18 10 | -
+21285 | 175  24  48 |   3   0 |  98.50 | 122/122 (5) | 18 10 | verkauft: fleisch x1
+ZEITEN nach 4520 Runden: lesen 178.84 s, wirtschaft 18.70 s, ruestung 5.63 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+21329 | 175  24  48 |   9   0 |  98.50 | 122/122 (5) | 18 10 | verkauft: apfel x1; STEUER 5 -> 6 (Beliebtheit 98.50)
+ZEITEN nach 4530 Runden: lesen 179.27 s, wirtschaft 18.74 s, ruestung 5.66 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+21380 | 175  24  48 |   3   0 |  98.50 | 122/122 (5) | 18 10 | -
+ZEITEN nach 4540 Runden: lesen 179.68 s, wirtschaft 18.75 s, ruestung 5.67 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+21423 | 175  24  48 |   3   0 |  96.75 | 122/122 (5) | 18 10 | -
+21429 | 175  24  48 |   3   0 |  96.75 | 122/122 (5) | 18 10 | verkauft: fleisch x1
+21460 | 187  24  48 |   2   0 |  96.75 | 122/122 (5) | 18 10 | verkauft: fleisch x1
+ZEITEN nach 4550 Runden: lesen 180.14 s, wirtschaft 18.76 s, ruestung 5.73 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+21476 | 192  24  48 |   2   0 |  96.75 | 122/122 (5) | 18 10 | PLANER Lage (Gewinn bis Ende / Amortisation):  | Stein-Reserve 0
+21489 | 192  24  48 |   3   0 |  96.75 | 122/122 (5) | 18 10 | verkauft: fleisch x1
+21505 | 192  24  48 |   6   0 |  96.75 | 122/122 (5) | 18 10 | verkauft: apfel x1
+ZEITEN nach 4560 Runden: lesen 180.55 s, wirtschaft 18.77 s, ruestung 5.79 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+21525 | 192  24  48 |   1   0 |  96.75 | 122/122 (5) | 18 10 | -
+ZEITEN nach 4570 Runden: lesen 180.94 s, wirtschaft 18.78 s, ruestung 5.80 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+21565 | 192  24  48 |   0   0 |  96.75 | 122/122 (5) | 18 10 | -
+ZEITEN nach 4580 Runden: lesen 181.33 s, wirtschaft 18.79 s, ruestung 5.80 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+21606 | 202  24  48 |   0   0 |  94.75 | 122/122 (5) | 18 10 | STEUER 6 -> 5 (Beliebtheit 94.75)
+21635 | 209  24  48 |   0   0 |  94.75 | 122/122 (5) | 18 10 | verkauft: fleisch x1
+ZEITEN nach 4590 Runden: lesen 181.75 s, wirtschaft 18.83 s, ruestung 5.84 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+21656 | 211  24  48 |   0   0 |  94.75 | 122/122 (5) | 18 10 | -
+21665 | 211  24  48 |   0   0 |  94.75 | 122/122 (5) | 18 10 | verkauft: fleisch x1
+21681 | 211  24  48 |   0   0 |  94.75 | 122/122 (5) | 18 10 | verkauft: fleisch x1
+ZEITEN nach 4600 Runden: lesen 182.16 s, wirtschaft 18.84 s, ruestung 5.91 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+21705 | 211  24  50 |   0   0 |  94.75 | 122/122 (5) | 18 10 | STEUER 5 -> 4 (Beliebtheit 94.75); PLANER Lage (Gewinn bis Ende / Amortisation):  | Stein-Reserve 0
+ZEITEN nach 4610 Runden: lesen 182.57 s, wirtschaft 18.88 s, ruestung 5.91 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+21750 | 223  24  50 |   0   0 |  94.75 | 122/122 (5) | 18 10 | -
+ZEITEN nach 4620 Runden: lesen 182.98 s, wirtschaft 18.89 s, ruestung 5.92 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+21793 | 240  24  52 |   0   0 |  94.75 | 122/122 (5) | 18 10 | STEUER 4 -> 3 (Beliebtheit 94.75)
+ZEITEN nach 4630 Runden: lesen 183.39 s, wirtschaft 18.93 s, ruestung 5.92 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+21839 | 240  24  52 |   0   0 |  94.50 | 122/122 (5) | 18 10 | -
+ZEITEN nach 4640 Runden: lesen 183.78 s, wirtschaft 18.94 s, ruestung 5.93 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+21880 | 240  24  52 |   0   0 |  94.50 | 122/122 (5) | 18 10 | STEUER 3 -> 2 (Beliebtheit 94.50)
+ZEITEN nach 4650 Runden: lesen 184.18 s, wirtschaft 18.98 s, ruestung 5.93 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+21925 | 240  24  52 |   0   0 |  94.50 | 122/122 (5) | 18 10 | PLANER Lage (Gewinn bis Ende / Amortisation):  | Stein-Reserve 0
+ZEITEN nach 4660 Runden: lesen 184.64 s, wirtschaft 19.00 s, ruestung 5.94 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+21974 | 240  24  54 |   0   0 |  94.50 | 122/122 (5) | 18 10 | STEUER 2 -> 1 (Beliebtheit 94.50)
+21981 | 240  24  54 |   0   0 |  94.50 | 122/122 (5) | 18 10 | verkauft: fleisch x1
+21998 | 240  24  54 |   0   0 |  94.50 | 122/122 (5) | 18 10 | verkauft: fleisch x1
+ZEITEN nach 4670 Runden: lesen 185.07 s, wirtschaft 19.04 s, ruestung 6.00 s, haus_lager_zeile 0.24 s, waechter 0.00 s
+22028 | 240  24  54 |   0   0 |  95.75 | 122/122 (5) | 18 10 | verkauft: fleisch x1
+ZEITEN nach 4680 Runden: lesen 185.48 s, wirtschaft 19.05 s, ruestung 6.04 s, haus_lager_zeile 0.25 s, waechter 0.00 s
+22073 | 240  24  54 |   0   0 |  95.75 | 122/122 (5) | 18 10 | -
+22096 | 240  24  54 |   4   0 |  95.75 | 122/122 (5) | 18 10 | verkauft: fleisch x1
+ZEITEN nach 4690 Runden: lesen 185.89 s, wirtschaft 19.06 s, ruestung 6.07 s, haus_lager_zeile 0.25 s, waechter 0.00 s
+22120 | 243  24  54 |   6   0 |  95.75 | 122/122 (5) | 18 10 | -
+ZEITEN nach 4700 Runden: lesen 186.29 s, wirtschaft 19.07 s, ruestung 6.08 s, haus_lager_zeile 0.25 s, waechter 0.00 s
+22161 | 248  24  55 |   7   0 |  95.75 | 122/122 (5) | 18 10 | PLANER Lage (Gewinn bis Ende / Amortisation):  | Stein-Reserve 0
+ZEITEN nach 4710 Runden: lesen 186.70 s, wirtschaft 19.08 s, ruestung 6.08 s, haus_lager_zeile 0.25 s, waechter 0.00 s
+22205 | 257  24  56 |   6   0 |  97.25 | 122/122 (5) | 18 10 | STEUER 1 -> 2 (Beliebtheit 97.25)
+ZEITEN nach 4720 Runden: lesen 187.14 s, wirtschaft 19.12 s, ruestung 6.09 s, haus_lager_zeile 0.25 s, waechter 0.00 s
+22254 | 265  24  56 |   6   0 |  97.25 | 122/122 (5) | 18 10 | -
+ZEITEN nach 4730 Runden: lesen 187.58 s, wirtschaft 19.13 s, ruestung 6.09 s, haus_lager_zeile 0.25 s, waechter 0.00 s
+22300 | 274  24  58 |   9   0 |  97.25 | 122/122 (5) | 18 10 | STEUER 2 -> 3 (Beliebtheit 97.25)
+ZEITEN nach 4740 Runden: lesen 188.00 s, wirtschaft 19.17 s, ruestung 6.10 s, haus_lager_zeile 0.25 s, waechter 0.00 s
+22346 | 283  24  60 |   9   0 |  97.25 | 122/122 (5) | 18 10 | -
+22355 | 283  24  60 |   9   0 |  97.25 | 122/122 (5) | 18 10 | verkauft: apfel x1
+22384 | 283  24  60 |   3   0 |  97.25 | 122/122 (5) | 18 10 | verkauft: fleisch x1
+ZEITEN nach 4750 Runden: lesen 188.41 s, wirtschaft 19.18 s, ruestung 6.16 s, haus_lager_zeile 0.25 s, waechter 0.00 s
+22396 | 283  24  60 |   3   0 |  97.25 | 122/122 (5) | 18 10 | STEUER 3 -> 4 (Beliebtheit 97.25); PLANER Lage (Gewinn bis Ende / Amortisation):  | Stein-Reserve 0
+22416 | 283  30  60 |   5   0 |  97.25 | 122/122 (5) | 18 10 | verkauft: stein,apfel x1
+22434 | 283  31  60 |   3   0 |  97.25 | 122/122 (5) | 18 10 | verkauft: stein,fleisch x2
+ZEITEN nach 4760 Runden: lesen 188.82 s, wirtschaft 19.22 s, ruestung 6.29 s, haus_lager_zeile 0.25 s, waechter 0.00 s
+22453 | 283  34  60 |   2   0 |  97.25 | 122/122 (5) | 18 10 | verkauft: stein; PLANER Jaegerhuette bei (98, 199) (Weg 32, 2.5 Gold/1000, Anlauf 4496, Amortisation 25664, Gewinn bis Ende -) -> (97, 199)
+22478 | 280  33  60 |   2   0 |  97.25 | 122/122 (5) | 18 10 | verkauft: stein
+22494 | 280  28  60 |   2   0 |  97.25 | 122/122 (5) | 18 10 | verkauft: stein
+ZEITEN nach 4770 Runden: lesen 189.22 s, wirtschaft 19.32 s, ruestung 6.38 s, haus_lager_zeile 0.25 s, waechter 0.00 s
+22513 | 280  23  60 |   2   0 |  97.25 | 122/122 (4) | 18 10 | STEUER 4 -> 5 (Beliebtheit 97.25)
+ZEITEN nach 4780 Runden: lesen 189.61 s, wirtschaft 19.36 s, ruestung 6.39 s, haus_lager_zeile 0.25 s, waechter 0.00 s
+22556 | 280  23  60 |   1   0 |  97.25 | 122/122 (4) | 18 10 | -
+ZEITEN nach 4790 Runden: lesen 190.00 s, wirtschaft 19.37 s, ruestung 6.39 s, haus_lager_zeile 0.25 s, waechter 0.00 s
+22598 | 280  23  60 |   1   0 |  97.25 | 122/122 (4) | 18 10 | STEUER 5 -> 6 (Beliebtheit 97.25)
+22627 | 285  23  60 |   0   0 |  96.25 | 122/122 (4) | 18 10 | verkauft: fleisch x1
+22643 | 285  23  60 |   0   0 |  96.25 | 122/122 (4) | 18 10 | verkauft: fleisch x1
+ZEITEN nach 4800 Runden: lesen 190.41 s, wirtschaft 19.41 s, ruestung 6.45 s, haus_lager_zeile 0.25 s, waechter 0.00 s
+22650 | 285  23  60 |   0   0 |  96.25 | 122/122 (4) | 18 10 | PLANER Lage (Gewinn bis Ende / Amortisation):  | Stein-Reserve 0
+22672 | 285  23  60 |   0   0 |  96.25 | 122/122 (4) | 18 10 | verkauft: fleisch x1
+22687 | 285  23  60 |   0   0 |  96.25 | 122/122 (4) | 18 10 | verkauft: fleisch x1
+ZEITEN nach 4810 Runden: lesen 190.83 s, wirtschaft 19.42 s, ruestung 6.52 s, haus_lager_zeile 0.25 s, waechter 0.00 s
+22699 | 285  32  60 |   0   0 |  96.25 | 122/122 (4) | 18 10 | -
+22704 | 285  35  61 |   1   0 |  96.25 | 122/122 (4) | 18 10 | verkauft: stein,fleisch x1
+22723 | 285  30  62 |   5   0 |  96.25 | 122/122 (4) | 18 10 | verkauft: stein,apfel x1,fleisch x1
+22742 | 285  25  62 |   0   0 |  96.25 | 122/122 (4) | 18 10 | verkauft: fleisch x1
+ZEITEN nach 4820 Runden: lesen 191.24 s, wirtschaft 19.43 s, ruestung 6.67 s, haus_lager_zeile 0.25 s, waechter 0.00 s
+22756 | 285  25  62 |   0   0 |  96.25 | 122/122 (4) | 18 10 | verkauft: fleisch x1
+22774 | 286  25  62 |   0   0 |  96.25 | 122/122 (4) | 18 10 | verkauft: fleisch x1
+22790 | 288  25  62 |   0   0 |  96.25 | 122/122 (4) | 18 10 | verkauft: fleisch x1
+ZEITEN nach 4830 Runden: lesen 191.65 s, wirtschaft 19.44 s, ruestung 6.77 s, haus_lager_zeile 0.25 s, waechter 0.00 s
+22809 | 288  25  62 |   0   0 |  94.25 | 122/122 (4) | 18 10 | STEUER 6 -> 5 (Beliebtheit 94.25)
+22821 | 288  25  62 |   0   0 |  94.25 | 122/122 (4) | 18 10 | verkauft: fleisch x1
+22836 | 288  35  62 |   1   0 |  94.25 | 122/122 (4) | 18 10 | verkauft: stein,fleisch x1
+22855 | 288  32  64 |   4   0 |  94.25 | 122/122 (4) | 18 10 | verkauft: stein
+ZEITEN nach 4840 Runden: lesen 192.06 s, wirtschaft 19.48 s, ruestung 6.89 s, haus_lager_zeile 0.25 s, waechter 0.00 s
+22867 | 288  27  64 |   4   0 |  94.25 | 122/122 (4) | 18 10 | -
+ZEITEN nach 4850 Runden: lesen 192.50 s, wirtschaft 19.49 s, ruestung 6.89 s, haus_lager_zeile 0.25 s, waechter 0.00 s
+22912 | 296  27  66 |   4   0 |  94.25 | 122/122 (4) | 18 10 | STEUER 5 -> 4 (Beliebtheit 94.25); PLANER Lage (Gewinn bis Ende / Amortisation):  | Stein-Reserve 0
+ZEITEN nach 4860 Runden: lesen 192.91 s, wirtschaft 19.53 s, ruestung 6.90 s, haus_lager_zeile 0.25 s, waechter 0.00 s
+22959 | 306  27  66 |   3   0 |  94.25 | 122/122 (4) | 18 10 | -
+ZEITEN nach 4870 Runden: lesen 193.34 s, wirtschaft 19.54 s, ruestung 6.90 s, haus_lager_zeile 0.25 s, waechter 0.00 s
+23003 | 322  27  67 |   3   0 |  93.75 | 122/122 (4) | 18 10 | STEUER 4 -> 3 (Beliebtheit 93.75)
+23039 | 329  27  70 |   2   0 |  93.75 | 122/122 (4) | 18 10 | verkauft: fleisch x1
+ZEITEN nach 4880 Runden: lesen 193.78 s, wirtschaft 19.58 s, ruestung 6.93 s, haus_lager_zeile 0.25 s, waechter 0.00 s
+23055 | 332  27  70 |   2   0 |  93.75 | 122/122 (4) | 18 10 | -
+23069 | 334  27  70 |   2   0 |  93.75 | 122/122 (4) | 18 10 | verkauft: fleisch x1
+23085 | 334  39  70 |   2   0 |  93.75 | 122/122 (4) | 18 10 | verkauft: stein
+23100 | 334  34  70 |   1   0 |  93.75 | 122/122 (4) | 18 10 | verkauft: stein,fleisch x1
+ZEITEN nach 4890 Runden: lesen 194.20 s, wirtschaft 19.59 s, ruestung 7.06 s, haus_lager_zeile 0.25 s, waechter 0.00 s
+23111 | 334  29  70 |   1   0 |  93.75 | 122/122 (4) | 18 10 | STEUER 3 -> 2 (Beliebtheit 93.75)
+23123 | 334  29  70 |   1   0 |  93.75 | 122/122 (4) | 18 10 | verkauft: stein,fleisch x1
+23143 | 334  36  70 |   5   0 |  93.75 | 122/122 (4) | 18 10 | verkauft: stein
+23159 | 334  31  70 |   9   0 |  93.75 | 122/122 (4) | 18 10 | verkauft: stein,apfel x1
+ZEITEN nach 4900 Runden: lesen 194.62 s, wirtschaft 19.63 s, ruestung 7.21 s, haus_lager_zeile 0.25 s, waechter 0.00 s
+23173 | 334  26  70 |   6   0 |  93.75 | 122/122 (4) | 18 10 | PLANER Lage (Gewinn bis Ende / Amortisation):  | Stein-Reserve 0
+ZEITEN nach 4910 Runden: lesen 195.05 s, wirtschaft 19.64 s, ruestung 7.22 s, haus_lager_zeile 0.25 s, waechter 0.00 s
+23218 | 334  26  70 |   5   0 |  94.25 | 122/122 (4) | 18 10 | STEUER 2 -> 1 (Beliebtheit 94.25)
+23259 | 334  26  70 |   4   0 |  94.25 | 122/122 (4) | 18 10 | verkauft: fleisch x1
+ZEITEN nach 4920 Runden: lesen 195.46 s, wirtschaft 19.68 s, ruestung 7.25 s, haus_lager_zeile 0.25 s, waechter 0.00 s
+23266 | 334  26  70 |   4   0 |  94.25 | 122/122 (4) | 18 10 | -
+23288 | 334  26  70 |   4   0 |  94.25 | 122/122 (4) | 18 10 | verkauft: fleisch x1
+23305 | 334  26  70 |   4   0 |  94.25 | 122/122 (4) | 18 10 | verkauft: fleisch x1
+ZEITEN nach 4930 Runden: lesen 195.88 s, wirtschaft 19.69 s, ruestung 7.32 s, haus_lager_zeile 0.25 s, waechter 0.00 s
+23316 | 334  26  70 |   4   0 |  94.25 | 122/122 (4) | 18 10 | STEUER 1 -> 0 (Beliebtheit 94.25)
+23324 | 334  26  70 |   6   0 |  94.25 | 122/122 (4) | 18 10 | verkauft: apfel x1,fleisch x1
+23342 | 334  26  70 |   2   0 |  94.25 | 122/122 (4) | 18 10 | verkauft: fleisch x2
+23358 | 334  26  70 |   4   0 |  94.25 | 122/122 (4) | 18 10 | verkauft: fleisch x1
+ZEITEN nach 4940 Runden: lesen 196.32 s, wirtschaft 19.73 s, ruestung 7.42 s, haus_lager_zeile 0.26 s, waechter 0.00 s
+23373 | 334  26  70 |   7   0 |  94.25 | 122/122 (4) | 18 10 | verkauft: apfel x1,fleisch x1
+23403 | 334  26  70 |   3   0 |  96.75 | 122/122 (4) | 18 10 | verkauft: fleisch x1
+23419 | 334  26  70 |   6   0 |  96.75 | 122/122 (4) | 18 10 | verkauft: apfel x1
+ZEITEN nach 4950 Runden: lesen 196.73 s, wirtschaft 19.74 s, ruestung 7.51 s, haus_lager_zeile 0.26 s, waechter 0.00 s
+23427 | 334  26  70 |   0   0 |  96.75 | 122/122 (4) | 18 10 | PLANER Lage (Gewinn bis Ende / Amortisation):  | Stein-Reserve 0
+23436 | 334  26  71 |   0   0 |  96.75 | 122/122 (4) | 18 10 | verkauft: fleisch x1
+23465 | 336  26  72 |   0   0 |  96.75 | 122/122 (4) | 18 10 | verkauft: fleisch x1
+ZEITEN nach 4960 Runden: lesen 197.15 s, wirtschaft 19.76 s, ruestung 7.58 s, haus_lager_zeile 0.26 s, waechter 0.00 s
+23476 | 336  26  72 |   0   0 |  96.75 | 122/122 (4) | 18 10 | PLANER Jaegerhuette bei (96, 195) (Weg 36, 2.3 Gold/1000, Anlauf 4496, Amortisation 27379, Gewinn bis Ende -) -> (95, 196)
+23489 | 333  26  72 |   0   0 |  96.75 | 122/122 (4) | 18 10 | verkauft: fleisch x1
+ZEITEN nach 4970 Runden: lesen 197.56 s, wirtschaft 19.85 s, ruestung 7.61 s, haus_lager_zeile 0.26 s, waechter 0.00 s
+23531 | 333  26  72 |   3   0 |  96.75 | 122/122 (3) | 18 10 | verkauft: fleisch x1
+23547 | 333  38  72 |   3   0 |  96.75 | 122/122 (3) | 18 10 | verkauft: stein
+23563 | 333  33  72 |   3   0 |  96.75 | 122/122 (3) | 18 10 | verkauft: stein
+23579 | 335  28  72 |   3   0 |  96.75 | 122/122 (3) | 18 10 | verkauft: stein
+ZEITEN nach 4980 Runden: lesen 197.97 s, wirtschaft 19.86 s, ruestung 7.73 s, haus_lager_zeile 0.26 s, waechter 0.00 s
+23585 | 336  23  73 |   3   0 |  96.75 | 122/122 (3) | 18 10 | -
+ZEITEN nach 4990 Runden: lesen 198.39 s, wirtschaft 19.87 s, ruestung 7.74 s, haus_lager_zeile 0.26 s, waechter 0.00 s
+23629 | 345  23  74 |   2   0 |  99.25 | 122/122 (3) | 18 10 | STEUER 0 -> 1 (Beliebtheit 99.25)
+ZEITEN nach 5000 Runden: lesen 198.80 s, wirtschaft 19.91 s, ruestung 7.74 s, haus_lager_zeile 0.26 s, waechter 0.00 s
+23675 | 349  35  74 |   2   0 |  99.25 | 122/122 (3) | 18 10 | verkauft: stein; PLANER Lage (Gewinn bis Ende / Amortisation):  | Stein-Reserve 0
+23691 | 349  30  74 |   2   0 |  99.25 | 122/122 (3) | 18 10 | verkauft: stein
+ZEITEN nach 5010 Runden: lesen 199.20 s, wirtschaft 19.92 s, ruestung 7.81 s, haus_lager_zeile 0.26 s, waechter 0.00 s
+23722 | 349  25  74 |   1   0 |  99.25 | 122/122 (3) | 18 10 | STEUER 1 -> 2 (Beliebtheit 99.25)
+23747 | 349  37  74 |   1   0 |  99.25 | 122/122 (3) | 18 10 | verkauft: stein
+23762 | 349  32  74 |   1   0 |  99.25 | 122/122 (3) | 18 10 | verkauft: stein
+ZEITEN nach 5020 Runden: lesen 199.61 s, wirtschaft 19.96 s, ruestung 7.87 s, haus_lager_zeile 0.26 s, waechter 0.00 s
+23775 | 349  27  76 |   1   0 |  99.25 | 122/122 (3) | 18 10 | -
+ZEITEN nach 5030 Runden: lesen 200.02 s, wirtschaft 19.97 s, ruestung 7.87 s, haus_lager_zeile 0.26 s, waechter 0.00 s
+23817 | 349  27  76 |   0   0 |  99.75 | 122/122 (3) | 18 10 | STEUER 2 -> 3 (Beliebtheit 99.75)
+ZEITEN nach 5040 Runden: lesen 200.41 s, wirtschaft 20.01 s, ruestung 7.88 s, haus_lager_zeile 0.26 s, waechter 0.00 s
+23861 | 349  27  76 |   0   0 |  99.75 | 122/122 (3) | 18 10 | -
+ZEITEN nach 5050 Runden: lesen 200.83 s, wirtschaft 20.02 s, ruestung 7.89 s, haus_lager_zeile 0.26 s, waechter 0.00 s
+23905 | 349  27  76 |   0   0 |  99.75 | 122/122 (3) | 18 10 | STEUER 3 -> 4 (Beliebtheit 99.75); PLANER Lage (Gewinn bis Ende / Amortisation):  | Stein-Reserve 0
+ZEITEN nach 5060 Runden: lesen 201.24 s, wirtschaft 20.06 s, ruestung 7.89 s, haus_lager_zeile 0.26 s, waechter 0.00 s
+23950 | 349  27  76 |   0   0 |  99.75 | 122/122 (3) | 18 10 | -
+ZEITEN nach 5070 Runden: lesen 201.63 s, wirtschaft 20.07 s, ruestung 7.90 s, haus_lager_zeile 0.26 s, waechter 0.00 s
+23991 | 349  27  76 |   0   0 |  99.75 | 122/122 (3) | 18 10 | STEUER 4 -> 5 (Beliebtheit 99.75)
+ZEITEN nach 5080 Runden: lesen 202.04 s, wirtschaft 20.11 s, ruestung 7.90 s, haus_lager_zeile 0.26 s, waechter 0.00 s
+24038 | 349  27  76 |   0   0 |  98.50 | 122/122 (3) | 18 10 | -
+ZEITEN nach 5090 Runden: lesen 202.46 s, wirtschaft 20.12 s, ruestung 7.91 s, haus_lager_zeile 0.26 s, waechter 0.00 s
+24080 | 349  27  76 |   0   0 |  98.50 | 122/122 (3) | 18 10 | STEUER 5 -> 6 (Beliebtheit 98.50)
+24098 | 349  27  76 |   0   0 |  98.50 | 122/122 (3) | 18 10 | verkauft: fleisch x1
+ZEITEN nach 5100 Runden: lesen 202.90 s, wirtschaft 20.16 s, ruestung 7.94 s, haus_lager_zeile 0.26 s, waechter 0.00 s
+24132 | 349  27  76 |   0   0 |  98.50 | 122/122 (3) | 18 10 | PLANER Lage (Gewinn bis Ende / Amortisation):  | Stein-Reserve 0
+ZEITEN nach 5110 Runden: lesen 203.31 s, wirtschaft 20.17 s, ruestung 7.95 s, haus_lager_zeile 0.26 s, waechter 0.00 s
+24175 | 349  27  76 |   0   0 |  98.50 | 122/122 (3) | 18 10 | STEUER 6 -> 7 (Beliebtheit 98.50)
+ZEITEN nach 5120 Runden: lesen 203.72 s, wirtschaft 20.21 s, ruestung 7.95 s, haus_lager_zeile 0.26 s, waechter 0.00 s
+24222 | 349  27  76 |   0   0 |  95.75 | 122/122 (3) | 18 10 | -
+ZEITEN nach 5130 Runden: lesen 204.14 s, wirtschaft 20.22 s, ruestung 7.96 s, haus_lager_zeile 0.26 s, waechter 0.00 s
+24265 | 349  27  78 |   1   0 |  95.75 | 122/122 (3) | 18 10 | -
+24287 | 349  28  78 |   3   0 |  95.75 | 122/122 (3) | 18 10 | verkauft: stein
+24303 | 349  34  78 |   3   0 |  95.75 | 122/122 (3) | 18 10 | verkauft: stein
+ZEITEN nach 5140 Runden: lesen 204.55 s, wirtschaft 20.23 s, ruestung 8.02 s, haus_lager_zeile 0.26 s, waechter 0.00 s
+24313 | 350  29  78 |   3   0 |  95.75 | 122/122 (3) | 18 10 | -
+24319 | 351  29  78 |   3   0 |  95.75 | 122/122 (3) | 18 10 | verkauft: stein
+24335 | 352  24  78 |   6   0 |  95.75 | 122/122 (3) | 18 10 | verkauft: apfel x1
+24351 | 352  24  78 |   6   0 |  95.75 | 122/122 (3) | 18 10 | verkauft: apfel x1
+ZEITEN nach 5150 Runden: lesen 204.96 s, wirtschaft 20.24 s, ruestung 8.11 s, haus_lager_zeile 0.26 s, waechter 0.00 s
+24365 | 352  24  78 |   3   0 |  95.75 | 122/122 (3) | 18 10 | PLANER Lage (Gewinn bis Ende / Amortisation):  | Stein-Reserve 0
+ZEITEN nach 5160 Runden: lesen 205.42 s, wirtschaft 20.25 s, ruestung 8.12 s, haus_lager_zeile 0.26 s, waechter 0.00 s
+24413 | 352  24  78 |   2   0 |  93.25 | 122/122 (3) | 18 10 | STEUER 7 -> 6 (Beliebtheit 93.25)
+Ende Phase 2 bei Tick 24428 nach 5163 Runden (0.0 s je Runde); Kornspeicher 1, Holzfaeller 18, Apfelplantagen 10
+Wirtschaft: Seasoning: A 3 / B 3 Plantagen, A reif bei 1695, B gesetzt bei 1720; Apfelbauern untaetig vor B 0 % (107 Messungen), B bis B+1000 15 % (249 Messungen), danach 25 % (4804 Messungen); FESTES FENSTER Tick 5000-12000 (zum Vergleich zwischen Partien): 23 % (1599 Messungen); Lager gesetzt bei 3677, gemessene Ladung je Gang {3: 18, 52: 1}
+Ertrags-Planer: gesetzt {'Holzfaeller': 1, 'Holzfaeller statt Verkauf': 3, 'Steinbruch+Ochsenjoch': 4, 'Ochsenjoch (Regel)': 11, 'Eisenmine': 18, 'Apfelplantage': 4, 'Jaegerhuette': 25}, stehen am Ende {'Eisenmine': 18, 'Steinbruch+Ochsenjoch': 5, 'Apfelplantage': 10, 'Jaegerhuette': 25, 'Holzfaeller': 18, 'Ochsenjoch': 15, 'Steinhaufen zuletzt': {47: 6, 56: 2, 73: 1, 76: 2, 80: 3}, 'Bauplaetze ohne Weg verworfen': 17}, abgelehnt {}, Verstoesse gegen den Horizont keine, Steuerstufe 6
+Ertragsmesser: Eisenmine 0.61->0.50 (Zugang 78, Lieferung 2, Gegenprobe 0.55, Anlauf 6384 gemessen an der Art); Steinbruch+Ochsenjoch 6.72->8.02 (Zugang 492, Lieferung None, Gegenprobe 0.0, Anlauf 3550 gemessen an der Art); Apfelplantage 3.25->3.35 (Zugang 464, Lieferung 5, Gegenprobe 0.26, Anlauf 1681 gemessen an der Art); Jaegerhuette 3.07->1.64 (Zugang 542, Lieferung 23, Gegenprobe 0.07, Anlauf 4496 gemessen an der Art); Holzfaeller 13.24->9.69 (Zugang 1252, Lieferung 18, Gegenprobe 0.06, Anlauf 4000 Startwert) | negative Zugaenge: holz 1 von 5162 Runden, Summe 2; stein 0 von 5162 Runden, Summe 0; eisen 0 von 5162 Runden, Summe 0 | abgegebene Ladung je Einheit@Art: {'13@32': 121, '3@3': 74, '32@5': 43, '6@7': 30, '52@7': 10}
