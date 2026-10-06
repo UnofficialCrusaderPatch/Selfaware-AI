@@ -452,6 +452,7 @@ ENTSCHEIDER = "regeln"   # "kausal" (Daniel 23:27 "dynamische Antworten fuer all
 B_VERSATZ = None         # Lernkreis: B-Plantagen so viele Ticks nach "alle A stehen" (None = erst bei A-Reife)
 STEUER_RUNTER = 95       # Lernkreis: Steuer senken unter dieser Beliebtheit (Daniel 06.10. 23:53: Steuern als Geldquelle)
 BEV_ZIEL = 0             # Lernkreis: Huetten bauen, bis so viele Wohnplaetze stehen (0 = aus; Daniel 07.10. 00:17 "60-70")
+PENNER = 20              # Lernkreis: Wachstums-Holzfaeller erst ab so vielen Wartenden am Feuer (hoechstens 24 moeglich)
 KASSE_GRENZE = 50        # Lernkreis: Kasse nur, solange die Beliebtheit darueber liegt (Lauf 26: bei 0 Massen-Wegzug)
 KASSE = "nein"           # Lernkreis: "steuer" / "steuer_essen" - ab Ziel-Bevoelkerung (oder wenn nichts mehr lohnt) Stufe 11 bis zum Ende
 STEUER_ENDE = "nein"     # Lernkreis: Hoechststeuer (Stufe 11), sobald sich nichts mehr amortisiert (Daniel 07.10. 00:0x)
@@ -1107,7 +1108,10 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                 # sondern direkt: naechster Baum-Platz des Planers, sonst ein geplanter Holzfaeller-Platz; jede Absage mit Grund
                 R_w = wirt.ruecklage(G)
                 # erst wenn die Steinbrueche besetzt sind (v15: Bauern nehmen Holzfaeller vor Steinbruch, Steinbrueche blieben 0/6)
-                if st.get("feuer", 0) >= 2 and "stein_besetzt" in fruehpruefung and not any(a["typ"] == 3 for a in BUCH.offen):
+                # Daniel 00:54: "es muss noch Platz fuer Penner sein - wenn alle direkt Holzfaeller werden, ist kein Platz": die
+                # Wartenden sind der Puffer (sie gehen bei niedriger Beliebtheit zuerst, aus ihnen wird angeworben); Holzfaeller
+                # erst, wenn das Feuer fast voll ist (hoechstens 24, dann kein Zuzug) - Knopf penner
+                if st.get("feuer", 0) >= PENNER and "stein_besetzt" in fruehpruefung and not any(a["typ"] == 3 for a in BUCH.offen):
                     if st["holz"] - R_w["holz"] >= kosten_spiel(3)["holz"]:
                         ort_w, weg_w = ausbau._bester_ort(3, L, G)
                         plaetze_w = [ort_w] if ort_w else [tuple(q) for q in v16_holzfaeller(plan) if not steht_bei(G, 3, tuple(q), 1)]
@@ -1368,7 +1372,9 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
             schreib("FRUEHABBRUCH bei Tick %d: %s" % (st["t"], endspiel["abbruch"]))
             break
         if streitkolben:
-            if leder is not None and not endspiel["fertig"] and not (BUCH is not None and HOLZ_SPAM and
+            # Daniel 00:54: "Gerber und Kaesereien machen keinen Sinn, wenn kein Platz fuer Bevoelkerung ist, wenn's als letztes
+            # gebaut wird" - mit Kasse gehen die Leute am Ende weg; Leder wird im Endspiel gekauft
+            if leder is not None and KASSE == "nein" and not endspiel["fertig"] and not (BUCH is not None and HOLZ_SPAM and
                     sum(1 for g in G.values() if g["besitzer"] == SP and g["typ"] == 3) < HOLZ_SPAM):
                 ereignis += leder.schritt(st, G, wirt)
             ereignis += bilanz_schritt(st, L, G, ausbau, streitkolben, endspiel, runde, kaempfer_marken)
@@ -1446,10 +1452,11 @@ def main():
     HOLZ_KAUFEN = arg.get("holz_kaufen", "nein") == "ja"
     global HOLZ_SPAM, STEIN_MAX, JOCH_NACH_STEIN, STEIN_PARALLEL, HUETTEN_VORAUS, VOLLBESCHAEFTIGUNG
     VOLLBESCHAEFTIGUNG = arg.get("vollbeschaeftigung", "nein") == "ja"
-    global ENTSCHEIDER, ZIEL_TICK, B_VERSATZ, STEUER_RUNTER, STEUER_ENDE, BEV_ZIEL, KASSE, KASSE_GRENZE
+    global ENTSCHEIDER, ZIEL_TICK, B_VERSATZ, STEUER_RUNTER, STEUER_ENDE, BEV_ZIEL, KASSE, KASSE_GRENZE, PENNER
     BEV_ZIEL = int(arg.get("bevoelkerung_ziel", 0))
     KASSE = arg.get("kasse", "nein")
     KASSE_GRENZE = int(arg.get("kasse_grenze", 50))
+    PENNER = int(arg.get("penner", 20))
     STEUER_RUNTER = int(arg.get("steuer_runter", 95))
     STEUER_ENDE = arg.get("steuer_ende", "nein")
     B_VERSATZ = None if arg.get("b_versatz", "reif") == "reif" else int(arg["b_versatz"])
