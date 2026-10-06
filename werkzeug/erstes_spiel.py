@@ -1031,6 +1031,14 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                         if not o_k:
                             ausbau.fehlschlag[(typ_k, ort_k)] = ausbau.fehlschlag.get((typ_k, ort_k), 0) + 1
                     ereignis.append("KAUSAL %s bei %s: %s -> %s" % (NACH_TYP[typ_k]["name"], ort_k, text_k, o_k))
+            if V14 and not endspiel["fertig"] and st["t"] >= ZIEL_TICK - 4000:
+                # Daniel 23:46: gegen Ende Holz direkt verkaufen statt neue Lagerplaetze - Holzfaeller legen sofort ab
+                ausbau.lager_stopp = wirt.lager_stopp = True
+                lose_h = min(3, max(0, (st["holz"] - 40) // 20))
+                if lose_h:
+                    sende({"befehle": [{"player": 1, "id": neue_id(), "spielbefehl": {"nr": 38, "werte": [1, WAREN_NR["holz"]]}}
+                                       for _ in range(lose_h)]}, 1.0, bis="SPIELBEFEHL")
+                    ereignis.append("HOLZ VERKAUFT %d Lose (Holz %d, Lager waechst nicht mehr)" % (lose_h, st["holz"]))
             if HUETTEN_VORAUS and not endspiel["fertig"] and ENTSCHEIDER != "kausal":
                 # v18 (Daniel 23:10 Punkt 3: "Haeuser bauen, bevor du Menschen brauchst, weil sie Spawnzeit brauchen"):
                 # freie Wohnplaetze >= offene Arbeitsplaetze + 4 (mind. 6)

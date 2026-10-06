@@ -548,7 +548,7 @@ class Ertragsplaner:
             voll = [w for w in ("holz", "stein", "eisen") if st.get(w, 0) % JE_TEIL >= JE_TEIL - 8]
             # hoechstens 2 Lagerplaetze = 8 Teile (Daniel 21:11: "du brauchst nur 3 Plaetze - Holz, Stein, Eisen - wenn du
             # optimal platzierst und verkaufst; bei zwei bist du selbst bei doppelten Plaetzen auf der sicheren Seite")
-            if voll and belegt >= teile and teile < MAX_LAGERTEILE:
+            if voll and belegt >= teile and teile < MAX_LAGERTEILE and not getattr(self, "lager_stopp", False):
                 l = self.ziele(G)[5][0]
                 ev.append("PLANER Lager anbauen (%s fast voll, %d Teile) -> %s" % (voll, teile, self.baue(10, l[0], l[1], 10)))
         ev += self.ochsen_nach_stau(st, G, holz)

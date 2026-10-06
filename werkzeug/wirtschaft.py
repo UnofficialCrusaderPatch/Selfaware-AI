@@ -246,7 +246,7 @@ class Wirtschaft:
         for e in einheiten.values():
             if e["zustand"] == 8 and e.get("ladung", 0) > 0:
                 self.ladung_max[e["typ"]] = max(self.ladung_max.get(e["typ"], 0), e["ladung"])
-        if teile and not alt_da:
+        if teile and not alt_da and not getattr(self, "lager_stopp", False):
             unterwegs = sum(e.get("ladung", 0) for e in einheiten.values() if e["typ"] == HOLZFAELLER and e["zustand"] == 8)
             bald = len(wollen) * self.ladung_max.get(HOLZFAELLER, 0)
             bestand = {k: st.get(k, 0) for k in LAGERWAREN}
