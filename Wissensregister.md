@@ -151,6 +151,11 @@ Tick 4.731-7.737, Aufloesung 14,5 Ticks (`daten/lage_ablauf_fein_20261006_224521
 | L6 | Lager: 1 Platz = 4 Teile je 3x3 (6x6), jedes Teil 48 Stueck einer Ware | getestet | lage_v15b_weiter (Teile 6-9 bei (89-92, 270-273)) | 06.10. |
 | L7 | Bauern kommen ~1 je 52 Ticks, sammeln sich zu viert am Feuer und gehen gemeinsam; Arbeit geht erst an Holzfaeller, dann Steinbruch, dann Joch (12 von 12 neue Arbeiter zu Holzfaellern) | getestet + Daniel (Reihenfolge) | arbeitsvergabe_messung_20261006.txt; v15b: Steinbruch voll 904, Joche 1.100 | 06.10. |
 | L8 | Ein Steinbruch legt seinen Steinhaufen (Typ 21) selbst daneben - (80,265) -> (87,267), (80,271) -> (87,276); er belegt Bauplatz | getestet | v15 Abbruch, Gebaeudeliste Tick 1.650 | 06.10. |
+| L10 | Neuer Holzfaeller liefert zum ersten Mal ~4.000 Ticks nach der Arbeitsvergabe: Weg Feuer->Huette (Bergfried-Feuer, 44-73 Felder = 1.060-1.850 Ticks), 3 Staemme (~950), 3x Saegen (~1.290), Weg zum Lager | getestet | E1-Spur Holzfaeller 146/162; E4b: 19 Holzfaeller bis Tick 699, erste Abgabe 4.575; v17 ~5.500 | 06.10. |
+| L11 | Holz kaufen: 5 Holz fuer 15 Gold (3 Gold je Holz) | getestet | v17, 6 Kaeufe gleich (Holz 4 -> 9, Gold -15) | 06.10. |
+| L12 | Startholz-Nachlieferung (bis ~650) landet im NEUEN Lager - frueher Umzug kostet nur den Rest im alten Lager (E1: 10 Holz) | getestet | E1: Holz 0 -> 48 von Tick 419 bis 652 im neuen Lager | 06.10. |
+| L13 | Startholz komplett in Holzfaeller (E4b): kein Holz fuer Huetten -> Wohnraum 26/26 von Tick 1.358 bis ~6.000, Bevoelkerung 4.600 Ticks eingefroren; Steinbrueche erst ab 5.075, bis 7.006 kein Stein | getestet | versuch_E4b_20261006.txt, Lageprotokoll | 06.10. |
+| L14 | Folgerung: alles, was vor ~9.400 noch Ertrag bringen soll, muss vor ~1.500 stehen UND besetzt sein (Verzoegerung ~4.000); spaeter gebaute Holzfaeller/Steinbrueche zahlen sich bis zum Endspiel nicht mehr aus | gerechnet aus L10/L13 | - | 06.10. |
 
 ## Bewaehrt / nicht bewaehrt (nach jedem Lauf eine Zeile, Daniel 21:05: "schauen, was hat sich bewaehrt und was nicht")
 
