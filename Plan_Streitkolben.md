@@ -153,8 +153,14 @@ v5 hatte bei 9.400 erst ~900 -> es fehlen ~30 %.
 1. Schnellere Eroeffnung (v11/v12: Seasoning B 1.215 statt 1.720) + schnelleres Endspiel -> grob 11.000. Reicht NICHT.
 2. Groesster Hebel = Bedarf senken: von 1.120 gehen 600 an Keulen, 320 an Leder.
    - eigenes Leder: 2 Hoefe + 1 Gerberei direkt nach dem Seasoning (~105 Gold) spart 320 (0,46 Kuehe/Hof/1000, 3 Leder/Kuh).
-   - eigene Keulen aus GEKAUFTEM Eisen: 7 Eisen x 54 = 378 -> 10 Keulen (1,5/Eisen) spart ~220 gegen 600.
-   -> Bedarf ~30 % kleiner = genau die Luecke. Gegenprobe Zeit: Hoefe ab ~1.300 -> ~7 Kuehe bis 9.000 (21 Leder);
-      Schmiede 1,5 Keulen je ~1.100 Ticks -> ~10 bis 8.000. Nur gerechnet (ungeprueft).
+   - ~~eigene Keulen aus GEKAUFTEM Eisen: 7 Eisen x 54 = 378 spart ~220~~ FALSCH (22:03, Daniels Frage "macht eine
+     Schmiede bei 10 Sinn?"): Eisen gibt es nur in 5er-Losen -> 10 Eisen = 540 statt 600 fuer 2 Lose Keulen = 60 gespart;
+     Schmiede 20 H 8 S (Wert 60), Abriss gibt 10 H 4 S zurueck -> netto ~30. Ergebnis ~0, dazu Arbeiter, Platz und
+     ~6.500 Ticks (7 Eisen x 927). Bei 10 Kaempfern: KEINE Schmiede. Bei 30: 6 Lose Keulen 1.800 gegen 4 Lose Eisen
+     1.080 -> spart ~720, dann lohnt sie (mehrere Schmieden wegen der Zeit).
+   - Leder netto: 2 Hoefe + Gerberei = 29 H 3 S 105 G (Wert ~149), Abriss gibt ~69 zurueck -> netto ~80, spart 320.
+     Zeit: Gerberei ~1.550 Ticks je Kuh -> 4 Kuehe (12 Leder) ~6.200 Ticks, ab ~1.500 fertig um ~7.700.
+   -> Luecke bei 9.400: ohne Leder 1.185 - 900 = ~285; mit Leder 865 - ~820 = ~45 (+ unbekannter Verlust, weil die
+      105 Gold frueh nicht in die Wirtschaft gehen). Reicht nur zusammen mit der schnelleren Eroeffnung. Gerechnet, ungeprueft.
 3. Gleiche Fassung mehrfach laufen lassen ist KEIN Weg (Daniel) - erst Aenderung mit Rechnung, dann Versuch.
-Naechster Schritt v14: weg=bilanz + fruehe Leder-Kette + Schmiede mit Markt-Eisen; Bilanz rechnet eigene Waffen gegen.
+Naechster Schritt v14: weg=bilanz + fruehe Leder-Kette, Keulen weiter kaufen; Bilanz rechnet eigenes Leder gegen.
