@@ -539,6 +539,11 @@ class Ertragsplaner:
             # Lernkreis (Daniel 23:53 "machen Steuern nochmal gut Geld?"): Schwelle zum Senken ist ein Knopf (steuer_runter)
             runter = getattr(self, "steuer_runter", 95)
             neu = self.steuer + 1 if (bel >= runter + 2 and self.steuer < 8 and st.get("leute", 0) >= 15) else self.steuer - 1 if (bel < runter and self.steuer > STEUER_MIN) else self.steuer
+            if getattr(self, "steuer_ende", "nein") == "ja" and getattr(self, "endphase", False) and bel >= 55:
+                # Daniel 07.10. 00:0x: "wenn du eh keine Produktion mehr baust, weil sie sich nicht mehr amortisiert, kannst du
+                # einfach -24 Steuern machen" - Endphase = Kausalmodell findet keine Handlung mit Wert mehr (holz_ueberfluessig);
+                # Wohnraum ist dann voll, Zuzug egal; unter 55 Beliebtheit zurueck auf die Regel (unter 50 gehen Leute)
+                neu = 11
             if neu != self.steuer:
                 befehl({"spielbefehl": {"nr": 34, "werte": [neu]}}, 1.0, bis="SPIELBEFEHL")
                 ev.append("STEUER %d -> %d (Beliebtheit %.2f)" % (self.steuer, neu, bel))

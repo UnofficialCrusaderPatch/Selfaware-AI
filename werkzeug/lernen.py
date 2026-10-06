@@ -43,14 +43,18 @@ KNOEPFE = {
     "vollbeschaeftigung": ["ja", "nein"],
     "entscheider": ["regeln", "kausal"],
     "b_versatz": ["reif", 0, 300, 600],
+    "steuer_ende": ["nein", "ja"],
+    "steuer_runter": [95, 90, 85, 80],
+    "stein_max": ["nein", "ja"],
 }
 GRUND = {"v14": "ja", "umzug": "frueh", "holzfaeller_vorab": 4, "holz_spam": 20, "holzfaeller_je_baum": 4, "holzfaeller_max": 30,
          "steinbruch_zuerst": "nein", "stein_parallel": "ja", "joch_nach_stein": "ja", "huetten_voraus": "ja",
-         "holz_kaufen": "ja", "je_arbeiter": "ja", "vollbeschaeftigung": "nein", "entscheider": "regeln", "b_versatz": "reif"}
+         "holz_kaufen": "ja", "je_arbeiter": "ja", "vollbeschaeftigung": "nein", "entscheider": "regeln", "b_versatz": "reif",
+         "steuer_ende": "nein", "steuer_runter": 95, "stein_max": "nein"}
 FEST = ["leere_ki=ja", "tempo=100", "minuten=60", "streitkolben=10", "weg=bilanz", "experiment=ja"]
 # 23:26 (Daniel: Ochse vor Steinbruch, Lager nicht umgezogen - in der v5-Bauweise galten die alten Regeln): EIN Weg.
 # v14 ist fest; der Kreis aendert nur Werte, keine Bauweisen ("zwei Wege zum selben Ziel sind immer ein Fehler")
-HINWEISE = ["b_versatz"]     # Daniel 23:30: "Seasoning passiert immer noch zu spaet ... jede Wartezeit der Apfelbauern ist unproduktiv"
+HINWEISE = ["steuer_ende", "steuer_runter", "stein_max", "b_versatz"]   # 07.10.: Steuern, dritter Steinbruch     # Daniel 23:30: "Seasoning passiert immer noch zu spaet ... jede Wartezeit der Apfelbauern ist unproduktiv"
 # welche Knoepfe zu welchem gemessenen Verlust gehoeren (Vorwissen; die Wirkung misst der Kreis selbst)
 VERLUST_KNOEPFE = {
     "wohnraum_voll": ["entscheider", "huetten_voraus", "holz_kaufen"],

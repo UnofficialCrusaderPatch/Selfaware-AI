@@ -69,6 +69,7 @@ class Wirtschaft:
         self.sp, self.baue_schnell = sp, baue_schnell
         self.A, self.B = apfel_gruppen(plan["aepfel"])
         self.B_offen = list(self.B)
+        self.b_vergeben = None                  # Plantagen-Nummern, die schon gezaehlt sind (A, frueher, je B eine)
         self.B_erwartet = {}                    # B-Sollplatz -> (gemeldeter Bauort, Tick); erst echtes Gebaeude bestaetigt
         self.lager_ort = tuple(plan["lager"])
         self.alt = set(alte_lager)               # Lagerteile aus der Eroeffnung (behalten B-Holz bis B steht)
@@ -158,13 +159,20 @@ class Wirtschaft:
                 if self.A_reif_tick is None:
                     self.A_reif_tick = t
                     ev.append("Seasoning: A-Plantagen reif bei Tick %d (Baum %d) - setze %d B-Plantagen" % (t, self.apfelbaum, len(self.B_offen)))
-                stehen = [(g["x"], g["y"]) for g in eigen.values() if g["typ"] == APFEL]
+                stehen = [(n, (g["x"], g["y"])) for n, g in eigen.items() if g["typ"] == APFEL]
+                if self.b_vergeben is None:
+                    # Daniel 07.10. (Lauf 14: "eine Apfelplantage oben nicht platziert"): B (89,235) stand nie, galt aber als
+                    # bestaetigt - jede Plantage im Umkreis 2 zaehlte, auch eine schon fuer ein anderes B gezaehlte. Jetzt
+                    # bestaetigt nur eine NEUE Plantage (Nummer noch nicht vergeben) genau einen B-Platz.
+                    self.b_vergeben = {n for n, _ in stehen}
                 holz_frei, gold_frei = st.get("holz", 0), st.get("gold", 0)
                 for o in list(self.B_offen):
                     erwartet = self.B_erwartet.get(o)
-                    bestaetigt = any(schach(o, s) <= 2 for s in stehen) or (erwartet and any(
-                        schach(erwartet[0], s) <= 2 for s in stehen))
+                    treffer = [n for n, s in stehen if n not in self.b_vergeben and (schach(o, s) <= 2 or (
+                        erwartet and schach(erwartet[0], s) <= 2))]
+                    bestaetigt = bool(treffer)
                     if bestaetigt:
+                        self.b_vergeben.add(treffer[0])
                         self.B_offen.remove(o)
                         self.B_erwartet.pop(o, None)
                         continue
@@ -178,6 +186,9 @@ class Wirtschaft:
                         ort = self.baue_schnell(APFEL, o[0], o[1], spielraum)
                         if ort is not None:
                             self.B_erwartet[o] = (tuple(ort), t)
+                            ev.append("Seasoning: B %s bestellt bei %s" % (o, tuple(ort)))
+                        elif self.versuche_B % 10 == 0:
+                            ev.append("Seasoning: B %s kein Bauplatz (Spielraum %d)" % (o, spielraum))
                             holz_frei -= APFEL_HOLZ
                             gold_frei -= APFEL_GOLD
                     elif holz_frei < APFEL_HOLZ and gold_frei >= 60:

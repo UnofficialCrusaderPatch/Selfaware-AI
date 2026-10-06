@@ -442,6 +442,8 @@ HUETTEN_VORAUS = False   # v18: Huetten vor dem Bedarf (Daniel 23:10 Punkt 3: Ba
 VOLLBESCHAEFTIGUNG = False   # Lernkreis: jeder Bauer am Feuer bekommt sofort einen Arbeitsplatz (Lernlauf 1: 93 % untaetig)
 ENTSCHEIDER = "regeln"   # "kausal" (Daniel 23:27 "dynamische Antworten fuer alles"): Kausalmodell entscheidet Betriebe + Huetten
 B_VERSATZ = None         # Lernkreis: B-Plantagen so viele Ticks nach "alle A stehen" (None = erst bei A-Reife)
+STEUER_RUNTER = 95       # Lernkreis: Steuer senken unter dieser Beliebtheit (Daniel 06.10. 23:53: Steuern als Geldquelle)
+STEUER_ENDE = "nein"     # Lernkreis: Hoechststeuer (Stufe 11), sobald sich nichts mehr amortisiert (Daniel 07.10. 00:0x)
 ZIEL_TICK = 9400         # Zieltick, bis zu dem das Kausalmodell Ertraege rechnet (unter 1 Jahr = 9.600, Endspiel davor)
 
 def v16_holzfaeller(plan):
@@ -760,6 +762,11 @@ def bilanz_schritt(st, L, G, ausbau, ziel, endspiel, runde, marken):
             for _ in range(-(-(12 - st.get("stein", 0)) // 5)):
                 befehl({"spielbefehl": {"nr": 38, "werte": [0, 4]}}, 1.0, bis="SPIELBEFEHL")
         aus.append("WARNUNG Kaserne fehlt nach dem Endspiel - neu gebaut: %s" % (kaserne_am_feuer(G),))
+    if endspiel["fertig"] and v.get("holz", 0) >= 5:
+        # Lauf 14: Gold reichte fuer 9 Kaempfer, 59 Holz lagen - im Endspiel ist Holz nur Gold
+        for _ in range(v["holz"] // 5):
+            befehl({"spielbefehl": {"nr": 38, "werte": [1, 2]}}, 1.0, bis="SPIELBEFEHL")
+        aus.append("ENDSPIEL Holz verkauft (%d Holz)" % v["holz"])
     if kas:
         werben = min(v.get("keule", 0), v.get("leder", 0), st.get("feuer", 0), v.get("gold", 0) // KAEMPFER_GOLD, n)
         for _ in range(max(werben, 0)):
@@ -924,6 +931,7 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
     from auftragsbuch import Auftragsbuch
     BUCH = Auftragsbuch(SP, ARBEITER_JE, NACH_TYP)
     ausbau.holz_max, ausbau.je_arbeiter, ausbau.huetten_je_baum = HF_MAX, JE_ARBEITER, HUETTEN_JE_BAUM
+    ausbau.steuer_runter, ausbau.steuer_ende = STEUER_RUNTER, STEUER_ENDE
     if V14:
         wirt.umzug_ab, wirt.lager_genau, wirt.lager_ort = None, True, tuple(V14_PLAN["lager"])
         wirt.umzug_nach_b = UMZUG == "nachb"
@@ -1049,6 +1057,7 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                 # positiven Wert, ist Holz nur noch Verkaufsware -> alles ueber 20 verkaufen, Lager waechst nicht mehr
                 bedarf_holz = KM.entscheide(st["t"], ZIEL_TICK, dict(st_k, holz=999, gold=999), kand_k, feuer_g, abgabe_k, kosten_spiel(1)["holz"])
                 fruehpruefung["holz_ueberfluessig"] = not bedarf_holz
+                ausbau.endphase = not bedarf_holz
             if V14 and not endspiel["fertig"] and fruehpruefung.get("holz_ueberfluessig"):
                 # Daniel 23:46: gegen Ende Holz direkt verkaufen statt neue Lagerplaetze - Holzfaeller legen sofort ab
                 ausbau.lager_stopp = wirt.lager_stopp = True
@@ -1153,7 +1162,10 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                           ausbau.messer, holz_verkaufen=bremst, eisen_reserve=10 ** 6 if prod else 0)
             if v:
                 ereignis.append(v)
-            if not bremst and st["holz"] > HOLZ_RESERVE + 4:     # Gold reicht: Holzueberschuss -> Holzfaeller
+            # Daniel 07.10. (Lauf 14: 9 statt 10 Kaempfer, "hier fehlt ein Arbeiter, schlecht kalkuliert"): nach dem Endspiel-
+            # Abriss lagen 59 Holz, daraus wurde ein Holzfaeller statt Gold - im Endspiel und ohne Holzbedarf nie
+            if (not bremst and st["holz"] > HOLZ_RESERVE + 4 and not endspiel["fertig"]
+                    and not fruehpruefung.get("holz_ueberfluessig")):
                 ort, text = ausbau.holzfaeller_statt_verkauf(st, L, G)
                 if ort:
                     ereignis.append("Holzfaeller statt Holzverkauf bei %s (Holz %d; %s)" % (ort, st["holz"], text))
@@ -1343,7 +1355,9 @@ def main():
     HOLZ_KAUFEN = arg.get("holz_kaufen", "nein") == "ja"
     global HOLZ_SPAM, STEIN_MAX, JOCH_NACH_STEIN, STEIN_PARALLEL, HUETTEN_VORAUS, VOLLBESCHAEFTIGUNG
     VOLLBESCHAEFTIGUNG = arg.get("vollbeschaeftigung", "nein") == "ja"
-    global ENTSCHEIDER, ZIEL_TICK, B_VERSATZ
+    global ENTSCHEIDER, ZIEL_TICK, B_VERSATZ, STEUER_RUNTER, STEUER_ENDE
+    STEUER_RUNTER = int(arg.get("steuer_runter", 95))
+    STEUER_ENDE = arg.get("steuer_ende", "nein")
     B_VERSATZ = None if arg.get("b_versatz", "reif") == "reif" else int(arg["b_versatz"])
     ENTSCHEIDER = arg.get("entscheider", "regeln")
     ZIEL_TICK = int(arg.get("ziel_tick", 9400))
