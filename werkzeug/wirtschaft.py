@@ -77,7 +77,7 @@ class Wirtschaft:
         self.bauern = []                          # (tick, Bauern, untaetig)
         self.versuche_B = 0
         self.a_versucht = {}                 # A-Platz -> Tick des letzten Bauversuchs (nachholen)
-        self.holz_verbauen = None            # (st, L, G) -> (ort, text): Holzfaeller statt Holz verkaufen (setzt der Lenker)
+        self.holz_verbauen = None            # (st, L, G) -> (ergebnis, text): Holz verkaufen oder Holzfaeller (setzt der Lenker)
         self.baum_gesucht = -999             # Tick der letzten Baumsuche
         # Baum gleich jetzt suchen, solange das Spiel noch steht (9g: die Kartensuche mitten im Lauf kostete ~600 Ticks)
         if self.B:
@@ -196,10 +196,10 @@ class Wirtschaft:
             else:
                 ware = max(inhalt, key=inhalt.get)
                 if ware == "holz":
-                    # Daniel 06.10.: Holz nicht verkaufen, sondern mehr Holzfaeller bauen - das verbraucht das Lagerholz.
-                    # Geht das gerade nicht, bleibt das Lager stehen und das Holz liegen.
-                    ort, text = self.holz_verbauen(st, L, G) if self.holz_verbauen else (None, "kein Planer")
-                    ev.append("Altes Lager leeren: Holzfaeller statt Verkauf -> %s (%s; Inhalt %s)" % (ort, text, inhalt))
+                    # Daniel 06.10.: Holz verkaufen nur, solange Gold das Anwerben bremst, sonst Holzfaeller - entscheidet der
+                    # Lenker (holz_verwerten). Geht beides gerade nicht, bleibt das Lager stehen und das Holz liegen.
+                    erg, text = self.holz_verbauen(st, L, G) if self.holz_verbauen else (None, "kein Planer")
+                    ev.append("Altes Lager leeren (Holz): %s (%s; Inhalt %s)" % (erg, text, inhalt))
                 else:
                     befehl({"spielbefehl": {"nr": 38, "werte": [1, {"stein": 4, "eisen": 6, "pech": 7, "weizen": 9,
                                                                    "hopfen": 3, "mehl": 16}[ware]]}}, 1.0, bis="SPIELBEFEHL")

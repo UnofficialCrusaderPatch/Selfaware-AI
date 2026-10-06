@@ -29,6 +29,10 @@ LORD = 55
 # Vorlaeufiger Ersatzwert fuer Lagen, die keine Messung deckt: die Angriffsgroesse, die bisher ueberall gewonnen hat
 # (Trainingsstand 40: 3/3; ganze Partien gemeinsam_1 mit 47-60: 3/3). Kein Beleg fuer die neue Lage - nur vorsichtig.
 VORLAEUFIG = 40
+# Nicht verglichen, nur mitgeschrieben (Daniel 06.10. 19:33: "ja"): Bauern (Typ 1). Bei ihrem Lord standen beim Angriff
+# mal 1, mal 27, mal 40 Bauern am Feuer - allein deshalb deckte nie eine gemessene Lage (bedarf_partie_3, holz_partie_2);
+# in den gemessenen Treffern (zielfeld_1) schlug nie ein Bauer zu.
+NICHT_VERGLICHEN = {1}
 
 
 def schach(a, b):
@@ -71,6 +75,8 @@ def deckt(gemessen, aktuell):
         return "Lord an anderem Ort %s statt %s" % (tuple(aktuell["lord_ort"]), tuple(gemessen["lord_ort"]))
     for art in ("einheiten", "gebaeude"):
         for k, v in sorted(aktuell[art].items()):
+            if art == "einheiten" and int(k.split(":")[1]) in NICHT_VERGLICHEN:
+                continue
             if v > gemessen[art].get(k, 0):
                 return "%s %s: %d statt hoechstens %d" % (art, k, v, gemessen[art].get(k, 0))
     return None

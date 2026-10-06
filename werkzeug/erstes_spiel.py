@@ -294,14 +294,16 @@ def nahrung_auf_kante(bestand, puffer, hoechstens=12):
     return lose
 WAREN_NR = {"holz": 2, "stein": 4, "eisen": 6, "pech": 7, "apfel": 13, "brot": 10, "kaese": 11, "fleisch": 12, "weizen": 9, "hopfen": 3, "mehl": 16}
 
-def verkaufen(st, stein_reserve=None, messer=None):
+def verkaufen(st, stein_reserve=None, messer=None, holz_verkaufen=False):
     """Je Runde hoechstens ein Verkauf je Ware (Spielbefehl 38, verkaufen=1). Gibt Text oder None.
     stein_reserve: Bedarf der naechsten geplanten Eisenmine (Daniel 05.10. 19:44: Stein bis darauf verkaufen);
     messer: Ertragsmesser - bekommt jedes verkaufte Los (fuer die Buchfuehrung Zugang = Bestand + Verkauft + Verbaut)."""
     teile = []
-    # Holz wird nicht mehr verkauft (Daniel 06.10.: "statt Holz verkaufen einfach mehr Holzfaeller, weil Holz kann man
-    # spaeter immer brauchen") - der Ueberschuss geht in Holzfaeller (Ertragsplaner.holzfaeller_statt_verkauf)
-    for ware, reserve in (("stein", STEIN_RESERVE if stein_reserve is None else stein_reserve), ("eisen", 0),
+    # Holz nur, solange Gold das Anwerben bremst (holz_verkaufen); sonst geht der Ueberschuss in Holzfaeller. Daniel
+    # 06.10.: erst "statt Holz verkaufen mehr Holzfaeller", nach holz_partie_1/2 (20. Assassine ~4.000 Ticks spaeter,
+    # kein Sieg) 19:33 "ja, vorerst" - gegen mehrere Gegner braucht es spaeter stabiles Wachstum statt Verkauf.
+    holz = (("holz", HOLZ_RESERVE),) if holz_verkaufen else ()
+    for ware, reserve in holz + (("stein", STEIN_RESERVE if stein_reserve is None else stein_reserve), ("eisen", 0),
                           ("pech", 0), ("weizen", 0), ("hopfen", 0), ("mehl", 0)):
         if st.get(ware, 0) > reserve + 4:
             befehl({"spielbefehl": {"nr": 38, "werte": [1, WAREN_NR[ware]]}}, 1.0, bis="SPIELBEFEHL"); teile.append(ware)
@@ -335,7 +337,19 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
         trupp.gelaende = list(_KARTE)   # einmal im Angriffsprotokoll: Gelände darf als Einfluss nicht vorab verschwinden
     lernlog = os.path.join(D, "ertrag_live_%s_i%d.jsonl" % (time.strftime("%Y%m%d_%H%M%S"), INSTANZ))   # je Instanz: Serien laufen parallel
     ausbau = Ertragsplaner(plan, SP, baue_schnell, wirt, s32(peek(PD + 0x2188)[0]), ende=bis_tick, protokoll=lernlog, wegtest=wegtest)   # lernt im Spiel (Daniel 19:44)
-    wirt.holz_verbauen = ausbau.holzfaeller_statt_verkauf    # altes Lager: Holzfaeller statt Holz verkaufen (Daniel 06.10.)
+
+    def gold_bremst(st, G):
+        """Es sollen Assassinen her, aber das Gold reicht nicht fuer den naechsten (70 + B-Ruecklage)."""
+        return bool(assassinen) and (assassinen < 0 or geworben < assassinen) and st.get("gold", 0) < 70 + wirt.ruecklage(G)["gold"]
+
+    def holz_verwerten(st, L, G):
+        """Altes Lager: Holz verkaufen, solange Gold das Anwerben bremst (Daniel 06.10. 19:33, vorerst); sonst Holzfaeller."""
+        if gold_bremst(st, G):
+            befehl({"spielbefehl": {"nr": 38, "werte": [1, WAREN_NR["holz"]]}}, 1.0, bis="SPIELBEFEHL")
+            ausbau.messer.verkauft("holz")
+            return "verkauft", "Gold bremst das Anwerben"
+        return ausbau.holzfaeller_statt_verkauf(st, L, G)
+    wirt.holz_verbauen = holz_verwerten
     schreib("Ertrags-Planer: Baukosten aus dem Spiel %s; Protokoll %s" % (
         {t: {w: v for w, v in k.items() if v} for t, k in ausbau.kosten.items()}, os.path.basename(lernlog)))
     schreib("Ertrags-Planer: " + ausbau.startwerte)
@@ -404,10 +418,11 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
             if not [n for n, g in G.items() if g["besitzer"] == SP and g["typ"] == 26] and runde % 20 == 2:
                 ereignis.append("Markt gesetzt %s" % (baue_schnell(26, BERGFRIED[0], BERGFRIED[1], 25),))
             elif runde % 3 == 0:
-                v = verkaufen(st, ausbau.reserve()["stein"], ausbau.messer)
+                bremst = gold_bremst(st, G)
+                v = verkaufen(st, ausbau.reserve()["stein"], ausbau.messer, holz_verkaufen=bremst)
                 if v:
                     ereignis.append(v)
-                if st["holz"] > HOLZ_RESERVE + 4:       # frueher: verkauft; jetzt ein Holzfaeller mehr
+                if not bremst and st["holz"] > HOLZ_RESERVE + 4:     # Gold reicht: Holzueberschuss -> Holzfaeller
                     ort, text = ausbau.holzfaeller_statt_verkauf(st, L, G)
                     if ort:
                         ereignis.append("Holzfaeller statt Holzverkauf bei %s (Holz %d; %s)" % (ort, st["holz"], text))

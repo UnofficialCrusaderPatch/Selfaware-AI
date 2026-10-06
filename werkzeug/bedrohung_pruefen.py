@@ -62,6 +62,10 @@ def main():
            and "noch keine Lage" in grund)
     L10 = copy.deepcopy(L); del L10[1]
     pruefe(10, "kein feindlicher Lord -> kein Bedarf", bed(L10, G)[0] is None)
+    L11 = copy.deepcopy(L)
+    for i in range(30):
+        L11[700 + i] = e(1, 2, LORD[0] + 2, LORD[1] + 2)
+    pruefe(11, "30 Bauern mehr am Lord -> belegt (Bauern werden nicht verglichen, Daniel 06.10. 19:33)", bed(L11, G)[1] == "belegt")
     print("\n%d von %d gruen" % (sum(ok), len(ok)))
     return 0 if all(ok) else 1
 
