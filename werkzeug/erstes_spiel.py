@@ -1095,6 +1095,13 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
             # Daniel 07.10. 00:17/00:20: "maximal viel Bevoelkerung und Holzfaeller, dann relativ frueh bei 60-70 Leuten -40
             # Steuern, Essen stoppen und verkaufen". Wachstum: Huetten, bis BEV_ZIEL Plaetze stehen (nur wenn fast voll).
             if BEV_ZIEL and not endspiel["fertig"] and not kasse["an"]:
+                # Daniel 00:40: "ohne ausreichend Holzfaeller werden niemals 70 erreicht, da maximal 24 Leute im Pennerhof sind" -
+                # am Lagerfeuer warten hoechstens 24, dann zieht niemand mehr zu. Wartende bekommen sofort Arbeit: der billigste
+                # Arbeitsplatz ist der Holzfaeller (3 Holz, 1 Arbeiter, liefert Holz fuer Huetten und Verkauf)
+                if st.get("feuer", 0) >= 2 and not any(a["typ"] == 3 for a in BUCH.offen):
+                    ort_w, text_w = ausbau.holzfaeller_statt_verkauf(st, L, G)
+                    if ort_w:
+                        ereignis.append("WACHSTUM Holzfaeller fuer %d Wartende bei %s (%s)" % (st.get("feuer", 0), ort_w, text_w))
                 frei_w = st.get("platz", 0) - st.get("leute", 0)
                 if st.get("platz", 0) < BEV_ZIEL and frei_w <= 4 and st["holz"] >= kosten_spiel(1)["holz"]                         and not any(a["typ"] == 1 for a in BUCH.offen):
                     ereignis.append("WACHSTUM Huette (Platz %d, Ziel %d, frei %d): %s" % (st.get("platz", 0), BEV_ZIEL, frei_w, baue_haus()))
