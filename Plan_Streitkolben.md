@@ -112,3 +112,6 @@ Daraus:
 Zustand. Gleiches gilt fuer Torhaeuser oder Tuerme, weshalb es manchmal effektiver sein kann, sie abzureissen und mit der
 Haelfte ein neues zu bauen, anstatt sie zu reparieren." - Meine 0-Messungen widersprechen dem: der Modulbefehl abreissen
 hat einen Parameter rueckgabe (Standard 0, Spielbefehl 29 {nr, rueckgabe, uid}) - nie gesetzt. Naechster Test: rueckgabe=1.
+- Messpartie 7 (20:07): Abriss mit rueckgabe=1 -> wieder 0 Holz/Stein/Gold nach 150 Ticks. Offen; zu pruefen: wurde die
+  zweite Schmiede ueberhaupt fertig/abgerissen (Gebaeudeliste vorher/nachher), war das Holz-Lager voll (195 = 4 Teile),
+  was param_3 in giveBackResourceForDestroyedBuilding bedeutet (daten/dekomp_abriss_rueckgabe.c ganz lesen).

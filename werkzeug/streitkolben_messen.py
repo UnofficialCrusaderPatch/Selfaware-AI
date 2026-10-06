@@ -131,7 +131,9 @@ def main():
     # 3. Abriss der zweiten Schmiede
     if len(schmieden) >= 2:
         a = bestand()
-        befehl({"abreissen": {"nr": schmieden[-1]}}, 0.8, bis="ABREISSEN")
+        # rueckgabe=1: Spielbefehl 29 {nr, rueckgabe, uid}; ohne kam 3-mal 0 zurueck. Daniel 20:06: Abriss gibt normalerweise die
+        # Haelfte zurueck, egal in welchem Zustand (giveBackResourceForDestroyedBuilding, daten/dekomp_abriss_rueckgabe.c)
+        befehl({"abreissen": {"nr": schmieden[-1], "rueckgabe": 1}}, 0.8, bis="ABREISSEN")
         warte_ticks(150)      # Messpartie 3: nach 10 Ticks noch nichts
         b = bestand()
         erg["ablauf"].append({"abriss_schmiede": differenz(a, b)})
