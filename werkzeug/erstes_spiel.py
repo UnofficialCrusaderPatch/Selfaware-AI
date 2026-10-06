@@ -1094,18 +1094,32 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
             # Steuern, Essen stoppen und verkaufen". Wachstum: Huetten, bis BEV_ZIEL Plaetze stehen (nur wenn fast voll).
             if BEV_ZIEL and not endspiel["fertig"] and not kasse["an"]:
                 frei_w = st.get("platz", 0) - st.get("leute", 0)
-                if st.get("platz", 0) < BEV_ZIEL and frei_w <= 2 and st["holz"] >= kosten_spiel(1)["holz"]                         and not any(a["typ"] == 1 for a in BUCH.offen):
+                if st.get("platz", 0) < BEV_ZIEL and frei_w <= 4 and st["holz"] >= kosten_spiel(1)["holz"]                         and not any(a["typ"] == 1 for a in BUCH.offen):
                     ereignis.append("WACHSTUM Huette (Platz %d, Ziel %d, frei %d): %s" % (st.get("platz", 0), BEV_ZIEL, frei_w, baue_haus()))
+            # mit Ziel-Bevoelkerung wartet die Kasse auf das Ziel (Daniel 00:34 "erst 60-70, dann -40"); frueher nur, wenn die
+            # Bevoelkerung einen Monat (~800 Ticks, L23) nicht mehr gewachsen ist und nichts mehr lohnt
+            if st.get("leute", 0) > kasse.get("leute_max", -1):
+                kasse["leute_max"], kasse["wuchs_tick"] = st.get("leute", 0), st["t"]
+            stillstand = st["t"] - kasse.get("wuchs_tick", st["t"]) >= 800
             if KASSE != "nein" and not kasse["an"] and not endspiel["fertig"] and (
-                    (BEV_ZIEL and st.get("leute", 0) >= BEV_ZIEL) or fruehpruefung.get("holz_ueberfluessig")):
+                    (BEV_ZIEL and st.get("leute", 0) >= BEV_ZIEL)
+                    or (fruehpruefung.get("holz_ueberfluessig") and (not BEV_ZIEL or stillstand))):
                 kasse["an"] = st["t"]
                 ausbau.kasse = True
                 ereignis.append("KASSE ab Tick %d (%s): Steuer 11 bis zum Ende, Leute %d, Beliebtheit %.1f%s" % (
-                    st["t"], "Ziel-Bevoelkerung" if BEV_ZIEL and st.get("leute", 0) >= BEV_ZIEL else "nichts lohnt mehr",
+                    st["t"], "Ziel-Bevoelkerung" if BEV_ZIEL and st.get("leute", 0) >= BEV_ZIEL else "nichts lohnt mehr" + (", Bevoelkerung steht seit Tick %d" % kasse["wuchs_tick"] if BEV_ZIEL else ""),
                     st.get("leute", 0), st.get("beliebt", 0) / 100.0, ", keine Rationen, Nahrung wird verkauft" if KASSE == "steuer_essen" else ""))
-                if KASSE == "steuer_essen":
-                    befehl({"spielbefehl": {"nr": 35, "werte": [0]}}, 1.0, bis="SPIELBEFEHL")
-            if kasse["an"] and KASSE == "steuer_essen" and runde % 3 == 1:
+            if kasse["an"] and KASSE == "steuer_essen":
+                # Lauf 38/39: unter der Grenze ging nur die Steuer aus, Rationen blieben 0 und Nahrung wurde weiter verkauft ->
+                # Beliebtheit bis 0, Lauf 39 von 34 auf 4 Leute, kein Kaempfer. Jetzt: unter der Grenze Rationen normal (2) und
+                # kein Nahrungsverkauf mehr, darueber Rationen 0 und alles verkaufen
+                essen_aus = st.get("beliebt", 0) / 100.0 >= KASSE_GRENZE
+                if essen_aus != kasse.get("essen_aus"):
+                    befehl({"spielbefehl": {"nr": 35, "werte": [0 if essen_aus else 2]}}, 1.0, bis="SPIELBEFEHL")
+                    kasse["essen_aus"] = essen_aus
+                    ereignis.append("KASSE Rationen %s (Beliebtheit %.1f, Grenze %d)" % (
+                        "aus, Nahrung wird verkauft" if essen_aus else "normal, kein Verkauf", st.get("beliebt", 0) / 100.0, KASSE_GRENZE))
+            if kasse["an"] and KASSE == "steuer_essen" and kasse.get("essen_aus") and runde % 3 == 1:
                 lose_n = [{"player": 1, "id": neue_id(), "spielbefehl": {"nr": 38, "werte": [1, WAREN_NR[w]]}}
                           for w in ("apfel", "brot", "kaese", "fleisch") for _ in range(st.get(w, 0) // 5)]
                 if lose_n:

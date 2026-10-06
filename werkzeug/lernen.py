@@ -45,7 +45,7 @@ KNOEPFE = {
     "b_versatz": ["reif", 0, 300, 600],
     "steuer_ende": ["nein", "ja"],   # "wohnraum" (Lauf 23) gestrichen: Hoechststeuer ab Tick 1.650 -> Beliebtheit 30, Arbeiter weg, Ziel verfehlt
     "kasse": ["nein", "steuer", "steuer_essen"],     # Daniel 07.10. 00:17/00:20
-    "bevoelkerung_ziel": [0, 50, 60, 70],
+    "bevoelkerung_ziel": [0, 70, 60, 50],     # Daniel 00:34: 60-70 zuerst
     "kasse_grenze": [50, 35, 25],     # Lauf 26: Beliebtheit 0 -> 50 auf 4 Leute, kein Kaempfer; Beliebtheit ist ein Vorrat
     "steuer_runter": [95, 90, 85, 80],
     "stein_max": ["nein", "ja"],
@@ -60,7 +60,7 @@ TEMPO = 100      # 07.10. 00:31: 1000 getestet (Daniel 00:27) - der Lenker brauc
                  # das Tempo bestimmt, wie oft der Lenker hinsieht (bei 100 alle ~11 Ticks). Je Lauf gespeichert.
 # 23:26 (Daniel: Ochse vor Steinbruch, Lager nicht umgezogen - in der v5-Bauweise galten die alten Regeln): EIN Weg.
 # v14 ist fest; der Kreis aendert nur Werte, keine Bauweisen ("zwei Wege zum selben Ziel sind immer ein Fehler")
-HINWEISE = ["kasse", "bevoelkerung_ziel", "kasse_grenze", "steuer_ende", "steuer_runter", "stein_max", "b_versatz"]   # 07.10.: Steuern, dritter Steinbruch     # Daniel 23:30: "Seasoning passiert immer noch zu spaet ... jede Wartezeit der Apfelbauern ist unproduktiv"
+HINWEISE = ["bevoelkerung_ziel", "kasse_grenze", "kasse", "steuer_ende", "steuer_runter", "stein_max", "b_versatz"]   # 07.10.: Steuern, dritter Steinbruch     # Daniel 23:30: "Seasoning passiert immer noch zu spaet ... jede Wartezeit der Apfelbauern ist unproduktiv"
 # welche Knoepfe zu welchem gemessenen Verlust gehoeren (Vorwissen; die Wirkung misst der Kreis selbst)
 VERLUST_KNOEPFE = {
     "wohnraum_voll": ["entscheider", "huetten_voraus", "holz_kaufen"],
@@ -234,6 +234,11 @@ def main():
             # Code hat sich seit der Bestzeit geaendert -> beste Strategie einmal neu messen (keine Wiederholung im Sinne
             # gleicher Laeufe: anderer Code), danach wird gegen diesen Kontrolllauf verglichen
             s, knopf, kontrolle = dict(beste["strategie"]), "kontrolle", False
+            # setze=knopf:wert,... (Daniel 00:34 "Lauf mit 60-70 Bevoelkerung so schnell wie moeglich"): der Kontrolllauf
+            # nimmt diese Werte gleich mit und wird damit der neue Massstab
+            for kv in filter(None, arg.get("setze", "").split(",")):
+                k_s, w_s = kv.split(":", 1)
+                s[k_s] = type(KNOEPFE[k_s][-1])(w_s) if not isinstance(KNOEPFE[k_s][-1], str) else w_s
             horizont = beste["note"]
             beste = None
         elif beste is None:
