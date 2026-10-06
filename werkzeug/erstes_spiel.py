@@ -330,8 +330,46 @@ def verkaufen(st, stein_reserve=None, messer=None, holz_verkaufen=False):
     teile += ["%s x%d" % (w, k) for w, k in lose.items()]
     return ("verkauft: " + ",".join(teile)) if teile else None
 
+KAEMPFER_GOLD = 20          # Anwerben (Liga goldCost)
+LOS_PREIS = {21: 300, 23: 160}   # 5 Keulen / 5 Lederharnische am Markt (gemessen 06.10. Messpartie 8)
+
+def ruestung_kaufen(st, G, wirt, ausbau, ziel, marken):
+    """v2 (Daniel 06.10. 21:05: erst maximale Wirtschaft, den Rest kaufen): Waffenlager + Kaserne weit weg (B3), Keulen und
+    Leder in 5er-Losen am Markt kaufen, sobald das Gold ueber der Ruecklage reicht, und anwerben (20 Gold, Bauer am Feuer).
+    Keine eigenen Werkstaetten - das ist v3."""
+    aus = []
+    eig = {n: g for n, g in G.items() if g["besitzer"] == SP}
+    waf = [n for n, g in eig.items() if g["typ"] == 11]
+    kas = [n for n, g in eig.items() if g["typ"] == 9]
+    rl = wirt.ruecklage(G)
+    if not waf and st["holz"] >= 5 + rl["holz"]:
+        aus.append("Waffenlager gesetzt %s" % (baue_schnell(11, BERGFRIED[0] - 14, BERGFRIED[1] + 14, 25),))
+    if not kas and st["stein"] >= 12:
+        aus.append("Kaserne gesetzt %s" % (baue_schnell(9, BERGFRIED[0] - 16, BERGFRIED[1] + 18, 30),))
+    if not (waf and kas) or not [n for n, g in eig.items() if g["typ"] == 26]:
+        return aus
+    v = vorrat(SP)
+    gold = st["gold"] - rl["gold"]
+    for ware, name in ((21, "keule"), (23, "leder")):
+        if v.get(name, 0) == 0 and gold >= LOS_PREIS[ware] + KAEMPFER_GOLD and not ausbau.braucht_gold:
+            befehl({"spielbefehl": {"nr": 38, "werte": [0, ware]}}, 1.0, bis="SPIELBEFEHL")
+            gold -= LOS_PREIS[ware]
+            v[name] = 5
+            aus.append("5 %s gekauft (%d Gold)" % (name, LOS_PREIS[ware]))
+    werben = min(v.get("keule", 0), v.get("leder", 0), st.get("feuer", 0), max(gold, 0) // KAEMPFER_GOLD,
+                 ziel - st.get("T26", 0))
+    for _ in range(max(werben, 0)):
+        befehl({"werbe": {"typ": 26, "gebaeude": kas[0]}}, 1.0, bis="WERBE")
+    if werben > 0:
+        aus.append("%d Streitkolbenkaempfer angeworben" % werben)
+    for n in range(1, ziel + 1):
+        if st.get("T26", 0) >= n and n not in marken:
+            marken[n] = st["t"]
+            aus.append("KAEMPFER %d bei Tick %d" % (n, st["t"]))
+    return aus
+
 def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0, trainingsstand=None, trainingsstand_ab=40,
-           gold_ziel=None):
+           gold_ziel=None, streitkolben=0):
     schreib("== Phase 2: Echtzeit, Tempo %d, %d Minuten, Waechter %s" % (tempo, minuten, "an" if mit_waechter else "aus"))
     partie_pruefen()
     # Halte-Liste des Moduls ueberlebt das Laden einer Partie (04.10.: alte Eintraege zogen neue Assassinen mit
@@ -357,6 +395,8 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
         """Es sollen Assassinen her, aber das Gold reicht nicht fuer den naechsten (70 + B-Ruecklage) - oder Gold ist selbst
         das Ziel (gold_ziel, Testpartie gegen die leere KI)."""
         if gold_ziel and st.get("gold", 0) < gold_ziel:
+            return True
+        if streitkolben and st.get("T26", 0) < streitkolben and st.get("gold", 0) < KAEMPFER_GOLD + wirt.ruecklage(G)["gold"]:
             return True
         return bool(assassinen) and (assassinen < 0 or geworben < assassinen) and st.get("gold", 0) < 70 + wirt.ruecklage(G)["gold"]
 
@@ -384,6 +424,7 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
         diese_runde[name] = time.time() - t0
         return time.time()
     gold_marke = 1000
+    kaempfer_marken = {}
     while time.time() < ende and not os.path.exists(os.path.join(HIER, "STOP")):
         tz = time.time()
         befehlskanal.belege()
@@ -478,6 +519,12 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                         trainingsstand, len(angekommen), st["t"], pfad))
                     break
             tz = uhr("assassinen", tz)
+        if streitkolben:
+            ereignis += ruestung_kaufen(st, G, wirt, ausbau, streitkolben, kaempfer_marken)
+            if st.get("T26", 0) >= streitkolben:
+                schreib("ZIEL %d Streitkolbenkaempfer erreicht bei Tick %d" % (streitkolben, st["t"]))
+                break
+            tz = uhr("ruestung", tz)
         # Feindlicher Lord: jede Runde mit Lebensverlust mitschreiben - wer steht bei ihm? (9i/9j: Sieg ohne Befehl auf ihn)
         for n, e in L.items():
             if e["typ"] == 55 and e["besitzer"] not in (0, SP):
@@ -536,7 +583,8 @@ def main():
     try:
         phase2(plan, int(arg.get("minuten", 10)), int(arg.get("tempo", 40)), arg.get("waechter", "nein") == "ja",
                int(arg["bis_tick"]) if arg.get("bis_tick") else None, int(arg.get("assassinen", 0)), arg.get("trainingsstand"),
-               int(arg.get("trainingsstand_ab", 40)), int(arg["gold_ziel"]) if arg.get("gold_ziel") else None)
+               int(arg.get("trainingsstand_ab", 40)), int(arg["gold_ziel"]) if arg.get("gold_ziel") else None,
+               int(arg.get("streitkolben", 0)))
     except RuntimeError as e:
         # Modulfehler (befehl.pruefe): Spiel anhalten, damit der Zustand fuer die Ursachensuche stehen bleibt
         import befehl as befehlskanal

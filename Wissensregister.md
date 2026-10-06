@@ -115,3 +115,16 @@ Spiels abgelesen ist, aber noch nicht mit laufenden Einheiten geprueft, bleibt "
 | B7 | Der schnellste Weg zu EINER Streitkolben-Werkstatt ist NICHT der schnellste zu 10 Kaempfern - der Aufbau braucht die ganze Wirtschaft: Apfelplantagen, Holzfaeller, Jaeger usw. | Daniel | Daniel 21:01 (Test v1 abgebrochen) | 06.10. |
 | B8 | Kaese nicht fuer die Nahrung nutzen - es kommt zu langsam herein | Daniel | Daniel 21:01 | 06.10. |
 | B9 | Haertetest v1 (Lager am Bergfried, ohne Nahrungswirtschaft), abgebrochen bei Tick 20.845: Steinbruch ab 646 -> erster Stein 5.246; Eisenmine ab 5.323 -> erstes Eisen 11.823; bis 20.845 keine Keule und kein Leder trotz 6 Kuehen (Ursache nicht gesucht); Beliebtheit 82, Leute 26, Gold 120 | getestet | `daten/haertetest_v1_abgebrochen_20261006.txt` | 06.10. |
+| B10 | Kurzes und langes Ziel trennen: Stein/Eisen so schnell wie moeglich ist "jain" - das Ziel braucht nicht nur schnell, sondern viel. Erst maximale Wirtschaft mit maximal viel Gold, im Notfall Waffen kaufen und Werkstaetten aus dem Ueberschuss finanzieren -> nach wenigen Monaten gleichauf, danach exponentiell schneller | Daniel | Daniel 21:05 | 06.10. |
+| B11 | Bauordnung v2 = Apfel-Eroeffnung (Phase 1/2 aus erstes_spiel.py) + Waffen am Markt kaufen (5 Keulen 300, 5 Leder 160, Anwerben 20 = 112 je Kaempfer); v3 = + Werkstaetten, sobald sie sich ueber den Horizont rechnen | Plan | `erstes_spiel.py streitkolben=10` | 06.10. |
+
+## Bewaehrt / nicht bewaehrt (nach jedem Lauf eine Zeile, Daniel 21:05: "schauen, was hat sich bewaehrt und was nicht")
+
+| Lauf | Was | Bewaehrt? | Messwert |
+|---|---|---|---|
+| Messpartie 8 / Abriss | Abriss-Knopf mit 50 % statt 0 % | bewaehrt | Schmiede 20/8 -> 10/4 zurueck |
+| Aufbau 5+5 Runde 1 | ohne Beliebtheit gemessen | NICHT bewaehrt | Beliebtheit 0, Leute 4, 0 Kuehe - Messung wertlos |
+| Aufbau 5+5 Runde 2 | Messumgebung (Beliebtheit 100) + Eisenteil im Plan + laufend anwerben | bewaehrt | 44 Kaempfer aus 30 Eisen; Schmied-Gaenge nah am Plan |
+| Aufbau 5+5 Runde 3 | Lager ans Gruenland versetzt | bewaehrt | 10->40 Kaempfer 31 % schneller |
+| Aufbauplaner Runde 1 | naechstes Lagerteil statt Eisenteil angenommen | NICHT bewaehrt | Gaenge doppelt so lang wie geplant |
+| Haertetest v1 | nur Waffenkette ab Tick 0, ohne Nahrungswirtschaft, Kaese verkauft | NICHT bewaehrt | erster Stein 5.246, erstes Eisen 11.823, keine Keule bis 20.845; Daniel brach ab |
