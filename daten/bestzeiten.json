@@ -70,5 +70,16 @@
    "fehler": false
   },
   "notiz": "Kaserne mit abgerissen (Exerzierplatz) - nur 4 Kaempfer"
+ },
+ {
+  "name": "v7",
+  "marken": {
+   "kaempfer_1": 11973,
+   "kaempfer_2": 12002,
+   "seasoning_b": 1726,
+   "endspiel": 11886,
+   "fehler": false
+  },
+  "notiz": "Exerzierplatz bleibt, Befehle gebuendelt"
  }
 ]

@@ -1,0 +1,596 @@
+CODE-KENNUNG 61001006 (19 Dateien: assassinen.py 5977c6, aufbau_planer.py 59270b, bauen.py fe647a, bedrohung.py 5585cf, befehl.py f9d5aa, bilanz.py fb9962, erstes_spiel.py 697152, ertrag_startwerte_M19.json b566ad, ertragsplaner.py 3a0327, farmen_mischen.py f28949, kennung.py c1d186, laden.py f8c499, logik.lua 58d59d, serie.py 665cfa, speichern.py 00a42e, steuerkarte.py 57bd5a, waechter.py cfbded, wegkarte.py 29ee1f, wirtschaft.py 566395)
+== Phase 1: neue Partie ab Tick 0, Tempo 100 durchgehend, ohne Pausen (Plan eroeffnung_plan_M19.json)
+Zuruecksetzen: Ansicht 14 (Partie vorbei: 0) -> Hauptmenue, pausiert
+LEERE KI: Spieler 2 ohne Waren und Gold (jede Runde)
+SAAT fest aus saat_liga.json (Modul meldet {'karte': 1788115329, 'partie': 1788115329, 'wert1': 7474, 'wert2': 22872, 'zaehler1': 1, 'zaehler2': 118})
+Partie laeuft seit Tick 98: Lords da, unser Lord bei (141, 269), {'Ansicht': 14, 'gameOver': 0, 'Mensch': 1, 'Platz': 1}
+ERSTE BAUBEFEHLE bei Tick 114: 16 von 20 Holz-Bauten stehen bei Tick 167 (Kornspeicher, Markt, Holzfaeller, Steinbruch, Ochsenjoch, Huetten); nicht gebaut: [('Steinbruch', 80, 271), ('Ochsenkarren', 87, 278), ('Huette', 134, 267), ('Huette', 134, 262)]
+VERKAUFT bis Tick 706: {'kaese': 3, 'brot': 3, 'apfel': 3} Lose, Gold 195
+SEASONING FRUEH: 3 von 3 A-Plantagen mit dem Posten bei Tick 726, Gold jetzt 150
+RAID ZUERST: Nahrung da bei Tick 181, {'kaese': 3, 'brot': 3, 'apfel': 3} verkauft (Lose zu 5); Soeldnerposten None; 0 Assassinen angeworben (freie Leute am Feuer jetzt 1) -> Gold 150, Nahrung uebrig {'fleisch': 15}, Tick 741
+NACHGEHOLT bei Tick 773: 3 von 4 (Apfelplantagen A + Rest); nicht gebaut: [('Huette', 134, 267)]; Holz 71, Gold 150
+Apfelplantagen A 3, B 3 spaeter [(89, 235), (80, 225), (70, 223)]; altes Lager bleibt mit {'holz': 71}
+== Phase 2: Echtzeit, Tempo 100, 95 Minuten, Waechter aus
+Ertrags-Planer: Baukosten aus dem Spiel {1: {'holz': 5}, 3: {'holz': 5}, 4: {'holz': 5}, 5: {'holz': 20, 'stein': 6}, 7: {'holz': 3, 'gold': 60}, 10: {}, 19: {'holz': 5}, 20: {'holz': 25}, 32: {'holz': 3, 'gold': 15}}; Protokoll ertrag_live_20261006_213718_i1.jsonl
+Ertrags-Planer: Startwerte aus 10 frueheren Partien: Eisenmine 0.61 (Gewicht 63177, Anlauf 6664); Steinbruch+Ochsenjoch 6.72 (Gewicht 54086, Anlauf 3644); Apfelplantage 3.25 (Gewicht 131019, Anlauf 2224); Jaegerhuette 3.07 (Gewicht 82848, Anlauf 4427); Holzfaeller 13.24 (Gewicht 151124, Anlauf 4000)
+Wirtschaft: Apfel A [(79, 237), (82, 247), (92, 245)], B [(89, 235), (80, 225), (70, 223)]; alte Lagerteile [6, 7, 8, 9]
+Tick | Holz Stein Eisen | Aepfel Brot | Beliebt | Leute/Platz (Feuer) | Holzf. Apfelb. | Ereignis
+  886 |  71   0   0 |   0   0 | 100.00 | 13/18 (1) | 9 0 | PLANER Lage (Gewinn bis Ende / Amortisation): Steinbruch+Ochsenjoch 307/1020, Eisenmine 59/3869, Holzfaeller 51/988, Apfelplantage 49/3467, Jaegerhuette 7/9552 | Stein-Reserve 6; PLANER wartet auf Arbeiter fuer Steinbruch+Ochsenjoch (Feuer 1, braucht 4); Huette (132, 266) (Bedarf 21, Platz 18, Leute 13, Feuer 1)
+  927 |  66   0   0 |   0   0 | 100.00 | 14/26 (0) | 9 0 | verkauft: fleisch x2
+  960 |  66   0   0 |   0   0 | 100.00 | 15/26 (1) | 9 1 | Holzfaeller statt Holzverkauf bei (87, 231) (Holz 66; Platz (87, 231), Weg 48)
+  998 |  61   0   0 |   0   0 | 100.00 | 15/26 (1) | 9 1 | Holzfaeller statt Holzverkauf bei (54, 216) (Holz 61; Platz (54, 216), Weg 63)
+ 1016 |  56   0   0 |   0   0 | 100.00 | 16/26 (2) | 9 1 | BILANZ Rest 10 Kaempfer | Gold 160 + Lager 40 (holz 56 (56 G), fleisch 4 (4 G)) + Abriss 21 Betriebe 73 = 273 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 2, nach Abriss 12 | fehlt 972 Gold
+ZEITEN nach 10 Runden: ruestung 0.51 s, wirtschaft 0.42 s, lesen 0.39 s, haus_lager_zeile 0.06 s, waechter 0.00 s
+ 1025 |  56   0   0 |   0   0 | 100.00 | 16/26 (2) | 9 1 | STEUER 2 -> 3 (Beliebtheit 100.00)
+ 1041 |  56   0   0 |   0   0 | 100.00 | 16/26 (2) | 9 1 | Holzfaeller statt Holzverkauf bei (109, 204) (Holz 56; Platz (109, 204), Weg 75)
+ 1076 |  51   0   0 |   0   0 | 100.00 | 17/26 (3) | 9 1 | Holzfaeller statt Holzverkauf bei (175, 200) (Holz 51; Platz (175, 200), Weg 82)
+ 1135 |  46   0   0 |   0   0 | 100.00 | 18/26 (1) | 10 3 | BILANZ Rest 10 Kaempfer | Gold 160 + Lager 40 (holz 46 (46 G), fleisch 3 (3 G)) + Abriss 23 Betriebe 77 = 277 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 1, nach Abriss 14 | fehlt 968 Gold
+ZEITEN nach 20 Runden: ruestung 0.99 s, lesen 0.78 s, wirtschaft 0.76 s, haus_lager_zeile 0.06 s, waechter 0.00 s
+ 1145 |  46   0   0 |   0   0 | 100.00 | 18/26 (1) | 10 3 | -
+ 1231 |  46   0   0 |   0   0 |  99.75 | 20/26 (3) | 10 3 | BILANZ Rest 10 Kaempfer | Gold 160 + Lager 40 (holz 46 (46 G), fleisch 3 (3 G)) + Abriss 23 Betriebe 77 = 277 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 3, nach Abriss 16 | fehlt 968 Gold
+ZEITEN nach 30 Runden: ruestung 1.29 s, lesen 1.15 s, wirtschaft 1.03 s, haus_lager_zeile 0.06 s, waechter 0.00 s
+ 1240 |  46   0   0 |   0   0 |  99.75 | 20/26 (3) | 10 3 | STEUER 3 -> 4 (Beliebtheit 99.75)
+ 1328 |  46   0   0 |   0   0 |  99.75 | 22/26 (1) | 10 3 | BILANZ Rest 10 Kaempfer | Gold 160 + Lager 40 (holz 46 (46 G), fleisch 3 (3 G)) + Abriss 23 Betriebe 77 = 277 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 1, nach Abriss 18 | fehlt 968 Gold
+ZEITEN nach 40 Runden: ruestung 1.59 s, lesen 1.51 s, wirtschaft 1.33 s, haus_lager_zeile 0.06 s, waechter 0.00 s
+ 1337 |  46   0   0 |   0   0 |  99.75 | 22/26 (1) | 14 3 | -
+ 1422 |  46   0   0 |   0   0 |  99.00 | 24/26 (3) | 14 3 | BILANZ Rest 10 Kaempfer | Gold 160 + Lager 40 (holz 46 (46 G), fleisch 2 (2 G)) + Abriss 23 Betriebe 77 = 277 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 3, nach Abriss 20 | fehlt 968 Gold
+ZEITEN nach 50 Runden: ruestung 1.89 s, lesen 1.89 s, wirtschaft 1.61 s, haus_lager_zeile 0.06 s, waechter 0.00 s
+ 1432 |  46   0   0 |   0   0 |  99.00 | 24/26 (3) | 14 3 | STEUER 4 -> 5 (Beliebtheit 99.00); PLANER Lage (Gewinn bis Ende / Amortisation): Steinbruch+Ochsenjoch 291/1020, Eisenmine 52/3869, Apfelplantage 46/3467, Jaegerhuette 4/9552 | Stein-Reserve 6; PLANER Huette zuerst (Feuer 3, Steinbruch+Ochsenjoch braucht 4) -> (129, 262)
+ 1526 |  41   0   0 |   0   0 |  99.00 | 26/34 (1) | 14 3 | BILANZ Rest 10 Kaempfer | Gold 160 + Lager 40 (holz 41 (41 G), fleisch 2 (2 G)) + Abriss 23 Betriebe 77 = 277 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 1, nach Abriss 22 | fehlt 968 Gold
+ZEITEN nach 60 Runden: lesen 2.26 s, ruestung 2.18 s, wirtschaft 1.97 s, haus_lager_zeile 0.06 s, waechter 0.00 s
+ 1534 |  41   0   0 |   0   0 |  99.00 | 26/34 (1) | 18 3 | -
+ 1621 |  41   0   0 |   0   0 |  97.75 | 28/34 (3) | 18 3 | BILANZ Rest 10 Kaempfer | Gold 168 + Lager 40 (holz 41 (41 G), fleisch 1 (1 G)) + Abriss 23 Betriebe 77 = 285 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 3, nach Abriss 24 | fehlt 960 Gold
+ZEITEN nach 70 Runden: lesen 2.63 s, ruestung 2.49 s, wirtschaft 2.24 s, haus_lager_zeile 0.06 s, waechter 0.00 s
+ 1630 |  41   0   0 |   0   0 |  97.75 | 28/34 (3) | 18 3 | STEUER 5 -> 6 (Beliebtheit 97.75)
+ 1698 |  41   0   0 |   0   0 |  97.75 | 29/34 (0) | 18 3 | Seasoning: A-Plantagen reif bei Tick 1698 (Baum 417) - setze 3 B-Plantagen
+ 1726 |  32   0   0 |   0   0 |  97.75 | 30/34 (1) | 18 3 | Seasoning: alle 3 B-Plantagen stehen (Tick 1726, 28 Ticks nach A-Reife); Altes Lager leeren (Holz): None (kein erreichbarer Holzfaeller-Platz; Inhalt {'holz': 32})
+ 1735 |  32   0   0 |   0   0 |  97.75 | 30/34 (1) | 18 3 | BILANZ Rest 10 Kaempfer | Gold 123 + Lager 20 (holz 32 (32 G), fleisch 1 (1 G)) + Abriss 26 Betriebe 101 = 244 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 1, nach Abriss 26 | fehlt 1001 Gold; Altes Lager leeren (Holz): None (kein erreichbarer Holzfaeller-Platz; Inhalt {'holz': 32})
+ZEITEN nach 80 Runden: lesen 3.00 s, ruestung 2.79 s, wirtschaft 2.70 s, haus_lager_zeile 0.06 s, waechter 0.00 s
+ 1742 |  32   0   0 |   0   0 |  97.75 | 30/34 (1) | 18 3 | Altes Lager leeren (Holz): None (kein erreichbarer Holzfaeller-Platz; Inhalt {'holz': 32})
+ 1750 |  32   0   0 |   0   0 |  97.75 | 30/34 (1) | 18 3 | Altes Lager leeren (Holz): None (kein erreichbarer Holzfaeller-Platz; Inhalt {'holz': 32})
+ 1757 |  32   0   0 |   0   0 |  97.75 | 31/34 (1) | 18 3 | Altes Lager leeren (Holz): None (kein erreichbarer Holzfaeller-Platz; Inhalt {'holz': 32})
+ 1763 |  32   0   0 |   0   0 |  97.75 | 31/34 (2) | 18 3 | Altes Lager leeren (Holz): None (kein erreichbarer Holzfaeller-Platz; Inhalt {'holz': 32})
+ 1770 |  32   0   0 |   0   0 |  97.75 | 31/34 (2) | 18 3 | Altes Lager leeren (Holz): None (kein erreichbarer Holzfaeller-Platz; Inhalt {'holz': 32})
+ 1778 |  32   0   0 |   0   0 |  97.75 | 31/34 (2) | 18 3 | Altes Lager leeren (Holz): None (kein erreichbarer Holzfaeller-Platz; Inhalt {'holz': 32})
+ 1784 |  32   0   0 |   0   0 |  97.75 | 31/34 (2) | 18 3 | Altes Lager leeren (Holz): None (kein erreichbarer Holzfaeller-Platz; Inhalt {'holz': 32})
+ 1791 |  32   0   0 |   0   0 |  97.75 | 31/34 (2) | 18 3 | Altes Lager leeren (Holz): None (kein erreichbarer Holzfaeller-Platz; Inhalt {'holz': 32})
+ 1798 |  32   0   0 |   0   0 |  97.75 | 31/34 (2) | 18 3 | Altes Lager leeren (Holz): None (kein erreichbarer Holzfaeller-Platz; Inhalt {'holz': 32})
+ 1804 |  32   0   0 |   0   0 |  93.25 | 31/34 (2) | 18 3 | BILANZ Rest 10 Kaempfer | Gold 123 + Lager 20 (holz 32 (32 G)) + Abriss 26 Betriebe 101 = 244 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 2, nach Abriss 28 | fehlt 1001 Gold; Altes Lager leeren (Holz): None (kein erreichbarer Holzfaeller-Platz; Inhalt {'holz': 32})
+ZEITEN nach 90 Runden: lesen 3.38 s, ruestung 3.08 s, wirtschaft 2.72 s, haus_lager_zeile 0.06 s, waechter 0.00 s
+ 1811 |  32   0   0 |   0   0 |  93.25 | 32/34 (3) | 18 3 | Altes Lager leeren (Holz): None (kein erreichbarer Holzfaeller-Platz; Inhalt {'holz': 32}); STEUER 6 -> 5 (Beliebtheit 93.25); PLANER Huette zuerst (Feuer 3, Steinbruch+Ochsenjoch braucht 4) -> (129, 270)
+ 1827 |  32   0   0 |   0   0 |  93.25 | 32/34 (3) | 18 3 | Altes Lager leeren (Holz): None (kein erreichbarer Holzfaeller-Platz; Inhalt {'holz': 32})
+ 1835 |  32   0   0 |   0   0 |  93.25 | 32/34 (3) | 18 3 | Altes Lager leeren (Holz): None (kein erreichbarer Holzfaeller-Platz; Inhalt {'holz': 32})
+ 1842 |  32   0   0 |   0   0 |  93.25 | 32/34 (3) | 18 3 | Altes Lager leeren (Holz): None (kein erreichbarer Holzfaeller-Platz; Inhalt {'holz': 32})
+ 1848 |  32   0   0 |   0   0 |  93.25 | 32/34 (3) | 18 3 | Altes Lager leeren (Holz): None (kein erreichbarer Holzfaeller-Platz; Inhalt {'holz': 32})
+ 1854 |  32   0   0 |   0   0 |  93.25 | 32/34 (3) | 18 3 | Altes Lager leeren (Holz): None (kein erreichbarer Holzfaeller-Platz; Inhalt {'holz': 32})
+ 1862 |  32   0   0 |   0   0 |  93.25 | 32/34 (4) | 18 3 | Altes Lager leeren (Holz): None (kein erreichbarer Holzfaeller-Platz; Inhalt {'holz': 32})
+ 1868 |  32   0   0 |   0   0 |  93.25 | 33/34 (4) | 18 3 | Altes Lager leeren (Holz): None (kein erreichbarer Holzfaeller-Platz; Inhalt {'holz': 32})
+ 1875 |  32   0   0 |   0   0 |  93.25 | 33/34 (4) | 18 3 | Altes Lager leeren (Holz): None (kein erreichbarer Holzfaeller-Platz; Inhalt {'holz': 32})
+ 1881 |  32   0   0 |   0   0 |  93.25 | 33/34 (4) | 18 3 | BILANZ Rest 10 Kaempfer | Gold 123 + Lager 20 (holz 32 (32 G)) + Abriss 26 Betriebe 101 = 244 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 4, nach Abriss 30 | fehlt 1001 Gold; Altes Lager leeren (Holz): None (kein erreichbarer Holzfaeller-Platz; Inhalt {'holz': 32})
+ZEITEN nach 100 Runden: lesen 3.75 s, ruestung 3.38 s, wirtschaft 2.82 s, haus_lager_zeile 0.06 s, waechter 0.00 s
+ 1888 |  32   0   0 |   0   0 |  93.25 | 33/34 (4) | 18 3 | Altes Lager leeren (Holz): None (kein erreichbarer Holzfaeller-Platz; Inhalt {'holz': 32}); PLANER Lage (Gewinn bis Ende / Amortisation): Steinbruch+Ochsenjoch 278/1020, Eisenmine 46/3869, Apfelplantage 44/3467, Jaegerhuette 1/9552 | Stein-Reserve 6; PLANER Steinbruch+Ochsenjoch bei (80, 265) (Weg 12, 29.4 Gold/1000, Anlauf 3644, Amortisation 1020, Gewinn bis Ende 278) -> (80, 265)
+ 1907 |   2   0   0 |   0   0 |  93.25 | 33/34 (1) | 18 3 | Altes Lager abgerissen (4 Teile, Rest {'holz': 2}) bei Tick 1907
+ 1975 |   0   0   0 |   0   0 |  93.25 | 34/34 (3) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 123 + Lager 0 (leer) + Abriss 28 Betriebe 118 = 241 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 3, nach Abriss 32 | fehlt 1004 Gold
+ZEITEN nach 110 Runden: lesen 4.13 s, ruestung 3.67 s, wirtschaft 3.07 s, haus_lager_zeile 0.06 s, waechter 0.00 s
+ 1982 |   0   0   0 |   0   0 |  93.25 | 34/34 (3) | 18 6 | STEUER 5 -> 4 (Beliebtheit 93.25)
+ 2047 |   0   0   0 |   0   0 |  90.00 | 34/34 (4) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 123 + Lager 0 (leer) + Abriss 28 Betriebe 118 = 241 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 4, nach Abriss 33 | fehlt 1004 Gold
+ZEITEN nach 120 Runden: lesen 4.50 s, ruestung 3.96 s, wirtschaft 3.13 s, haus_lager_zeile 0.06 s, waechter 0.00 s
+ 2054 |   0   0   0 |   0   0 |  90.00 | 34/34 (4) | 18 6 | -
+ 2153 |   0   0   0 |   0   0 |  90.00 | 34/34 (2) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 123 + Lager 0 (leer) + Abriss 28 Betriebe 118 = 241 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 2, nach Abriss 36 | fehlt 1004 Gold
+ZEITEN nach 130 Runden: lesen 5.25 s, ruestung 4.26 s, wirtschaft 3.14 s, haus_lager_zeile 0.06 s, waechter 0.00 s
+ 2160 |   0   0   0 |   0   0 |  90.00 | 34/34 (2) | 18 6 | STEUER 4 -> 3 (Beliebtheit 90.00)
+ 2224 |   0   0   0 |   0   0 |  87.25 | 34/34 (2) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 123 + Lager 0 (leer) + Abriss 28 Betriebe 118 = 241 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 2, nach Abriss 36 | fehlt 1004 Gold
+ZEITEN nach 140 Runden: lesen 5.63 s, ruestung 4.56 s, wirtschaft 3.17 s, haus_lager_zeile 0.06 s, waechter 0.00 s
+ 2232 |   0   0   0 |   0   0 |  87.25 | 34/34 (2) | 18 6 | -
+ 2292 |   0   0   0 |   0   0 |  87.25 | 34/34 (2) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 123 + Lager 0 (leer) + Abriss 28 Betriebe 118 = 241 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 2, nach Abriss 36 | fehlt 1004 Gold
+ZEITEN nach 150 Runden: lesen 5.99 s, ruestung 4.86 s, wirtschaft 3.18 s, haus_lager_zeile 0.06 s, waechter 0.00 s
+ 2299 |   0   0   0 |   0   0 |  87.25 | 34/34 (2) | 18 6 | STEUER 3 -> 2 (Beliebtheit 87.25); PLANER Lage (Gewinn bis Ende / Amortisation): Steinbruch+Ochsenjoch 83/2679, Apfelplantage 42/3467, Eisenmine 41/3869, Jaegerhuette -2/9552 [Horizont] | Stein-Reserve 6; PLANER wartet auf Arbeiter fuer Steinbruch+Ochsenjoch (Feuer 2, braucht 4)
+ 2364 |   0   0   0 |   0   0 |  87.25 | 34/34 (2) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 123 + Lager 0 (leer) + Abriss 28 Betriebe 118 = 241 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 2, nach Abriss 36 | fehlt 1004 Gold
+ZEITEN nach 160 Runden: lesen 6.37 s, ruestung 5.16 s, wirtschaft 3.22 s, haus_lager_zeile 0.06 s, waechter 0.00 s
+ 2371 |   0   0   0 |   0   0 |  87.25 | 34/34 (2) | 18 6 | -
+ 2433 |   0   0   0 |   0   0 |  85.00 | 34/34 (2) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 137 + Lager 0 (leer) + Abriss 28 Betriebe 118 = 255 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 2, nach Abriss 36 | fehlt 990 Gold
+ZEITEN nach 170 Runden: lesen 6.76 s, ruestung 5.46 s, wirtschaft 3.23 s, haus_lager_zeile 0.06 s, waechter 0.00 s
+ 2440 |   0   0   0 |   0   0 |  85.00 | 34/34 (2) | 18 6 | STEUER 2 -> 1 (Beliebtheit 85.00)
+ 2503 |   0   0   0 |   0   0 |  85.00 | 34/34 (2) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 137 + Lager 0 (leer) + Abriss 28 Betriebe 118 = 255 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 2, nach Abriss 36 | fehlt 990 Gold
+ZEITEN nach 180 Runden: lesen 7.13 s, ruestung 5.75 s, wirtschaft 3.26 s, haus_lager_zeile 0.06 s, waechter 0.00 s
+ 2509 |   0   0   0 |   0   0 |  85.00 | 34/34 (2) | 18 6 | -
+ 2570 |   0   0   0 |   0   0 |  85.00 | 34/34 (2) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 137 + Lager 0 (leer) + Abriss 28 Betriebe 118 = 255 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 2, nach Abriss 36 | fehlt 990 Gold
+ZEITEN nach 190 Runden: lesen 7.50 s, ruestung 6.05 s, wirtschaft 3.27 s, haus_lager_zeile 0.06 s, waechter 0.00 s
+ 2577 |   0   0   0 |   0   0 |  85.00 | 34/34 (2) | 18 6 | STEUER 1 -> 0 (Beliebtheit 85.00)
+ 2642 |   0   0   0 |   4   0 |  84.75 | 34/34 (2) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 137 + Lager 0 (apfel 4 (12 G)) + Abriss 28 Betriebe 118 = 255 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 2, nach Abriss 36 | fehlt 990 Gold
+ZEITEN nach 200 Runden: lesen 7.88 s, ruestung 6.35 s, wirtschaft 3.30 s, haus_lager_zeile 0.06 s, waechter 0.00 s
+ 2649 |   0   0   0 |   4   0 |  84.75 | 34/34 (2) | 18 6 | PLANER Lage (Gewinn bis Ende / Amortisation): Steinbruch+Ochsenjoch 79/2679, Apfelplantage 43/3468, Eisenmine 36/3869, Jaegerhuette -4/9552 [Horizont] | Stein-Reserve 6; PLANER wartet auf Arbeiter fuer Steinbruch+Ochsenjoch (Feuer 2, braucht 4)
+ 2711 |   0   0   0 |   4   0 |  84.75 | 34/34 (2) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 137 + Lager 0 (apfel 4 (12 G)) + Abriss 28 Betriebe 118 = 255 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 2, nach Abriss 36 | fehlt 990 Gold
+ZEITEN nach 210 Runden: lesen 8.25 s, ruestung 6.65 s, wirtschaft 3.31 s, haus_lager_zeile 0.06 s, waechter 0.00 s
+ 2717 |   0   0   0 |   4   0 |  84.75 | 34/34 (2) | 18 6 | -
+ 2780 |   0   0   0 |   3   0 |  84.75 | 34/34 (2) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 137 + Lager 0 (apfel 3 (9 G)) + Abriss 28 Betriebe 118 = 255 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 2, nach Abriss 36 | fehlt 990 Gold
+ZEITEN nach 220 Runden: lesen 8.64 s, ruestung 6.95 s, wirtschaft 3.31 s, haus_lager_zeile 0.06 s, waechter 0.00 s
+ 2786 |   0   0   0 |   3   0 |  84.75 | 34/34 (2) | 18 6 | -
+ 2849 |   0   0   0 |   7   0 |  87.00 | 34/34 (2) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 137 + Lager 15 (apfel 7 (21 G)) + Abriss 28 Betriebe 118 = 270 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 2, nach Abriss 36 | fehlt 975 Gold
+ZEITEN nach 230 Runden: lesen 9.03 s, ruestung 7.25 s, wirtschaft 3.32 s, haus_lager_zeile 0.06 s, waechter 0.00 s
+ 2857 |   0   0   0 |   7   0 |  87.00 | 34/34 (2) | 18 6 | -
+ 2918 |   0   0   0 |   6   0 |  87.00 | 34/34 (2) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 137 + Lager 15 (apfel 6 (18 G)) + Abriss 28 Betriebe 118 = 270 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 2, nach Abriss 36 | fehlt 975 Gold
+ZEITEN nach 240 Runden: lesen 9.40 s, ruestung 7.55 s, wirtschaft 3.33 s, haus_lager_zeile 0.06 s, waechter 0.00 s
+ 2925 |   0   0   0 |   6   0 |  87.00 | 34/34 (2) | 18 6 | -
+ 2987 |   0   0   0 |   6   0 |  87.00 | 34/34 (2) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 137 + Lager 15 (apfel 6 (18 G)) + Abriss 28 Betriebe 118 = 270 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 2, nach Abriss 36 | fehlt 975 Gold
+ZEITEN nach 250 Runden: lesen 9.79 s, ruestung 7.85 s, wirtschaft 3.33 s, haus_lager_zeile 0.06 s, waechter 0.00 s
+ 2994 |   0   0   0 |   6   0 |  87.00 | 34/34 (2) | 18 6 | PLANER Lage (Gewinn bis Ende / Amortisation): Steinbruch+Ochsenjoch 75/2679, Apfelplantage 40/3488, Eisenmine 32/3869, Jaegerhuette -6/9552 [Horizont] | Stein-Reserve 6; PLANER wartet auf Arbeiter fuer Steinbruch+Ochsenjoch (Feuer 2, braucht 4)
+ 3055 |   0   0   0 |   5   0 |  89.25 | 34/34 (2) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 137 + Lager 15 (apfel 5 (15 G)) + Abriss 28 Betriebe 118 = 270 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 2, nach Abriss 36 | fehlt 975 Gold
+ZEITEN nach 260 Runden: lesen 10.17 s, ruestung 8.15 s, wirtschaft 3.34 s, haus_lager_zeile 0.06 s, waechter 0.00 s
+ 3062 |   0   0   0 |   5   0 |  89.25 | 34/34 (2) | 18 6 | -
+ 3123 |   0   0   0 |   5   0 |  89.25 | 34/34 (2) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 137 + Lager 15 (apfel 5 (15 G)) + Abriss 28 Betriebe 118 = 270 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 2, nach Abriss 36 | fehlt 975 Gold
+ZEITEN nach 270 Runden: lesen 10.54 s, ruestung 8.45 s, wirtschaft 3.34 s, haus_lager_zeile 0.06 s, waechter 0.00 s
+ 3130 |   0   0   0 |   5   0 |  89.25 | 34/34 (2) | 18 6 | -
+ 3192 |   0   0   0 |   5   0 |  89.25 | 34/34 (2) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 137 + Lager 15 (apfel 5 (15 G)) + Abriss 28 Betriebe 118 = 270 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 2, nach Abriss 36 | fehlt 975 Gold
+ZEITEN nach 280 Runden: lesen 10.93 s, ruestung 8.74 s, wirtschaft 3.35 s, haus_lager_zeile 0.06 s, waechter 0.00 s
+ 3199 |   0   0   0 |   4   0 |  89.25 | 34/34 (2) | 18 6 | -
+ 3262 |   0   0   0 |   4   0 |  91.50 | 34/34 (2) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 87 + Lager 0 (apfel 4 (12 G)) + Abriss 28 Betriebe 118 = 205 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 2, nach Abriss 36 | fehlt 1040 Gold
+ZEITEN nach 290 Runden: lesen 11.32 s, ruestung 9.04 s, wirtschaft 3.36 s, haus_lager_zeile 0.06 s, waechter 0.00 s
+ 3270 |   0   0   0 |   4   0 |  91.50 | 34/34 (2) | 18 6 | -
+ 3331 |   0   0   0 |   8   0 |  91.50 | 34/34 (2) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 87 + Lager 15 (apfel 8 (24 G)) + Abriss 28 Betriebe 118 = 220 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 2, nach Abriss 36 | fehlt 1025 Gold
+ZEITEN nach 300 Runden: lesen 11.71 s, ruestung 9.33 s, wirtschaft 3.36 s, haus_lager_zeile 0.06 s, waechter 0.00 s
+ 3338 |   0   0   0 |   8   0 |  91.50 | 34/34 (2) | 18 6 | PLANER Lage (Gewinn bis Ende / Amortisation): Steinbruch+Ochsenjoch 71/2679, Apfelplantage 38/3508, Eisenmine 28/3869, Jaegerhuette -9/9552 [Horizont] | Stein-Reserve 6; PLANER wartet auf Arbeiter fuer Steinbruch+Ochsenjoch (Feuer 2, braucht 4)
+ 3401 |   0   0   0 |   7   0 |  93.75 | 34/34 (2) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 87 + Lager 15 (apfel 7 (21 G)) + Abriss 28 Betriebe 118 = 220 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 2, nach Abriss 36 | fehlt 1025 Gold
+ZEITEN nach 310 Runden: lesen 12.11 s, ruestung 9.63 s, wirtschaft 3.37 s, haus_lager_zeile 0.06 s, waechter 0.00 s
+ 3408 |   0   0   0 |   7   0 |  93.75 | 34/34 (2) | 18 6 | -
+ 3471 |   0   0   0 |   7   0 |  93.75 | 34/34 (2) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 87 + Lager 15 (apfel 7 (21 G)) + Abriss 28 Betriebe 118 = 220 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 2, nach Abriss 36 | fehlt 1025 Gold
+ZEITEN nach 320 Runden: lesen 12.50 s, ruestung 9.92 s, wirtschaft 3.38 s, haus_lager_zeile 0.06 s, waechter 0.00 s
+ 3478 |   0   0   0 |   7   0 |  93.75 | 34/34 (2) | 18 6 | -
+ 3539 |   0   0   0 |   6   0 |  93.75 | 34/34 (2) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 87 + Lager 15 (apfel 6 (18 G)) + Abriss 28 Betriebe 118 = 220 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 2, nach Abriss 36 | fehlt 1025 Gold
+ZEITEN nach 330 Runden: lesen 12.87 s, ruestung 10.22 s, wirtschaft 3.38 s, haus_lager_zeile 0.06 s, waechter 0.00 s
+ 3546 |   0   0   0 |   6   0 |  93.75 | 34/34 (2) | 18 6 | -
+ 3607 |   0   0   0 |   6   0 |  96.00 | 34/34 (2) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 87 + Lager 15 (apfel 6 (18 G)) + Abriss 28 Betriebe 118 = 220 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 2, nach Abriss 36 | fehlt 1025 Gold
+ZEITEN nach 340 Runden: lesen 13.25 s, ruestung 10.52 s, wirtschaft 3.39 s, haus_lager_zeile 0.06 s, waechter 0.00 s
+ 3613 |   0   0   0 |   6   0 |  96.00 | 34/34 (2) | 18 6 | -
+ 3676 |   0   0   0 |  10   0 |  96.00 | 34/34 (2) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 87 + Lager 30 (apfel 10 (30 G)) + Abriss 28 Betriebe 118 = 235 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 2, nach Abriss 36 | fehlt 1010 Gold; Lager gesetzt bei (94, 280) - 1 Holzfaeller wollen abliefern (Tick 3676)
+ZEITEN nach 350 Runden: lesen 13.64 s, ruestung 10.82 s, wirtschaft 3.45 s, haus_lager_zeile 0.06 s, waechter 0.00 s
+ 3689 |   0   0   0 |  10   0 |  96.00 | 34/34 (2) | 18 6 | PLANER Lage (Gewinn bis Ende / Amortisation): Steinbruch+Ochsenjoch 65/2742, Apfelplantage 36/3538, Eisenmine 29/3572, Jaegerhuette -11/9552 [Horizont] | Stein-Reserve 6; PLANER wartet auf Arbeiter fuer Steinbruch+Ochsenjoch (Feuer 2, braucht 4)
+ 3755 |   0   0   0 |  10   0 |  96.00 | 34/34 (2) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 87 + Lager 30 (apfel 10 (30 G)) + Abriss 28 Betriebe 118 = 235 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 2, nach Abriss 36 | fehlt 1010 Gold
+ZEITEN nach 360 Runden: lesen 14.03 s, ruestung 11.11 s, wirtschaft 3.49 s, haus_lager_zeile 0.06 s, waechter 0.00 s
+ 3761 |   0   0   0 |  10   0 |  96.00 | 34/34 (2) | 18 6 | -
+ 3776 |   0   0   0 |  13   0 |  96.00 | 34/34 (2) | 18 6 | verkauft: apfel x1
+ 3828 |   0   0   0 |   8   0 |  98.25 | 34/34 (2) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 102 + Lager 15 (apfel 8 (24 G)) + Abriss 28 Betriebe 118 = 235 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 2, nach Abriss 36 | fehlt 1010 Gold
+ZEITEN nach 370 Runden: lesen 14.42 s, ruestung 11.44 s, wirtschaft 3.49 s, haus_lager_zeile 0.06 s, waechter 0.00 s
+ 3835 |   0   0   0 |   8   0 |  98.25 | 34/34 (2) | 18 6 | STEUER 0 -> 1 (Beliebtheit 98.25)
+ 3866 |   0   0   0 |  11   0 |  98.25 | 34/34 (2) | 18 6 | verkauft: apfel x1
+ 3904 |   1   0   0 |   8   0 |  98.25 | 34/34 (2) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 117 + Lager 15 (holz 1 (1 G), apfel 8 (24 G)) + Abriss 28 Betriebe 118 = 250 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 2, nach Abriss 36 | fehlt 995 Gold
+ZEITEN nach 380 Runden: lesen 14.82 s, ruestung 11.77 s, wirtschaft 3.53 s, haus_lager_zeile 0.06 s, waechter 0.00 s
+ 3910 |   2   0   0 |   8   0 |  98.25 | 34/34 (2) | 18 6 | -
+ 3974 |  15   0   0 |   7   0 |  98.25 | 34/34 (2) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 117 + Lager 15 (holz 15 (15 G), apfel 7 (21 G)) + Abriss 28 Betriebe 118 = 250 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 2, nach Abriss 36 | fehlt 995 Gold
+ZEITEN nach 390 Runden: lesen 15.23 s, ruestung 12.07 s, wirtschaft 3.54 s, haus_lager_zeile 0.06 s, waechter 0.00 s
+ 3982 |  17   0   0 |   7   0 |  98.25 | 34/34 (2) | 18 6 | STEUER 1 -> 2 (Beliebtheit 98.25); PLANER Ochsenjoch an Steinbruch 47: erster Ochse beladen unterwegs -> sofort der zweite (Joche 1, Haufen 1) -> (86, 264); PLANER Huette zuerst (Feuer 2, Steinbruch+Ochsenjoch braucht 4) -> (130, 271)
+ 4053 |   8   0   0 |  11   0 |  98.50 | 35/42 (2) | 18 6 | verkauft: apfel x1
+ 4062 |   8   0   0 |   6   0 |  98.50 | 36/42 (2) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 94 + Lager 15 (holz 8 (8 G), apfel 6 (18 G)) + Abriss 29 Betriebe 120 = 229 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 2, nach Abriss 36 | fehlt 1016 Gold
+ZEITEN nach 400 Runden: lesen 15.62 s, ruestung 12.39 s, wirtschaft 3.69 s, haus_lager_zeile 0.06 s, waechter 0.00 s
+ 4070 |   8   0   0 |   6   0 |  98.50 | 36/42 (2) | 18 6 | PLANER Lage (Gewinn bis Ende / Amortisation): Steinbruch+Ochsenjoch 61/2742, Apfelplantage 34/3566, Eisenmine 24/3572, Jaegerhuette -14/9552 [Horizont] | Stein-Reserve 6; PLANER wartet auf Arbeiter fuer Steinbruch+Ochsenjoch (Feuer 2, braucht 4)
+ 4133 |   8   0   0 |   5   0 |  98.50 | 37/42 (1) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 94 + Lager 15 (holz 8 (8 G), apfel 5 (15 G)) + Abriss 29 Betriebe 120 = 229 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 1, nach Abriss 36 | fehlt 1016 Gold
+ZEITEN nach 410 Runden: lesen 16.01 s, ruestung 12.69 s, wirtschaft 3.70 s, haus_lager_zeile 0.06 s, waechter 0.00 s
+ 4139 |   8   0   0 |   5   0 |  98.50 | 37/42 (1) | 18 6 | STEUER 2 -> 3 (Beliebtheit 98.50)
+ 4205 |   8   0   0 |   5   0 |  98.25 | 39/42 (1) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 94 + Lager 15 (holz 8 (8 G), apfel 5 (15 G)) + Abriss 29 Betriebe 120 = 229 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 1, nach Abriss 37 | fehlt 1016 Gold
+ZEITEN nach 420 Runden: lesen 16.40 s, ruestung 12.99 s, wirtschaft 3.73 s, haus_lager_zeile 0.06 s, waechter 0.00 s
+ 4211 |   8   0   0 |   5   0 |  98.25 | 39/42 (2) | 18 6 | -
+ 4274 |   8   0   0 |   4   0 |  98.25 | 40/42 (3) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 94 + Lager 0 (holz 8 (8 G), apfel 4 (12 G)) + Abriss 29 Betriebe 120 = 214 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 3, nach Abriss 39 | fehlt 1031 Gold
+ZEITEN nach 430 Runden: lesen 16.79 s, ruestung 13.29 s, wirtschaft 3.74 s, haus_lager_zeile 0.06 s, waechter 0.00 s
+ 4281 |   8   0   0 |   4   0 |  98.25 | 40/42 (3) | 18 6 | STEUER 3 -> 4 (Beliebtheit 98.25); PLANER Huette zuerst (Feuer 3, Steinbruch+Ochsenjoch braucht 4) -> (134, 272)
+ 4352 |   9   0   0 |   3   0 |  98.25 | 41/50 (4) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 94 + Lager 0 (holz 9 (9 G), apfel 3 (9 G)) + Abriss 29 Betriebe 120 = 214 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 4, nach Abriss 40 | fehlt 1031 Gold
+ZEITEN nach 440 Runden: lesen 17.18 s, ruestung 13.58 s, wirtschaft 3.84 s, haus_lager_zeile 0.06 s, waechter 0.00 s
+ 4358 |  10   0   0 |   3   0 |  98.25 | 42/50 (5) | 18 6 | -
+ 4423 |  21   0   0 |   3   0 |  97.50 | 43/50 (6) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 94 + Lager 20 (holz 21 (21 G), apfel 3 (9 G)) + Abriss 29 Betriebe 120 = 234 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 6, nach Abriss 42 | fehlt 1011 Gold
+ZEITEN nach 450 Runden: lesen 17.58 s, ruestung 13.88 s, wirtschaft 3.84 s, haus_lager_zeile 0.06 s, waechter 0.00 s
+ 4430 |  21   0   0 |   3   0 |  97.50 | 43/50 (6) | 18 6 | STEUER 4 -> 5 (Beliebtheit 97.50); PLANER Lage (Gewinn bis Ende / Amortisation): Steinbruch+Ochsenjoch 57/2742, Apfelplantage 31/3609, Eisenmine 19/3572, Jaegerhuette -16/9552 [Horizont] | Stein-Reserve 6; PLANER wartet auf Steinbruch+Ochsenjoch (fehlt: holz 9)
+ 4498 |  21   0   0 |   2   0 |  97.50 | 44/50 (7) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 94 + Lager 20 (holz 21 (21 G), apfel 2 (6 G)) + Abriss 29 Betriebe 120 = 234 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 7, nach Abriss 43 | fehlt 1011 Gold
+ZEITEN nach 460 Runden: lesen 17.98 s, ruestung 14.18 s, wirtschaft 3.89 s, haus_lager_zeile 0.06 s, waechter 0.00 s
+ 4504 |  21   0   0 |   2   0 |  97.50 | 45/50 (8) | 18 6 | -
+ 4567 |  21   0   0 |   2   0 |  97.50 | 46/50 (9) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 94 + Lager 20 (holz 21 (21 G), apfel 2 (6 G)) + Abriss 29 Betriebe 120 = 234 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 9, nach Abriss 45 | fehlt 1011 Gold
+ZEITEN nach 470 Runden: lesen 18.37 s, ruestung 14.48 s, wirtschaft 3.89 s, haus_lager_zeile 0.06 s, waechter 0.00 s
+ 4575 |  21   0   0 |   1   0 |  97.50 | 46/50 (9) | 18 6 | STEUER 5 -> 6 (Beliebtheit 97.50)
+ 4644 |  21   0   0 |  10   0 |  95.50 | 47/50 (10) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 94 + Lager 50 (holz 21 (21 G), apfel 10 (30 G)) + Abriss 29 Betriebe 120 = 264 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 10, nach Abriss 46 | fehlt 981 Gold
+ZEITEN nach 480 Runden: lesen 18.79 s, ruestung 14.78 s, wirtschaft 3.93 s, haus_lager_zeile 0.06 s, waechter 0.00 s
+ 4650 |  21   0   0 |  10   0 |  95.50 | 47/50 (10) | 18 6 | -
+ 4714 |  21   0   0 |   9   0 |  95.50 | 49/50 (12) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 94 + Lager 35 (holz 21 (21 G), apfel 9 (27 G)) + Abriss 29 Betriebe 120 = 249 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 12, nach Abriss 48 | fehlt 996 Gold
+ZEITEN nach 490 Runden: lesen 19.18 s, ruestung 15.08 s, wirtschaft 3.94 s, haus_lager_zeile 0.06 s, waechter 0.00 s
+ 4720 |  21   0   0 |   9   0 |  95.50 | 49/50 (12) | 18 6 | -
+ 4783 |  21   0   0 |   8   0 |  95.50 | 50/50 (13) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 94 + Lager 35 (holz 21 (21 G), apfel 8 (24 G)) + Abriss 29 Betriebe 120 = 249 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 13, nach Abriss 49 | fehlt 996 Gold
+ZEITEN nach 500 Runden: lesen 19.56 s, ruestung 15.38 s, wirtschaft 3.94 s, haus_lager_zeile 0.07 s, waechter 0.00 s
+ 4790 |  21   0   0 |   8   0 |  95.50 | 50/50 (13) | 18 6 | PLANER Lage (Gewinn bis Ende / Amortisation): Steinbruch+Ochsenjoch 52/2753, Apfelplantage 30/3576, Eisenmine 14/3572, Jaegerhuette -18/9552 [Horizont] | Stein-Reserve 6; PLANER wartet auf Steinbruch+Ochsenjoch (fehlt: holz 9)
+ 4852 |  21   0   0 |   8   0 |  93.50 | 50/50 (14) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 125 + Lager 35 (holz 21 (21 G), apfel 8 (24 G)) + Abriss 29 Betriebe 120 = 280 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 14, nach Abriss 50 | fehlt 965 Gold
+ZEITEN nach 510 Runden: lesen 19.95 s, ruestung 15.68 s, wirtschaft 3.95 s, haus_lager_zeile 0.07 s, waechter 0.00 s
+ 4859 |  21   0   0 |   8   0 |  93.50 | 50/50 (15) | 18 6 | STEUER 6 -> 5 (Beliebtheit 93.50)
+ 4924 |  21   0   0 |  12   0 |  93.50 | 50/50 (16) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 125 + Lager 50 (holz 21 (21 G), apfel 12 (36 G)) + Abriss 29 Betriebe 120 = 295 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 16, nach Abriss 52 | fehlt 950 Gold
+ZEITEN nach 520 Runden: lesen 20.34 s, ruestung 15.97 s, wirtschaft 3.99 s, haus_lager_zeile 0.07 s, waechter 0.00 s
+ 4931 |  21   0   0 |  12   0 |  93.50 | 50/50 (16) | 18 6 | -
+ 4993 |  21   0   0 |  11   0 |  93.50 | 50/50 (17) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 125 + Lager 50 (holz 21 (21 G), apfel 11 (33 G)) + Abriss 29 Betriebe 120 = 295 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 17, nach Abriss 53 | fehlt 950 Gold
+ZEITEN nach 530 Runden: lesen 20.72 s, ruestung 16.27 s, wirtschaft 3.99 s, haus_lager_zeile 0.07 s, waechter 0.00 s
+ 5000 |  21   0   0 |  11   0 |  92.25 | 50/50 (17) | 18 6 | STEUER 5 -> 4 (Beliebtheit 92.25)
+ 5066 |  21   0   0 |  11   0 |  92.25 | 50/50 (17) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 125 + Lager 50 (holz 21 (21 G), apfel 11 (33 G)) + Abriss 29 Betriebe 120 = 295 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 17, nach Abriss 53 | fehlt 950 Gold
+ZEITEN nach 540 Runden: lesen 21.11 s, ruestung 16.57 s, wirtschaft 4.03 s, haus_lager_zeile 0.07 s, waechter 0.00 s
+ 5073 |  21   0   0 |  11   0 |  92.25 | 50/50 (17) | 18 6 | -
+ 5114 |  21   0   0 |  10   0 |  92.25 | 50/50 (17) | 18 6 | Lager erweitert (90, 275): Bestand 21, Holz unterwegs 144 + bald 36, Teile 4 -> noetig 5
+ 5142 |  21   0   0 |  10   0 |  92.25 | 50/50 (17) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 125 + Lager 50 (holz 21 (21 G), apfel 10 (30 G)) + Abriss 29 Betriebe 120 = 295 | Bedarf 1245 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 17, nach Abriss 53 | fehlt 950 Gold
+ZEITEN nach 550 Runden: lesen 21.51 s, ruestung 16.87 s, wirtschaft 4.10 s, haus_lager_zeile 0.07 s, waechter 0.00 s
+ 5149 |  21   0   0 |  10   0 |  92.25 | 50/50 (17) | 18 6 | STEUER 4 -> 3 (Beliebtheit 92.25); PLANER Lage (Gewinn bis Ende / Amortisation): Steinbruch+Ochsenjoch 53/2608, Apfelplantage 28/3584, Eisenmine 9/3572, Jaegerhuette -21/9552 [Horizont] | Stein-Reserve 6; PLANER wartet auf Steinbruch+Ochsenjoch (fehlt: holz 9)
+ 5218 |  21  12   0 |   9   0 |  92.00 | 50/50 (17) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 125 + Lager 85 (holz 21 (21 G), stein 12 (60 G), apfel 9 (27 G)) + Abriss 29 Betriebe 120 = 330 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 17, nach Abriss 53 | fehlt 855 Gold
+ZEITEN nach 560 Runden: lesen 21.90 s, ruestung 17.17 s, wirtschaft 4.17 s, haus_lager_zeile 0.07 s, waechter 0.00 s
+ 5226 |  21  12   0 |   9   0 |  92.00 | 50/50 (17) | 18 6 | -
+ 5290 |  21  12   0 |   8   0 |  92.00 | 50/50 (17) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 125 + Lager 85 (holz 21 (21 G), stein 12 (60 G), apfel 8 (24 G)) + Abriss 29 Betriebe 120 = 330 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 17, nach Abriss 53 | fehlt 855 Gold
+ZEITEN nach 570 Runden: lesen 22.32 s, ruestung 17.47 s, wirtschaft 4.17 s, haus_lager_zeile 0.07 s, waechter 0.00 s
+ 5297 |  21  12   0 |   8   0 |  92.00 | 50/50 (17) | 18 6 | STEUER 3 -> 2 (Beliebtheit 92.00)
+ 5362 |  21  12   0 |   8   0 |  92.00 | 50/50 (17) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 125 + Lager 85 (holz 21 (21 G), stein 12 (60 G), apfel 8 (24 G)) + Abriss 29 Betriebe 120 = 330 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 17, nach Abriss 53 | fehlt 855 Gold
+ZEITEN nach 580 Runden: lesen 22.70 s, ruestung 17.77 s, wirtschaft 4.21 s, haus_lager_zeile 0.07 s, waechter 0.00 s
+ 5367 |  21  12   0 |   8   0 |  92.00 | 50/50 (17) | 18 6 | -
+ 5429 |  21  12   0 |   7   0 |  92.25 | 50/50 (17) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 125 + Lager 85 (holz 21 (21 G), stein 12 (60 G), apfel 7 (21 G)) + Abriss 29 Betriebe 120 = 330 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 17, nach Abriss 53 | fehlt 855 Gold
+ZEITEN nach 590 Runden: lesen 23.08 s, ruestung 18.06 s, wirtschaft 4.21 s, haus_lager_zeile 0.07 s, waechter 0.00 s
+ 5436 |  21  12   0 |   7   0 |  92.25 | 50/50 (17) | 18 6 | STEUER 2 -> 1 (Beliebtheit 92.25)
+ 5503 |  21  12   0 |   6   0 |  92.25 | 50/50 (17) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 125 + Lager 85 (holz 21 (21 G), stein 12 (60 G), apfel 6 (18 G)) + Abriss 29 Betriebe 120 = 330 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 17, nach Abriss 53 | fehlt 855 Gold
+ZEITEN nach 600 Runden: lesen 23.47 s, ruestung 18.36 s, wirtschaft 4.25 s, haus_lager_zeile 0.07 s, waechter 0.00 s
+ 5509 |  21  12   0 |   6   0 |  92.25 | 50/50 (17) | 18 6 | PLANER Lage (Gewinn bis Ende / Amortisation): Steinbruch+Ochsenjoch 53/2547, Apfelplantage 26/3625, Eisenmine 4/3572, Jaegerhuette -23/9552 [Horizont] | Stein-Reserve 6; PLANER wartet auf Steinbruch+Ochsenjoch (fehlt: holz 9)
+ 5576 |  38  12   0 |   6   0 |  92.25 | 50/50 (17) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 125 + Lager 85 (holz 38 (38 G), stein 12 (60 G), apfel 6 (18 G)) + Abriss 29 Betriebe 120 = 330 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 17, nach Abriss 53 | fehlt 855 Gold
+ZEITEN nach 610 Runden: lesen 23.89 s, ruestung 18.66 s, wirtschaft 4.26 s, haus_lager_zeile 0.07 s, waechter 0.00 s
+ 5583 |  40  12   0 |   6   0 |  92.25 | 50/50 (17) | 18 6 | STEUER 1 -> 0 (Beliebtheit 92.25); PLANER Steinbruch+Ochsenjoch bei (62, 213) (Weg 61, 11.7 Gold/1000, Anlauf 3464, Amortisation 2553, Gewinn bis Ende 52) -> (62, 213)
+ 5663 |  27  12   0 |  10   0 |  94.50 | 50/50 (17) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 118 + Lager 100 (holz 27 (27 G), stein 12 (60 G), apfel 10 (30 G)) + Abriss 31 Betriebe 137 = 355 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 17, nach Abriss 53 | fehlt 830 Gold
+ZEITEN nach 620 Runden: lesen 24.30 s, ruestung 18.96 s, wirtschaft 4.41 s, haus_lager_zeile 0.07 s, waechter 0.00 s
+ 5670 |  27  12   0 |  10   0 |  94.50 | 50/50 (17) | 18 6 | -
+ 5714 |  27  12   0 |  13   0 |  94.50 | 50/50 (13) | 18 6 | verkauft: apfel x1
+ 5739 |  27  12   0 |   8   0 |  94.50 | 50/50 (13) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 133 + Lager 85 (holz 27 (27 G), stein 12 (60 G), apfel 8 (24 G)) + Abriss 31 Betriebe 137 = 355 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 13, nach Abriss 53 | fehlt 830 Gold
+ZEITEN nach 630 Runden: lesen 24.70 s, ruestung 19.29 s, wirtschaft 4.45 s, haus_lager_zeile 0.07 s, waechter 0.00 s
+ 5746 |  27  12   0 |   8   0 |  94.50 | 50/50 (13) | 18 6 | -
+ 5810 |  30  12   0 |   7   0 |  96.75 | 50/50 (13) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 133 + Lager 85 (holz 30 (30 G), stein 12 (60 G), apfel 7 (21 G)) + Abriss 31 Betriebe 137 = 355 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 13, nach Abriss 54 | fehlt 830 Gold
+ZEITEN nach 640 Runden: lesen 25.09 s, ruestung 19.59 s, wirtschaft 4.46 s, haus_lager_zeile 0.07 s, waechter 0.00 s
+ 5816 |  31  12   0 |   7   0 |  96.75 | 50/50 (13) | 18 6 | PLANER Steinbruch+Ochsenjoch bei (74, 210) (Weg 64, 11.2 Gold/1000, Anlauf 3464, Amortisation 2669, Gewinn bis Ende 46) -> (74, 210)
+ 5893 |  39  12   0 |   6   0 |  96.75 | 50/50 (13) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 133 + Lager 85 (holz 39 (39 G), stein 12 (60 G), apfel 6 (18 G)) + Abriss 33 Betriebe 154 = 372 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 13, nach Abriss 54 | fehlt 813 Gold
+ZEITEN nach 650 Runden: lesen 25.51 s, ruestung 19.89 s, wirtschaft 4.59 s, haus_lager_zeile 0.07 s, waechter 0.00 s
+ 5900 |  42  12   0 |   6   0 |  96.75 | 50/50 (9) | 18 6 | Holzfaeller statt Holzverkauf bei (118, 193) (Holz 42; Platz (118, 193), Weg 83); PLANER Lage (Gewinn bis Ende / Amortisation): Steinbruch+Ochsenjoch 41/2805, Apfelplantage 24/3605, Eisenmine -2/3572 [Horizont], Jaegerhuette -26/9552 [Horizont] | Stein-Reserve 0; PLANER Steinbruch+Ochsenjoch bei (86, 206) (Weg 68, 10.7 Gold/1000, Anlauf 3464, Amortisation 2805, Gewinn bis Ende 41) -> (86, 206)
+ 5984 |  16  12   0 |  10   0 |  96.75 | 50/50 (9) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 133 + Lager 80 (holz 16 (16 G), stein 12 (60 G), apfel 10 (30 G)) + Abriss 36 Betriebe 173 = 386 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 9, nach Abriss 55 | fehlt 799 Gold
+ZEITEN nach 660 Runden: lesen 25.89 s, ruestung 20.25 s, wirtschaft 4.74 s, haus_lager_zeile 0.07 s, waechter 0.00 s
+ 5991 |  16  12   0 |  10   0 |  96.75 | 50/50 (9) | 18 6 | PLANER Apfelplantage bei (101, 200) (Weg 27, 5.0 Gold/1000, Anlauf 1690, Amortisation 3583, Gewinn bis Ende 24) -> None
+ 6011 |  16  12   0 |  13   0 |  99.00 | 50/50 (9) | 18 6 | verkauft: apfel x1
+ 6063 |  16  12   0 |   9   0 |  99.00 | 50/50 (9) | 18 6 | BILANZ Rest 10 Kaempfer | Gold 148 + Lager 65 (holz 16 (16 G), stein 12 (60 G), apfel 9 (27 G)) + Abriss 36 Betriebe 173 = 386 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 9, nach Abriss 55 | fehlt 799 Gold
+ZEITEN nach 670 Runden: lesen 26.29 s, ruestung 20.58 s, wirtschaft 4.81 s, haus_lager_zeile 0.07 s, waechter 0.00 s
+ 6069 |  16  12   0 |   9   0 |  99.00 | 50/50 (9) | 18 6 | STEUER 0 -> 1 (Beliebtheit 99.00); PLANER Apfelplantage bei (104, 191) (Weg 36, 4.2 Gold/1000, Anlauf 1690, Amortisation 4242, Gewinn bis Ende 17) -> (104, 191)
+ 6145 |  13  12   0 |   8   0 |  99.00 | 50/50 (3) | 19 7 | BILANZ Rest 10 Kaempfer | Gold 133 + Lager 65 (holz 13 (13 G), stein 12 (60 G), apfel 8 (24 G)) + Abriss 37 Betriebe 181 = 379 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 3, nach Abriss 56 | fehlt 806 Gold
+ZEITEN nach 680 Runden: lesen 26.68 s, ruestung 20.88 s, wirtschaft 4.94 s, haus_lager_zeile 0.07 s, waechter 0.00 s
+ 6152 |  13  12   0 |   8   0 |  99.00 | 50/50 (3) | 19 7 | PLANER Apfelplantage bei (104, 181) (Weg 46, 3.6 Gold/1000, Anlauf 1690, Amortisation 5013, Gewinn bis Ende 11) -> (104, 181)
+ 6225 |  10  12   0 |   7   0 | 100.00 | 50/50 (3) | 19 7 | BILANZ Rest 10 Kaempfer | Gold 118 + Lager 65 (holz 10 (10 G), stein 12 (60 G), apfel 7 (21 G)) + Abriss 38 Betriebe 189 = 372 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 3, nach Abriss 56 | fehlt 813 Gold
+ZEITEN nach 690 Runden: lesen 27.08 s, ruestung 21.17 s, wirtschaft 5.03 s, haus_lager_zeile 0.07 s, waechter 0.00 s
+ 6232 |  10  12   0 |   7   0 | 100.00 | 50/50 (3) | 19 7 | STEUER 1 -> 2 (Beliebtheit 100.00); PLANER Apfelplantage bei (105, 171) (Weg 56, 3.1 Gold/1000, Anlauf 1690, Amortisation 5786, Gewinn bis Ende 7) -> (105, 171)
+ 6310 |  22  12   0 |   6   0 | 100.00 | 50/50 (1) | 19 7 | BILANZ Rest 10 Kaempfer | Gold 103 + Lager 85 (holz 22 (22 G), stein 12 (60 G), apfel 6 (18 G)) + Abriss 39 Betriebe 197 = 385 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 1, nach Abriss 56 | fehlt 800 Gold
+ZEITEN nach 700 Runden: lesen 27.50 s, ruestung 21.47 s, wirtschaft 5.17 s, haus_lager_zeile 0.07 s, waechter 0.00 s
+ 6317 |  23  12   0 |   6   0 | 100.00 | 50/50 (1) | 19 7 | PLANER Lage (Gewinn bis Ende / Amortisation): Apfelplantage 7/5801, Eisenmine -8/3572 [Horizont], Jaegerhuette -28/9552 [Horizont] | Stein-Reserve 0; PLANER Apfelplantage bei (94, 171) (Weg 56, 3.1 Gold/1000, Anlauf 1690, Amortisation 5801, Gewinn bis Ende 7) -> (94, 171)
+ 6389 |  22  12   0 |   6   0 | 100.00 | 50/50 (1) | 19 9 | BILANZ Rest 10 Kaempfer | Gold 88 + Lager 85 (holz 22 (22 G), stein 12 (60 G), apfel 6 (18 G)) + Abriss 40 Betriebe 205 = 378 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 1, nach Abriss 56 | fehlt 807 Gold
+ZEITEN nach 710 Runden: lesen 27.90 s, ruestung 21.77 s, wirtschaft 5.26 s, haus_lager_zeile 0.07 s, waechter 0.00 s
+ 6396 |  22  12   0 |   5   0 | 100.00 | 50/50 (1) | 19 9 | STEUER 2 -> 3 (Beliebtheit 100.00)
+ 6467 |  37  12   0 |   5   0 | 100.00 | 50/50 (1) | 19 9 | Holzfaeller statt Holzverkauf bei (182, 198) (Holz 37; Platz (182, 198), Weg 84); BILANZ Rest 10 Kaempfer | Gold 45 + Lager 85 (holz 37 (37 G), stein 12 (60 G), apfel 5 (15 G)) + Abriss 40 Betriebe 205 = 335 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 1, nach Abriss 56 | fehlt 850 Gold
+ZEITEN nach 720 Runden: lesen 28.31 s, ruestung 22.13 s, wirtschaft 5.33 s, haus_lager_zeile 0.07 s, waechter 0.00 s
+ 6480 |  38  12   0 |   5   0 | 100.00 | 50/50 (1) | 19 9 | Huette (128, 267) (Bedarf 51, Platz 50, Leute 50, Feuer 1)
+ 6548 |  48  12   0 |   4   0 | 100.00 | 52/58 (0) | 19 10 | BILANZ Rest 10 Kaempfer | Gold 45 + Lager 90 (holz 48 (48 G), stein 12 (60 G), apfel 4 (12 G)) + Abriss 41 Betriebe 207 = 342 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 0, nach Abriss 56 | fehlt 843 Gold
+ZEITEN nach 730 Runden: lesen 28.71 s, ruestung 22.42 s, wirtschaft 5.34 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 6556 |  48  12   0 |   4   0 | 100.00 | 52/58 (0) | 19 10 | STEUER 3 -> 4 (Beliebtheit 100.00)
+ 6623 |  54  12   0 |   7   0 |  99.25 | 53/58 (0) | 19 10 | BILANZ Rest 10 Kaempfer | Gold 45 + Lager 105 (holz 54 (54 G), stein 12 (60 G), apfel 7 (21 G)) + Abriss 41 Betriebe 207 = 357 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 0, nach Abriss 56 | fehlt 828 Gold
+ZEITEN nach 740 Runden: lesen 29.11 s, ruestung 22.72 s, wirtschaft 5.38 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 6630 |  55  12   0 |   7   0 |  99.25 | 53/58 (0) | 19 10 | -
+ 6694 |  80  12   0 |   6   0 |  99.25 | 55/58 (1) | 19 10 | BILANZ Rest 10 Kaempfer | Gold 45 + Lager 145 (holz 80 (80 G), stein 12 (60 G), apfel 6 (18 G)) + Abriss 41 Betriebe 207 = 397 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 1, nach Abriss 57 | fehlt 788 Gold
+ZEITEN nach 750 Runden: lesen 29.52 s, ruestung 23.01 s, wirtschaft 5.38 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 6702 |  82  12   0 |   6   0 |  99.25 | 55/58 (1) | 19 10 | STEUER 4 -> 5 (Beliebtheit 99.25); PLANER Lage (Gewinn bis Ende / Amortisation): Eisenmine -13/3572 [Horizont], Jaegerhuette -31/9552 [Horizont] | Stein-Reserve 0
+ 6767 |  84  12   0 |   6   0 |  99.25 | 56/58 (2) | 19 10 | BILANZ Rest 10 Kaempfer | Gold 45 + Lager 145 (holz 84 (84 G), stein 12 (60 G), apfel 6 (18 G)) + Abriss 41 Betriebe 207 = 397 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 2, nach Abriss 58 | fehlt 788 Gold
+ZEITEN nach 760 Runden: lesen 29.89 s, ruestung 23.32 s, wirtschaft 5.42 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 6774 |  84  12   0 |   6   0 |  99.25 | 56/58 (2) | 19 10 | -
+ 6838 |  84  12   0 |   9   0 |  98.00 | 57/58 (3) | 19 10 | BILANZ Rest 10 Kaempfer | Gold 45 + Lager 145 (holz 84 (84 G), stein 12 (60 G), apfel 9 (27 G)) + Abriss 41 Betriebe 207 = 397 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 3, nach Abriss 59 | fehlt 788 Gold
+ZEITEN nach 770 Runden: lesen 30.28 s, ruestung 23.63 s, wirtschaft 5.43 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 6844 |  84  12   0 |   9   0 |  98.00 | 58/58 (4) | 19 10 | STEUER 5 -> 6 (Beliebtheit 98.00)
+ 6909 |  84  12   0 |   8   0 |  98.00 | 58/58 (4) | 19 10 | BILANZ Rest 10 Kaempfer | Gold 45 + Lager 145 (holz 84 (84 G), stein 12 (60 G), apfel 8 (24 G)) + Abriss 41 Betriebe 207 = 397 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 4, nach Abriss 61 | fehlt 788 Gold
+ZEITEN nach 780 Runden: lesen 30.66 s, ruestung 23.92 s, wirtschaft 5.47 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 6916 |  84  12   0 |   8   0 |  98.00 | 58/58 (4) | 19 10 | -
+ 6980 |  84  12   0 |   7   0 |  98.00 | 58/58 (5) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 45 + Lager 145 (holz 84 (84 G), stein 12 (60 G), apfel 7 (21 G)) + Abriss 41 Betriebe 207 = 397 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 5, nach Abriss 62 | fehlt 788 Gold
+ZEITEN nach 790 Runden: lesen 31.05 s, ruestung 24.23 s, wirtschaft 5.48 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 6987 |  84  12   0 |   7   0 |  98.00 | 58/58 (5) | 20 10 | STEUER 6 -> 7 (Beliebtheit 98.00)
+ 7054 |  94  12   0 |  11   0 |  95.25 | 58/58 (7) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 45 + Lager 160 (holz 94 (94 G), stein 12 (60 G), apfel 11 (33 G)) + Abriss 41 Betriebe 207 = 412 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 7, nach Abriss 64 | fehlt 773 Gold
+ZEITEN nach 800 Runden: lesen 31.45 s, ruestung 24.53 s, wirtschaft 5.51 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 7062 |  96  12   0 |  11   0 |  95.25 | 58/58 (7) | 20 10 | PLANER Lage (Gewinn bis Ende / Amortisation): Eisenmine -18/3572 [Horizont], Jaegerhuette -33/9552 [Horizont] | Stein-Reserve 0
+ 7124 |  96  12   0 |  11   0 |  95.25 | 58/58 (7) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 45 + Lager 160 (holz 96 (96 G), stein 12 (60 G), apfel 11 (33 G)) + Abriss 41 Betriebe 207 = 412 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 7, nach Abriss 64 | fehlt 773 Gold
+ZEITEN nach 810 Runden: lesen 31.85 s, ruestung 24.83 s, wirtschaft 5.52 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 7132 |  96  12   0 |  10   0 |  95.25 | 58/58 (7) | 20 10 | -
+ 7196 | 102  12   0 |  10   0 |  95.25 | 58/58 (7) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 45 + Lager 180 (holz 102 (102 G), stein 12 (60 G), apfel 10 (30 G)) + Abriss 41 Betriebe 207 = 432 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 7, nach Abriss 64 | fehlt 753 Gold
+ZEITEN nach 820 Runden: lesen 32.25 s, ruestung 25.13 s, wirtschaft 5.53 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 7203 | 102  12   0 |  10   0 |  92.50 | 58/58 (7) | 20 10 | STEUER 7 -> 6 (Beliebtheit 92.50)
+ 7268 | 102  12   0 |   9   0 |  92.50 | 58/58 (7) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 99 + Lager 165 (holz 102 (102 G), stein 12 (60 G), apfel 9 (27 G)) + Abriss 41 Betriebe 207 = 471 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 7, nach Abriss 64 | fehlt 714 Gold
+ZEITEN nach 830 Runden: lesen 32.65 s, ruestung 25.43 s, wirtschaft 5.57 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 7276 | 102  12   0 |   9   0 |  92.50 | 58/58 (7) | 20 10 | -
+ 7341 | 102  12   0 |   8   0 |  92.50 | 58/58 (7) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 99 + Lager 165 (holz 102 (102 G), stein 12 (60 G), apfel 8 (24 G)) + Abriss 41 Betriebe 207 = 471 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 7, nach Abriss 64 | fehlt 714 Gold
+ZEITEN nach 840 Runden: lesen 33.04 s, ruestung 25.73 s, wirtschaft 5.58 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 7348 | 102  12   0 |   8   0 |  92.50 | 58/58 (7) | 20 10 | STEUER 6 -> 5 (Beliebtheit 92.50)
+ 7408 | 102  24   0 |   7   0 |  91.25 | 58/58 (7) | 20 10 | verkauft: stein
+ 7418 | 102  19   0 |   7   0 |  91.25 | 58/58 (7) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 124 + Lager 190 (holz 102 (102 G), stein 19 (95 G), apfel 7 (21 G)) + Abriss 41 Betriebe 207 = 521 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 7, nach Abriss 64 | fehlt 664 Gold
+ZEITEN nach 850 Runden: lesen 33.44 s, ruestung 26.07 s, wirtschaft 5.62 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 7425 | 102  19   0 |   7   0 |  91.25 | 58/58 (7) | 20 10 | PLANER Lage (Gewinn bis Ende / Amortisation): Eisenmine -23/3572 [Horizont], Jaegerhuette -36/9552 [Horizont] | Stein-Reserve 0
+ 7433 | 102  19   0 |   7   0 |  91.25 | 58/58 (7) | 20 10 | verkauft: stein
+ 7492 | 105  14   0 |   6   0 |  91.25 | 58/58 (7) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 149 + Lager 165 (holz 105 (105 G), stein 14 (70 G), apfel 6 (18 G)) + Abriss 41 Betriebe 207 = 521 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 7, nach Abriss 64 | fehlt 664 Gold
+ZEITEN nach 860 Runden: lesen 33.84 s, ruestung 26.40 s, wirtschaft 5.62 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 7498 | 107  14   0 |   6   0 |  91.25 | 58/58 (7) | 20 10 | STEUER 5 -> 4 (Beliebtheit 91.25)
+ 7566 | 132  14   0 |   5   0 |  91.25 | 58/58 (7) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 149 + Lager 185 (holz 132 (132 G), stein 14 (70 G), apfel 5 (15 G)) + Abriss 41 Betriebe 207 = 541 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 7, nach Abriss 64 | fehlt 644 Gold
+ZEITEN nach 870 Runden: lesen 34.25 s, ruestung 26.70 s, wirtschaft 5.66 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 7574 | 134  14   0 |   5   0 |  91.25 | 58/58 (7) | 20 10 | -
+ 7638 | 144  14   0 |   9   0 |  90.50 | 58/58 (7) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 149 + Lager 205 (holz 144 (144 G), stein 14 (70 G), apfel 9 (27 G)) + Abriss 41 Betriebe 207 = 561 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 7, nach Abriss 64 | fehlt 624 Gold
+ZEITEN nach 880 Runden: lesen 34.65 s, ruestung 27.00 s, wirtschaft 5.67 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 7645 | 144  14   0 |   9   0 |  90.50 | 58/58 (7) | 20 10 | STEUER 4 -> 3 (Beliebtheit 90.50)
+ 7699 | 144  14   0 |  13   0 |  90.50 | 58/58 (7) | 20 10 | verkauft: apfel x1
+ 7715 | 144  14   0 |   8   0 |  90.50 | 58/58 (7) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 164 + Lager 205 (holz 144 (144 G), stein 14 (70 G), apfel 8 (24 G)) + Abriss 41 Betriebe 207 = 576 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 7, nach Abriss 64 | fehlt 609 Gold
+ZEITEN nach 890 Runden: lesen 35.04 s, ruestung 27.33 s, wirtschaft 5.71 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 7722 | 144  14   0 |   8   0 |  90.50 | 58/58 (7) | 20 10 | -
+ 7786 | 144  14   0 |  12   0 |  90.50 | 58/58 (7) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 164 + Lager 220 (holz 144 (144 G), stein 14 (70 G), apfel 12 (36 G)) + Abriss 41 Betriebe 207 = 591 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 7, nach Abriss 64 | fehlt 594 Gold
+ZEITEN nach 900 Runden: lesen 35.43 s, ruestung 27.64 s, wirtschaft 5.72 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 7792 | 144  14   0 |  12   0 |  90.50 | 58/58 (7) | 20 10 | STEUER 3 -> 2 (Beliebtheit 90.50); PLANER Lage (Gewinn bis Ende / Amortisation): Eisenmine -28/3572 [Horizont], Jaegerhuette -38/9552 [Horizont] | Stein-Reserve 0
+ 7858 | 144  14   0 |  11   0 |  90.75 | 58/58 (7) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 164 + Lager 220 (holz 144 (144 G), stein 14 (70 G), apfel 11 (33 G)) + Abriss 41 Betriebe 207 = 591 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 7, nach Abriss 64 | fehlt 594 Gold
+ZEITEN nach 910 Runden: lesen 35.82 s, ruestung 27.94 s, wirtschaft 5.76 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 7864 | 144  14   0 |  11   0 |  90.75 | 58/58 (7) | 20 10 | -
+ 7930 | 159  17   0 |  10   0 |  90.75 | 58/58 (7) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 164 + Lager 245 (holz 159 (159 G), stein 17 (85 G), apfel 10 (30 G)) + Abriss 41 Betriebe 207 = 616 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 7, nach Abriss 64 | fehlt 569 Gold
+ZEITEN nach 920 Runden: lesen 36.23 s, ruestung 28.24 s, wirtschaft 5.77 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 7938 | 162  25   0 |  10   0 |  90.75 | 58/58 (7) | 20 10 | verkauft: stein; STEUER 2 -> 1 (Beliebtheit 90.75)
+ 7966 | 179  21   0 |  10   0 |  90.75 | 58/58 (7) | 20 10 | verkauft: stein
+ 8012 | 192  16   0 |   9   0 |  92.00 | 58/58 (7) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 224 + Lager 270 (holz 192 (192 G), stein 16 (80 G), apfel 9 (27 G)) + Abriss 41 Betriebe 207 = 701 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 7, nach Abriss 64 | fehlt 484 Gold
+ZEITEN nach 930 Runden: lesen 36.64 s, ruestung 28.60 s, wirtschaft 5.80 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 8019 | 192  16   0 |   9   0 |  92.00 | 58/58 (7) | 20 10 | -
+ 8083 | 192  16   0 |  14   0 |  92.00 | 58/58 (7) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 224 + Lager 285 (holz 192 (192 G), stein 16 (80 G), apfel 14 (42 G)) + Abriss 41 Betriebe 207 = 716 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 7, nach Abriss 64 | fehlt 469 Gold
+ZEITEN nach 940 Runden: lesen 37.03 s, ruestung 28.91 s, wirtschaft 5.81 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 8090 | 193  16   0 |  15   0 |  92.00 | 58/58 (7) | 20 10 | STEUER 1 -> 0 (Beliebtheit 92.00)
+ 8100 | 195  16   0 |  16   0 |  92.00 | 58/58 (7) | 20 10 | verkauft: apfel x1
+ 8160 | 207  16   0 |  11   0 |  92.00 | 58/58 (7) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 239 + Lager 305 (holz 207 (207 G), stein 16 (80 G), apfel 11 (33 G)) + Abriss 41 Betriebe 207 = 751 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 7, nach Abriss 64 | fehlt 434 Gold
+ZEITEN nach 950 Runden: lesen 37.44 s, ruestung 29.24 s, wirtschaft 5.85 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 8168 | 209  16   0 |  11   0 |  92.00 | 58/58 (7) | 20 10 | PLANER Ochsenjoch an Steinbruch 71: erster Ochse beladen unterwegs -> sofort der zweite (Joche 1, Haufen 4) -> (63, 210); PLANER Lage (Gewinn bis Ende / Amortisation): Eisenmine -34/3572 [Horizont], Jaegerhuette -41/9552 [Horizont] | Stein-Reserve 0
+ 8196 | 205  28   0 |  10   0 |  92.00 | 58/58 (7) | 20 10 | verkauft: stein
+ 8220 | 205  23   0 |  10   0 |  94.25 | 58/58 (7) | 20 10 | verkauft: stein
+ 8244 | 209  18   0 |  10   0 |  94.25 | 58/58 (7) | 20 10 | verkauft: stein; BILANZ Rest 10 Kaempfer | Gold 289 + Lager 305 (holz 209 (209 G), stein 18 (90 G), apfel 10 (30 G)) + Abriss 42 Betriebe 209 = 803 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 7, nach Abriss 64 | fehlt 382 Gold
+ZEITEN nach 960 Runden: lesen 37.85 s, ruestung 29.63 s, wirtschaft 5.92 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 8255 | 211  13   0 |  10   0 |  94.25 | 58/58 (7) | 20 10 | -
+ 8320 | 223  13   0 |   9   0 |  94.25 | 58/58 (6) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 314 + Lager 285 (holz 223 (223 G), stein 13 (65 G), apfel 9 (27 G)) + Abriss 42 Betriebe 209 = 808 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 6, nach Abriss 64 | fehlt 377 Gold
+ZEITEN nach 970 Runden: lesen 38.26 s, ruestung 29.93 s, wirtschaft 5.93 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 8328 | 223  13   0 |   9   0 |  94.25 | 58/58 (6) | 20 10 | -
+ 8390 | 223  13   0 |   8   0 |  94.25 | 58/58 (6) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 314 + Lager 285 (holz 223 (223 G), stein 13 (65 G), apfel 8 (24 G)) + Abriss 42 Betriebe 209 = 808 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 6, nach Abriss 65 | fehlt 377 Gold
+ZEITEN nach 980 Runden: lesen 38.65 s, ruestung 30.23 s, wirtschaft 5.93 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 8397 | 223  13   0 |   8   0 |  94.25 | 58/58 (6) | 20 10 | PLANER Ochsenjoch an Steinbruch 74: erster Ochse beladen unterwegs -> sofort der zweite (Joche 1, Haufen 4) -> (75, 206)
+ 8466 | 218  13   0 |   7   0 |  96.50 | 58/58 (6) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 314 + Lager 265 (holz 218 (218 G), stein 13 (65 G), apfel 7 (21 G)) + Abriss 43 Betriebe 211 = 790 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 6, nach Abriss 65 | fehlt 395 Gold
+ZEITEN nach 990 Runden: lesen 39.04 s, ruestung 30.53 s, wirtschaft 6.00 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 8473 | 218  13   0 |   7   0 |  96.50 | 58/58 (6) | 20 10 | -
+ 8534 | 218  13   0 |   6   0 |  96.50 | 58/58 (5) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 314 + Lager 265 (holz 218 (218 G), stein 13 (65 G), apfel 6 (18 G)) + Abriss 43 Betriebe 211 = 790 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 5, nach Abriss 65 | fehlt 395 Gold
+ZEITEN nach 1000 Runden: lesen 39.41 s, ruestung 30.83 s, wirtschaft 6.01 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 8541 | 218  13   0 |   6   0 |  96.50 | 58/58 (5) | 20 10 | PLANER Lage (Gewinn bis Ende / Amortisation): Eisenmine -39/3572 [Horizont], Jaegerhuette -43/9552 [Horizont] | Stein-Reserve 0
+ 8605 | 218  13   0 |  10   0 |  98.75 | 58/58 (5) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 314 + Lager 280 (holz 218 (218 G), stein 13 (65 G), apfel 10 (30 G)) + Abriss 43 Betriebe 211 = 805 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 5, nach Abriss 66 | fehlt 380 Gold
+ZEITEN nach 1010 Runden: lesen 39.81 s, ruestung 31.14 s, wirtschaft 6.02 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 8612 | 218  13   0 |   9   0 |  98.75 | 58/58 (5) | 20 10 | STEUER 0 -> 1 (Beliebtheit 98.75)
+ 8658 | 218  13   0 |  13   0 |  98.75 | 58/58 (5) | 20 10 | verkauft: apfel x1
+ 8682 | 218  13   0 |   8   0 |  98.75 | 58/58 (5) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 329 + Lager 265 (holz 218 (218 G), stein 13 (65 G), apfel 8 (24 G)) + Abriss 43 Betriebe 211 = 805 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 5, nach Abriss 66 | fehlt 380 Gold
+ZEITEN nach 1020 Runden: lesen 40.20 s, ruestung 31.47 s, wirtschaft 6.06 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 8689 | 218  13   0 |   8   0 |  98.75 | 58/58 (5) | 20 10 | PLANER Ochsenjoch an Steinbruch 78: erster Ochse beladen unterwegs -> sofort der zweite (Joche 1, Haufen 5) -> (90, 201)
+ 8757 | 213  13   0 |   7   0 |  98.75 | 58/58 (5) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 329 + Lager 265 (holz 213 (213 G), stein 13 (65 G), apfel 7 (21 G)) + Abriss 44 Betriebe 213 = 807 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 5, nach Abriss 66 | fehlt 378 Gold
+ZEITEN nach 1030 Runden: lesen 40.58 s, ruestung 31.77 s, wirtschaft 6.12 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 8763 | 213  13   0 |   7   0 |  98.75 | 58/58 (5) | 20 10 | STEUER 1 -> 2 (Beliebtheit 98.75)
+ 8830 | 213  13   0 |   6   0 |  99.00 | 58/58 (5) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 264 + Lager 265 (holz 213 (213 G), stein 13 (65 G), apfel 6 (18 G)) + Abriss 44 Betriebe 213 = 742 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 5, nach Abriss 66 | fehlt 443 Gold
+ZEITEN nach 1040 Runden: lesen 40.98 s, ruestung 32.06 s, wirtschaft 6.16 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 8836 | 213  13   0 |   6   0 |  99.00 | 58/58 (5) | 20 10 | -
+ 8900 | 214  13   0 |   5   0 |  99.00 | 58/58 (4) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 264 + Lager 265 (holz 214 (214 G), stein 13 (65 G), apfel 5 (15 G)) + Abriss 44 Betriebe 213 = 742 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 4, nach Abriss 66 | fehlt 443 Gold
+ZEITEN nach 1050 Runden: lesen 41.38 s, ruestung 32.37 s, wirtschaft 6.17 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 8908 | 216  13   0 |   6   0 |  99.00 | 58/58 (4) | 20 10 | STEUER 2 -> 3 (Beliebtheit 99.00); PLANER Lage (Gewinn bis Ende / Amortisation): Eisenmine -44/3572 [Horizont], Jaegerhuette -45/9552 [Horizont] | Stein-Reserve 0
+ 8977 | 228  13   0 |   9   0 |  99.00 | 58/58 (4) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 264 + Lager 285 (holz 228 (228 G), stein 13 (65 G), apfel 9 (27 G)) + Abriss 44 Betriebe 213 = 762 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 4, nach Abriss 67 | fehlt 423 Gold
+ZEITEN nach 1060 Runden: lesen 41.79 s, ruestung 32.68 s, wirtschaft 6.21 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 8984 | 228  13   0 |   9   0 |  99.00 | 58/58 (4) | 20 10 | -
+ 9035 | 228  13   0 |  14   0 |  98.75 | 58/58 (4) | 20 10 | verkauft: apfel x1
+ 9051 | 228  13   0 |   8   0 |  98.75 | 58/58 (4) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 279 + Lager 285 (holz 228 (228 G), stein 13 (65 G), apfel 8 (24 G)) + Abriss 44 Betriebe 213 = 777 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 4, nach Abriss 67 | fehlt 408 Gold
+ZEITEN nach 1070 Runden: lesen 42.19 s, ruestung 33.01 s, wirtschaft 6.22 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 9059 | 228  13   0 |   8   0 |  98.75 | 58/58 (4) | 20 10 | STEUER 3 -> 4 (Beliebtheit 98.75)
+ 9123 | 231  13   0 |   8   0 |  98.75 | 58/58 (4) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 279 + Lager 285 (holz 231 (231 G), stein 13 (65 G), apfel 8 (24 G)) + Abriss 44 Betriebe 213 = 777 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 4, nach Abriss 67 | fehlt 408 Gold
+ZEITEN nach 1080 Runden: lesen 42.57 s, ruestung 33.30 s, wirtschaft 6.26 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 9131 | 231  13   0 |   8   0 |  98.75 | 58/58 (4) | 20 10 | -
+ 9195 | 231  13   0 |  12   0 |  98.75 | 58/58 (4) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 279 + Lager 300 (holz 231 (231 G), stein 13 (65 G), apfel 12 (36 G)) + Abriss 44 Betriebe 213 = 792 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 4, nach Abriss 67 | fehlt 393 Gold
+ZEITEN nach 1090 Runden: lesen 42.97 s, ruestung 33.61 s, wirtschaft 6.26 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 9201 | 231  13   0 |  12   0 |  98.00 | 58/58 (4) | 20 10 | STEUER 4 -> 5 (Beliebtheit 98.00)
+ 9267 | 231  13   0 |  11   0 |  98.00 | 58/58 (4) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 279 + Lager 300 (holz 231 (231 G), stein 13 (65 G), apfel 11 (33 G)) + Abriss 44 Betriebe 213 = 792 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 4, nach Abriss 67 | fehlt 393 Gold
+ZEITEN nach 1100 Runden: lesen 43.34 s, ruestung 33.91 s, wirtschaft 6.30 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 9273 | 231  13   0 |  11   0 |  98.00 | 58/58 (4) | 20 10 | PLANER Lage (Gewinn bis Ende / Amortisation): Jaegerhuette -48/9552 [Horizont], Eisenmine -49/3572 [Horizont] | Stein-Reserve 0
+ 9295 | 231  13   0 |  13   0 |  98.00 | 58/58 (4) | 20 10 | verkauft: apfel x1
+ 9339 | 231  13   0 |  10   0 |  98.00 | 58/58 (4) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 294 + Lager 300 (holz 231 (231 G), stein 13 (65 G), apfel 10 (30 G)) + Abriss 44 Betriebe 213 = 807 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 4, nach Abriss 67 | fehlt 378 Gold
+ZEITEN nach 1110 Runden: lesen 43.73 s, ruestung 34.24 s, wirtschaft 6.31 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 9347 | 231  13   0 |  11   0 |  98.00 | 58/58 (4) | 20 10 | STEUER 5 -> 6 (Beliebtheit 98.00)
+ 9363 | 231  13   0 |  13   0 |  98.00 | 58/58 (4) | 20 10 | verkauft: apfel x1
+ 9416 | 231  13   0 |   7   0 |  96.00 | 58/58 (4) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 309 + Lager 285 (holz 231 (231 G), stein 13 (65 G), apfel 7 (21 G)) + Abriss 44 Betriebe 213 = 807 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 4, nach Abriss 67 | fehlt 378 Gold
+ZEITEN nach 1120 Runden: lesen 44.14 s, ruestung 34.57 s, wirtschaft 6.35 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 9424 | 231  13   0 |   7   0 |  96.00 | 58/58 (4) | 20 10 | -
+ 9488 | 231  13   0 |   8   0 |  96.00 | 58/58 (4) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 309 + Lager 285 (holz 231 (231 G), stein 13 (65 G), apfel 8 (24 G)) + Abriss 44 Betriebe 213 = 807 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 4, nach Abriss 67 | fehlt 378 Gold
+ZEITEN nach 1130 Runden: lesen 44.54 s, ruestung 34.87 s, wirtschaft 6.36 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 9496 | 231  13   0 |   9   0 |  96.00 | 58/58 (4) | 20 10 | -
+ 9517 | 234  13   0 |  15   0 |  96.00 | 58/58 (4) | 20 10 | verkauft: apfel x1
+ 9562 | 240  13   0 |  13   0 |  96.00 | 58/58 (4) | 20 10 | verkauft: apfel x1; BILANZ Rest 10 Kaempfer | Gold 324 + Lager 320 (holz 240 (240 G), stein 13 (65 G), apfel 13 (39 G)) + Abriss 44 Betriebe 213 = 857 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 4, nach Abriss 67 | fehlt 328 Gold
+ZEITEN nach 1140 Runden: lesen 44.94 s, ruestung 35.23 s, wirtschaft 6.37 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 9573 | 240  13   0 |   9   0 |  96.00 | 58/58 (4) | 20 10 | -
+ 9635 | 240  13   0 |   9   0 |  94.00 | 58/58 (4) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 378 + Lager 305 (holz 240 (240 G), stein 13 (65 G), apfel 9 (27 G)) + Abriss 44 Betriebe 213 = 896 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 4, nach Abriss 67 | fehlt 289 Gold
+ZEITEN nach 1150 Runden: lesen 45.32 s, ruestung 35.54 s, wirtschaft 6.38 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 9642 | 240  13   0 |   9   0 |  94.00 | 58/58 (4) | 20 10 | STEUER 6 -> 5 (Beliebtheit 94.00); PLANER Lage (Gewinn bis Ende / Amortisation): Jaegerhuette -50/9552 [Horizont], Eisenmine -54/3572 [Horizont] | Stein-Reserve 0
+ 9709 | 249  13   0 |   8   0 |  94.00 | 58/58 (4) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 378 + Lager 305 (holz 249 (249 G), stein 13 (65 G), apfel 8 (24 G)) + Abriss 44 Betriebe 213 = 896 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 4, nach Abriss 67 | fehlt 289 Gold
+ZEITEN nach 1160 Runden: lesen 45.72 s, ruestung 35.84 s, wirtschaft 6.41 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 9717 | 249  13   0 |   8   0 |  94.00 | 58/58 (4) | 20 10 | -
+ 9781 | 249  13   0 |   7   0 |  94.00 | 58/58 (4) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 378 + Lager 305 (holz 249 (249 G), stein 13 (65 G), apfel 7 (21 G)) + Abriss 44 Betriebe 213 = 896 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 4, nach Abriss 67 | fehlt 289 Gold
+ZEITEN nach 1170 Runden: lesen 46.11 s, ruestung 36.15 s, wirtschaft 6.42 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 9787 | 249  13   0 |   7   0 |  94.00 | 58/58 (4) | 20 10 | STEUER 5 -> 4 (Beliebtheit 94.00)
+ 9853 | 249  13   0 |   6   0 |  93.25 | 58/58 (4) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 378 + Lager 305 (holz 249 (249 G), stein 13 (65 G), apfel 6 (18 G)) + Abriss 44 Betriebe 213 = 896 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 4, nach Abriss 67 | fehlt 289 Gold
+ZEITEN nach 1180 Runden: lesen 46.50 s, ruestung 36.45 s, wirtschaft 6.46 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 9859 | 249  13   0 |   6   0 |  93.25 | 58/58 (4) | 20 10 | -
+ 9867 | 249  13   0 |   6   0 |  93.25 | 58/58 (4) | 20 10 | Lager erweitert (95, 275): Bestand 262, Holz unterwegs 72 + bald 18, Teile 8 -> noetig 9
+ 9930 | 249  13   0 |   5   0 |  93.25 | 58/58 (4) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 378 + Lager 305 (holz 249 (249 G), stein 13 (65 G), apfel 5 (15 G)) + Abriss 44 Betriebe 213 = 896 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 4, nach Abriss 67 | fehlt 289 Gold
+ZEITEN nach 1190 Runden: lesen 46.89 s, ruestung 36.75 s, wirtschaft 6.53 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+ 9937 | 249  13   0 |   5   0 |  93.25 | 58/58 (4) | 20 10 | STEUER 4 -> 3 (Beliebtheit 93.25)
+10007 | 259  13   0 |   4   0 |  93.00 | 58/58 (4) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 378 + Lager 290 (holz 259 (259 G), stein 13 (65 G), apfel 4 (12 G)) + Abriss 44 Betriebe 213 = 881 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 4, nach Abriss 67 | fehlt 304 Gold
+ZEITEN nach 1200 Runden: lesen 47.30 s, ruestung 37.05 s, wirtschaft 6.60 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+10014 | 262  13   0 |   4   0 |  93.00 | 58/58 (4) | 20 10 | PLANER Lage (Gewinn bis Ende / Amortisation): Jaegerhuette -53/9552 [Horizont], Eisenmine -59/3572 [Horizont] | Stein-Reserve 0
+10079 | 283  13   0 |   8   0 |  93.00 | 58/58 (4) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 378 + Lager 345 (holz 283 (283 G), stein 13 (65 G), apfel 8 (24 G)) + Abriss 44 Betriebe 213 = 936 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 4, nach Abriss 67 | fehlt 249 Gold
+ZEITEN nach 1210 Runden: lesen 47.71 s, ruestung 37.35 s, wirtschaft 6.60 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+10087 | 285  13   0 |   7   0 |  93.00 | 58/58 (4) | 20 10 | STEUER 3 -> 2 (Beliebtheit 93.00); PLANER Ochsenjoch an Steinbruch 74: juengster Ochse unterwegs und noch 9 am Haufen (> 8) (Joche 2, Haufen 9) -> (79, 205)
+10159 | 280  13   0 |   8   0 |  93.00 | 58/58 (4) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 378 + Lager 345 (holz 280 (280 G), stein 13 (65 G), apfel 8 (24 G)) + Abriss 45 Betriebe 215 = 938 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 4, nach Abriss 67 | fehlt 247 Gold
+ZEITEN nach 1220 Runden: lesen 48.11 s, ruestung 37.65 s, wirtschaft 6.70 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+10165 | 280  13   0 |   9   0 |  93.00 | 58/58 (4) | 20 10 | -
+10230 | 280  13   0 |  10   0 |  93.25 | 58/58 (4) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 378 + Lager 360 (holz 280 (280 G), stein 13 (65 G), apfel 10 (30 G)) + Abriss 45 Betriebe 215 = 953 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 4, nach Abriss 67 | fehlt 232 Gold
+ZEITEN nach 1230 Runden: lesen 48.51 s, ruestung 37.95 s, wirtschaft 6.71 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+10237 | 280  13   0 |  10   0 |  93.25 | 58/58 (4) | 20 10 | STEUER 2 -> 1 (Beliebtheit 93.25)
+10298 | 280  13   0 |  13   0 |  93.25 | 58/58 (3) | 20 10 | verkauft: apfel x1
+10309 | 280  13   0 |   9   0 |  93.25 | 58/58 (3) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 393 + Lager 345 (holz 280 (280 G), stein 13 (65 G), apfel 9 (27 G)) + Abriss 45 Betriebe 215 = 953 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 3, nach Abriss 67 | fehlt 232 Gold
+ZEITEN nach 1240 Runden: lesen 48.92 s, ruestung 38.29 s, wirtschaft 6.75 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+10316 | 280  13   0 |  11   0 |  93.25 | 58/58 (3) | 20 10 | -
+10381 | 280  13   0 |  14   0 |  93.25 | 58/58 (3) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 393 + Lager 360 (holz 280 (280 G), stein 13 (65 G), apfel 14 (42 G)) + Abriss 45 Betriebe 215 = 968 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 3, nach Abriss 68 | fehlt 217 Gold
+ZEITEN nach 1250 Runden: lesen 49.33 s, ruestung 38.59 s, wirtschaft 6.76 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+10389 | 280  13   0 |  16   0 |  93.25 | 58/58 (3) | 20 10 | verkauft: apfel x1; STEUER 1 -> 0 (Beliebtheit 93.25); PLANER Lage (Gewinn bis Ende / Amortisation): Jaegerhuette -55/9552 [Horizont], Eisenmine -65/3572 [Horizont] | Stein-Reserve 0
+10458 | 280  13   0 |  10   0 |  95.50 | 58/58 (3) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 397 + Lager 360 (holz 280 (280 G), stein 13 (65 G), apfel 10 (30 G)) + Abriss 45 Betriebe 215 = 972 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 3, nach Abriss 68 | fehlt 213 Gold
+ZEITEN nach 1260 Runden: lesen 49.73 s, ruestung 38.93 s, wirtschaft 6.80 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+10466 | 280  13   0 |  10   0 |  95.50 | 58/58 (3) | 20 10 | PLANER Ochsenjoch an Steinbruch 78: juengster Ochse unterwegs und noch 10 am Haufen (> 8) (Joche 2, Haufen 10) -> (87, 200)
+10534 | 275  13   0 |   9   0 |  95.50 | 58/58 (2) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 397 + Lager 325 (holz 275 (275 G), stein 13 (65 G), apfel 9 (27 G)) + Abriss 46 Betriebe 217 = 939 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 2, nach Abriss 68 | fehlt 246 Gold
+ZEITEN nach 1270 Runden: lesen 50.11 s, ruestung 39.23 s, wirtschaft 6.87 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+10542 | 275  13   0 |   9   0 |  95.50 | 58/58 (2) | 20 10 | -
+10605 | 275  13   0 |   9   0 |  97.75 | 58/58 (2) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 397 + Lager 325 (holz 275 (275 G), stein 13 (65 G), apfel 9 (27 G)) + Abriss 46 Betriebe 217 = 939 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 2, nach Abriss 69 | fehlt 246 Gold
+ZEITEN nach 1280 Runden: lesen 50.50 s, ruestung 39.53 s, wirtschaft 6.88 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+10611 | 275  13   0 |   8   0 |  97.75 | 58/58 (2) | 20 10 | STEUER 0 -> 1 (Beliebtheit 97.75)
+10679 | 275  13   0 |   8   0 |  97.75 | 58/58 (2) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 397 + Lager 325 (holz 275 (275 G), stein 13 (65 G), apfel 8 (24 G)) + Abriss 46 Betriebe 217 = 939 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 2, nach Abriss 69 | fehlt 246 Gold
+ZEITEN nach 1290 Runden: lesen 50.91 s, ruestung 39.83 s, wirtschaft 6.92 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+10687 | 275  13   0 |   8   0 |  97.75 | 58/58 (2) | 20 10 | -
+10750 | 275  13   0 |   7   0 |  97.75 | 58/58 (2) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 397 + Lager 325 (holz 275 (275 G), stein 13 (65 G), apfel 7 (21 G)) + Abriss 46 Betriebe 217 = 939 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 2, nach Abriss 69 | fehlt 246 Gold
+ZEITEN nach 1300 Runden: lesen 51.30 s, ruestung 40.14 s, wirtschaft 6.92 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+10756 | 275  13   0 |   7   0 |  97.75 | 58/58 (2) | 20 10 | STEUER 1 -> 2 (Beliebtheit 97.75); PLANER Lage (Gewinn bis Ende / Amortisation): Jaegerhuette -58/9552 [Horizont], Eisenmine -70/3572 [Horizont] | Stein-Reserve 0
+10826 | 285  13   0 |   6   0 |  98.00 | 58/58 (2) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 397 + Lager 345 (holz 285 (285 G), stein 13 (65 G), apfel 6 (18 G)) + Abriss 46 Betriebe 217 = 959 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 2, nach Abriss 69 | fehlt 226 Gold
+ZEITEN nach 1310 Runden: lesen 51.71 s, ruestung 40.44 s, wirtschaft 6.96 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+10832 | 285  13   0 |   7   0 |  98.00 | 58/58 (2) | 20 10 | -
+10896 | 285  13   0 |   9   0 |  98.00 | 58/58 (2) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 397 + Lager 345 (holz 285 (285 G), stein 13 (65 G), apfel 9 (27 G)) + Abriss 46 Betriebe 217 = 959 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 2, nach Abriss 69 | fehlt 226 Gold
+ZEITEN nach 1320 Runden: lesen 52.11 s, ruestung 40.74 s, wirtschaft 6.97 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+10904 | 285  13   0 |   9   0 |  98.00 | 58/58 (2) | 20 10 | STEUER 2 -> 3 (Beliebtheit 98.00)
+10971 | 288  13   0 |   8   0 |  98.00 | 58/58 (2) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 397 + Lager 345 (holz 288 (288 G), stein 13 (65 G), apfel 8 (24 G)) + Abriss 46 Betriebe 217 = 959 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 2, nach Abriss 69 | fehlt 226 Gold
+ZEITEN nach 1330 Runden: lesen 52.51 s, ruestung 41.04 s, wirtschaft 7.01 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+10978 | 288  13   0 |   8   0 |  98.00 | 58/58 (2) | 20 10 | -
+11043 | 301  19   0 |   8   0 |  97.75 | 58/58 (2) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 397 + Lager 390 (holz 301 (301 G), stein 19 (95 G), apfel 8 (24 G)) + Abriss 46 Betriebe 217 = 1004 | Bedarf 1185 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 2, nach Abriss 69 | fehlt 181 Gold
+ZEITEN nach 1340 Runden: lesen 52.92 s, ruestung 41.34 s, wirtschaft 7.02 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+11050 | 304  25   0 |   9   0 |  97.75 | 58/58 (2) | 20 10 | verkauft: stein; STEUER 3 -> 4 (Beliebtheit 97.75)
+11064 | 308  20   0 |  12   0 |  97.75 | 58/58 (2) | 20 10 | VORBEREITUNG Kaserne am Feuer (137, 277); VORBEREITUNG Waffenlager (126, 282)
+11096 | 315   8   0 |  12   0 |  97.75 | 58/58 (2) | 20 10 | verkauft: stein
+11144 | 324   3   0 |  11   0 |  97.75 | 58/58 (2) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 447 + Lager 350 (holz 324 (324 G), stein 3 (15 G), apfel 11 (33 G)) + Abriss 48 Betriebe 217 = 1014 | Bedarf 1120 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 2, nach Abriss 69 | fehlt 106 Gold
+ZEITEN nach 1350 Runden: lesen 53.35 s, ruestung 41.87 s, wirtschaft 7.06 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+11151 | 324   3   0 |  11   0 |  97.75 | 58/58 (2) | 20 10 | PLANER Lage (Gewinn bis Ende / Amortisation): Jaegerhuette -60/9552 [Horizont], Eisenmine -75/3572 [Horizont] | Stein-Reserve 0
+11167 | 324   3   0 |  13   0 |  97.75 | 58/58 (2) | 20 10 | verkauft: apfel x1
+11220 | 324   3   0 |  10   0 |  97.00 | 58/58 (2) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 451 + Lager 350 (holz 324 (324 G), stein 3 (15 G), apfel 10 (30 G)) + Abriss 48 Betriebe 217 = 1018 | Bedarf 1120 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 2, nach Abriss 69 | fehlt 102 Gold
+ZEITEN nach 1360 Runden: lesen 53.77 s, ruestung 42.21 s, wirtschaft 7.07 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+11227 | 324   3   0 |  10   0 |  97.00 | 58/58 (2) | 20 10 | STEUER 4 -> 5 (Beliebtheit 97.00)
+11296 | 329   3   0 |  10   0 |  97.00 | 58/58 (2) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 451 + Lager 350 (holz 329 (329 G), stein 3 (15 G), apfel 10 (30 G)) + Abriss 48 Betriebe 217 = 1018 | Bedarf 1120 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 2, nach Abriss 69 | fehlt 102 Gold
+ZEITEN nach 1370 Runden: lesen 54.18 s, ruestung 42.51 s, wirtschaft 7.11 s, haus_lager_zeile 0.13 s, waechter 0.00 s
+11303 | 329   3   0 |  10   0 |  97.00 | 58/58 (2) | 20 10 | -
+11367 | 330   3   0 |   9   0 |  97.00 | 58/58 (2) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 451 + Lager 335 (holz 330 (330 G), stein 3 (15 G), apfel 9 (27 G)) + Abriss 48 Betriebe 217 = 1003 | Bedarf 1120 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 2, nach Abriss 69 | fehlt 117 Gold
+ZEITEN nach 1380 Runden: lesen 54.58 s, ruestung 42.81 s, wirtschaft 7.12 s, haus_lager_zeile 0.14 s, waechter 0.00 s
+11373 | 331   3   0 |   9   0 |  97.00 | 58/58 (2) | 20 10 | STEUER 5 -> 6 (Beliebtheit 97.00)
+11413 | 336   3   0 |  13   0 |  95.00 | 58/58 (2) | 20 10 | verkauft: apfel x1
+11445 | 336   3   0 |   8   0 |  95.00 | 58/58 (2) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 466 + Lager 335 (holz 336 (336 G), stein 3 (15 G), apfel 8 (24 G)) + Abriss 48 Betriebe 217 = 1018 | Bedarf 1120 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 2, nach Abriss 69 | fehlt 102 Gold
+ZEITEN nach 1390 Runden: lesen 54.98 s, ruestung 43.14 s, wirtschaft 7.16 s, haus_lager_zeile 0.14 s, waechter 0.00 s
+11452 | 336   3   0 |   9   0 |  95.00 | 58/58 (2) | 20 10 | -
+11516 | 336   3   0 |  12   0 |  95.00 | 58/58 (2) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 466 + Lager 350 (holz 336 (336 G), stein 3 (15 G), apfel 12 (36 G)) + Abriss 48 Betriebe 217 = 1033 | Bedarf 1120 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 2, nach Abriss 69 | fehlt 87 Gold
+ZEITEN nach 1400 Runden: lesen 55.38 s, ruestung 43.44 s, wirtschaft 7.17 s, haus_lager_zeile 0.14 s, waechter 0.00 s
+11523 | 336   3   0 |  12   0 |  95.00 | 58/58 (2) | 20 10 | PLANER Lage (Gewinn bis Ende / Amortisation): Jaegerhuette -63/9552 [Horizont], Eisenmine -81/3572 [Horizont] | Stein-Reserve 0
+11587 | 345   3   0 |  11   0 |  95.00 | 58/58 (2) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 466 + Lager 370 (holz 345 (345 G), stein 3 (15 G), apfel 11 (33 G)) + Abriss 48 Betriebe 217 = 1053 | Bedarf 1120 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 2, nach Abriss 69 | fehlt 67 Gold
+ZEITEN nach 1410 Runden: lesen 55.77 s, ruestung 43.75 s, wirtschaft 7.18 s, haus_lager_zeile 0.14 s, waechter 0.00 s
+11593 | 346   3   0 |  11   0 |  95.00 | 58/58 (2) | 20 10 | -
+11658 | 359   3   0 |  10   0 |  93.00 | 58/58 (2) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 466 + Lager 370 (holz 359 (359 G), stein 3 (15 G), apfel 10 (30 G)) + Abriss 48 Betriebe 217 = 1053 | Bedarf 1120 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 2, nach Abriss 69 | fehlt 67 Gold
+ZEITEN nach 1420 Runden: lesen 56.18 s, ruestung 44.05 s, wirtschaft 7.19 s, haus_lager_zeile 0.14 s, waechter 0.00 s
+11666 | 360   3   0 |  10   0 |  93.00 | 58/58 (2) | 20 10 | STEUER 6 -> 5 (Beliebtheit 93.00)
+11721 | 360   3   0 |  15   0 |  93.00 | 58/58 (2) | 20 10 | verkauft: apfel x1
+11738 | 360   3   0 |  10   0 |  93.00 | 58/58 (2) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 481 + Lager 390 (holz 360 (360 G), stein 3 (15 G), apfel 10 (30 G)) + Abriss 48 Betriebe 217 = 1088 | Bedarf 1120 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 2, nach Abriss 69 | fehlt 32 Gold
+ZEITEN nach 1430 Runden: lesen 56.60 s, ruestung 44.38 s, wirtschaft 7.23 s, haus_lager_zeile 0.14 s, waechter 0.00 s
+11745 | 360   3   0 |   9   0 |  93.00 | 58/58 (2) | 20 10 | -
+11810 | 360   3   0 |   9   0 |  91.75 | 58/58 (2) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 481 + Lager 375 (holz 360 (360 G), stein 3 (15 G), apfel 9 (27 G)) + Abriss 48 Betriebe 217 = 1073 | Bedarf 1120 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 2, nach Abriss 69 | fehlt 47 Gold
+ZEITEN nach 1440 Runden: lesen 57.00 s, ruestung 44.69 s, wirtschaft 7.24 s, haus_lager_zeile 0.14 s, waechter 0.00 s
+11818 | 360   3   0 |   9   0 |  91.75 | 58/58 (2) | 20 10 | STEUER 5 -> 4 (Beliebtheit 91.75)
+11876 | 360   9   0 |   8   0 |  91.75 | 58/58 (2) | 20 10 | verkauft: stein
+11886 | 360  10   0 |   8   0 |  91.75 | 58/58 (2) | 20 10 | BILANZ Rest 10 Kaempfer | Gold 506 + Lager 425 (holz 360 (360 G), stein 10 (50 G), apfel 8 (24 G)) + Abriss 48 Betriebe 217 = 1148 | Bedarf 1120 (Keulen da 0, Leder da 0, Lose 2+2, Anwerben, Kaserne/Waffenlager) | Bauern frei 2, nach Abriss 69 | JETZT ERREICHBAR; ENDSPIEL bei Tick 11886: 48 Betriebe abreissen, alles verkaufen, 2+2 Lose kaufen; ENDSPIEL verkauft (Lose): {'holz': 24, 'stein': 2, 'apfel': 1}, Gold jetzt 1071; 5 keule gekauft; 5 keule gekauft; 5 leder gekauft; 2 Streitkolbenkaempfer angeworben
+ZEITEN nach 1450 Runden: lesen 57.39 s, ruestung 45.71 s, wirtschaft 7.28 s, haus_lager_zeile 0.14 s, waechter 0.00 s
+11963 |  44   0   0 |   2   0 |  91.75 | 58/58 (56) | 0 0 | -
+11973 |  44   0   0 |   2   0 |  91.75 | 57/58 (56) | 0 0 | Holzfaeller statt Holzverkauf bei (95, 287) (Holz 44; Platz (95, 287), Weg 3); KAEMPFER 1 bei Tick 11973
+12002 |  39   0   0 |   1   0 |  91.00 | 56/58 (56) | 0 0 | KAEMPFER 2 bei Tick 12002
+12011 |  39   0   0 |   1   0 |  91.00 | 56/58 (56) | 0 0 | Holzfaeller statt Holzverkauf bei (107, 303) (Holz 39; Platz (107, 303), Weg 19)
+ZEITEN nach 1460 Runden: lesen 57.79 s, ruestung 46.48 s, wirtschaft 7.28 s, haus_lager_zeile 0.14 s, waechter 0.00 s
+12079 |  34   0   0 |   1   0 |  91.00 | 56/58 (56) | 0 0 | -
+ZEITEN nach 1470 Runden: lesen 58.17 s, ruestung 47.08 s, wirtschaft 7.28 s, haus_lager_zeile 0.14 s, waechter 0.00 s
+12178 |  34   0   0 |   0   0 |  91.00 | 56/58 (54) | 2 0 | -
+ZEITEN nach 1480 Runden: lesen 58.53 s, ruestung 47.67 s, wirtschaft 7.28 s, haus_lager_zeile 0.14 s, waechter 0.00 s
+12274 |  34   0   0 |   0   0 |  87.75 | 56/58 (54) | 2 0 | -
+ZEITEN nach 1490 Runden: lesen 58.91 s, ruestung 48.26 s, wirtschaft 7.28 s, haus_lager_zeile 0.14 s, waechter 0.00 s
+12371 |  34   0   0 |   0   0 |  87.75 | 56/58 (54) | 2 0 | -
+ZEITEN nach 1500 Runden: lesen 59.29 s, ruestung 48.85 s, wirtschaft 7.28 s, haus_lager_zeile 0.14 s, waechter 0.00 s
+12467 |  34   0   0 |   0   0 |  84.50 | 56/58 (54) | 2 0 | -
+ZEITEN nach 1510 Runden: lesen 59.66 s, ruestung 49.44 s, wirtschaft 7.28 s, haus_lager_zeile 0.14 s, waechter 0.00 s
+12564 |  34   0   0 |   0   0 |  84.50 | 56/58 (54) | 2 0 | -
+ZEITEN nach 1520 Runden: lesen 60.03 s, ruestung 50.03 s, wirtschaft 7.28 s, haus_lager_zeile 0.14 s, waechter 0.00 s
+12659 |  34   0   0 |   0   0 |  81.25 | 56/58 (54) | 2 0 | -
+ZEITEN nach 1530 Runden: lesen 60.39 s, ruestung 50.62 s, wirtschaft 7.28 s, haus_lager_zeile 0.14 s, waechter 0.00 s
+12755 |  34   0   0 |   0   0 |  81.25 | 56/58 (54) | 2 0 | -
+12803 |  34   0   0 |   0   0 |  78.00 | 56/58 (54) | 2 0 | 5 leder gekauft
+ZEITEN nach 1540 Runden: lesen 60.77 s, ruestung 51.24 s, wirtschaft 7.28 s, haus_lager_zeile 0.14 s, waechter 0.00 s
+12855 |  34   0   0 |   0   0 |  78.00 | 56/58 (54) | 2 0 | -
+ZEITEN nach 1550 Runden: lesen 61.14 s, ruestung 51.83 s, wirtschaft 7.28 s, haus_lager_zeile 0.14 s, waechter 0.00 s
+12952 |  34   0   0 |   0   0 |  78.00 | 56/58 (54) | 2 0 | -
+ZEITEN nach 1560 Runden: lesen 61.52 s, ruestung 52.42 s, wirtschaft 7.28 s, haus_lager_zeile 0.14 s, waechter 0.00 s
+13049 |  34   0   0 |   0   0 |  74.75 | 56/58 (54) | 2 0 | -
+ZEITEN nach 1570 Runden: lesen 61.89 s, ruestung 53.01 s, wirtschaft 7.28 s, haus_lager_zeile 0.14 s, waechter 0.00 s
+13144 |  34   0   0 |   0   0 |  74.75 | 56/58 (54) | 2 0 | -
+ZEITEN nach 1580 Runden: lesen 62.27 s, ruestung 53.60 s, wirtschaft 7.28 s, haus_lager_zeile 0.14 s, waechter 0.00 s
+13241 |  34   0   0 |   0   0 |  71.50 | 56/58 (54) | 2 0 | -
+ZEITEN nach 1590 Runden: lesen 62.65 s, ruestung 54.19 s, wirtschaft 7.28 s, haus_lager_zeile 0.14 s, waechter 0.00 s
+13338 |  34   0   0 |   0   0 |  71.50 | 56/58 (54) | 2 0 | -
+ZEITEN nach 1600 Runden: lesen 63.03 s, ruestung 54.79 s, wirtschaft 7.28 s, haus_lager_zeile 0.14 s, waechter 0.00 s
+13437 |  34   0   0 |   0   0 |  68.25 | 56/58 (54) | 2 0 | -
+ZEITEN nach 1610 Runden: lesen 63.39 s, ruestung 55.39 s, wirtschaft 7.28 s, haus_lager_zeile 0.14 s, waechter 0.00 s
+13533 |  34   0   0 |   0   0 |  68.25 | 56/58 (54) | 2 0 | -
+ZEITEN nach 1620 Runden: lesen 63.76 s, ruestung 55.98 s, wirtschaft 7.28 s, haus_lager_zeile 0.14 s, waechter 0.00 s
+13629 |  34   0   0 |   0   0 |  65.00 | 56/58 (54) | 2 0 | -
+ZEITEN nach 1630 Runden: lesen 64.13 s, ruestung 56.58 s, wirtschaft 7.28 s, haus_lager_zeile 0.14 s, waechter 0.00 s
+13726 |  34   0   0 |   0   0 |  65.00 | 56/58 (54) | 2 0 | -
+ZEITEN nach 1640 Runden: lesen 64.50 s, ruestung 57.17 s, wirtschaft 7.28 s, haus_lager_zeile 0.14 s, waechter 0.00 s
+13822 |  34   0   0 |   0   0 |  61.75 | 56/58 (54) | 2 0 | -
+ZEITEN nach 1650 Runden: lesen 64.88 s, ruestung 57.76 s, wirtschaft 7.28 s, haus_lager_zeile 0.14 s, waechter 0.00 s
+13918 |  34   0   0 |   0   0 |  61.75 | 56/58 (54) | 2 0 | -
+ZEITEN nach 1660 Runden: lesen 65.25 s, ruestung 58.36 s, wirtschaft 7.28 s, haus_lager_zeile 0.14 s, waechter 0.00 s
+14016 |  34   0   0 |   0   0 |  58.50 | 56/58 (54) | 2 0 | -
+ZEITEN nach 1670 Runden: lesen 65.62 s, ruestung 58.95 s, wirtschaft 7.28 s, haus_lager_zeile 0.14 s, waechter 0.00 s
+14114 |  34   0   0 |   0   0 |  58.50 | 56/58 (54) | 2 0 | -
+ZEITEN nach 1680 Runden: lesen 66.01 s, ruestung 59.54 s, wirtschaft 7.28 s, haus_lager_zeile 0.14 s, waechter 0.00 s
+14211 |  34   0   0 |   0   0 |  55.25 | 56/58 (54) | 2 0 | -
+ZEITEN nach 1690 Runden: lesen 66.38 s, ruestung 60.13 s, wirtschaft 7.28 s, haus_lager_zeile 0.14 s, waechter 0.00 s
+14307 |  34   0   0 |   0   0 |  55.25 | 56/58 (54) | 2 0 | -
+ZEITEN nach 1700 Runden: lesen 66.75 s, ruestung 60.73 s, wirtschaft 7.28 s, haus_lager_zeile 0.14 s, waechter 0.00 s
+14404 |  34   0   0 |   0   0 |  52.00 | 56/58 (54) | 2 0 | -
+ZEITEN nach 1710 Runden: lesen 67.13 s, ruestung 61.32 s, wirtschaft 7.28 s, haus_lager_zeile 0.14 s, waechter 0.00 s
+14501 |  34   0   0 |   0   0 |  52.00 | 56/58 (54) | 2 0 | -
+ZEITEN nach 1720 Runden: lesen 67.50 s, ruestung 61.92 s, wirtschaft 7.28 s, haus_lager_zeile 0.14 s, waechter 0.00 s
+14598 |  34   0   0 |   0   0 |  52.00 | 56/58 (54) | 2 0 | -
+ZEITEN nach 1730 Runden: lesen 67.88 s, ruestung 62.51 s, wirtschaft 7.28 s, haus_lager_zeile 0.14 s, waechter 0.00 s
+14694 |  34   0   0 |   0   0 |  48.75 | 56/58 (54) | 2 0 | -
+ZEITEN nach 1740 Runden: lesen 68.26 s, ruestung 63.10 s, wirtschaft 7.28 s, haus_lager_zeile 0.14 s, waechter 0.00 s
+14791 |  34   0   0 |   0   0 |  48.75 | 56/58 (54) | 2 0 | -
+ZEITEN nach 1750 Runden: lesen 68.63 s, ruestung 63.69 s, wirtschaft 7.28 s, haus_lager_zeile 0.14 s, waechter 0.00 s
+14889 |  34   0   0 |   0   0 |  45.50 | 56/58 (54) | 2 0 | -
+ZEITEN nach 1760 Runden: lesen 69.01 s, ruestung 64.29 s, wirtschaft 7.28 s, haus_lager_zeile 0.14 s, waechter 0.00 s
+14986 |  34   0   0 |   0   0 |  45.50 | 56/58 (54) | 2 0 | -
+ZEITEN nach 1770 Runden: lesen 69.38 s, ruestung 64.88 s, wirtschaft 7.28 s, haus_lager_zeile 0.14 s, waechter 0.00 s
+15083 |  34   0   0 |   0   0 |  42.25 | 56/58 (54) | 2 0 | -
+ZEITEN nach 1780 Runden: lesen 69.77 s, ruestung 65.48 s, wirtschaft 7.28 s, haus_lager_zeile 0.14 s, waechter 0.00 s
+15182 |  34   0   0 |   0   0 |  42.25 | 56/58 (54) | 2 0 | -
+ZEITEN nach 1790 Runden: lesen 70.16 s, ruestung 66.06 s, wirtschaft 7.28 s, haus_lager_zeile 0.14 s, waechter 0.00 s
+15279 |  34   0   0 |   0   0 |  39.00 | 56/58 (54) | 2 0 | -
+ZEITEN nach 1800 Runden: lesen 70.54 s, ruestung 66.65 s, wirtschaft 7.28 s, haus_lager_zeile 0.14 s, waechter 0.00 s
+15375 |  34   0   0 |   0   0 |  39.00 | 56/58 (54) | 2 0 | -
+ZEITEN nach 1810 Runden: lesen 70.91 s, ruestung 67.24 s, wirtschaft 7.28 s, haus_lager_zeile 0.14 s, waechter 0.00 s
+15473 |  34   0   0 |   0   0 |  35.75 | 56/58 (54) | 2 0 | -
+15512 |  39   0   0 |   0   0 |  35.75 | 56/58 (54) | 2 0 | Holzfaeller statt Holzverkauf bei (67, 252) (Holz 39; Platz (67, 252), Weg 24)
+15551 |  42   0   0 |   0   0 |  35.75 | 56/58 (54) | 2 0 | Holzfaeller statt Holzverkauf bei (65, 259) (Holz 42; Platz (65, 259), Weg 26)
+ZEITEN nach 1820 Runden: lesen 71.31 s, ruestung 68.01 s, wirtschaft 7.28 s, haus_lager_zeile 0.14 s, waechter 0.00 s
+15590 |  42   0   0 |   0   0 |  35.75 | 56/58 (54) | 2 0 | Holzfaeller statt Holzverkauf bei (65, 241) (Holz 42; Platz (65, 241), Weg 35)
+15624 |  37   0   0 |   0   0 |  32.50 | 56/58 (54) | 2 0 | Holzfaeller statt Holzverkauf bei (73, 240) (Holz 37; Platz (73, 240), Weg 36)
+ZEITEN nach 1830 Runden: lesen 71.69 s, ruestung 68.76 s, wirtschaft 7.28 s, haus_lager_zeile 0.14 s, waechter 0.00 s
+15703 |  32   0   0 |   0   0 |  32.50 | 56/58 (50) | 3 0 | -
+ZEITEN nach 1840 Runden: lesen 72.07 s, ruestung 69.35 s, wirtschaft 7.28 s, haus_lager_zeile 0.14 s, waechter 0.00 s
+15799 |  32   0   0 |   0   0 |  32.50 | 56/58 (50) | 6 0 | -
+ZEITEN nach 1850 Runden: lesen 72.45 s, ruestung 69.95 s, wirtschaft 7.28 s, haus_lager_zeile 0.14 s, waechter 0.00 s
+15897 |  32   0   0 |   0   0 |  29.25 | 56/58 (50) | 6 0 | -
+ZEITEN nach 1860 Runden: lesen 72.83 s, ruestung 70.53 s, wirtschaft 7.28 s, haus_lager_zeile 0.14 s, waechter 0.00 s
+15994 |  32   0   0 |   0   0 |  29.25 | 56/58 (50) | 6 0 | -
+Ende Phase 2 bei Tick 16008 nach 1861 Runden (0.1 s je Runde); Kornspeicher 1, Holzfaeller 6, Apfelplantagen 0
+Wirtschaft: Seasoning: A 3 / B 3 Plantagen, A reif bei 1698, B gesetzt bei 1726; Apfelbauern untaetig vor B 0 % (75 Messungen), B bis B+1000 15 % (134 Messungen), danach 25 % (1237 Messungen); FESTES FENSTER Tick 5000-12000 (zum Vergleich zwischen Partien): 24 % (919 Messungen); Lager gesetzt bei 3676, gemessene Ladung je Gang {3: 18}
+Ertrags-Planer: gesetzt {'Holzfaeller statt Verkauf': 12, 'Steinbruch+Ochsenjoch': 4, 'Ochsenjoch (Regel)': 6, 'Apfelplantage': 4}, stehen am Ende {'Eisenmine': 0, 'Steinbruch+Ochsenjoch': 0, 'Apfelplantage': 0, 'Jaegerhuette': 0, 'Holzfaeller': 6, 'Ochsenjoch': 0, 'Steinhaufen zuletzt': {47: 7, 60: 1, 71: 1, 74: 5, 78: 7}, 'Bauplaetze ohne Weg verworfen': 17}, abgelehnt {'Jaegerhuette: Horizont': 133, 'Eisenmine: Horizont': 81}, Verstoesse gegen den Horizont keine, Steuerstufe 4
+Ertragsmesser: Eisenmine 0.61->0.61 (Zugang 0, Lieferung None, Gegenprobe None, Anlauf 6664 Startwert); Steinbruch+Ochsenjoch 6.72->5.89 (Zugang 50, Lieferung None, Gegenprobe 0.0, Anlauf 3464 gemessen an der Art); Apfelplantage 3.25->3.17 (Zugang 179, Lieferung 5, Gegenprobe 0.36, Anlauf 1690 gemessen an der Art); Jaegerhuette 3.07->3.07 (Zugang 0, Lieferung None, Gegenprobe None, Anlauf 4427 Startwert); Holzfaeller 13.24->9.29 (Zugang 217, Lieferung 18, Gegenprobe 0.21, Anlauf 4000 Startwert) | negative Zugaenge: holz 2 von 1860 Runden, Summe 318; stein 2 von 1860 Runden, Summe 22; eisen 0 von 1860 Runden, Summe 0 | abgegebene Ladung je Einheit@Art: {'13@32': 64, '3@3': 46}
