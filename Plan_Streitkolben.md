@@ -62,5 +62,7 @@ Spiel gegenpruefen.
 - Gerberei: +3 Lederharnische je Kuh (zwei Spruenge 4->7 bei Tick 5.615, 7->10 bei 7.450; 2 Milchviehhoefe + 1 Gerberei).
 - Offen: Keulen je Eisen (Eisenkauf scheiterte, Gold blieb gleich - warum?), Holzkauf scheiterte ebenso;
   Abriss einer frisch gebauten Schmiede gab in 10 Ticks nichts zurueck (zu frueh gemessen? im Bau?).
-- Naechster Schritt: Eisen-/Holzkauf klaeren (Lagerplatz? Spielbefehl?), Schmiede mit Eisen messen, Abriss nach
+- Eisen-/Holzkauf geklaert (19:58): alle 4 Lagerteile belegt (Holz 13+48, Stein 17+2) - ein Teil fasst nur eine
+  Warenart (48). Vor neuer Warenart freies Teil schaffen.
+- Naechster Schritt: Schmiede mit Eisen messen, Abriss nach
   Fertigstellung und laengerer Wartezeit messen; dann Kette dimensionieren und erster Benchmark 10 Kaempfer.
