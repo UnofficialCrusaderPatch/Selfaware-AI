@@ -75,3 +75,18 @@ Spiel gegenpruefen.
   Klick auf Keulen umgestellt -> den Spielbefehl dafuer finden (nicht Speicher setzen).
 - Naechste Schritte: (1) Umstell-Befehl der Schmiede finden; (2) Werkstaetten, Waffenlager und Kaserne direkt ans Lager;
   (3) Zeit je Keule und je Harnisch bei kurzem Weg messen; (4) Abriss-Rueckgabe messen (diesmal keine 2. Schmiede gebaut).
+
+## Messpartien 5/6 (06.10. 20:02-20:04)
+- Spielbefehl 33 `ClickSetBuildingProductionType` (Gebaeude, Art, UID) -> `SetBuildingProductionType` setzt
+  producedItemType, wenn die UID passt (`daten/dekomp_produktionstyp*.c`, Befehlstabelle `daten/befehlstabelle_namen.txt`).
+  Art 21 = Keule: danach 3 Keulen aus 3 Eisen (belegt: 1 Eisen = 1 Keule).
+- Lager zuerst vergroessern! Messpartie 5 baute alles direkt ans Lager -> kein Anbau moeglich, Eisenkauf scheiterte.
+  Messpartie 6: erst zwei Lagerbloecke, dann der Rest -> Eisen (20 fuer 1.080) und Holz (bis 195) kaufbar.
+- Schmiede ~6 Felder vom Lager: holt alle ~2.100 Ticks 1 Eisen (3.151 / 5.256 / 7.364), Keulen bei 5.124 und 7.231.
+  Bei ~55 Feldern Weg waren es ~4.100 Ticks.
+- Gerberei: erste Harnische bei ~6.500 (Milchviehhoefe ~40 Felder weg, bei (174,296)/(178,240)); 1 Kuh = 3 Harnische.
+- Abriss einer Schmiede: auch nach 150 Ticks und mit Lagerplatz 0 zurueck - offen (fertig gebaut? andere Art Rueckgabe?).
+- Vergleich: Markt 1 Keule 60 Gold, 1 Harnisch 32 Gold -> ein Kaempfer 112 Gold; selbst gemacht: Eisen 54 Gold je Stueck
+  (Kauf) + ~2.100 Ticks je Schmiede. Gold ist der Engpass (Ausgangswert: 1.000 Gold erst bei Tick 15.975).
+- Naechster Schritt: erster Benchmark 10 Kaempfer ab Tick 0 ohne gesetztes Gold - Weg A nur Markt, Weg B Markt +
+  eigene Kette; Marken 1..10 mit Tick.

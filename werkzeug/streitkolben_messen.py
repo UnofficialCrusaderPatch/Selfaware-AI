@@ -73,7 +73,9 @@ def main():
     # Messpartie 1 (19:51): nach 5 Ticks war das vorige Gebaeude noch nicht eingetragen - die Platzsuche gab Schmiede,
     # Gerberei und Huette denselben Platz (90, 276); Milchviehhoefe (10x10) fanden im Umkreis 25 keinen Platz.
     # Darum: nach jedem Bau warten, bis das Gebaeude in der Liste steht; grosse Hoefe weiter weg suchen.
-    for typ, r in ((MARKT, 20), (WAFFENLAGER, 10), ("kaufen", 0), (KASERNE, 12), (SCHMIEDE, 12), (GERBER, 12),
+    # Messpartie 5: alles direkt ans Lager gebaut -> kein Platz zum Anbauen, Eisenkauf und Abriss-Rueckgabe scheiterten
+    # (jedes Teil nur eine Warenart, 48). Darum ZUERST zwei Lagerbloecke anbauen, dann den Rest drumherum.
+    for typ, r in ((LAGER, 8), (LAGER, 10), (MARKT, 20), (WAFFENLAGER, 10), ("kaufen", 0), (KASERNE, 12), (SCHMIEDE, 12), (GERBER, 12),
                    (MILCH, 45), (MILCH, 45), (HUETTE, 20), (HUETTE, 20), (HUETTE, 20), (SCHMIEDE, 20)):
         if typ == "kaufen":                       # nach dem Markt: Stein und Holz echt kaufen
             for art, lose in ((STEIN, 10), (HOLZ, 10)):
