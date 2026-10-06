@@ -45,7 +45,7 @@ KNOEPFE = {
     "b_versatz": ["reif", 0, 300, 600],
     "steuer_ende": ["nein", "ja"],   # "wohnraum" (Lauf 23) gestrichen: Hoechststeuer ab Tick 1.650 -> Beliebtheit 30, Arbeiter weg, Ziel verfehlt
     "kasse": ["nein", "steuer", "steuer_essen"],     # Daniel 07.10. 00:17/00:20
-    "bevoelkerung_ziel": [0, 70, 80, 90, 60, 50],     # Daniel 00:34: 60-70; 00:48: "eher 80-90"
+    "bevoelkerung_ziel": [70, 80, 90, 60, 50, 0],     # Reihenfolge = Testfolge (naechste nimmt den ersten ungespielten)
     "kasse_grenze": [50, 35, 25, 0],
     "penner": [2, 20, 12],     # Wachstums-Holzfaeller ab so vielen Wartenden (Daniel 00:54: Platz fuer Penner lassen)   # 0 = immer -40 ab Kasse-Start (Daniel 00:51: "erst gehen nur die im Pennergraben")     # Lauf 26: Beliebtheit 0 -> 50 auf 4 Leute, kein Kaempfer; Beliebtheit ist ein Vorrat
     "steuer_runter": [95, 90, 85, 80],
