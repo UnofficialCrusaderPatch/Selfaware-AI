@@ -1,0 +1,21 @@
+START Tick 822 Feuer 3 Leute 15/98 | {'Steinbr': [0, 6], 'Joch': [0, 2], 'Holzf': [5, 18], 'Apfel': [3, 3]} | Bauern {'z7@Feuer': 1, 'z5': 3, 'z8@Feuer': 2, 'z109': 1} | Arbeiter-Einheiten {13: 3, 3: 5}
+Tick 853 Feuer 4 Leute 16/98 | {'Steinbr': [0, 6], 'Joch': [0, 2], 'Holzf': [5, 18], 'Apfel': [3, 3]} | Bauern {'z8@Feuer': 3, 'z5': 3, 'z7@Feuer': 1, 'z109': 1} | Einheiten {13: 3, 3: 5}
+Tick 886 Feuer 4 Leute 16/98 | {'Steinbr': [0, 6], 'Joch': [0, 2], 'Holzf': [5, 18], 'Apfel': [3, 3]} | Bauern {'z8@Feuer': 3, 'z5': 3, 'z7@Feuer': 1, 'z4': 1} | Einheiten {13: 3, 3: 5}
+Tick 917 Feuer 1 Leute 17/98 | {'Steinbr': [0, 6], 'Joch': [0, 2], 'Holzf': [9, 18], 'Apfel': [3, 3]} | Bauern {'z109': 5, 'z5': 3, 'z7@Feuer': 1} | Einheiten {13: 3, 3: 5}
+Tick 947 Feuer 1 Leute 17/98 | {'Steinbr': [0, 6], 'Joch': [0, 2], 'Holzf': [9, 18], 'Apfel': [3, 3]} | Bauern {'z5': 3, 'z8@Feuer': 1, 'z4': 1} | Einheiten {13: 3, 3: 9}
+Tick 979 Feuer 2 Leute 18/98 | {'Steinbr': [0, 6], 'Joch': [0, 2], 'Holzf': [9, 18], 'Apfel': [3, 3]} | Bauern {'z7@Feuer': 1, 'z8@Feuer': 1, 'z5': 3, 'z109': 1} | Einheiten {13: 3, 3: 9}
+Tick 1009 Feuer 3 Leute 19/98 | {'Steinbr': [0, 6], 'Joch': [0, 2], 'Holzf': [9, 18], 'Apfel': [3, 3]} | Bauern {'z8@Feuer': 2, 'z7@Feuer': 1, 'z5': 3, 'z109': 1} | Einheiten {13: 3, 3: 9}
+Tick 1039 Feuer 3 Leute 19/98 | {'Steinbr': [0, 6], 'Joch': [0, 2], 'Holzf': [9, 18], 'Apfel': [3, 3]} | Bauern {'z8@Feuer': 2, 'z7@Feuer': 1, 'z5': 3, 'z4': 1} | Einheiten {13: 3, 3: 9}
+Tick 1069 Feuer 4 Leute 20/98 | {'Steinbr': [0, 6], 'Joch': [0, 2], 'Holzf': [9, 18], 'Apfel': [3, 3]} | Bauern {'z8@Feuer': 3, 'z7@Feuer': 1, 'z5': 3, 'z109': 1} | Einheiten {13: 3, 3: 9}
+Tick 1101 Feuer 0 Leute 21/98 | {'Steinbr': [0, 6], 'Joch': [0, 2], 'Holzf': [13, 18], 'Apfel': [3, 3]} | Bauern {'z109': 5, 'z0': 1, 'z5': 3} | Einheiten {13: 3, 3: 9}
+Tick 1131 Feuer 1 Leute 21/98 | {'Steinbr': [0, 6], 'Joch': [0, 2], 'Holzf': [13, 18], 'Apfel': [3, 3]} | Bauern {'z8@Feuer': 1, 'z5': 3, 'z109': 1} | Einheiten {13: 3, 3: 13}
+Tick 1163 Feuer 2 Leute 22/98 | {'Steinbr': [0, 6], 'Joch': [0, 2], 'Holzf': [13, 18], 'Apfel': [3, 3]} | Bauern {'z8@Feuer': 1, 'z7@Feuer': 1, 'z5': 3, 'z109': 1} | Einheiten {13: 3, 3: 13}
+Tick 1192 Feuer 2 Leute 22/98 | {'Steinbr': [0, 6], 'Joch': [0, 2], 'Holzf': [13, 18], 'Apfel': [3, 3]} | Bauern {'z8@Feuer': 2, 'z5': 3, 'z4': 1} | Einheiten {13: 3, 3: 13}
+Tick 1224 Feuer 3 Leute 23/98 | {'Steinbr': [0, 6], 'Joch': [0, 2], 'Holzf': [13, 18], 'Apfel': [3, 3]} | Bauern {'z8@Feuer': 2, 'z7@Feuer': 1, 'z5': 3, 'z109': 1} | Einheiten {13: 3, 3: 13}
+Tick 1254 Feuer 4 Leute 24/98 | {'Steinbr': [0, 6], 'Joch': [0, 2], 'Holzf': [13, 18], 'Apfel': [3, 3]} | Bauern {'z8@Feuer': 2, 'z7@Feuer': 2, 'z5': 3, 'z109': 1} | Einheiten {13: 3, 3: 13}
+Tick 1286 Feuer 4 Leute 24/98 | {'Steinbr': [0, 6], 'Joch': [0, 2], 'Holzf': [13, 18], 'Apfel': [3, 3]} | Bauern {'z8@Feuer': 4, 'z5': 3, 'z4': 1} | Einheiten {13: 3, 3: 13}
+Tick 1318 Feuer 1 Leute 25/98 | {'Steinbr': [0, 6], 'Joch': [0, 2], 'Holzf': [17, 18], 'Apfel': [3, 3]} | Bauern {'z109': 5, 'z7@Feuer': 1, 'z5': 3} | Einheiten {13: 3, 3: 13}
+Tick 1348 Feuer 1 Leute 25/98 | {'Steinbr': [0, 6], 'Joch': [0, 2], 'Holzf': [17, 18], 'Apfel': [3, 3]} | Bauern {'z8@Feuer': 1, 'z5': 3, 'z4': 1} | Einheiten {13: 3, 3: 17}
+Tick 1380 Feuer 2 Leute 26/98 | {'Steinbr': [0, 6], 'Joch': [0, 2], 'Holzf': [17, 18], 'Apfel': [3, 3]} | Bauern {'z8@Feuer': 1, 'z7@Feuer': 1, 'z5': 3, 'z109': 1} | Einheiten {13: 3, 3: 17}
+Tick 1412 Feuer 3 Leute 27/98 | {'Steinbr': [0, 6], 'Joch': [0, 2], 'Holzf': [17, 18], 'Apfel': [3, 3]} | Bauern {'z8@Feuer': 2, 'z7@Feuer': 1, 'z5': 3, 'z109': 1} | Einheiten {13: 3, 3: 17}
+Tick 1442 Feuer 3 Leute 27/98 | {'Steinbr': [0, 6], 'Joch': [0, 2], 'Holzf': [17, 18], 'Apfel': [3, 3]} | Bauern {'z8@Feuer': 2, 'z7@Feuer': 1, 'z5': 3, 'z4': 1} | Einheiten {13: 3, 3: 17}

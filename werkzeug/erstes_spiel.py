@@ -146,7 +146,8 @@ def phase1(plan, tempo, mit_posten=True):
         # Daniel 22:05: "zwei Steinbrueche direkt neben dem Vorratslager, sofort gebaut, wenn die Ressourcen da sind" -
         # vor den Holzfaellern (die Reihenfolge entscheidet, was beim ersten Holz (30 bei Tick 120) noch geht)
         holz_bauten = [(19, tuple(plan["kornspeicher"])), (26, MARKT)] + [(20, q) for q in V14["brueche"]] + \
-                      [(4, j) for j in V14["joche"]] + [(3, tuple(p)) for p in plan["holzfaeller"]]
+                      [(4, j) for j in V14["joche"]] + \
+                      [(3, tuple(p)) for p in (plan["holzfaeller"] if HF_VORAB is None else plan["holzfaeller"][:HF_VORAB])]
     else:
         holz_bauten = [(19, tuple(plan["kornspeicher"])), (26, MARKT)] + [(3, tuple(p)) for p in plan["holzfaeller"]]
     if plan.get("stein") and not V14:
@@ -385,6 +386,8 @@ LOS_PREIS = {21: 300, 23: 160}   # 5 Keulen / 5 Lederharnische am Markt (gemesse
 #    Platz); der Gerber laeuft nur Hof <-> Gerberei <-> Waffenlager, das Lager braucht er nicht. Zwei Hoefe 8 Felder
 #    auseinander, Gerberei dazwischen (2 Felder zu beiden), Waffenlager 1 Feld neben der Gerberei.
 V14 = None
+HF_VORAB = None          # v15: so viele Holzfaeller aus dem Eroeffnungsplan in Phase 1, der Rest erst nach den Steinbruechen
+STEIN_ZUERST = False     # v15: Planer baut nichts mit Arbeitern, bis beide Steinbrueche + Joche besetzt sind
 V14_PLAN = {"brueche": [(80, 265), (80, 271)], "joche": [(87, 265), (87, 274)], "lager": (87, 268),
             "erweiterung": [(93, 268), (98, 268)], "hoefe": [(172, 297), (181, 279)], "gerberei": (175, 291),
             "waffenlager": (176, 286)}
@@ -773,6 +776,15 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
             ausbau.messer.verkauft("holz")
             return "verkauft", "Gold bremst das Anwerben"
         ort, text = ausbau.holzfaeller_statt_verkauf(st, L, G)
+        if ort is None and streitkolben and V14:
+            # v15 (Daniel 22:29: "10 Haeuser helfen nur bedingt"; v14 baute 11 Huetten fuer 15 Leute, Platz 98): keine Huette
+            # als Holz-Abfluss - Huetten nur als Puffer (Platz - Leute < 6). Holz bleibt fuer B (Seasoning vor der ersten
+            # Holzlieferung), ein volles 20er-Los wird verkauft, wenn das Holz ueber der Ruecklage liegt.
+            if st.get("holz", 0) - wirt.ruecklage(G)["holz"] >= 20:
+                befehl({"spielbefehl": {"nr": 38, "werte": [1, WAREN_NR["holz"]]}}, 1.0, bis="SPIELBEFEHL")
+                ausbau.messer.verkauft("holz")
+                return "verkauft", "kein Holzfaeller-Platz (%s), Los ueber der Ruecklage" % text
+            return None, text
         if ort is None and streitkolben:
             # v11: "kein erreichbarer Holzfaeller-Platz" -> das alte Lager wurde nie leer, der Umzug blieb bis 11.520 haengen.
             # Dann Huetten (Wohnplatz-Puffer, Daniel 21:55), sonst verkaufen - nie liegen lassen.
@@ -786,12 +798,16 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
         return ort, text
     wirt.holz_verbauen = holz_verwerten
     global BUCH
-    leder = None
+    leder, hf_spaeter = None, []
     if V14:
         from auftragsbuch import Auftragsbuch
         BUCH = Auftragsbuch(SP, ARBEITER_JE, NACH_TYP)
-        wirt.umzug_ab, wirt.lager_genau, wirt.lager_ort = V14_UMZUG_AB, True, tuple(V14_PLAN["lager"])
-        ausbau.ohne, ausbau.sperr = {20}, v14_sperrflaechen()
+        wirt.umzug_ab, wirt.lager_genau, wirt.lager_ort = None, True, tuple(V14_PLAN["lager"])
+        wirt.umzug_nach_b = True
+        ausbau.ohne, ausbau.sperr = ({3, 5, 7, 20, 32} if STEIN_ZUERST else {20}), v14_sperrflaechen()
+        hf_spaeter = [tuple(p) for p in plan["holzfaeller"][HF_VORAB:]] if HF_VORAB is not None else []
+        schreib("v15: Holzfaeller vorab %s, spaeter %d aus dem Plan; Steinbrueche zuerst besetzen: %s; Lagerumzug nach B" % (
+            HF_VORAB, len(hf_spaeter), STEIN_ZUERST))
         leder = LederKette({})
         schreib("v14: Auftragsbuch an; Steinbrueche %s, Joche %s, Lager %s (Umzug ab Tick %d), Leder: Hoefe %s, Gerberei %s, "
                 "Waffenlager %s; Fruehabbruch: Steinbrueche+Joche bis %d, neues Lager bis %d" % (
@@ -864,6 +880,16 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                 schreib(BUCH.stand(G, st))
             if V14 and not endspiel["fertig"]:
                 ereignis += v14_steinpflicht(st, G, wirt)   # vor allem anderen (Daniel 22:05)
+                if "stein_besetzt" not in fruehpruefung:
+                    voll = all(BUCH.hat.get(n, 0) >= ARBEITER_JE[typ] for typ, orte in ((20, V14_PLAN["brueche"]), (4, V14_PLAN["joche"]))
+                               for o in orte for n in (steht_bei(G, typ, o) or [None]))
+                    if voll:
+                        fruehpruefung["stein_besetzt"] = st["t"]
+                        ausbau.ohne = {20}
+                        ereignis.append("STEINBRUECHE BESETZT bei Tick %d (6/6 + Joche 2/2) - Planer und restliche Holzfaeller frei" % st["t"])
+                elif hf_spaeter and st["holz"] - wirt.ruecklage(G)["holz"] >= 5:
+                    o = hf_spaeter.pop(0)
+                    ereignis.append("HOLZFAELLER aus dem Plan nach den Steinbruechen bei %s: %s" % (o, baue_schnell(3, o[0], o[1], 1, zweck="Plan")))
             tz = uhr("auftragsbuch", tz)
         # Markt und Verkauf gehoeren zur Wirtschaft, nicht zu den Assassinen (gold10k_1: mit assassinen=0 wurde 60.000
         # Ticks lang nichts verkauft - der Block stand im Assassinen-Teil; Gold am Ende 1.013, nur aus Steuern)
@@ -934,7 +960,11 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                     break
                 fruehpruefung["stein"] = True
                 schreib("PRUEFUNG bestanden bei Tick %d: beide Steinbrueche + Joche stehen an den Plan-Plaetzen" % st["t"])
-            if st["t"] >= V14_LAGER_BIS and not fruehpruefung.get("lager"):
+            lager_bis = min(2000, wirt.B_tick + 400) if wirt.B_tick else 2000      # v15: Umzug erst nach B
+            if STEIN_ZUERST and st["t"] >= 1500 and "stein_besetzt" not in fruehpruefung:
+                schreib("FRUEHABBRUCH bei Tick %d: Steinbrueche + Joche nicht besetzt (%s)" % (st["t"], BUCH.stand(G, st)))
+                break
+            if st["t"] >= lager_bis and not fruehpruefung.get("lager"):
                 neu = steht_bei(G, 10, V14_PLAN["lager"])
                 alt = [n for n, g in G.items() if g["besitzer"] == SP and g["typ"] == 10 and
                        max(abs(g["x"] - BASIS_LAGER[0]), abs(g["y"] - BASIS_LAGER[1])) <= 6]
@@ -1041,6 +1071,10 @@ def main():
     waechter.BERGFRIED_EINGANG = BERGFRIED
     global LEERE_KI, V14
     LEERE_KI = arg.get("leere_ki", "nein") == "ja"
+    global HF_VORAB, STEIN_ZUERST
+    if arg.get("holzfaeller_vorab"):
+        HF_VORAB = int(arg["holzfaeller_vorab"])
+    STEIN_ZUERST = arg.get("steinbruch_zuerst", "nein") == "ja"
     if arg.get("v14", "nein") == "ja":
         V14 = V14_PLAN
         plan["lager"], plan["lager_mitte"] = list(V14_PLAN["lager"]), [V14_PLAN["lager"][0] + 2, V14_PLAN["lager"][1] + 2]

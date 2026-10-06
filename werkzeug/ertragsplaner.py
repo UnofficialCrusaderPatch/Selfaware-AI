@@ -396,6 +396,10 @@ class Ertragsplaner:
             return None, "Holz/Gold reicht nach B-Ruecklage nicht"
         if st.get("feuer", 0) < 1:
             return None, "kein freier Arbeiter am Feuer"
+        if 3 in getattr(self, "ohne", ()):
+            # v15: Holzfaeller bekommen ihre Arbeiter VOR den Steinbruechen (gemessen 06.10. 22:35, Tick 822-1.442: 12 neue
+            # Arbeiter, alle zu Holzfaellern, Steinbrueche 0/6) - erst die Steinbrueche besetzen
+            return None, "Holzfaeller warten, bis die Steinbrueche besetzt sind"
         # Auf den besten Bau sparen (Daniel 21:52: "entweder fehlen ihm Informationen oder er nutzt sie nicht"): fehlt dem
         # zuletzt gewaehlten besten Bau Holz, darf dieser Holzfaeller es nicht verbauen (v9: Steinbruch wartete 8x auf 3-8 Holz)
         b = self.letzte_wahl
@@ -448,7 +452,10 @@ class Ertragsplaner:
         """Der erste der besten Orte, zu dem unser Lord einen Weg hat (ein Modulaufruf fuer bis zu 8 neue Punkte)."""
         if not self.wegtest:
             return orte[0] if orte else None
-        probe = [p for p in orte[:16] if p not in self.unerreichbar][:8]
+        # erst die Verworfenen herausnehmen, DANN die naechsten 8 (Daniel 22:29: "sie findet kein Holz? auf einer Karte voll
+        # mit Baeumen? ... das ist ein Berechnungsfehler"): vorher orte[:16] zuerst geschnitten - waren die 16 naechsten
+        # verworfen, blieb die Probe leer und es hiess fuer immer "kein erreichbarer Holzfaeller-Platz" (v11, v14: 16 verworfen)
+        probe = [p for p in orte if p not in self.unerreichbar][:8]
         neu = [p for p in probe if p not in self.erreichbar_ok]
         if neu:
             lord = next((n for n, e in L.items() if e["typ"] == 55 and e["besitzer"] == self.sp), None)

@@ -82,6 +82,8 @@ class Wirtschaft:
         self.extra = {}                      # Ruecklage einer Pflicht (v14), vom Lenker gesetzt
         self.umzug_ab = None                 # v14: Tick, ab dem das alte Lager geraeumt wird (Startholz vollstaendig)
         self.lager_genau = False             # v14: neues Lager genau am Plan-Platz (Umkreis 0)
+        self.umzug_nach_b = False            # v15: altes Lager erst raeumen, wenn B steht (Daniel 22:29: Seasoning vor der
+                                             # ersten Holzlieferung - das B-Holz muss im alten Lager liegen bleiben)
         # Baum gleich jetzt suchen, solange das Spiel noch steht (9g: die Kartensuche mitten im Lauf kostete ~600 Ticks)
         if self.B:
             self.apfelbaum = self._a_baum() or -1
@@ -191,9 +193,18 @@ class Wirtschaft:
         # v14: fester Zeitpunkt statt "B steht / Holzfaeller will liefern" - das Startholz ist ab ~650 komplett da (Plan_
         # Streitkolben: 30 bei 120, +28 je 110 Ticks, 150 ab ~650); danach liefern Steinbrueche und Holzfaeller ans neue Lager
         raeumen = (t >= self.umzug_ab) if self.umzug_ab is not None else (not self.B_offen or will_liefern)
+        if self.umzug_nach_b:
+            raeumen = not self.B_offen
         if alt_da and raeumen:
             inhalt = {k: st.get(k, 0) for k in LAGERWAREN if st.get(k, 0) > 0}
-            if sum(inhalt.values()) < 5:
+            rest_ok = sum(inhalt.values()) < 5
+            if not rest_ok and self.umzug_nach_b and set(inhalt) <= {"holz"} and inhalt.get("holz", 0) < 20 and self.holz_verbauen:
+                # v15: unter einem 20er-Los und kein Holzfaeller erlaubt/moeglich -> der Rest blockiert den Umzug nicht
+                erg, text = self.holz_verbauen(st, L, G)
+                if erg is None:
+                    ev.append("Altes Lager: Rest %s geht beim Abriss verloren (%s)" % (inhalt, text))
+                    rest_ok = True
+            if rest_ok:
                 # Verkaeufe gehen nur in 5er-Losen, Bauten brauchen mindestens 5 Holz. Darum wird alles Verkaufbare
                 # zuerst geleert; nur ein technisch weder verkauf- noch verbaubarer Gesamt-Rest von 1-4 darf fallen.
                 for n in alt_da:
