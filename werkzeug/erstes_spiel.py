@@ -752,7 +752,8 @@ def bilanz_schritt(st, L, G, ausbau, ziel, endspiel, runde, marken):
         # 07.10. 01:18: Abriss mit 80 % - gemessen kommen 82-114 % an (Gold vor/nach Endspiel-Verkauf: Lauf 12 +111/136,
         # 15 +109/128, 18 +116/128, 52 +211/186, 54 ~+205/182). Die Drittel-Rechnung beruhte auf einem Messfehler (L16 zaehlte
         # nur das nach dem Verkauf uebrige Holz) und liess Lauf 54 ~270 Ticks auf Gold warten
-        if gold_echt + int(t["abriss_wert"] * 0.8) < noch + 20:
+        # Daniel 01:44 "es wird zu frueh abgerissen, ein kleiner Puffer": 70 % und 50 Gold Polster
+        if gold_echt + int(t["abriss_wert"] * 0.7) < noch + 50:
             aus.append("ENDSPIEL VERSCHOBEN: Gold nach Verkauf %d + Abriss %d < %d - Wirtschaft laeuft weiter" % (
                 gold_echt, t["abriss_wert"], noch))
             return aus
@@ -817,6 +818,14 @@ def bilanz_schritt(st, L, G, ausbau, ziel, endspiel, runde, marken):
         for _ in range(v["holz"] // 5):
             befehl({"spielbefehl": {"nr": 38, "werte": [1, 2]}}, 1.0, bis="SPIELBEFEHL")
         aus.append("ENDSPIEL Holz verkauft (%d Holz)" % v["holz"])
+    if AUFLOESEN == "ende" and endspiel["fertig"] and n > 0 and not marken.get("soldaten_aufgeloest"):
+        # Daniel 01:44: "die Starteinheiten aufbewahren und erst am Ende, wenn man die Ressourcen hat, rekrutieren" - frische
+        # Bauern am Feuer genau zum Anwerben
+        sold = [k for k, e in L.items() if e["besitzer"] == SP and 22 <= e["typ"] <= 30 and e["typ"] != 26][:n]
+        if sold:
+            befehl({"aufloesen": {"nr": [int(k) for k in sold]}}, 1.0)
+            marken["soldaten_aufgeloest"] = st["t"]
+            aus.append("ENDSPIEL %d Start-Soldaten aufgeloest -> Bauern zum Anwerben" % len(sold))
     if kas:
         werben = min(v.get("keule", 0), v.get("leder", 0), st.get("feuer", 0), v.get("gold", 0) // KAEMPFER_GOLD, n)
         # 07.10. 01:25: hoechstens EINE Anwerbung je Runde (~11 Ticks). Lauf 45/46/52/57: von 5 gleichzeitig bezahlten kamen
@@ -1273,8 +1282,8 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
             # 01:39 (Daniel: "die 12 Starteinheiten chillen dann nur und werden nicht zu Arbeitern - eleganter loesen"; Lauf 61:
             # alle 12 auf einmal fuellten den Wohnraum 26, 17 sassen am Feuer): nach Bedarf - ein Soldat wird erst Bauer, wenn
             # ein Arbeitsplatz offen ist und niemand am Feuer wartet (er ersetzt den Bauern, auf den man ~52 Ticks warten muesste)
-            offene_a = wohnraum_fehlt(st, G)[1] if AUFLOESEN else 0
-            if AUFLOESEN and not endspiel["fertig"] and st.get("feuer", 0) == 0 and offene_a > 0:
+            offene_a = wohnraum_fehlt(st, G)[1] if AUFLOESEN == "ja" else 0
+            if AUFLOESEN == "ja" and not endspiel["fertig"] and st.get("feuer", 0) == 0 and offene_a > 0:
                 opfer = [n for n, e in L.items() if e["besitzer"] == SP and 22 <= e["typ"] <= 30 and e["typ"] != 26][:min(offene_a, 2)]
                 if opfer:
                     # das Modul erwartet eine LISTE von Nummern (aufloesen_ersetzen.py; Lauf 61: einzelne Nummer -> "0 Einheiten")
@@ -1574,7 +1583,7 @@ def main():
     PENNER = int(arg.get("penner", 20))
     KASSE_STUFE = int(arg.get("kasse_stufe", 11))
     SCHUB = arg.get("schub", "nein") == "ja"
-    AUFLOESEN = arg.get("aufloesen", "nein") == "ja"
+    AUFLOESEN = arg.get("aufloesen", "nein")   # "ja" = nach Bedarf als Arbeiter, "ende" = als Rekruten im Endspiel
     EINZELKAUF = arg.get("einzelkauf", "nein") == "ja"
     STEUER_RUNTER = int(arg.get("steuer_runter", 95))
     STEUER_ENDE = arg.get("steuer_ende", "nein")

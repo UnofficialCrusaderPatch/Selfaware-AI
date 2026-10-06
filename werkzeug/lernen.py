@@ -49,7 +49,7 @@ KNOEPFE = {
     "kasse_grenze": [0],   # Daniel 01:39: "Steuern nicht bei 20 oder irgendeiner Nummer halten" - Kasse immer -40 bis zum Ende
     "penner": [2, 20, 12],
     "einzelkauf": ["nein", "ja"],   # fehlende Waffen einzeln (Daniel 01:35)
-    "aufloesen": ["nein", "ja"],   # Daniel 01:29: Start-Soldaten zu Bauern
+    "aufloesen": ["nein", "ja", "ende"],   # ja = nach Bedarf als Arbeiter, ende = als Rekruten im Endspiel (Daniel 01:44)   # Daniel 01:29: Start-Soldaten zu Bauern
     "schub": ["nein", "ja"],      # erste 5 Kaempfer waehrend der Kasse (07.10.)
     "kasse_stufe": [11],     # Daniel 01:04: nicht testen - gerechnet bringen 9/7 insgesamt nicht mehr Gold, nur langsamer     # Wachstums-Holzfaeller ab so vielen Wartenden (Daniel 00:54: Platz fuer Penner lassen)   # 0 = immer -40 ab Kasse-Start (Daniel 00:51: "erst gehen nur die im Pennergraben")     # Lauf 26: Beliebtheit 0 -> 50 auf 4 Leute, kein Kaempfer; Beliebtheit ist ein Vorrat
     "steuer_runter": [95, 90, 85, 80],
