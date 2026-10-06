@@ -48,6 +48,7 @@ KNOEPFE = {
     "bevoelkerung_ziel": [70, 80, 90, 60, 50, 0],     # Reihenfolge = Testfolge (naechste nimmt den ersten ungespielten)
     "kasse_grenze": [0],   # Daniel 01:39: "Steuern nicht bei 20 oder irgendeiner Nummer halten" - Kasse immer -40 bis zum Ende
     "penner": [2, 20, 12],
+    "abriss": ["ja", "nein"],      # Daniel 01:51: direkt anwerben statt abreissen
     "einzelkauf": ["nein", "ja"],   # fehlende Waffen einzeln (Daniel 01:35)
     "aufloesen": ["nein", "ja", "ende"],   # ja = nach Bedarf als Arbeiter, ende = als Rekruten im Endspiel (Daniel 01:44)   # Daniel 01:29: Start-Soldaten zu Bauern
     "schub": ["nein", "ja"],      # erste 5 Kaempfer waehrend der Kasse (07.10.)
@@ -59,7 +60,7 @@ GRUND = {"v14": "ja", "umzug": "frueh", "holzfaeller_vorab": 4, "holz_spam": 20,
          "steinbruch_zuerst": "nein", "stein_parallel": "ja", "joch_nach_stein": "ja", "huetten_voraus": "ja",
          "holz_kaufen": "ja", "je_arbeiter": "ja", "vollbeschaeftigung": "nein", "entscheider": "regeln", "b_versatz": "reif",
          "steuer_ende": "nein", "steuer_runter": 95, "stein_max": "nein",
-         "kasse": "nein", "bevoelkerung_ziel": 0, "kasse_grenze": 50, "penner": 2, "kasse_stufe": 11, "schub": "nein", "aufloesen": "nein", "einzelkauf": "nein"}
+         "kasse": "nein", "bevoelkerung_ziel": 0, "kasse_grenze": 50, "penner": 2, "kasse_stufe": 11, "schub": "nein", "aufloesen": "nein", "einzelkauf": "nein", "abriss": "ja"}
 FEST = ["leere_ki=ja", "minuten=60", "streitkolben=10", "weg=bilanz", "experiment=ja"]
 TEMPO = 100      # 07.10. 00:31: 1000 getestet (Daniel 00:27) - der Lenker braucht dann 1,2 s je Runde, alle 8 Laeufe brachen ab;
                  # das Tempo bestimmt, wie oft der Lenker hinsieht (bei 100 alle ~11 Ticks). Je Lauf gespeichert.

@@ -452,6 +452,7 @@ ENTSCHEIDER = "regeln"   # "kausal" (Daniel 23:27 "dynamische Antworten fuer all
 B_VERSATZ = None         # Lernkreis: B-Plantagen so viele Ticks nach "alle A stehen" (None = erst bei A-Reife)
 STEUER_RUNTER = 95       # Lernkreis: Steuer senken unter dieser Beliebtheit (Daniel 06.10. 23:53: Steuern als Geldquelle)
 BEV_ZIEL = 0             # Lernkreis: Huetten bauen, bis so viele Wohnplaetze stehen (0 = aus; Daniel 07.10. 00:17 "60-70")
+ABRISS = True            # Lernkreis: im Endspiel alle Betriebe abreissen (nein = direkt anwerben, Daniel 01:51)
 EINZELKAUF = False       # Lernkreis: fehlende 1-4 Waffen einzeln gutschreiben statt 5er kaufen (Daniel 01:35)
 AUFLOESEN = False        # Lernkreis: eigene Soldaten (ausser Streitkolbenkaempfern) zu Bauern aufloesen (Daniel 01:29)
 SCHUB = False            # Lernkreis: die ersten 5 Kaempfer schon waehrend der Kasse anwerben (Lauf 45/46: Verlust im Endspiel)
@@ -762,11 +763,15 @@ def bilanz_schritt(st, L, G, ausbau, ziel, endspiel, runde, marken):
         # 15 +109/128, 18 +116/128, 52 +211/186, 54 ~+205/182). Die Drittel-Rechnung beruhte auf einem Messfehler (L16 zaehlte
         # nur das nach dem Verkauf uebrige Holz) und liess Lauf 54 ~270 Ticks auf Gold warten
         # Daniel 01:44 "es wird zu frueh abgerissen, ein kleiner Puffer": 70 % und 50 Gold Polster
-        if gold_echt + int(t["abriss_wert"] * 0.7) < noch + 50:
+        # Daniel 01:51 "warum wird abgerissen und nicht direkt rekrutiert? macht keinen Sinn": Lauf 64 verlor beim Abriss ~190
+        # Holz unterwegs/in Huetten gegen ~200 Rueckgabe; Rekruten liefern die Start-Soldaten (aufloesen=ende). Ohne ABRISS
+        # zaehlt nur das echte Gold
+        abriss_teil = int(t["abriss_wert"] * 0.7) if ABRISS else 0
+        if gold_echt + abriss_teil < noch + 50:
             aus.append("ENDSPIEL VERSCHOBEN: Gold nach Verkauf %d + Abriss %d < %d - Wirtschaft laeuft weiter" % (
                 gold_echt, t["abriss_wert"], noch))
             return aus
-        if t["abriss_liste"]:
+        if ABRISS and t["abriss_liste"]:
             sende({"befehle": [{"player": 1, "id": neue_id(), "abreissen": {"nr": nr}} for nr in t["abriss_liste"]]}, 2.0,
                   bis="ABREISSEN")
         tick0 = tick()
@@ -1585,7 +1590,7 @@ def main():
     HOLZ_KAUFEN = arg.get("holz_kaufen", "nein") == "ja"
     global HOLZ_SPAM, STEIN_MAX, JOCH_NACH_STEIN, STEIN_PARALLEL, HUETTEN_VORAUS, VOLLBESCHAEFTIGUNG
     VOLLBESCHAEFTIGUNG = arg.get("vollbeschaeftigung", "nein") == "ja"
-    global ENTSCHEIDER, ZIEL_TICK, B_VERSATZ, STEUER_RUNTER, STEUER_ENDE, BEV_ZIEL, KASSE, KASSE_GRENZE, PENNER, KASSE_STUFE, SCHUB, AUFLOESEN, EINZELKAUF
+    global ENTSCHEIDER, ZIEL_TICK, B_VERSATZ, STEUER_RUNTER, STEUER_ENDE, BEV_ZIEL, KASSE, KASSE_GRENZE, PENNER, KASSE_STUFE, SCHUB, AUFLOESEN, EINZELKAUF, ABRISS
     BEV_ZIEL = int(arg.get("bevoelkerung_ziel", 0))
     KASSE = arg.get("kasse", "nein")
     KASSE_GRENZE = int(arg.get("kasse_grenze", 50))
@@ -1594,6 +1599,7 @@ def main():
     SCHUB = arg.get("schub", "nein") == "ja"
     AUFLOESEN = arg.get("aufloesen", "nein")   # "ja" = nach Bedarf als Arbeiter, "ende" = als Rekruten im Endspiel
     EINZELKAUF = arg.get("einzelkauf", "nein") == "ja"
+    ABRISS = arg.get("abriss", "ja") == "ja"
     STEUER_RUNTER = int(arg.get("steuer_runter", 95))
     STEUER_ENDE = arg.get("steuer_ende", "nein")
     B_VERSATZ = None if arg.get("b_versatz", "reif") == "reif" else int(arg["b_versatz"])
