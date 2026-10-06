@@ -361,7 +361,9 @@ class Ertragsplaner:
         # v17: bei mehreren Holzfaellern je Baum sperrt ein Fehlschlag nur seinen eigenen Platz, nicht 8 Felder rundum
         sperr_r = 0 if (typ == 3 and self.huetten_je_baum) else 8
         gesperrt = lambda p: any(t == typ and schach(p, q) <= sperr_r for (t, q) in self.fehlschlag)
-        frei = lambda p: all(schach(p, q) >= b for q in gleich) and not gesperrt(p)
+        # v18 (Daniel 23:10 "Holzfaeller sollten alle zugaenglich sein"): Holzfaeller-Huetten mit 1 Feld Gang zueinander
+        abstand = b + 1 if (typ == 3 and self.huetten_je_baum) else b
+        frei = lambda p: all(schach(p, q) >= abstand for q in gleich) and not gesperrt(p)
         if typ in (5, 20, 32):
             orte = [p for p in self.platz[typ] if frei(p)]
             if typ == 32 and self.wirt.B_offen:

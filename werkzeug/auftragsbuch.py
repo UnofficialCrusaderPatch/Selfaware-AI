@@ -36,6 +36,8 @@ class Auftragsbuch:
         self.ereignisse = []
         self.tick = 0
         self.gescheitert = []        # (tick, typ, ort, zweck) - fuer die Fruehpruefung
+        self.unerreichbar = []       # (nr, typ, ort) - bestaetigt, aber laut Spiel nicht erreichbar; der Lenker reisst ab
+        self.hat = {}
 
     def name(self, typ):
         return self.namen.get(typ, {}).get("name", str(typ)) if isinstance(self.namen.get(typ), dict) else str(typ)
@@ -72,6 +74,11 @@ class Auftragsbuch:
                 self.zahl["bestaetigt"] += 1
                 ev.append("BAU BESTAETIGT %s Nr %d bei (%d,%d) nach %d Ticks%s" % (
                     self.name(a["typ"]), n, g["x"], g["y"], t - a["tick"], " [%s]" % a["zweck"] if a["zweck"] else ""))
+                if g.get("erreichbar") == 0:
+                    # Daniel 23:10 "Holzfaeller sollten alle zugaenglich sein": das Spiel fuehrt je Gebaeude ein Feld erreichbar
+                    # (E4b: Joch (90,206) = 0). Der Lenker reisst es ab und sperrt den Platz.
+                    self.unerreichbar.append((n, g["typ"], (g["x"], g["y"])))
+                    ev.append("BAU UNERREICHBAR %s Nr %d bei (%d,%d) - wird abgerissen" % (self.name(a["typ"]), n, g["x"], g["y"]))
             elif t - a["tick"] > self.WARTEN:
                 self.offen.remove(a)
                 self.zahl["gescheitert"] += 1

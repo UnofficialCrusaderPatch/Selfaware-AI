@@ -150,7 +150,7 @@ def phase1(plan, tempo, mit_posten=True):
         # Daniel 22:05: "zwei Steinbrueche direkt neben dem Vorratslager, sofort gebaut, wenn die Ressourcen da sind" -
         # vor den Holzfaellern (die Reihenfolge entscheidet, was beim ersten Holz (30 bei Tick 120) noch geht)
         holz_bauten = [(19, tuple(plan["kornspeicher"])), (26, MARKT)] + [(20, q) for q in V14["brueche"]] + \
-                      [(4, j) for j in V14["joche"]] + \
+                      ([] if JOCH_NACH_STEIN else [(4, j) for j in V14["joche"]]) + \
                       [(3, tuple(p)) for p in (v16_holzfaeller(plan) if HF_VORAB is None else v16_holzfaeller(plan)[:HF_VORAB])]
     else:
         holz_bauten = [(19, tuple(plan["kornspeicher"])), (26, MARKT)] + [(3, tuple(p)) for p in plan["holzfaeller"]]
@@ -399,6 +399,9 @@ HUETTEN_JE_BAUM = None   # v17: bis zu so viele Holzfaeller je Baum (Daniel 22:5
 HOLZ_KAUFEN = False      # v17: Holz kaufen, wenn >= 4 Bauern untaetig sind und Holz fehlt
 HOLZ_SPAM = 0            # E3: erst so viele Holzfaeller rund ums Lager, dann Steinbrueche und Leder
 STEIN_MAX = False        # E4: Steinbrueche erst nach der ersten Holzlieferung, dann alle (2 am Lager + 3 am zweiten Steinfeld)
+JOCH_NACH_STEIN = False  # v18: Joch erst, wenn der Steinhaufen seines Steinbruchs Stein hat (Daniel 23:10, Punkte 4+5)
+STEIN_PARALLEL = False   # v18: Steinbrueche sofort (vor allem), Holzfaeller-Spam mit dem Rest - nicht erst nach dem Spam
+HUETTEN_VORAUS = False   # v18: Huetten vor dem Bedarf (Daniel 23:10 Punkt 3: Bauern brauchen Spawnzeit)
 
 def v16_holzfaeller(plan):
     """Plan-Holzfaeller nach Abstand zum neuen Lager, ohne die jenseits von HF_MAX."""
@@ -432,6 +435,14 @@ def v14_sperrflaechen():
 def steht_bei(G, typ, ort, r=1):
     return [n for n, g in G.items() if g["besitzer"] == SP and g["typ"] == typ and max(abs(g["x"] - ort[0]), abs(g["y"] - ort[1])) <= r]
 
+def haufen_hat_stein(G, q):
+    """Liegt auf dem Steinhaufen (Verbund) des Steinbruchs bei q schon Stein?"""
+    n = steht_bei(G, 20, q)
+    if not n:
+        return False
+    h = G.get(G[n[0]].get("verbund") or -1)
+    return bool(h and (h.get("vorrat") or 0) > 0)
+
 E4_BRUECHE = [(61, 213), (72, 210), (84, 206)]   # zweites Steinfeld (61,212), 57 Felder vom Lager - 3 passen (Platzkarte Tick 0)
 
 def v14_steinpflicht(st, G, wirt):
@@ -439,7 +450,15 @@ def v14_steinpflicht(st, G, wirt):
     anderen in der Runde. Was noch fehlt, liegt als Ruecklage in wirt.extra (Planer, Huetten, Holzfaeller halten es frei).
     E4 (Daniel 23:03 "so viele Steinbrueche wie geht"): danach die 3 vom zweiten Steinfeld, je mit Joch daneben."""
     ev, holz, offen = [], st.get("holz", 0), 0
-    auftraege = [(20, q, 0) for q in V14_PLAN["brueche"]] + [(4, j, 0) for j in V14_PLAN["joche"]]
+    if JOCH_NACH_STEIN:
+        # v18 (Daniel 23:10: "erst Steinbrueche, dann Ochsen, auch wenn Holz fuer Ochsen da ist ... Ochsen erst, wenn Stein
+        # produziert wird"): Joch i erst, wenn Steinbruch i steht UND auf seinem Steinhaufen (Verbund) Stein liegt
+        auftraege = [(20, q, 0) for q in V14_PLAN["brueche"]]
+        for q, j in zip(V14_PLAN["brueche"], V14_PLAN["joche"]):
+            if haufen_hat_stein(G, q) or steht_bei(G, 4, j):
+                auftraege.append((4, j, 0))
+    else:
+        auftraege = [(20, q, 0) for q in V14_PLAN["brueche"]] + [(4, j, 0) for j in V14_PLAN["joche"]]
     if STEIN_MAX:
         for q in E4_BRUECHE:
             auftraege += [(20, q, 0)]
@@ -930,6 +949,17 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
         tz = uhr("waechter", tz)
         if BUCH is not None:
             ereignis += BUCH.abgleich(G, L, st)            # jeder Bau bestaetigt oder gescheitert, jede Belegung
+            while BUCH.unerreichbar:                        # v18: laut Spiel unerreichbar -> abreissen, Platz sperren
+                n_u, typ_u, ort_u = BUCH.unerreichbar.pop()
+                befehl({"abreissen": {"nr": n_u}}, 0.8, bis="ABREISSEN")
+                ausbau.fehlschlag[(typ_u, ort_u)] = ausbau.fehlschlag.get((typ_u, ort_u), 0) + 1
+            if HUETTEN_VORAUS and not endspiel["fertig"]:
+                # v18 (Daniel 23:10 Punkt 3: "Haeuser bauen, bevor du Menschen brauchst, weil sie Spawnzeit brauchen"):
+                # freie Wohnplaetze >= offene Arbeitsplaetze + 4 (mind. 6)
+                offene = sum(max(0, ARBEITER_JE.get(g["typ"], 0) - BUCH.hat.get(n, 0)) for n, g in G.items() if g["besitzer"] == SP)
+                frei_wohn = st.get("platz", 0) - st.get("leute", 0)
+                if frei_wohn < max(6, offene + 4) and st["holz"] >= 5 and not any(a["typ"] == 1 for a in BUCH.offen):
+                    ereignis.append("HUETTE VORAUS (frei %d, offene Arbeitsplaetze %d): %s" % (frei_wohn, offene, baue_haus()))
             if runde % 10 == 1:
                 schreib(BUCH.stand(G, st))
             hf_jetzt = sum(1 for g in G.values() if g["besitzer"] == SP and g["typ"] == 3) + \
@@ -963,11 +993,12 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                     holz -= 5
                     hf_jetzt += 1
             # E4 (Daniel 23:03: "wenn die ersten 20 Holzfaeller Holz geladen haben, direkt Steinbrueche, so viele wie geht")
-            stein_frei =not spam_offen and (not STEIN_MAX or "holz_geliefert" in fruehpruefung)
+            stein_frei = (STEIN_PARALLEL or not spam_offen) and (not STEIN_MAX or "holz_geliefert" in fruehpruefung)
             if V14 and not endspiel["fertig"] and stein_frei:
                 ereignis += v14_steinpflicht(st, G, wirt)   # vor allem anderen (Daniel 22:05); E3: erst nach dem Holz-Spam
                 if "stein_besetzt" not in fruehpruefung:
-                    voll = all(BUCH.hat.get(n, 0) >= ARBEITER_JE[typ] for typ, orte in ((20, V14_PLAN["brueche"]), (4, V14_PLAN["joche"]))
+                    pruef = ((20, V14_PLAN["brueche"]),) if JOCH_NACH_STEIN else ((20, V14_PLAN["brueche"]), (4, V14_PLAN["joche"]))
+                    voll = all(BUCH.hat.get(n, 0) >= ARBEITER_JE[typ] for typ, orte in pruef
                                for o in orte for n in (steht_bei(G, typ, o) or [None]))
                     if voll:
                         fruehpruefung["stein_besetzt"] = st["t"]
@@ -1047,7 +1078,7 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
             # +28 je 110 Ticks; Kornspeicher 5, Steinbruch 25, A-Plantagen 9, Joch 5, Steinbruch 25, Joch 5)
             if st["t"] >= V14_STEIN_BIS and not fruehpruefung.get("stein") and not HOLZ_SPAM:   # E3: Steinbrueche absichtlich spaeter
                 fehlt = ["%s %s" % (NACH_TYP[typ]["name"], o) for typ, o in [(20, q) for q in V14_PLAN["brueche"]] +
-                         [(4, j) for j in V14_PLAN["joche"]] if not steht_bei(G, typ, o)]
+                         ([] if JOCH_NACH_STEIN else [(4, j) for j in V14_PLAN["joche"]]) if not steht_bei(G, typ, o)]
                 if fehlt:
                     schreib("FRUEHABBRUCH bei Tick %d: fehlt %s" % (st["t"], ", ".join(fehlt)))
                     break
@@ -1076,7 +1107,7 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                     break
                 fruehpruefung["lager"] = True
                 schreib("PRUEFUNG bestanden bei Tick %d: neues Lager steht bei %s, altes weg" % (st["t"], V14_PLAN["lager"]))
-        if streitkolben and not V14 and not fruehpruefung.get("ok4000"):
+        if streitkolben and not V14 and not EXPERIMENT and not fruehpruefung.get("ok4000"):   # Lernkreis: diese Regel wuergte alle 4 1-Jahr-Versuche ab
             # schaerfer (Daniel 21:56: "er baut nur einen Steinbruch, hier wuerde ich auch abbrechen ... gleiches fuer
             # andere nicht optimal platzierte Gebaeude"): genug Steinbrueche, keiner weit vom Lager
             lager_teile = [g for g in G.values() if g["besitzer"] == SP and g["typ"] == 10]
@@ -1090,7 +1121,7 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                 break
             if st["t"] >= FRUEH_TICK:
                 fruehpruefung["ok4000"] = True
-        if streitkolben and st["t"] >= FRUEH_TICK and not fruehpruefung.get("ok"):
+        if streitkolben and st["t"] >= FRUEH_TICK and not EXPERIMENT and not fruehpruefung.get("ok"):
             # Fruehabbruch (Daniel 21:55: "wenn du merkst, dass schon der Steinbruch nicht richtig gesetzt ist, muesstest du
             # eigentlich schon aufhoeren ... das sind alles verschwendete Zeiten/Versuche")
             fehlt = []
@@ -1185,9 +1216,12 @@ def main():
     global HF_VORAB, STEIN_ZUERST, HF_MAX, JE_ARBEITER, UMZUG, EXPERIMENT, HUETTEN_JE_BAUM, HOLZ_KAUFEN
     HUETTEN_JE_BAUM = int(arg["holzfaeller_je_baum"]) if arg.get("holzfaeller_je_baum") else None
     HOLZ_KAUFEN = arg.get("holz_kaufen", "nein") == "ja"
-    global HOLZ_SPAM, STEIN_MAX
+    global HOLZ_SPAM, STEIN_MAX, JOCH_NACH_STEIN, STEIN_PARALLEL, HUETTEN_VORAUS
     HOLZ_SPAM = int(arg.get("holz_spam", 0))
     STEIN_MAX = arg.get("stein_max", "nein") == "ja"
+    JOCH_NACH_STEIN = arg.get("joch_nach_stein", "nein") == "ja"
+    STEIN_PARALLEL = arg.get("stein_parallel", "nein") == "ja"
+    HUETTEN_VORAUS = arg.get("huetten_voraus", "nein") == "ja"
     UMZUG = arg.get("umzug", "nachb")
     EXPERIMENT = arg.get("experiment", "nein") == "ja"
     if arg.get("holzfaeller_vorab"):
