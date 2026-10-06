@@ -48,6 +48,7 @@ KNOEPFE = {
     "bevoelkerung_ziel": [70, 80, 90, 60, 50, 0],     # Reihenfolge = Testfolge (naechste nimmt den ersten ungespielten)
     "kasse_grenze": [50, 35, 25, 0],
     "penner": [2, 20, 12],
+    "aufloesen": ["nein", "ja"],   # Daniel 01:29: Start-Soldaten zu Bauern
     "schub": ["nein", "ja"],      # erste 5 Kaempfer waehrend der Kasse (07.10.)
     "kasse_stufe": [11],     # Daniel 01:04: nicht testen - gerechnet bringen 9/7 insgesamt nicht mehr Gold, nur langsamer     # Wachstums-Holzfaeller ab so vielen Wartenden (Daniel 00:54: Platz fuer Penner lassen)   # 0 = immer -40 ab Kasse-Start (Daniel 00:51: "erst gehen nur die im Pennergraben")     # Lauf 26: Beliebtheit 0 -> 50 auf 4 Leute, kein Kaempfer; Beliebtheit ist ein Vorrat
     "steuer_runter": [95, 90, 85, 80],
@@ -57,13 +58,13 @@ GRUND = {"v14": "ja", "umzug": "frueh", "holzfaeller_vorab": 4, "holz_spam": 20,
          "steinbruch_zuerst": "nein", "stein_parallel": "ja", "joch_nach_stein": "ja", "huetten_voraus": "ja",
          "holz_kaufen": "ja", "je_arbeiter": "ja", "vollbeschaeftigung": "nein", "entscheider": "regeln", "b_versatz": "reif",
          "steuer_ende": "nein", "steuer_runter": 95, "stein_max": "nein",
-         "kasse": "nein", "bevoelkerung_ziel": 0, "kasse_grenze": 50, "penner": 2, "kasse_stufe": 11, "schub": "nein"}
+         "kasse": "nein", "bevoelkerung_ziel": 0, "kasse_grenze": 50, "penner": 2, "kasse_stufe": 11, "schub": "nein", "aufloesen": "nein"}
 FEST = ["leere_ki=ja", "minuten=60", "streitkolben=10", "weg=bilanz", "experiment=ja"]
 TEMPO = 100      # 07.10. 00:31: 1000 getestet (Daniel 00:27) - der Lenker braucht dann 1,2 s je Runde, alle 8 Laeufe brachen ab;
                  # das Tempo bestimmt, wie oft der Lenker hinsieht (bei 100 alle ~11 Ticks). Je Lauf gespeichert.
 # 23:26 (Daniel: Ochse vor Steinbruch, Lager nicht umgezogen - in der v5-Bauweise galten die alten Regeln): EIN Weg.
 # v14 ist fest; der Kreis aendert nur Werte, keine Bauweisen ("zwei Wege zum selben Ziel sind immer ein Fehler")
-HINWEISE = ["kasse_grenze", "schub", "bevoelkerung_ziel", "penner", "kasse", "steuer_ende", "steuer_runter", "stein_max", "b_versatz"]   # 07.10.: Steuern, dritter Steinbruch     # Daniel 23:30: "Seasoning passiert immer noch zu spaet ... jede Wartezeit der Apfelbauern ist unproduktiv"
+HINWEISE = ["aufloesen", "kasse_grenze", "schub", "bevoelkerung_ziel", "penner", "kasse", "steuer_ende", "steuer_runter", "stein_max", "b_versatz"]   # 07.10.: Steuern, dritter Steinbruch     # Daniel 23:30: "Seasoning passiert immer noch zu spaet ... jede Wartezeit der Apfelbauern ist unproduktiv"
 # welche Knoepfe zu welchem gemessenen Verlust gehoeren (Vorwissen; die Wirkung misst der Kreis selbst)
 VERLUST_KNOEPFE = {
     "wohnraum_voll": ["entscheider", "huetten_voraus", "holz_kaufen"],

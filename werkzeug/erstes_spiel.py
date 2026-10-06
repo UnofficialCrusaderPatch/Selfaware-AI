@@ -452,6 +452,7 @@ ENTSCHEIDER = "regeln"   # "kausal" (Daniel 23:27 "dynamische Antworten fuer all
 B_VERSATZ = None         # Lernkreis: B-Plantagen so viele Ticks nach "alle A stehen" (None = erst bei A-Reife)
 STEUER_RUNTER = 95       # Lernkreis: Steuer senken unter dieser Beliebtheit (Daniel 06.10. 23:53: Steuern als Geldquelle)
 BEV_ZIEL = 0             # Lernkreis: Huetten bauen, bis so viele Wohnplaetze stehen (0 = aus; Daniel 07.10. 00:17 "60-70")
+AUFLOESEN = False        # Lernkreis: eigene Soldaten (ausser Streitkolbenkaempfern) zu Bauern aufloesen (Daniel 01:29)
 SCHUB = False            # Lernkreis: die ersten 5 Kaempfer schon waehrend der Kasse anwerben (Lauf 45/46: Verlust im Endspiel)
 KASSE_STUFE = 11         # Lernkreis: Steuerstufe der Kasse (11 = -40, 9 = -20, 7 = -11; Liga 4,00 / 2,00 / 1,30 Gold je Kopf)
 PENNER = 20              # Lernkreis: Wachstums-Holzfaeller erst ab so vielen Wartenden am Feuer (hoechstens 24 moeglich)
@@ -1223,6 +1224,16 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                                 befehl({"spielbefehl": {"nr": 38, "werte": [0, ware]}}, 1.0, bis="SPIELBEFEHL")
                         kasse["schub"] = "gekauft"
                         ereignis.append("SCHUB je 1 Los Keulen + Leder gekauft (Gold %d, Beliebtheit %.1f)" % (v_s.get("gold", 0), st.get("beliebt", 0) / 100.0))
+            # Daniel 01:29: "deine Starteinheiten einschlaefern - die werden dann zu Bevoelkerung". Gegen die leere KI nutzlos:
+            # Bogenschuetzen (22, 5 ab Start), Speertraeger (24, 7 spaeter) usw. aufloesen (disbandUnit -> Bauer am Feuer,
+            # M10.04); Streitkolbenkaempfer (26) und Lord (55) bleiben
+            if AUFLOESEN and runde % 5 == 0 and not endspiel["fertig"]:
+                opfer = [n for n, e in L.items() if e["besitzer"] == SP and 22 <= e["typ"] <= 30 and e["typ"] != 26]
+                for n in opfer[:12]:
+                    befehl({"aufloesen": {"nr": int(n)}}, 1.0)
+                if opfer:
+                    ereignis.append("AUFGELOEST %d Soldaten (Typen %s) -> Bauern" % (
+                        len(opfer[:12]), sorted({L[n]["typ"] for n in opfer[:12]})))
             ausbau.nach_abriss = bool(endspiel["fertig"])
             if runde % 10 == 1:
                 schreib(BUCH.stand(G, st))
@@ -1508,13 +1519,14 @@ def main():
     HOLZ_KAUFEN = arg.get("holz_kaufen", "nein") == "ja"
     global HOLZ_SPAM, STEIN_MAX, JOCH_NACH_STEIN, STEIN_PARALLEL, HUETTEN_VORAUS, VOLLBESCHAEFTIGUNG
     VOLLBESCHAEFTIGUNG = arg.get("vollbeschaeftigung", "nein") == "ja"
-    global ENTSCHEIDER, ZIEL_TICK, B_VERSATZ, STEUER_RUNTER, STEUER_ENDE, BEV_ZIEL, KASSE, KASSE_GRENZE, PENNER, KASSE_STUFE, SCHUB
+    global ENTSCHEIDER, ZIEL_TICK, B_VERSATZ, STEUER_RUNTER, STEUER_ENDE, BEV_ZIEL, KASSE, KASSE_GRENZE, PENNER, KASSE_STUFE, SCHUB, AUFLOESEN
     BEV_ZIEL = int(arg.get("bevoelkerung_ziel", 0))
     KASSE = arg.get("kasse", "nein")
     KASSE_GRENZE = int(arg.get("kasse_grenze", 50))
     PENNER = int(arg.get("penner", 20))
     KASSE_STUFE = int(arg.get("kasse_stufe", 11))
     SCHUB = arg.get("schub", "nein") == "ja"
+    AUFLOESEN = arg.get("aufloesen", "nein") == "ja"
     STEUER_RUNTER = int(arg.get("steuer_runter", 95))
     STEUER_ENDE = arg.get("steuer_ende", "nein")
     B_VERSATZ = None if arg.get("b_versatz", "reif") == "reif" else int(arg["b_versatz"])
