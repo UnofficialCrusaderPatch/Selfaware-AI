@@ -536,7 +536,9 @@ class Ertragsplaner:
         if runde - self.steuer_runde >= 2 * self.PLANEN:
             # Untergrenze 0 statt 3 (Daniel 21:13, B17: "Beliebtheit wirklich ueber 95 halten, damit die Bevoelkerung schnell
             # genug nachkommt" - v2b fiel bei Stufe 3 auf 59, dann 38): unter 95 bis zur Bestechung herunter
-            neu = self.steuer + 1 if (bel >= 97 and self.steuer < 8 and st.get("leute", 0) >= 15) else self.steuer - 1 if (bel < 95 and self.steuer > STEUER_MIN) else self.steuer
+            # Lernkreis (Daniel 23:53 "machen Steuern nochmal gut Geld?"): Schwelle zum Senken ist ein Knopf (steuer_runter)
+            runter = getattr(self, "steuer_runter", 95)
+            neu = self.steuer + 1 if (bel >= runter + 2 and self.steuer < 8 and st.get("leute", 0) >= 15) else self.steuer - 1 if (bel < runter and self.steuer > STEUER_MIN) else self.steuer
             if neu != self.steuer:
                 befehl({"spielbefehl": {"nr": 34, "werte": [neu]}}, 1.0, bis="SPIELBEFEHL")
                 ev.append("STEUER %d -> %d (Beliebtheit %.2f)" % (self.steuer, neu, bel))
