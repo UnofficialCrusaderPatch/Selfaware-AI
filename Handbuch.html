@@ -77,7 +77,7 @@ td.z { text-align: right; white-space: nowrap; }
 
 <main>
 <header>
-  <span class="marke">Stronghold Crusader &middot; UCP3 &middot; Stand 06.10.2026, 19:25</span>
+  <span class="marke">Stronghold Crusader &middot; UCP3 &middot; Stand 06.10.2026, 19:50</span>
   <h1>Selfaware-AI Handbuch</h1>
   <p>Alles, was die Selfaware-KI bisher gelernt hat: wie sie das Spiel steuert, was gemessen ist, was nur aus dem Spielcode abgelesen ist, und was noch offen ist. Jede Zahl stammt aus einem Testlauf oder aus einer Datei; Vermutungen sind als offen markiert.</p>
   <div class="legende">
@@ -171,6 +171,15 @@ td.z { text-align: right; white-space: nowrap; }
     <li><b>B-Plantage erst bestaetigt, wenn sie steht</b> (Codex 06.10.): ein gesendeter Baubefehl zaehlt nicht mehr als gebaut, erst das sichtbare Gebaeude; nach 50 Ticks ohne Gebaeude wird neu beauftragt. Mehrere B-Plantagen in einer Runde geben Holz und Gold nicht mehr doppelt aus. Vorher hielt eine einzige "offene" B-Plantage das Anwerben fest.</li>
     <li><b>Ertrags-Planer:</b> baut nur, was sich bis Spielende bezahlt macht; Erträge werden im Spiel gemessen (Zugang = Bestandsaenderung + Verkauf + Verbaut). Holz wird nicht gekauft, sondern mit seinem Verkaufswert gerechnet; Stein bis auf den Bedarf der naechsten Eisenmine (6) verkauft.</li>
   </ul>
+  <h3>Testpartie gegen die leere KI: 10.000 Gold <span class="status gemessen">gemessen</span></h3>
+  <p>Ohne Assassinen, Rotkaeppchen ohne Waren und Gold. Erster Lauf: 60.000 Ticks, nur 1.013 Gold - der Verkauf am Markt stand im Lenker im Assassinen-Teil und lief ohne Assassinen nie (behoben). Zweiter Lauf mit Verkauf:</p>
+  <div class="tab"><table>
+    <tr><th class="z">Gold</th><th class="z">1.000</th><th class="z">2.000</th><th class="z">4.000</th><th class="z">6.000</th><th class="z">8.000</th><th class="z">10.000</th></tr>
+    <tr><td class="z">Tick</td><td class="z">15.975</td><td class="z">20.808</td><td class="z">25.483</td><td class="z">29.103</td><td class="z">32.767</td><td class="z">36.226</td></tr>
+  </table></div>
+  <p>Verkauft (Runden mit Verkauf): Holz 166, Fleisch 146, Aepfel 103, Stein 95, Eisen 27. <span class="status abgelesen">abgelesen</span> Liga-Steuern je Einwohner und Beliebtheit: Stufe 3 (heute) 0,25 Gold / -25; Stufe 6 1,0 / -200; Stufe 9 2,0 / -500 - Steuern sind der Hebel fuer stabiles Wachstum, bezahlt mit Beliebtheit aus Bier, Essensvielfalt, Religion, Angstfaktor (Daniel 19:33: Rohstoffverkauf reicht gegen mehrere Gegner nicht).</p>
+  <h3>Streitkolbenkaempfer 10-20-30-40-50 <span class="status offen">offen</span></h3>
+  <p>Plan in <code>Plan_Streitkolben.md</code>: erst jede Werkstatt messen (Kuehe je Zeit, Harnische je Kuh, Keulen je Eisen), dann die Kette mit Kaserne und Waffenlager direkt am Lager bauen, bauen erst wenn die Ware im Lager ist; Gegenprobe mit Kauf am Markt. Liga: 20 Gold + Keule + Lederharnisch je Kaempfer; Keule am Markt 300, Leder 160.</p>
   <h3>Apfel-Seasoning <span class="status gemessen">gemessen</span></h3>
   <p>Ein Apfelbaum durchlaeuft sechs Stufen (500 / 300 / 200 / 1.000 / 40 / 40 Ticks) und wird nur in Stufe 3 geerntet. Der Apfelbauer nimmt jeden reifen Baum im Umkreis von 30 Feldern, auch fremde. Daniels Regel: Gruppe B neben Gruppe A genau dann setzen, wenn A in Stufe 3 springt; dann versorgen sie sich gegenseitig.</p>
   <h3>Seasoning am Anfang <span class="status gemessen">gemessen</span></h3>
