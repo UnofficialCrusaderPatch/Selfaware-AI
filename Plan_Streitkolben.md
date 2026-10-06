@@ -66,3 +66,12 @@ Spiel gegenpruefen.
   Warenart (48). Vor neuer Warenart freies Teil schaffen.
 - Naechster Schritt: Schmiede mit Eisen messen, Abriss nach
   Fertigstellung und laengerer Wartezeit messen; dann Kette dimensionieren und erster Benchmark 10 Kaempfer.
+
+## Messpartie 4 (06.10. 20:00, `daten/streitkolben_messung_20261006_195917.json`)
+- Mit angebautem Lagerblock klappt der Eisenkauf: 4 Kaeufe = 20 Eisen fuer 1.080 Gold (270 je 5).
+- Schmiede (bei (90,280), Lager am Bergfried (145,264), ~55 Felder): holte je 1 Eisen bei Tick 4.654 und 8.745 -
+  ~4.100 Ticks je Stueck, der Weg zum Lager dominiert (Daniel: Werkstaetten nah ans Lager).
+- Die Schmiede macht ohne Umstellung SCHWERTER: Vorrat danach Schwert 1, Keule unveraendert. Im Spiel wird sie per
+  Klick auf Keulen umgestellt -> den Spielbefehl dafuer finden (nicht Speicher setzen).
+- Naechste Schritte: (1) Umstell-Befehl der Schmiede finden; (2) Werkstaetten, Waffenlager und Kaserne direkt ans Lager;
+  (3) Zeit je Keule und je Harnisch bei kurzem Weg messen; (4) Abriss-Rueckgabe messen (diesmal keine 2. Schmiede gebaut).

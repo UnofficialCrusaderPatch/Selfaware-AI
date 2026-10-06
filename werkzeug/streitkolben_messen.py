@@ -119,13 +119,23 @@ def main():
     if len(schmieden) >= 2:
         a = bestand()
         befehl({"abreissen": {"nr": schmieden[-1]}}, 0.8, bis="ABREISSEN")
-        warte_ticks(10)
+        warte_ticks(150)      # Messpartie 3: nach 10 Ticks noch nichts
         b = bestand()
         erg["ablauf"].append({"abriss_schmiede": differenz(a, b)})
         print("ABRISS Schmiede: %s" % differenz(a, b), flush=True)
     # 4. Produktion: Eisen fuer die Schmiede, Keule/Leder auf 0, dann laufen lassen und mitschreiben
+    # Jedes Lagerteil fasst nur eine Warenart (Messung 19:58, Tipp Daniel); die 4 Startteile waren mit Holz und Stein
+    # belegt, Eisen fand keinen Platz. Darum vorher einen Lagerblock anbauen (kostet nichts).
+    teile = [g for g in E.runde_lesen()[2].values() if g["besitzer"] == SP and g["typ"] == LAGER]
+    if teile:
+        erg["ablauf"].append({"lager_anbau": E.baue_schnell(LAGER, teile[0]["x"], teile[0]["y"], 8)})
+        warte_ticks(40)
+    vor_eisen = bestand()
     for _ in range(4):                              # Eisen fuer die Schmiede echt kaufen (Los zu 270 Gold)
         befehl({"spielbefehl": {"nr": 38, "werte": [0, EISEN]}}, 1.0, bis="SPIELBEFEHL")
+    warte_ticks(5)
+    erg["ablauf"].append({"eisenkauf": differenz(vor_eisen, bestand())})
+    print("EISENKAUF 4 Lose: %s" % erg["ablauf"][-1]["eisenkauf"], flush=True)
     t0 = peek(TICK)[0]
     while peek(TICK)[0] - t0 < dauer:
         p = bestand()
