@@ -1262,12 +1262,16 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
             # Daniel 01:29: "deine Starteinheiten einschlaefern - die werden dann zu Bevoelkerung". Gegen die leere KI nutzlos:
             # Bogenschuetzen (22, 5 ab Start), Speertraeger (24, 7 spaeter) usw. aufloesen (disbandUnit -> Bauer am Feuer,
             # M10.04); Streitkolbenkaempfer (26) und Lord (55) bleiben
-            if AUFLOESEN and runde % 5 == 0 and not endspiel["fertig"]:
-                opfer = [n for n, e in L.items() if e["besitzer"] == SP and 22 <= e["typ"] <= 30 and e["typ"] != 26]
+            # 01:39 (Daniel: "die 12 Starteinheiten chillen dann nur und werden nicht zu Arbeitern - eleganter loesen"; Lauf 61:
+            # alle 12 auf einmal fuellten den Wohnraum 26, 17 sassen am Feuer): nach Bedarf - ein Soldat wird erst Bauer, wenn
+            # ein Arbeitsplatz offen ist und niemand am Feuer wartet (er ersetzt den Bauern, auf den man ~52 Ticks warten muesste)
+            offene_a = wohnraum_fehlt(st, G)[1] if AUFLOESEN else 0
+            if AUFLOESEN and not endspiel["fertig"] and st.get("feuer", 0) == 0 and offene_a > 0:
+                opfer = [n for n, e in L.items() if e["besitzer"] == SP and 22 <= e["typ"] <= 30 and e["typ"] != 26][:min(offene_a, 2)]
                 if opfer:
                     # das Modul erwartet eine LISTE von Nummern (aufloesen_ersetzen.py; Lauf 61: einzelne Nummer -> "0 Einheiten")
                     befehl({"aufloesen": {"nr": [int(n) for n in opfer[:12]]}}, 1.0)
-                    ereignis.append("AUFGELOEST %d Soldaten (Typen %s) -> Bauern" % (
+                    ereignis.append("AUFGELOEST %d Soldaten fuer %d offene Arbeitsplaetze (Typen %s) -> Bauern" % (offene_a, 
                         len(opfer[:12]), sorted({L[n]["typ"] for n in opfer[:12]})))
             ausbau.nach_abriss = bool(endspiel["fertig"])
             if runde % 10 == 1:
