@@ -1,0 +1,223 @@
+{
+ "bergfried": [
+  141,
+  265
+ ],
+ "fenster": [
+  71,
+  195,
+  211,
+  335
+ ],
+ "hof_stellen": 925,
+ "mine_stellen": 224,
+ "heute_am_bergfried": {
+  "hof": 27,
+  "mine": 45
+ },
+ "beste_markt": [
+  {
+   "lager": [
+    167,
+    295
+   ],
+   "hof": 0,
+   "mine": 20,
+   "umfeld": 435,
+   "berg": 32
+  },
+  {
+   "lager": [
+    171,
+    295
+   ],
+   "hof": 0,
+   "mine": 22,
+   "umfeld": 439,
+   "berg": 32
+  },
+  {
+   "lager": [
+    169,
+    295
+   ],
+   "hof": 0,
+   "mine": 21,
+   "umfeld": 437,
+   "berg": 32
+  },
+  {
+   "lager": [
+    173,
+    295
+   ],
+   "hof": 0,
+   "mine": 22,
+   "umfeld": 441,
+   "berg": 34
+  },
+  {
+   "lager": [
+    173,
+    297
+   ],
+   "hof": 0,
+   "mine": 21,
+   "umfeld": 441,
+   "berg": 34
+  },
+  {
+   "lager": [
+    167,
+    297
+   ],
+   "hof": 0,
+   "mine": 19,
+   "umfeld": 423,
+   "berg": 34
+  },
+  {
+   "lager": [
+    171,
+    297
+   ],
+   "hof": 0,
+   "mine": 20,
+   "umfeld": 435,
+   "berg": 34
+  },
+  {
+   "lager": [
+    169,
+    297
+   ],
+   "hof": 0,
+   "mine": 20,
+   "umfeld": 429,
+   "berg": 34
+  },
+  {
+   "lager": [
+    173,
+    299
+   ],
+   "hof": 0,
+   "mine": 19,
+   "umfeld": 438,
+   "berg": 36
+  },
+  {
+   "lager": [
+    167,
+    299
+   ],
+   "hof": 0,
+   "mine": 18,
+   "umfeld": 414,
+   "berg": 36
+  }
+ ],
+ "beste_mine": [
+  {
+   "lager": [
+    193,
+    309
+   ],
+   "hof": 1,
+   "mine": 6,
+   "umfeld": 368,
+   "berg": 54
+  },
+  {
+   "lager": [
+    197,
+    313
+   ],
+   "hof": 5,
+   "mine": 2,
+   "umfeld": 357,
+   "berg": 58
+  },
+  {
+   "lager": [
+    199,
+    315
+   ],
+   "hof": 7,
+   "mine": 0,
+   "umfeld": 363,
+   "berg": 60
+  },
+  {
+   "lager": [
+    191,
+    307
+   ],
+   "hof": 0,
+   "mine": 8,
+   "umfeld": 390,
+   "berg": 52
+  },
+  {
+   "lager": [
+    191,
+    309
+   ],
+   "hof": 1,
+   "mine": 7,
+   "umfeld": 368,
+   "berg": 52
+  },
+  {
+   "lager": [
+    193,
+    307
+   ],
+   "hof": 0,
+   "mine": 8,
+   "umfeld": 390,
+   "berg": 54
+  },
+  {
+   "lager": [
+    195,
+    309
+   ],
+   "hof": 2,
+   "mine": 6,
+   "umfeld": 371,
+   "berg": 56
+  },
+  {
+   "lager": [
+    197,
+    311
+   ],
+   "hof": 4,
+   "mine": 4,
+   "umfeld": 373,
+   "berg": 58
+  },
+  {
+   "lager": [
+    197,
+    315
+   ],
+   "hof": 7,
+   "mine": 1,
+   "umfeld": 338,
+   "berg": 58
+  },
+  {
+   "lager": [
+    199,
+    313
+   ],
+   "hof": 6,
+   "mine": 2,
+   "umfeld": 378,
+   "berg": 60
+  }
+ ],
+ "kandidaten": 2839
+}
