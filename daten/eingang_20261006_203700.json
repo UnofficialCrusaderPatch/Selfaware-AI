@@ -1,0 +1,314 @@
+{
+ "richtung": [
+  {
+   "art": "Schmiede",
+   "richtung": 0,
+   "ort": [
+    153,
+    278
+   ],
+   "eingang": [
+    155,
+    282
+   ],
+   "relativ": [
+    2,
+    4
+   ]
+  },
+  {
+   "art": "Schmiede",
+   "richtung": 2,
+   "ort": [
+    153,
+    278
+   ],
+   "eingang": [
+    152,
+    280
+   ],
+   "relativ": [
+    -1,
+    2
+   ]
+  },
+  {
+   "art": "Schmiede",
+   "richtung": 4,
+   "ort": [
+    153,
+    278
+   ],
+   "eingang": [
+    154,
+    277
+   ],
+   "relativ": [
+    1,
+    -1
+   ]
+  },
+  {
+   "art": "Schmiede",
+   "richtung": 6,
+   "ort": [
+    153,
+    278
+   ],
+   "eingang": [
+    157,
+    279
+   ],
+   "relativ": [
+    4,
+    1
+   ]
+  },
+  {
+   "art": "Gerberei",
+   "richtung": 0,
+   "ort": [
+    153,
+    278
+   ],
+   "eingang": [
+    155,
+    282
+   ],
+   "relativ": [
+    2,
+    4
+   ]
+  },
+  {
+   "art": "Gerberei",
+   "richtung": 2,
+   "ort": [
+    153,
+    278
+   ],
+   "eingang": [
+    152,
+    280
+   ],
+   "relativ": [
+    -1,
+    2
+   ]
+  },
+  {
+   "art": "Gerberei",
+   "richtung": 4,
+   "ort": [
+    153,
+    278
+   ],
+   "eingang": [
+    154,
+    277
+   ],
+   "relativ": [
+    1,
+    -1
+   ]
+  },
+  {
+   "art": "Gerberei",
+   "richtung": 6,
+   "ort": [
+    153,
+    278
+   ],
+   "eingang": [
+    157,
+    279
+   ],
+   "relativ": [
+    4,
+    1
+   ]
+  },
+  {
+   "art": "Waffenlager",
+   "richtung": 0,
+   "ort": [
+    153,
+    278
+   ],
+   "eingang": [
+    155,
+    282
+   ],
+   "relativ": [
+    2,
+    4
+   ]
+  },
+  {
+   "art": "Waffenlager",
+   "richtung": 2,
+   "ort": [
+    153,
+    278
+   ],
+   "eingang": [
+    152,
+    280
+   ],
+   "relativ": [
+    -1,
+    2
+   ]
+  },
+  {
+   "art": "Waffenlager",
+   "richtung": 4,
+   "ort": [
+    153,
+    278
+   ],
+   "eingang": [
+    154,
+    277
+   ],
+   "relativ": [
+    1,
+    -1
+   ]
+  },
+  {
+   "art": "Waffenlager",
+   "richtung": 6,
+   "ort": [
+    153,
+    278
+   ],
+   "eingang": [
+    157,
+    279
+   ],
+   "relativ": [
+    4,
+    1
+   ]
+  },
+  {
+   "art": "Huette",
+   "richtung": 0,
+   "ort": [
+    153,
+    278
+   ],
+   "eingang": [
+    155,
+    282
+   ],
+   "relativ": [
+    2,
+    4
+   ]
+  },
+  {
+   "art": "Huette",
+   "richtung": 2,
+   "ort": [
+    153,
+    278
+   ],
+   "eingang": [
+    152,
+    280
+   ],
+   "relativ": [
+    -1,
+    2
+   ]
+  },
+  {
+   "art": "Huette",
+   "richtung": 4,
+   "ort": [
+    153,
+    278
+   ],
+   "eingang": [
+    154,
+    277
+   ],
+   "relativ": [
+    1,
+    -1
+   ]
+  },
+  {
+   "art": "Huette",
+   "richtung": 6,
+   "ort": [
+    153,
+    278
+   ],
+   "eingang": [
+    157,
+    279
+   ],
+   "relativ": [
+    4,
+    1
+   ]
+  },
+  {
+   "art": "Markt",
+   "richtung": 0,
+   "gebaut": false
+  },
+  {
+   "art": "Markt",
+   "richtung": 2,
+   "gebaut": false
+  },
+  {
+   "art": "Markt",
+   "richtung": 4,
+   "gebaut": false
+  },
+  {
+   "art": "Markt",
+   "richtung": 6,
+   "gebaut": false
+  }
+ ],
+ "blockieren": {
+  "vorher": {
+   "ort": [
+    153,
+    278
+   ],
+   "eingang": [
+    155,
+    282
+   ]
+  },
+  "huette": {
+   "31": {
+    "ort": [
+     154,
+     282
+    ],
+    "eingang": [
+     156,
+     286
+    ]
+   }
+  },
+  "nachher": {
+   "ort": [
+    153,
+    278
+   ],
+   "eingang": [
+    155,
+    282
+   ]
+  }
+ }
+}

@@ -83,3 +83,6 @@ Spiels abgelesen ist, aber noch nicht mit laufenden Einheiten geprueft, bleibt "
 | G7 | Woher der Gerber nach der ersten Kuh die naechsten bekommt, ist ungeklaert (nur ein Gang zum Hof gesehen) | offen | Kuehe (Typ 51) beim naechsten Mal mitschreiben | 06.10. |
 | G8 | Eingang (wo der Arbeiter steht): Schmiede und Gerberei unten Mitte (x+2, y+4); Waffenlager links (x-1, y+2) | getestet | Haltefelder der Arbeiter, Bau-Richtung 0 | 06.10. |
 | G9 | Ein Gerber schafft rechnerisch so viel wie ~2 Schmiede (3 Leder je ~1.700-3.300 Ticks gegen 1 Keule je ~1.500-2.600) | ungeprueft | abgeleitet aus G3-G5, nicht im Spiel gegeneinander gemessen | 06.10. |
+| G10 | Bau-Richtung dreht den Eingang (4x4: Schmiede, Gerberei, Waffenlager, Huette gleich): 0 unten (x+2,y+4), 2 links (x-1,y+2), 4 oben (x+1,y-1), 6 rechts (x+4,y+1) | getestet | `eingang_messen.py` 20:37, `daten/eingang_20261006_203700.json` | 06.10. |
+| G11 | Eingang mit einer Huette zugebaut: der GESPEICHERTE Eingang (+0x112) bleibt gleich - ob Arbeiter einen anderen Zugang nehmen (Daniel W20), ist nicht getestet | getestet (Teil) | dieselbe Messung, Bild `daten/wege_abstand/eingang_blockiert.png` | 06.10. |
+| G12 | Ein zweiter Markt wurde in keiner Richtung gebaut | getestet | dieselbe Messung; Grund nicht nachgesehen | 06.10. |
