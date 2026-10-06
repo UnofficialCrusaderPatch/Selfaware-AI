@@ -443,8 +443,10 @@ def wohnraum_fehlt(st, G):
     Huetten, untaetigen Bauern und neuen Huetten."""
     offene = sum(max(0, ARBEITER_JE.get(g["typ"], 0) - (BUCH.hat.get(n, 0) if BUCH is not None else 0))
                  for n, g in G.items() if g["besitzer"] == SP)
-    bedarf = offene - st.get("feuer", 0)
-    return bedarf > 0 and bedarf + 2 > st.get("platz", 0) - st.get("leute", 0), offene
+    # 23:27 (Lernlauf 3: Wohnraum 83 % der Zeit voll): ohne untaetige Bauern immer 2 Plaetze Wachstum frei halten - sonst
+    # warten Huetten auf Arbeit und Arbeit (Vollbeschaeftigung) auf Bauern, und nichts waechst
+    feuer = st.get("feuer", 0)
+    return feuer < 2 and max(0, offene - feuer) + 2 > st.get("platz", 0) - st.get("leute", 0), offene
 
 def haufen_hat_stein(G, q):
     """Liegt auf dem Steinhaufen (Verbund) des Steinbruchs bei q schon Stein?"""

@@ -29,7 +29,6 @@ D = os.path.join(HIER, "..", "daten")
 sys.path.insert(0, HIER)
 
 KNOEPFE = {
-    "v14": ["ja", "nein"],               # nein = Aufbau wie v5 (Bestzeit 11.930): Lager am Bergfried, Planer allein
     "umzug": ["frueh", "nachb", "nein"],
     "holzfaeller_vorab": [0, 4, 8, 14],
     "holz_spam": [0, 10, 20, 30],
@@ -47,7 +46,8 @@ GRUND = {"v14": "ja", "umzug": "frueh", "holzfaeller_vorab": 4, "holz_spam": 20,
          "steinbruch_zuerst": "nein", "stein_parallel": "ja", "joch_nach_stein": "ja", "huetten_voraus": "ja",
          "holz_kaufen": "ja", "je_arbeiter": "ja", "vollbeschaeftigung": "nein"}
 FEST = ["leere_ki=ja", "tempo=100", "minuten=60", "streitkolben=10", "weg=bilanz", "experiment=ja"]
-REFERENZ = dict(GRUND, v14="nein")      # zweiter Lauf: die bisher schnellste Bauweise (v5) als Messlatte im selben Code
+# 23:26 (Daniel: Ochse vor Steinbruch, Lager nicht umgezogen - in der v5-Bauweise galten die alten Regeln): EIN Weg.
+# v14 ist fest; der Kreis aendert nur Werte, keine Bauweisen ("zwei Wege zum selben Ziel sind immer ein Fehler")
 # welche Knoepfe zu welchem gemessenen Verlust gehoeren (Vorwissen; die Wirkung misst der Kreis selbst)
 VERLUST_KNOEPFE = {
     "wohnraum_voll": ["huetten_voraus", "holz_kaufen"],
@@ -161,12 +161,11 @@ def main():
     for r in alle:
         r["strategie"] = dict(GRUND, **r["strategie"])     # aeltere Laeufe: neue Knoepfe mit Grundwert (KeyError 23:21)
     gespielt = {schluessel(r["strategie"]) for r in alle}
-    beste = min(alle, key=lambda r: r["note"]) if alle else None
+    gueltig = [r for r in alle if r["strategie"].get("v14", "ja") == "ja"]     # nur Laeufe auf dem einen Weg zaehlen
+    beste = min(gueltig, key=lambda r: r["note"]) if gueltig else None
     for i in range(laeufe):
         if beste is None:
             s, knopf = dict(GRUND), None
-        elif schluessel(REFERENZ) not in gespielt:
-            s, knopf = dict(REFERENZ), "v14"
         else:
             s, knopf = naechste(beste["strategie"], gespielt, beste.get("nachschau"))
             if s is None:
