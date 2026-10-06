@@ -398,6 +398,7 @@ JE_ARBEITER = False      # v16: Planer bewertet Gewinn je Arbeiter (Bauern sind 
 HUETTEN_JE_BAUM = None   # v17: bis zu so viele Holzfaeller je Baum (Daniel 22:57); None = alte Regel (einer je Baum, 7 Felder Sperre)
 HOLZ_KAUFEN = False      # v17: Holz kaufen, wenn >= 4 Bauern untaetig sind und Holz fehlt
 HOLZ_SPAM = 0            # E3: erst so viele Holzfaeller rund ums Lager, dann Steinbrueche und Leder
+STEIN_MAX = False        # E4: Steinbrueche erst nach der ersten Holzlieferung, dann alle (2 am Lager + 3 am zweiten Steinfeld)
 
 def v16_holzfaeller(plan):
     """Plan-Holzfaeller nach Abstand zum neuen Lager, ohne die jenseits von HF_MAX."""
@@ -424,21 +425,32 @@ def v14_sperrflaechen():
                       (16, [p["gerberei"]]), (11, [p["waffenlager"]])):
         b = V14_GROESSE[typ]
         r += [(x - 1, y - 1, x + b, y + b) for x, y in orte]
+    if STEIN_MAX:
+        r += [(x - 1, y - 1, x + 9, y + 6) for x, y in E4_BRUECHE]     # Steinbruch 6x6 + Haufen/Joch rechts daneben
     return r
 
 def steht_bei(G, typ, ort, r=1):
     return [n for n, g in G.items() if g["besitzer"] == SP and g["typ"] == typ and max(abs(g["x"] - ort[0]), abs(g["y"] - ort[1])) <= r]
 
+E4_BRUECHE = [(61, 213), (72, 210), (84, 206)]   # zweites Steinfeld (61,212), 57 Felder vom Lager - 3 passen (Platzkarte Tick 0)
+
 def v14_steinpflicht(st, G, wirt):
     """Beide Steinbrueche, dann beide Joche, genau an ihren Plaetzen (Umkreis 0), sobald das Holz reicht - vor allem
-    anderen in der Runde. Was noch fehlt, liegt als Ruecklage in wirt.extra (Planer, Huetten, Holzfaeller halten es frei)."""
+    anderen in der Runde. Was noch fehlt, liegt als Ruecklage in wirt.extra (Planer, Huetten, Holzfaeller halten es frei).
+    E4 (Daniel 23:03 "so viele Steinbrueche wie geht"): danach die 3 vom zweiten Steinfeld, je mit Joch daneben."""
     ev, holz, offen = [], st.get("holz", 0), 0
-    for typ, ort in [(20, q) for q in V14_PLAN["brueche"]] + [(4, j) for j in V14_PLAN["joche"]]:
-        if steht_bei(G, typ, ort) or BUCH.offen_bei(typ, ort):
+    auftraege = [(20, q, 0) for q in V14_PLAN["brueche"]] + [(4, j, 0) for j in V14_PLAN["joche"]]
+    if STEIN_MAX:
+        for q in E4_BRUECHE:
+            auftraege += [(20, q, 0)]
+            if steht_bei(G, 20, q):
+                auftraege += [(4, (q[0] + 7, q[1] + 2), 6)]    # Joch neben den Steinhaufen (der liegt bei x+7, y+2)
+    for typ, ort, r in auftraege:
+        if steht_bei(G, typ, ort, 1 if r == 0 else r) or BUCH.offen_bei(typ, ort, 2 if r == 0 else r):
             continue
         k = kosten_spiel(typ)["holz"]
         if holz >= k:
-            o = baue_schnell(typ, ort[0], ort[1], 0, zweck="v14 Steinpflicht")
+            o = baue_schnell(typ, ort[0], ort[1], r, zweck="Steinpflicht")
             ev.append("PFLICHT %s bei %s gesendet: %s (Holz %d)" % (NACH_TYP[typ]["name"], ort, o, holz))
             if o:
                 holz -= k
@@ -928,18 +940,27 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                 for _ in range(3):
                     if holz < 5 or hf_jetzt >= HOLZ_SPAM:
                         break
-                    ort, w = ausbau._bester_ort(3, L, G)
+                    ort, weg_hf = ausbau._bester_ort(3, L, G)     # NICHT w - das ist der Waechter (E3-Absturz 23:03)
                     if ort is None:
                         ereignis.append("HOLZ-SPAM: kein Platz mehr (%d Holzfaeller)" % hf_jetzt)
                         break
                     o = baue_schnell(3, ort[0], ort[1], 1, zweck="E3 Holz-Spam")
-                    ereignis.append("HOLZ-SPAM %d/%d bei %s (Weg %d): %s" % (hf_jetzt + 1, HOLZ_SPAM, ort, w, o))
+                    ereignis.append("HOLZ-SPAM %d/%d bei %s (Weg %d): %s" % (hf_jetzt + 1, HOLZ_SPAM, ort, weg_hf, o))
                     if not o:
                         ausbau.fehlschlag[(3, ort)] = ausbau.fehlschlag.get((3, ort), 0) + 1
                         break
                     holz -= 5
                     hf_jetzt += 1
-            if V14 and not endspiel["fertig"] and not spam_offen:
+            # E4 (Daniel 23:03: "wenn die ersten 20 Holzfaeller Holz geladen haben, direkt Steinbrueche, so viele wie geht"):
+            # erste Holzlieferung = Holz im Lager steigt nach dem Startholz (ab Tick 700) um >= 2 ohne Kauf in dieser Runde
+            if ("holz_vorher" in fruehpruefung and "holz_geliefert" not in fruehpruefung and st["t"] > 700
+                    and st["holz"] >= fruehpruefung["holz_vorher"] + 2 and st["t"] - fruehpruefung.get("holz_gekauft", -999) > 60):
+                fruehpruefung["holz_geliefert"] = st["t"]
+                ereignis.append("ERSTE HOLZLIEFERUNG bei Tick %d (Holz %d -> %d, Holzfaeller %d)" % (
+                    st["t"], fruehpruefung["holz_vorher"], st["holz"], hf_jetzt))
+            fruehpruefung["holz_vorher"] = st["holz"]
+            stein_frei = not spam_offen and (not STEIN_MAX or "holz_geliefert" in fruehpruefung)
+            if V14 and not endspiel["fertig"] and stein_frei:
                 ereignis += v14_steinpflicht(st, G, wirt)   # vor allem anderen (Daniel 22:05); E3: erst nach dem Holz-Spam
                 if "stein_besetzt" not in fruehpruefung:
                     voll = all(BUCH.hat.get(n, 0) >= ARBEITER_JE[typ] for typ, orte in ((20, V14_PLAN["brueche"]), (4, V14_PLAN["joche"]))
@@ -1160,8 +1181,9 @@ def main():
     global HF_VORAB, STEIN_ZUERST, HF_MAX, JE_ARBEITER, UMZUG, EXPERIMENT, HUETTEN_JE_BAUM, HOLZ_KAUFEN
     HUETTEN_JE_BAUM = int(arg["holzfaeller_je_baum"]) if arg.get("holzfaeller_je_baum") else None
     HOLZ_KAUFEN = arg.get("holz_kaufen", "nein") == "ja"
-    global HOLZ_SPAM
+    global HOLZ_SPAM, STEIN_MAX
     HOLZ_SPAM = int(arg.get("holz_spam", 0))
+    STEIN_MAX = arg.get("stein_max", "nein") == "ja"
     UMZUG = arg.get("umzug", "nachb")
     EXPERIMENT = arg.get("experiment", "nein") == "ja"
     if arg.get("holzfaeller_vorab"):
@@ -1183,12 +1205,18 @@ def main():
                int(arg["bis_tick"]) if arg.get("bis_tick") else None, int(arg.get("assassinen", 0)), arg.get("trainingsstand"),
                int(arg.get("trainingsstand_ab", 40)), int(arg["gold_ziel"]) if arg.get("gold_ziel") else None,
                int(arg.get("streitkolben", 0)), arg.get("weg", "kauf"))
-    except RuntimeError as e:
-        # Modulfehler (befehl.pruefe): Spiel anhalten, damit der Zustand fuer die Ursachensuche stehen bleibt
+    except BaseException as e:
+        # JEDER Abbruch haelt das Spiel an (06.10. 23:04, Daniel "Abbrechen funktioniert nicht": E3 stuerzte bei Tick 353 mit
+        # einem AttributeError ab - gefangen wurde nur RuntimeError, das Spiel lief ohne Lenker bis 5.420 weiter)
+        import traceback
         import befehl as befehlskanal
         befehlskanal.STRENG = False
-        befehl({"pause": True}, 0.8)
-        print("ABBRUCH -", e, flush=True)
+        try:
+            befehl({"pause": True}, 0.8)
+        except Exception:
+            pass
+        traceback.print_exc()
+        print("ABBRUCH - Spiel angehalten -", repr(e), flush=True)
         sys.exit(1)
 
 if __name__ == "__main__":
