@@ -2,7 +2,8 @@
 """Pruefung ohne Spiel fuer den gemeinsamen Lord-Angriff mit Bedarf aus gemessenen Lagen (Daniel 05.10. 23:51: ausser
 Schussweite sammeln, dann gleichzeitig; 06.10.: nicht pauschal 40 sammeln, kleinste ausreichend sichere Truppe, nicht auf
 Nachzuegler warten, unbekannte Lage nur vorlaeufig). Vorher festgelegt, was gelten muss:
-  1. keine gemessene Lage -> Bedarf VORLAEUFIG (Ersatzwert, so gemeldet); darunter kein Sammeln
+  1. keine gemessene Lage -> Bedarf VORLAEUFIG (Ersatzwert, so gemeldet); 19 lebende raiden; 20 sammeln schon (Schutz
+     vor Verlusten beim Raiden - sonst leben nie 40 gleichzeitig, bedarf_partie_1), greifen aber nicht an
   2. gemessene Lage deckt -> Bedarf belegt (19); 18 lebende raiden, 19 sammeln ausser Schussweite, kein Lord-Befehl
   3. Neue schliessen sich der Sammlung an; solange weniger als der Bedarf angekommen ist, greift niemand an
   4. 19 angekommen, 6 noch unterwegs -> EIN Befehl mit genau den 19 gesuendesten; die 6 werden nicht abgewartet und
@@ -83,11 +84,17 @@ def main():
     # 1. keine gemessene Lage
     L, _ = grundlage()
     t = neuer_trupp([])
-    assassinen(L, range(100, 100 + B.VORLAEUFIG - 1))
-    t.aufnehmen(range(100, 100 + B.VORLAEUFIG - 1))
+    assassinen(L, range(100, 119))
+    t.aufnehmen(range(100, 119))
     erg, bef = t.schritt(L, G, sichere_orte=ORTE)
-    pruefe(1, "keine Lage gemessen -> VORLAEUFIG %d gemeldet, mit %d lebenden kein Sammeln" % (B.VORLAEUFIG, B.VORLAEUFIG - 1),
-           any("LORD-BEDARF" in e and "VORLAEUFIG" in e for e in erg) and t.lordtrupp.get("phase") is None)
+    vorl = any("LORD-BEDARF" in e and "VORLAEUFIG" in e for e in erg) and t.lordtrupp.get("phase") is None
+    assassinen(L, [119])
+    t.aufnehmen([119])
+    t.schritt(L, G, sichere_orte=ORTE)
+    an_den_punkt(L, range(100, 120), t.lordtrupp.get("sammelpunkt") or HEIM)
+    erg, bef = t.schritt(L, G, sichere_orte=ORTE)
+    pruefe(1, "keine Lage -> VORLAEUFIG %d gemeldet; 19 raiden, 20 sammeln, 20 am Treffpunkt greifen nicht an" % B.VORLAEUFIG,
+           vorl and t.lordtrupp.get("phase") == "sammeln" and not lord_befehle(bef))
     # 2. gemessene Lage deckt: 18 raiden, 19 sammeln
     L, _ = grundlage()
     t = neuer_trupp([gemessen])

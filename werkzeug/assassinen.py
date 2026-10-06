@@ -279,6 +279,10 @@ class Einzeln:
     # griff mit 47-60 an, weil jeder Nachzuegler erst ankommen musste). Daniel 06.10.: nicht pauschal sammeln, die Lage
     # entscheidet, Zeit ist kritisch. Den Bedarf liefert bedrohung.bedarf aus gemessenen Lagen (oder vorlaeufig).
     LORD_SAMMEL_R = 8       # wer so nah am Treffpunkt steht, zaehlt als angekommen
+    # Sammeln beginnt spaetestens bei 20 Lebenden, auch wenn der Bedarf hoeher ist: beim Raiden sterben laufend
+    # Assassinen (bedarf_partie_1: Sammeln erst ab Bedarf 40 -> nie 40 gleichzeitig am Leben, 36 Verluste, kein
+    # Lord-Angriff bis 28.747). Gemessen mit 20 (gemeinsam_1, Codex): Verluste 10-18, 3 Siege.
+    LORD_SAMMELN_AB = 20
     LORD_SAMMEL_ABSTAND = SCHUSSWEITE + 5
     LORD_REST = 3          # weniger Ueberlebende aus dem Angriff -> vorbei, wieder raiden bis zum naechsten Bedarf
 
@@ -795,7 +799,7 @@ class Einzeln:
                 for n in list(lt["mitglieder"]):
                     self._vergessen(n)
                 lt.update(mitglieder=set(), phase=None, sammelpunkt=None)
-            if lt["phase"] is None and len(self.mitglieder) >= n_bedarf:
+            if lt["phase"] is None and len(self.mitglieder) >= min(n_bedarf, self.LORD_SAMMELN_AB):
                 punkt = self._lord_sammelpunkt(lp, sichere_orte, fern)
                 if punkt is not None:
                     alle = sorted(self.mitglieder)
