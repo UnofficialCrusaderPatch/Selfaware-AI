@@ -832,14 +832,21 @@ def bilanz_schritt(st, L, G, ausbau, ziel, endspiel, runde, marken):
         for _ in range(v["holz"] // 5):
             befehl({"spielbefehl": {"nr": 38, "werte": [1, 2]}}, 1.0, bis="SPIELBEFEHL")
         aus.append("ENDSPIEL Holz verkauft (%d Holz)" % v["holz"])
-    if AUFLOESEN == "ende" and endspiel["fertig"] and n > 0 and not marken.get("soldaten_aufgeloest"):
-        # Daniel 01:44: "die Starteinheiten aufbewahren und erst am Ende, wenn man die Ressourcen hat, rekrutieren" - frische
-        # Bauern am Feuer genau zum Anwerben
-        sold = [k for k, e in L.items() if e["besitzer"] == SP and 22 <= e["typ"] <= 30 and e["typ"] != 26][:n]
+    fehlen_b = n - st.get("feuer", 0)
+    if endspiel["fertig"] and n > 0 and fehlen_b > 0 and st["t"] - marken.get("bauern_frei", -999) >= 100:
+        # Daniel 01:44: Starteinheiten erst am Ende zu Bauern zum Anwerben; Lauf 68: nur einmal 5 aufgeloest, 2 gingen verloren,
+        # danach kein Bauer mehr am Feuer (ohne Abriss) -> haengen geblieben. Jetzt: fehlen Bauern, weitere Soldaten aufloesen,
+        # sind keine mehr da, genau so viele Holzfaeller abreissen
+        sold = [k for k, e in L.items() if e["besitzer"] == SP and 22 <= e["typ"] <= 30 and e["typ"] != 26][:fehlen_b]
         if sold:
             befehl({"aufloesen": {"nr": [int(k) for k in sold]}}, 1.0)
-            marken["soldaten_aufgeloest"] = st["t"]
             aus.append("ENDSPIEL %d Start-Soldaten aufgeloest -> Bauern zum Anwerben" % len(sold))
+        else:
+            hf_ab = [k for k, g in G.items() if g["besitzer"] == SP and g["typ"] == 3][:fehlen_b]
+            if hf_ab:
+                sende({"befehle": [{"player": 1, "id": neue_id(), "abreissen": {"nr": k}} for k in hf_ab]}, 1.0, bis="ABREISSEN")
+                aus.append("ENDSPIEL %d Holzfaeller abgerissen -> Bauern zum Anwerben" % len(hf_ab))
+        marken["bauern_frei"] = st["t"]
     if kas:
         werben = min(v.get("keule", 0), v.get("leder", 0), st.get("feuer", 0), v.get("gold", 0) // KAEMPFER_GOLD, n)
         # 07.10. 01:25: hoechstens EINE Anwerbung je Runde (~11 Ticks). Lauf 45/46/52/57: von 5 gleichzeitig bezahlten kamen
