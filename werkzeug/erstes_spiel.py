@@ -1102,7 +1102,8 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                 # Wartenden): nicht ueber holzfaeller_statt_verkauf (haelt Holz fuer den "besten Bau" zurueck, Entfernungsgrenze),
                 # sondern direkt: naechster Baum-Platz des Planers, sonst ein geplanter Holzfaeller-Platz; jede Absage mit Grund
                 R_w = wirt.ruecklage(G)
-                if st.get("feuer", 0) >= 2 and not any(a["typ"] == 3 for a in BUCH.offen):
+                # erst wenn die Steinbrueche besetzt sind (v15: Bauern nehmen Holzfaeller vor Steinbruch, Steinbrueche blieben 0/6)
+                if st.get("feuer", 0) >= 2 and "stein_besetzt" in fruehpruefung and not any(a["typ"] == 3 for a in BUCH.offen):
                     if st["holz"] - R_w["holz"] >= kosten_spiel(3)["holz"]:
                         ort_w, weg_w = ausbau._bester_ort(3, L, G)
                         plaetze_w = [ort_w] if ort_w else [tuple(q) for q in v16_holzfaeller(plan) if not steht_bei(G, 3, tuple(q), 1)]
