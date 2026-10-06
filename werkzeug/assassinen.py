@@ -308,6 +308,7 @@ class Einzeln:
         self.lagen = lagen_laden()           # gemessene Lagen (daten/lagen_belegt.json) fuer den Lord-Bedarf
         self.angriff_aus = False             # Trainingsstand: nur sammeln, nie angreifen (setzt erstes_spiel.py)
         self.bedarf_zuletzt = None
+        self.bedarf_grund, self.bedarf_fa = "", None
 
     def aufnehmen(self, nummern):
         self.mitglieder |= set(n for n in nummern if n not in self.bilanz["verluste"])
@@ -434,7 +435,9 @@ class Einzeln:
 
     def _lord_bedarf(self, L, G, ereignis):
         """Bedarf fuer den Lord-Angriff in dieser Lage: (Zahl, Art, Gruppenleben). Meldet jede Aenderung einmal."""
-        n, art, grund, gruppe_leben = lage_bedarf(fingerabdruck(L, G, self.sp), self.lagen)
+        fa = fingerabdruck(L, G, self.sp)
+        n, art, grund, gruppe_leben = lage_bedarf(fa, self.lagen)
+        self.bedarf_grund, self.bedarf_fa = grund, fa      # fuer Sammelbeginn/Angriff (bedarf_partie_3: Grund fehlte dort)
         if (n, art) != self.bedarf_zuletzt:
             self.bedarf_zuletzt = (n, art)
             ereignis.append("LORD-BEDARF: %s %s - %s" % (n, "belegt" if art == "belegt" else "VORLAEUFIG", grund))
@@ -545,13 +548,14 @@ class Einzeln:
             angreifer = [{"nr": n, "x": L[n]["x"], "y": L[n]["y"], "leben": L[n]["leben"],
                           "schaden": max(0, leben_alt.get(n, L[n]["leben"]) - L[n]["leben"]),
                           "zustand": L[n].get("zustand"), "zielart": L[n].get("zielart"),
-                          "ziel": L[n].get("zieleinheit")} for n in lebend]
+                          "ziel": L[n].get("zieleinheit"), "nahangreifer": L[n].get("nahangreifer")} for n in lebend]
             leben_alt.update({n: L[n]["leben"] for n in lebend})
             alle_einheiten = [{"nr": n, "typ": e.get("typ"), "besitzer": e.get("besitzer"),
                                "x": e.get("x"), "y": e.get("y"), "leben": e.get("leben"),
                                "zustand": e.get("zustand"), "zielart": e.get("zielart"),
-                               "ziel": e.get("zieleinheit"),
-                               "zielt_auf_angreifer": e.get("zielart") == 4 and e.get("zieleinheit") in a["truppe"]}
+                               "ziel": e.get("zieleinheit"), "nahziel": e.get("nahziel"),   # +830: wen er schlaegt (06.10.)
+                               "zielt_auf_angreifer": (e.get("zielart") == 4 and e.get("zieleinheit") in a["truppe"])
+                                                      or e.get("nahziel") in a["truppe"]}
                               for n, e in sorted(L.items())]
             alle_gebaeude = [{"nr": n, "typ": g.get("typ"), "besitzer": g.get("besitzer"),
                               "x": g.get("x"), "y": g.get("y"), "leben": g.get("leben"),
@@ -808,8 +812,8 @@ class Einzeln:
                         self._warten(n, punkt, halten)
                     self.stapel["mitglieder"], self.stapel["ziel"] = set(), None
                     lt.update(mitglieder=set(alle), seit=self.runde, lord=ln, phase="sammeln", sammelpunkt=punkt)
-                    ereignis.append("LORD-SAMMELN: %d Assassinen nach %s (ausser Schussweite), Angriff ab %d am Treffpunkt (%s)" % (
-                        len(alle), punkt, n_bedarf, bedarf_art))
+                    ereignis.append("LORD-SAMMELN: %d Assassinen nach %s (ausser Schussweite), Angriff ab %d am Treffpunkt (%s: %s)" % (
+                        len(alle), punkt, n_bedarf, bedarf_art, self.bedarf_grund))
             elif lt["phase"] == "sammeln":
                 # Neue Anwerbungen gehoeren sofort dazu. Bereits Laufende nicht jede Runde neu befehlen: jeder neue
                 # Befehl ist ein kurzer Halt. Die bestehende Warten-Gegenprobe schickt nur bei Stillstand erneut.
@@ -834,10 +838,12 @@ class Einzeln:
                                           "fern": self._anzahl(lp, fern, self.LORD_UMKREIS), "nah": self._anzahl(lp, nah, self.LORD_UMKREIS),
                                           "weg_min": wege[0], "weg_max": wege[-1], "am_lord_max": 0, "erreicht_runde": None,
                                           "anderes": {}, "truppe": set(alle), "verluste": 0,
-                                          "bedarf": n_bedarf, "bedarf_art": bedarf_art})
-                    ereignis.append("GEMEINSAM-AUF-LORD: %d Assassinen zusammen von %s (Bedarf %d %s, %d Nachzuegler raiden weiter; Leben %d, Fern %d / Nah %d um ihn, Weg %d-%d)" % (
+                                          "bedarf": n_bedarf, "bedarf_art": bedarf_art, "bedarf_grund": self.bedarf_grund,
+                                          "fingerabdruck": self.bedarf_fa})
+                    ereignis.append("GEMEINSAM-AUF-LORD: %d Assassinen zusammen von %s (Bedarf %d %s, %d Nachzuegler raiden weiter; Leben %d, Fern %d / Nah %d um ihn, Weg %d-%d) | %s | Fingerabdruck %s" % (
                         len(alle), punkt, n_bedarf, bedarf_art, len(self.mitglieder) - len(alle), le["leben"],
-                        self._anzahl(lp, fern, self.LORD_UMKREIS), self._anzahl(lp, nah, self.LORD_UMKREIS), wege[0], wege[-1]))
+                        self._anzahl(lp, fern, self.LORD_UMKREIS), self._anzahl(lp, nah, self.LORD_UMKREIS), wege[0], wege[-1],
+                        self.bedarf_grund, self.bedarf_fa))
                 elif neu or self.runde % 10 == 0:
                     ereignis.append("LORD-SAMMELN: %d/%d da, %d lebend (Angriff ab %d am Treffpunkt, %s)" % (
                         len(angekommen), len(lt["mitglieder"]), len(self.mitglieder), n_bedarf, bedarf_art))
