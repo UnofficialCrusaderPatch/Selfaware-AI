@@ -208,6 +208,8 @@ def main():
     gueltig = [r for r in alle if r["strategie"].get("v14", "ja") == "ja"]     # nur Laeufe auf dem einen Weg zaehlen
     beste = min(gueltig, key=lambda r: r["note"]) if gueltig else None
     kontrolle = arg.get("kontrolle") == "ja"
+    # 07.10.: Nummer aus ALLEN Laeufen (vorher len(alle) ohne ungueltige -> 8 bis 11 doppelt vergeben)
+    nr_neu = max([x.get("nr", 0) for x in alle_roh] + [0]) + 1
     for i in range(laeufe):
         if kontrolle and beste is not None:
             # Code hat sich seit der Bestzeit geaendert -> beste Strategie einmal neu messen (keine Wiederholung im Sinne
@@ -224,7 +226,8 @@ def main():
         print("LERNEN Lauf %d: %s%s" % (len(alle) + 1, "Grundstrategie" if knopf is None else "Kontrolllauf der besten Strategie mit neuem Code"
               if knopf == "kontrolle" else "%s = %s (statt %s)" % (knopf, s[knopf], beste["strategie"][knopf]),
               "" if beste is None else ", beste Note bisher %d" % beste["note"]), flush=True)
-        r = lauf(s, bis_tick, len(alle) + 1)
+        r = lauf(s, bis_tick, nr_neu)
+        nr_neu += 1
         r["geaendert"] = knopf
         r["vergleich"] = None if beste is None else {"gegen": beste["nr"], "note_vorher": beste["note"], "differenz": r["note"] - beste["note"]}
         alle.append(r)
