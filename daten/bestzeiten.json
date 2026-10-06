@@ -39,5 +39,23 @@
    "fehler": false
   },
   "notiz": "Apfel-Eroeffnung + Produktion (lieferte 0) + Bilanz-Endspiel bei 14.000"
+ },
+ {
+  "name": "v5",
+  "marken": {
+   "kaempfer_1": 11867,
+   "kaempfer_2": 11900,
+   "kaempfer_3": 11900,
+   "kaempfer_4": 11900,
+   "kaempfer_5": 11900,
+   "kaempfer_6": 11900,
+   "kaempfer_7": 11917,
+   "seasoning_b": 1726,
+   "endspiel": 11416,
+   "ziel": 11930,
+   "kaempfer_10": 11930,
+   "fehler": false
+  },
+  "notiz": "nur Wirtschaft + Bilanz, Horizont 16.000"
  }
 ]
