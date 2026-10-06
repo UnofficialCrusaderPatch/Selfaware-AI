@@ -387,6 +387,8 @@ LOS_PREIS = {21: 300, 23: 160}   # 5 Keulen / 5 Lederharnische am Markt (gemesse
 #    auseinander, Gerberei dazwischen (2 Felder zu beiden), Waffenlager 1 Feld neben der Gerberei.
 V14 = None
 HF_VORAB = None          # v15: so viele Holzfaeller aus dem Eroeffnungsplan in Phase 1, der Rest erst nach den Steinbruechen
+UMZUG = "nachb"          # E1/E2 (06.10. 22:55): "frueh" = gleich nach Phase 1, "nachb" = wenn B steht, "nein" = Lager bleibt am Bergfried
+EXPERIMENT = False       # Versuch: keine Tempo-Regel gegen die Bestzeit (er soll die erste Lieferung erleben), nur harte Fehler brechen ab
 HF_MAX = None            # v16: Holzfaeller nur bis so viele Felder vom neuen Lager (L9: weit weg ~3, nah ~11 Holz je 1.000)
 JE_ARBEITER = False      # v16: Planer bewertet Gewinn je Arbeiter (Bauern sind der Engpass, L7)
 
@@ -394,7 +396,8 @@ def v16_holzfaeller(plan):
     """Plan-Holzfaeller nach Abstand zum neuen Lager, ohne die jenseits von HF_MAX."""
     if not V14:
         return list(plan["holzfaeller"])
-    m = (V14_PLAN["lager"][0] + 3, V14_PLAN["lager"][1] + 3)
+    lg = BASIS_LAGER if UMZUG == "nein" else V14_PLAN["lager"]      # E2: Lager bleibt am Bergfried
+    m = (lg[0] + 3, lg[1] + 3)
     ab = lambda p: max(abs(p[0] + 1 - m[0]), abs(p[1] + 1 - m[1]))
     return [p for p in sorted(plan["holzfaeller"], key=ab) if HF_MAX is None or ab(p) <= HF_MAX]
 STEIN_ZUERST = False     # v15: Planer baut nichts mit Arbeitern, bis beide Steinbrueche + Joche besetzt sind
@@ -583,7 +586,7 @@ def bilanz_schritt(st, L, G, ausbau, ziel, endspiel, runde, marken):
         # als 10 % dahinter -> Abbruch. Ziel unter 1 Jahr (Daniel 21:58): Tempo von v5 * 11.930/9.600 noetig
         split = bestzeit_split(st["t"] * ZIEL_FAKTOR)
         anteil = t["habe_gold"] / float(max(1, t["bedarf_gold"]))
-        if split and st["t"] >= 3000 and anteil < 0.9 * split:
+        if split and st["t"] >= 3000 and anteil < 0.9 * split and not EXPERIMENT:
             endspiel["abbruch"] = "Fortschritt %.2f (%d von %d) < 90 %% des Ziel-Tempos (%.2f) bei Tick %d" % (
                 anteil, t["habe_gold"], t["bedarf_gold"], split, st["t"])
         if runde % 10 == 0 or t["jetzt_erreichbar"]:
@@ -820,7 +823,14 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
         from auftragsbuch import Auftragsbuch
         BUCH = Auftragsbuch(SP, ARBEITER_JE, NACH_TYP)
         wirt.umzug_ab, wirt.lager_genau, wirt.lager_ort = None, True, tuple(V14_PLAN["lager"])
-        wirt.umzug_nach_b = True
+        wirt.umzug_nach_b = UMZUG == "nachb"
+        if UMZUG == "frueh":
+            wirt.umzug_ab = 0
+        elif UMZUG == "nein":
+            wirt.alt = set()                    # die Startteile SIND das Lager - kein Abriss, kein neues
+            wirt.lager_ort = BASIS_LAGER
+            plan["lager"] = list(BASIS_LAGER)   # Planer misst Wege zum Lager am Bergfried
+        schreib("Versuch: Umzug %s, Experiment (ohne Tempo-Regel) %s" % (UMZUG, EXPERIMENT))
         ausbau.ohne, ausbau.sperr = ({3, 5, 7, 20, 32} if STEIN_ZUERST else {20}), v14_sperrflaechen()
         hf_spaeter = [tuple(p) for p in v16_holzfaeller(plan)[HF_VORAB:]] if HF_VORAB is not None else []
         ausbau.holz_max, ausbau.je_arbeiter = HF_MAX, JE_ARBEITER
@@ -995,7 +1005,7 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
             if STEIN_ZUERST and st["t"] >= 1500 and "stein_besetzt" not in fruehpruefung:
                 schreib("FRUEHABBRUCH bei Tick %d: Steinbrueche + Joche nicht besetzt (%s)" % (st["t"], BUCH.stand(G, st)))
                 break
-            if st["t"] >= lager_bis and not fruehpruefung.get("lager"):
+            if st["t"] >= lager_bis and not fruehpruefung.get("lager") and UMZUG != "nein":
                 neu = steht_bei(G, 10, V14_PLAN["lager"])
                 alt = [n for n, g in G.items() if g["besitzer"] == SP and g["typ"] == 10 and
                        max(abs(g["x"] - BASIS_LAGER[0]), abs(g["y"] - BASIS_LAGER[1])) <= 6]
@@ -1110,7 +1120,9 @@ def main():
     waechter.BERGFRIED_EINGANG = BERGFRIED
     global LEERE_KI, V14
     LEERE_KI = arg.get("leere_ki", "nein") == "ja"
-    global HF_VORAB, STEIN_ZUERST, HF_MAX, JE_ARBEITER
+    global HF_VORAB, STEIN_ZUERST, HF_MAX, JE_ARBEITER, UMZUG, EXPERIMENT
+    UMZUG = arg.get("umzug", "nachb")
+    EXPERIMENT = arg.get("experiment", "nein") == "ja"
     if arg.get("holzfaeller_vorab"):
         HF_VORAB = int(arg["holzfaeller_vorab"])
     if arg.get("holzfaeller_max"):

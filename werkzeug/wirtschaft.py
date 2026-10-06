@@ -198,7 +198,7 @@ class Wirtschaft:
         if alt_da and raeumen:
             inhalt = {k: st.get(k, 0) for k in LAGERWAREN if st.get(k, 0) > 0}
             rest_ok = sum(inhalt.values()) < 5
-            if not rest_ok and self.umzug_nach_b and set(inhalt) <= {"holz"} and inhalt.get("holz", 0) < 20 and self.holz_verbauen:
+            if not rest_ok and (self.umzug_nach_b or self.umzug_ab is not None) and set(inhalt) <= {"holz"} and inhalt.get("holz", 0) < 20 and self.holz_verbauen:
                 # v15: unter einem 20er-Los und kein Holzfaeller erlaubt/moeglich -> der Rest blockiert den Umzug nicht
                 erg, text = self.holz_verbauen(st, L, G)
                 if erg is None:
