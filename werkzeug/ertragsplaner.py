@@ -353,6 +353,22 @@ class Ertragsplaner:
         return [p for p in orte if not any(p[0] <= r[2] and p[0] + b - 1 >= r[0] and p[1] <= r[3] and p[1] + b - 1 >= r[1]
                                            for r in sperr)]
 
+    @staticmethod
+    def _dicht_packen(orte, b):
+        """Steinbruch/Eisenmine (Daniel 23:24 "warum nur einen Steinbruch, wenn 2 moeglich sind?"): nur Plaetze, nach denen auf
+        demselben Rohstofffeld die meisten weiteren Bauten derselben Art noch passen (gierige Packung der uebrigen Plaetze).
+        Vorher nahm der Planer (81,268) mitten im Steinfeld - danach passte dort keiner mehr (v12, Lernlauf 3)."""
+        if not orte:
+            return orte
+        def packung(p):
+            gew = [p]
+            for q in sorted(x for x in orte if schach(x, p) <= 3 * b):
+                if all(schach(q, g) >= b for g in gew):
+                    gew.append(q)
+            return len(gew)
+        wert = {p: packung(p) for p in orte}
+        return [p for p in orte if wert[p] >= max(wert[q] for q in orte if schach(q, p) <= 2 * b)]
+
     def _orte_roh(self, typ, L, G):
         """Kandidaten-Orte fuer typ (Ankerpunkte)."""
         eigen = [g for g in G.values() if g["besitzer"] == self.sp]
@@ -370,6 +386,8 @@ class Ertragsplaner:
                 # Seasoning (v2b, B23): der Planer setzte vor der A-Reife eigene Plantagen auf/neben die B-Plaetze -
                 # 2 von 3 B fanden danach keinen Platz, B blieb die ganze Partie offen. B-Plaetze bleiben frei, bis B steht.
                 orte = [p for p in orte if all(schach(p, b) > 6 for b in self.wirt.B_offen)]
+            if typ in (20, 5):
+                orte = self._dicht_packen(orte, b)
             return orte
         if typ == 3:
             hf = [(x + 1, y + 1) for (x, y) in gleich]
