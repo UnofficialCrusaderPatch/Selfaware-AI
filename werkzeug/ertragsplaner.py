@@ -408,6 +408,8 @@ class Ertragsplaner:
         ort, w = self._bester_ort(3, L, G)
         if ort is None:
             return None, "kein erreichbarer Holzfaeller-Platz"
+        if getattr(self, "holz_max", None) is not None and w > self.holz_max:
+            return None, "naechster Holzfaeller-Platz %d Felder vom Lager (Grenze %d)" % (w, self.holz_max)
         gebaut = self.baue(3, ort[0], ort[1], 3)
         if gebaut:
             self.gesetzt["Holzfaeller statt Verkauf"] = self.gesetzt.get("Holzfaeller statt Verkauf", 0) + 1
@@ -430,6 +432,8 @@ class Ertragsplaner:
                 continue
             if w > 70:
                 continue
+            if typ == 3 and getattr(self, "holz_max", None) is not None and w > self.holz_max:
+                continue                     # v16: Holzfaeller weit vom Lager liefern ~3 statt ~11 je 1.000 Ticks (L9)
             rate = self.messer.rate(typ) * self.messer.wegfaktor(typ, w)
             gold_je_tick = rate * VERKAUF[ware] / 1000.0
             k = self.kosten_von(typ)
@@ -444,6 +448,11 @@ class Ertragsplaner:
                 grund = "Amortisation %.0f > %d" % (amort, MAX_AMORT)
             aus.append({"typ": typ, "ort": ort, "weg": w, "gold_je_1000": round(1000 * gold_je_tick, 1), "amort": amort,
                         "gewinn": gewinn, "anlauf": anl, "rest": rest, "kosten": k, "arbeiter": arb, "grund": grund})
+        if getattr(self, "je_arbeiter", False):
+            # v16 (06.10. 22:55): Bauern sind der Engpass (1 je 52 Ticks, L7) - Gewinn je ARBEITER entscheidet, nicht je Bau
+            if rest is None:
+                return sorted(aus, key=lambda k: k["amort"] * max(1, k["arbeiter"]))
+            return sorted(aus, key=lambda k: -k["gewinn"] / float(max(1, k["arbeiter"])))
         if rest is None:
             return sorted(aus, key=lambda k: k["amort"])
         return sorted(aus, key=lambda k: -k["gewinn"])

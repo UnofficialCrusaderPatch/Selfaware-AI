@@ -147,7 +147,7 @@ def phase1(plan, tempo, mit_posten=True):
         # vor den Holzfaellern (die Reihenfolge entscheidet, was beim ersten Holz (30 bei Tick 120) noch geht)
         holz_bauten = [(19, tuple(plan["kornspeicher"])), (26, MARKT)] + [(20, q) for q in V14["brueche"]] + \
                       [(4, j) for j in V14["joche"]] + \
-                      [(3, tuple(p)) for p in (plan["holzfaeller"] if HF_VORAB is None else plan["holzfaeller"][:HF_VORAB])]
+                      [(3, tuple(p)) for p in (v16_holzfaeller(plan) if HF_VORAB is None else v16_holzfaeller(plan)[:HF_VORAB])]
     else:
         holz_bauten = [(19, tuple(plan["kornspeicher"])), (26, MARKT)] + [(3, tuple(p)) for p in plan["holzfaeller"]]
     if plan.get("stein") and not V14:
@@ -387,6 +387,16 @@ LOS_PREIS = {21: 300, 23: 160}   # 5 Keulen / 5 Lederharnische am Markt (gemesse
 #    auseinander, Gerberei dazwischen (2 Felder zu beiden), Waffenlager 1 Feld neben der Gerberei.
 V14 = None
 HF_VORAB = None          # v15: so viele Holzfaeller aus dem Eroeffnungsplan in Phase 1, der Rest erst nach den Steinbruechen
+HF_MAX = None            # v16: Holzfaeller nur bis so viele Felder vom neuen Lager (L9: weit weg ~3, nah ~11 Holz je 1.000)
+JE_ARBEITER = False      # v16: Planer bewertet Gewinn je Arbeiter (Bauern sind der Engpass, L7)
+
+def v16_holzfaeller(plan):
+    """Plan-Holzfaeller nach Abstand zum neuen Lager, ohne die jenseits von HF_MAX."""
+    if not V14:
+        return list(plan["holzfaeller"])
+    m = (V14_PLAN["lager"][0] + 3, V14_PLAN["lager"][1] + 3)
+    ab = lambda p: max(abs(p[0] + 1 - m[0]), abs(p[1] + 1 - m[1]))
+    return [p for p in sorted(plan["holzfaeller"], key=ab) if HF_MAX is None or ab(p) <= HF_MAX]
 STEIN_ZUERST = False     # v15: Planer baut nichts mit Arbeitern, bis beide Steinbrueche + Joche besetzt sind
 # Lager (89,270) statt (87,268) (v15, 22:45): die Steinbrueche legen ihre Steinhaufen (Typ 21) selbst daneben - gemessen
 # bei (87,267) und (87,276); (87,268) war damit belegt, die Platzkarte von Tick 0 kannte die Haufen nicht. (89,270) ist
@@ -812,7 +822,10 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
         wirt.umzug_ab, wirt.lager_genau, wirt.lager_ort = None, True, tuple(V14_PLAN["lager"])
         wirt.umzug_nach_b = True
         ausbau.ohne, ausbau.sperr = ({3, 5, 7, 20, 32} if STEIN_ZUERST else {20}), v14_sperrflaechen()
-        hf_spaeter = [tuple(p) for p in plan["holzfaeller"][HF_VORAB:]] if HF_VORAB is not None else []
+        hf_spaeter = [tuple(p) for p in v16_holzfaeller(plan)[HF_VORAB:]] if HF_VORAB is not None else []
+        ausbau.holz_max, ausbau.je_arbeiter = HF_MAX, JE_ARBEITER
+        schreib("v16: Holzfaeller hoechstens %s Felder vom Lager (Plan: %s), Planer nach Gewinn je Arbeiter: %s" % (
+            HF_MAX, v16_holzfaeller(plan), JE_ARBEITER))
         schreib("v15: Holzfaeller vorab %s, spaeter %d aus dem Plan; Steinbrueche zuerst besetzen: %s; Lagerumzug nach B" % (
             HF_VORAB, len(hf_spaeter), STEIN_ZUERST))
         leder = LederKette({})
@@ -1097,9 +1110,12 @@ def main():
     waechter.BERGFRIED_EINGANG = BERGFRIED
     global LEERE_KI, V14
     LEERE_KI = arg.get("leere_ki", "nein") == "ja"
-    global HF_VORAB, STEIN_ZUERST
+    global HF_VORAB, STEIN_ZUERST, HF_MAX, JE_ARBEITER
     if arg.get("holzfaeller_vorab"):
         HF_VORAB = int(arg["holzfaeller_vorab"])
+    if arg.get("holzfaeller_max"):
+        HF_MAX = int(arg["holzfaeller_max"])
+    JE_ARBEITER = arg.get("je_arbeiter", "nein") == "ja"
     STEIN_ZUERST = arg.get("steinbruch_zuerst", "nein") == "ja"
     if arg.get("v14", "nein") == "ja":
         V14 = V14_PLAN
