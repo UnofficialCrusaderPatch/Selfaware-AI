@@ -1126,6 +1126,8 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                 # Wartenden): nicht ueber holzfaeller_statt_verkauf (haelt Holz fuer den "besten Bau" zurueck, Entfernungsgrenze),
                 # sondern direkt: naechster Baum-Platz des Planers, sonst ein geplanter Holzfaeller-Platz; jede Absage mit Grund
                 R_w = wirt.ruecklage(G)
+                # Daniel 01:35: "Holz gekauft kurz bevor Holz reinkommt - unnoetig": was Holzfaeller gerade tragen, kommt gleich
+                holz_kommt = sum(e.get("ladung", 0) for e in L.values() if e["besitzer"] == SP and e["typ"] == 3 and e.get("ladung", 0) > 0)
                 # erst wenn die Steinbrueche besetzt sind (v15: Bauern nehmen Holzfaeller vor Steinbruch, Steinbrueche blieben 0/6)
                 # Daniel 00:54: "es muss noch Platz fuer Penner sein - wenn alle direkt Holzfaeller werden, ist kein Platz": die
                 # Wartenden sind der Puffer (sie gehen bei niedriger Beliebtheit zuerst, aus ihnen wird angeworben); Holzfaeller
@@ -1147,6 +1149,9 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                                 st["feuer"], plaetze_w[0], weg_w, o_w))
                         elif runde % 20 == 0:
                             ereignis.append("WACHSTUM kein Holzfaeller-Platz (Planer und Plan leer) bei %d Wartenden" % st["feuer"])
+                    elif holz_kommt + st["holz"] - R_w["holz"] >= kosten_spiel(3)["holz"]:
+                        if runde % 20 == 0:
+                            ereignis.append("WACHSTUM wartet auf %d Holz unterwegs (statt kaufen)" % holz_kommt)
                     elif HOLZ_KAUFEN and st["gold"] - R_w["gold"] >= 15 and st["t"] - fruehpruefung.get("holz_gekauft_w", -999) >= 12:
                         # Daniel 00:44: "Gold am Anfang fuer Holz ausgeben, bis das erste Holz reinkommt, und noch mehr Holzfaeller"
                         # - 5 Holz fuer 15 Gold (L11) = ein Holzfaeller fuer einen Wartenden
@@ -1250,7 +1255,8 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
             fruehpruefung["hf_ladung"] = lad_jetzt
             # Spam endet bei HOLZ_SPAM Holzfaellern ODER mit der ersten Lieferung (E4: 19 von 20 - die Steinbrueche kamen nie)
             spam_offen = bool(HOLZ_SPAM) and hf_jetzt < HOLZ_SPAM and "holz_geliefert" not in fruehpruefung
-            if HOLZ_KAUFEN and not endspiel["fertig"] and st.get("feuer", 0) >= 4 and st["holz"] < 5 \
+            holz_unterwegs = sum(e.get("ladung", 0) for e in L.values() if e["besitzer"] == SP and e["typ"] == 3 and e.get("ladung", 0) > 0)
+            if HOLZ_KAUFEN and not endspiel["fertig"] and st.get("feuer", 0) >= 4 and st["holz"] + holz_unterwegs < 5 \
                     and st["gold"] >= 60 + wirt.ruecklage(G)["gold"] and st["t"] - fruehpruefung.get("holz_gekauft", -999) >= 100:
                 # v17 (22:57): untaetige Bauern bringen 0 - 5 Holz fuer 15 Gold (L11) = ein Arbeitsplatz; in jeder Bauweise
                 fruehpruefung["holz_gekauft"] = st["t"]
