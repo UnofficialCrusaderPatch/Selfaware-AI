@@ -810,7 +810,8 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
 
     def holz_verwerten(st, L, G):
         """Altes Lager: Holz verkaufen, solange Gold das Anwerben bremst (Daniel 06.10. 19:33, vorerst); sonst Holzfaeller."""
-        if gold_bremst(st, G):
+        if gold_bremst(st, G) and not V14:
+            # v14+ nicht: E4 (23:06) verkaufte so beim Lagerumzug bei Tick 353 Startholz - am Anfang wird nicht angeworben
             befehl({"spielbefehl": {"nr": 38, "werte": [1, WAREN_NR["holz"]]}}, 1.0, bis="SPIELBEFEHL")
             ausbau.messer.verkauft("holz")
             return "verkauft", "Gold bremst das Anwerben"
@@ -933,7 +934,17 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                 schreib(BUCH.stand(G, st))
             hf_jetzt = sum(1 for g in G.values() if g["besitzer"] == SP and g["typ"] == 3) + \
                 sum(1 for a in BUCH.offen if a["typ"] == 3)
-            spam_offen = bool(HOLZ_SPAM) and hf_jetzt < HOLZ_SPAM
+            # E4: erste ECHTE Holzlieferung = ein Holzfaeller (Typ 3) gibt Ladung ab (Lagebild), nicht "Holz im Lager steigt"
+            # (23:06: der Kauf "Holz fuer B" bei Tick 1.190 galt als Lieferung)
+            lad_jetzt = {n: e.get("ladung", 0) for n, e in L.items() if e["besitzer"] == SP and e["typ"] == 3}
+            lad_vor = fruehpruefung.get("hf_ladung", {})
+            if "holz_geliefert" not in fruehpruefung and any(lad_vor.get(n, 0) > l for n, l in lad_jetzt.items()):
+                fruehpruefung["holz_geliefert"] = st["t"]
+                ereignis.append("ERSTE HOLZLIEFERUNG bei Tick %d (Holzfaeller gibt Ladung ab; Holzfaeller %d, Holz %d)" % (
+                    st["t"], hf_jetzt, st["holz"]))
+            fruehpruefung["hf_ladung"] = lad_jetzt
+            # Spam endet bei HOLZ_SPAM Holzfaellern ODER mit der ersten Lieferung (E4: 19 von 20 - die Steinbrueche kamen nie)
+            spam_offen = bool(HOLZ_SPAM) and hf_jetzt < HOLZ_SPAM and "holz_geliefert" not in fruehpruefung
             if V14 and spam_offen and not endspiel["fertig"]:
                 # E3: so viele Holzfaeller wie das Holz hergibt (ueber der B-Ruecklage), naechste zum Lager, mehrere je Baum
                 holz = st["holz"] - wirt.ruecklage(G)["holz"]
@@ -951,15 +962,8 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                         break
                     holz -= 5
                     hf_jetzt += 1
-            # E4 (Daniel 23:03: "wenn die ersten 20 Holzfaeller Holz geladen haben, direkt Steinbrueche, so viele wie geht"):
-            # erste Holzlieferung = Holz im Lager steigt nach dem Startholz (ab Tick 700) um >= 2 ohne Kauf in dieser Runde
-            if ("holz_vorher" in fruehpruefung and "holz_geliefert" not in fruehpruefung and st["t"] > 700
-                    and st["holz"] >= fruehpruefung["holz_vorher"] + 2 and st["t"] - fruehpruefung.get("holz_gekauft", -999) > 60):
-                fruehpruefung["holz_geliefert"] = st["t"]
-                ereignis.append("ERSTE HOLZLIEFERUNG bei Tick %d (Holz %d -> %d, Holzfaeller %d)" % (
-                    st["t"], fruehpruefung["holz_vorher"], st["holz"], hf_jetzt))
-            fruehpruefung["holz_vorher"] = st["holz"]
-            stein_frei = not spam_offen and (not STEIN_MAX or "holz_geliefert" in fruehpruefung)
+            # E4 (Daniel 23:03: "wenn die ersten 20 Holzfaeller Holz geladen haben, direkt Steinbrueche, so viele wie geht")
+            stein_frei =not spam_offen and (not STEIN_MAX or "holz_geliefert" in fruehpruefung)
             if V14 and not endspiel["fertig"] and stein_frei:
                 ereignis += v14_steinpflicht(st, G, wirt)   # vor allem anderen (Daniel 22:05); E3: erst nach dem Holz-Spam
                 if "stein_besetzt" not in fruehpruefung:
@@ -1090,7 +1094,7 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
             # Fruehabbruch (Daniel 21:55: "wenn du merkst, dass schon der Steinbruch nicht richtig gesetzt ist, muesstest du
             # eigentlich schon aufhoeren ... das sind alles verschwendete Zeiten/Versuche")
             fehlt = []
-            if not st.get("G20", 0):
+            if not st.get("G20", 0) and not HOLZ_SPAM:          # E3/E4: Steinbrueche absichtlich nach dem Holz
                 fehlt.append("kein Steinbruch")
             if [n for n in wirt.alt if n in G and G[n]["typ"] == 10 and max(abs(G[n]["x"] - BASIS_LAGER[0]), abs(G[n]["y"] - BASIS_LAGER[1])) <= 6]:
                 fehlt.append("Lager nicht umgezogen")
