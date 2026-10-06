@@ -77,7 +77,7 @@ td.z { text-align: right; white-space: nowrap; }
 
 <main>
 <header>
-  <span class="marke">Stronghold Crusader &middot; UCP3 &middot; Stand 06.10.2026, 19:05</span>
+  <span class="marke">Stronghold Crusader &middot; UCP3 &middot; Stand 06.10.2026, 19:25</span>
   <h1>Selfaware-AI Handbuch</h1>
   <p>Alles, was die Selfaware-KI bisher gelernt hat: wie sie das Spiel steuert, was gemessen ist, was nur aus dem Spielcode abgelesen ist, und was noch offen ist. Jede Zahl stammt aus einem Testlauf oder aus einer Datei; Vermutungen sind als offen markiert.</p>
   <div class="legende">
@@ -110,6 +110,7 @@ td.z { text-align: right; white-space: nowrap; }
     <tr><td>Vorrat lesen</td><td class="z">1,01 s</td><td class="z">0,034 s</td></tr>
     <tr><td>Gebaeude einer Art lesen</td><td class="z">1,01 s</td><td class="z">0,030 s</td></tr>
   </table></div>
+  <div class="merk"><b>Learning (06.10.):</b> Die Quittung sagt, dass der Befehl ausgefuehrt wurde - nicht, dass er gewirkt hat. Beim Laden kommt die Quittung im selben Tick wie der Knopfdruck, das Laden selbst erst danach; seit Einfuehrung der Quittung meldete darum jedes Laden "kein Laden erkannt" (Codex umging das im Messwerkzeug). Jetzt wartet das Laden auf die Lade-Meldung des Spiels.</div>
   <div class="merk"><b>Learning:</b> Bei Tempo 40 ist eine Sekunde 40 Spielticks. Feste Wartezeiten machten die Eroeffnung um tausende Ticks langsamer. Nie fest warten, immer auf eine Antwort oder auf eine Spielzeit.</div>
   <h3>Spielbefehle wie ein Mensch <span class="status abgelesen">abgelesen</span></h3>
   <ul>
@@ -166,7 +167,7 @@ td.z { text-align: right; white-space: nowrap; }
     <li><b>Anwerben ab 70 Gold</b> (ein Assassine kostet 70); vorher lagen 30 Gold Ruecklage obendrauf, das Gold stand meist bei 40&ndash;97 und reichte nie (gewinn_2).</li>
     <li><b>Nahrung:</b> sofort beim ersten Essen verkaufen ging schief (es kommt nach und nach an) - erst wenn alle vier Sorten da sind.</li>
     <li><b>Ochsenjoche</b> nach Daniels Regel: erster Ochse beladen unterwegs, dann sofort das zweite; liegen dann noch mehr als 8 Steine am Haufen, ein weiteres; keine Obergrenze.</li>
-    <li><b>Altes Lager nicht mit Holz abreissen</b> (Daniel 06.10.): Beim Umzug wird zuerst alles in 5er-Losen verkauft, nur ein unverwertbarer Rest von 1&ndash;4 darf verloren gehen (vorher bis zu 20). Im Trainingslauf brachte das 25 Holz = 25 Gold bei Tick 1.540&ndash;1.669; erster Assassine dort bei 3.207 (ein Lauf, noch kein Vergleich). <span class="status offen">offen</span> Mehr Holzfaeller nur, wenn sie den Ausbau beschleunigen; sonst verkaufen statt verlieren.</li>
+    <li><b>Holz wird nicht mehr verkauft</b> (Daniel 06.10.: "statt Holz verkaufen einfach mehr Holzfaeller, weil Holz kann man spaeter immer brauchen"): Wo bisher Holz verkauft wurde - Ueberschuss ueber 30 und das alte Lager vor dem Abriss -, baut der Lenker einen Holzfaeller am besten Platz; geht das gerade nicht (kein Arbeiter frei, B-Ruecklage), bleibt das Holz liegen. Nur ein Rest von 1&ndash;4 im alten Lager geht beim Abriss verloren (Codex). Vorher (Codex, 06.10.): Lagerholz in 5er-Losen verkauft, 25 Holz = 25 Gold. <span class="status gemessen">gemessen</span> holz_partie_1: kein Sieg bis 28.717, 20. Assassine erst bei 19.785 (vorher 16.013) - verzerrt durch einen Fehler (1.009 Bauversuche am selben unbebaubaren Platz, behoben). holz_partie_2 (Fehler behoben): 5 Holzfaeller statt Verkauf, 10./20. Assassine bei 16.592 / 20.190 (mit Holzverkauf: 12.446 / 16.013), Angriff erst kurz vor 28.744, kein Sieg. <b>Holzverkauf war frueh eine wichtige Goldquelle fuer die Assassinen</b> - Zielkonflikt mit "so frueh wie moeglich gewinnen", liegt Daniel zur Entscheidung vor.</li>
     <li><b>B-Plantage erst bestaetigt, wenn sie steht</b> (Codex 06.10.): ein gesendeter Baubefehl zaehlt nicht mehr als gebaut, erst das sichtbare Gebaeude; nach 50 Ticks ohne Gebaeude wird neu beauftragt. Mehrere B-Plantagen in einer Runde geben Holz und Gold nicht mehr doppelt aus. Vorher hielt eine einzige "offene" B-Plantage das Anwerben fest.</li>
     <li><b>Ertrags-Planer:</b> baut nur, was sich bis Spielende bezahlt macht; Erträge werden im Spiel gemessen (Zugang = Bestandsaenderung + Verkauf + Verbaut). Holz wird nicht gekauft, sondern mit seinem Verkaufswert gerechnet; Stein bis auf den Bedarf der naechsten Eisenmine (6) verkauft.</li>
   </ul>
@@ -230,7 +231,43 @@ td.z { text-align: right; white-space: nowrap; }
     <tr><td class="z">19</td><td>3 Siege</td><td class="z">0</td></tr>
     <tr><td class="z">20, 25, 30, 35, 40</td><td>je 3 Siege</td><td class="z">0</td></tr>
   </table></div>
-  <div class="merk"><b>Learnings:</b> (1) In <b>dieser einen Lage</b> reichen 19; 20&ndash;40 gewinnen nicht schneller (alle Siege zwischen Tick 26.186 und 26.417, also 1.700&ndash;1.900 Ticks nach dem Befehl) - groessere Gruppen verlieren nur weniger. Die 19 ist keine allgemeine Formel: Sie gilt nur fuer diese Verteidigung, diesen Weg und dieses Lord-Leben. (2) 15&ndash;17 machen viel Schaden, schaffen es aber nicht in 3.500 Ticks - "reicht nicht" und "dauert laenger" sind verschiedene Ergebnisse. (3) <span class="status gemessen">gemessen</span> Wer die Assassinen trifft, sehen wir noch nicht: KI-Einheiten stehen auf Zielart 3, ihr Ziel steht nicht im gelesenen Zielfeld (in der 20er-Messung 123.400 Schaden, 0 davon einem sichtbar zielenden Feind zuzuordnen). In den 60 Runden mit Schaden (Lauf 20/1) stand am naechsten: ihr Lord 28-mal (meist 2&ndash;10 Felder), ein Bogenschuetze 17-mal, ein Speertraeger 9-mal, ein Assassine 4-mal - Naehe ist aber noch kein Beleg, wer getroffen hat. <span class="status offen">offen</span> Das echte Zielfeld der KI-Einheiten im Spielspeicher finden; erst dann ist "wer stoert wirklich" messbar. (4) <span class="status offen">offen</span> Warum ihr Lord in den ganzen Partien mit 75.000 Leben gemeldet wird und hier mit 150.000.</div>
+  <div class="merk"><b>Learnings:</b> (1) In <b>dieser einen Lage</b> reichen 19; 20&ndash;40 gewinnen nicht schneller (alle Siege zwischen Tick 26.186 und 26.417, also 1.700&ndash;1.900 Ticks nach dem Befehl) - groessere Gruppen verlieren nur weniger. Die 19 ist keine allgemeine Formel: Sie gilt nur fuer diese Verteidigung, diesen Weg und dieses Lord-Leben. (2) 15&ndash;17 machen viel Schaden, schaffen es aber nicht in 3.500 Ticks - "reicht nicht" und "dauert laenger" sind verschiedene Ergebnisse. (3) Codex sah keinen Feind auf einen Assassinen zielen, weil das gelesene Zielfeld (+926) nur Spielerbefehle enthaelt; KI-Einheiten stehen auf Zielart 3. Siehe "Wer trifft wirklich?". (4) <span class="status offen">offen</span> Warum ihr Lord in den ganzen Partien mit 75.000 Leben gemeldet wird und hier mit 150.000.</div>
+  <h3>Wer trifft wirklich? <span class="status gemessen">gemessen</span></h3>
+  <p><code>zielfeld_suchen.py</code> haelt das Spiel an, sobald ein Assassine Leben verliert, liest die ganze Einheit (1.168 Byte) aller Feinde im Umkreis 45 und sucht jedes Feld, das auf den Getroffenen zeigt. Vorher festgelegt: Ein Feld zaehlt nur, wenn es auf Getroffene zeigt und nicht auf Unbeteiligte. Trainingsstand, 20 Assassinen, 12 Schadens-Momente:</p>
+  <div class="tab"><table>
+    <tr><th>Feld</th><th>Bedeutung</th><th>Befund</th></tr>
+    <tr><td><code>+0x33E</code> (830) bei Feinden</td><td>wen er gerade im Nahkampf schlaegt (attackedUnitID)</td><td>16-mal auf den Getroffenen, 0-mal auf Unbeteiligte - alle 16 waren Speertraeger 0&ndash;2 Felder neben ihm</td></tr>
+    <tr><td><code>+0x3AE</code> (942) beim Opfer</td><td>wie viele ihn gerade schlagen (attackedBy)</td><td>1 &rarr; 3 &rarr; 2, deckt sich genau mit den Speertraegern, die auf ihn zeigen</td></tr>
+    <tr><td>Bogenschuetzen</td><td>kein Zielfeld gefunden</td><td>ihr +0x33E steht immer auf 0; die anderen Treffer waren Zufall (Laufziel-Koordinate 242 = Nummer des Assassinen 242)</td></tr>
+  </table></div>
+  <p>Beide Felder stehen jetzt im Lagebild jeder Runde (<code>nahziel</code>, <code>nahangreifer</code>; Modul <code>logik.lua</code>). Vier der Treffer hatten keinen Nahkampfgegner: Assassinen 6&ndash;12 Felder vor Bogenschuetzen - vermutlich Pfeile. <span class="status offen">offen</span> Das Zielfeld der Fernkaempfer (vermutlich am Geschoss, nicht an der Einheit).</p>
+  <h3>Bedarf aus gemessenen Lagen statt fester Zahl <span class="status gemessen">gemessen</span></h3>
+  <p>Daniel 06.10.: nicht pauschal 40 sammeln; jede Einheit, jedes Gebaeude und das Gelaende kann Einfluss haben; keine Formel aus Lord-Leben oder Fern/Nah-Zahl; Zeit ist kritisch. Darum vergleicht <code>bedrohung.py</code> die aktuelle Lage mit gemessenen Lagen (<code>daten/lagen_belegt.json</code>):</p>
+  <ul>
+    <li><b>Fingerabdruck:</b> Leben und Ort ihres Lords, alle feindlichen Einheiten nach Typ bis 15 und bis 45 Felder um ihn, ihre Gebaeude nach Typ bis 15 Felder; weiter entfernte werden nur mitgeschrieben (in der einzigen Messung war keine beteiligt - offene Annahme).</li>
+    <li><b>Belegt:</b> Ist die aktuelle Lage in keinem Wert gefaehrlicher als eine gemessene, gilt deren belegte Mindestzahl (kleinste Groesse, die selbst und alle groesseren 3 von 3 gewannen) - dazu das gemessene Gruppenleben, damit angeschlagene Assassinen nicht wie volle zaehlen.</li>
+    <li><b>Vorlaeufig:</b> Deckt keine gemessene Lage, gilt der Ersatzwert 40 und das Protokoll nennt den Grund (z. B. "einheiten 15:22: 13 statt hoechstens 12").</li>
+    <li><b>Angriff:</b> Sobald so viele leben, sammeln sie ausser Schussweite; sobald die kleinste ausreichende Gruppe (die gesuendesten zuerst) am Treffpunkt steht, greift genau sie an - Nachzuegler raiden weiter.</li>
+  </ul>
+  <p>Eingetragen ist bisher <b>eine</b> Lage (Trainingsstand T24521: 12 Bogenschuetzen, 3 Speertraeger, 3 Assassinen bis 15 Felder, Lord 150.000) mit belegter Zahl 19. Pruefungen ohne Spiel: <code>bedrohung_pruefen.py</code> 10/10 (Gegenprobe mit sabotiertem Vergleich: 4 rot), <code>lordtrupp_pruefen.py</code> 10/10 (gegen den Stand davor: 7 rot). Im Spiel aus dem Trainingsstand: Bedarf "19 belegt", 43 sammeln, 19 greifen an, 25 raiden weiter, <b>Sieg bei Tick 26.482</b>, 6 Verluste.</p>
+  <h3>Zweite Lage: die ganze Partie <span class="status gemessen">gemessen</span></h3>
+  <p>Ganze Partie ab Tick 0 im Trainingsmodus (<code>trainingsstand_ab=25</code>): gesichert bei Tick 19.596 mit 26 Assassinen am Treffpunkt (bis 15 Felder um ihren Lord: 40 Bauern, 14 Bogenschuetzen, 3 Speertraeger, 3 Assassinen). Je 3 Laeufe:</p>
+  <div class="tab"><table>
+    <tr><th class="z">Assassinen</th><th>Ergebnis</th><th class="z">Lord-Leben am Ende</th></tr>
+    <tr><td class="z">10</td><td>alle tot</td><td class="z">120.200&ndash;145.300</td></tr>
+    <tr><td class="z">15</td><td>alle tot</td><td class="z">41.700&ndash;81.700</td></tr>
+    <tr><td class="z">20</td><td>3 Siege (8&ndash;11 ueberleben)</td><td class="z">0</td></tr>
+    <tr><td class="z">25</td><td>3 Siege (14&ndash;16 ueberleben)</td><td class="z">0</td></tr>
+  </table></div>
+  <p>Belegt: 20 (16&ndash;19 nicht gemessen). Ganze Partien mit dem neuen Bedarf:</p>
+  <div class="tab"><table>
+    <tr><th>Partie</th><th>Stand</th><th>Ergebnis</th><th>Angriff</th></tr>
+    <tr><td>bedarf_partie_1</td><td>Sammeln erst ab Bedarf (40)</td><td>kein Angriff, Zeit um</td><td>durch Raid-Verluste nie 40 gleichzeitig am Leben (34 Tote)</td></tr>
+    <tr><td>bedarf_partie_2</td><td>Sammeln ab 20</td><td>kein Angriff, Zeit um</td><td>Sammeln erst ab 23.994 (vorher unter 20), hoechstens 27 da</td></tr>
+    <tr><td>bedarf_partie_3</td><td>+ zweite Lage eingetragen</td><td><b>Sieg 26.015</b></td><td>40 (vorlaeufig) ab 24.219, 3 Verluste im Angriff, 4 Nachzuegler raiden weiter</td></tr>
+  </table></div>
+  <div class="merk"><b>Learnings:</b> (1) Sammeln ab dem Bedarf geht schief, wenn der Bedarf hoeher ist, als durch die Raid-Verluste je gleichzeitig lebt - darum Sammeln wieder spaetestens ab 20. (2) Ob 20 Lebende rechtzeitig zusammenkommen, kippt an Kleinigkeiten: In Codex' Partien ab ~17.600, in bedarf_partie_2 erst ab 23.994 (zwischen 16.000 und 24.000 starben 30 beim Raiden nahe ihrer Burg). <span class="status offen">offen</span> Nicht weiter raiden, wenn nur noch gefaehrliche Ziele uebrig sind. (3) In bedarf_partie_3 deckte keine der zwei Lagen die echte Lage beim Angriff; der Grund wird seitdem beim Sammeln und Angriff mitgeschrieben.</div>
+  <div class="merk"><b>Learnings:</b> (1) Der Fingerabdruck ist mit Absicht streng: Ein einziger Arbeiter mehr im 45er-Ring macht eine Lage "nicht gedeckt" - dann gilt vorlaeufig 40, bis diese Art Lage gemessen ist. Schneller wird die KI also nur mit mehr gemessenen Lagen. (2) Waehrend des Angriffs springt die Bewertung, wenn ein Arbeiter in den Ring laeuft (gemeldet, aendert den laufenden Angriff nicht).</div>
 </section>
 
 <section id="testen">
@@ -270,8 +307,9 @@ td.z { text-align: right; white-space: nowrap; }
   <h2><small>10</small>Offen</h2>
   <ul>
     <li>Stufe 2 und 3 der Assassinen-Taktik: Wachen weglocken, waehrend andere raiden; sammeln bis zur eigenen Uebermacht, dann die Wachen schlagen.</li>
-    <li><b>Als Naechstes (Daniel 06.10.):</b> ein ehrlicher Bedrohungs- und Einfluss-Fingerabdruck aus gemessenem Schaden, Weg, Sicht, Gebaeuden und Gelaende - zuerst das echte Zielfeld der KI-Einheiten lesen.</li>
-    <li><b>Als Naechstes:</b> mit der kleinsten ausreichend sicheren Truppe angreifen, nicht auf Nachzuegler warten; fuer unbekannte Lagen keine unbelegte Zahl, ein vorsichtiger Ersatzwert nur als vorlaeufig gekennzeichnet.</li>
+    <li><b>Als Naechstes:</b> mehr Lagen messen - vor allem die Lage, in der die ganze Partie wirklich angreift (dort gilt bisher nur der vorlaeufige Ersatzwert). Der Fingerabdruck soll Weg, Sicht und gemessenen Schaden (nahziel/nahangreifer) einbeziehen, sobald mehrere Lagen vorliegen.</li>
+    <li>Zielfeld der Fernkaempfer finden (Pfeile).</li>
+    <li><b>Daniel 06.10.:</b> so frueh wie moeglich gewinnen. Testpartie gegen eine leere KI: wie kommt man am schnellsten auf 10.000 Gold, auf 10/20/30/40/50 Streitkolbenkaempfer, dann jede Einheit. Wirtschaft: Hopfen/Bier, Brot, Religion, positiver/negativer Angstfaktor.</li>
     <li><b>Als Naechstes:</b> erster Assassine frueher (gewinn_6: 3.778, Trainingslauf: 3.207); Holz: zusaetzliche Holzfaeller nur, wenn sie den Ausbau beschleunigen, sonst verkaufen.</li>
     <li>Eigenen Lord schuetzen: der Waechter schickt heute den Lord mit in den Kampf gegen Assassinen.</li>
     <li>Beliebtheit faellt auch mit Seasoning noch (93 &rarr; 80 bis Tick 20.000): Essen wird bis auf einen kleinen Puffer verkauft. Mehr Plantagen-Paare oder weniger verkaufen - erst messen.</li>
