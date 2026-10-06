@@ -244,6 +244,32 @@ def kosten_spiel(typ):
         _KOSTEN_SPIEL[typ] = kosten(typ)
     return _KOSTEN_SPIEL[typ]
 
+GROESSE_IST = {10: 6, 20: 6, 21: 3, 4: 2}     # tatsaechliche Flaeche: Lagerplatz = 4 Teile 3x3 (L6), Steinhaufen ~3x3
+
+def platz_sauber(typ, frei):
+    """Daniel 23:34: (1) "der Ochsenjoch-Arbeiter ist vom Vorratslager geblockt ... ein Abstand von eins wuerde helfen";
+    (2) "ein Ochsenjoch, das gebaut wurde, hat einen Mitarbeiter ueberbaut - worst case".
+    Aus den Plaetzen der Platzsuche (naechste zuerst) den ersten nehmen, auf dem keine eigene Einheit steht und - fuer Lager
+    und Joche - mit 1 Feld Gang zu Steinbruch, Steinhaufen, Joch und Lager (je nach Art). Gibt die Liste gefiltert zurueck."""
+    try:
+        L = lies_lagebild(neu_holen=False)
+        G = lies_gebaeude()
+    except Exception:
+        return frei
+    b = GROESSE_IST.get(typ, NACH_TYP[typ]["b"])
+    leute = [(e["x"], e["y"]) for e in L.values() if e["besitzer"] == SP]
+    gang_zu = {10: (20, 21, 4), 4: (10, 20)}.get(typ, ())
+    hindernis = [(gg["x"], gg["y"], GROESSE_IST.get(gg["typ"], NACH_TYP.get(gg["typ"], {"b": 3})["b"]))
+                 for gg in G.values() if gg["besitzer"] == SP and gg["typ"] in gang_zu]
+    gut = []
+    for (px, py) in frei:
+        if any(px <= ux < px + b and py <= uy < py + b for ux, uy in leute):
+            continue
+        if any(px - 1 <= hx + hb - 1 and hx <= px + b and py - 1 <= hy + hb - 1 and hy <= py + b for hx, hy, hb in hindernis):
+            continue
+        gut.append((px, py))
+    return gut
+
 def baue_schnell(typ, x, y, r, mapper=None, zweck=""):
     """Im laufenden Spiel: Platz suchen und bauen OHNE zu blockieren (04.10.: das alte Bauwerkzeug wartete fest und
     auf einen genauen Tick - bei Tempo 1000 hing die Schleife ~20.000 Ticks, der Waechter kam nie dran).
@@ -257,9 +283,11 @@ def baue_schnell(typ, x, y, r, mapper=None, zweck=""):
         if fehlt:
             BUCH.ablehnen(typ, (x, y), "fehlt " + ", ".join(fehlt))
             return None
-    z = " ".join(befehl({"platzsuche": {"spieler": SP, "mapper": g["mapper"], "groesse": g["b"], "x": x, "y": y, "r": r, "max": 1}},
-                        1.0, bis="PLATZSUCHE"))
+    z = " ".join(befehl({"platzsuche": {"spieler": SP, "mapper": g["mapper"], "groesse": g["b"], "x": x, "y": y, "r": r,
+                                        "max": 12 if BUCH is not None else 1}}, 1.0, bis="PLATZSUCHE"))
     frei = [tuple(map(int, p)) for p in re.findall(r"\((\d+),(\d+)\)", z.split("geprueft:")[-1])]
+    if BUCH is not None and frei:
+        frei = platz_sauber(typ, frei)
     if not frei:
         if BUCH is not None:
             BUCH.ablehnen(typ, (x, y), "kein Platz im Umkreis %d" % r)
