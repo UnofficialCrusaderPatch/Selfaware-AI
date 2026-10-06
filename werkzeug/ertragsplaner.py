@@ -552,7 +552,8 @@ class Ertragsplaner:
                 # Steuer unabhaengig von der Beliebtheit (updateTaxing: Stufe x Koepfe, je Monat ~800 Ticks). ABER Lauf 26:
                 # Beliebtheit 0 -> Massen-Wegzug (Liga gathering_rate -40 bei 0-4), 50 -> 4 Leute, kein Kaempfer. Darum Grenze
                 # (Knopf kasse_grenze): darunter Stufe 2 (keine Steuer, +1/Monat) - Beliebtheit ist ein Vorrat, keiner der nachwaechst
-                neu = 11 if bel >= getattr(self, "kasse_grenze", 50) else 2
+                # Stufe als Knopf (Daniel 01:03 "nicht -40, damit die Kurve nicht so schnell ist, dann laenger laufen lassen")
+                neu = getattr(self, "kasse_stufe", 11) if bel >= getattr(self, "kasse_grenze", 50) else 2
             elif getattr(self, "wachstum", False):
                 # Daniel 00:38 "die Steuer wird schon VIEL zu frueh genommen" (Lauf 40: Stufe 7 im Wachstum, dann steuer_ende
                 # Stufe 11 bei 29/34 Leuten -> Beliebtheit 28, Zuzug weg, bei 38 stehen geblieben): bis zur Ziel-Bevoelkerung
