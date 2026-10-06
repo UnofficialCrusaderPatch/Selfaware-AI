@@ -1098,10 +1098,34 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                 # Daniel 00:40: "ohne ausreichend Holzfaeller werden niemals 70 erreicht, da maximal 24 Leute im Pennerhof sind" -
                 # am Lagerfeuer warten hoechstens 24, dann zieht niemand mehr zu. Wartende bekommen sofort Arbeit: der billigste
                 # Arbeitsplatz ist der Holzfaeller (3 Holz, 1 Arbeiter, liefert Holz fuer Huetten und Verkauf)
+                # 00:44 (Daniel "er baut immer noch keine Holzfaeller"; Lauf 42: 2 Stueck, bei Tick 6.122 lagen 39 Holz bei 19
+                # Wartenden): nicht ueber holzfaeller_statt_verkauf (haelt Holz fuer den "besten Bau" zurueck, Entfernungsgrenze),
+                # sondern direkt: naechster Baum-Platz des Planers, sonst ein geplanter Holzfaeller-Platz; jede Absage mit Grund
+                R_w = wirt.ruecklage(G)
                 if st.get("feuer", 0) >= 2 and not any(a["typ"] == 3 for a in BUCH.offen):
-                    ort_w, text_w = ausbau.holzfaeller_statt_verkauf(st, L, G)
-                    if ort_w:
-                        ereignis.append("WACHSTUM Holzfaeller fuer %d Wartende bei %s (%s)" % (st.get("feuer", 0), ort_w, text_w))
+                    if st["holz"] - R_w["holz"] >= kosten_spiel(3)["holz"]:
+                        ort_w, weg_w = ausbau._bester_ort(3, L, G)
+                        plaetze_w = [ort_w] if ort_w else [tuple(q) for q in v16_holzfaeller(plan) if not steht_bei(G, 3, tuple(q), 1)]
+                        if plaetze_w:
+                            o_w = baue_schnell(3, plaetze_w[0][0], plaetze_w[0][1], 3, zweck="Wachstum")
+                            if not o_w and ort_w:
+                                ausbau.fehlschlag[(3, ort_w)] = ausbau.fehlschlag.get((3, ort_w), 0) + 1
+                            ereignis.append("WACHSTUM Holzfaeller fuer %d Wartende bei %s (Weg %s): %s" % (
+                                st["feuer"], plaetze_w[0], weg_w, o_w))
+                        elif runde % 20 == 0:
+                            ereignis.append("WACHSTUM kein Holzfaeller-Platz (Planer und Plan leer) bei %d Wartenden" % st["feuer"])
+                    elif HOLZ_KAUFEN and st["gold"] - R_w["gold"] >= 15 and st["t"] - fruehpruefung.get("holz_gekauft_w", -999) >= 12:
+                        # Daniel 00:44: "Gold am Anfang fuer Holz ausgeben, bis das erste Holz reinkommt, und noch mehr Holzfaeller"
+                        # - 5 Holz fuer 15 Gold (L11) = ein Holzfaeller fuer einen Wartenden
+                        lose_w = int(min((st["gold"] - R_w["gold"]) // 15, max(1, st["feuer"] // 2)))
+                        sende({"befehle": [{"player": 1, "id": neue_id(), "spielbefehl": {"nr": 38, "werte": [0, WAREN_NR["holz"]]}}
+                                           for _ in range(lose_w)]}, 1.0, bis="SPIELBEFEHL")
+                        fruehpruefung["holz_gekauft_w"] = st["t"]
+                        ereignis.append("WACHSTUM Holz gekauft: %d Lose fuer %d Wartende (Holz %d, Gold %d)" % (
+                            lose_w, st["feuer"], st["holz"], st["gold"]))
+                    elif runde % 20 == 0:
+                        ereignis.append("WACHSTUM wartet: %d am Feuer, Holz %d (Ruecklage %d), Gold %d (Ruecklage %d)" % (
+                            st["feuer"], st["holz"], R_w["holz"], st["gold"], R_w["gold"]))
                 frei_w = st.get("platz", 0) - st.get("leute", 0)
                 if st.get("platz", 0) < BEV_ZIEL and frei_w <= 4 and st["holz"] >= kosten_spiel(1)["holz"]                         and not any(a["typ"] == 1 for a in BUCH.offen):
                     ereignis.append("WACHSTUM Huette (Platz %d, Ziel %d, frei %d): %s" % (st.get("platz", 0), BEV_ZIEL, frei_w, baue_haus()))
