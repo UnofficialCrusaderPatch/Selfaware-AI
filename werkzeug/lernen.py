@@ -231,6 +231,16 @@ def main():
         print("LERNEN Ergebnis Lauf %d: Note %d (%s)%s | Nachschau %s" % (
             r["nr"], r["note"], r["art"], "" if r["vergleich"] is None else ", %+d gegen Lauf %d" % (r["vergleich"]["differenz"], beste["nr"]),
             {k: v for k, v in r["nachschau"].items() if v}), flush=True)
+        ns_r = r.get("nachschau", {})
+        w_r = []
+        if ns_r.get("bau_wieder_abgerissen"):
+            w_r.append("%d eigene Bauten binnen 1.000 Ticks wieder abgerissen" % ns_r["bau_wieder_abgerissen"])
+        if ns_r.get("fehlversuche", 0) > 20:
+            w_r.append("%d gescheiterte/abgelehnte Befehle (Schleife?)" % ns_r["fehlversuche"])
+        if ns_r.get("holz_liegt_bauern_warten", 0) > 0.1 * max(1, ns_r.get("ticks", 1)):
+            w_r.append("Holz lag %d Ticks, waehrend >= 2 Bauern warteten" % ns_r["holz_liegt_bauern_warten"])
+        if w_r:
+            print("LERNEN WIDERSPRUCH Lauf %d: %s" % (r["nr"], "; ".join(w_r)), flush=True)
         if beste is None or r["note"] < beste["note"]:
             beste = r
             print("LERNEN neue beste Strategie (Lauf %d)" % r["nr"], flush=True)
