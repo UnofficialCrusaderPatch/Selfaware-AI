@@ -142,7 +142,11 @@ def phase1(plan, tempo, mit_posten=True):
     # Ochsenjoch, Huetten) an festen Plaetzen; sobald das Essen da ist verkaufen, Posten, Assassine; dann die Apfelplantagen
     # (die kosten Gold). Kontrolle einmal, waehrend wir sowieso aufs Essen warten.
     A, B = apfel_gruppen(plan["aepfel"])
-    if V14:
+    if V14 and HOLZ_SPAM:
+        # E3 (Daniel 22:57: "als Spieler erstmal alle Baeume vollspammen im Umkreis vom Vorratslager"): das Startholz zuerst in
+        # Holzfaeller - Steinbrueche/Joche erst, wenn HOLZ_SPAM Holzfaeller stehen (Phase 2)
+        holz_bauten = [(19, tuple(plan["kornspeicher"])), (26, MARKT)] + [(3, tuple(p)) for p in v16_holzfaeller(plan)]
+    elif V14:
         # Daniel 22:05: "zwei Steinbrueche direkt neben dem Vorratslager, sofort gebaut, wenn die Ressourcen da sind" -
         # vor den Holzfaellern (die Reihenfolge entscheidet, was beim ersten Holz (30 bei Tick 120) noch geht)
         holz_bauten = [(19, tuple(plan["kornspeicher"])), (26, MARKT)] + [(20, q) for q in V14["brueche"]] + \
@@ -393,6 +397,7 @@ HF_MAX = None            # v16: Holzfaeller nur bis so viele Felder vom neuen La
 JE_ARBEITER = False      # v16: Planer bewertet Gewinn je Arbeiter (Bauern sind der Engpass, L7)
 HUETTEN_JE_BAUM = None   # v17: bis zu so viele Holzfaeller je Baum (Daniel 22:57); None = alte Regel (einer je Baum, 7 Felder Sperre)
 HOLZ_KAUFEN = False      # v17: Holz kaufen, wenn >= 4 Bauern untaetig sind und Holz fehlt
+HOLZ_SPAM = 0            # E3: erst so viele Holzfaeller rund ums Lager, dann Steinbrueche und Leder
 
 def v16_holzfaeller(plan):
     """Plan-Holzfaeller nach Abstand zum neuen Lager, ohne die jenseits von HF_MAX."""
@@ -914,8 +919,28 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
             ereignis += BUCH.abgleich(G, L, st)            # jeder Bau bestaetigt oder gescheitert, jede Belegung
             if runde % 10 == 1:
                 schreib(BUCH.stand(G, st))
-            if V14 and not endspiel["fertig"]:
-                ereignis += v14_steinpflicht(st, G, wirt)   # vor allem anderen (Daniel 22:05)
+            hf_jetzt = sum(1 for g in G.values() if g["besitzer"] == SP and g["typ"] == 3) + \
+                sum(1 for a in BUCH.offen if a["typ"] == 3)
+            spam_offen = bool(HOLZ_SPAM) and hf_jetzt < HOLZ_SPAM
+            if V14 and spam_offen and not endspiel["fertig"]:
+                # E3: so viele Holzfaeller wie das Holz hergibt (ueber der B-Ruecklage), naechste zum Lager, mehrere je Baum
+                holz = st["holz"] - wirt.ruecklage(G)["holz"]
+                for _ in range(3):
+                    if holz < 5 or hf_jetzt >= HOLZ_SPAM:
+                        break
+                    ort, w = ausbau._bester_ort(3, L, G)
+                    if ort is None:
+                        ereignis.append("HOLZ-SPAM: kein Platz mehr (%d Holzfaeller)" % hf_jetzt)
+                        break
+                    o = baue_schnell(3, ort[0], ort[1], 1, zweck="E3 Holz-Spam")
+                    ereignis.append("HOLZ-SPAM %d/%d bei %s (Weg %d): %s" % (hf_jetzt + 1, HOLZ_SPAM, ort, w, o))
+                    if not o:
+                        ausbau.fehlschlag[(3, ort)] = ausbau.fehlschlag.get((3, ort), 0) + 1
+                        break
+                    holz -= 5
+                    hf_jetzt += 1
+            if V14 and not endspiel["fertig"] and not spam_offen:
+                ereignis += v14_steinpflicht(st, G, wirt)   # vor allem anderen (Daniel 22:05); E3: erst nach dem Holz-Spam
                 if "stein_besetzt" not in fruehpruefung:
                     voll = all(BUCH.hat.get(n, 0) >= ARBEITER_JE[typ] for typ, orte in ((20, V14_PLAN["brueche"]), (4, V14_PLAN["joche"]))
                                for o in orte for n in (steht_bei(G, typ, o) or [None]))
@@ -995,7 +1020,7 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
             # v14-Fruehabbruch (Daniel 22:05: "ich brauche nicht noch einen Run, wo nicht zwei Steinbrueche direkt neben dem
             # Vorratslager sind"): nach dem Holz-Zeitplan stehen beide Steinbrueche + Joche bei ~350 (30 Holz bei 120,
             # +28 je 110 Ticks; Kornspeicher 5, Steinbruch 25, A-Plantagen 9, Joch 5, Steinbruch 25, Joch 5)
-            if st["t"] >= V14_STEIN_BIS and not fruehpruefung.get("stein"):
+            if st["t"] >= V14_STEIN_BIS and not fruehpruefung.get("stein") and not HOLZ_SPAM:   # E3: Steinbrueche absichtlich spaeter
                 fehlt = ["%s %s" % (NACH_TYP[typ]["name"], o) for typ, o in [(20, q) for q in V14_PLAN["brueche"]] +
                          [(4, j) for j in V14_PLAN["joche"]] if not steht_bei(G, typ, o)]
                 if fehlt:
@@ -1059,7 +1084,8 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
             schreib("FRUEHABBRUCH bei Tick %d: %s" % (st["t"], endspiel["abbruch"]))
             break
         if streitkolben:
-            if leder is not None and not endspiel["fertig"]:
+            if leder is not None and not endspiel["fertig"] and not (BUCH is not None and HOLZ_SPAM and
+                    sum(1 for g in G.values() if g["besitzer"] == SP and g["typ"] == 3) < HOLZ_SPAM):
                 ereignis += leder.schritt(st, G, wirt)
             ereignis += bilanz_schritt(st, L, G, ausbau, streitkolben, endspiel, runde, kaempfer_marken)
             if not endspiel["fertig"] and weg != "bilanz":     # weg=bilanz: nur Wirtschaft + Bilanz-Endspiel (v5)
@@ -1134,6 +1160,8 @@ def main():
     global HF_VORAB, STEIN_ZUERST, HF_MAX, JE_ARBEITER, UMZUG, EXPERIMENT, HUETTEN_JE_BAUM, HOLZ_KAUFEN
     HUETTEN_JE_BAUM = int(arg["holzfaeller_je_baum"]) if arg.get("holzfaeller_je_baum") else None
     HOLZ_KAUFEN = arg.get("holz_kaufen", "nein") == "ja"
+    global HOLZ_SPAM
+    HOLZ_SPAM = int(arg.get("holz_spam", 0))
     UMZUG = arg.get("umzug", "nachb")
     EXPERIMENT = arg.get("experiment", "nein") == "ja"
     if arg.get("holzfaeller_vorab"):
