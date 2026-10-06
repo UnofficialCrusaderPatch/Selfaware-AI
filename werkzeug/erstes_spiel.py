@@ -761,6 +761,10 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
     if trupp is not None:
         trupp.gelaende = list(_KARTE)   # einmal im Angriffsprotokoll: Gelände darf als Einfluss nicht vorab verschwinden
     lernlog = os.path.join(D, "ertrag_live_%s_i%d.jsonl" % (time.strftime("%Y%m%d_%H%M%S"), INSTANZ))   # je Instanz: Serien laufen parallel
+    # Daniel 22:39: jede Runde die ganze Lage (jede Einheit, jedes Gebaeude der Karte) - abfragbar mit lageprotokoll.py
+    from lageprotokoll import Lageprotokoll
+    lage = Lageprotokoll(os.path.join(D, "lage_%s_i%d.jsonl.gz" % (time.strftime("%Y%m%d_%H%M%S"), INSTANZ)))
+    schreib("Lageprotokoll (jede Runde komplett): %s" % lage.pfad)
     ausbau = Ertragsplaner(plan, SP, baue_schnell, wirt, s32(peek(PD + 0x2188)[0]), ende=bis_tick, protokoll=lernlog, wegtest=wegtest)   # lernt im Spiel (Daniel 19:44)
 
     def gold_bremst(st, G):
@@ -840,6 +844,8 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
         tz = time.time()
         befehlskanal.belege()
         st, L, G = runde_lesen()
+        if st:
+            lage.schreibe(st)
         tz = uhr("lesen", tz)
         if bis_tick and st.get("t", 0) >= bis_tick:
             break
