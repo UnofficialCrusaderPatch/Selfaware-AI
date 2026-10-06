@@ -183,7 +183,7 @@ class Wirtschaft:
                         # neue Plantage nach der Dreiecksregel weiterhin hoechstens 30 Felder von mindestens einer
                         # A-Plantage liegt. Damit bleibt der gemessene Baum-Suchradius garantiert erhalten.
                         spielraum = max(2, SUCHRADIUS_BAUER - min((schach(o, a) for a in self.A), default=SUCHRADIUS_BAUER - 2))
-                        ort = self.baue_schnell(APFEL, o[0], o[1], spielraum)
+                        ort = self.baue_schnell(APFEL, o[0], o[1], spielraum, zweck="B")
                         if ort is not None:
                             self.B_erwartet[o] = (tuple(ort), t)
                             ev.append("Seasoning: B %s bestellt bei %s" % (o, tuple(ort)))

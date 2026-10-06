@@ -235,6 +235,7 @@ def haus_noetig(l, b):
     bedarf = sum(ARBEITER_JE[t] * k for t, k in b.items())
     return bedarf, bedarf > l["platz"]
 
+RESERVIERT = []      # 07.10. (Lauf 29): B-Plantagen-Flaechen (x0, y0, x1, y1 einschliesslich, Anker) - kein anderer Bau darf hinein
 BUCH = None          # Auftragsbuch (phase2): jeder Bau wird vorher gegen den Bestand geprueft und danach bestaetigt
 _KOSTEN_SPIEL = {}
 
@@ -246,7 +247,7 @@ def kosten_spiel(typ):
 
 GROESSE_IST = {10: 6, 20: 6, 21: 3, 4: 2}     # tatsaechliche Flaeche: Lagerplatz = 4 Teile 3x3 (L6), Steinhaufen ~3x3
 
-def platz_sauber(typ, frei):
+def platz_sauber(typ, frei, eigen=None):
     """Daniel 23:34: (1) "der Ochsenjoch-Arbeiter ist vom Vorratslager geblockt ... ein Abstand von eins wuerde helfen";
     (2) "ein Ochsenjoch, das gebaut wurde, hat einen Mitarbeiter ueberbaut - worst case".
     Aus den Plaetzen der Platzsuche (naechste zuerst) den ersten nehmen, auf dem keine eigene Einheit steht und - fuer Lager
@@ -274,6 +275,13 @@ def platz_sauber(typ, frei):
     for (px, py) in frei:
         if any(px <= ux < px + b and py <= uy < py + b for ux, uy in leute):
             continue
+        # Lauf 29: ein Holzfaeller (kausal) stand bei (89,236) auf dem Platz der B-Plantage oben -> B oben wich auf B Mitte aus,
+        # B Mitte auf B unten, B unten fand 43-mal keinen Platz. Reservierte B-Flaechen sind tabu, ausser fuer ihr eigenes B
+        # fremde Bauten mit 1 Feld Rand; die B untereinander nur mit ihrer Flaeche (sie beruehren sich an den Ecken)
+        rand = 0 if eigen is not None else 1
+        if any(px <= r[2] + rand and px + b - 1 >= r[0] - rand and py <= r[3] + rand and py + b - 1 >= r[1] - rand
+               for r, anker in RESERVIERT if anker != eigen):
+            continue
         if any(px - 1 <= hx + hb - 1 and hx <= px + b and py - 1 <= hy + hb - 1 and hy <= py + b for hx, hy, hb in hindernis):
             continue
         gut.append((px, py))
@@ -296,7 +304,7 @@ def baue_schnell(typ, x, y, r, mapper=None, zweck=""):
                                         "max": 12 if BUCH is not None else 1}}, 1.0, bis="PLATZSUCHE"))
     frei = [tuple(map(int, p)) for p in re.findall(r"\((\d+),(\d+)\)", z.split("geprueft:")[-1])]
     if BUCH is not None and frei:
-        frei = platz_sauber(typ, frei)
+        frei = platz_sauber(typ, frei, eigen=(x, y) if zweck == "B" else None)
     if not frei:
         if BUCH is not None:
             BUCH.ablehnen(typ, (x, y), "kein Platz im Umkreis %d" % r)
@@ -950,6 +958,8 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
             plan["lager"] = list(BASIS_LAGER)   # Planer misst Wege zum Lager am Bergfried
         schreib("Versuch: Umzug %s, Experiment (ohne Tempo-Regel) %s" % (UMZUG, EXPERIMENT))
         ausbau.ohne, ausbau.sperr = ({3, 5, 7, 20, 32} if STEIN_ZUERST else {20}), v14_sperrflaechen()
+        RESERVIERT[:] = [((x, y, x + 9, y + 9), (x, y)) for x, y in (tuple(o) for o in wirt.B)]   # Apfelplantage 10x10
+        ausbau.sperr = ausbau.sperr + [(r[0] - 1, r[1] - 1, r[2] + 1, r[3] + 1) for r, _ in RESERVIERT]
         hf_spaeter = [tuple(p) for p in v16_holzfaeller(plan)[HF_VORAB:]] if HF_VORAB is not None else []
         ausbau.holz_max, ausbau.je_arbeiter = HF_MAX, JE_ARBEITER
         ausbau.huetten_je_baum = HUETTEN_JE_BAUM
