@@ -1271,8 +1271,8 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                 if opfer:
                     # das Modul erwartet eine LISTE von Nummern (aufloesen_ersetzen.py; Lauf 61: einzelne Nummer -> "0 Einheiten")
                     befehl({"aufloesen": {"nr": [int(n) for n in opfer[:12]]}}, 1.0)
-                    ereignis.append("AUFGELOEST %d Soldaten fuer %d offene Arbeitsplaetze (Typen %s) -> Bauern" % (offene_a, 
-                        len(opfer[:12]), sorted({L[n]["typ"] for n in opfer[:12]})))
+                    ereignis.append("AUFGELOEST %d Soldaten fuer %d offene Arbeitsplaetze (Typen %s) -> Bauern" % (len(opfer[:12]), offene_a, 
+                        sorted({L[n]["typ"] for n in opfer[:12]})))
             ausbau.nach_abriss = bool(endspiel["fertig"])
             if runde % 10 == 1:
                 schreib(BUCH.stand(G, st))
