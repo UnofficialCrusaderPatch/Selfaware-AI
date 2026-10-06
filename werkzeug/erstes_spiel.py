@@ -100,14 +100,15 @@ def gefecht_starten(tempo):
     kanal.sende({"player": SP, "pause": False}, 0.5)
     if LEERE_KI:
         # Daniel 06.10.: Testpartie gegen eine leere KI (ohne Gegner endet das Gefecht sofort als Sieg, gemessen).
-        # Erst NACH dem Aufheben der Pause senden - pausiert nimmt das Modul im Hauptmenue keine Befehle an (gemessen).
-        z = kanal.sende({"player": SP, "leereKI": [2]}, 3.0, bis="LEERE KI")
+        # Als Befehlsliste: im Hauptmenue reicht der UCP-Haken (villagestudio init.lua) nur bestimmte Befehle und Listen
+        # an die Logik durch, einen einzelnen leereKI-Befehl verwirft er still (gemessen 06.10.: keine Quittung).
+        z = kanal.sende({"befehle": [{"player": SP, "id": kanal.neue_id(), "leereKI": [2]}]}, 3.0, bis="LEERE KI")
         if not any("LEERE KI" in x for x in z):
             raise SystemExit("LEERE KI nicht bestaetigt: %s" % z[-3:])
         schreib("LEERE KI: Spieler 2 ohne Waren und Gold (jede Runde)")
     else:
         # der Modulzustand ueberdauert das Gefecht - sonst haette die naechste normale Partie eine leere Rotkaeppchen
-        kanal.sende({"player": SP, "leereKI": False}, 3.0, bis="LEERE KI")
+        kanal.sende({"befehle": [{"player": SP, "id": kanal.neue_id(), "leereKI": False}]}, 3.0, bis="LEERE KI")
     saat = saat_laden()
     zeilen = kanal.sende(dict(LIGA_GEFECHT, **({"saat": saat} if saat else {})), 4, bis="LaunchSkirmishGame zurueck")
     gelesen = saat_lesen(zeilen)
