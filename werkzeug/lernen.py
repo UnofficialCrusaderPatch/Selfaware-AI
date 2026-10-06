@@ -48,7 +48,7 @@ KNOEPFE = {
     "bevoelkerung_ziel": [70, 80, 90, 60, 50, 0],     # Reihenfolge = Testfolge (naechste nimmt den ersten ungespielten)
     "kasse_grenze": [50, 35, 25, 0],
     "penner": [2, 20, 12],
-    "kasse_stufe": [11, 9, 7],     # Daniel 01:03: flachere Kurve, laenger laufen lassen     # Wachstums-Holzfaeller ab so vielen Wartenden (Daniel 00:54: Platz fuer Penner lassen)   # 0 = immer -40 ab Kasse-Start (Daniel 00:51: "erst gehen nur die im Pennergraben")     # Lauf 26: Beliebtheit 0 -> 50 auf 4 Leute, kein Kaempfer; Beliebtheit ist ein Vorrat
+    "kasse_stufe": [11],     # Daniel 01:04: nicht testen - gerechnet bringen 9/7 insgesamt nicht mehr Gold, nur langsamer     # Wachstums-Holzfaeller ab so vielen Wartenden (Daniel 00:54: Platz fuer Penner lassen)   # 0 = immer -40 ab Kasse-Start (Daniel 00:51: "erst gehen nur die im Pennergraben")     # Lauf 26: Beliebtheit 0 -> 50 auf 4 Leute, kein Kaempfer; Beliebtheit ist ein Vorrat
     "steuer_runter": [95, 90, 85, 80],
     "stein_max": ["nein", "ja"],
 }
@@ -62,7 +62,7 @@ TEMPO = 100      # 07.10. 00:31: 1000 getestet (Daniel 00:27) - der Lenker brauc
                  # das Tempo bestimmt, wie oft der Lenker hinsieht (bei 100 alle ~11 Ticks). Je Lauf gespeichert.
 # 23:26 (Daniel: Ochse vor Steinbruch, Lager nicht umgezogen - in der v5-Bauweise galten die alten Regeln): EIN Weg.
 # v14 ist fest; der Kreis aendert nur Werte, keine Bauweisen ("zwei Wege zum selben Ziel sind immer ein Fehler")
-HINWEISE = ["bevoelkerung_ziel", "kasse_stufe", "penner", "kasse_grenze", "kasse", "steuer_ende", "steuer_runter", "stein_max", "b_versatz"]   # 07.10.: Steuern, dritter Steinbruch     # Daniel 23:30: "Seasoning passiert immer noch zu spaet ... jede Wartezeit der Apfelbauern ist unproduktiv"
+HINWEISE = ["bevoelkerung_ziel", "penner", "kasse_grenze", "kasse", "steuer_ende", "steuer_runter", "stein_max", "b_versatz"]   # 07.10.: Steuern, dritter Steinbruch     # Daniel 23:30: "Seasoning passiert immer noch zu spaet ... jede Wartezeit der Apfelbauern ist unproduktiv"
 # welche Knoepfe zu welchem gemessenen Verlust gehoeren (Vorwissen; die Wirkung misst der Kreis selbst)
 VERLUST_KNOEPFE = {
     "wohnraum_voll": ["entscheider", "huetten_voraus", "holz_kaufen"],

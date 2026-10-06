@@ -1115,9 +1115,14 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                 if st.get("feuer", 0) >= PENNER and "stein_besetzt" in fruehpruefung and not any(a["typ"] == 3 for a in BUCH.offen):
                     if st["holz"] - R_w["holz"] >= kosten_spiel(3)["holz"]:
                         ort_w, weg_w = ausbau._bester_ort(3, L, G)
-                        plaetze_w = [ort_w] if ort_w else [tuple(q) for q in v16_holzfaeller(plan) if not steht_bei(G, 3, tuple(q), 1)]
+                        # Daniel 01:03 (rote Marker = "ausserhalb gebaut", jenseits des Flusses): der Plan-Platz wurde nicht auf
+                        # einen Weg geprueft und die Platzsuche durfte 3 Felder abweichen. Jetzt jeder Platz per Wegtest des
+                        # Spiels, Abweichung hoechstens 1 Feld
+                        if not ort_w:
+                            ort_w = ausbau._erreichbarer([tuple(q) for q in v16_holzfaeller(plan) if not steht_bei(G, 3, tuple(q), 1)], L)
+                        plaetze_w = [ort_w] if ort_w else []
                         if plaetze_w:
-                            o_w = baue_schnell(3, plaetze_w[0][0], plaetze_w[0][1], 3, zweck="Wachstum")
+                            o_w = baue_schnell(3, plaetze_w[0][0], plaetze_w[0][1], 1, zweck="Wachstum")
                             if not o_w and ort_w:
                                 ausbau.fehlschlag[(3, ort_w)] = ausbau.fehlschlag.get((3, ort_w), 0) + 1
                             ereignis.append("WACHSTUM Holzfaeller fuer %d Wartende bei %s (Weg %s): %s" % (
