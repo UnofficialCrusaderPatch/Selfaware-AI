@@ -162,7 +162,10 @@ def phase1(plan, tempo, mit_posten=True):
         vk = vorrat(SP)
         for w, k in nahrung_auf_kante({k: vk.get(k, 0) for k in NAHRUNG_PREIS}, 15).items():
             lose[w] = lose.get(w, 0) + k
-        if warte_bis(lambda: vorrat(SP)["gold"] >= 190, "Gold fuer Posten + Assassine", 5, pflicht=False):
+        # ohne Posten (Streitkolben) reicht Gold fuer die 3 A-Plantagen (3 x 15) - Daniel 21:48 "warum wartet er am Anfang?":
+        # v9 wartete bis Tick ~708 auf 190 Gold (Posten + Assassine), A erst danach -> gut 500 Ticks verloren
+        if warte_bis(lambda: vorrat(SP)["gold"] >= (190 if mit_posten else 45), "Gold fuer Posten + Assassine" if mit_posten
+                     else "Gold fuer die A-Plantagen", 5, pflicht=False):
             break
     schreib("VERKAUFT bis Tick %d: %s Lose, Gold %d" % (tick(), lose, vorrat(SP)["gold"]))
     # Daniel 23:41: "Seasoning am Anfang ist eine gute Investition, da Nahrung fuer Beliebtheit und Verkauf unersetzlich
