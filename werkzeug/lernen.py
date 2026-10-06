@@ -176,6 +176,8 @@ def main():
     alle = [json.loads(z) for z in open(pfad, encoding="utf-8")] if os.path.exists(pfad) else []
     for r in alle:
         r["strategie"] = dict(GRUND, **r["strategie"])     # aeltere Laeufe: neue Knoepfe mit Grundwert (KeyError 23:21)
+    alle_roh = alle
+    alle = [r for r in alle if not r.get("ungueltig")]       # Fehler im Lenker - daraus wird nichts gelernt
     gespielt = {schluessel(r["strategie"]) for r in alle}
     gueltig = [r for r in alle if r["strategie"].get("v14", "ja") == "ja"]     # nur Laeufe auf dem einen Weg zaehlen
     beste = min(gueltig, key=lambda r: r["note"]) if gueltig else None
@@ -193,6 +195,7 @@ def main():
         r["geaendert"] = knopf
         r["vergleich"] = None if beste is None else {"gegen": beste["nr"], "note_vorher": beste["note"], "differenz": r["note"] - beste["note"]}
         alle.append(r)
+        alle_roh.append(r)
         gespielt.add(schluessel(s))
         with open(pfad, "a", encoding="utf-8") as f:
             f.write(json.dumps(r, ensure_ascii=False) + "\n")

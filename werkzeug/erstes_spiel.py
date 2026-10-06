@@ -1197,7 +1197,7 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                 schreib("FRUEHABBRUCH bei Tick %d: Steinbrueche + Joche nicht besetzt (%s)" % (st["t"], BUCH.stand(G, st)))
                 break
             if st["t"] >= lager_bis and not fruehpruefung.get("lager") and UMZUG != "nein":
-                neu = steht_bei(G, 10, V14_PLAN["lager"])
+                neu = steht_bei(G, 10, V14_PLAN["lager"], 6)   # 23:40: Platzwahl haelt Abstand zum Steinhaufen -> (91,268) statt (89,270)
                 alt = [n for n, g in G.items() if g["besitzer"] == SP and g["typ"] == 10 and
                        max(abs(g["x"] - BASIS_LAGER[0]), abs(g["y"] - BASIS_LAGER[1])) <= 6]
                 if not neu or alt:
