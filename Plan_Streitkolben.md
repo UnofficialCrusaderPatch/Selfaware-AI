@@ -164,3 +164,38 @@ v5 hatte bei 9.400 erst ~900 -> es fehlen ~30 %.
       105 Gold frueh nicht in die Wirtschaft gehen). Reicht nur zusammen mit der schnelleren Eroeffnung. Gerechnet, ungeprueft.
 3. Gleiche Fassung mehrfach laufen lassen ist KEIN Weg (Daniel) - erst Aenderung mit Rechnung, dann Versuch.
 Naechster Schritt v14: weg=bilanz + fruehe Leder-Kette, Keulen weiter kaufen; Bilanz rechnet eigenes Leder gegen.
+
+## Plan 25 Streitkolbenkaempfer (Daniel 06.10. 23:15: "der Plan fuer 25 Streitis steht")
+Stand 23:20. Grundlage: nur gemessene Werte (Register), Rechnungen als solche markiert. Der Lernkreis (werkzeug/lernen.py)
+waehlt die Stellgroessen selbst; dieser Plan gibt ihm die Knoepfe und die Rechnung, nicht feste Regeln.
+
+### 1. Bedarf: Kaufen gegen Selbermachen (Marktpreise gemessen, Messpartie 8 / L11)
+| Posten | Kaufen | Selbst | Rechnung |
+|---|---|---|---|
+| 25 Lederharnische | 5 Lose x 160 = 800 | 9 Kuehe (3 Leder je Kuh, S3) | 4 Hoefe (28 H, 60 G) + 3 Gerbereien (45 H, 9 S, 225 G) ~ 330 Wert, Abriss gibt die Haelfte zurueck -> netto ~165, spart ~635 |
+| 25 Keulen | 5 Lose x 300 = 1.500 | Schmiede mit Markt-Eisen (54 G je Eisen) | 1:1 (S4, 3 Stueck): 5 Lose Eisen 1.350; 1,5 je Eisen (Daniel): 17 Eisen = 4 Lose 1.080 (5 Keulen uebrig). OFFEN: S4 mit groesserer Zahl messen |
+| Anwerben | 25 x 20 = 500 | - | - |
+| Kaserne + Waffenlager | 12 Stein + 5 Holz | eigener Stein | - |
+Kaufen gesamt ~2.800 Gold. Mit eigenem Leder + Keulen aus Markt-Eisen (1,5-Fall) ~1.080 + 500 + ~165 + Schmieden netto ~120 = ~1.870.
+
+### 2. Zeit der Ketten (gemessen)
+- Kuh: 0,46 je Hof und 1.000 Ticks; erste Kuh ~1.400-2.000 Ticks nach dem Hof (v15b: Hoefe 1.269 -> Kuh 2.701). 9 Kuehe mit 4 Hoefen ~4.900 Ticks.
+- Gerber: ~1.550 Ticks je Kuh -> 9 Kuehe = 14.000 Gerber-Ticks -> 3 Gerbereien ~4.700 Ticks.
+- Schmied: 927 Ticks je Keule (G3), Rundgang Schmiede -> Lager -> Waffenlager (G4: nah 588 Ticks). 25 Keulen = 23.200 Schmied-Ticks -> 5 Schmieden ~4.700 Ticks.
+- Neuer Arbeitsplatz: erster Ertrag erst ~4.000 Ticks nach der Vergabe (L10, Weg vom Feuer am Bergfried). -> Leder-Kette
+  muss VOR ~Tick 2.000 stehen, Schmieden spaetestens ~5.000 Ticks vor dem Ziel.
+
+### 3. Ablauf (Stellgroessen fuer den Lernkreis, Werte waehlt er)
+1. Eroeffnung wie die beste 10er-Strategie des Lernkreises (Holz, Seasoning, Steinbrueche, Huetten voraus).
+2. Direkt nach dem Seasoning: N_hoefe (2/4/6) Milchviehhoefe; Gerbereien (1/2/3) mit der ersten Kuh; Waffenlager mit dem ersten Leder.
+3. Ab Gold-Schwelle G_eisen: Eisen in 5er-Losen kaufen, N_schmieden (0/2/4/5) Schmieden 1 Feld vom Lager (B4), Waffenlager daneben.
+4. Bilanz rechnet eigenes Leder und eigene Keulen gegen (wie v14 "kommt"); Endspiel sobald Rest-Bedarf gedeckt.
+5. Anwerben laufend, sobald je 1 Keule + 1 Leder + 20 Gold + Bauer da sind (bei 25 lohnt es, nicht alles ans Ende zu legen).
+
+### 4. Pruefpunkte (Fruehabbruch, Lernkreis-Note)
+- Bis Tick 2.000: N_hoefe Hoefe stehen und sind besetzt; bis 3.500 erste Kuh.
+- Bis 6.000: erste Keule aus eigener Schmiede (falls N_schmieden > 0).
+- Note = Tick des 25. Kaempfers (sonst geschaetzt wie beim 10er).
+### 5. Offen (vor dem ersten 25er-Lauf messen)
+- Keulen je Eisen (S4 1:1 aus 3 Stueck gegen Daniels 1,5) - entscheidet 1.080 gegen 1.350.
+- Waffenlager-Groesse (~50, Indiz) - bei 25 + 25 reicht eins?
