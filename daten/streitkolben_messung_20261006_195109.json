@@ -1,0 +1,1039 @@
+{
+ "ablauf": [
+  {
+   "gebaut": {
+    "10": [
+     null
+    ],
+    "11": [
+     [
+      94,
+      280
+     ]
+    ],
+    "9": [
+     [
+      98,
+      276
+     ]
+    ],
+    "26": [
+     [
+      94,
+      284
+     ]
+    ],
+    "13": [
+     [
+      90,
+      276
+     ],
+     [
+      98,
+      276
+     ]
+    ],
+    "16": [
+     [
+      90,
+      276
+     ]
+    ],
+    "33": [
+     null,
+     null
+    ],
+    "1": [
+     [
+      90,
+      276
+     ],
+     [
+      90,
+      280
+     ],
+     [
+      94,
+      276
+     ]
+    ]
+   },
+   "t": 632
+  },
+  {
+   "markt": "keule",
+   "kauf": {
+    "gold": -300,
+    "keule": 5,
+    "leder": 0,
+    "eisen": 0,
+    "holz": 0,
+    "stein": 0,
+    "feuer": 1,
+    "kaempfer": 0
+   },
+   "verkauf": {
+    "gold": 150,
+    "keule": -5,
+    "leder": 0,
+    "eisen": 0,
+    "holz": 0,
+    "stein": 0,
+    "feuer": 1,
+    "kaempfer": 0
+   }
+  },
+  {
+   "markt": "leder",
+   "kauf": {
+    "gold": -160,
+    "keule": 0,
+    "leder": 5,
+    "eisen": 0,
+    "holz": 0,
+    "stein": 0,
+    "feuer": 1,
+    "kaempfer": 0
+   },
+   "verkauf": {
+    "gold": 50,
+    "keule": 0,
+    "leder": -5,
+    "eisen": 0,
+    "holz": 0,
+    "stein": 0,
+    "feuer": 1,
+    "kaempfer": 0
+   }
+  },
+  {
+   "kaserne": [],
+   "werben": {
+    "gold": 0,
+    "keule": 0,
+    "leder": 0,
+    "eisen": 0,
+    "holz": 0,
+    "stein": 0,
+    "feuer": 0,
+    "kaempfer": 0
+   }
+  }
+ ],
+ "proben": [
+  {
+   "t": 1255,
+   "gold": 19740,
+   "keule": 0,
+   "leder": 0,
+   "eisen": 20,
+   "holz": 130,
+   "stein": 0,
+   "feuer": 19,
+   "kaempfer": 0,
+   "einheiten": {
+    "T1": 23,
+    "T63": 3,
+    "T57": 1,
+    "T24": 7,
+    "T64": 2,
+    "T55": 1,
+    "T22": 5
+   }
+  },
+  {
+   "t": 1385,
+   "gold": 19740,
+   "keule": 0,
+   "leder": 0,
+   "eisen": 20,
+   "holz": 130,
+   "stein": 0,
+   "feuer": 22,
+   "kaempfer": 0,
+   "einheiten": {
+    "T1": 24,
+    "T63": 3,
+    "T57": 1,
+    "T24": 7,
+    "T64": 3,
+    "T55": 1,
+    "T22": 5
+   }
+  },
+  {
+   "t": 1518,
+   "gold": 19740,
+   "keule": 0,
+   "leder": 0,
+   "eisen": 20,
+   "holz": 130,
+   "stein": 0,
+   "feuer": 24,
+   "kaempfer": 0,
+   "einheiten": {
+    "T1": 24,
+    "T63": 3,
+    "T57": 1,
+    "T24": 7,
+    "T64": 4,
+    "T55": 1,
+    "T22": 5
+   }
+  },
+  {
+   "t": 1651,
+   "gold": 19740,
+   "keule": 0,
+   "leder": 0,
+   "eisen": 0,
+   "holz": 130,
+   "stein": 0,
+   "feuer": 24,
+   "kaempfer": 0,
+   "einheiten": {
+    "T1": 24,
+    "T63": 3,
+    "T57": 1,
+    "T24": 7,
+    "T64": 4,
+    "T55": 1,
+    "T22": 5
+   }
+  },
+  {
+   "t": 1781,
+   "gold": 19740,
+   "keule": 0,
+   "leder": 0,
+   "eisen": 0,
+   "holz": 130,
+   "stein": 0,
+   "feuer": 24,
+   "kaempfer": 0,
+   "einheiten": {
+    "T1": 24,
+    "T63": 2,
+    "T57": 1,
+    "T24": 7,
+    "T64": 4,
+    "T55": 1,
+    "T22": 5
+   }
+  },
+  {
+   "t": 1912,
+   "gold": 19740,
+   "keule": 0,
+   "leder": 0,
+   "eisen": 0,
+   "holz": 130,
+   "stein": 0,
+   "feuer": 24,
+   "kaempfer": 0,
+   "einheiten": {
+    "T1": 24,
+    "T63": 3,
+    "T57": 1,
+    "T24": 7,
+    "T64": 5,
+    "T55": 1,
+    "T22": 5
+   }
+  },
+  {
+   "t": 2045,
+   "gold": 19740,
+   "keule": 0,
+   "leder": 0,
+   "eisen": 0,
+   "holz": 130,
+   "stein": 0,
+   "feuer": 24,
+   "kaempfer": 0,
+   "einheiten": {
+    "T1": 24,
+    "T63": 3,
+    "T57": 1,
+    "T24": 7,
+    "T64": 5,
+    "T55": 1,
+    "T22": 5
+   }
+  },
+  {
+   "t": 2182,
+   "gold": 19740,
+   "keule": 0,
+   "leder": 0,
+   "eisen": 0,
+   "holz": 130,
+   "stein": 0,
+   "feuer": 24,
+   "kaempfer": 0,
+   "einheiten": {
+    "T1": 24,
+    "T63": 3,
+    "T57": 1,
+    "T24": 7,
+    "T64": 4,
+    "T55": 1,
+    "T22": 5
+   }
+  },
+  {
+   "t": 2316,
+   "gold": 19740,
+   "keule": 0,
+   "leder": 0,
+   "eisen": 0,
+   "holz": 130,
+   "stein": 0,
+   "feuer": 24,
+   "kaempfer": 0,
+   "einheiten": {
+    "T1": 24,
+    "T63": 3,
+    "T57": 1,
+    "T24": 7,
+    "T64": 5,
+    "T55": 1,
+    "T22": 5
+   }
+  },
+  {
+   "t": 2446,
+   "gold": 19740,
+   "keule": 0,
+   "leder": 0,
+   "eisen": 0,
+   "holz": 130,
+   "stein": 0,
+   "feuer": 24,
+   "kaempfer": 0,
+   "einheiten": {
+    "T1": 24,
+    "T63": 3,
+    "T57": 1,
+    "T24": 7,
+    "T64": 5,
+    "T55": 1,
+    "T22": 5
+   }
+  },
+  {
+   "t": 2578,
+   "gold": 19740,
+   "keule": 0,
+   "leder": 0,
+   "eisen": 0,
+   "holz": 130,
+   "stein": 0,
+   "feuer": 24,
+   "kaempfer": 0,
+   "einheiten": {
+    "T1": 24,
+    "T63": 3,
+    "T57": 1,
+    "T24": 7,
+    "T64": 5,
+    "T55": 1,
+    "T22": 5
+   }
+  },
+  {
+   "t": 2711,
+   "gold": 19740,
+   "keule": 0,
+   "leder": 0,
+   "eisen": 0,
+   "holz": 130,
+   "stein": 0,
+   "feuer": 24,
+   "kaempfer": 0,
+   "einheiten": {
+    "T1": 24,
+    "T63": 3,
+    "T57": 1,
+    "T24": 7,
+    "T64": 6,
+    "T55": 1,
+    "T22": 5
+   }
+  },
+  {
+   "t": 2846,
+   "gold": 19740,
+   "keule": 0,
+   "leder": 0,
+   "eisen": 0,
+   "holz": 130,
+   "stein": 0,
+   "feuer": 24,
+   "kaempfer": 0,
+   "einheiten": {
+    "T1": 24,
+    "T63": 3,
+    "T57": 1,
+    "T24": 7,
+    "T64": 6,
+    "T55": 1,
+    "T22": 5
+   }
+  },
+  {
+   "t": 2978,
+   "gold": 19740,
+   "keule": 0,
+   "leder": 0,
+   "eisen": 0,
+   "holz": 130,
+   "stein": 0,
+   "feuer": 24,
+   "kaempfer": 0,
+   "einheiten": {
+    "T1": 24,
+    "T63": 2,
+    "T57": 1,
+    "T24": 7,
+    "T64": 6,
+    "T55": 1,
+    "T22": 5
+   }
+  },
+  {
+   "t": 3111,
+   "gold": 19740,
+   "keule": 0,
+   "leder": 0,
+   "eisen": 0,
+   "holz": 130,
+   "stein": 0,
+   "feuer": 24,
+   "kaempfer": 0,
+   "einheiten": {
+    "T1": 24,
+    "T63": 3,
+    "T57": 1,
+    "T24": 7,
+    "T64": 6,
+    "T55": 1,
+    "T22": 5
+   }
+  },
+  {
+   "t": 3244,
+   "gold": 19740,
+   "keule": 0,
+   "leder": 0,
+   "eisen": 0,
+   "holz": 130,
+   "stein": 0,
+   "feuer": 24,
+   "kaempfer": 0,
+   "einheiten": {
+    "T1": 24,
+    "T63": 3,
+    "T57": 1,
+    "T24": 7,
+    "T64": 6,
+    "T55": 1,
+    "T22": 5
+   }
+  },
+  {
+   "t": 3377,
+   "gold": 19740,
+   "keule": 0,
+   "leder": 0,
+   "eisen": 0,
+   "holz": 130,
+   "stein": 0,
+   "feuer": 24,
+   "kaempfer": 0,
+   "einheiten": {
+    "T1": 24,
+    "T63": 3,
+    "T57": 1,
+    "T24": 7,
+    "T64": 5,
+    "T55": 1,
+    "T22": 5
+   }
+  },
+  {
+   "t": 3510,
+   "gold": 19740,
+   "keule": 0,
+   "leder": 0,
+   "eisen": 0,
+   "holz": 130,
+   "stein": 0,
+   "feuer": 24,
+   "kaempfer": 0,
+   "einheiten": {
+    "T1": 24,
+    "T63": 3,
+    "T57": 1,
+    "T24": 7,
+    "T64": 6,
+    "T55": 1,
+    "T22": 5
+   }
+  },
+  {
+   "t": 3640,
+   "gold": 19740,
+   "keule": 0,
+   "leder": 0,
+   "eisen": 0,
+   "holz": 130,
+   "stein": 0,
+   "feuer": 24,
+   "kaempfer": 0,
+   "einheiten": {
+    "T1": 24,
+    "T63": 3,
+    "T57": 1,
+    "T24": 7,
+    "T64": 6,
+    "T55": 1,
+    "T22": 5
+   }
+  },
+  {
+   "t": 3773,
+   "gold": 19740,
+   "keule": 0,
+   "leder": 0,
+   "eisen": 0,
+   "holz": 130,
+   "stein": 0,
+   "feuer": 24,
+   "kaempfer": 0,
+   "einheiten": {
+    "T1": 24,
+    "T63": 3,
+    "T57": 1,
+    "T24": 7,
+    "T64": 5,
+    "T55": 1,
+    "T22": 5
+   }
+  },
+  {
+   "t": 3906,
+   "gold": 19740,
+   "keule": 0,
+   "leder": 0,
+   "eisen": 0,
+   "holz": 130,
+   "stein": 0,
+   "feuer": 24,
+   "kaempfer": 0,
+   "einheiten": {
+    "T1": 24,
+    "T63": 3,
+    "T57": 1,
+    "T24": 7,
+    "T64": 6,
+    "T55": 1,
+    "T22": 5
+   }
+  },
+  {
+   "t": 4035,
+   "gold": 19740,
+   "keule": 0,
+   "leder": 0,
+   "eisen": 0,
+   "holz": 130,
+   "stein": 0,
+   "feuer": 24,
+   "kaempfer": 0,
+   "einheiten": {
+    "T1": 24,
+    "T63": 3,
+    "T57": 1,
+    "T24": 7,
+    "T64": 6,
+    "T55": 1,
+    "T22": 5
+   }
+  },
+  {
+   "t": 4168,
+   "gold": 19740,
+   "keule": 0,
+   "leder": 0,
+   "eisen": 0,
+   "holz": 130,
+   "stein": 0,
+   "feuer": 24,
+   "kaempfer": 0,
+   "einheiten": {
+    "T1": 24,
+    "T63": 2,
+    "T57": 1,
+    "T24": 7,
+    "T64": 6,
+    "T55": 1,
+    "T22": 5
+   }
+  },
+  {
+   "t": 4301,
+   "gold": 19740,
+   "keule": 0,
+   "leder": 0,
+   "eisen": 0,
+   "holz": 130,
+   "stein": 0,
+   "feuer": 24,
+   "kaempfer": 0,
+   "einheiten": {
+    "T1": 24,
+    "T63": 3,
+    "T57": 1,
+    "T24": 7,
+    "T64": 6,
+    "T55": 1,
+    "T22": 5
+   }
+  },
+  {
+   "t": 4431,
+   "gold": 19740,
+   "keule": 0,
+   "leder": 0,
+   "eisen": 0,
+   "holz": 130,
+   "stein": 0,
+   "feuer": 24,
+   "kaempfer": 0,
+   "einheiten": {
+    "T1": 24,
+    "T63": 3,
+    "T57": 1,
+    "T24": 7,
+    "T64": 6,
+    "T55": 1,
+    "T22": 5
+   }
+  },
+  {
+   "t": 4563,
+   "gold": 19740,
+   "keule": 0,
+   "leder": 0,
+   "eisen": 0,
+   "holz": 130,
+   "stein": 0,
+   "feuer": 24,
+   "kaempfer": 0,
+   "einheiten": {
+    "T1": 24,
+    "T63": 3,
+    "T57": 1,
+    "T24": 7,
+    "T64": 5,
+    "T55": 1,
+    "T22": 5
+   }
+  },
+  {
+   "t": 4697,
+   "gold": 19740,
+   "keule": 0,
+   "leder": 0,
+   "eisen": 0,
+   "holz": 130,
+   "stein": 0,
+   "feuer": 24,
+   "kaempfer": 0,
+   "einheiten": {
+    "T1": 24,
+    "T63": 3,
+    "T57": 1,
+    "T24": 7,
+    "T64": 5,
+    "T55": 1,
+    "T22": 5
+   }
+  },
+  {
+   "t": 4826,
+   "gold": 19740,
+   "keule": 0,
+   "leder": 0,
+   "eisen": 0,
+   "holz": 130,
+   "stein": 0,
+   "feuer": 24,
+   "kaempfer": 0,
+   "einheiten": {
+    "T1": 24,
+    "T63": 3,
+    "T57": 1,
+    "T24": 7,
+    "T64": 4,
+    "T55": 1,
+    "T22": 5
+   }
+  },
+  {
+   "t": 4959,
+   "gold": 19740,
+   "keule": 0,
+   "leder": 0,
+   "eisen": 0,
+   "holz": 130,
+   "stein": 0,
+   "feuer": 24,
+   "kaempfer": 0,
+   "einheiten": {
+    "T1": 24,
+    "T63": 3,
+    "T57": 1,
+    "T24": 7,
+    "T64": 4,
+    "T55": 1,
+    "T22": 5
+   }
+  },
+  {
+   "t": 5092,
+   "gold": 19740,
+   "keule": 0,
+   "leder": 0,
+   "eisen": 0,
+   "holz": 130,
+   "stein": 0,
+   "feuer": 24,
+   "kaempfer": 0,
+   "einheiten": {
+    "T1": 24,
+    "T63": 3,
+    "T57": 1,
+    "T24": 7,
+    "T64": 4,
+    "T55": 1,
+    "T22": 5
+   }
+  },
+  {
+   "t": 5226,
+   "gold": 19740,
+   "keule": 0,
+   "leder": 0,
+   "eisen": 0,
+   "holz": 130,
+   "stein": 0,
+   "feuer": 24,
+   "kaempfer": 0,
+   "einheiten": {
+    "T1": 24,
+    "T63": 3,
+    "T57": 1,
+    "T24": 7,
+    "T64": 4,
+    "T55": 1,
+    "T22": 5
+   }
+  },
+  {
+   "t": 5355,
+   "gold": 19740,
+   "keule": 0,
+   "leder": 0,
+   "eisen": 0,
+   "holz": 130,
+   "stein": 0,
+   "feuer": 24,
+   "kaempfer": 0,
+   "einheiten": {
+    "T1": 24,
+    "T63": 3,
+    "T57": 1,
+    "T24": 7,
+    "T64": 3,
+    "T55": 1,
+    "T22": 5
+   }
+  },
+  {
+   "t": 5487,
+   "gold": 19740,
+   "keule": 0,
+   "leder": 0,
+   "eisen": 0,
+   "holz": 130,
+   "stein": 0,
+   "feuer": 24,
+   "kaempfer": 0,
+   "einheiten": {
+    "T1": 24,
+    "T63": 3,
+    "T57": 1,
+    "T24": 7,
+    "T64": 3,
+    "T55": 1,
+    "T22": 5
+   }
+  },
+  {
+   "t": 5621,
+   "gold": 19740,
+   "keule": 0,
+   "leder": 0,
+   "eisen": 0,
+   "holz": 130,
+   "stein": 0,
+   "feuer": 24,
+   "kaempfer": 0,
+   "einheiten": {
+    "T1": 24,
+    "T63": 3,
+    "T57": 1,
+    "T24": 7,
+    "T64": 3,
+    "T55": 1,
+    "T22": 5
+   }
+  },
+  {
+   "t": 5752,
+   "gold": 19740,
+   "keule": 0,
+   "leder": 0,
+   "eisen": 0,
+   "holz": 130,
+   "stein": 0,
+   "feuer": 24,
+   "kaempfer": 0,
+   "einheiten": {
+    "T1": 24,
+    "T63": 3,
+    "T57": 1,
+    "T24": 7,
+    "T64": 3,
+    "T55": 1,
+    "T22": 5
+   }
+  },
+  {
+   "t": 5882,
+   "gold": 19740,
+   "keule": 0,
+   "leder": 0,
+   "eisen": 0,
+   "holz": 130,
+   "stein": 0,
+   "feuer": 24,
+   "kaempfer": 0,
+   "einheiten": {
+    "T1": 24,
+    "T63": 3,
+    "T57": 1,
+    "T24": 7,
+    "T64": 3,
+    "T55": 1,
+    "T22": 5
+   }
+  },
+  {
+   "t": 6015,
+   "gold": 19740,
+   "keule": 0,
+   "leder": 0,
+   "eisen": 0,
+   "holz": 130,
+   "stein": 0,
+   "feuer": 24,
+   "kaempfer": 0,
+   "einheiten": {
+    "T1": 24,
+    "T63": 3,
+    "T57": 1,
+    "T24": 7,
+    "T64": 3,
+    "T55": 1,
+    "T22": 5
+   }
+  },
+  {
+   "t": 6148,
+   "gold": 19740,
+   "keule": 0,
+   "leder": 0,
+   "eisen": 0,
+   "holz": 130,
+   "stein": 0,
+   "feuer": 24,
+   "kaempfer": 0,
+   "einheiten": {
+    "T1": 24,
+    "T63": 3,
+    "T57": 1,
+    "T24": 7,
+    "T64": 3,
+    "T55": 1,
+    "T22": 5
+   }
+  },
+  {
+   "t": 6277,
+   "gold": 19740,
+   "keule": 0,
+   "leder": 0,
+   "eisen": 0,
+   "holz": 130,
+   "stein": 0,
+   "feuer": 23,
+   "kaempfer": 0,
+   "einheiten": {
+    "T1": 23,
+    "T63": 3,
+    "T57": 1,
+    "T24": 7,
+    "T64": 2,
+    "T55": 1,
+    "T22": 5
+   }
+  },
+  {
+   "t": 6412,
+   "gold": 19740,
+   "keule": 0,
+   "leder": 0,
+   "eisen": 0,
+   "holz": 130,
+   "stein": 0,
+   "feuer": 23,
+   "kaempfer": 0,
+   "einheiten": {
+    "T1": 23,
+    "T63": 3,
+    "T57": 1,
+    "T24": 7,
+    "T64": 1,
+    "T55": 1,
+    "T22": 5
+   }
+  },
+  {
+   "t": 6543,
+   "gold": 19740,
+   "keule": 0,
+   "leder": 0,
+   "eisen": 0,
+   "holz": 130,
+   "stein": 0,
+   "feuer": 23,
+   "kaempfer": 0,
+   "einheiten": {
+    "T1": 23,
+    "T63": 2,
+    "T57": 1,
+    "T24": 7,
+    "T55": 1,
+    "T22": 5
+   }
+  },
+  {
+   "t": 6676,
+   "gold": 19740,
+   "keule": 0,
+   "leder": 0,
+   "eisen": 0,
+   "holz": 130,
+   "stein": 0,
+   "feuer": 22,
+   "kaempfer": 0,
+   "einheiten": {
+    "T1": 22,
+    "T63": 2,
+    "T57": 1,
+    "T24": 7,
+    "T55": 1,
+    "T22": 5
+   }
+  },
+  {
+   "t": 6809,
+   "gold": 19740,
+   "keule": 0,
+   "leder": 0,
+   "eisen": 0,
+   "holz": 130,
+   "stein": 0,
+   "feuer": 22,
+   "kaempfer": 0,
+   "einheiten": {
+    "T1": 22,
+    "T63": 3,
+    "T22": 5,
+    "T24": 7,
+    "T55": 1,
+    "T57": 1
+   }
+  },
+  {
+   "t": 6937,
+   "gold": 19740,
+   "keule": 0,
+   "leder": 0,
+   "eisen": 0,
+   "holz": 130,
+   "stein": 0,
+   "feuer": 22,
+   "kaempfer": 0,
+   "einheiten": {
+    "T1": 22,
+    "T63": 3,
+    "T22": 5,
+    "T24": 7,
+    "T55": 1,
+    "T57": 1
+   }
+  },
+  {
+   "t": 7070,
+   "gold": 19740,
+   "keule": 0,
+   "leder": 0,
+   "eisen": 0,
+   "holz": 130,
+   "stein": 0,
+   "feuer": 21,
+   "kaempfer": 0,
+   "einheiten": {
+    "T1": 21,
+    "T63": 3,
+    "T22": 5,
+    "T24": 7,
+    "T55": 1,
+    "T57": 1
+   }
+  },
+  {
+   "t": 7201,
+   "gold": 19740,
+   "keule": 0,
+   "leder": 0,
+   "eisen": 0,
+   "holz": 130,
+   "stein": 0,
+   "feuer": 21,
+   "kaempfer": 0,
+   "einheiten": {
+    "T1": 21,
+    "T63": 3,
+    "T22": 5,
+    "T24": 7,
+    "T55": 1,
+    "T57": 1
+   }
+  }
+ ]
+}
