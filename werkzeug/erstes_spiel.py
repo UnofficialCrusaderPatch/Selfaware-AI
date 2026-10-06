@@ -376,6 +376,12 @@ def ruestung_kaufen(st, G, wirt, ausbau, ziel, marken):
             aus.append("KAEMPFER %d bei Tick %d" % (n, st["t"]))
     return aus
 
+def kaserne_am_feuer(G):
+    """Kaserne so nah wie moeglich am Lagerfeuer (Typ 55): die Bauern laufen vom Feuer zur Kaserne (v5: weit weg gebaut)."""
+    feuer = next((g for g in G.values() if g["besitzer"] == SP and g["typ"] == 55), None)
+    x, y = (feuer["x"] + 3, feuer["y"] + 3) if feuer else (BERGFRIED[0], BERGFRIED[1] + 6)
+    return baue_schnell(9, x, y, 20)
+
 _KOSTEN = {}
 
 def kosten_aller(typ, ausbau):
@@ -399,6 +405,13 @@ def bilanz_schritt(st, L, G, ausbau, ziel, endspiel, runde, marken):
         if runde % 10 == 0 or t["jetzt_erreichbar"]:
             aus.append(BZ.text(t))
         if not t["jetzt_erreichbar"]:
+            # kurz vor dem Endspiel (90 % der Bilanz) Kaserne am Feuer und Waffenlager setzen (v5: erst im Endspiel gebaut,
+            # weit weg - erster Kaempfer 450 Ticks nach dem Endspiel; Daniel B13: nicht frueher als noetig)
+            if t["habe_gold"] >= 0.9 * t["bedarf_gold"]:
+                if not any(g["typ"] == 9 for g in eig.values()) and st.get("stein", 0) >= 12:
+                    aus.append("VORBEREITUNG Kaserne am Feuer %s" % (kaserne_am_feuer(G),))
+                if not any(g["typ"] == 11 for g in eig.values()) and st.get("holz", 0) >= 5:
+                    aus.append("VORBEREITUNG Waffenlager %s" % (baue_schnell(11, BERGFRIED[0] - 14, BERGFRIED[1] + 14, 25),))
             return aus
         # ENDSPIEL: Kaserne/Waffenlager sichern, abreissen, alles verkaufen, kaufen
         aus.append("ENDSPIEL bei Tick %d: %d Betriebe abreissen, alles verkaufen, %d+%d Lose kaufen" % (
@@ -406,7 +419,7 @@ def bilanz_schritt(st, L, G, ausbau, ziel, endspiel, runde, marken):
         if not any(g["typ"] == 9 for g in eig.values()):
             for _ in range(max(0, -(-(12 - st.get("stein", 0)) // 5))):
                 befehl({"spielbefehl": {"nr": 38, "werte": [0, 4]}}, 1.0, bis="SPIELBEFEHL")
-            aus.append("Kaserne %s" % (baue_schnell(9, BERGFRIED[0] - 16, BERGFRIED[1] + 18, 30),))
+            aus.append("Kaserne %s" % (kaserne_am_feuer(G),))
         if not any(g["typ"] == 11 for g in eig.values()):
             aus.append("Waffenlager %s" % (baue_schnell(11, BERGFRIED[0] - 14, BERGFRIED[1] + 14, 25),))
         # Reihenfolge (Daniel 21:24: "sie geht verloren, wenn du abreisst und kein Platz ist"): ERST alles verkaufen,

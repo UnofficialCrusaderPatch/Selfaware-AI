@@ -34,7 +34,7 @@ def rechne(st, v, G, L, sp, ziel, kosten_von):
     lager_wert = 0
     for w, p in PREIS.items():
         menge = st.get(w, 0)
-        lager_wert += menge * p
+        lager_wert += (menge // LOS[w]) * LOS[w] * p     # nur ganze Verkaufslose (v6)
         zeilen.append((w, menge, menge * p))
     abriss = [nr for nr, g in eig.items() if g["typ"] not in BLEIBEN]
     abriss_gold = sum(abriss_wert(kosten_von(eig[nr]["typ"])) for nr in abriss)
@@ -43,11 +43,12 @@ def rechne(st, v, G, L, sp, ziel, kosten_von):
     lose_k = math.ceil(max(0, n - keule) / 5)
     lose_l = math.ceil(max(0, n - leder) / 5)
     hat = {t: any(g["typ"] == t for g in eig.values()) for t in (9, 11, 26)}
-    bedarf = lose_k * KAUF_LOS[21] + lose_l * KAUF_LOS[23] + n * ANWERBEN \
-        + (0 if hat[9] else 12 * 10) + (0 if hat[11] else 5)        # Stein notfalls kaufen (50 je 5)
+    # Kaserne: aus eigenem Stein kostet sie nur dessen Verkaufswert (12 x 5), sonst gekauft (12 x 10); Waffenlager 5 Holz
+    kaserne = 0 if hat[9] else (12 * PREIS["stein"] if st.get("stein", 0) >= 12 else 12 * 10)
+    bedarf = lose_k * KAUF_LOS[21] + lose_l * KAUF_LOS[23] + n * ANWERBEN + kaserne + (0 if hat[11] else 5)
     habe = st.get("gold", 0) + lager_wert + abriss_gold
     bauern = st.get("feuer", 0) + frei_werden
-    ok = n > 0 and hat[26] and habe >= bedarf * 1.05 and bauern >= n
+    ok = n > 0 and hat[26] and habe >= bedarf and bauern >= n            # exakt (v6), vorher 5 % Aufschlag
     tabelle = {"rest_kaempfer": n, "gold": st.get("gold", 0), "lager": zeilen, "lager_wert": lager_wert,
                "abriss_betriebe": len(abriss), "abriss_wert": abriss_gold, "keule": keule, "leder": leder,
                "lose_keule": lose_k, "lose_leder": lose_l, "bedarf_gold": bedarf, "habe_gold": habe,
@@ -63,4 +64,4 @@ def text(t):
                 t["rest_kaempfer"], t["gold"], t["lager_wert"], lager or "leer", t["abriss_betriebe"], t["abriss_wert"],
                 t["habe_gold"], t["bedarf_gold"], t["keule"], t["leder"], t["lose_keule"], t["lose_leder"],
                 t["bauern_frei"], t["bauern_nach_abriss"],
-                "JETZT ERREICHBAR" if t["jetzt_erreichbar"] else "fehlt %d Gold" % max(0, t["bedarf_gold"] * 1.05 - t["habe_gold"])))
+                "JETZT ERREICHBAR" if t["jetzt_erreichbar"] else "fehlt %d Gold" % max(0, t["bedarf_gold"] - t["habe_gold"])))
