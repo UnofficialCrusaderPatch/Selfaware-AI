@@ -1,0 +1,4152 @@
+{
+ "kosten_alt": {
+  "0x01124DF8": 20,
+  "0x01124DFC": 8,
+  "0x01124E00": 0,
+  "0x01124E04": 0,
+  "0x01124E08": 0,
+  "0x01124E34": 15,
+  "0x01124E38": 3,
+  "0x01124E3C": 0,
+  "0x01124E40": 0,
+  "0x01124E44": 75,
+  "0x01124DA8": 0,
+  "0x01124DAC": 12,
+  "0x01124DB0": 0,
+  "0x01124DB4": 0,
+  "0x01124DB8": 0,
+  "0x01124DD0": 5,
+  "0x01124DD4": 0,
+  "0x01124DD8": 0,
+  "0x01124DDC": 0,
+  "0x01124DE0": 0,
+  "0x01124D08": 5,
+  "0x01124D0C": 0,
+  "0x01124D10": 0,
+  "0x01124D14": 0,
+  "0x01124D18": 0,
+  "0x01124DBC": 0,
+  "0x01124DC0": 0,
+  "0x01124DC4": 0,
+  "0x01124DC8": 0,
+  "0x01124DCC": 0,
+  "0x01124EFC": 0,
+  "0x01124F00": 0,
+  "0x01124F04": 0,
+  "0x01124F08": 0,
+  "0x01124F0C": 0,
+  "0x01124F88": 7,
+  "0x01124F8C": 0,
+  "0x01124F90": 0,
+  "0x01124F94": 0,
+  "0x01124F98": 15,
+  "0x01124F74": 3,
+  "0x01124F78": 0,
+  "0x01124F7C": 0,
+  "0x01124F80": 0,
+  "0x01124F84": 15,
+  "0x01124F9C": 18,
+  "0x01124FA0": 0,
+  "0x01124FA4": 0,
+  "0x01124FA8": 0,
+  "0x01124FAC": 0,
+  "0x01124FC4": 0,
+  "0x01124FC8": 10,
+  "0x01124FCC": 0,
+  "0x01124FD0": 0,
+  "0x01124FD4": 75,
+  "0x011252BC": 0,
+  "0x011252C0": 12,
+  "0x011252C4": 0,
+  "0x011252C8": 0,
+  "0x011252CC": 0,
+  "0x011252D0": 0,
+  "0x011252D4": 10,
+  "0x011252D8": 0,
+  "0x011252DC": 0,
+  "0x011252E0": 0,
+  "0x0112508C": 0,
+  "0x01125090": 15,
+  "0x01125094": 0,
+  "0x01125098": 0,
+  "0x0112509C": 0,
+  "0x01124D94": 0,
+  "0x01124D98": 0,
+  "0x01124D9C": 0,
+  "0x01124DA0": 0,
+  "0x01124DA4": 120
+ },
+ "grundriss": {
+  "Schmiede": {
+   "gebaut": true,
+   "versatz": [
+    0,
+    0
+   ],
+   "groesse": [
+    4,
+    4
+   ],
+   "maske": [
+    "####",
+    "####",
+    "####",
+    "####"
+   ],
+   "eckdurchgaenge": 0,
+   "einbahn": 0
+  },
+  "Gerberei": {
+   "gebaut": true,
+   "versatz": [
+    0,
+    0
+   ],
+   "groesse": [
+    4,
+    4
+   ],
+   "maske": [
+    "####",
+    "####",
+    "####",
+    "####"
+   ],
+   "eckdurchgaenge": 0,
+   "einbahn": 0
+  },
+  "Kaserne": {
+   "gebaut": true,
+   "versatz": [
+    0,
+    0
+   ],
+   "groesse": [
+    10,
+    10
+   ],
+   "maske": [
+    "#####ooooo",
+    "#####ooooo",
+    "#####oo#oo",
+    "#####ooooo",
+    "#####ooooo",
+    "oooooooooo",
+    "oooooooooo",
+    "oo#oooo#oo",
+    "oooooooooo",
+    "oooooooooo"
+   ],
+   "eckdurchgaenge": 0,
+   "einbahn": 0
+  },
+  "Waffenlager": {
+   "gebaut": true,
+   "versatz": [
+    0,
+    0
+   ],
+   "groesse": [
+    4,
+    4
+   ],
+   "maske": [
+    "####",
+    "####",
+    "####",
+    "####"
+   ],
+   "eckdurchgaenge": 0,
+   "einbahn": 0
+  },
+  "Milchviehhof": {
+   "gebaut": true,
+   "versatz": [
+    0,
+    0
+   ],
+   "groesse": [
+    10,
+    10
+   ],
+   "maske": [
+    "####..####",
+    "###......#",
+    "###......#",
+    "#........#",
+    "..........",
+    "..........",
+    "#........#",
+    "#........#",
+    "#........#",
+    "####..####"
+   ],
+   "eckdurchgaenge": 0,
+   "einbahn": 0
+  }
+ },
+ "faelle": [
+  {
+   "fall": "Schmiede|Kaserne O-W Abstand 0",
+   "teile": [
+    [
+     "Schmiede",
+     148,
+     273
+    ],
+    [
+     "Kaserne",
+     152,
+     273
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "N->S",
+     "durch": true,
+     "laenge": 12,
+     "weg": [
+      [
+       156,
+       272
+      ],
+      [
+       157,
+       273
+      ],
+      [
+       158,
+       274
+      ],
+      [
+       158,
+       275
+      ],
+      [
+       159,
+       276
+      ],
+      [
+       158,
+       277
+      ],
+      [
+       157,
+       278
+      ],
+      [
+       156,
+       279
+      ],
+      [
+       155,
+       280
+      ],
+      [
+       154,
+       281
+      ],
+      [
+       153,
+       282
+      ],
+      [
+       152,
+       283
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Schmiede|Kaserne O-W Abstand 1",
+   "teile": [
+    [
+     "Schmiede",
+     148,
+     273
+    ],
+    [
+     "Kaserne",
+     153,
+     273
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "N->S",
+     "durch": true,
+     "laenge": 12,
+     "weg": [
+      [
+       151,
+       272
+      ],
+      [
+       152,
+       273
+      ],
+      [
+       152,
+       274
+      ],
+      [
+       152,
+       275
+      ],
+      [
+       152,
+       276
+      ],
+      [
+       152,
+       277
+      ],
+      [
+       153,
+       278
+      ],
+      [
+       152,
+       279
+      ],
+      [
+       151,
+       280
+      ],
+      [
+       150,
+       281
+      ],
+      [
+       149,
+       282
+      ],
+      [
+       148,
+       283
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Schmiede|Kaserne O-W Abstand 2",
+   "teile": [
+    [
+     "Schmiede",
+     148,
+     273
+    ],
+    [
+     "Kaserne",
+     154,
+     273
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "N->S",
+     "durch": true,
+     "laenge": 12,
+     "weg": [
+      [
+       151,
+       272
+      ],
+      [
+       152,
+       273
+      ],
+      [
+       153,
+       274
+      ],
+      [
+       153,
+       275
+      ],
+      [
+       153,
+       276
+      ],
+      [
+       153,
+       277
+      ],
+      [
+       153,
+       278
+      ],
+      [
+       152,
+       279
+      ],
+      [
+       151,
+       280
+      ],
+      [
+       150,
+       281
+      ],
+      [
+       149,
+       282
+      ],
+      [
+       148,
+       283
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Schmiede|Kaserne O-W Abstand 3",
+   "teile": [
+    [
+     "Schmiede",
+     148,
+     273
+    ],
+    [
+     "Kaserne",
+     155,
+     273
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "N->S",
+     "durch": true,
+     "laenge": 12,
+     "weg": [
+      [
+       151,
+       272
+      ],
+      [
+       152,
+       273
+      ],
+      [
+       153,
+       274
+      ],
+      [
+       154,
+       275
+      ],
+      [
+       154,
+       276
+      ],
+      [
+       154,
+       277
+      ],
+      [
+       153,
+       278
+      ],
+      [
+       152,
+       279
+      ],
+      [
+       151,
+       280
+      ],
+      [
+       150,
+       281
+      ],
+      [
+       149,
+       282
+      ],
+      [
+       148,
+       283
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Schmiede|Kaserne N-S Abstand 0",
+   "teile": [
+    [
+     "Schmiede",
+     148,
+     273
+    ],
+    [
+     "Kaserne",
+     148,
+     277
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "W->O",
+     "durch": true,
+     "laenge": 12,
+     "weg": [
+      [
+       147,
+       281
+      ],
+      [
+       148,
+       282
+      ],
+      [
+       149,
+       282
+      ],
+      [
+       150,
+       282
+      ],
+      [
+       151,
+       282
+      ],
+      [
+       152,
+       282
+      ],
+      [
+       153,
+       281
+      ],
+      [
+       154,
+       280
+      ],
+      [
+       155,
+       280
+      ],
+      [
+       156,
+       279
+      ],
+      [
+       157,
+       278
+      ],
+      [
+       158,
+       277
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Schmiede|Kaserne N-S Abstand 1",
+   "teile": [
+    [
+     "Schmiede",
+     148,
+     273
+    ],
+    [
+     "Kaserne",
+     148,
+     278
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "W->O",
+     "durch": true,
+     "laenge": 12,
+     "weg": [
+      [
+       147,
+       276
+      ],
+      [
+       148,
+       277
+      ],
+      [
+       149,
+       277
+      ],
+      [
+       150,
+       277
+      ],
+      [
+       151,
+       277
+      ],
+      [
+       152,
+       276
+      ],
+      [
+       153,
+       275
+      ],
+      [
+       154,
+       274
+      ],
+      [
+       155,
+       273
+      ],
+      [
+       156,
+       273
+      ],
+      [
+       157,
+       273
+      ],
+      [
+       158,
+       273
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Schmiede|Kaserne N-S Abstand 2",
+   "teile": [
+    [
+     "Schmiede",
+     148,
+     273
+    ],
+    [
+     "Kaserne",
+     148,
+     279
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "W->O",
+     "durch": true,
+     "laenge": 12,
+     "weg": [
+      [
+       147,
+       276
+      ],
+      [
+       148,
+       277
+      ],
+      [
+       149,
+       277
+      ],
+      [
+       150,
+       277
+      ],
+      [
+       151,
+       277
+      ],
+      [
+       152,
+       276
+      ],
+      [
+       153,
+       275
+      ],
+      [
+       154,
+       274
+      ],
+      [
+       155,
+       273
+      ],
+      [
+       156,
+       273
+      ],
+      [
+       157,
+       273
+      ],
+      [
+       158,
+       273
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Schmiede|Kaserne N-S Abstand 3",
+   "teile": [
+    [
+     "Schmiede",
+     148,
+     273
+    ],
+    [
+     "Kaserne",
+     148,
+     280
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "W->O",
+     "durch": true,
+     "laenge": 12,
+     "weg": [
+      [
+       147,
+       276
+      ],
+      [
+       148,
+       277
+      ],
+      [
+       149,
+       277
+      ],
+      [
+       150,
+       277
+      ],
+      [
+       151,
+       277
+      ],
+      [
+       152,
+       276
+      ],
+      [
+       153,
+       275
+      ],
+      [
+       154,
+       274
+      ],
+      [
+       155,
+       273
+      ],
+      [
+       156,
+       273
+      ],
+      [
+       157,
+       273
+      ],
+      [
+       158,
+       273
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Schmiede|Kaserne Eck SO 0-0",
+   "teile": [
+    [
+     "Schmiede",
+     148,
+     273
+    ],
+    [
+     "Kaserne",
+     152,
+     277
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "NO->SW",
+     "durch": true,
+     "laenge": 5,
+     "weg": [
+      [
+       152,
+       276
+      ],
+      [
+       151,
+       277
+      ],
+      [
+       150,
+       278
+      ],
+      [
+       149,
+       278
+      ],
+      [
+       148,
+       277
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": [
+    [
+     [
+      152,
+      276
+     ],
+     [
+      151,
+      277
+     ]
+    ],
+    [
+     [
+      151,
+      277
+     ],
+     [
+      152,
+      276
+     ]
+    ]
+   ]
+  },
+  {
+   "fall": "Schmiede|Kaserne Eck SO 0-1",
+   "teile": [
+    [
+     "Schmiede",
+     148,
+     273
+    ],
+    [
+     "Kaserne",
+     152,
+     278
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "NO->SW",
+     "durch": true,
+     "laenge": 5,
+     "weg": [
+      [
+       152,
+       276
+      ],
+      [
+       151,
+       277
+      ],
+      [
+       150,
+       278
+      ],
+      [
+       149,
+       278
+      ],
+      [
+       148,
+       277
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Schmiede|Kaserne Eck SO 1-0",
+   "teile": [
+    [
+     "Schmiede",
+     148,
+     273
+    ],
+    [
+     "Kaserne",
+     153,
+     277
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "NO->SW",
+     "durch": true,
+     "laenge": 5,
+     "weg": [
+      [
+       152,
+       276
+      ],
+      [
+       151,
+       277
+      ],
+      [
+       150,
+       278
+      ],
+      [
+       149,
+       278
+      ],
+      [
+       148,
+       277
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Schmiede|Kaserne Eck SO 1-1",
+   "teile": [
+    [
+     "Schmiede",
+     148,
+     273
+    ],
+    [
+     "Kaserne",
+     153,
+     278
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "NO->SW",
+     "durch": true,
+     "laenge": 5,
+     "weg": [
+      [
+       152,
+       276
+      ],
+      [
+       151,
+       277
+      ],
+      [
+       150,
+       278
+      ],
+      [
+       149,
+       278
+      ],
+      [
+       148,
+       277
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Schmiede|Kaserne Eck NO 0-0",
+   "teile": [
+    [
+     "Schmiede",
+     148,
+     283
+    ],
+    [
+     "Kaserne",
+     152,
+     273
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "NW->SO",
+     "durch": true,
+     "laenge": 6,
+     "weg": [
+      [
+       148,
+       278
+      ],
+      [
+       149,
+       279
+      ],
+      [
+       150,
+       280
+      ],
+      [
+       151,
+       281
+      ],
+      [
+       152,
+       282
+      ],
+      [
+       152,
+       283
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Schmiede|Kaserne Eck NO 0-1",
+   "teile": [
+    [
+     "Schmiede",
+     148,
+     284
+    ],
+    [
+     "Kaserne",
+     152,
+     273
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "NW->SO",
+     "durch": true,
+     "laenge": 6,
+     "weg": [
+      [
+       148,
+       278
+      ],
+      [
+       149,
+       279
+      ],
+      [
+       150,
+       280
+      ],
+      [
+       151,
+       281
+      ],
+      [
+       152,
+       282
+      ],
+      [
+       152,
+       283
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Schmiede|Kaserne Eck NO 1-0",
+   "teile": [
+    [
+     "Schmiede",
+     148,
+     283
+    ],
+    [
+     "Kaserne",
+     153,
+     273
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "NW->SO",
+     "durch": true,
+     "laenge": 6,
+     "weg": [
+      [
+       148,
+       278
+      ],
+      [
+       149,
+       279
+      ],
+      [
+       150,
+       280
+      ],
+      [
+       151,
+       281
+      ],
+      [
+       152,
+       282
+      ],
+      [
+       152,
+       283
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Schmiede|Kaserne Eck NO 1-1",
+   "teile": [
+    [
+     "Schmiede",
+     148,
+     284
+    ],
+    [
+     "Kaserne",
+     153,
+     273
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "NW->SO",
+     "durch": true,
+     "laenge": 6,
+     "weg": [
+      [
+       148,
+       278
+      ],
+      [
+       149,
+       279
+      ],
+      [
+       150,
+       280
+      ],
+      [
+       151,
+       281
+      ],
+      [
+       152,
+       282
+      ],
+      [
+       152,
+       283
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Kaserne|Schmiede O-W Abstand 0",
+   "teile": [
+    [
+     "Kaserne",
+     148,
+     273
+    ],
+    [
+     "Schmiede",
+     158,
+     273
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "N->S",
+     "durch": true,
+     "laenge": 12,
+     "weg": [
+      [
+       152,
+       272
+      ],
+      [
+       153,
+       273
+      ],
+      [
+       154,
+       274
+      ],
+      [
+       154,
+       275
+      ],
+      [
+       155,
+       276
+      ],
+      [
+       154,
+       277
+      ],
+      [
+       153,
+       278
+      ],
+      [
+       152,
+       279
+      ],
+      [
+       151,
+       280
+      ],
+      [
+       150,
+       281
+      ],
+      [
+       149,
+       282
+      ],
+      [
+       148,
+       283
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Kaserne|Schmiede O-W Abstand 1",
+   "teile": [
+    [
+     "Kaserne",
+     148,
+     273
+    ],
+    [
+     "Schmiede",
+     159,
+     273
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "N->S",
+     "durch": true,
+     "laenge": 12,
+     "weg": [
+      [
+       152,
+       272
+      ],
+      [
+       153,
+       273
+      ],
+      [
+       154,
+       274
+      ],
+      [
+       154,
+       275
+      ],
+      [
+       155,
+       276
+      ],
+      [
+       154,
+       277
+      ],
+      [
+       153,
+       278
+      ],
+      [
+       152,
+       279
+      ],
+      [
+       151,
+       280
+      ],
+      [
+       150,
+       281
+      ],
+      [
+       149,
+       282
+      ],
+      [
+       148,
+       283
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Kaserne|Schmiede O-W Abstand 2",
+   "teile": [
+    [
+     "Kaserne",
+     148,
+     273
+    ],
+    [
+     "Schmiede",
+     160,
+     273
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "N->S",
+     "durch": true,
+     "laenge": 12,
+     "weg": [
+      [
+       152,
+       272
+      ],
+      [
+       153,
+       273
+      ],
+      [
+       154,
+       274
+      ],
+      [
+       154,
+       275
+      ],
+      [
+       155,
+       276
+      ],
+      [
+       154,
+       277
+      ],
+      [
+       153,
+       278
+      ],
+      [
+       152,
+       279
+      ],
+      [
+       151,
+       280
+      ],
+      [
+       150,
+       281
+      ],
+      [
+       149,
+       282
+      ],
+      [
+       148,
+       283
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Kaserne|Schmiede O-W Abstand 3",
+   "teile": [
+    [
+     "Kaserne",
+     148,
+     273
+    ],
+    [
+     "Schmiede",
+     161,
+     273
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "N->S",
+     "durch": true,
+     "laenge": 12,
+     "weg": [
+      [
+       152,
+       272
+      ],
+      [
+       153,
+       273
+      ],
+      [
+       154,
+       274
+      ],
+      [
+       154,
+       275
+      ],
+      [
+       155,
+       276
+      ],
+      [
+       154,
+       277
+      ],
+      [
+       153,
+       278
+      ],
+      [
+       152,
+       279
+      ],
+      [
+       151,
+       280
+      ],
+      [
+       150,
+       281
+      ],
+      [
+       149,
+       282
+      ],
+      [
+       148,
+       283
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Kaserne|Schmiede N-S Abstand 0",
+   "teile": [
+    [
+     "Kaserne",
+     148,
+     273
+    ],
+    [
+     "Schmiede",
+     148,
+     283
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "W->O",
+     "durch": true,
+     "laenge": 12,
+     "weg": [
+      [
+       147,
+       277
+      ],
+      [
+       148,
+       278
+      ],
+      [
+       149,
+       278
+      ],
+      [
+       150,
+       278
+      ],
+      [
+       151,
+       278
+      ],
+      [
+       152,
+       278
+      ],
+      [
+       153,
+       277
+      ],
+      [
+       154,
+       276
+      ],
+      [
+       155,
+       276
+      ],
+      [
+       156,
+       275
+      ],
+      [
+       157,
+       274
+      ],
+      [
+       158,
+       273
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Kaserne|Schmiede N-S Abstand 1",
+   "teile": [
+    [
+     "Kaserne",
+     148,
+     273
+    ],
+    [
+     "Schmiede",
+     148,
+     284
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "W->O",
+     "durch": true,
+     "laenge": 12,
+     "weg": [
+      [
+       147,
+       277
+      ],
+      [
+       148,
+       278
+      ],
+      [
+       149,
+       278
+      ],
+      [
+       150,
+       278
+      ],
+      [
+       151,
+       278
+      ],
+      [
+       152,
+       278
+      ],
+      [
+       153,
+       277
+      ],
+      [
+       154,
+       276
+      ],
+      [
+       155,
+       276
+      ],
+      [
+       156,
+       275
+      ],
+      [
+       157,
+       274
+      ],
+      [
+       158,
+       273
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Kaserne|Schmiede N-S Abstand 2",
+   "teile": [
+    [
+     "Kaserne",
+     148,
+     273
+    ],
+    [
+     "Schmiede",
+     148,
+     285
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "W->O",
+     "durch": true,
+     "laenge": 12,
+     "weg": [
+      [
+       147,
+       277
+      ],
+      [
+       148,
+       278
+      ],
+      [
+       149,
+       278
+      ],
+      [
+       150,
+       278
+      ],
+      [
+       151,
+       278
+      ],
+      [
+       152,
+       278
+      ],
+      [
+       153,
+       277
+      ],
+      [
+       154,
+       276
+      ],
+      [
+       155,
+       276
+      ],
+      [
+       156,
+       275
+      ],
+      [
+       157,
+       274
+      ],
+      [
+       158,
+       273
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Kaserne|Schmiede N-S Abstand 3",
+   "teile": [
+    [
+     "Kaserne",
+     148,
+     273
+    ],
+    [
+     "Schmiede",
+     148,
+     286
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "W->O",
+     "durch": true,
+     "laenge": 12,
+     "weg": [
+      [
+       147,
+       277
+      ],
+      [
+       148,
+       278
+      ],
+      [
+       149,
+       278
+      ],
+      [
+       150,
+       278
+      ],
+      [
+       151,
+       278
+      ],
+      [
+       152,
+       278
+      ],
+      [
+       153,
+       277
+      ],
+      [
+       154,
+       276
+      ],
+      [
+       155,
+       276
+      ],
+      [
+       156,
+       275
+      ],
+      [
+       157,
+       274
+      ],
+      [
+       158,
+       273
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Kaserne|Schmiede Eck SO 0-0",
+   "teile": [
+    [
+     "Kaserne",
+     148,
+     273
+    ],
+    [
+     "Schmiede",
+     158,
+     283
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "NO->SW",
+     "durch": true,
+     "laenge": 10,
+     "weg": [
+      [
+       158,
+       274
+      ],
+      [
+       157,
+       275
+      ],
+      [
+       156,
+       276
+      ],
+      [
+       155,
+       277
+      ],
+      [
+       154,
+       278
+      ],
+      [
+       153,
+       279
+      ],
+      [
+       152,
+       280
+      ],
+      [
+       151,
+       281
+      ],
+      [
+       150,
+       282
+      ],
+      [
+       149,
+       283
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Kaserne|Schmiede Eck SO 0-1",
+   "teile": [
+    [
+     "Kaserne",
+     148,
+     273
+    ],
+    [
+     "Schmiede",
+     158,
+     284
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "NO->SW",
+     "durch": true,
+     "laenge": 10,
+     "weg": [
+      [
+       158,
+       274
+      ],
+      [
+       157,
+       275
+      ],
+      [
+       156,
+       276
+      ],
+      [
+       155,
+       277
+      ],
+      [
+       154,
+       278
+      ],
+      [
+       153,
+       279
+      ],
+      [
+       152,
+       280
+      ],
+      [
+       151,
+       281
+      ],
+      [
+       150,
+       282
+      ],
+      [
+       149,
+       283
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Kaserne|Schmiede Eck SO 1-0",
+   "teile": [
+    [
+     "Kaserne",
+     148,
+     273
+    ],
+    [
+     "Schmiede",
+     159,
+     283
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "NO->SW",
+     "durch": true,
+     "laenge": 10,
+     "weg": [
+      [
+       158,
+       274
+      ],
+      [
+       157,
+       275
+      ],
+      [
+       156,
+       276
+      ],
+      [
+       155,
+       277
+      ],
+      [
+       154,
+       278
+      ],
+      [
+       153,
+       279
+      ],
+      [
+       152,
+       280
+      ],
+      [
+       151,
+       281
+      ],
+      [
+       150,
+       282
+      ],
+      [
+       149,
+       283
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Kaserne|Schmiede Eck SO 1-1",
+   "teile": [
+    [
+     "Kaserne",
+     148,
+     273
+    ],
+    [
+     "Schmiede",
+     159,
+     284
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "NO->SW",
+     "durch": true,
+     "laenge": 10,
+     "weg": [
+      [
+       158,
+       274
+      ],
+      [
+       157,
+       275
+      ],
+      [
+       156,
+       276
+      ],
+      [
+       155,
+       277
+      ],
+      [
+       154,
+       278
+      ],
+      [
+       153,
+       279
+      ],
+      [
+       152,
+       280
+      ],
+      [
+       151,
+       281
+      ],
+      [
+       150,
+       282
+      ],
+      [
+       149,
+       283
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Kaserne|Schmiede Eck NO 0-0",
+   "teile": [
+    [
+     "Kaserne",
+     148,
+     277
+    ],
+    [
+     "Schmiede",
+     158,
+     273
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "NW->SO",
+     "durch": true,
+     "laenge": 10,
+     "weg": [
+      [
+       149,
+       273
+      ],
+      [
+       150,
+       273
+      ],
+      [
+       151,
+       273
+      ],
+      [
+       152,
+       273
+      ],
+      [
+       153,
+       273
+      ],
+      [
+       154,
+       273
+      ],
+      [
+       155,
+       274
+      ],
+      [
+       156,
+       275
+      ],
+      [
+       157,
+       276
+      ],
+      [
+       158,
+       277
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Kaserne|Schmiede Eck NO 0-1",
+   "teile": [
+    [
+     "Kaserne",
+     148,
+     278
+    ],
+    [
+     "Schmiede",
+     158,
+     273
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "NW->SO",
+     "durch": true,
+     "laenge": 10,
+     "weg": [
+      [
+       149,
+       273
+      ],
+      [
+       150,
+       273
+      ],
+      [
+       151,
+       273
+      ],
+      [
+       152,
+       273
+      ],
+      [
+       153,
+       273
+      ],
+      [
+       154,
+       273
+      ],
+      [
+       155,
+       274
+      ],
+      [
+       156,
+       275
+      ],
+      [
+       157,
+       276
+      ],
+      [
+       158,
+       277
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Kaserne|Schmiede Eck NO 1-0",
+   "teile": [
+    [
+     "Kaserne",
+     148,
+     277
+    ],
+    [
+     "Schmiede",
+     159,
+     273
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "NW->SO",
+     "durch": true,
+     "laenge": 10,
+     "weg": [
+      [
+       149,
+       273
+      ],
+      [
+       150,
+       273
+      ],
+      [
+       151,
+       273
+      ],
+      [
+       152,
+       273
+      ],
+      [
+       153,
+       273
+      ],
+      [
+       154,
+       273
+      ],
+      [
+       155,
+       274
+      ],
+      [
+       156,
+       275
+      ],
+      [
+       157,
+       276
+      ],
+      [
+       158,
+       277
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Kaserne|Schmiede Eck NO 1-1",
+   "teile": [
+    [
+     "Kaserne",
+     148,
+     278
+    ],
+    [
+     "Schmiede",
+     159,
+     273
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "NW->SO",
+     "durch": true,
+     "laenge": 10,
+     "weg": [
+      [
+       149,
+       273
+      ],
+      [
+       150,
+       273
+      ],
+      [
+       151,
+       273
+      ],
+      [
+       152,
+       273
+      ],
+      [
+       153,
+       273
+      ],
+      [
+       154,
+       273
+      ],
+      [
+       155,
+       274
+      ],
+      [
+       156,
+       275
+      ],
+      [
+       157,
+       276
+      ],
+      [
+       158,
+       277
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Schmiede|Waffenlager O-W Abstand 0",
+   "teile": [
+    [
+     "Schmiede",
+     148,
+     273
+    ],
+    [
+     "Waffenlager",
+     152,
+     273
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "N->S",
+     "durch": false,
+     "laenge": null,
+     "weg": null
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Schmiede|Waffenlager O-W Abstand 1",
+   "teile": [
+    [
+     "Schmiede",
+     148,
+     273
+    ],
+    [
+     "Waffenlager",
+     153,
+     273
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "N->S",
+     "durch": true,
+     "laenge": 6,
+     "weg": [
+      [
+       151,
+       272
+      ],
+      [
+       152,
+       273
+      ],
+      [
+       152,
+       274
+      ],
+      [
+       152,
+       275
+      ],
+      [
+       152,
+       276
+      ],
+      [
+       151,
+       277
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Schmiede|Waffenlager O-W Abstand 2",
+   "teile": [
+    [
+     "Schmiede",
+     148,
+     273
+    ],
+    [
+     "Waffenlager",
+     154,
+     273
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "N->S",
+     "durch": true,
+     "laenge": 6,
+     "weg": [
+      [
+       151,
+       272
+      ],
+      [
+       152,
+       273
+      ],
+      [
+       153,
+       274
+      ],
+      [
+       153,
+       275
+      ],
+      [
+       152,
+       276
+      ],
+      [
+       151,
+       277
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Schmiede|Waffenlager O-W Abstand 3",
+   "teile": [
+    [
+     "Schmiede",
+     148,
+     273
+    ],
+    [
+     "Waffenlager",
+     155,
+     273
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "N->S",
+     "durch": true,
+     "laenge": 6,
+     "weg": [
+      [
+       151,
+       272
+      ],
+      [
+       152,
+       273
+      ],
+      [
+       153,
+       274
+      ],
+      [
+       153,
+       275
+      ],
+      [
+       152,
+       276
+      ],
+      [
+       151,
+       277
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Schmiede|Waffenlager N-S Abstand 0",
+   "teile": [
+    [
+     "Schmiede",
+     148,
+     273
+    ],
+    [
+     "Waffenlager",
+     148,
+     277
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "W->O",
+     "durch": false,
+     "laenge": null,
+     "weg": null
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Schmiede|Waffenlager N-S Abstand 1",
+   "teile": [
+    [
+     "Schmiede",
+     148,
+     273
+    ],
+    [
+     "Waffenlager",
+     148,
+     278
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "W->O",
+     "durch": true,
+     "laenge": 6,
+     "weg": [
+      [
+       147,
+       276
+      ],
+      [
+       148,
+       277
+      ],
+      [
+       149,
+       277
+      ],
+      [
+       150,
+       277
+      ],
+      [
+       151,
+       277
+      ],
+      [
+       152,
+       276
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Schmiede|Waffenlager N-S Abstand 2",
+   "teile": [
+    [
+     "Schmiede",
+     148,
+     273
+    ],
+    [
+     "Waffenlager",
+     148,
+     279
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "W->O",
+     "durch": true,
+     "laenge": 6,
+     "weg": [
+      [
+       147,
+       276
+      ],
+      [
+       148,
+       277
+      ],
+      [
+       149,
+       277
+      ],
+      [
+       150,
+       277
+      ],
+      [
+       151,
+       277
+      ],
+      [
+       152,
+       276
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Schmiede|Waffenlager N-S Abstand 3",
+   "teile": [
+    [
+     "Schmiede",
+     148,
+     273
+    ],
+    [
+     "Waffenlager",
+     148,
+     280
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "W->O",
+     "durch": true,
+     "laenge": 6,
+     "weg": [
+      [
+       147,
+       276
+      ],
+      [
+       148,
+       277
+      ],
+      [
+       149,
+       277
+      ],
+      [
+       150,
+       277
+      ],
+      [
+       151,
+       277
+      ],
+      [
+       152,
+       276
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Schmiede|Waffenlager Eck SO 0-0",
+   "teile": [
+    [
+     "Schmiede",
+     148,
+     273
+    ],
+    [
+     "Waffenlager",
+     152,
+     277
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "NO->SW",
+     "durch": true,
+     "laenge": 4,
+     "weg": [
+      [
+       152,
+       276
+      ],
+      [
+       151,
+       277
+      ],
+      [
+       150,
+       278
+      ],
+      [
+       149,
+       277
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": [
+    [
+     [
+      152,
+      276
+     ],
+     [
+      151,
+      277
+     ]
+    ],
+    [
+     [
+      151,
+      277
+     ],
+     [
+      152,
+      276
+     ]
+    ]
+   ]
+  },
+  {
+   "fall": "Schmiede|Waffenlager Eck SO 0-1",
+   "teile": [
+    [
+     "Schmiede",
+     148,
+     273
+    ],
+    [
+     "Waffenlager",
+     152,
+     278
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "NO->SW",
+     "durch": true,
+     "laenge": 4,
+     "weg": [
+      [
+       152,
+       276
+      ],
+      [
+       151,
+       277
+      ],
+      [
+       150,
+       278
+      ],
+      [
+       149,
+       277
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Schmiede|Waffenlager Eck SO 1-0",
+   "teile": [
+    [
+     "Schmiede",
+     148,
+     273
+    ],
+    [
+     "Waffenlager",
+     153,
+     277
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "NO->SW",
+     "durch": true,
+     "laenge": 4,
+     "weg": [
+      [
+       152,
+       276
+      ],
+      [
+       151,
+       277
+      ],
+      [
+       150,
+       278
+      ],
+      [
+       149,
+       277
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Schmiede|Waffenlager Eck SO 1-1",
+   "teile": [
+    [
+     "Schmiede",
+     148,
+     273
+    ],
+    [
+     "Waffenlager",
+     153,
+     278
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "NO->SW",
+     "durch": true,
+     "laenge": 4,
+     "weg": [
+      [
+       152,
+       276
+      ],
+      [
+       151,
+       277
+      ],
+      [
+       150,
+       278
+      ],
+      [
+       149,
+       277
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Schmiede|Waffenlager Eck NO 0-0",
+   "teile": [
+    [
+     "Schmiede",
+     148,
+     277
+    ],
+    [
+     "Waffenlager",
+     152,
+     273
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "NW->SO",
+     "durch": true,
+     "laenge": 4,
+     "weg": [
+      [
+       149,
+       274
+      ],
+      [
+       150,
+       275
+      ],
+      [
+       151,
+       276
+      ],
+      [
+       152,
+       277
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": [
+    [
+     [
+      151,
+      276
+     ],
+     [
+      152,
+      277
+     ]
+    ],
+    [
+     [
+      152,
+      277
+     ],
+     [
+      151,
+      276
+     ]
+    ]
+   ]
+  },
+  {
+   "fall": "Schmiede|Waffenlager Eck NO 0-1",
+   "teile": [
+    [
+     "Schmiede",
+     148,
+     278
+    ],
+    [
+     "Waffenlager",
+     152,
+     273
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "NW->SO",
+     "durch": true,
+     "laenge": 5,
+     "weg": [
+      [
+       148,
+       273
+      ],
+      [
+       149,
+       274
+      ],
+      [
+       150,
+       275
+      ],
+      [
+       151,
+       276
+      ],
+      [
+       152,
+       277
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Schmiede|Waffenlager Eck NO 1-0",
+   "teile": [
+    [
+     "Schmiede",
+     148,
+     277
+    ],
+    [
+     "Waffenlager",
+     153,
+     273
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "NW->SO",
+     "durch": true,
+     "laenge": 4,
+     "weg": [
+      [
+       149,
+       274
+      ],
+      [
+       150,
+       275
+      ],
+      [
+       151,
+       276
+      ],
+      [
+       152,
+       277
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Schmiede|Waffenlager Eck NO 1-1",
+   "teile": [
+    [
+     "Schmiede",
+     148,
+     278
+    ],
+    [
+     "Waffenlager",
+     153,
+     273
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "NW->SO",
+     "durch": true,
+     "laenge": 5,
+     "weg": [
+      [
+       148,
+       273
+      ],
+      [
+       149,
+       274
+      ],
+      [
+       150,
+       275
+      ],
+      [
+       151,
+       276
+      ],
+      [
+       152,
+       277
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Waffenlager|Schmiede O-W Abstand 0",
+   "teile": [
+    [
+     "Waffenlager",
+     148,
+     273
+    ],
+    [
+     "Schmiede",
+     152,
+     273
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "N->S",
+     "durch": false,
+     "laenge": null,
+     "weg": null
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Waffenlager|Schmiede O-W Abstand 1",
+   "teile": [
+    [
+     "Waffenlager",
+     148,
+     273
+    ],
+    [
+     "Schmiede",
+     153,
+     273
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "N->S",
+     "durch": true,
+     "laenge": 6,
+     "weg": [
+      [
+       151,
+       272
+      ],
+      [
+       152,
+       273
+      ],
+      [
+       152,
+       274
+      ],
+      [
+       152,
+       275
+      ],
+      [
+       152,
+       276
+      ],
+      [
+       151,
+       277
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Waffenlager|Schmiede O-W Abstand 2",
+   "teile": [
+    [
+     "Waffenlager",
+     148,
+     273
+    ],
+    [
+     "Schmiede",
+     154,
+     273
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "N->S",
+     "durch": true,
+     "laenge": 6,
+     "weg": [
+      [
+       151,
+       272
+      ],
+      [
+       152,
+       273
+      ],
+      [
+       153,
+       274
+      ],
+      [
+       153,
+       275
+      ],
+      [
+       152,
+       276
+      ],
+      [
+       151,
+       277
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Waffenlager|Schmiede O-W Abstand 3",
+   "teile": [
+    [
+     "Waffenlager",
+     148,
+     273
+    ],
+    [
+     "Schmiede",
+     155,
+     273
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "N->S",
+     "durch": true,
+     "laenge": 6,
+     "weg": [
+      [
+       151,
+       272
+      ],
+      [
+       152,
+       273
+      ],
+      [
+       153,
+       274
+      ],
+      [
+       153,
+       275
+      ],
+      [
+       152,
+       276
+      ],
+      [
+       151,
+       277
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Waffenlager|Schmiede N-S Abstand 0",
+   "teile": [
+    [
+     "Waffenlager",
+     148,
+     273
+    ],
+    [
+     "Schmiede",
+     148,
+     277
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "W->O",
+     "durch": false,
+     "laenge": null,
+     "weg": null
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Waffenlager|Schmiede N-S Abstand 1",
+   "teile": [
+    [
+     "Waffenlager",
+     148,
+     273
+    ],
+    [
+     "Schmiede",
+     148,
+     278
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "W->O",
+     "durch": true,
+     "laenge": 6,
+     "weg": [
+      [
+       147,
+       276
+      ],
+      [
+       148,
+       277
+      ],
+      [
+       149,
+       277
+      ],
+      [
+       150,
+       277
+      ],
+      [
+       151,
+       277
+      ],
+      [
+       152,
+       276
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Waffenlager|Schmiede N-S Abstand 2",
+   "teile": [
+    [
+     "Waffenlager",
+     148,
+     273
+    ],
+    [
+     "Schmiede",
+     148,
+     279
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "W->O",
+     "durch": true,
+     "laenge": 6,
+     "weg": [
+      [
+       147,
+       276
+      ],
+      [
+       148,
+       277
+      ],
+      [
+       149,
+       277
+      ],
+      [
+       150,
+       277
+      ],
+      [
+       151,
+       277
+      ],
+      [
+       152,
+       276
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Waffenlager|Schmiede N-S Abstand 3",
+   "teile": [
+    [
+     "Waffenlager",
+     148,
+     273
+    ],
+    [
+     "Schmiede",
+     148,
+     280
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "W->O",
+     "durch": true,
+     "laenge": 6,
+     "weg": [
+      [
+       147,
+       276
+      ],
+      [
+       148,
+       277
+      ],
+      [
+       149,
+       277
+      ],
+      [
+       150,
+       277
+      ],
+      [
+       151,
+       277
+      ],
+      [
+       152,
+       276
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Waffenlager|Schmiede Eck SO 0-0",
+   "teile": [
+    [
+     "Waffenlager",
+     148,
+     273
+    ],
+    [
+     "Schmiede",
+     152,
+     277
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "NO->SW",
+     "durch": true,
+     "laenge": 4,
+     "weg": [
+      [
+       152,
+       276
+      ],
+      [
+       151,
+       277
+      ],
+      [
+       150,
+       278
+      ],
+      [
+       149,
+       277
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": [
+    [
+     [
+      152,
+      276
+     ],
+     [
+      151,
+      277
+     ]
+    ],
+    [
+     [
+      151,
+      277
+     ],
+     [
+      152,
+      276
+     ]
+    ]
+   ]
+  },
+  {
+   "fall": "Waffenlager|Schmiede Eck SO 0-1",
+   "teile": [
+    [
+     "Waffenlager",
+     148,
+     273
+    ],
+    [
+     "Schmiede",
+     152,
+     278
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "NO->SW",
+     "durch": true,
+     "laenge": 4,
+     "weg": [
+      [
+       152,
+       276
+      ],
+      [
+       151,
+       277
+      ],
+      [
+       150,
+       278
+      ],
+      [
+       149,
+       277
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Waffenlager|Schmiede Eck SO 1-0",
+   "teile": [
+    [
+     "Waffenlager",
+     148,
+     273
+    ],
+    [
+     "Schmiede",
+     153,
+     277
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "NO->SW",
+     "durch": true,
+     "laenge": 4,
+     "weg": [
+      [
+       152,
+       276
+      ],
+      [
+       151,
+       277
+      ],
+      [
+       150,
+       278
+      ],
+      [
+       149,
+       277
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Waffenlager|Schmiede Eck SO 1-1",
+   "teile": [
+    [
+     "Waffenlager",
+     148,
+     273
+    ],
+    [
+     "Schmiede",
+     153,
+     278
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "NO->SW",
+     "durch": true,
+     "laenge": 4,
+     "weg": [
+      [
+       152,
+       276
+      ],
+      [
+       151,
+       277
+      ],
+      [
+       150,
+       278
+      ],
+      [
+       149,
+       277
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Waffenlager|Schmiede Eck NO 0-0",
+   "teile": [
+    [
+     "Waffenlager",
+     148,
+     277
+    ],
+    [
+     "Schmiede",
+     152,
+     273
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "NW->SO",
+     "durch": true,
+     "laenge": 4,
+     "weg": [
+      [
+       149,
+       274
+      ],
+      [
+       150,
+       275
+      ],
+      [
+       151,
+       276
+      ],
+      [
+       152,
+       277
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": [
+    [
+     [
+      151,
+      276
+     ],
+     [
+      152,
+      277
+     ]
+    ],
+    [
+     [
+      152,
+      277
+     ],
+     [
+      151,
+      276
+     ]
+    ]
+   ]
+  },
+  {
+   "fall": "Waffenlager|Schmiede Eck NO 0-1",
+   "teile": [
+    [
+     "Waffenlager",
+     148,
+     278
+    ],
+    [
+     "Schmiede",
+     152,
+     273
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "NW->SO",
+     "durch": true,
+     "laenge": 5,
+     "weg": [
+      [
+       148,
+       273
+      ],
+      [
+       149,
+       274
+      ],
+      [
+       150,
+       275
+      ],
+      [
+       151,
+       276
+      ],
+      [
+       152,
+       277
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Waffenlager|Schmiede Eck NO 1-0",
+   "teile": [
+    [
+     "Waffenlager",
+     148,
+     277
+    ],
+    [
+     "Schmiede",
+     153,
+     273
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "NW->SO",
+     "durch": true,
+     "laenge": 4,
+     "weg": [
+      [
+       149,
+       274
+      ],
+      [
+       150,
+       275
+      ],
+      [
+       151,
+       276
+      ],
+      [
+       152,
+       277
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Waffenlager|Schmiede Eck NO 1-1",
+   "teile": [
+    [
+     "Waffenlager",
+     148,
+     278
+    ],
+    [
+     "Schmiede",
+     153,
+     273
+    ]
+   ],
+   "gebaut": 2,
+   "soll": 2,
+   "pruefungen": [
+    {
+     "was": "NW->SO",
+     "durch": true,
+     "laenge": 5,
+     "weg": [
+      [
+       148,
+       273
+      ],
+      [
+       149,
+       274
+      ],
+      [
+       150,
+       275
+      ],
+      [
+       151,
+       276
+      ],
+      [
+       152,
+       277
+      ]
+     ]
+    }
+   ],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Gerberei|Milchviehhof O-W Abstand 0",
+   "teile": [
+    [
+     "Gerberei",
+     148,
+     273
+    ],
+    [
+     "Milchviehhof",
+     152,
+     273
+    ]
+   ],
+   "gebaut": 1,
+   "soll": 2,
+   "pruefungen": [],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Gerberei|Milchviehhof O-W Abstand 1",
+   "teile": [
+    [
+     "Gerberei",
+     148,
+     273
+    ],
+    [
+     "Milchviehhof",
+     153,
+     273
+    ]
+   ],
+   "gebaut": 1,
+   "soll": 2,
+   "pruefungen": [],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Gerberei|Milchviehhof O-W Abstand 2",
+   "teile": [
+    [
+     "Gerberei",
+     148,
+     273
+    ],
+    [
+     "Milchviehhof",
+     154,
+     273
+    ]
+   ],
+   "gebaut": 1,
+   "soll": 2,
+   "pruefungen": [],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Gerberei|Milchviehhof O-W Abstand 3",
+   "teile": [
+    [
+     "Gerberei",
+     148,
+     273
+    ],
+    [
+     "Milchviehhof",
+     155,
+     273
+    ]
+   ],
+   "gebaut": 1,
+   "soll": 2,
+   "pruefungen": [],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Gerberei|Milchviehhof N-S Abstand 0",
+   "teile": [
+    [
+     "Gerberei",
+     148,
+     273
+    ],
+    [
+     "Milchviehhof",
+     148,
+     277
+    ]
+   ],
+   "gebaut": 1,
+   "soll": 2,
+   "pruefungen": [],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Gerberei|Milchviehhof N-S Abstand 1",
+   "teile": [
+    [
+     "Gerberei",
+     148,
+     273
+    ],
+    [
+     "Milchviehhof",
+     148,
+     278
+    ]
+   ],
+   "gebaut": 1,
+   "soll": 2,
+   "pruefungen": [],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Gerberei|Milchviehhof N-S Abstand 2",
+   "teile": [
+    [
+     "Gerberei",
+     148,
+     273
+    ],
+    [
+     "Milchviehhof",
+     148,
+     279
+    ]
+   ],
+   "gebaut": 1,
+   "soll": 2,
+   "pruefungen": [],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Gerberei|Milchviehhof N-S Abstand 3",
+   "teile": [
+    [
+     "Gerberei",
+     148,
+     273
+    ],
+    [
+     "Milchviehhof",
+     148,
+     280
+    ]
+   ],
+   "gebaut": 1,
+   "soll": 2,
+   "pruefungen": [],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Gerberei|Milchviehhof Eck SO 0-0",
+   "teile": [
+    [
+     "Gerberei",
+     148,
+     273
+    ],
+    [
+     "Milchviehhof",
+     152,
+     277
+    ]
+   ],
+   "gebaut": 1,
+   "soll": 2,
+   "pruefungen": [],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Gerberei|Milchviehhof Eck SO 0-1",
+   "teile": [
+    [
+     "Gerberei",
+     148,
+     273
+    ],
+    [
+     "Milchviehhof",
+     152,
+     278
+    ]
+   ],
+   "gebaut": 1,
+   "soll": 2,
+   "pruefungen": [],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Gerberei|Milchviehhof Eck SO 1-0",
+   "teile": [
+    [
+     "Gerberei",
+     148,
+     273
+    ],
+    [
+     "Milchviehhof",
+     153,
+     277
+    ]
+   ],
+   "gebaut": 1,
+   "soll": 2,
+   "pruefungen": [],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Gerberei|Milchviehhof Eck SO 1-1",
+   "teile": [
+    [
+     "Gerberei",
+     148,
+     273
+    ],
+    [
+     "Milchviehhof",
+     153,
+     278
+    ]
+   ],
+   "gebaut": 1,
+   "soll": 2,
+   "pruefungen": [],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Gerberei|Milchviehhof Eck NO 0-0",
+   "teile": [
+    [
+     "Gerberei",
+     148,
+     283
+    ],
+    [
+     "Milchviehhof",
+     152,
+     273
+    ]
+   ],
+   "gebaut": 1,
+   "soll": 2,
+   "pruefungen": [],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Gerberei|Milchviehhof Eck NO 0-1",
+   "teile": [
+    [
+     "Gerberei",
+     148,
+     284
+    ],
+    [
+     "Milchviehhof",
+     152,
+     273
+    ]
+   ],
+   "gebaut": 1,
+   "soll": 2,
+   "pruefungen": [],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Gerberei|Milchviehhof Eck NO 1-0",
+   "teile": [
+    [
+     "Gerberei",
+     148,
+     283
+    ],
+    [
+     "Milchviehhof",
+     153,
+     273
+    ]
+   ],
+   "gebaut": 1,
+   "soll": 2,
+   "pruefungen": [],
+   "eckdurchgaenge": []
+  },
+  {
+   "fall": "Gerberei|Milchviehhof Eck NO 1-1",
+   "teile": [
+    [
+     "Gerberei",
+     148,
+     284
+    ],
+    [
+     "Milchviehhof",
+     153,
+     273
+    ]
+   ],
+   "gebaut": 1,
+   "soll": 2,
+   "pruefungen": [],
+   "eckdurchgaenge": []
+  }
+ ],
+ "testflaeche": [
+  145,
+  270
+ ],
+ "kosten_zurueck": true
+}

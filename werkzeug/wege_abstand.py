@@ -163,10 +163,13 @@ class Prober:
             self.setze(n, x, y)
         warte_ticks(4)
         k = self.lesen(*fen)
-        neu = {v[1] for v in k["f"].values() if v[1] and v[1] not in vorher}
-        e = {"fall": titel, "teile": teile, "gebaut": len(neu), "soll": len(teile), "pruefungen": []}
+        # gebaut zaehlt je Teil: steht auf seiner linken oberen Ecke ein NEUES Gebaeude der verlangten Art?
+        # (20:30: die Kaserne bringt 3 Exerzierplatz-Gebaeude mit - Nummern zaehlen ergab "4/2" und keine Pruefung)
+        da = [n for n, x, y in teile if k["f"].get((x, y), (0, 0, 0, 0, 0, -1))[5] == ART[n][0]
+              and k["f"][(x, y)][1] not in vorher]
+        e = {"fall": titel, "teile": teile, "gebaut": len(da), "soll": len(teile), "pruefungen": []}
         wege = []
-        if len(neu) == len(teile):
+        if len(da) == len(teile):
             for pname, start, ziel, box in pruefungen:
                 kurz = None
                 for s in start:
@@ -182,7 +185,7 @@ class Prober:
         self.ergebnis["faelle"].append(e)
         W.zeichnen(k, os.path.join(BILDER, re.sub(r"[^A-Za-z0-9_-]+", "_", titel) + ".png"), W.gebaeude_typen_aus(k, {}),
                    wege=wege, zelle=24, titel=titel)
-        print("FALL %-48s gebaut %d/%d  %s" % (titel, len(neu), len(teile), "  ".join(
+        print("FALL %-48s gebaut %d/%d  %s" % (titel, len(da), len(teile), "  ".join(
             "%s=%s" % (p["was"], ("JA(%d)" % p["laenge"]) if p["durch"] else "nein") for p in e["pruefungen"])), flush=True)
         self.abreissen(k, vorher)
 
@@ -276,6 +279,8 @@ def gruppen(p):
 def main():
     arg = dict(a.split("=", 1) for a in sys.argv[1:])
     nur, tempo = arg.get("nur", "alle"), int(arg.get("tempo", 100))
+    if "paare" in arg:
+        PAARE[:] = [tuple(x.split(":")) for x in arg["paare"].split(",")]
     os.makedirs(BILDER, exist_ok=True)
     E.LEERE_KI = True
     E.gefecht_starten(tempo)
@@ -293,8 +298,12 @@ def main():
         for n in ("Lagerplatz", "Milchviehhof", "Apfelplantage"):
             SUCHEN[n] = mitte
         p = Prober(u)
-        for name in ART:                                   # Grundriss immer: liefert den Versatz fuer die Faelle
-            p.grundriss(name)
+        namen = {n for pr in PAARE for n in pr} | ({"Schmiede", "Kaserne"} if nur in ("alle", "gruppen") else set())
+        for name in ART:                                   # Grundriss: liefert Versatz und Groesse fuer die Faelle
+            if nur == "grundriss" or name in namen:
+                p.grundriss(name)
+        if "paare" in arg:                                 # z. B. paare=Schmiede:Kaserne,Kaserne:Schmiede
+            PAARE[:] = [tuple(x.split(":")) for x in arg["paare"].split(",")]
         if nur in ("alle", "paare"):
             paare(p)
         if nur in ("alle", "gruppen"):

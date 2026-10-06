@@ -60,3 +60,12 @@ Spiels abgelesen ist, aber noch nicht mit laufenden Einheiten geprueft, bleibt "
 | W17 | Milchviehhof 10x10: Huette in der Ecke, Zaun mit 2 Felder breiten Toren in der Mitte jeder Seite, innen freier Boden | ungeprueft | Weg-Ebene abgelesen (Grundriss 20:28); deckt sich mit Daniel W7 (Gitter) | 06.10. |
 | W18 | Apfelplantage: nur die Huette (3x3) ist Gebaeude, die Plantage zaehlt nicht dazu | ungeprueft | Weg-Ebene abgelesen (Grundriss 20:28); deckt sich mit Daniel W7 | 06.10. |
 | W19 | Wachturm, Verteidigungsturm, Torhaus: Felder oben begehbar, vom Boden nicht (ausser Torhaus-Durchfahrt) | ungeprueft | Weg-Ebene abgelesen; Pruefung "vom Boden erreichbar" laeuft (Abstandsreihe 20:31) | 06.10. |
+| W20 | Eingaenge lassen sich blockieren (Gebaeude, Mauern, Steingebaeude) - dann nehmen die Arbeiter einen anderen Eingang; so steuert man, wo was passiert | Daniel | Daniel 20:32 ("kleiner Tipp fuer maximale Effektivitaet") | 06.10. |
+| W21 | Nur EINE Kaserne je Spieler: eine zweite wurde in 25 von 25 Versuchen nicht gebaut | getestet | Abstandsreihe 20:30 (`daten/wege_abstand_20261006_203014.json`, Kosten 0, Platz frei) - Grund nicht im Code nachgesehen | 06.10. |
+| W22 | Ein weiteres Waffenlager wird nur Kante an Kante an ein bestehendes gebaut (Abstand 1-3 und nur Ecke an Ecke: 0 von 14) | getestet | Abstandsreihe 20:30 | 06.10. |
+| W23 | Zwei Schmieden gerade ohne Abstand: kein Durchgang; ab 1 Feld Abstand Durchgang (O-W und N-S) | ungeprueft | Weg-Ebene, Abstandsreihe 20:30 (Bauen getestet, Laufen nicht) | 06.10. |
+| W24 | Zwei Schmieden Ecke an Ecke: schraeger Durchgang zwischen den Ecken; zwei Verteidigungstuerme Ecke an Ecke: kein Durchgang | ungeprueft | Weg-Ebene, Abstandsreihe 20:30; deckt sich mit W3/W4 und Daniel W8 | 06.10. |
+| W25 | Vier Schmieden im Quadrat ohne Abstand: Mitte nicht passierbar; je 1 Feld Abstand: passierbar in beide Richtungen | ungeprueft | Weg-Ebene, Abstandsreihe 20:30 | 06.10. |
+| W26 | Huette neben Schmiede: in 3 Lagen (N-S 0, Eck NO 0-0 und 1-0) wurde die Schmiede nicht gebaut - Grund unbekannt | getestet | Abstandsreihe 20:30; offen | 06.10. |
+| W27 | Schmiede neben Kaserne: bei jedem Abstand (auch 0) ein Weg - ueber den Exerzierplatz | ungeprueft | Weg-Ebene, Abstandsreihe 20:32 (`daten/wege_abstand_20261006_203223.json`) | 06.10. |
+| W28 | Schmiede neben Waffenlager: gerade ohne Abstand kein Durchgang; Ecke an Ecke schraeg durch (nur eine Seite ist Ecksperre) | ungeprueft | Weg-Ebene, Abstandsreihe 20:32; deckt sich mit W3 | 06.10. |
