@@ -744,6 +744,19 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                         trainingsstand, len(angekommen), st["t"], pfad))
                     break
             tz = uhr("assassinen", tz)
+        if streitkolben and not fruehpruefung.get("ok4000"):
+            # schaerfer (Daniel 21:56: "er baut nur einen Steinbruch, hier wuerde ich auch abbrechen ... gleiches fuer
+            # andere nicht optimal platzierte Gebaeude"): genug Steinbrueche, keiner weit vom Lager
+            lager_teile = [g for g in G.values() if g["besitzer"] == SP and g["typ"] == 10]
+            weit = [(g["x"], g["y"]) for g in G.values() if g["besitzer"] == SP and g["typ"] == 20 and lager_teile and
+                    min(max(abs(g["x"] - l["x"]), abs(g["y"] - l["y"])) for l in lager_teile) > 40]
+            soll = 3 if st["t"] >= 4000 else 2 if st["t"] >= FRUEH_TICK else 0
+            if st.get("G20", 0) < soll or (weit and st["t"] >= FRUEH_TICK):
+                schreib("FRUEHABBRUCH bei Tick %d: %d Steinbrueche (soll %d)%s" % (st["t"], st.get("G20", 0), soll,
+                        ", weit vom Lager: %s" % weit if weit else ""))
+                break
+            if st["t"] >= 4000:
+                fruehpruefung["ok4000"] = True
         if streitkolben and st["t"] >= FRUEH_TICK and not fruehpruefung.get("ok"):
             # Fruehabbruch (Daniel 21:55: "wenn du merkst, dass schon der Steinbruch nicht richtig gesetzt ist, muesstest du
             # eigentlich schon aufhoeren ... das sind alles verschwendete Zeiten/Versuche")
