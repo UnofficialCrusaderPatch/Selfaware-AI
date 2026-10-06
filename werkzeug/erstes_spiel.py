@@ -858,9 +858,12 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
     wirt.holz_verbauen = holz_verwerten
     global BUCH
     leder, hf_spaeter = None, []
+    # Auftragsbuch und die allgemeinen Knoepfe in JEDER Bauweise (Lernkreis 23:20: sonst kann er nach einem Sieg der
+    # v5-Bauweise nichts mehr verbessern; Daniel 22:08: jeder Bau wird geprueft - nicht nur in v14)
+    from auftragsbuch import Auftragsbuch
+    BUCH = Auftragsbuch(SP, ARBEITER_JE, NACH_TYP)
+    ausbau.holz_max, ausbau.je_arbeiter, ausbau.huetten_je_baum = HF_MAX, JE_ARBEITER, HUETTEN_JE_BAUM
     if V14:
-        from auftragsbuch import Auftragsbuch
-        BUCH = Auftragsbuch(SP, ARBEITER_JE, NACH_TYP)
         wirt.umzug_ab, wirt.lager_genau, wirt.lager_ort = None, True, tuple(V14_PLAN["lager"])
         wirt.umzug_nach_b = UMZUG == "nachb"
         if UMZUG == "frueh":
@@ -975,7 +978,14 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
             fruehpruefung["hf_ladung"] = lad_jetzt
             # Spam endet bei HOLZ_SPAM Holzfaellern ODER mit der ersten Lieferung (E4: 19 von 20 - die Steinbrueche kamen nie)
             spam_offen = bool(HOLZ_SPAM) and hf_jetzt < HOLZ_SPAM and "holz_geliefert" not in fruehpruefung
-            if V14 and spam_offen and not endspiel["fertig"]:
+            if HOLZ_KAUFEN and not endspiel["fertig"] and st.get("feuer", 0) >= 4 and st["holz"] < 5 \
+                    and st["gold"] >= 60 + wirt.ruecklage(G)["gold"] and st["t"] - fruehpruefung.get("holz_gekauft", -999) >= 100:
+                # v17 (22:57): untaetige Bauern bringen 0 - 5 Holz fuer 15 Gold (L11) = ein Arbeitsplatz; in jeder Bauweise
+                fruehpruefung["holz_gekauft"] = st["t"]
+                vor = vorrat(SP)["gold"]
+                befehl({"spielbefehl": {"nr": 38, "werte": [0, 2]}}, 1.0, bis="SPIELBEFEHL")
+                ereignis.append("HOLZ GEKAUFT (Feuer %d untaetig, Holz %d): Gold %d -> %d" % (st["feuer"], st["holz"], vor, vorrat(SP)["gold"]))
+            if spam_offen and not endspiel["fertig"]:
                 # E3: so viele Holzfaeller wie das Holz hergibt (ueber der B-Ruecklage), naechste zum Lager, mehrere je Baum
                 holz = st["holz"] - wirt.ruecklage(G)["holz"]
                 for _ in range(3):
@@ -1004,13 +1014,6 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                         fruehpruefung["stein_besetzt"] = st["t"]
                         ausbau.ohne = {20}
                         ereignis.append("STEINBRUECHE BESETZT bei Tick %d (6/6 + Joche 2/2) - Planer und restliche Holzfaeller frei" % st["t"])
-                if HOLZ_KAUFEN and st.get("feuer", 0) >= 4 and st["holz"] < 5 and st["gold"] >= 60 + wirt.ruecklage(G)["gold"] \
-                        and st["t"] - fruehpruefung.get("holz_gekauft", -999) >= 100:
-                    # v17 (22:57): untaetige Bauern bringen 0 - ein 20er-Los Holz = 4 Holzfaeller-Huetten; Preis wird gemessen
-                    fruehpruefung["holz_gekauft"] = st["t"]
-                    vor = vorrat(SP)["gold"]
-                    befehl({"spielbefehl": {"nr": 38, "werte": [0, 2]}}, 1.0, bis="SPIELBEFEHL")
-                    ereignis.append("HOLZ GEKAUFT (Feuer %d untaetig, Holz %d): Gold %d -> %d" % (st["feuer"], st["holz"], vor, vorrat(SP)["gold"]))
                 if "stein_besetzt" in fruehpruefung and hf_spaeter and st["holz"] - wirt.ruecklage(G)["holz"] >= 5:
                     o = hf_spaeter.pop(0)
                     ereignis.append("HOLZFAELLER aus dem Plan nach den Steinbruechen bei %s: %s" % (o, baue_schnell(3, o[0], o[1], 1, zweck="Plan")))
