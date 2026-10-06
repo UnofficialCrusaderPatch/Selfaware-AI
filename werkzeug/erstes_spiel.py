@@ -452,6 +452,7 @@ ENTSCHEIDER = "regeln"   # "kausal" (Daniel 23:27 "dynamische Antworten fuer all
 B_VERSATZ = None         # Lernkreis: B-Plantagen so viele Ticks nach "alle A stehen" (None = erst bei A-Reife)
 STEUER_RUNTER = 95       # Lernkreis: Steuer senken unter dieser Beliebtheit (Daniel 06.10. 23:53: Steuern als Geldquelle)
 BEV_ZIEL = 0             # Lernkreis: Huetten bauen, bis so viele Wohnplaetze stehen (0 = aus; Daniel 07.10. 00:17 "60-70")
+SCHUB = False            # Lernkreis: die ersten 5 Kaempfer schon waehrend der Kasse anwerben (Lauf 45/46: Verlust im Endspiel)
 KASSE_STUFE = 11         # Lernkreis: Steuerstufe der Kasse (11 = -40, 9 = -20, 7 = -11; Liga 4,00 / 2,00 / 1,30 Gold je Kopf)
 PENNER = 20              # Lernkreis: Wachstums-Holzfaeller erst ab so vielen Wartenden am Feuer (hoechstens 24 moeglich)
 KASSE_GRENZE = 50        # Lernkreis: Kasse nur, solange die Beliebtheit darueber liegt (Lauf 26: bei 0 Massen-Wegzug)
@@ -1018,7 +1019,18 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
         runde += 1
         if not st:
             continue
-        if st.get("over") != 0 or st.get("ansicht") != 14:
+        if st.get("over") == 0 and st.get("ansicht") not in (14, 16):
+            # 07.10. (Lauf 24/27/50/51: Daniel schaut zu, Ansicht 16 bei pause 0 -> Abbruch, Lauf verloren): Ansicht 16 ist
+            # Spiel mit offenem Menue (Spiel laeuft weiter) und zaehlt wie 14; andere Ansicht: warten, nach 120 s abbrechen
+            if "ansicht_weg" not in fruehpruefung:
+                fruehpruefung["ansicht_weg"] = time.time()
+                schreib("ANSICHT %s bei Tick %s (von aussen?) - Lenker wartet" % (st.get("ansicht"), st.get("t")))
+            if time.time() - fruehpruefung["ansicht_weg"] < 120:
+                time.sleep(0.5)
+                continue
+        else:
+            fruehpruefung.pop("ansicht_weg", None)
+        if st.get("over") != 0 or st.get("ansicht") not in (14, 16):
             # Spielende deutlich melden (Daniel 05.10. 00:44): wer hat wessen Lord getoetet? (PlayerData +8720)
             if st.get("over") == 1:
                 getoetet = {sp: s32(peek(0x0115BDF8 + sp * 0x39F4 + 8720)[0]) for sp in (1, 2)}
@@ -1173,6 +1185,36 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                 if lose_n:
                     sende({"befehle": lose_n}, 1.0, bis="SPIELBEFEHL")
                     ereignis.append("KASSE Nahrung verkauft: %d Lose" % len(lose_n))
+            # Schub (07.10., Daniel 01:07 "macht was ihr koennt"): Lauf 45/46 - im Endspiel bei Beliebtheit 0 ging der 10.
+            # Angeworbene auf dem Weg verloren, Nachkauf 460 Gold = ~1.100 Ticks. Die ersten 5 Kaempfer darum schon waehrend
+            # der Kasse, solange die Beliebtheit hoeher ist (Liga-Wegzug -5 bei 25-29 statt -40 bei 0-4)
+            if SCHUB and kasse["an"] and not endspiel["fertig"] and st.get("T26", 0) == 0 and kasse.get("schub") != "geworben":
+                v_s = vorrat(SP)
+                kas_s = [n for n, g in G.items() if g["besitzer"] == SP and g["typ"] == 9]
+                wl_s = [n for n, g in G.items() if g["besitzer"] == SP and g["typ"] == 11]
+                bedarf_s = LOS_PREIS[21] + LOS_PREIS[23] + 5 * KAEMPFER_GOLD
+                if kasse.get("schub") == "gekauft":
+                    werben_s = min(v_s.get("keule", 0), v_s.get("leder", 0), st.get("feuer", 0), v_s.get("gold", 0) // KAEMPFER_GOLD, 5)
+                    if kas_s and werben_s > 0:
+                        for _ in range(werben_s):
+                            befehl({"werbe": {"typ": 26, "gebaeude": kas_s[0]}}, 1.0, bis="WERBE")
+                        kasse["schub"] = "geworben"
+                        ereignis.append("SCHUB %d Streitkolbenkaempfer angeworben (Beliebtheit %.1f)" % (werben_s, st.get("beliebt", 0) / 100.0))
+                elif v_s.get("gold", 0) >= bedarf_s and st.get("feuer", 0) >= 5:
+                    if not kas_s:
+                        if st.get("stein", 0) < 12:
+                            for _ in range(-(-(12 - st.get("stein", 0)) // 5)):
+                                befehl({"spielbefehl": {"nr": 38, "werte": [0, 4]}}, 1.0, bis="SPIELBEFEHL")
+                        elif not any(a["typ"] == 9 for a in BUCH.offen):
+                            ereignis.append("SCHUB Kaserne am Feuer %s" % (kaserne_am_feuer(G),))
+                    if not wl_s and not any(a["typ"] == 11 for a in BUCH.offen):
+                        ereignis.append("SCHUB Waffenlager %s" % (baue_schnell(11, BERGFRIED[0] - 14, BERGFRIED[1] + 14, 25),))
+                    if kas_s and wl_s:
+                        for ware, name in ((21, "keule"), (23, "leder")):
+                            if v_s.get(name, 0) < 5:
+                                befehl({"spielbefehl": {"nr": 38, "werte": [0, ware]}}, 1.0, bis="SPIELBEFEHL")
+                        kasse["schub"] = "gekauft"
+                        ereignis.append("SCHUB je 1 Los Keulen + Leder gekauft (Gold %d, Beliebtheit %.1f)" % (v_s.get("gold", 0), st.get("beliebt", 0) / 100.0))
             ausbau.nach_abriss = bool(endspiel["fertig"])
             if runde % 10 == 1:
                 schreib(BUCH.stand(G, st))
@@ -1458,12 +1500,13 @@ def main():
     HOLZ_KAUFEN = arg.get("holz_kaufen", "nein") == "ja"
     global HOLZ_SPAM, STEIN_MAX, JOCH_NACH_STEIN, STEIN_PARALLEL, HUETTEN_VORAUS, VOLLBESCHAEFTIGUNG
     VOLLBESCHAEFTIGUNG = arg.get("vollbeschaeftigung", "nein") == "ja"
-    global ENTSCHEIDER, ZIEL_TICK, B_VERSATZ, STEUER_RUNTER, STEUER_ENDE, BEV_ZIEL, KASSE, KASSE_GRENZE, PENNER, KASSE_STUFE
+    global ENTSCHEIDER, ZIEL_TICK, B_VERSATZ, STEUER_RUNTER, STEUER_ENDE, BEV_ZIEL, KASSE, KASSE_GRENZE, PENNER, KASSE_STUFE, SCHUB
     BEV_ZIEL = int(arg.get("bevoelkerung_ziel", 0))
     KASSE = arg.get("kasse", "nein")
     KASSE_GRENZE = int(arg.get("kasse_grenze", 50))
     PENNER = int(arg.get("penner", 20))
     KASSE_STUFE = int(arg.get("kasse_stufe", 11))
+    SCHUB = arg.get("schub", "nein") == "ja"
     STEUER_RUNTER = int(arg.get("steuer_runter", 95))
     STEUER_ENDE = arg.get("steuer_ende", "nein")
     B_VERSATZ = None if arg.get("b_versatz", "reif") == "reif" else int(arg["b_versatz"])
