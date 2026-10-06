@@ -90,3 +90,19 @@ Spiel gegenpruefen.
   (Kauf) + ~2.100 Ticks je Schmiede. Gold ist der Engpass (Ausgangswert: 1.000 Gold erst bei Tick 15.975).
 - Naechster Schritt: erster Benchmark 10 Kaempfer ab Tick 0 ohne gesetztes Gold - Weg A nur Markt, Weg B Markt +
   eigene Kette; Marken 1..10 mit Tick.
+
+## Daniel 06.10. 20:05 (Bild: Lager mit Gebaeuden drumherum) - als Naechstes
+Woertlich: "ich verstehe nicht genau warum du es so baust, weil der Weg vom Streitimacher gesperrt ist. PS: wenn du
+sie genau aufeinanderliegend machst, koennen sie durchlaufen. PS PS: es macht sehr viel Sinn zu schauen, wie du die
+Laufwege sehen kannst und natuerlich wie das Spiel sie berechnet, und dann eine moeglichst effektive Aufstellung
+erstellst - das wird besonders wichtig, wenn du skalierst, sagen wir 30 Schwertmacher und 30 Lederharnischmacher etc.
+bzw. dynamisch anpassend je nachdem wie viele du von was brauchst. Aber bitte gerne testen wie viel Streitis wie viel
+Eisen, wie viele Kuehe wie viele Lederharnische."
+Daraus:
+1. Laufwege sichtbar machen: Arbeiter-Positionen je Runde mitschreiben (Lagebild: x, y, laufx, laufy, zustand) und als
+   Karte auswerten; Begehbarkeit/Wegnetz des Spiels lesen (Modulbefehle begehbar, wegtest, rohstoffkarte).
+2. Wie das Spiel Wege berechnet (Wegfinder, Wegnetz-Gebiete) im Spielcode nachlesen (Ghidra, findPath...).
+3. Aufstellung: Werkstaetten so, dass kein Weg zum Lager/Waffenlager versperrt ist; Gebaeude genau aneinander, damit
+   man durchlaufen kann (Daniel) - im Spiel pruefen.
+4. Skalierbar und dynamisch: Zahl der Schmieden/Gerbereien/Milchhoefe nach Bedarf (z. B. 30/30) - Verhaeltnisse
+   messen: Keulen je Eisen (bisher 1:1, 3 Stueck), Harnische je Kuh (bisher 3, 2 Kuehe) - mit mehr Stueckzahl bestaetigen.
