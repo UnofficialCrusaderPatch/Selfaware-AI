@@ -106,3 +106,9 @@ Daraus:
    man durchlaufen kann (Daniel) - im Spiel pruefen.
 4. Skalierbar und dynamisch: Zahl der Schmieden/Gerbereien/Milchhoefe nach Bedarf (z. B. 30/30) - Verhaeltnisse
    messen: Keulen je Eisen (bisher 1:1, 3 Stueck), Harnische je Kuh (bisher 3, 2 Kuehe) - mit mehr Stueckzahl bestaetigen.
+
+## Daniel 06.10. 20:06 zum Abriss
+"sie bekommen nicht mehr Wert, nur weil sie laenger stehen. Sie geben normalerweise die Haelfte ab, egal in welchem
+Zustand. Gleiches gilt fuer Torhaeuser oder Tuerme, weshalb es manchmal effektiver sein kann, sie abzureissen und mit der
+Haelfte ein neues zu bauen, anstatt sie zu reparieren." - Meine 0-Messungen widersprechen dem: der Modulbefehl abreissen
+hat einen Parameter rueckgabe (Standard 0, Spielbefehl 29 {nr, rueckgabe, uid}) - nie gesetzt. Naechster Test: rueckgabe=1.
