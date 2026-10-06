@@ -458,6 +458,12 @@ def bilanz_schritt(st, L, G, ausbau, ziel, endspiel, runde, marken):
             v[name] = v.get(name, 0) + 5
             v["gold"] -= LOS_PREIS[ware]
             aus.append("5 %s gekauft" % name)
+    if not kas and n > 0 and endspiel["fertig"]:
+        # Absicherung (v6/v7: Kaserne nach dem Endspiel weg, Lauf hing still bei 2-4 Kaempfern): sofort neu bauen
+        if st.get("stein", 0) < 12:
+            for _ in range(-(-(12 - st.get("stein", 0)) // 5)):
+                befehl({"spielbefehl": {"nr": 38, "werte": [0, 4]}}, 1.0, bis="SPIELBEFEHL")
+        aus.append("WARNUNG Kaserne fehlt nach dem Endspiel - neu gebaut: %s" % (kaserne_am_feuer(G),))
     if kas:
         werben = min(v.get("keule", 0), v.get("leder", 0), st.get("feuer", 0), v.get("gold", 0) // KAEMPFER_GOLD, n)
         for _ in range(max(werben, 0)):
