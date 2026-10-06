@@ -57,5 +57,18 @@
    "fehler": false
   },
   "notiz": "nur Wirtschaft + Bilanz, Horizont 16.000"
+ },
+ {
+  "name": "v6",
+  "marken": {
+   "kaempfer_1": 12135,
+   "kaempfer_2": 12161,
+   "kaempfer_3": 12189,
+   "kaempfer_4": 12189,
+   "seasoning_b": 1729,
+   "endspiel": 11708,
+   "fehler": false
+  },
+  "notiz": "Kaserne mit abgerissen (Exerzierplatz) - nur 4 Kaempfer"
  }
 ]

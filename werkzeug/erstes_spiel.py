@@ -424,17 +424,22 @@ def bilanz_schritt(st, L, G, ausbau, ziel, endspiel, runde, marken):
             aus.append("Waffenlager %s" % (baue_schnell(11, BERGFRIED[0] - 14, BERGFRIED[1] + 14, 25),))
         # Reihenfolge (Daniel 21:24: "sie geht verloren, wenn du abreisst und kein Platz ist"): ERST alles verkaufen,
         # damit die Lagerteile leer sind, DANN abreissen, dann die Rueckgabe noch einmal verkaufen
+        # gebuendelt in EINEM Befehl je Schritt (v6: 34 Verkaeufe + 47 Abrisse einzeln -> die Runde dauerte 427 Ticks)
         verkauft = {}
         def alles_verkaufen():
+            vk = vorrat(SP)
+            liste = []
             for w, los in BZ.LOS.items():
-                for _ in range(60):
-                    if vorrat(SP).get(w, 0) < los:
-                        break
-                    befehl({"spielbefehl": {"nr": 38, "werte": [1, BZ.WARE_NR[w]]}}, 1.0, bis="SPIELBEFEHL")
-                    verkauft[w] = verkauft.get(w, 0) + 1
+                k = min(vk.get(w, 0) // los, 60)
+                liste += [{"spielbefehl": {"nr": 38, "werte": [1, BZ.WARE_NR[w]]}}] * k
+                if k:
+                    verkauft[w] = verkauft.get(w, 0) + k
+            if liste:
+                sende({"befehle": [dict(b, player=1, id=neue_id()) for b in liste]}, 2.0, bis="SPIELBEFEHL")
         alles_verkaufen()
-        for nr in t["abriss_liste"]:
-            befehl({"abreissen": {"nr": nr}}, 0.6, bis="ABREISSEN")
+        if t["abriss_liste"]:
+            sende({"befehle": [{"player": 1, "id": neue_id(), "abreissen": {"nr": nr}} for nr in t["abriss_liste"]]}, 2.0,
+                  bis="ABREISSEN")
         tick0 = tick()
         while tick() - tick0 < 10:                     # Abriss-Rueckgabe ins Lager
             time.sleep(0.05)
@@ -446,8 +451,9 @@ def bilanz_schritt(st, L, G, ausbau, ziel, endspiel, runde, marken):
     v = vorrat(SP)
     kas = [n for n, g in eig.items() if g["typ"] == 9]
     n = ziel - st.get("T26", 0)
+    # alle noetigen Lose auf einmal (v6 kaufte nur eines je Ware und wartete dann), Gold fuer das Anwerben bleibt
     for ware, name in ((21, "keule"), (23, "leder")):
-        if v.get(name, 0) < n and v.get(name, 0) == 0 and v.get("gold", 0) >= LOS_PREIS[ware] + KAEMPFER_GOLD:
+        while v.get(name, 0) < n and v.get("gold", 0) >= LOS_PREIS[ware] + n * KAEMPFER_GOLD:
             befehl({"spielbefehl": {"nr": 38, "werte": [0, ware]}}, 1.0, bis="SPIELBEFEHL")
             v[name] = v.get(name, 0) + 5
             v["gold"] -= LOS_PREIS[ware]
@@ -721,8 +727,9 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                         n, alt, e["leben"], e["x"], e["y"], bei or "keine"))
                 feindlord[n] = e["leben"]
         tz = time.time()
-        ereignis += wirt.schritt(st, L, G)
-        ereignis += ausbau.schritt(st, L, G, runde)
+        if not (streitkolben and endspiel["fertig"]):    # nach dem Endspiel ruht die Wirtschaft (v6: baute A-Plantagen nach)
+            ereignis += wirt.schritt(st, L, G)
+            ereignis += ausbau.schritt(st, L, G, runde)
         tz = uhr("wirtschaft", tz)
         bedarf = sum(ARBEITER_JE[t] * st.get("G%d" % t, 0) for t in ARBEITER_JE)
         if st["holz"] >= 5 + wirt.ruecklage(G)["holz"] and (bedarf > st["platz"] or (trupp is not None and st["feuer"] == 0 and st["platz"] - st["leute"] <= 2)):

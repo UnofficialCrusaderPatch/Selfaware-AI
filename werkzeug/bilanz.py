@@ -17,7 +17,7 @@ WARE_NR = {"holz": 2, "stein": 4, "eisen": 6, "apfel": 13, "brot": 10, "kaese": 
 LOS = {"holz": 20, "stein": 5, "eisen": 5, "apfel": 5, "brot": 5, "kaese": 5, "fleisch": 5}
 KAUF_LOS = {21: 300, 23: 160}
 ANWERBEN = 20
-BLEIBEN = {41, 71, 72, 73, 55, 1, 9, 10, 11, 19, 21, 26}  # Bergfried, Tueren, Feuer, Huetten, Kaserne, Lager, Waffenlager, Kornspeicher, Steinhaufen (gehoert zum Steinbruch), Markt
+BLEIBEN = {41, 71, 72, 73, 55, 1, 9, 10, 11, 19, 21, 26, 57}  # Bergfried, Tueren, Feuer, Huetten, Kaserne, Lager, Waffenlager, Kornspeicher, Steinhaufen (gehoert zum Steinbruch), Markt, Exerzierplatz (57, gehoert zur Kaserne - v6 riss ihn ab, danach keine Kaserne mehr)
 ROHSTOFF_WERT = {"holz": 1, "stein": 5, "eisen": 27, "pech": 0, "gold": 1}
 
 
