@@ -1019,7 +1019,16 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                 feuer_g = next(((g["x"] + 1, g["y"] + 1) for g in G.values() if g["besitzer"] == SP and g["typ"] == 55), BERGFRIED)
                 lager_m = tuple(plan["lager"])
                 speicher_m = tuple(plan["kornspeicher"])
-                kand_k = [(k["typ"], k["ort"], k["kosten"], k["arbeiter"]) for k in ausbau.kandidaten(st, L, G) if k["typ"] in (3, 32, 7)]
+                # 23:48 (Daniel: "warum wird hier keine Plantage gebaut"): je Art die 4 naechsten Plaetze zur Abgabe bewerten -
+                # vorher nur EINEN (den "besten" des Planers, (101,200) ganz oben); die Flaeche neben den Obstgaerten sah es nie
+                abgabe_k = {3: lager_m, 32: speicher_m, 7: speicher_m}
+                kand_k = []
+                for typ_a in (3, 32, 7):
+                    if typ_a in getattr(ausbau, "ohne", ()):
+                        continue
+                    b_a = ausbau.groesse.get(typ_a, 3) // 2
+                    orte_a = sorted(ausbau._orte(typ_a, L, G), key=lambda p: max(abs(p[0] + b_a - abgabe_k[typ_a][0]), abs(p[1] + b_a - abgabe_k[typ_a][1])))
+                    kand_k += [(typ_a, p, ausbau.kosten_von(typ_a), 1) for p in orte_a[:4]]
                 R_k = wirt.ruecklage(G)
                 st_k = dict(st, holz=st["holz"] - R_k["holz"], gold=st["gold"] - R_k["gold"])
                 for w_k, typ_k, ort_k, text_k in KM.entscheide(st["t"], ZIEL_TICK, st_k, kand_k, feuer_g,
@@ -1031,10 +1040,14 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                         if not o_k:
                             ausbau.fehlschlag[(typ_k, ort_k)] = ausbau.fehlschlag.get((typ_k, ort_k), 0) + 1
                     ereignis.append("KAUSAL %s bei %s: %s -> %s" % (NACH_TYP[typ_k]["name"], ort_k, text_k, o_k))
-            if V14 and not endspiel["fertig"] and st["t"] >= ZIEL_TICK - 4000:
+                # Holz aus dem Modell (Daniel 23:48 "mach das direkt aus dem Modell, sofort"): hat keine Handlung mit Holz mehr
+                # positiven Wert, ist Holz nur noch Verkaufsware -> alles ueber 20 verkaufen, Lager waechst nicht mehr
+                bedarf_holz = KM.entscheide(st["t"], ZIEL_TICK, dict(st_k, holz=999, gold=999), kand_k, feuer_g, abgabe_k, kosten_spiel(1)["holz"])
+                fruehpruefung["holz_ueberfluessig"] = not bedarf_holz
+            if V14 and not endspiel["fertig"] and fruehpruefung.get("holz_ueberfluessig"):
                 # Daniel 23:46: gegen Ende Holz direkt verkaufen statt neue Lagerplaetze - Holzfaeller legen sofort ab
                 ausbau.lager_stopp = wirt.lager_stopp = True
-                lose_h = min(3, max(0, (st["holz"] - 40) // 20))
+                lose_h = min(3, max(0, (st["holz"] - 20) // 20))
                 if lose_h:
                     sende({"befehle": [{"player": 1, "id": neue_id(), "spielbefehl": {"nr": 38, "werte": [1, WAREN_NR["holz"]]}}
                                        for _ in range(lose_h)]}, 1.0, bis="SPIELBEFEHL")
