@@ -133,6 +133,7 @@ Spiels abgelesen ist, aber noch nicht mit laufenden Einheiten geprueft, bleibt "
 | B25 | Verkaufspreise: Stein 5 Gold je Stueck (5 -> +25), Eisen 27 (10 -> +270) | getestet | Messung 21:22 im stehenden v3-Spiel (je 1 Verkauf, kurz laufend - Holz/Fleisch dabei verrauscht) | 06.10. |
 | B27 | Spielzeit: 1 Tag = 50 Ticks, 1 Monat = 16 Tage = 800 Ticks, 1 Jahr = 12 Monate = 9.600 Ticks (11.930 Ticks = 1 Jahr 2 Monate 15 Tage) | getestet | VillageStudio doku/Wissensstand.md ("belegt", 445 von 445), Modulkommentar logik.lua Zeile 63 | 06.10. |
 | B26 | Eine Eisenmine zu bauen ist fast immer besser, als Holz und Stein nur zu verkaufen | Daniel | Daniel 21:34; steht gegen unsere Messung (v4: 11 Minen bis Tick 14.000 kein Eisen, Anlauf 6.664; v5: 359 Holz ungenutzt im Endspiel) -> Verdacht: unsere Minen sind falsch gesetzt/unbesetzt/Eisen sofort verkauft - Diagnose offen | 06.10. |
+| B28 | "Gruende" wie fehlendes Holz/Arbeiter sind keine Gruende: entweder fehlen dem Planer Informationen oder er nutzt sie nicht. Planer entscheidet gierig je Runde statt vorauszuplanen (spart nicht auf den besten Bau, erfaehrt nicht, dass ein fester Platz gescheitert ist) | Daniel | Daniel 21:52; umgesetzt v11: Holz fuer den besten Bau zurueckhalten, Steinbruch am Stein weitersuchen - Vorausplanung (Reservierung von Arbeitern, Huetten vorab) offen | 06.10. |
 
 ## Bewaehrt / nicht bewaehrt (nach jedem Lauf eine Zeile, Daniel 21:05: "schauen, was hat sich bewaehrt und was nicht")
 
@@ -154,3 +155,4 @@ Spiels abgelesen ist, aber noch nicht mit laufenden Einheiten geprueft, bleibt "
 | Haertetest v7 | Exerzierplatz 57 geschuetzt, Befehle gebuendelt | teils | Endspiel 11.886, erster Kaempfer nach 87 Ticks (bewaehrt: buendeln); Teile 56/58 abgerissen -> Kaserne weg, nur 2 |
 | Haertetest v8 | alle Exerzierplatz-Teile 56-59 geschuetzt | teils | Endspiel 11.368 (fruehestes), 5 Kaempfer bei 11.509; Gold reichte nicht fuer das 2. Leder-Los -> 10 erst bei 15.262 |
 | Haertetest v9 | zweistufiges Endspiel (echtes Gold nach Verkauf) | teils | 6x verschoben ab 14.255; dann 904+179 genuegte nicht (1.086 < 1.120) -> 5 Kaempfer bei 14.501, Rest nicht bis 16.000. ERKENNTNIS: Laeufe derselben Fassung streuen stark (Endspiel 11.368 / 11.416 / 14.255) - fuer Vergleiche mehrere Laeufe je Variante |
+| Haertetest v10a | Abriss nur halb + 20 Sicherheit im Endspiel | **bewaehrt (Platz 2)** | 10 Kaempfer bei 12.259 ohne Haengen (63x verschoben ab 11.206, dann sicher) |
