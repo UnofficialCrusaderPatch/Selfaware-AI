@@ -1,0 +1,62 @@
+# Wissensregister Selfaware-AI
+
+Angelegt 06.10.2026 20:23 auf Daniels Wunsch: "alle diese Dinger als ungeprueft von dir oder per Tests oder von mir
+confirmed festhalten, nicht einfach fuer bare Muenze nehmen; wenn du es getestet und ich verifiziert habe, gerne so
+uebernehmen als festes Wissen."
+
+**Stufen**
+- **ungeprueft** – nur im Spielcode gelesen, aus einer fremden Quelle oder von Claude vermutet
+- **getestet** – von Claude im Spiel gemessen; Werkzeug und Datei stehen als Beleg dabei
+- **Daniel** – von Daniel aus Spielerfahrung gesagt, noch nicht getestet
+- **fest** – getestet UND von Daniel bestaetigt; nur das gilt als festes Wissen
+
+Eine Stufe steigt nur durch einen Test (-> getestet) oder durch Daniel (-> Daniel / fest). Was in der Weg-Ebene des
+Spiels abgelesen ist, aber noch nicht mit laufenden Einheiten geprueft, bleibt "ungeprueft".
+
+## Abriss
+
+| Nr | Aussage | Stufe | Grundlage | Stand |
+|---|---|---|---|---|
+| A1 | Der Abriss-Knopf gibt die Haelfte der Baukosten zurueck | **fest** | Daniel 20:06 ("die Haelfte"); Code: Knopf schickt 50 % (0x00438ad9); getestet Messpartie 8 (Schmiede 20/8 -> 10/4) | 06.10. |
+| A2 | Es wird je Ware abgerundet, kein Rest wird gemerkt (3 -> 1, 15 -> 7) | getestet | `abriss_messen.py`, 6 von 6 wie vorhergesagt, `daten/abriss_messung_20261006_201248.json` | 06.10. |
+| A3 | Der Zustand (Schaden) aendert die Rueckgabe nicht | Daniel | Daniel 20:06; Code-Formel hat keinen Zustand-Anteil (ungeprueft) - mit beschaedigtem Gebaeude nicht getestet | 06.10. |
+| A4 | Ohne Lagerplatz fuer die Ware ist die Rueckgabe weg (nur Ton "kein Platz") | ungeprueft | Code `giveBackResourceForDestroyedBuilding` | 06.10. |
+| A5 | Gratis gebaute Gebaeude (kein Holz und kein Holzfaeller) geben beim Abriss nichts zurueck | ungeprueft | Code `placeBuilding`: Marke +0x288 = 1, ClickDestroyBuilding gibt nur bei 0 zurueck | 06.10. |
+| A6 | Torhaus/Turm: abreissen und neu bauen kann billiger sein als reparieren | Daniel | Daniel 20:06 | 06.10. |
+| A7 | Mauern sammeln Bruchteile ueber mehrere Abrisse | ungeprueft | Code (Weg -1/-2 mit stoneGainedFraction/woodGainedFraction) | 06.10. |
+
+## Streitkolben-Kette und Lager
+
+| Nr | Aussage | Stufe | Grundlage | Stand |
+|---|---|---|---|---|
+| S1 | Ein Streitkolbenkaempfer kostet 20 Gold + 1 Keule + 1 Lederharnisch | getestet | Messpartien 3 und 8 (`streitkolben_messen.py`) | 06.10. |
+| S2 | Markt: 5 Keulen kaufen 300 / verkaufen 150; 5 Leder 160 / 50; 5 Eisen kaufen 270 | getestet | Messpartie 8; Eisen Messpartie 4 (20 Eisen = 1.080 Gold) | 06.10. |
+| S3 | Gerberei macht aus einer Kuh 3 Lederharnische | getestet | Messpartie 3, nur 2 Kuehe - mit groesserer Zahl bestaetigen | 06.10. |
+| S4 | Schmiede: 1 Eisen -> 1 Keule; ohne Umstellung macht sie Schwerter; Umstellung per Spielbefehl 33 | getestet | Messpartien 4-6, 3 Stueck - mit groesserer Zahl bestaetigen | 06.10. |
+| S5 | Schmiede holt am Lager (~6 Felder) alle ~2.100 Ticks ein Eisen, bei ~55 Feldern ~4.100 | getestet | Messpartien 4-6, je 2 Proben | 06.10. |
+| S6 | Jedes Lagerteil fasst nur EINE Warenart, hoechstens 48 | getestet | Messung 19:58 (Gebaeude +0x184/+0x188/+0x18C), Tipp Daniel | 06.10. |
+| S7 | Nur Gold ist eine reine Zahl; gesetzte Waren werden aus den Lagern neu gezaehlt | getestet | Messpartie 2 (Stein 300 gesetzt -> 0) | 06.10. |
+
+## Laufwege (Weg-Ebene des Spiels)
+
+| Nr | Aussage | Stufe | Grundlage | Stand |
+|---|---|---|---|---|
+| W1 | Das Spiel fuehrt je Feld ein Byte mit 8 erlaubten Schritten (PathLinkageLayer, 0x01E1E4F8); Bits 1 N, 2 NO, 4 O, 8 SO, 0x10 S, 0x20 SW, 0x40 W, 0x80 NW | ungeprueft | Code `updateSeparateAreaTileMap`; Richtung der Bits noch nicht mit laufender Einheit geprueft | 06.10. |
+| W2 | Gerade kommt man nicht auf ein Gebaeudefeld (ausser Sonderfaelle: Lagerteile, Bergfried-Ebene, Lagerfeuer) | ungeprueft | Code `updatePathLinkageLayerBasedOnBuildingsUnk`; Weg-Ebene abgelesen (wegkarte_test0) | 06.10. |
+| W3 | Schraeg an einer Ecke vorbei ist nur verboten, wenn BEIDE geraden Nachbarn "Ecksperren" sind | ungeprueft | Code (dieselbe Funktion, Ende) | 06.10. |
+| W4 | Ecksperren sind: Soeldnerposten, Kaserne, Waffenlager, Muehle, Kapelle, Bergfriede, Torhaeuser, Tuerme, Aussenposten; Werkstaetten, Lager, Markt, Huetten, Hoefe nicht | ungeprueft | Tabelle BuildingDefinedData +0x1774, gelesen aus der Referenz-exe (nicht aus unserem laufenden Spiel) | 06.10. |
+| W5 | An Mauern und Tuermen kommt man nicht schraeg vorbei | Daniel | Daniel 20:21; Code zaehlt Mauerfelder (0x10000000) und Tuerme als Ecksperre (ungeprueft) | 06.10. |
+| W6 | Am Wassergraben kommt man schraeg durch | Daniel | Daniel 20:22; Code: Graben sperrt gerade, ist aber keine Ecksperre (ungeprueft); laut Code ebenso Wasser, Baeume, Felsen | 06.10. |
+| W7 | Kaserne hat einen begehbaren Vorhof; Milchviehhof ein Gitter; Apfelplantage begehbar, nur die Huette nicht | Daniel | Daniel 20:21 | 06.10. |
+| W8 | Gebaeude genau aneinander gebaut lassen Laeufer durch | Daniel | Daniel 20:05 | 06.10. |
+| W9 | Lagerteile: herunter kommt man, von aussen hinauf nicht (Einbahn) | ungeprueft | Weg-Ebene abgelesen (wegkarte_test0, Tick 1830); Code-Lesart passt; nicht mit Laeufern geprueft | 06.10. |
+| W10 | Markt ganz gesperrt; Lagerfeuer begehbar bis auf die Raute in der Mitte; Bergfried oben eigene Ebene ohne Verbindung zum Boden | ungeprueft | Weg-Ebene abgelesen (wegkarte_test0) | 06.10. |
+| W11 | Das Wegnetz (welche Gebiete zusammenhaengen) baut das Spiel hoechstens alle 200 Takte neu | ungeprueft | Code `updateSeparateAreaTileMap` (counterForUpdatingSeparateAreaTileMaps = 200) | 06.10. |
+| W12 | Arbeiter gehen nicht durch Gebaeude; zugebaute Lager-Eingaenge stoeren | ungeprueft | Fremdquelle (Steam-Forum, Websuche 20:15) | 06.10. |
+| W13 | Gebaeude-Koordinate beim Bauen = linke obere Ecke des Grundrisses (Versatz 0/0 bei allen 15 Arten) | getestet | `wege_abstand.py nur=grundriss` 20:28, `daten/wege_abstand_20261006_202838.json` | 06.10. |
+| W14 | Kaserne und Soeldnerposten belegen 10x10: Haus 5x5 links oben gesperrt, dazu 3 Exerzierplatz-Stuecke je 5x5 (eigene Gebaeude, Art 57), begehbar bis auf 4 Pfosten | ungeprueft | Weg-Ebene abgelesen (Grundriss 20:28, Bild `daten/wege_abstand/grundriss_Kaserne.png`); deckt sich mit Daniel W7 (Vorhof) | 06.10. |
+| W15 | Schmiede, Gerberei, Waffenlager, Huette (4x4), Markt (5x5), Muehle (3x3), Kapelle (6x6) sind ganz gesperrt | ungeprueft | Weg-Ebene abgelesen (Grundriss 20:28) | 06.10. |
+| W16 | Lagerplatz 5x5 = vier Teile zu 2x2 (nur herunter) und ein Kreuz aus freiem Boden dazwischen | ungeprueft | Weg-Ebene abgelesen (Grundriss 20:28) | 06.10. |
+| W17 | Milchviehhof 10x10: Huette in der Ecke, Zaun mit 2 Felder breiten Toren in der Mitte jeder Seite, innen freier Boden | ungeprueft | Weg-Ebene abgelesen (Grundriss 20:28); deckt sich mit Daniel W7 (Gitter) | 06.10. |
+| W18 | Apfelplantage: nur die Huette (3x3) ist Gebaeude, die Plantage zaehlt nicht dazu | ungeprueft | Weg-Ebene abgelesen (Grundriss 20:28); deckt sich mit Daniel W7 | 06.10. |
+| W19 | Wachturm, Verteidigungsturm, Torhaus: Felder oben begehbar, vom Boden nicht (ausser Torhaus-Durchfahrt) | ungeprueft | Weg-Ebene abgelesen; Pruefung "vom Boden erreichbar" laeuft (Abstandsreihe 20:31) | 06.10. |

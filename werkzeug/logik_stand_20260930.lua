@@ -1759,6 +1759,43 @@ local function einzelbefehl(cmd)
     return true
   end
 
+  --   { "wegkarte": { "x0": 130, "y0": 240, "x1": 190, "y1": 300 } }  (06.10.2026, Daniel: "alle moeglichen Wege durch
+  --   Gebaeude durch"). Nur lesen. abzug/wegkarte.txt: Kopfzeile, dann je Kartenzeile je Feld "link:geb:gebiet:logik:hoehe:typ".
+  --   link = PathLinkageLayer (TileMapState 0x01A93208 +3715824 = 0x01E1E4F8, 1 Byte je Feld): erlaubte Schritte zum
+  --   Nachbarn, Bits im Uhrzeigersinn 1 N (y-1), 2 NO, 4 O (x+1), 8 SO, 0x10 S, 0x20 SW, 0x40 W, 0x80 NW (abgelesen aus
+  --   updateSeparateAreaTileMap; die Regel steht in updatePathLinkageLayerBasedOnBuildingsUnk, daten/dekomp_weglinks2.c).
+  --   geb = BuildingLayer, gebiet = PathConnectionLayer (Wegnetz, das Spiel baut es hoechstens alle 200 Takte neu),
+  --   logik = LogicLayer (hex), hoehe = HeightLayer (+2751024 = 0x01D32C38).
+  if cmd.wegkarte ~= nil and type(cmd.wegkarte) == "table" then
+    local g = cmd.wegkarte
+    local x0, y0 = tonumber(g.x0) or 0, tonumber(g.y0) or 0
+    local x1, y1 = tonumber(g.x1) or 399, tonumber(g.y1) or 399
+    local NL = string.char(10)
+    local f = io.open("ucp/villagestudio/abzug/wegkarte.txt", "w")
+    f:write(string.format("tick %d x0=%d y0=%d x1=%d y1=%d", tick(), x0, y0, x1, y1) .. NL)
+    local n, offen = 0, 0
+    for y = y0, y1 do
+      local basis = core.readInteger(0x023372F8 + y * 12 + 8) or 0
+      local zeile = {}
+      for x = x0, x1 do
+        local k = basis + x
+        local link = core.readByte(0x01E1E4F8 + k) or 0
+        local geb = core.readSmallInteger(0x01C95BB8 + k * 2) or 0
+        local gtyp = (geb > 0) and (core.readSmallInteger(GEBAEUDE + geb * G_SCHRITT + G_TYP) or -1) or 0
+        zeile[#zeile + 1] = string.format("%x:%d:%d:%x:%d:%d", link, geb,
+          core.readSmallInteger(0x01DF6FD8 + k * 2) or 0, (core.readInteger(0x01BF8368 + k * 4) or 0) & 0xFFFFFFFF,
+          core.readByte(0x01D32C38 + k) or 0, gtyp)
+        n = n + 1
+        if link ~= 0 then offen = offen + 1 end
+      end
+      f:write(table.concat(zeile, " ") .. NL)
+    end
+    f:close()
+    log(INFO, string.format("WEGKARTE Tick %d (%d,%d)-(%d,%d): %d Felder, %d mit Weg -> abzug/wegkarte.txt", tick(),
+      x0, y0, x1, y1, n, offen))
+    return true
+  end
+
   --   { "gruenland": { "x0": 140, "y0": 80, "x1": 220, "y1": 160 } }  Textkarte nach
   --   ucp/villagestudio/abzug/gruenland.txt: G Gruenland (Logic2Layer 0x10/0x80), s nur Gestruepp
   --   (0x01), # blockiert (LogicLayer 0x30), x unfruchtbar (LogicLayer 0x100000), . sonst.
