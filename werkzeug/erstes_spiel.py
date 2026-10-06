@@ -437,6 +437,15 @@ def bilanz_schritt(st, L, G, ausbau, ziel, endspiel, runde, marken):
             if liste:
                 sende({"befehle": [dict(b, player=1, id=neue_id()) for b in liste]}, 2.0, bis="SPIELBEFEHL")
         alles_verkaufen()
+        # Stufe 2 (v8: nach dem Endspiel fehlte Gold fuer das 2. Leder-Los - Kaempfer 6-10 erst 3.800 Ticks spaeter):
+        # mit dem ECHTEN Gold nach dem Verkauf nachrechnen; reicht es nicht sicher, NICHT abreissen - Wirtschaft laeuft weiter
+        gold_echt = vorrat(SP)["gold"]
+        n_rest = max(0, ziel - st.get("T26", 0))
+        noch = (-(-max(0, n_rest - v.get("keule", 0)) // 5)) * LOS_PREIS[21] + (-(-max(0, n_rest - v.get("leder", 0)) // 5)) * LOS_PREIS[23]             + n_rest * KAEMPFER_GOLD
+        if gold_echt + t["abriss_wert"] < noch:
+            aus.append("ENDSPIEL VERSCHOBEN: Gold nach Verkauf %d + Abriss %d < %d - Wirtschaft laeuft weiter" % (
+                gold_echt, t["abriss_wert"], noch))
+            return aus
         if t["abriss_liste"]:
             sende({"befehle": [{"player": 1, "id": neue_id(), "abreissen": {"nr": nr}} for nr in t["abriss_liste"]]}, 2.0,
                   bis="ABREISSEN")

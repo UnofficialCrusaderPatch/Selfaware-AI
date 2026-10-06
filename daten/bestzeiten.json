@@ -81,5 +81,25 @@
    "fehler": false
   },
   "notiz": "Exerzierplatz bleibt, Befehle gebuendelt"
+ },
+ {
+  "name": "v8",
+  "marken": {
+   "kaempfer_1": 11445,
+   "kaempfer_2": 11480,
+   "kaempfer_3": 11480,
+   "kaempfer_4": 11509,
+   "kaempfer_5": 11509,
+   "kaempfer_6": 15242,
+   "kaempfer_7": 15252,
+   "kaempfer_8": 15252,
+   "kaempfer_9": 15252,
+   "seasoning_b": 1727,
+   "endspiel": 11368,
+   "ziel": 15262,
+   "kaempfer_10": 15262,
+   "fehler": false
+  },
+  "notiz": "alle Exerzierplatz-Teile bleiben"
  }
 ]
