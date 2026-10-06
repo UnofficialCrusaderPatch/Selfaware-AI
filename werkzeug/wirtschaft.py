@@ -229,7 +229,11 @@ class Wirtschaft:
         # Holzfaeller nicht, Zustand 7 kam nie; Holz 0 von 1.453 bis 4.294)
         jetzt = (not alt_da and not self.alt) if self.lager_genau else bool(wollen)
         if not teile and jetzt and (self.lager_tick is None or t - self.lager_tick > (30 if self.lager_genau else 60)):
-            ort = self.baue_schnell(LAGER, self.lager_ort[0], self.lager_ort[1], 0 if self.lager_genau else 8)
+            # v15: genau am Plan-Platz nur beim ersten Versuch, danach Umkreis 3 (v15: (87,268) war vom Steinhaufen belegt,
+            # 330 Ticks ohne Lager - nie wieder ohne Lager stehen bleiben)
+            self.lager_versuche = getattr(self, "lager_versuche", 0) + 1
+            r = (0 if self.lager_versuche == 1 else 3) if self.lager_genau else 8
+            ort = self.baue_schnell(LAGER, self.lager_ort[0], self.lager_ort[1], r)
             self.lager_tick = t
             ev.append("Lager gesetzt bei %s - %d Holzfaeller wollen abliefern (Tick %d)" % (ort, len(wollen), t))
         # 4. Rechtzeitig erweitern: Bestand + was unterwegs ist

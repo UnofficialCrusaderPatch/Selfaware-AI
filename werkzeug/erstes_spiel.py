@@ -388,8 +388,11 @@ LOS_PREIS = {21: 300, 23: 160}   # 5 Keulen / 5 Lederharnische am Markt (gemesse
 V14 = None
 HF_VORAB = None          # v15: so viele Holzfaeller aus dem Eroeffnungsplan in Phase 1, der Rest erst nach den Steinbruechen
 STEIN_ZUERST = False     # v15: Planer baut nichts mit Arbeitern, bis beide Steinbrueche + Joche besetzt sind
-V14_PLAN = {"brueche": [(80, 265), (80, 271)], "joche": [(87, 265), (87, 274)], "lager": (87, 268),
-            "erweiterung": [(93, 268), (98, 268)], "hoefe": [(172, 297), (181, 279)], "gerberei": (175, 291),
+# Lager (89,270) statt (87,268) (v15, 22:45): die Steinbrueche legen ihre Steinhaufen (Typ 21) selbst daneben - gemessen
+# bei (87,267) und (87,276); (87,268) war damit belegt, die Platzkarte von Tick 0 kannte die Haufen nicht. (89,270) ist
+# laut Platzkarte bei Tick 1.650 frei und liegt 1 Feld neben beiden Haufen (kurzer Ochsenweg).
+V14_PLAN = {"brueche": [(80, 265), (80, 271)], "joche": [(87, 265), (87, 274)], "lager": (89, 270),
+            "erweiterung": [(89, 265), (94, 265)], "hoefe": [(172, 297), (181, 279)], "gerberei": (175, 291),
             "waffenlager": (176, 286)}
 V14_GROESSE = {20: 6, 4: 2, 10: 5, 33: 10, 16: 4, 11: 4}
 V14_STEIN_BIS, V14_LAGER_BIS, V14_UMZUG_AB = 500, 800, 650   # Fruehabbruch-Marken; Startholz ist ab ~650 komplett da
@@ -961,6 +964,15 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                 fruehpruefung["stein"] = True
                 schreib("PRUEFUNG bestanden bei Tick %d: beide Steinbrueche + Joche stehen an den Plan-Plaetzen" % st["t"])
             lager_bis = min(2000, wirt.B_tick + 400) if wirt.B_tick else 2000      # v15: Umzug erst nach B
+            teile = [g for g in G.values() if g["besitzer"] == SP and g["typ"] == 10]
+            if not teile:
+                fruehpruefung.setdefault("ohne_lager_seit", st["t"])
+                if st["t"] - fruehpruefung["ohne_lager_seit"] > 150:
+                    schreib("FRUEHABBRUCH bei Tick %d: seit Tick %d kein Lager (Holz und Stein kommen nicht an)" % (
+                        st["t"], fruehpruefung["ohne_lager_seit"]))
+                    break
+            else:
+                fruehpruefung.pop("ohne_lager_seit", None)
             if STEIN_ZUERST and st["t"] >= 1500 and "stein_besetzt" not in fruehpruefung:
                 schreib("FRUEHABBRUCH bei Tick %d: Steinbrueche + Joche nicht besetzt (%s)" % (st["t"], BUCH.stand(G, st)))
                 break
