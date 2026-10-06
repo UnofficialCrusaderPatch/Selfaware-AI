@@ -455,8 +455,10 @@ def v14_steinpflicht(st, G, wirt):
         # produziert wird"): Joch i erst, wenn Steinbruch i steht UND auf seinem Steinhaufen (Verbund) Stein liegt
         auftraege = [(20, q, 0) for q in V14_PLAN["brueche"]]
         for q, j in zip(V14_PLAN["brueche"], V14_PLAN["joche"]):
-            if haufen_hat_stein(G, q) or steht_bei(G, 4, j):
-                auftraege.append((4, j, 0))
+            if haufen_hat_stein(G, q) or steht_bei(G, 4, j, 3):
+                # Umkreis 3: kommt das Joch nach dem ersten Stein, liegt der Steinhaufen schon - Lernlauf 1 (23:18): Haufen
+                # bei (87,273) belegte den festen Joch-Platz (87,274), 501 Fehlversuche, 26 Steine nie abgeholt
+                auftraege.append((4, j, 3))
     else:
         auftraege = [(20, q, 0) for q in V14_PLAN["brueche"]] + [(4, j, 0) for j in V14_PLAN["joche"]]
     if STEIN_MAX:
