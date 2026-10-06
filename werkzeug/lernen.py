@@ -63,7 +63,7 @@ TEMPO = 100      # 07.10. 00:31: 1000 getestet (Daniel 00:27) - der Lenker brauc
                  # das Tempo bestimmt, wie oft der Lenker hinsieht (bei 100 alle ~11 Ticks). Je Lauf gespeichert.
 # 23:26 (Daniel: Ochse vor Steinbruch, Lager nicht umgezogen - in der v5-Bauweise galten die alten Regeln): EIN Weg.
 # v14 ist fest; der Kreis aendert nur Werte, keine Bauweisen ("zwei Wege zum selben Ziel sind immer ein Fehler")
-HINWEISE = ["schub", "bevoelkerung_ziel", "penner", "kasse_grenze", "kasse", "steuer_ende", "steuer_runter", "stein_max", "b_versatz"]   # 07.10.: Steuern, dritter Steinbruch     # Daniel 23:30: "Seasoning passiert immer noch zu spaet ... jede Wartezeit der Apfelbauern ist unproduktiv"
+HINWEISE = ["kasse_grenze", "schub", "bevoelkerung_ziel", "penner", "kasse", "steuer_ende", "steuer_runter", "stein_max", "b_versatz"]   # 07.10.: Steuern, dritter Steinbruch     # Daniel 23:30: "Seasoning passiert immer noch zu spaet ... jede Wartezeit der Apfelbauern ist unproduktiv"
 # welche Knoepfe zu welchem gemessenen Verlust gehoeren (Vorwissen; die Wirkung misst der Kreis selbst)
 VERLUST_KNOEPFE = {
     "wohnraum_voll": ["entscheider", "huetten_voraus", "holz_kaufen"],

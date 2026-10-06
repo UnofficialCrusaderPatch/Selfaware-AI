@@ -171,6 +171,8 @@ Tick 4.731-7.737, Aufloesung 14,5 Ticks (`daten/lage_ablauf_fein_20261006_224521
 | L27 | Am Lagerfeuer warten hoechstens 24 Untaetige - dann zieht niemand mehr zu; Wachstum braucht Arbeitsplaetze (billigster: Holzfaeller, 3 Holz) | Daniel + gemessen | Daniel 07.10. 00:40; Lauf 41 (Ziel 70): ab Tick ~6.300 bei 54/66 Leuten stehen geblieben, 24 am Feuer | 07.10. |
 | L28 | Kasse mit Essen-Stopp: Lauf 38 9.395 (unter 1 Jahr), aber Kontrolllauf 39 verfehlt - unter der Grenze 50 blieben die Rationen aus, Beliebtheit bis 0, 34 -> 4 Leute. Seit 3245acc: unter der Grenze Rationen normal, kein Nahrungsverkauf | getestet | Lauf 38/39 | 07.10. |
 | L29 | Im Wachstum fehlt frueh das Holz fuer Huetten: Lauf 41 stand von Tick ~2.000 bis 4.400 bei 26/26 (erste Holzlieferung ~4.600) | gemessen | Lauf 41 | 07.10. |
+| L30 | Bei Beliebtheit 0 geht beim Anwerben je Schub genau ein Kaempfer verloren: bezahlt (Gold -100 fuer 5) und Waffen verbraucht, aber nur 4 Bauern laufen vom Feuer los - vermutlich wird ein gerade abwandernder Bauer angeworben. Bei Beliebtheit 47,8 kamen alle 5 an. Nachkauf 460 Gold = ~1.000 Ticks | gemessen | Lauf 45/46/52 (52: Feuer 58->54, T26 5->9, Gold 258->158; Schub bei 47,8: 5/5) | 07.10. |
+| L31 | Steuer -40 bis zum Ende (Grenze 0): Endspiel frueh (Lauf 46: 9.082, 52: 9.328), aber L30 kostet ~1.100 Ticks -> 10.424/10.453; Grenze 50: kein Verlust, weniger Steuer (Lauf 42: 9.820) | getestet | Lauf 42/46/52 | 07.10. |
 
 ## Bewaehrt / nicht bewaehrt (nach jedem Lauf eine Zeile, Daniel 21:05: "schauen, was hat sich bewaehrt und was nicht")
 
