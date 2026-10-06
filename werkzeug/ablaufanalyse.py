@@ -88,15 +88,18 @@ def analyse(pfad, sp=1):
                 # Ende = Beginn des naechsten Abschnitts (die Einheit war bis dahin in diesem Zustand)
                 z["dauer"].append(abschn[j + 1]["von"] - a["von"])
         # 2. Gehen, 3. Ablieferungen, 6. Vergabe
+        # Gehen ueber GANZE Abschnitte eines Zustands, in dem sich die Einheit bewegt (>= 3 Felder): Weg / Dauer.
+        # 22:52 korrigiert: vorher nur Runden mit Bewegung gezaehlt - eine Einheit kommt je Runde (14,5 Ticks) hoechstens
+        # 1 Feld weiter, gemessen wurde damit der Rundenabstand (14,5) statt der Geschwindigkeit (~25, Arbeitsgaenge G).
+        for j, a in enumerate(abschn):
+            if a["weg"] >= 3 and not a["erster"] and j < len(abschn) - 1:
+                g = gehen.setdefault(typ, {"mit": [0, 0], "ohne": [0, 0]})
+                g["mit" if a["k"][1] else "ohne"][0] += a["weg"]
+                g["mit" if a["k"][1] else "ohne"][1] += abschn[j + 1]["von"] - a["von"]
         for (t0, d0), (t1, d1) in zip(s, s[1:]):
             dt = t1 - t0
             if dt <= 0:
                 continue
-            w = schach((d0["x"], d0["y"]), (d1["x"], d1["y"]))
-            if w > 0 and d0["zustand"] == d1["zustand"]:
-                g = gehen.setdefault(typ, {"mit": [0, 0], "ohne": [0, 0]})
-                g["mit" if d0.get("ladung", 0) > 0 else "ohne"][0] += w
-                g["mit" if d0.get("ladung", 0) > 0 else "ohne"][1] += dt
             if d0.get("ladung", 0) > 0 and d1.get("ladung", 0) < d0.get("ladung", 0):
                 abliefern.append({"nr": nr, "typ": typ, "t": t1, "menge": d0["ladung"] - d1.get("ladung", 0),
                                   "ort": (d1["x"], d1["y"]), "arbeitsplatz": d0.get("arbeitsplatz")})

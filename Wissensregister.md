@@ -142,8 +142,9 @@ Tick 4.731-7.737, Aufloesung 14,5 Ticks (`daten/lage_ablauf_fein_20261006_224521
 
 | Nr | Erkenntnis | Stufe | Beleg | Datum |
 |---|---|---|---|---|
-| L1 | Gehen: alle Arbeiterarten ~14,5 Ticks je Feld, mit und ohne Last gleich (Holzfaeller 903 Felder, Apfelbauer 540, Ochse 32). Der grobe Mitschnitt (31 Ticks) ergab 24 - Messfehler durch Stillstand zwischen zwei Runden | getestet | ablauf_lage_ablauf_fein | 06.10. |
+| L1 | Gehen (ganze Wege): Holzfaeller ~26 Ticks je Feld, Apfelbauer 17-18, Milchbauer 16, Steinbrucharbeiter 19 - mit/ohne Last fast gleich; passt zur 2-Tick-Messung (24 / 16). ~~14,5~~ war der Rundenabstand, nicht die Geschwindigkeit (widerlegt 22:52). Holzfaeller 27 brauchte 841 Ticks fuer 19 Felder Luftlinie = ~35 Felder Weg (Umweg um den Steinbruch-Block?) | getestet | ablauf_lage_ablauf_fein (korrigierter Auswerter) | 06.10. |
 | L2 | Holzfaeller verbringt 62 % seiner Zeit mit Gehen (38 % beladen, Abschnitt Median 1.183 Ticks; 24 % leer, 833); 25 % an der Huette (Zustand 5, Median 385) | getestet | dito, 13 Holzfaeller | 06.10. |
+| L9 | Holzfaeller-Arbeitsgang: Huettenvorrat +1 je ~400 Ticks (Zustaende 3/5 an der Huette), bei 3 traegt er 18 Holz ins Lager (6 je Einheit); Lagergang = Hin + 90 Abladen + Zurueck (22 Felder: 841 + 90 + 833 = 1.764 Ticks). Im Fenster von 3.000 Ticks lieferte JEDER der 13 genau 1 Ladung - Abstand zum Lager darin nicht messbar | getestet | dito, Spur Huetten 27 und 56 | 06.10. |
 | L3 | Ein Holzfaeller bringt 18 Holz je Gang (Abladen in Schritten von 2-6); 13 Holzfaeller lieferten 207 Holz in 3.000 Ticks = 5,3 je Holzfaeller und 1.000 Ticks - bei 55-75 Feldern Weg | getestet | dito | 06.10. |
 | L4 | Stein: Steinbrucharbeiter (Typ 8, Arbeitsplatz = Joch) tragen 1 Stein je 189 Ticks zum Haufen; Ochse bringt 6 je Gang (einmal 12); netto 12 Stein je 1.000 Ticks mit 2 Steinbruechen | getestet | dito | 06.10. |
 | L5 | Die 6 Steinmetze (Typ 7, Arbeitsplatz = Steinbruch) stehen 100 % der Zeit in Zustand 1. Daniel 22:44: "liegt daran, dass sie erstmal Stein benoetigen" - Ablauf noch nicht vermessen | ungeprueft (Daniel) | dito | 06.10. |
