@@ -338,6 +338,8 @@ def verkaufen(st, stein_reserve=None, messer=None, holz_verkaufen=False, eisen_r
     return ("verkauft: " + ",".join(teile)) if teile else None
 
 KAEMPFER_GOLD = 20          # Anwerben (Liga goldCost)
+FRUEH_TICK = 2500           # bis hierhin muessen Steinbruch, Lagerumzug und B-Seasoning stehen (Fruehabbruch)
+BASIS_LAGER = (145, 264)    # Startlager am Bergfried (Teil 6, gemessen) - steht dort noch ein Teil, ist das Lager nicht umgezogen
 LOS_PREIS = {21: 300, 23: 160}   # 5 Keulen / 5 Lederharnische am Markt (gemessen 06.10. Messpartie 8)
 
 def ruestung_kaufen(st, G, wirt, ausbau, ziel, marken):
@@ -611,7 +613,18 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
             befehl({"spielbefehl": {"nr": 38, "werte": [1, WAREN_NR["holz"]]}}, 1.0, bis="SPIELBEFEHL")
             ausbau.messer.verkauft("holz")
             return "verkauft", "Gold bremst das Anwerben"
-        return ausbau.holzfaeller_statt_verkauf(st, L, G)
+        ort, text = ausbau.holzfaeller_statt_verkauf(st, L, G)
+        if ort is None and streitkolben:
+            # v11: "kein erreichbarer Holzfaeller-Platz" -> das alte Lager wurde nie leer, der Umzug blieb bis 11.520 haengen.
+            # Dann Huetten (Wohnplatz-Puffer, Daniel 21:55), sonst verkaufen - nie liegen lassen.
+            if st.get("holz", 0) >= 5:
+                h = baue_haus()
+                if h:
+                    return h, "Huette statt Holzfaeller (%s)" % text
+            befehl({"spielbefehl": {"nr": 38, "werte": [1, WAREN_NR["holz"]]}}, 1.0, bis="SPIELBEFEHL")
+            ausbau.messer.verkauft("holz")
+            return "verkauft", "kein Holzfaeller-/Huettenplatz (%s)" % text
+        return ort, text
     wirt.holz_verbauen = holz_verwerten
     schreib("Ertrags-Planer: Baukosten aus dem Spiel %s; Protokoll %s" % (
         {t: {w: v for w, v in k.items() if v} for t, k in ausbau.kosten.items()}, os.path.basename(lernlog)))
@@ -632,6 +645,7 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
     kaempfer_marken = {}
     prod = Produktion(streitkolben, kaempfer_marken, plan.get("lager")) if streitkolben and weg == "produktion" else None
     endspiel = {"fertig": False, "tabelle": None}
+    fruehpruefung = {}
     while time.time() < ende and not os.path.exists(os.path.join(HIER, "STOP")):
         tz = time.time()
         befehlskanal.belege()
@@ -730,6 +744,21 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                         trainingsstand, len(angekommen), st["t"], pfad))
                     break
             tz = uhr("assassinen", tz)
+        if streitkolben and st["t"] >= FRUEH_TICK and not fruehpruefung.get("ok"):
+            # Fruehabbruch (Daniel 21:55: "wenn du merkst, dass schon der Steinbruch nicht richtig gesetzt ist, muesstest du
+            # eigentlich schon aufhoeren ... das sind alles verschwendete Zeiten/Versuche")
+            fehlt = []
+            if not st.get("G20", 0):
+                fehlt.append("kein Steinbruch")
+            if [n for n in wirt.alt if n in G and G[n]["typ"] == 10 and max(abs(G[n]["x"] - BASIS_LAGER[0]), abs(G[n]["y"] - BASIS_LAGER[1])) <= 6]:
+                fehlt.append("Lager nicht umgezogen")
+            if wirt.B_offen:
+                fehlt.append("B-Seasoning offen")
+            if fehlt:
+                schreib("FRUEHABBRUCH bei Tick %d: %s" % (st["t"], ", ".join(fehlt)))
+                break
+            fruehpruefung["ok"] = True
+            schreib("FRUEHPRUEFUNG bestanden bei Tick %d (Steinbruch, Lager umgezogen, B-Seasoning)" % st["t"])
         if streitkolben:
             ereignis += bilanz_schritt(st, L, G, ausbau, streitkolben, endspiel, runde, kaempfer_marken)
             if not endspiel["fertig"] and weg != "bilanz":     # weg=bilanz: nur Wirtschaft + Bilanz-Endspiel (v5)
@@ -756,7 +785,8 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
             ereignis += ausbau.schritt(st, L, G, runde)
         tz = uhr("wirtschaft", tz)
         bedarf = sum(ARBEITER_JE[t] * st.get("G%d" % t, 0) for t in ARBEITER_JE)
-        if st["holz"] >= 5 + wirt.ruecklage(G)["holz"] and (bedarf > st["platz"] or (trupp is not None and st["feuer"] == 0 and st["platz"] - st["leute"] <= 2)):
+        puffer = streitkolben and st["platz"] - st["leute"] < 6 and not (endspiel["fertig"])   # Huetten vorab (Daniel 21:55)
+        if st["holz"] >= 5 + wirt.ruecklage(G)["holz"] and (bedarf > st["platz"] or puffer or (trupp is not None and st["feuer"] == 0 and st["platz"] - st["leute"] <= 2)):
             ereignis.append("Huette %s (Bedarf %d, Platz %d, Leute %d, Feuer %d)" % (baue_haus(), bedarf, st["platz"], st["leute"], st["feuer"]))
         zeile = "%5d | %3d %3d %3d | %3d %3d | %6.2f | %d/%d (%d) | %d %d | %s" % (
             st["t"], st["holz"], st["stein"], st["eisen"], st["apfel"], st["brot"], st["beliebt"] / 100.0, st["leute"],
