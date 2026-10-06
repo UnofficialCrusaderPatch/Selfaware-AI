@@ -56,6 +56,11 @@ def main():
     dauer, tempo = int(arg.get("ticks", 6000)), int(arg.get("tempo", 300))
     plan = json.load(open(os.path.join(D, "eroeffnung_plan_M19.json"), encoding="utf-8"))
     lx, ly = plan["lager"]
+    # Messpartie 4: Schmiede ~55 Felder vom Lager am Bergfried -> ~4.100 Ticks je Eisen. Darum alles direkt an dieses Lager
+    # (Daniel: Kaserne naeher zum Vorratslager, minimale Laufwege).
+    teile0 = [g for g in E.runde_lesen()[2].values() if g["besitzer"] == SP and g["typ"] == LAGER]
+    if teile0:
+        lx, ly = teile0[0]["x"], teile0[0]["y"]
     E.LEERE_KI = True
     E.gefecht_starten(tempo)
     erg = {"ablauf": [], "proben": []}
@@ -92,6 +97,12 @@ def main():
     G = E.runde_lesen()[2]
     eigen = {n: g for n, g in G.items() if g["besitzer"] == SP}
     kaserne = [n for n, g in eigen.items() if g["typ"] == KASERNE]
+    # Schmiede auf Keulen stellen: Spielbefehl 33 ClickSetBuildingProductionType (Gebaeude, Art, UID) ->
+    # SetBuildingProductionType setzt producedItemType, wenn die UID passt (dekomp_produktionstyp*.c). Art 21 = Keule.
+    for n, g in eigen.items():
+        if g["typ"] == SCHMIEDE:
+            befehl({"spielbefehl": {"nr": 33, "werte": [n, KEULE, g.get("uid", 0)]}}, 1.0, bis="SPIELBEFEHL")
+            erg["ablauf"].append({"schmiede_auf_keule": [n, g.get("uid")]})
     schmieden = [n for n, g in eigen.items() if g["typ"] == SCHMIEDE]
     # 1. Markt
     for name, art in (("keule", KEULE), ("leder", LEDER)):
