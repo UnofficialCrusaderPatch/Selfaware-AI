@@ -58,6 +58,7 @@ VERLUST_KNOEPFE = {
     "gold_liegt_holz_fehlt": ["holz_kaufen", "holz_spam"],
     "ohne_holz": ["holz_spam", "holzfaeller_vorab", "holzfaeller_je_baum", "holzfaeller_max", "umzug"],
     "apfel_warten": ["b_versatz"],
+    "holz_liegt_bauern_warten": ["entscheider", "vollbeschaeftigung", "holzfaeller_je_baum"],
     "stein_spaet": ["steinbruch_zuerst", "stein_parallel", "joch_nach_stein", "umzug"],
 }
 
@@ -66,7 +67,7 @@ def nachschau(lage):
     """Verluste und Marken aus dem Lageprotokoll (jede Runde)."""
     from lageprotokoll import runden
     m = {"wohnraum_voll": 0, "bauern_untaetig": 0, "ohne_holz": 0, "gold_liegt_holz_fehlt": 0,
-         "erstes_holz_geliefert": None, "erster_stein": None, "ticks": 0, "apfel_warten": 0}
+         "erstes_holz_geliefert": None, "erster_stein": None, "ticks": 0, "apfel_warten": 0, "holz_liegt_bauern_warten": 0}
     vor, lad_vor = None, {}
     for t, st, E, G in runden(lage):
         if vor is not None:
@@ -76,6 +77,8 @@ def nachschau(lage):
                 m["wohnraum_voll"] += dt
             if st.get("feuer", 0) >= 4:
                 m["bauern_untaetig"] += dt
+            if st.get("holz", 0) >= 5 and st.get("feuer", 0) >= 2:
+                m["holz_liegt_bauern_warten"] += dt      # Widerspruch: Holz da UND Bauern untaetig (Daniel 23:41)
             if st.get("holz", 0) < 5:
                 m["ohne_holz"] += dt
                 if st.get("gold", 0) >= 100:
@@ -93,6 +96,24 @@ def nachschau(lage):
             m["erster_stein"] = t
         vor = t
     return m
+
+
+def widersprueche(text):
+    """Daniel 23:42: "das Problem ist eher, warum es nicht von dir gesehen wird". Allgemeiner Grundsatz statt Einzelfaelle:
+    jede ausgegebene Ressource muss etwas bewirken. Zaehlt im Laufprotokoll: eigene Bauten, die binnen 1.000 Ticks wieder
+    abgerissen werden; immer wieder scheiternde Befehle (ABGELEHNT/GESCHEITERT/"gesendet: None")."""
+    gebaut = {}
+    w = {"bau_wieder_abgerissen": 0, "fehlversuche": 0}
+    for zeile in text.splitlines():
+        t = re.match(r"\s*(\d+) \|", zeile)
+        tick = int(t.group(1)) if t else None
+        for nr in re.findall(r"BAU BESTAETIGT \S+ Nr (\d+)", zeile):
+            gebaut[nr] = tick
+        for nr in re.findall(r"BAU UNERREICHBAR \S+ Nr (\d+)", zeile):
+            if tick is not None and gebaut.get(nr) is not None and tick - gebaut[nr] <= 1000:
+                w["bau_wieder_abgerissen"] += 1
+        w["fehlversuche"] += len(re.findall(r"BAU ABGELEHNT|BAU GESCHEITERT|gesendet: None", zeile))
+    return w
 
 
 def note_aus(text, bis_tick):
@@ -123,6 +144,7 @@ def lauf(strategie, bis_tick, nr):
     note, art = note_aus(text, bis_tick)
     lp = re.search(r"Lageprotokoll \(jede Runde komplett\): (.+?\.jsonl\.gz)", text)   # Pfad hat Leerzeichen (Lauf 1: Nachschau leer)
     ns = nachschau(lp.group(1)) if lp and os.path.exists(lp.group(1)) else {}
+    ns.update(widersprueche(text))
     abbruch = re.search(r"FRUEHABBRUCH bei Tick \d+: [^\n]*", text)
     return {"nr": nr, "zeit": stempel, "strategie": strategie, "note": note, "art": art, "nachschau": ns,
             "abbruch": abbruch.group(0) if abbruch else None, "datei": os.path.basename(aus)}
