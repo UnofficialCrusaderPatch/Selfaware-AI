@@ -10,6 +10,16 @@ viele Streitis aus einem Eisen gebraucht werden etc."
 Vorher (19:21): Testpartie gegen eine leere KI - am schnellsten 10.000 Gold, dann 10-20-30-40-50 Streitkolbenkaempfer,
 dann jede Einheit. Grundsatz (19:33): gegen mehrere Gegner braucht es stabiles Wachstum, Rohstoffverkauf reicht nicht.
 
+## Challenge-Regeln (Daniel 06.10. 19:49)
+- Es zaehlt die genaue Anzahl, so schnell wie moeglich - wie ein TAS-Run (Speedrun mit Werkzeug).
+- Fuer die letzten Kaempfer duerfen nicht mehr gebrauchte Waffen verkauft werden; Abreissen bringt tendenziell die
+  Haelfte der investierten Ressourcen als verkaufbare Produkte -> theoretisch alles abreissen bis auf das, was die
+  Rekrutierung braucht, und die letzten rauspressen.
+- Reihenfolge: erst Recherche, dann Aufbau, dann Benchmark, dann immer weniger Zeit. "Ich glaube, es ist schneller als
+  ich denke."
+- Arbeitsweise (19:49): selbst herausfinden, aber Daniel hat viel Spielerfahrung - nicht ALLE Fehler selbst machen;
+  stoppt er, ihm vertrauen und die richtigen Infos sammeln.
+
 ## Testumgebung (steht)
 `erstes_spiel.py assassinen=0 leere_ki=ja gold_ziel=N bis_tick=60000` - Rotkaeppchen mit Waren/Gold jede Runde 0.
 Ausgangswert Gold (gold10k_2, 06.10.): 1.000 bei 15.975, 10.000 bei 36.226; verkauft vor allem Holz, Fleisch, Aepfel, Stein.
