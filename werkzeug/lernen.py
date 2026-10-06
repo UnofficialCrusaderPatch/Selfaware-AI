@@ -42,19 +42,22 @@ KNOEPFE = {
     "je_arbeiter": ["ja", "nein"],
     "vollbeschaeftigung": ["ja", "nein"],
     "entscheider": ["regeln", "kausal"],
+    "b_versatz": ["reif", 0, 300, 600],
 }
 GRUND = {"v14": "ja", "umzug": "frueh", "holzfaeller_vorab": 4, "holz_spam": 20, "holzfaeller_je_baum": 4, "holzfaeller_max": 30,
          "steinbruch_zuerst": "nein", "stein_parallel": "ja", "joch_nach_stein": "ja", "huetten_voraus": "ja",
-         "holz_kaufen": "ja", "je_arbeiter": "ja", "vollbeschaeftigung": "nein", "entscheider": "regeln"}
+         "holz_kaufen": "ja", "je_arbeiter": "ja", "vollbeschaeftigung": "nein", "entscheider": "regeln", "b_versatz": "reif"}
 FEST = ["leere_ki=ja", "tempo=100", "minuten=60", "streitkolben=10", "weg=bilanz", "experiment=ja"]
 # 23:26 (Daniel: Ochse vor Steinbruch, Lager nicht umgezogen - in der v5-Bauweise galten die alten Regeln): EIN Weg.
 # v14 ist fest; der Kreis aendert nur Werte, keine Bauweisen ("zwei Wege zum selben Ziel sind immer ein Fehler")
+HINWEISE = ["b_versatz"]     # Daniel 23:30: "Seasoning passiert immer noch zu spaet ... jede Wartezeit der Apfelbauern ist unproduktiv"
 # welche Knoepfe zu welchem gemessenen Verlust gehoeren (Vorwissen; die Wirkung misst der Kreis selbst)
 VERLUST_KNOEPFE = {
     "wohnraum_voll": ["entscheider", "huetten_voraus", "holz_kaufen"],
     "bauern_untaetig": ["entscheider", "vollbeschaeftigung", "holz_kaufen", "holz_spam", "holzfaeller_je_baum", "je_arbeiter"],
     "gold_liegt_holz_fehlt": ["holz_kaufen", "holz_spam"],
     "ohne_holz": ["holz_spam", "holzfaeller_vorab", "holzfaeller_je_baum", "holzfaeller_max", "umzug"],
+    "apfel_warten": ["b_versatz"],
     "stein_spaet": ["steinbruch_zuerst", "stein_parallel", "joch_nach_stein", "umzug"],
 }
 
@@ -63,7 +66,7 @@ def nachschau(lage):
     """Verluste und Marken aus dem Lageprotokoll (jede Runde)."""
     from lageprotokoll import runden
     m = {"wohnraum_voll": 0, "bauern_untaetig": 0, "ohne_holz": 0, "gold_liegt_holz_fehlt": 0,
-         "erstes_holz_geliefert": None, "erster_stein": None, "ticks": 0}
+         "erstes_holz_geliefert": None, "erster_stein": None, "ticks": 0, "apfel_warten": 0}
     vor, lad_vor = None, {}
     for t, st, E, G in runden(lage):
         if vor is not None:
@@ -77,6 +80,11 @@ def nachschau(lage):
                 m["ohne_holz"] += dt
                 if st.get("gold", 0) >= 100:
                     m["gold_liegt_holz_fehlt"] += dt
+        if vor is not None:
+            # Apfelbauer ohne reifen Baum = Zustand 1 (Wissensstand selectClosestTree); Bauer-Ticks, auf "je Bauer" umgerechnet
+            bauern = [e for e in E if e["besitzer"] == 1 and e["typ"] == 13]
+            if bauern:
+                m["apfel_warten"] += (t - vor) * sum(1 for e in bauern if e["zustand"] == 1) / float(len(bauern))
         lad = {e["nr"]: e.get("ladung", 0) for e in E if e["besitzer"] == 1 and e["typ"] == 3}
         if m["erstes_holz_geliefert"] is None and any(lad_vor.get(n, 0) > l for n, l in lad.items()):
             m["erstes_holz_geliefert"] = t
@@ -131,6 +139,13 @@ def naechste(beste, gespielt, ns):
     der erste Knopf mit einem noch nicht gespielten Wert gewinnt (logische Konsequenz aus der Nachschau). Erst wenn alle
     passenden Knoepfe durch sind, zufaellig."""
     beste = dict(GRUND, **beste)            # aeltere Laeufe kennen neue Knoepfe nicht -> Grundwert
+    # Hinweise von Daniel zuerst (Vorwissen eines Experten): Knopf, auf den er gezeigt hat, vor der eigenen Rangfolge
+    for k in HINWEISE:
+        for w in KNOEPFE[k]:
+            if w != beste[k]:
+                s = dict(beste, **{k: w})
+                if schluessel(s) not in gespielt:
+                    return s, k
     if ns:
         anteil = {v: ns.get(v, 0) / float(max(1, ns.get("ticks", 1))) for v in VERLUST_KNOEPFE}
         for verlust in sorted(anteil, key=anteil.get, reverse=True):

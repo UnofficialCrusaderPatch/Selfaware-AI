@@ -404,6 +404,7 @@ STEIN_PARALLEL = False   # v18: Steinbrueche sofort (vor allem), Holzfaeller-Spa
 HUETTEN_VORAUS = False   # v18: Huetten vor dem Bedarf (Daniel 23:10 Punkt 3: Bauern brauchen Spawnzeit)
 VOLLBESCHAEFTIGUNG = False   # Lernkreis: jeder Bauer am Feuer bekommt sofort einen Arbeitsplatz (Lernlauf 1: 93 % untaetig)
 ENTSCHEIDER = "regeln"   # "kausal" (Daniel 23:27 "dynamische Antworten fuer alles"): Kausalmodell entscheidet Betriebe + Huetten
+B_VERSATZ = None         # Lernkreis: B-Plantagen so viele Ticks nach "alle A stehen" (None = erst bei A-Reife)
 ZIEL_TICK = 9400         # Zieltick, bis zu dem das Kausalmodell Ertraege rechnet (unter 1 Jahr = 9.600, Endspiel davor)
 
 def v16_holzfaeller(plan):
@@ -873,6 +874,7 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
             return "verkauft", "kein Holzfaeller-/Huettenplatz (%s)" % text
         return ort, text
     wirt.holz_verbauen = holz_verwerten
+    wirt.b_versatz = B_VERSATZ
     global BUCH
     leder, hf_spaeter = None, []
     # Auftragsbuch und die allgemeinen Knoepfe in JEDER Bauweise (Lernkreis 23:20: sonst kann er nach einem Sieg der
@@ -1278,7 +1280,8 @@ def main():
     HOLZ_KAUFEN = arg.get("holz_kaufen", "nein") == "ja"
     global HOLZ_SPAM, STEIN_MAX, JOCH_NACH_STEIN, STEIN_PARALLEL, HUETTEN_VORAUS, VOLLBESCHAEFTIGUNG
     VOLLBESCHAEFTIGUNG = arg.get("vollbeschaeftigung", "nein") == "ja"
-    global ENTSCHEIDER, ZIEL_TICK
+    global ENTSCHEIDER, ZIEL_TICK, B_VERSATZ
+    B_VERSATZ = None if arg.get("b_versatz", "reif") == "reif" else int(arg["b_versatz"])
     ENTSCHEIDER = arg.get("entscheider", "regeln")
     ZIEL_TICK = int(arg.get("ziel_tick", 9400))
     HOLZ_SPAM = int(arg.get("holz_spam", 0))

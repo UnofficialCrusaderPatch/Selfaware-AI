@@ -82,6 +82,9 @@ class Wirtschaft:
         self.extra = {}                      # Ruecklage einer Pflicht (v14), vom Lenker gesetzt
         self.umzug_ab = None                 # v14: Tick, ab dem das alte Lager geraeumt wird (Startholz vollstaendig)
         self.lager_genau = False             # v14: neues Lager genau am Plan-Platz (Umkreis 0)
+        self.b_versatz = None                # Lernkreis (Daniel 23:30 "Seasoning zu spaet, jede Wartezeit der Apfelbauern ist
+                                             # unproduktiv"): B so viele Ticks nach "alle A stehen" statt erst bei A-Reife
+        self.a_steht_tick = None
         self.umzug_nach_b = False            # v15: altes Lager erst raeumen, wenn B steht (Daniel 22:29: Seasoning vor der
                                              # ersten Holzlieferung - das B-Holz muss im alten Lager liegen bleiben)
         # Baum gleich jetzt suchen, solange das Spiel noch steht (9g: die Kartensuche mitten im Lauf kostete ~600 Ticks)
@@ -148,7 +151,10 @@ class Wirtschaft:
         # 1. Seasoning: B setzen, sobald A reif wird
         if self.B_offen:
             stufe = self.stufe_a() if self.B_tick is None else REIF
-            if stufe == REIF:
+            if self.a_steht_tick is None and not self.a_offen(G):
+                self.a_steht_tick = t
+            frueh = self.b_versatz is not None and self.a_steht_tick is not None and t >= self.a_steht_tick + self.b_versatz
+            if stufe == REIF or frueh:
                 if self.A_reif_tick is None:
                     self.A_reif_tick = t
                     ev.append("Seasoning: A-Plantagen reif bei Tick %d (Baum %d) - setze %d B-Plantagen" % (t, self.apfelbaum, len(self.B_offen)))
