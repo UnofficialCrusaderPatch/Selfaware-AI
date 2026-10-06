@@ -391,6 +391,8 @@ UMZUG = "nachb"          # E1/E2 (06.10. 22:55): "frueh" = gleich nach Phase 1, 
 EXPERIMENT = False       # Versuch: keine Tempo-Regel gegen die Bestzeit (er soll die erste Lieferung erleben), nur harte Fehler brechen ab
 HF_MAX = None            # v16: Holzfaeller nur bis so viele Felder vom neuen Lager (L9: weit weg ~3, nah ~11 Holz je 1.000)
 JE_ARBEITER = False      # v16: Planer bewertet Gewinn je Arbeiter (Bauern sind der Engpass, L7)
+HUETTEN_JE_BAUM = None   # v17: bis zu so viele Holzfaeller je Baum (Daniel 22:57); None = alte Regel (einer je Baum, 7 Felder Sperre)
+HOLZ_KAUFEN = False      # v17: Holz kaufen, wenn >= 4 Bauern untaetig sind und Holz fehlt
 
 def v16_holzfaeller(plan):
     """Plan-Holzfaeller nach Abstand zum neuen Lager, ohne die jenseits von HF_MAX."""
@@ -834,6 +836,8 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
         ausbau.ohne, ausbau.sperr = ({3, 5, 7, 20, 32} if STEIN_ZUERST else {20}), v14_sperrflaechen()
         hf_spaeter = [tuple(p) for p in v16_holzfaeller(plan)[HF_VORAB:]] if HF_VORAB is not None else []
         ausbau.holz_max, ausbau.je_arbeiter = HF_MAX, JE_ARBEITER
+        ausbau.huetten_je_baum = HUETTEN_JE_BAUM
+        schreib("v17: Holzfaeller je Baum %s, Holz kaufen bei untaetigen Bauern %s" % (HUETTEN_JE_BAUM, HOLZ_KAUFEN))
         schreib("v16: Holzfaeller hoechstens %s Felder vom Lager (Plan: %s), Planer nach Gewinn je Arbeiter: %s" % (
             HF_MAX, v16_holzfaeller(plan), JE_ARBEITER))
         schreib("v15: Holzfaeller vorab %s, spaeter %d aus dem Plan; Steinbrueche zuerst besetzen: %s; Lagerumzug nach B" % (
@@ -919,7 +923,14 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                         fruehpruefung["stein_besetzt"] = st["t"]
                         ausbau.ohne = {20}
                         ereignis.append("STEINBRUECHE BESETZT bei Tick %d (6/6 + Joche 2/2) - Planer und restliche Holzfaeller frei" % st["t"])
-                elif hf_spaeter and st["holz"] - wirt.ruecklage(G)["holz"] >= 5:
+                if HOLZ_KAUFEN and st.get("feuer", 0) >= 4 and st["holz"] < 5 and st["gold"] >= 60 + wirt.ruecklage(G)["gold"] \
+                        and st["t"] - fruehpruefung.get("holz_gekauft", -999) >= 100:
+                    # v17 (22:57): untaetige Bauern bringen 0 - ein 20er-Los Holz = 4 Holzfaeller-Huetten; Preis wird gemessen
+                    fruehpruefung["holz_gekauft"] = st["t"]
+                    vor = vorrat(SP)["gold"]
+                    befehl({"spielbefehl": {"nr": 38, "werte": [0, 2]}}, 1.0, bis="SPIELBEFEHL")
+                    ereignis.append("HOLZ GEKAUFT (Feuer %d untaetig, Holz %d): Gold %d -> %d" % (st["feuer"], st["holz"], vor, vorrat(SP)["gold"]))
+                if "stein_besetzt" in fruehpruefung and hf_spaeter and st["holz"] - wirt.ruecklage(G)["holz"] >= 5:
                     o = hf_spaeter.pop(0)
                     ereignis.append("HOLZFAELLER aus dem Plan nach den Steinbruechen bei %s: %s" % (o, baue_schnell(3, o[0], o[1], 1, zweck="Plan")))
             tz = uhr("auftragsbuch", tz)
@@ -1120,7 +1131,9 @@ def main():
     waechter.BERGFRIED_EINGANG = BERGFRIED
     global LEERE_KI, V14
     LEERE_KI = arg.get("leere_ki", "nein") == "ja"
-    global HF_VORAB, STEIN_ZUERST, HF_MAX, JE_ARBEITER, UMZUG, EXPERIMENT
+    global HF_VORAB, STEIN_ZUERST, HF_MAX, JE_ARBEITER, UMZUG, EXPERIMENT, HUETTEN_JE_BAUM, HOLZ_KAUFEN
+    HUETTEN_JE_BAUM = int(arg["holzfaeller_je_baum"]) if arg.get("holzfaeller_je_baum") else None
+    HOLZ_KAUFEN = arg.get("holz_kaufen", "nein") == "ja"
     UMZUG = arg.get("umzug", "nachb")
     EXPERIMENT = arg.get("experiment", "nein") == "ja"
     if arg.get("holzfaeller_vorab"):

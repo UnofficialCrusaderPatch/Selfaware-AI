@@ -310,11 +310,14 @@ class Ertragsplaner:
             if len(w) >= 7 and w[2] == "2" and int(w[5]) < 4 and int(w[6]) > 0 and self.eigene_seite((int(w[3]), int(w[4]))):
                 baeume.append((int(w[3]), int(w[4])))
         hp = set(self.platz[3])
-        self.baum_platz = {}
+        self.baum_platz, self.baum_plaetze = {}, {}
         for b in baeume:
             nah = [(b[0] + dx, b[1] + dy) for dx in range(-4, 2) for dy in range(-4, 2) if (b[0] + dx, b[1] + dy) in hp]
             if nah:
                 self.baum_platz[b] = min(nah, key=lambda p: schach((p[0] + 1, p[1] + 1), b))
+                # v17: ALLE gueltigen Huettenplaetze, deren Mitte hoechstens 3 Felder vom Baum liegt (mehrere Holzfaeller je Baum)
+                self.baum_plaetze[b] = sorted(nah, key=lambda p: schach((p[0] + 1, p[1] + 1), b))
+        self.huetten_je_baum = None      # v17 (Daniel 22:57: "pro Baum beliebig viele Holzfaeller") - None = alte Regel (BAUM_FREI)
         self.steuer, self.steuer_runde = steuerstufe, -99
         self.braucht_gold, self.letzte_wahl, self.gesetzt = False, None, {}
         self.fehlschlag, self.abgelehnt, self.verstoss = {}, {}, []
@@ -355,7 +358,9 @@ class Ertragsplaner:
         eigen = [g for g in G.values() if g["besitzer"] == self.sp]
         gleich = [(g["x"], g["y"]) for g in eigen if g["typ"] == typ]
         b = self.groesse.get(typ, 3)
-        gesperrt = lambda p: any(t == typ and schach(p, q) <= 8 for (t, q) in self.fehlschlag)
+        # v17: bei mehreren Holzfaellern je Baum sperrt ein Fehlschlag nur seinen eigenen Platz, nicht 8 Felder rundum
+        sperr_r = 0 if (typ == 3 and self.huetten_je_baum) else 8
+        gesperrt = lambda p: any(t == typ and schach(p, q) <= sperr_r for (t, q) in self.fehlschlag)
         frei = lambda p: all(schach(p, q) >= b for q in gleich) and not gesperrt(p)
         if typ in (5, 20, 32):
             orte = [p for p in self.platz[typ] if frei(p)]
@@ -366,6 +371,14 @@ class Ertragsplaner:
             return orte
         if typ == 3:
             hf = [(x + 1, y + 1) for (x, y) in gleich]
+            if self.huetten_je_baum:
+                # v17: ein Baum nimmt bis zu K Huetten (Daniel 22:57) statt "vergeben, sobald ein Holzfaeller 7 Felder nah steht"
+                # (die alte Regel sperrte so auch alle Nachbarbaeume - am neuen Lager blieben 5 Holzfaeller fuer ~400 Holz)
+                aus = set()
+                for baum, plaetze in self.baum_plaetze.items():
+                    if sum(1 for h in hf if schach(baum, h) <= 4) < self.huetten_je_baum:
+                        aus.update(p for p in plaetze if frei(p))
+                return list(aus)
             return list({p for baum, p in self.baum_platz.items()
                          if all(schach(baum, h) > BAUM_FREI for h in hf) and frei(p)})
         rehe = [(e["x"], e["y"]) for e in L.values() if e["typ"] == 44 and e["besitzer"] == 0 and self.eigene_seite((e["x"], e["y"]))]
