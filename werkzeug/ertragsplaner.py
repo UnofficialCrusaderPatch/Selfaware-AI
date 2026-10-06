@@ -378,6 +378,9 @@ class Ertragsplaner:
         gebaut = self.baue(3, ort[0], ort[1], 3)
         if gebaut:
             self.gesetzt["Holzfaeller statt Verkauf"] = self.gesetzt.get("Holzfaeller statt Verkauf", 0) + 1
+        else:
+            # wie der Hauptweg: gescheiterten Platz merken, _orte sperrt ihn (holz_partie_1: 1.009 Versuche an (87, 231))
+            self.fehlschlag[(3, ort)] = self.fehlschlag.get((3, ort), 0) + 1
         return gebaut, "Platz %s, Weg %d" % (ort, w)
 
     def kandidaten(self, st, L, G):
