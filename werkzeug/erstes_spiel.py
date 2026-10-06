@@ -402,6 +402,7 @@ STEIN_MAX = False        # E4: Steinbrueche erst nach der ersten Holzlieferung, 
 JOCH_NACH_STEIN = False  # v18: Joch erst, wenn der Steinhaufen seines Steinbruchs Stein hat (Daniel 23:10, Punkte 4+5)
 STEIN_PARALLEL = False   # v18: Steinbrueche sofort (vor allem), Holzfaeller-Spam mit dem Rest - nicht erst nach dem Spam
 HUETTEN_VORAUS = False   # v18: Huetten vor dem Bedarf (Daniel 23:10 Punkt 3: Bauern brauchen Spawnzeit)
+VOLLBESCHAEFTIGUNG = False   # Lernkreis: jeder Bauer am Feuer bekommt sofort einen Arbeitsplatz (Lernlauf 1: 93 % untaetig)
 
 def v16_holzfaeller(plan):
     """Plan-Holzfaeller nach Abstand zum neuen Lager, ohne die jenseits von HF_MAX."""
@@ -987,6 +988,27 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                 vor = vorrat(SP)["gold"]
                 befehl({"spielbefehl": {"nr": 38, "werte": [0, 2]}}, 1.0, bis="SPIELBEFEHL")
                 ereignis.append("HOLZ GEKAUFT (Feuer %d untaetig, Holz %d): Gold %d -> %d" % (st["feuer"], st["holz"], vor, vorrat(SP)["gold"]))
+            if VOLLBESCHAEFTIGUNG and not endspiel["fertig"] and st.get("feuer", 0) >= 2:
+                # Lernlauf 1 (23:22): 93 % der Zeit >= 4 Bauern untaetig, am Ende 448 Holz + 510 Gold ungenutzt - ein Bauer am
+                # Feuer bringt 0. Jede freie Hand bekommt sofort einen Arbeitsplatz (beste Art je Platz laut Planer, ohne
+                # Horizont-Pruefung), bis zu 3 je Runde, Kosten ueber den Ruecklagen
+                frei_b = st["feuer"]
+                R = wirt.ruecklage(G)
+                habe_v = {"holz": st["holz"] - R["holz"], "stein": st["stein"], "gold": st["gold"] - R["gold"]}
+                gebaut_v = 0
+                for k in ausbau.kandidaten(st, L, G):
+                    if k["typ"] not in (3, 32, 7) or k["arbeiter"] > frei_b or gebaut_v >= 3:
+                        continue
+                    if all(habe_v[w] >= k["kosten"][w] for w in habe_v):
+                        o = baue_schnell(k["typ"], k["ort"][0], k["ort"][1], 3, zweck="Vollbeschaeftigung")
+                        ereignis.append("VOLL %s bei %s: %s (Feuer %d)" % (NACH_TYP[k["typ"]]["name"], k["ort"], o, st["feuer"]))
+                        if o:
+                            for w_v in habe_v:
+                                habe_v[w_v] -= k["kosten"][w_v]
+                            frei_b -= k["arbeiter"]
+                            gebaut_v += 1
+                        else:
+                            ausbau.fehlschlag[(k["typ"], k["ort"])] = ausbau.fehlschlag.get((k["typ"], k["ort"]), 0) + 1
             if spam_offen and not endspiel["fertig"]:
                 # E3: so viele Holzfaeller wie das Holz hergibt (ueber der B-Ruecklage), naechste zum Lager, mehrere je Baum
                 holz = st["holz"] - wirt.ruecklage(G)["holz"]
@@ -1221,7 +1243,8 @@ def main():
     global HF_VORAB, STEIN_ZUERST, HF_MAX, JE_ARBEITER, UMZUG, EXPERIMENT, HUETTEN_JE_BAUM, HOLZ_KAUFEN
     HUETTEN_JE_BAUM = int(arg["holzfaeller_je_baum"]) if arg.get("holzfaeller_je_baum") else None
     HOLZ_KAUFEN = arg.get("holz_kaufen", "nein") == "ja"
-    global HOLZ_SPAM, STEIN_MAX, JOCH_NACH_STEIN, STEIN_PARALLEL, HUETTEN_VORAUS
+    global HOLZ_SPAM, STEIN_MAX, JOCH_NACH_STEIN, STEIN_PARALLEL, HUETTEN_VORAUS, VOLLBESCHAEFTIGUNG
+    VOLLBESCHAEFTIGUNG = arg.get("vollbeschaeftigung", "nein") == "ja"
     HOLZ_SPAM = int(arg.get("holz_spam", 0))
     STEIN_MAX = arg.get("stein_max", "nein") == "ja"
     JOCH_NACH_STEIN = arg.get("joch_nach_stein", "nein") == "ja"

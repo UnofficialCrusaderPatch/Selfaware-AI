@@ -41,16 +41,17 @@ KNOEPFE = {
     "huetten_voraus": ["ja", "nein"],
     "holz_kaufen": ["ja", "nein"],
     "je_arbeiter": ["ja", "nein"],
+    "vollbeschaeftigung": ["ja", "nein"],
 }
 GRUND = {"v14": "ja", "umzug": "frueh", "holzfaeller_vorab": 4, "holz_spam": 20, "holzfaeller_je_baum": 4, "holzfaeller_max": 30,
          "steinbruch_zuerst": "nein", "stein_parallel": "ja", "joch_nach_stein": "ja", "huetten_voraus": "ja",
-         "holz_kaufen": "ja", "je_arbeiter": "ja"}
+         "holz_kaufen": "ja", "je_arbeiter": "ja", "vollbeschaeftigung": "nein"}
 FEST = ["leere_ki=ja", "tempo=100", "minuten=60", "streitkolben=10", "weg=bilanz", "experiment=ja"]
 REFERENZ = dict(GRUND, v14="nein")      # zweiter Lauf: die bisher schnellste Bauweise (v5) als Messlatte im selben Code
 # welche Knoepfe zu welchem gemessenen Verlust gehoeren (Vorwissen; die Wirkung misst der Kreis selbst)
 VERLUST_KNOEPFE = {
     "wohnraum_voll": ["huetten_voraus", "holz_kaufen"],
-    "bauern_untaetig": ["holz_kaufen", "holz_spam", "holzfaeller_je_baum", "je_arbeiter"],
+    "bauern_untaetig": ["vollbeschaeftigung", "holz_kaufen", "holz_spam", "holzfaeller_je_baum", "je_arbeiter"],
     "gold_liegt_holz_fehlt": ["holz_kaufen", "holz_spam"],
     "ohne_holz": ["holz_spam", "holzfaeller_vorab", "holzfaeller_je_baum", "holzfaeller_max", "umzug"],
     "stein_spaet": ["steinbruch_zuerst", "stein_parallel", "joch_nach_stein", "umzug"],
@@ -111,7 +112,7 @@ def lauf(strategie, bis_tick, nr):
         subprocess.run(args, stdout=f, stderr=subprocess.STDOUT, env=env, cwd=HIER, timeout=3600)
     text = open(aus, encoding="utf-8", errors="replace").read()
     note, art = note_aus(text, bis_tick)
-    lp = re.search(r"Lageprotokoll \(jede Runde komplett\): (\S+)", text)
+    lp = re.search(r"Lageprotokoll \(jede Runde komplett\): (.+?\.jsonl\.gz)", text)   # Pfad hat Leerzeichen (Lauf 1: Nachschau leer)
     ns = nachschau(lp.group(1)) if lp and os.path.exists(lp.group(1)) else {}
     abbruch = re.search(r"FRUEHABBRUCH bei Tick \d+: [^\n]*", text)
     return {"nr": nr, "zeit": stempel, "strategie": strategie, "note": note, "art": art, "nachschau": ns,
@@ -123,13 +124,21 @@ def schluessel(s):
 
 
 def naechste(beste, gespielt, ns):
-    gewicht = {k: 1.0 for k in KNOEPFE}
+    """23:24: nicht wuerfeln. Die Verluste der besten Strategie der Groesse nach; je Verlust seine Knoepfe in Rangfolge;
+    der erste Knopf mit einem noch nicht gespielten Wert gewinnt (logische Konsequenz aus der Nachschau). Erst wenn alle
+    passenden Knoepfe durch sind, zufaellig."""
     if ns:
         anteil = {v: ns.get(v, 0) / float(max(1, ns.get("ticks", 1))) for v in VERLUST_KNOEPFE}
-        groesster = max(anteil, key=anteil.get)
-        if anteil[groesster] > 0.1:
-            for k in VERLUST_KNOEPFE[groesster]:
-                gewicht[k] += 3.0
+        for verlust in sorted(anteil, key=anteil.get, reverse=True):
+            if anteil[verlust] <= 0.1:
+                break
+            for k in VERLUST_KNOEPFE[verlust]:
+                for w in KNOEPFE[k]:
+                    if w != beste[k]:
+                        s = dict(beste, **{k: w})
+                        if schluessel(s) not in gespielt:
+                            return s, k
+    gewicht = {k: 1.0 for k in KNOEPFE}
     for _ in range(200):
         k = random.choices(list(gewicht), weights=list(gewicht.values()))[0]
         werte = [w for w in KNOEPFE[k] if w != beste[k]]
