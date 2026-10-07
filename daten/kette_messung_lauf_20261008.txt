@@ -1,0 +1,178 @@
+Zuruecksetzen: Ansicht 14 (Partie vorbei: 0) -> Hauptmenue, pausiert
+LEERE KI: Spieler 2 ohne Waren und Gold (jede Runde)
+SAAT fest aus saat_liga.json (Modul meldet {'karte': 1788115329, 'partie': 1788115329, 'wert1': 7474, 'wert2': 22872, 'zaehler1': 1, 'zaehler2': 118})
+Partie laeuft seit Tick 99: Lords da, unser Lord bei (141, 269), {'Ansicht': 14, 'gameOver': 0, 'Mensch': 1, 'Platz': 1}
+GEBAUT Lager am Eisenfeld: {'name': 'Lager am Eisenfeld', 'typ': 10, 'gesucht': [142, 311, 6], 'ort': (143, 310), 'nr': 6, 'x': 143, 'y': 310, 'uid': 518733, 't': 174}
+GEBAUT Lager Block 2: {'name': 'Lager Block 2', 'typ': 10, 'gesucht': [143, 310, 8], 'ort': (138, 306), 'nr': 20, 'x': 138, 'y': 306, 'uid': 518739, 't': 201}
+GEBAUT Markt: {'name': 'Markt', 'typ': 26, 'gesucht': [143, 310, 25], 'ort': (143, 305), 'nr': 24, 'x': 143, 'y': 305, 'uid': 518768, 't': 228}
+GEBAUT Mine am Lager: {'name': 'Mine am Lager', 'typ': 5, 'gesucht': [140, 317, 1], 'ort': None, 'nr': None, 'x': None, 'y': None, 'uid': None, 't': 1047}
+GEBAUT Mine ~25 Felder: {'name': 'Mine ~25 Felder', 'typ': 5, 'gesucht': [150, 335, 1], 'ort': (150, 335), 'nr': 40, 'x': 150, 'y': 335, 'uid': 519024, 't': 1073}
+GEBAUT Mine ~45 Felder: {'name': 'Mine ~45 Felder', 'typ': 5, 'gesucht': [197, 320, 1], 'ort': (197, 320), 'nr': 41, 'x': 197, 'y': 320, 'uid': 519029, 't': 1107}
+GEBAUT Schmiede 1: {'name': 'Schmiede 1', 'typ': 13, 'gesucht': [143, 310, 10], 'ort': (143, 301), 'nr': 42, 'x': 143, 'y': 301, 'uid': 519039, 't': 1133}
+GEBAUT Schmiede 2: {'name': 'Schmiede 2', 'typ': 13, 'gesucht': [143, 310, 10], 'ort': (147, 301), 'nr': 43, 'x': 147, 'y': 301, 'uid': 519041, 't': 1166}
+GEBAUT Waffenlager: {'name': 'Waffenlager', 'typ': 11, 'gesucht': [143, 310, 12], 'ort': (151, 301), 'nr': 44, 'x': 151, 'y': 301, 'uid': 519053, 't': 1199}
+GEBAUT Milchviehhof 1: {'name': 'Milchviehhof 1', 'typ': 33, 'gesucht': [143, 310, 30], 'ort': (164, 299), 'nr': 45, 'x': 164, 'y': 299, 'uid': 519069, 't': 1243}
+GEBAUT Milchviehhof 2: {'name': 'Milchviehhof 2', 'typ': 33, 'gesucht': [143, 310, 30], 'ort': (169, 309), 'nr': 46, 'x': 169, 'y': 309, 'uid': 519079, 't': 1269}
+GEBAUT Gerberei: {'name': 'Gerberei', 'typ': 16, 'gesucht': [143, 310, 12], 'ort': (152, 305), 'nr': 47, 'x': 152, 'y': 305, 'uid': 519080, 't': 1295}
+Lageprotokoll: C:\Users\danie\Documents\PC_Affe\Games\Stronghold_Crusader\Stronghold Crusader Modding\Tools\Selfaware-AI\werkzeug\..\daten\lage_kette_20261008_002350_i1.jsonl.gz
+PROBE t=1379 Keule 0 Leder 0 Eisen 20 Gold 17131 Beliebt 100.0 Leute 27
+PROBE t=1453 Keule 0 Leder 0 Eisen 20 Gold 17131 Beliebt 100.0 Leute 28
+PROBE t=1527 Keule 0 Leder 0 Eisen 20 Gold 17131 Beliebt 100.0 Leute 30
+PROBE t=1602 Keule 0 Leder 0 Eisen 20 Gold 17131 Beliebt 100.0 Leute 31
+PROBE t=1676 Keule 0 Leder 0 Eisen 20 Gold 17094 Beliebt 100.0 Leute 33
+PROBE t=1749 Keule 0 Leder 0 Eisen 20 Gold 17094 Beliebt 100.0 Leute 33
+PROBE t=1824 Keule 0 Leder 0 Eisen 20 Gold 17094 Beliebt 100.0 Leute 33
+PROBE t=1903 Keule 0 Leder 0 Eisen 20 Gold 17094 Beliebt 100.0 Leute 33
+PROBE t=1977 Keule 0 Leder 0 Eisen 20 Gold 17094 Beliebt 100.0 Leute 33
+PROBE t=2050 Keule 0 Leder 0 Eisen 20 Gold 17094 Beliebt 100.0 Leute 33
+PROBE t=2125 Keule 0 Leder 0 Eisen 20 Gold 17094 Beliebt 100.0 Leute 33
+PROBE t=2198 Keule 0 Leder 0 Eisen 20 Gold 17094 Beliebt 100.0 Leute 33
+PROBE t=2273 Keule 0 Leder 0 Eisen 20 Gold 17094 Beliebt 100.0 Leute 33
+PROBE t=2346 Keule 0 Leder 0 Eisen 20 Gold 17094 Beliebt 100.0 Leute 33
+PROBE t=2421 Keule 0 Leder 0 Eisen 20 Gold 17046 Beliebt 100.0 Leute 32
+PROBE t=2494 Keule 0 Leder 0 Eisen 20 Gold 17046 Beliebt 100.0 Leute 32
+PROBE t=2567 Keule 0 Leder 0 Eisen 20 Gold 17046 Beliebt 100.0 Leute 33
+PROBE t=2642 Keule 0 Leder 0 Eisen 19 Gold 17046 Beliebt 100.0 Leute 33
+PROBE t=2716 Keule 0 Leder 0 Eisen 19 Gold 17046 Beliebt 100.0 Leute 33
+PROBE t=2790 Keule 0 Leder 0 Eisen 19 Gold 17046 Beliebt 100.0 Leute 33
+PROBE t=2864 Keule 0 Leder 0 Eisen 18 Gold 17046 Beliebt 100.0 Leute 33
+PROBE t=2939 Keule 0 Leder 0 Eisen 18 Gold 17046 Beliebt 100.0 Leute 33
+PROBE t=3013 Keule 0 Leder 0 Eisen 18 Gold 17046 Beliebt 100.0 Leute 33
+PROBE t=3089 Keule 0 Leder 0 Eisen 18 Gold 17046 Beliebt 100.0 Leute 33
+PROBE t=3161 Keule 0 Leder 0 Eisen 18 Gold 17046 Beliebt 100.0 Leute 33
+PROBE t=3235 Keule 0 Leder 0 Eisen 18 Gold 16997 Beliebt 100.0 Leute 33
+PROBE t=3311 Keule 0 Leder 0 Eisen 18 Gold 16997 Beliebt 100.0 Leute 33
+PROBE t=3387 Keule 0 Leder 0 Eisen 18 Gold 16997 Beliebt 100.0 Leute 33
+PROBE t=3461 Keule 0 Leder 0 Eisen 18 Gold 16997 Beliebt 100.0 Leute 33
+PROBE t=3536 Keule 0 Leder 0 Eisen 18 Gold 16997 Beliebt 100.0 Leute 33
+PROBE t=3611 Keule 0 Leder 0 Eisen 18 Gold 16997 Beliebt 100.0 Leute 33
+PROBE t=3685 Keule 0 Leder 0 Eisen 18 Gold 16997 Beliebt 100.0 Leute 33
+PROBE t=3761 Keule 0 Leder 0 Eisen 18 Gold 16997 Beliebt 100.0 Leute 33
+PROBE t=3836 Keule 0 Leder 0 Eisen 18 Gold 16997 Beliebt 100.0 Leute 32
+PROBE t=3909 Keule 0 Leder 0 Eisen 18 Gold 16997 Beliebt 100.0 Leute 32
+PROBE t=3983 Keule 0 Leder 0 Eisen 18 Gold 16997 Beliebt 100.0 Leute 33
+PROBE t=4057 Keule 0 Leder 0 Eisen 18 Gold 16949 Beliebt 100.0 Leute 33
+PROBE t=4133 Keule 0 Leder 0 Eisen 18 Gold 16949 Beliebt 100.0 Leute 33
+PROBE t=4208 Keule 0 Leder 0 Eisen 18 Gold 16949 Beliebt 100.0 Leute 33
+PROBE t=4286 Keule 0 Leder 0 Eisen 18 Gold 16949 Beliebt 100.0 Leute 33
+PROBE t=4361 Keule 0 Leder 0 Eisen 18 Gold 16949 Beliebt 100.0 Leute 33
+PROBE t=4435 Keule 1 Leder 0 Eisen 18 Gold 16949 Beliebt 100.0 Leute 33
+PROBE t=4510 Keule 1 Leder 0 Eisen 18 Gold 16949 Beliebt 100.0 Leute 33
+PROBE t=4585 Keule 1 Leder 0 Eisen 18 Gold 16949 Beliebt 100.0 Leute 33
+PROBE t=4660 Keule 2 Leder 0 Eisen 18 Gold 16949 Beliebt 100.0 Leute 33
+PROBE t=4734 Keule 2 Leder 0 Eisen 18 Gold 16949 Beliebt 100.0 Leute 33
+PROBE t=4809 Keule 2 Leder 0 Eisen 18 Gold 16900 Beliebt 100.0 Leute 33
+PROBE t=4882 Keule 2 Leder 0 Eisen 18 Gold 16900 Beliebt 100.0 Leute 33
+PROBE t=4956 Keule 2 Leder 0 Eisen 18 Gold 16900 Beliebt 100.0 Leute 33
+PROBE t=5031 Keule 2 Leder 0 Eisen 18 Gold 16900 Beliebt 100.0 Leute 33
+PROBE t=5107 Keule 2 Leder 0 Eisen 18 Gold 16900 Beliebt 100.0 Leute 33
+PROBE t=5181 Keule 2 Leder 0 Eisen 18 Gold 16900 Beliebt 100.0 Leute 33
+PROBE t=5257 Keule 2 Leder 3 Eisen 18 Gold 16900 Beliebt 100.0 Leute 32
+PROBE t=5333 Keule 2 Leder 3 Eisen 17 Gold 16900 Beliebt 100.0 Leute 32
+PROBE t=5408 Keule 2 Leder 3 Eisen 17 Gold 16900 Beliebt 100.0 Leute 33
+PROBE t=5484 Keule 2 Leder 3 Eisen 16 Gold 16900 Beliebt 100.0 Leute 33
+PROBE t=5560 Keule 2 Leder 3 Eisen 16 Gold 16900 Beliebt 100.0 Leute 33
+PROBE t=5636 Keule 2 Leder 3 Eisen 16 Gold 16852 Beliebt 100.0 Leute 33
+PROBE t=5709 Keule 2 Leder 3 Eisen 16 Gold 16852 Beliebt 100.0 Leute 33
+PROBE t=5783 Keule 2 Leder 3 Eisen 16 Gold 16852 Beliebt 100.0 Leute 33
+PROBE t=5858 Keule 2 Leder 3 Eisen 16 Gold 16852 Beliebt 100.0 Leute 33
+PROBE t=5933 Keule 2 Leder 3 Eisen 16 Gold 16852 Beliebt 100.0 Leute 33
+PROBE t=6008 Keule 2 Leder 3 Eisen 16 Gold 16852 Beliebt 100.0 Leute 33
+PROBE t=6082 Keule 2 Leder 3 Eisen 16 Gold 16852 Beliebt 100.0 Leute 33
+PROBE t=6157 Keule 2 Leder 3 Eisen 16 Gold 16852 Beliebt 100.0 Leute 33
+PROBE t=6235 Keule 2 Leder 3 Eisen 16 Gold 16852 Beliebt 100.0 Leute 33
+PROBE t=6311 Keule 2 Leder 3 Eisen 16 Gold 16852 Beliebt 100.0 Leute 33
+PROBE t=6386 Keule 2 Leder 3 Eisen 16 Gold 16852 Beliebt 100.0 Leute 33
+PROBE t=6463 Keule 2 Leder 3 Eisen 16 Gold 16803 Beliebt 100.0 Leute 33
+PROBE t=6538 Keule 2 Leder 3 Eisen 16 Gold 16803 Beliebt 100.0 Leute 33
+PROBE t=6611 Keule 2 Leder 3 Eisen 16 Gold 16803 Beliebt 100.0 Leute 32
+PROBE t=6685 Keule 2 Leder 3 Eisen 16 Gold 16803 Beliebt 100.0 Leute 32
+PROBE t=6759 Keule 2 Leder 3 Eisen 16 Gold 16803 Beliebt 100.0 Leute 33
+PROBE t=6833 Keule 2 Leder 3 Eisen 16 Gold 16803 Beliebt 100.0 Leute 33
+PROBE t=6908 Keule 2 Leder 3 Eisen 16 Gold 16803 Beliebt 100.0 Leute 33
+PROBE t=6982 Keule 2 Leder 3 Eisen 16 Gold 16803 Beliebt 100.0 Leute 33
+PROBE t=7058 Keule 4 Leder 3 Eisen 16 Gold 16803 Beliebt 100.0 Leute 33
+PROBE t=7132 Keule 4 Leder 3 Eisen 16 Gold 16803 Beliebt 100.0 Leute 33
+PROBE t=7208 Keule 4 Leder 3 Eisen 16 Gold 16755 Beliebt 100.0 Leute 33
+PROBE t=7294 Keule 6 Leder 3 Eisen 16 Gold 16595 Beliebt 100.0 Leute 33
+PROBE t=7370 Keule 6 Leder 6 Eisen 18 Gold 16595 Beliebt 100.0 Leute 33
+PROBE t=7451 Keule 6 Leder 6 Eisen 18 Gold 16515 Beliebt 100.0 Leute 33
+PROBE t=7526 Keule 6 Leder 6 Eisen 18 Gold 16515 Beliebt 100.0 Leute 33
+PROBE t=7599 Keule 6 Leder 6 Eisen 18 Gold 16515 Beliebt 100.0 Leute 33
+PROBE t=7673 Keule 6 Leder 6 Eisen 18 Gold 16515 Beliebt 100.0 Leute 33
+PROBE t=7747 Keule 6 Leder 6 Eisen 18 Gold 16515 Beliebt 100.0 Leute 33
+PROBE t=7822 Keule 6 Leder 6 Eisen 18 Gold 16515 Beliebt 100.0 Leute 33
+PROBE t=7898 Keule 6 Leder 6 Eisen 18 Gold 16515 Beliebt 100.0 Leute 33
+PROBE t=7972 Keule 6 Leder 6 Eisen 17 Gold 16515 Beliebt 100.0 Leute 33
+PROBE t=8046 Keule 6 Leder 6 Eisen 17 Gold 16466 Beliebt 100.0 Leute 32
+PROBE t=8121 Keule 6 Leder 6 Eisen 16 Gold 16466 Beliebt 100.0 Leute 32
+PROBE t=8196 Keule 6 Leder 6 Eisen 16 Gold 16466 Beliebt 100.0 Leute 33
+PROBE t=8269 Keule 6 Leder 6 Eisen 16 Gold 16466 Beliebt 100.0 Leute 33
+PROBE t=8344 Keule 6 Leder 6 Eisen 16 Gold 16466 Beliebt 100.0 Leute 33
+PROBE t=8419 Keule 6 Leder 6 Eisen 16 Gold 16466 Beliebt 100.0 Leute 33
+PROBE t=8494 Keule 6 Leder 6 Eisen 16 Gold 16466 Beliebt 100.0 Leute 33
+PROBE t=8567 Keule 6 Leder 6 Eisen 16 Gold 16466 Beliebt 100.0 Leute 33
+PROBE t=8641 Keule 6 Leder 6 Eisen 16 Gold 16466 Beliebt 100.0 Leute 33
+PROBE t=8715 Keule 6 Leder 6 Eisen 16 Gold 16466 Beliebt 100.0 Leute 33
+PROBE t=8788 Keule 6 Leder 6 Eisen 16 Gold 16466 Beliebt 100.0 Leute 33
+PROBE t=8862 Keule 6 Leder 6 Eisen 16 Gold 16417 Beliebt 100.0 Leute 33
+PROBE t=8937 Keule 6 Leder 6 Eisen 16 Gold 16417 Beliebt 100.0 Leute 33
+PROBE t=9010 Keule 6 Leder 6 Eisen 16 Gold 16417 Beliebt 100.0 Leute 33
+PROBE t=9085 Keule 6 Leder 6 Eisen 16 Gold 16417 Beliebt 100.0 Leute 33
+PROBE t=9157 Keule 6 Leder 6 Eisen 16 Gold 16417 Beliebt 100.0 Leute 33
+PROBE t=9233 Keule 6 Leder 6 Eisen 16 Gold 16417 Beliebt 100.0 Leute 33
+PROBE t=9306 Keule 6 Leder 6 Eisen 16 Gold 16417 Beliebt 100.0 Leute 33
+PROBE t=9380 Keule 6 Leder 6 Eisen 16 Gold 16417 Beliebt 100.0 Leute 33
+PROBE t=9454 Keule 6 Leder 6 Eisen 16 Gold 16417 Beliebt 100.0 Leute 32
+PROBE t=9528 Keule 6 Leder 9 Eisen 16 Gold 16417 Beliebt 100.0 Leute 32
+PROBE t=9602 Keule 6 Leder 9 Eisen 16 Gold 16417 Beliebt 100.0 Leute 33
+PROBE t=9675 Keule 6 Leder 9 Eisen 16 Gold 16368 Beliebt 100.0 Leute 33
+PROBE t=9750 Keule 7 Leder 9 Eisen 16 Gold 16368 Beliebt 100.0 Leute 33
+PROBE t=9823 Keule 7 Leder 9 Eisen 16 Gold 16368 Beliebt 100.0 Leute 33
+PROBE t=9897 Keule 8 Leder 9 Eisen 16 Gold 16368 Beliebt 100.0 Leute 33
+PROBE t=9971 Keule 8 Leder 9 Eisen 16 Gold 16368 Beliebt 100.0 Leute 33
+PROBE t=10045 Keule 8 Leder 9 Eisen 16 Gold 16368 Beliebt 100.0 Leute 33
+PROBE t=10118 Keule 8 Leder 9 Eisen 16 Gold 16368 Beliebt 100.0 Leute 33
+PROBE t=10195 Keule 8 Leder 9 Eisen 16 Gold 16368 Beliebt 100.0 Leute 33
+PROBE t=10275 Keule 8 Leder 9 Eisen 16 Gold 16288 Beliebt 100.0 Leute 33
+PROBE t=10350 Keule 8 Leder 9 Eisen 16 Gold 16288 Beliebt 100.0 Leute 33
+PROBE t=10438 Keule 8 Leder 9 Eisen 16 Gold 16079 Beliebt 100.0 Leute 33
+PROBE t=10511 Keule 8 Leder 9 Eisen 16 Gold 16079 Beliebt 100.0 Leute 33
+PROBE t=10588 Keule 8 Leder 9 Eisen 15 Gold 16079 Beliebt 100.0 Leute 33
+PROBE t=10663 Keule 8 Leder 9 Eisen 15 Gold 16079 Beliebt 100.0 Leute 33
+PROBE t=10738 Keule 8 Leder 9 Eisen 14 Gold 16079 Beliebt 100.0 Leute 33
+PROBE t=10811 Keule 8 Leder 9 Eisen 16 Gold 16079 Beliebt 100.0 Leute 33
+PROBE t=10887 Keule 8 Leder 9 Eisen 16 Gold 16079 Beliebt 100.0 Leute 33
+PROBE t=10962 Keule 8 Leder 9 Eisen 16 Gold 16079 Beliebt 100.0 Leute 33
+PROBE t=11035 Keule 8 Leder 9 Eisen 16 Gold 16079 Beliebt 100.0 Leute 33
+PROBE t=11108 Keule 8 Leder 9 Eisen 16 Gold 16079 Beliebt 100.0 Leute 33
+PROBE t=11183 Keule 8 Leder 9 Eisen 16 Gold 16079 Beliebt 100.0 Leute 33
+PROBE t=11257 Keule 8 Leder 9 Eisen 16 Gold 16030 Beliebt 100.0 Leute 33
+PROBE t=11331 Keule 8 Leder 9 Eisen 16 Gold 16030 Beliebt 100.0 Leute 33
+PROBE t=11405 Keule 8 Leder 9 Eisen 16 Gold 16030 Beliebt 100.0 Leute 33
+PROBE t=11480 Keule 8 Leder 9 Eisen 16 Gold 16030 Beliebt 100.0 Leute 33
+PROBE t=11555 Keule 8 Leder 9 Eisen 16 Gold 16030 Beliebt 100.0 Leute 33
+PROBE t=11628 Keule 8 Leder 9 Eisen 16 Gold 16030 Beliebt 100.0 Leute 33
+PROBE t=11701 Keule 8 Leder 9 Eisen 16 Gold 16030 Beliebt 100.0 Leute 33
+PROBE t=11779 Keule 8 Leder 9 Eisen 16 Gold 16030 Beliebt 100.0 Leute 33
+PROBE t=11855 Keule 8 Leder 9 Eisen 18 Gold 16030 Beliebt 100.0 Leute 33
+PROBE t=11928 Keule 8 Leder 9 Eisen 18 Gold 16030 Beliebt 100.0 Leute 33
+PROBE t=12001 Keule 8 Leder 9 Eisen 18 Gold 16030 Beliebt 100.0 Leute 33
+PROBE t=12076 Keule 8 Leder 9 Eisen 18 Gold 15981 Beliebt 100.0 Leute 33
+PROBE t=12150 Keule 8 Leder 9 Eisen 18 Gold 15981 Beliebt 100.0 Leute 33
+PROBE t=12224 Keule 8 Leder 9 Eisen 18 Gold 15981 Beliebt 100.0 Leute 33
+PROBE t=12300 Keule 8 Leder 12 Eisen 18 Gold 15981 Beliebt 100.0 Leute 33
+PROBE t=12375 Keule 10 Leder 12 Eisen 18 Gold 15981 Beliebt 100.0 Leute 33
+PROBE t=12450 Keule 10 Leder 12 Eisen 18 Gold 15981 Beliebt 100.0 Leute 33
+PROBE t=12525 Keule 12 Leder 12 Eisen 18 Gold 15981 Beliebt 100.0 Leute 33
+PROBE t=12598 Keule 12 Leder 12 Eisen 18 Gold 15981 Beliebt 100.0 Leute 33
+PROBE t=12673 Keule 12 Leder 12 Eisen 18 Gold 15981 Beliebt 100.0 Leute 33
+PROBE t=12748 Keule 12 Leder 12 Eisen 18 Gold 15981 Beliebt 100.0 Leute 33
+PROBE t=12821 Keule 12 Leder 12 Eisen 18 Gold 15932 Beliebt 100.0 Leute 33
+PROBE t=12894 Keule 12 Leder 12 Eisen 18 Gold 15932 Beliebt 100.0 Leute 33
+PROBE t=12969 Keule 12 Leder 12 Eisen 18 Gold 15932 Beliebt 100.0 Leute 33
+PROBE t=13042 Keule 12 Leder 12 Eisen 18 Gold 15932 Beliebt 100.0 Leute 33
+PROBE t=13117 Keule 12 Leder 12 Eisen 18 Gold 15932 Beliebt 100.0 Leute 33
+PROBE t=13192 Keule 12 Leder 12 Eisen 17 Gold 15932 Beliebt 100.0 Leute 32
+PROBE t=13273 Keule 12 Leder 12 Eisen 17 Gold 15852 Beliebt 100.0 Leute 32
+Daten: C:\Users\danie\Documents\PC_Affe\Games\Stronghold_Crusader\Stronghold Crusader Modding\Tools\Selfaware-AI\werkzeug\..\daten\kette_messung_20261008_002350.json

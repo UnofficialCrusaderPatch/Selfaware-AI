@@ -166,9 +166,131 @@ def main():
     print("Daten:", pfad)
 
 
+EISENMINE, KORNSPEICHER = 5, 19
+
+
+def eigene(typ=None):
+    G = E.runde_lesen()[2]
+    return {n: g for n, g in G.items() if g["besitzer"] == SP and (typ is None or g["typ"] == typ)}
+
+
+def baue_und_warte(typ, x, y, r, protokoll, name):
+    """Bauen und warten, bis das Gebaeude in der Liste steht (Messpartie 1: sonst bekommen zwei Bauten denselben Platz)."""
+    vorher = set(eigene(typ))
+    ort = E.baue_schnell(typ, x, y, r)
+    neu = []
+    for _ in range(40):
+        warte_ticks(3)
+        neu = [n for n in eigene(typ) if n not in vorher]
+        if neu:
+            break
+    g = eigene(typ).get(neu[0]) if neu else None
+    eintrag = {"name": name, "typ": typ, "gesucht": [x, y, r], "ort": ort, "nr": neu[0] if neu else None,
+               "x": g["x"] if g else None, "y": g["y"] if g else None, "uid": g.get("uid") if g else None, "t": peek(TICK)[0]}
+    protokoll.append(eintrag)
+    print("GEBAUT %s: %s" % (name, eintrag), flush=True)
+    return eintrag
+
+
+def kette():
+    """Messpartie Eisen/Schmiede/Leder (Daniel 08.10. 00:18: "ja bitte und auch wirklich messen"). Vorher festgelegt:
+    - Spielregel (Stronghold-Wiki "Resources"): ein Eisenarbeiter traegt je Gang ein Stueck zur Lagerstelle, Ochsen helfen
+      nicht - die Rate haengt am Weg Mine <-> Lager. Liga: enable_iron_double_pickup (vermutlich 2 je Gang).
+    - Ein zweites Lager geht nur angrenzend (Platzsuche 08.10.: 0 von 961 Plaetzen um (142,311), 5 von 27 neben dem Lager).
+      Darum zieht das ganze Lager ans Eisenfeld (wie der Lagerumzug zu den Steinbruechen): alte Teile abreissen, neu bauen.
+    - Drei Minen mit verschiedenem Weg (am Lager, ~25, ~45 Feldern) -> Eisen je 1.000 Ticks gegen Weglaenge.
+    - Zwei Schmieden am Lager, auf Keulen gestellt (Spielbefehl 33), 20 Eisen gekauft -> Keulen je 1.000 Ticks bei Eisen satt.
+    - 2 Milchviehhoefe + 1 Gerberei -> Kuehe, Leder je 1.000 Ticks.
+    - Beliebtheit 100 ueber die Messumgebung (Aufbau-Messung 20:40: bei 0 gingen die Leute, 0 Kuehe in 12.000 Ticks).
+    WIDERLEGT ist die Hoffnung "Eisen am Lager lohnt", wenn die Mine am Lager unter 1 Eisen je 1.000 Ticks bleibt.
+    Gesetzt wird nur Gold; alles andere echt gebaut, gekauft, gezaehlt. Jede Runde komplett ins Lageprotokoll."""
+    import messumgebung as M
+    from farmen_mischen import lies_karte
+    from lageprotokoll import Lageprotokoll
+    arg = dict(a.split("=", 1) for a in sys.argv[1:])
+    dauer, tempo = int(arg.get("ticks", 12000)), int(arg.get("tempo", 100))
+    ziel = tuple(int(v) for v in arg.get("lager", "142,311").split(","))
+    stempel = time.strftime("%Y%m%d_%H%M%S")
+    E.LEERE_KI = True
+    E.gefecht_starten(tempo)
+    erg = {"bauten": [], "schritte": [], "proben": [], "start": stempel}
+    setze(GOLD, 20000)
+    # 1. Lager ans Eisenfeld: alte Teile weg, dann das erste Teil frei setzen, ein zweiter Block daneben
+    alte = list(eigene(LAGER))
+    for n in alte:
+        befehl({"abreissen": {"nr": n}}, 0.8, bis="ABREISSEN")
+    warte_ticks(10)
+    erg["schritte"].append({"alte_lagerteile_abgerissen": alte, "rest": list(eigene(LAGER))})
+    l1 = baue_und_warte(LAGER, ziel[0], ziel[1], 6, erg["bauten"], "Lager am Eisenfeld")
+    if not l1["nr"]:
+        print("ABBRUCH: Lager am Eisenfeld nicht gebaut", flush=True)
+        return
+    lx, ly = l1["x"], l1["y"]
+    baue_und_warte(LAGER, lx, ly, 8, erg["bauten"], "Lager Block 2")
+    baue_und_warte(MARKT, lx, ly, 25, erg["bauten"], "Markt")
+    for art, lose in ((HOLZ, 25), (STEIN, 12)):
+        for _ in range(lose):
+            befehl({"spielbefehl": {"nr": 38, "werte": [0, art]}}, 1.0, bis="SPIELBEFEHL")
+    warte_ticks(10)
+    erg["schritte"].append({"gekauft": bestand()})
+    # 2. Minen ZUERST (Messpartie 08.10. 00:23: die Huetten der Messumgebung standen schon auf dem Eisenfeld - die Mine am
+    #    Lager fand keinen Platz). Je Weglaenge die naechsten Kandidaten der Reihe nach, bis einer steht.
+    plaetze = lies_karte(os.path.join(D, "start_M19_platz_eisenmine.txt"))
+    weg = lambda q: max(abs(q[0] + 2 - (lx + 2)), abs(q[1] + 2 - (ly + 2)))
+    soll_liste = [int(s) for s in arg.get("minen", "0,25,45").split(",")]
+    for soll in soll_liste:
+        name = "Mine am Lager" if soll == 0 else "Mine ~%d Felder" % soll
+        kand = sorted((q for q in plaetze if weg(q) >= 5 and all(max(abs(q[0] - b["x"]), abs(q[1] - b["y"])) >= 5
+                                                                  for b in erg["bauten"] if b["x"] is not None)),
+                      key=lambda q: abs(weg(q) - soll))
+        for q in kand[:12]:
+            e = baue_und_warte(EISENMINE, q[0], q[1], 1, erg["bauten"], name)
+            if e["nr"]:
+                e["weg_soll"], e["weg_luftlinie"] = soll, weg(q)
+                break
+            erg["bauten"].pop()
+    erg["schritte"].append({"messumgebung": M.vorbereiten(lx, ly, huetten=6)})
+    # 3. Schmieden + Waffenlager am Lager, auf Keulen stellen; Eisen fuer die Schmiede-Zeit kaufen
+    for name in ("Schmiede 1", "Schmiede 2"):
+        baue_und_warte(SCHMIEDE, lx, ly, 10, erg["bauten"], name)
+    baue_und_warte(WAFFENLAGER, lx, ly, 12, erg["bauten"], "Waffenlager")
+    for b in erg["bauten"]:
+        if b["typ"] == SCHMIEDE and b["nr"]:
+            befehl({"spielbefehl": {"nr": 33, "werte": [b["nr"], KEULE, b["uid"] or 0]}}, 1.0, bis="SPIELBEFEHL")
+    for _ in range(4):
+        befehl({"spielbefehl": {"nr": 38, "werte": [0, EISEN]}}, 1.0, bis="SPIELBEFEHL")
+    # 4. Leder
+    baue_und_warte(MILCH, lx, ly, 30, erg["bauten"], "Milchviehhof 1")
+    baue_und_warte(MILCH, lx, ly, 30, erg["bauten"], "Milchviehhof 2")
+    baue_und_warte(GERBER, lx, ly, 12, erg["bauten"], "Gerberei")
+    erg["schritte"].append({"nach_aufbau": bestand()})
+    # 5. Laufen lassen, jede Runde komplett mitschreiben
+    lage = Lageprotokoll(os.path.join(D, "lage_kette_%s_i%d.jsonl.gz" % (stempel, E.INSTANZ)))
+    erg["lageprotokoll"] = lage.pfad
+    print("Lageprotokoll:", lage.pfad, flush=True)
+    t0, runde = peek(TICK)[0], 0
+    erg["t_messbeginn"] = t0
+    while peek(TICK)[0] - t0 < dauer:
+        st = E.runde_lesen()[0]
+        if st:
+            lage.schreibe(st)
+        runde += 1
+        if runde % 20 == 0:
+            M.pflegen(st)
+        if runde % 10 == 0:
+            p = bestand()
+            erg["proben"].append(p)
+            print("PROBE t=%s Keule %s Leder %s Eisen %s Gold %s Beliebt %.1f Leute %s" % (
+                p["t"], p["keule"], p["leder"], p["eisen"], p["gold"], st.get("beliebt", 0) / 100.0, st.get("leute")), flush=True)
+    befehl({"pause": True}, 0.5)
+    pfad = os.path.join(D, "kette_messung_%s.json" % stempel)
+    json.dump(erg, open(pfad, "w", encoding="utf-8"), indent=1)
+    print("Daten:", pfad, flush=True)
+
+
 if __name__ == "__main__":
     kanal.belege()
     try:
-        main()
+        kette() if "teil=kette" in sys.argv else main()
     finally:
         kanal.freigeben()
