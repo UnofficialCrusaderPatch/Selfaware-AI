@@ -25,6 +25,7 @@ def schach(a, b):
 class Auftragsbuch:
     WARTEN = 60          # Ticks: so lange darf ein gesendeter Bau brauchen, bis er in der Gebaeudeliste steht
     MELDEN_LEER = 200    # Ticks unterbesetzt, ab denen ein Betrieb gemeldet wird
+    UEBERHOLT = 2        # so viele spaeter gebaute Holzfaellerhuetten besetzt, waehrend eine leer bleibt -> unerreichbar
 
     def __init__(self, sp, arbeiter_je, namen):
         self.sp, self.arbeiter_je, self.namen = sp, arbeiter_je, namen
@@ -39,6 +40,7 @@ class Auftragsbuch:
         self.unerreichbar = []       # (nr, typ, ort) - bestaetigt, aber laut Spiel nicht erreichbar; der Lenker reisst ab
         self.erreichbar_pruefen = {} # nr -> (tick, typ, ort): frisch gebaut mit erreichbar=0, Nachpruefung nach 250 Ticks
         self.hat = {}
+        self.bestaetigt_tick = {}    # nr -> Tick, ab dem der Betrieb in der Liste steht (Reihenfolge fuer "ueberholt")
 
     def name(self, typ):
         return self.namen.get(typ, {}).get("name", str(typ)) if isinstance(self.namen.get(typ), dict) else str(typ)
@@ -75,15 +77,11 @@ class Auftragsbuch:
                 self.zahl["bestaetigt"] += 1
                 ev.append("BAU BESTAETIGT %s Nr %d bei (%d,%d) nach %d Ticks%s" % (
                     self.name(a["typ"]), n, g["x"], g["y"], t - a["tick"], " [%s]" % a["zweck"] if a["zweck"] else ""))
-                # 08.10. 00:08 (Daniel, Bild: Huetten jenseits des Flusses mit rotem Zeichen; Lauf s25/5: 21 Huetten mit
-                # "erreichbar" 1, nie besetzt): das Feld beweist auch in diese Richtung nichts - JEDER neue Betrieb mit
-                # Arbeitsplaetzen kommt in den Beweis unten (600 Ticks ohne Arbeiter bei freien Bauern -> abreissen)
-                # 00:12 (Lauf s25/6: BEIDE Steinbrueche nach 602/671 Ticks abgerissen): nur Holzfaellerhuetten ohne Flag -
-                # neue Bauern gehen zuerst zu Holzfaellern (L7, 12 von 12); Steinbruch/Joch warten dahinter legitim lange
+                self.bestaetigt_tick[n] = t
+                # Nachpruefung (Daniel 23:10 "Holzfaeller sollten alle zugaenglich sein"): mit Flag 0 jeder Betrieb; ohne Flag
+                # die Holzfaellerhuetten (08.10. 00:08, Daniel, Bild: Huetten jenseits des Flusses; Lauf s25/5: 21 Huetten mit
+                # "erreichbar" 1, nie besetzt - das Feld beweist in keine Richtung etwas)
                 if g.get("erreichbar") == 0 or a["typ"] == 3:
-                    # Daniel 23:10 "Holzfaeller sollten alle zugaenglich sein" - ABER das Spiel rechnet sein Wegnetz hoechstens
-                    # alle 200 Ticks neu (Register W): frisch gebaut steht "erreichbar" kurz auf 0. 23:37 (Daniel: "Apfelplantage
-                    # oben platziert und direkt wieder geloescht, sogar zweimal"): erst nach 250 Ticks erneut pruefen.
                     self.erreichbar_pruefen[n] = (t, g["typ"], (g["x"], g["y"]))
             elif t - a["tick"] > self.WARTEN:
                 self.offen.remove(a)
@@ -95,20 +93,34 @@ class Auftragsbuch:
                               t - a["tick"], st.get("holz", 0), st.get("stein", 0), st.get("gold", 0)))
         ev_beleg = self._belegung(eig, L)          # Arbeiter je Betrieb JETZT (fuer den Beweis unten)
         for n, (t0, typ0, ort0) in list(self.erreichbar_pruefen.items()):
-            # 23:41 (Daniel: "laesst immer noch Apfelplantagen abreissen" - das Flag stand nach 260 Ticks noch auf 0, der
-            # Wegtest des Planers fand aber einen Weg): Beweis statt Flag - unerreichbar erst, wenn nach 600 Ticks KEIN
-            # Arbeiter da ist, obwohl Bauern am Feuer frei stehen. Hat er einen Arbeiter, ist er erreichbar.
             if n not in eig or self.hat.get(n, 0) > 0 or not self.arbeiter_je.get(typ0):
-                del self.erreichbar_pruefen[n]
+                del self.erreichbar_pruefen[n]                # hat einen Arbeiter -> erreichbar
+                continue
+            if typ0 == 3:
+                # Holzfaeller: Beweis = UEBERHOLT. Neue Bauern besetzen die Huetten der Reihe nach (Lauf s25/6: 22-26, dann
+                # 36-43, dann 47; die 1-4 am Feuer sind die Vierergruppe, die sich sammelt, L7) - "600 Ticks leer bei freien
+                # Bauern" riss so Huette 47 ab, die einfach die letzte in der Schlange war. Unerreichbar ist eine Huette erst,
+                # wenn mindestens 2 SPAETER gebaute Huetten Arbeiter bekommen haben, waehrend sie leer blieb.
+                ueberholt = [m for m, tm in self.bestaetigt_tick.items() if tm > t0 and m in eig and eig[m]["typ"] == 3
+                             and self.hat.get(m, 0) > 0]
+                if len(ueberholt) >= self.UEBERHOLT:
+                    del self.erreichbar_pruefen[n]
+                    self.unerreichbar.append((n, typ0, ort0))
+                    ev.append("BAU UNERREICHBAR %s Nr %d bei %s: leer seit Tick %d, spaeter gebaute Huetten %s schon besetzt "
+                              "- wird abgerissen" % (self.name(typ0), n, ort0, t0, sorted(ueberholt)[:5]))
             elif t - t0 >= 600 and st.get("feuer", 0) > 0:
+                # andere Betriebe mit Flag 0 (23:41, Daniel: "laesst immer noch Apfelplantagen abreissen"): Flag allein ist
+                # kein Beweis - unerreichbar erst nach 600 Ticks ohne Arbeiter bei freien Bauern
                 del self.erreichbar_pruefen[n]
                 self.unerreichbar.append((n, typ0, ort0))
                 ev.append("BAU UNERREICHBAR %s Nr %d bei %s: %d Ticks ohne Arbeiter bei %d freien Bauern - wird abgerissen" % (
                     self.name(typ0), n, ort0, t - t0, st.get("feuer", 0)))
         for n, g in neu.items():                       # ohne Auftrag aufgetaucht: still aufnehmen
             self.bekannt[n] = (g["typ"], g["x"], g["y"])
+            self.bestaetigt_tick[n] = t
         for n in [n for n in self.bekannt if n not in eig]:
             del self.bekannt[n]
+            self.bestaetigt_tick.pop(n, None)
         ev += ev_beleg
         return ev
 
