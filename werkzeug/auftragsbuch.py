@@ -78,7 +78,9 @@ class Auftragsbuch:
                 # 08.10. 00:08 (Daniel, Bild: Huetten jenseits des Flusses mit rotem Zeichen; Lauf s25/5: 21 Huetten mit
                 # "erreichbar" 1, nie besetzt): das Feld beweist auch in diese Richtung nichts - JEDER neue Betrieb mit
                 # Arbeitsplaetzen kommt in den Beweis unten (600 Ticks ohne Arbeiter bei freien Bauern -> abreissen)
-                if self.arbeiter_je.get(a["typ"]):
+                # 00:12 (Lauf s25/6: BEIDE Steinbrueche nach 602/671 Ticks abgerissen): nur Holzfaellerhuetten ohne Flag -
+                # neue Bauern gehen zuerst zu Holzfaellern (L7, 12 von 12); Steinbruch/Joch warten dahinter legitim lange
+                if g.get("erreichbar") == 0 or a["typ"] == 3:
                     # Daniel 23:10 "Holzfaeller sollten alle zugaenglich sein" - ABER das Spiel rechnet sein Wegnetz hoechstens
                     # alle 200 Ticks neu (Register W): frisch gebaut steht "erreichbar" kurz auf 0. 23:37 (Daniel: "Apfelplantage
                     # oben platziert und direkt wieder geloescht, sogar zweimal"): erst nach 250 Ticks erneut pruefen.
