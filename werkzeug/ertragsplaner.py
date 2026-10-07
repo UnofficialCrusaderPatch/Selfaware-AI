@@ -533,7 +533,7 @@ class Ertragsplaner:
         holz, stein, gold = st.get("holz", 0), st.get("stein", 0), st.get("gold", 0)
         # Steuern nach Beliebtheit (Regel bleibt, bis der Planer sie mitrechnet)
         bel = st.get("beliebt", 0) / 100.0
-        if runde - self.steuer_runde >= 2 * self.PLANEN:
+        if runde - self.steuer_runde >= 2 * self.PLANEN and not getattr(self, "steuer_extern", False):   # kasse=haushalt: haushalt.py
             # Untergrenze 0 statt 3 (Daniel 21:13, B17: "Beliebtheit wirklich ueber 95 halten, damit die Bevoelkerung schnell
             # genug nachkommt" - v2b fiel bei Stufe 3 auf 59, dann 38): unter 95 bis zur Bestechung herunter
             # Lernkreis (Daniel 23:53 "machen Steuern nochmal gut Geld?"): Schwelle zum Senken ist ein Knopf (steuer_runter)

@@ -398,7 +398,7 @@ def nahrung_auf_kante(bestand, puffer, hoechstens=12):
     return lose
 WAREN_NR = {"holz": 2, "stein": 4, "eisen": 6, "pech": 7, "apfel": 13, "brot": 10, "kaese": 11, "fleisch": 12, "weizen": 9, "hopfen": 3, "mehl": 16}
 
-def verkaufen(st, stein_reserve=None, messer=None, holz_verkaufen=False, eisen_reserve=0):
+def verkaufen(st, stein_reserve=None, messer=None, holz_verkaufen=False, eisen_reserve=0, nahrung_puffer_h=None):
     """Je Runde hoechstens ein Verkauf je Ware (Spielbefehl 38, verkaufen=1). Gibt Text oder None.
     stein_reserve: Bedarf der naechsten geplanten Eisenmine (Daniel 05.10. 19:44: Stein bis darauf verkaufen);
     messer: Ertragsmesser - bekommt jedes verkaufte Los (fuer die Buchfuehrung Zugang = Bestand + Verkauft + Verbaut)."""
@@ -413,7 +413,8 @@ def verkaufen(st, stein_reserve=None, messer=None, holz_verkaufen=False, eisen_r
             befehl({"spielbefehl": {"nr": 38, "werte": [1, WAREN_NR[ware]]}}, 1.0, bis="SPIELBEFEHL"); teile.append(ware)
             if messer is not None:
                 messer.verkauft(ware)
-    lose = nahrung_auf_kante({k: st.get(k, 0) for k in NAHRUNG_PREIS}, nahrung_puffer(st.get("leute", 10)))
+    lose = nahrung_auf_kante({k: st.get(k, 0) for k in NAHRUNG_PREIS},
+                             nahrung_puffer(st.get("leute", 10)) if nahrung_puffer_h is None else nahrung_puffer_h)
     if messer is not None:
         for w, k in lose.items():
             messer.verkauft(w, k)
@@ -461,6 +462,14 @@ PENNER = 20              # Lernkreis: Wachstums-Holzfaeller erst ab so vielen Wa
 KASSE_GRENZE = 50        # Lernkreis: Kasse nur, solange die Beliebtheit darueber liegt (Lauf 26: bei 0 Massen-Wegzug)
 KASSE = "nein"           # Lernkreis: "steuer" / "steuer_essen" - ab Ziel-Bevoelkerung (oder wenn nichts mehr lohnt) Stufe 11 bis zum Ende
 STEUER_ENDE = "nein"     # Lernkreis: Hoechststeuer (Stufe 11), sobald sich nichts mehr amortisiert (Daniel 07.10. 00:0x)
+# kasse=haushalt (Daniel 07.10. 23:34 "25 Streitkolbenkaempfer, niemals unter 50 Beliebtheit"; Rat 23:50): haushalt.py setzt
+# Steuer und Rationen jede Runde aus der Wochenrechnung (Schritt = Summe der Liga-Tabellenwerte, gemessen an Lauf 69)
+HAUSHALT_RAND = 650      # Lernkreis: Abstand (Hundertstel) ueber 50 - deckt doppelte Rationen -> leer (-500) plus Vielfalt (-125)
+WACHSTUM_BODEN = 9500    # Lernkreis: vor der Kasse nie unter 95 (Liga-Zuzug +40 erst ab 95, darunter 36 ... 5)
+GUTE_DINGE = 0           # Lernkreis: so viele Gaerten (30 Gold, Liga-Furcht bis +175 je Woche, Arbeitsleistung sinkt) ab Kasse-Start
+RATIONEN = "doppelt"     # Lernkreis: doppelte Rationen (+250 je Woche), sobald genug Nahrung da ist
+REGEL50 = False          # Aufgabe s25: faellt die Beliebtheit unter 50, bricht der Lauf ab (Regelbruch)
+NAHRUNG_AUSBAU = False   # Lernkreis: fehlt Nahrung fuer doppelte Rationen, eine Apfelplantage mehr je Woche (Lauf s25/1)
 ZIEL_TICK = 9400         # Zieltick, bis zu dem das Kausalmodell Ertraege rechnet (unter 1 Jahr = 9.600, Endspiel davor)
                          # 07.10.: Lernkreis setzt ihn auf das gemessene Ende der besten Strategie; gilt auch fuer den Planer
                          # (vorher Planer bis bis_tick=13.000, Kausal bis 9.400 - zwei Zeitraeume fuer dieselbe Frage)
@@ -745,6 +754,8 @@ def bilanz_schritt(st, L, G, ausbau, ziel, endspiel, runde, marken):
             vk = vorrat(SP)
             liste = []
             for w, los in BZ.LOS.items():
+                if KASSE == "haushalt" and w in NAHRUNG_PREIS:
+                    continue          # Haushalt: Nahrung traegt die Beliebtheit (Rationen, Vielfalt) - nie im Endspiel verkaufen
                 k = min(vk.get(w, 0) // los, 60)
                 liste += [{"spielbefehl": {"nr": 38, "werte": [1, BZ.WARE_NR[w]]}}] * k
                 if k:
@@ -1026,6 +1037,14 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
     ausbau.kasse_grenze, ausbau.kasse_stufe = KASSE_GRENZE, KASSE_STUFE
     ausbau.kasse_modus = KASSE                       # ist die Kasse eingestellt, setzt NUR sie Stufe 11 (steuer_ende schweigt)
     ausbau.wachstum = bool(BEV_ZIEL)                 # bis zur Ziel-Bevoelkerung keine Steuer
+    haus = None
+    if KASSE == "haushalt":
+        from haushalt import Haushalt
+        haus = Haushalt(HAUSHALT_RAND, RATIONEN == "doppelt")
+        haus.stufe = ausbau.steuer                   # Steuerstufe beim Start (PlayerData +0x2188)
+        ausbau.steuer_extern = True                  # Steuer setzt nur noch der Haushalt (auch nach dem Endspiel)
+        schreib("Haushalt: Boden Wachstum %.2f, Kasse %.2f (50 + Rand), Rationen %s, Gute Dinge %d, Regel 50 %s" % (
+            WACHSTUM_BODEN / 100.0, (5000 + HAUSHALT_RAND) / 100.0, RATIONEN, GUTE_DINGE, REGEL50))
     if V14:
         wirt.umzug_ab, wirt.lager_genau, wirt.lager_ort = None, True, tuple(V14_PLAN["lager"])
         wirt.umzug_nach_b = UMZUG == "nachb"
@@ -1119,6 +1138,9 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
         if stand >= 4:
             schreib("ABBRUCH - Spielzeit steht bei %d" % st["t"]); break
         letzter_tick = st["t"]
+        if REGEL50 and st.get("t", 0) > 0 and st.get("beliebt", 10000) < 5000:
+            schreib("REGELBRUCH bei Tick %d: Beliebtheit %.2f unter 50 - Lauf abgebrochen" % (st["t"], st["beliebt"] / 100.0))
+            break
         ausbau.beobachte(st, L, G)        # Buchfuehrung des Planers: Zugang je Ware seit der letzten Runde
         eig = [g for g in G.values() if g["besitzer"] == SP]
         gebs = [(g["x"] + NACH_TYP.get(g["typ"], {"b": 2})["b"] // 2, g["y"] + NACH_TYP.get(g["typ"], {"b": 2})["b"] // 2)
@@ -1243,8 +1265,8 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                     or (fruehpruefung.get("holz_ueberfluessig") and (not BEV_ZIEL or stillstand))):
                 kasse["an"] = st["t"]
                 ausbau.kasse, ausbau.wachstum = True, False
-                ereignis.append("KASSE ab Tick %d (%s): Steuer 11 bis zum Ende, Leute %d, Beliebtheit %.1f%s" % (
-                    st["t"], "Ziel-Bevoelkerung" if BEV_ZIEL and st.get("leute", 0) >= BEV_ZIEL else "nichts lohnt mehr" + (", Bevoelkerung steht seit Tick %d" % kasse["wuchs_tick"] if BEV_ZIEL else ""),
+                ereignis.append("KASSE ab Tick %d (%s): %s, Leute %d, Beliebtheit %.1f%s" % (
+                    st["t"], "Haushalt bis Beliebtheit %.2f" % ((5000 + HAUSHALT_RAND) / 100.0) if haus else "Steuer 11 bis zum Ende", "Ziel-Bevoelkerung" if BEV_ZIEL and st.get("leute", 0) >= BEV_ZIEL else "nichts lohnt mehr" + (", Bevoelkerung steht seit Tick %d" % kasse["wuchs_tick"] if BEV_ZIEL else ""),
                     st.get("leute", 0), st.get("beliebt", 0) / 100.0, ", keine Rationen, Nahrung wird verkauft" if KASSE == "steuer_essen" else ""))
             if kasse["an"] and KASSE == "steuer_essen":
                 # Lauf 38/39: unter der Grenze ging nur die Steuer aus, Rationen blieben 0 und Nahrung wurde weiter verkauft ->
@@ -1265,7 +1287,10 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
             # Schub (07.10., Daniel 01:07 "macht was ihr koennt"): Lauf 45/46 - im Endspiel bei Beliebtheit 0 ging der 10.
             # Angeworbene auf dem Weg verloren, Nachkauf 460 Gold = ~1.100 Ticks. Die ersten 5 Kaempfer darum schon waehrend
             # der Kasse, solange die Beliebtheit hoeher ist (Liga-Wegzug -5 bei 25-29 statt -40 bei 0-4)
-            if SCHUB and kasse["an"] and not endspiel["fertig"] and (st.get("T26", 0) == 0 or kasse.get("schub") == "gekauft")                     and kasse.get("schub") != "geworben":
+            # schub=immer (25er, Rat 23:50): ein Schub nach dem anderen, solange Gold und Bauern reichen - unter der Regel 50
+            # wandert niemand ab, und 25 = 5 x 5 geht in 5er-Kaeufen genau auf
+            if SCHUB and kasse["an"] and not endspiel["fertig"] and (st.get("T26", 0) == 0 or kasse.get("schub") == "gekauft" or SCHUB == "immer") \
+                    and kasse.get("schub") != "geworben" and st.get("T26", 0) < streitkolben:
                 v_s = vorrat(SP)
                 kas_s = [n for n, g in G.items() if g["besitzer"] == SP and g["typ"] == 9]
                 wl_s = [n for n, g in G.items() if g["besitzer"] == SP and g["typ"] == 11]
@@ -1281,7 +1306,8 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                         ereignis.append("SCHUB %d. Streitkolbenkaempfer angeworben (Beliebtheit %.1f, Wartende %d)" % (
                             kasse["schub_n"], st.get("beliebt", 0) / 100.0, st.get("feuer", 0)))
                     elif kasse.get("schub_n"):
-                        kasse["schub"] = "geworben"
+                        kasse["schub"] = None if SCHUB == "immer" else "geworben"
+                        kasse["schub_n"] = 0
                 elif v_s.get("gold", 0) >= bedarf_s and st.get("feuer", 0) >= 5:
                     if not kas_s:
                         if st.get("stein", 0) < 12:
@@ -1293,7 +1319,7 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                         ereignis.append("SCHUB Waffenlager %s" % (baue_schnell(11, BERGFRIED[0] - 14, BERGFRIED[1] + 14, 25),))
                     if kas_s and wl_s:
                         for ware, name in ((21, "keule"), (23, "leder")):
-                            if v_s.get(name, 0) < 5:
+                            if v_s.get(name, 0) < 5 and st.get("T26", 0) + v_s.get(name, 0) < streitkolben:
                                 befehl({"spielbefehl": {"nr": 38, "werte": [0, ware]}}, 1.0, bis="SPIELBEFEHL")
                         kasse["schub"] = "gekauft"
                         ereignis.append("SCHUB je 1 Los Keulen + Leder gekauft (Gold %d, Beliebtheit %.1f)" % (v_s.get("gold", 0), st.get("beliebt", 0) / 100.0))
@@ -1312,6 +1338,48 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                     ereignis.append("AUFGELOEST %d Soldaten fuer %d offene Arbeitsplaetze (Typen %s) -> Bauern" % (len(opfer[:12]), offene_a, 
                         sorted({L[n]["typ"] for n in opfer[:12]})))
             ausbau.nach_abriss = bool(endspiel["fertig"])
+            if haus is not None:
+                # Wochenrechnung: erst den letzten Schritt messen, dann Rationen und Stufe fuer die naechste Woche
+                txt_h = haus.beobachte(st)
+                if txt_h:
+                    ereignis.append(txt_h + ", Gold %d, Leute %d" % (st.get("gold", 0), st.get("leute", 0)))
+                regel_h = 5000 + HAUSHALT_RAND
+                if haus.jetzt_entscheiden(st, regel_h):
+                    haus.entschieden = st["t"]
+                    nahrung_h = sum(st.get(w, 0) for w in ("apfel", "brot", "kaese", "fleisch"))
+                    ration_h = haus.waehle_ration(st, 3 + st.get("leute", 0) // 10)
+                    if ration_h != haus.ration:
+                        befehl({"spielbefehl": {"nr": 35, "werte": [ration_h]}}, 1.0, bis="SPIELBEFEHL")
+                        ereignis.append("HAUSHALT Rationen %s -> %d (Nahrung %d)" % (haus.ration, ration_h, nahrung_h))
+                        haus.ration = ration_h
+                    boden_h = max(regel_h, 0 if kasse["an"] else WACHSTUM_BODEN)
+                    stufe_h = haus.waehle_stufe(st, boden_h, ration_h)
+                    if stufe_h != haus.stufe:
+                        befehl({"spielbefehl": {"nr": 34, "werte": [stufe_h]}}, 1.0, bis="SPIELBEFEHL")
+                        ereignis.append("HAUSHALT Steuer %s -> %d (Beliebtheit %.2f, Boden %.2f, Rest %+d)" % (
+                            haus.stufe, stufe_h, st.get("beliebt", 0) / 100.0, boden_h / 100.0, haus.rest))
+                        haus.stufe = ausbau.steuer = stufe_h
+                    # Lauf s25/1 (07.10. 23:55): 6 Apfelplantagen fuer 85 Leute - doppelte Rationen fielen fast jede Woche
+                    # aus Mangel aus, die Steuer pendelte 2/3 (kaum Gold). Doppelt statt normal = +250 je Woche = rund 3
+                    # Stufen mehr Steuer. Fehlt die Nahrung dafuer, eine Apfelplantage mehr (hoechstens eine je Woche)
+                    if NAHRUNG_AUSBAU and RATIONEN == "doppelt" and ration_h != 4 and not endspiel["fertig"] \
+                            and st.get("feuer", 0) >= 1 and not any(a["typ"] == 32 for a in BUCH.offen):
+                        R_n = wirt.ruecklage(G)
+                        k_n = kosten_spiel(32)
+                        if st["holz"] - R_n["holz"] >= k_n["holz"] and st["gold"] - R_n["gold"] >= k_n["gold"]:
+                            ort_n, weg_n = ausbau._bester_ort(32, L, G)
+                            if ort_n:
+                                o_n = baue_schnell(32, ort_n[0], ort_n[1], 1, zweck="Nahrung")
+                                if not o_n:
+                                    ausbau.fehlschlag[(32, ort_n)] = ausbau.fehlschlag.get((32, ort_n), 0) + 1
+                                ereignis.append("HAUSHALT Apfelplantage fuer doppelte Rationen bei %s (Weg %s, Nahrung %d, Leute %d): %s" % (
+                                    ort_n, weg_n, nahrung_h, st.get("leute", 0), o_n))
+                if kasse["an"] and GUTE_DINGE and not endspiel["fertig"]:
+                    gd = sum(1 for g in G.values() if g["besitzer"] == SP and g["typ"] == 66) + \
+                        sum(1 for a in BUCH.offen if a["typ"] == 66)
+                    if gd < GUTE_DINGE and st.get("gold", 0) - wirt.ruecklage(G)["gold"] >= kosten_spiel(66)["gold"]:
+                        ereignis.append("GUTE DINGE Garten %d/%d: %s" % (gd + 1, GUTE_DINGE, baue_schnell(
+                            66, BERGFRIED[0] + 8, BERGFRIED[1] - 8, 20, zweck="Gute Dinge")))
             if runde % 10 == 1:
                 schreib(BUCH.stand(G, st))
             hf_jetzt = sum(1 for g in G.values() if g["besitzer"] == SP and g["typ"] == 3) + \
@@ -1399,7 +1467,9 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
             # gesetzt" in derselben Runde - danach reichte der Stein nicht mehr)
             kas_fehlt = streitkolben and not [n for n, g in G.items() if g["besitzer"] == SP and g["typ"] == 9]
             v = verkaufen(st, ausbau.reserve()["stein"] + (12 if kas_fehlt else 0) + (prod.stein_bedarf() if prod else 0),
-                          ausbau.messer, holz_verkaufen=bremst, eisen_reserve=10 ** 6 if prod else 0)
+                          ausbau.messer, holz_verkaufen=bremst, eisen_reserve=10 ** 6 if prod else 0,
+                          # Haushalt: Nahrung fuer doppelte Rationen behalten (2 x 0,1 je Kopf und 1.000 Ticks, gemessen 05.10.)
+                          nahrung_puffer_h=(3 + st.get("leute", 0) // 3) if haus else None)
             if v:
                 ereignis.append(v)
             # Daniel 07.10. (Lauf 14: 9 statt 10 Kaempfer, "hier fehlt ein Arbeiter, schlecht kalkuliert"): nach dem Endspiel-
@@ -1565,6 +1635,8 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
         (("; Waechter: " + w.bericht()) if w else "") + (("; Angriff: " + trupp.bericht()) if trupp else "")))
     schreib("Wirtschaft: " + wirt.bericht())
     schreib(ausbau.bericht())
+    if haus is not None:
+        schreib(haus.bericht())
     if BUCH is not None:
         BUCH.abgleich(G, L, st)
         schreib(BUCH.stand(G, st))
@@ -1603,7 +1675,14 @@ def main():
     KASSE_GRENZE = int(arg.get("kasse_grenze", 50))
     PENNER = int(arg.get("penner", 20))
     KASSE_STUFE = int(arg.get("kasse_stufe", 11))
-    SCHUB = arg.get("schub", "nein") == "ja"
+    SCHUB = False if arg.get("schub", "nein") == "nein" else arg["schub"]    # "ja" = ein Schub, "immer" = einer nach dem anderen
+    global HAUSHALT_RAND, WACHSTUM_BODEN, GUTE_DINGE, RATIONEN, REGEL50, NAHRUNG_AUSBAU
+    NAHRUNG_AUSBAU = arg.get("nahrung_ausbau", "nein") == "ja"
+    HAUSHALT_RAND = int(arg.get("haushalt_rand", HAUSHALT_RAND))
+    WACHSTUM_BODEN = int(arg.get("wachstum_boden", WACHSTUM_BODEN))
+    GUTE_DINGE = int(arg.get("gute_dinge", GUTE_DINGE))
+    RATIONEN = arg.get("rationen", RATIONEN)
+    REGEL50 = arg.get("regel50", "nein") == "ja"
     AUFLOESEN = arg.get("aufloesen", "nein")   # "ja" = nach Bedarf als Arbeiter, "ende" = als Rekruten im Endspiel
     EINZELKAUF = arg.get("einzelkauf", "nein") == "ja"
     ABRISS = arg.get("abriss", "ja") == "ja"

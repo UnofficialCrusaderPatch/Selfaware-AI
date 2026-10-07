@@ -56,6 +56,31 @@ KNOEPFE = {
     "steuer_runter": [95, 90, 85, 80],
     "stein_max": ["nein", "ja"],
 }
+# Aufgabe s25 (Daniel 07.10. 23:34: 25 Streitkolbenkaempfer, "niemals unter 50 Beliebtheit", kuerzeste Zeit; Rat 23:50 in
+# Plan_Streitkolben.md): eigene Ergebnisdatei, Ausgang = Lauf 69 mit Haushalt statt Kasse -40
+S25 = {
+    "datei": "lernen_s25.jsonl", "wissen": "lernen_s25_wissen.json", "ziel": 25, "bis_tick": 40000,
+    "fest": ["leere_ki=ja", "minuten=60", "streitkolben=25", "weg=bilanz", "experiment=ja", "regel50=ja"],
+    "knoepfe": {
+        "kasse": ["haushalt"],
+        "schub": ["immer"],
+        "bevoelkerung_ziel": [70, 90, 110, 50],
+        "gute_dinge": [0, 4, 8, 16],
+        "haushalt_rand": [650, 400, 900],
+        "wachstum_boden": [9500, 9000, 10000],
+        "rationen": ["doppelt", "normal"],
+        "nahrung_ausbau": ["ja", "nein"],     # Lauf s25/1: Nahrung fehlte fuer doppelte Rationen
+    },
+    "grund": {"abriss": "nein", "aufloesen": "ende", "b_versatz": 600, "bevoelkerung_ziel": 70, "einzelkauf": "nein",
+              "entscheider": "kausal", "holz_kaufen": "ja", "holz_spam": 20, "holzfaeller_je_baum": 4, "holzfaeller_max": 30,
+              "holzfaeller_vorab": 4, "huetten_voraus": "nein", "je_arbeiter": "ja", "joch_nach_stein": "ja",
+              "kasse": "haushalt", "kasse_grenze": 0, "kasse_stufe": 11, "penner": 20, "schub": "immer", "stein_max": "nein",
+              "stein_parallel": "ja", "steinbruch_zuerst": "nein", "steuer_ende": "ja", "steuer_runter": 90, "umzug": "frueh",
+              "v14": "ja", "vollbeschaeftigung": "ja",
+              "gute_dinge": 0, "haushalt_rand": 650, "wachstum_boden": 9500, "rationen": "doppelt", "nahrung_ausbau": "nein"},
+    "hinweise": ["nahrung_ausbau", "bevoelkerung_ziel", "gute_dinge", "haushalt_rand", "wachstum_boden", "rationen", "penner"],
+}
+ZIEL = 10
 GRUND = {"v14": "ja", "umzug": "frueh", "holzfaeller_vorab": 4, "holz_spam": 20, "holzfaeller_je_baum": 4, "holzfaeller_max": 30,
          "steinbruch_zuerst": "nein", "stein_parallel": "ja", "joch_nach_stein": "ja", "huetten_voraus": "ja",
          "holz_kaufen": "ja", "je_arbeiter": "ja", "vollbeschaeftigung": "nein", "entscheider": "regeln", "b_versatz": "reif",
@@ -133,9 +158,13 @@ def widersprueche(text):
 
 
 def note_aus(text, bis_tick):
-    r = re.search(r"KAEMPFER 10 bei Tick (\d+)", text) or re.search(r"ZIEL 10 Streitkolbenkaempfer erreicht bei Tick (\d+)", text)
+    r = re.search(r"KAEMPFER %d bei Tick (\d+)" % ZIEL, text) or re.search(r"ZIEL %d Streitkolbenkaempfer erreicht bei Tick (\d+)" % ZIEL, text)
     if r:
         return int(r.group(1)), "erreicht"
+    rb = re.search(r"REGELBRUCH bei Tick (\d+): [^\n]*", text)
+    if rb:
+        # Aufgabe s25: ein gueltiger, aber verlorener Lauf - der Kreis soll daraus lernen (nicht "ungueltig")
+        return 30000, "Regel verletzt: " + rb.group(0)
     if re.search(r"ABBRUCH - Testbedingung weg", text):
         # 07.10.: Lauf 24/27 - Spielansicht von aussen geaendert; Lauf 27 wurde hochgerechnet und galt als beste (8.562)
         return 30000, "ungueltig: Testbedingung weg (Spielansicht von aussen geaendert)"
@@ -215,10 +244,18 @@ def naechste(beste, gespielt, ns):
 
 def main():
     arg = dict(a.split("=", 1) for a in sys.argv[1:])
+    global TEMPO, KNOEPFE, GRUND, FEST, HINWEISE, ZIEL
+    datei, wissen_datei = "lernen.jsonl", "lernen_wissen.json"
+    if arg.get("aufgabe") == "s25":
+        KNOEPFE = dict(KNOEPFE)
+        for k, werte in S25["knoepfe"].items():
+            KNOEPFE[k] = werte
+        GRUND, FEST, HINWEISE, ZIEL = dict(S25["grund"]), list(S25["fest"]), list(S25["hinweise"]), S25["ziel"]
+        datei, wissen_datei = S25["datei"], S25["wissen"]
+        arg.setdefault("bis_tick", str(S25["bis_tick"]))
     laeufe, bis_tick = int(arg.get("laeufe", 5)), int(arg.get("bis_tick", 14000))
-    global TEMPO
     TEMPO = int(arg.get("tempo", TEMPO))
-    pfad = os.path.join(D, "lernen.jsonl")
+    pfad = os.path.join(D, datei)
     alle = [json.loads(z) for z in open(pfad, encoding="utf-8")] if os.path.exists(pfad) else []
     for r in alle:
         r["strategie"] = dict(GRUND, **r["strategie"])     # aeltere Laeufe: neue Knoepfe mit Grundwert (KeyError 23:21)
@@ -301,7 +338,7 @@ def main():
             if x.get("geaendert") and x.get("geaendert") != "kontrolle" and x.get("vergleich"):
                 k = "%s=%s" % (x["geaendert"], x["strategie"][x["geaendert"]])
                 wissen.setdefault(k, []).append(x["vergleich"]["differenz"])
-        json.dump({"beste": beste, "wirkung_je_knopfwert": wissen}, open(os.path.join(D, "lernen_wissen.json"), "w", encoding="utf-8"),
+        json.dump({"beste": beste, "wirkung_je_knopfwert": wissen}, open(os.path.join(D, wissen_datei), "w", encoding="utf-8"),
                   indent=1, ensure_ascii=False)
     print("LERNEN fertig: beste Note %s (Lauf %s, %s)" % (beste["note"], beste["nr"], beste["strategie"]), flush=True)
 
