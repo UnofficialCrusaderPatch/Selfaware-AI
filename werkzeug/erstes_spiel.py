@@ -469,7 +469,7 @@ WACHSTUM_BODEN = 9500    # Lernkreis: vor der Kasse nie unter 95 (Liga-Zuzug +40
 GUTE_DINGE = 0           # Lernkreis: so viele Gaerten (30 Gold, Liga-Furcht bis +175 je Woche, Arbeitsleistung sinkt) ab Kasse-Start
 RATIONEN = "doppelt"     # Lernkreis: doppelte Rationen (+250 je Woche), sobald genug Nahrung da ist
 REGEL50 = False          # Aufgabe s25: faellt die Beliebtheit unter 50, bricht der Lauf ab (Regelbruch)
-NAHRUNG_AUSBAU = False   # Lernkreis: fehlt Nahrung fuer doppelte Rationen, eine Apfelplantage mehr je Woche (Lauf s25/1)
+NAHRUNG_AUSBAU = "nein"  # Lernkreis: fehlt Nahrung fuer doppelte Rationen, eine Apfelplantage mehr je Woche (Lauf s25/1)
 ZIEL_TICK = 9400         # Zieltick, bis zu dem das Kausalmodell Ertraege rechnet (unter 1 Jahr = 9.600, Endspiel davor)
                          # 07.10.: Lernkreis setzt ihn auf das gemessene Ende der besten Strategie; gilt auch fuer den Planer
                          # (vorher Planer bis bis_tick=13.000, Kausal bis 9.400 - zwei Zeitraeume fuer dieselbe Frage)
@@ -1154,6 +1154,8 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                 n_u, typ_u, ort_u = BUCH.unerreichbar.pop()
                 befehl({"abreissen": {"nr": n_u}}, 0.8, bis="ABREISSEN")
                 ausbau.fehlschlag[(typ_u, ort_u)] = ausbau.fehlschlag.get((typ_u, ort_u), 0) + 1
+                ausbau.unerreichbar.add(tuple(ort_u))       # auch der Wegtest-Speicher: nie wieder als erreichbar anbieten
+                ausbau.erreichbar_ok.discard(tuple(ort_u))
             if ENTSCHEIDER == "kausal" and not endspiel["fertig"]:
                 # Kausalmodell (kausal.py): fuer jede Handlung die Wirkungskette bis ZIEL_TICK aus der aktuellen Lage
                 import kausal as KM
@@ -1170,7 +1172,9 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                         continue
                     b_a = ausbau.groesse.get(typ_a, 3) // 2
                     orte_a = sorted(ausbau._orte(typ_a, L, G), key=lambda p: max(abs(p[0] + b_a - abgabe_k[typ_a][0]), abs(p[1] + b_a - abgabe_k[typ_a][1])))
-                    kand_k += [(typ_a, p, ausbau.kosten_von(typ_a), 1) for p in orte_a[:4]]
+                    # 08.10. 00:08 (Daniel, Bild: Holzfaeller jenseits des Flusses): nur Plaetze mit Weg laut Wegtest des Spiels -
+                    # vorher die 4 naechsten ungeprueft (Lauf s25/5: 21 Huetten bei x 8-54, nie besetzt)
+                    kand_k += [(typ_a, p, ausbau.kosten_von(typ_a), 1) for p in ausbau.erreichbare(orte_a, L, 4)]
                 R_k = wirt.ruecklage(G)
                 st_k = dict(st, holz=st["holz"] - R_k["holz"], gold=st["gold"] - R_k["gold"])
                 for w_k, typ_k, ort_k, text_k in KM.entscheide(st["t"], ZIEL_TICK, st_k, kand_k, feuer_g,
@@ -1362,7 +1366,10 @@ def phase2(plan, minuten, tempo, mit_waechter=False, bis_tick=None, assassinen=0
                     # Lauf s25/1 (07.10. 23:55): 6 Apfelplantagen fuer 85 Leute - doppelte Rationen fielen fast jede Woche
                     # aus Mangel aus, die Steuer pendelte 2/3 (kaum Gold). Doppelt statt normal = +250 je Woche = rund 3
                     # Stufen mehr Steuer. Fehlt die Nahrung dafuer, eine Apfelplantage mehr (hoechstens eine je Woche)
-                    if NAHRUNG_AUSBAU and RATIONEN == "doppelt" and ration_h != 4 and not endspiel["fertig"] \
+                    # Lauf s25/3 gegen 4 (08.10. 00:06): Plantagen im Wachstum kosten Holz/Gold, wenn beides am knappsten ist
+                    # (Lauf 3 Kasse erst bei 9.922 gegen 9.460) - Wert "kasse": erst ab Kasse-Start
+                    if (NAHRUNG_AUSBAU == "ja" or (NAHRUNG_AUSBAU == "kasse" and kasse["an"])) and RATIONEN == "doppelt" \
+                            and ration_h != 4 and not endspiel["fertig"] \
                             and st.get("feuer", 0) >= 1 and not any(a["typ"] == 32 for a in BUCH.offen):
                         R_n = wirt.ruecklage(G)
                         k_n = kosten_spiel(32)
@@ -1677,7 +1684,7 @@ def main():
     KASSE_STUFE = int(arg.get("kasse_stufe", 11))
     SCHUB = False if arg.get("schub", "nein") == "nein" else arg["schub"]    # "ja" = ein Schub, "immer" = einer nach dem anderen
     global HAUSHALT_RAND, WACHSTUM_BODEN, GUTE_DINGE, RATIONEN, REGEL50, NAHRUNG_AUSBAU
-    NAHRUNG_AUSBAU = arg.get("nahrung_ausbau", "nein") == "ja"
+    NAHRUNG_AUSBAU = arg.get("nahrung_ausbau", "nein")    # "ja" = immer, "kasse" = erst ab Kasse-Start, "nein"
     HAUSHALT_RAND = int(arg.get("haushalt_rand", HAUSHALT_RAND))
     WACHSTUM_BODEN = int(arg.get("wachstum_boden", WACHSTUM_BODEN))
     GUTE_DINGE = int(arg.get("gute_dinge", GUTE_DINGE))

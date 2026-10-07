@@ -1,0 +1,16 @@
+LERNEN Lauf 2: Kontrolllauf der besten Strategie mit neuem Code
+LERNEN Ergebnis Lauf 2: Note 19205 (erreicht) | Nachschau {'bauern_untaetig': 8644, 'ohne_holz': 8673, 'gold_liegt_holz_fehlt': 4677, 'erstes_holz_geliefert': 4612, 'erster_stein': 5208, 'ticks': 18854, 'apfel_warten': 2290.552078348211, 'holz_liegt_bauern_warten': 3440, 'bau_wieder_abgerissen': 29, 'fehlversuche': 64}
+LERNEN WIDERSPRUCH Lauf 2: 29 eigene Bauten binnen 1.000 Ticks wieder abgerissen; 64 gescheiterte/abgelehnte Befehle (Schleife?); Holz lag 3440 Ticks, waehrend >= 2 Bauern warteten
+LERNEN neue beste Strategie (Lauf 2)
+LERNEN Lauf 3: bevoelkerung_ziel = 90 (statt 70), beste Note bisher 19205
+LERNEN Ergebnis Lauf 3: Note 17716 (erreicht), -1489 gegen Lauf 2 | Nachschau {'wohnraum_voll': 5822, 'bauern_untaetig': 5300, 'ohne_holz': 9533, 'gold_liegt_holz_fehlt': 6496, 'erstes_holz_geliefert': 4610, 'erster_stein': 7572, 'ticks': 17369, 'apfel_warten': 3279.3154037998524, 'holz_liegt_bauern_warten': 2009, 'bau_wieder_abgerissen': 3, 'fehlversuche': 31}
+LERNEN WIDERSPRUCH Lauf 3: 3 eigene Bauten binnen 1.000 Ticks wieder abgerissen; 31 gescheiterte/abgelehnte Befehle (Schleife?); Holz lag 2009 Ticks, waehrend >= 2 Bauern warteten
+LERNEN neue beste Strategie (Lauf 3)
+LERNEN Lauf 4: nahrung_ausbau = nein (statt ja), beste Note bisher 17716
+LERNEN Ergebnis Lauf 4: Note 16753 (erreicht), -963 gegen Lauf 3 | Nachschau {'wohnraum_voll': 4179, 'bauern_untaetig': 7219, 'ohne_holz': 8594, 'gold_liegt_holz_fehlt': 6112, 'erstes_holz_geliefert': 4624, 'erster_stein': 7640, 'ticks': 16398, 'apfel_warten': 3599.01406926407, 'holz_liegt_bauern_warten': 6304, 'fehlversuche': 24}
+LERNEN WIDERSPRUCH Lauf 4: 24 gescheiterte/abgelehnte Befehle (Schleife?); Holz lag 6304 Ticks, waehrend >= 2 Bauern warteten
+LERNEN neue beste Strategie (Lauf 4)
+LERNEN Lauf 5: bevoelkerung_ziel = 110 (statt 90), beste Note bisher 16753
+LERNEN Ergebnis Lauf 5: Note 16966 (erreicht), +213 gegen Lauf 4 | Nachschau {'wohnraum_voll': 5204, 'bauern_untaetig': 10632, 'ohne_holz': 7844, 'gold_liegt_holz_fehlt': 5684, 'erstes_holz_geliefert': 4612, 'erster_stein': 7570, 'ticks': 16612, 'apfel_warten': 3863.8531468531446, 'holz_liegt_bauern_warten': 8308, 'fehlversuche': 25}
+LERNEN WIDERSPRUCH Lauf 5: 25 gescheiterte/abgelehnte Befehle (Schleife?); Holz lag 8308 Ticks, waehrend >= 2 Bauern warteten
+LERNEN Lauf 6: bevoelkerung_ziel = 50 (statt 90), beste Note bisher 16753

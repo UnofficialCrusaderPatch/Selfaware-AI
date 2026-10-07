@@ -75,7 +75,10 @@ class Auftragsbuch:
                 self.zahl["bestaetigt"] += 1
                 ev.append("BAU BESTAETIGT %s Nr %d bei (%d,%d) nach %d Ticks%s" % (
                     self.name(a["typ"]), n, g["x"], g["y"], t - a["tick"], " [%s]" % a["zweck"] if a["zweck"] else ""))
-                if g.get("erreichbar") == 0:
+                # 08.10. 00:08 (Daniel, Bild: Huetten jenseits des Flusses mit rotem Zeichen; Lauf s25/5: 21 Huetten mit
+                # "erreichbar" 1, nie besetzt): das Feld beweist auch in diese Richtung nichts - JEDER neue Betrieb mit
+                # Arbeitsplaetzen kommt in den Beweis unten (600 Ticks ohne Arbeiter bei freien Bauern -> abreissen)
+                if self.arbeiter_je.get(a["typ"]):
                     # Daniel 23:10 "Holzfaeller sollten alle zugaenglich sein" - ABER das Spiel rechnet sein Wegnetz hoechstens
                     # alle 200 Ticks neu (Register W): frisch gebaut steht "erreichbar" kurz auf 0. 23:37 (Daniel: "Apfelplantage
                     # oben platziert und direkt wieder geloescht, sogar zweimal"): erst nach 250 Ticks erneut pruefen.

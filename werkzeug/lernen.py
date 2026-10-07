@@ -69,7 +69,7 @@ S25 = {
         "haushalt_rand": [650, 400, 900],
         "wachstum_boden": [9500, 9000, 10000],
         "rationen": ["doppelt", "normal"],
-        "nahrung_ausbau": ["ja", "nein"],     # Lauf s25/1: Nahrung fehlte fuer doppelte Rationen
+        "nahrung_ausbau": ["ja", "nein", "kasse"],     # Lauf s25/1: Nahrung fehlte fuer doppelte Rationen
     },
     "grund": {"abriss": "nein", "aufloesen": "ende", "b_versatz": 600, "bevoelkerung_ziel": 70, "einzelkauf": "nein",
               "entscheider": "kausal", "holz_kaufen": "ja", "holz_spam": 20, "holzfaeller_je_baum": 4, "holzfaeller_max": 30,

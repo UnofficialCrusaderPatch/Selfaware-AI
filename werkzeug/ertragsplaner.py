@@ -507,6 +507,31 @@ class Ertragsplaner:
                 (self.erreichbar_ok if ok else self.unerreichbar).add(p)
         return next((p for p in probe if p in self.erreichbar_ok), None)
 
+    def erreichbare(self, orte, L, n=4):
+        """Bis zu n Orte aus der Rangfolge, zu denen der Wegtest des Spiels einen Weg findet (Daniel 08.10. 00:08, Bild:
+        Holzfaeller jenseits des Flusses mit rotem Zeichen - der Kausal-Weg nahm die naechsten 4 Plaetze ohne Wegtest;
+        Lauf s25/5: 21 Huetten bei x 8-54 nie besetzt)."""
+        if not self.wegtest:
+            return list(orte)[:n]
+        kand = [p for p in orte if p not in self.unerreichbar]
+        aus, proben, lord = [], 0, None
+        for i in range(0, len(kand), 8):                     # Bloecke zu 8 Punkten = ein Modulaufruf
+            block = kand[i:i + 8]
+            neu = [p for p in block if p not in self.erreichbar_ok]
+            if neu:
+                if proben >= 3:                              # hoechstens 3 neue Wegtests je Aufruf (Rundenzeit)
+                    break
+                lord = lord or next((k for k, e in L.items() if e["typ"] == 55 and e["besitzer"] == self.sp), None)
+                if lord is None:
+                    return block[:n]
+                for q, ok in zip(neu, self.wegtest(lord, neu)):
+                    (self.erreichbar_ok if ok else self.unerreichbar).add(q)
+                proben += 1
+            aus += [q for q in block if q in self.erreichbar_ok][:n - len(aus)]
+            if len(aus) >= n:
+                break
+        return aus
+
     def reserve(self):
         """Was nicht verkauft werden darf (Daniel 19:44: Stein bis auf den Bedarf der geplanten Eisenmine)."""
         return {"stein": self.stein_reserve}

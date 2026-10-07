@@ -1,12 +1,12 @@
 {
  "beste": {
-  "nr": 1,
-  "zeit": "20261007_235301",
+  "nr": 4,
+  "zeit": "20261008_000349",
   "strategie": {
    "abriss": "nein",
    "aufloesen": "ende",
    "b_versatz": 600,
-   "bevoelkerung_ziel": 70,
+   "bevoelkerung_ziel": 90,
    "einzelkauf": "nein",
    "entscheider": "kausal",
    "holz_kaufen": "ja",
@@ -33,29 +33,44 @@
    "gute_dinge": 0,
    "haushalt_rand": 650,
    "wachstum_boden": 9500,
-   "rationen": "doppelt"
+   "rationen": "doppelt",
+   "nahrung_ausbau": "nein"
   },
-  "note": 21348,
+  "note": 16753,
   "art": "erreicht",
   "nachschau": {
-   "wohnraum_voll": 0,
-   "bauern_untaetig": 19928,
-   "ohne_holz": 4790,
-   "gold_liegt_holz_fehlt": 868,
-   "erstes_holz_geliefert": 4610,
-   "erster_stein": 5119,
-   "ticks": 20842,
-   "apfel_warten": 6142.166666666676,
-   "holz_liegt_bauern_warten": 15882,
+   "wohnraum_voll": 4179,
+   "bauern_untaetig": 7219,
+   "ohne_holz": 8594,
+   "gold_liegt_holz_fehlt": 6112,
+   "erstes_holz_geliefert": 4624,
+   "erster_stein": 7640,
+   "ticks": 16398,
+   "apfel_warten": 3599.01406926407,
+   "holz_liegt_bauern_warten": 6304,
    "bau_wieder_abgerissen": 0,
-   "fehlversuche": 28
+   "fehlversuche": 24
   },
   "abbruch": null,
-  "datei": "lernen_lauf_20261007_235301_1.txt",
-  "horizont": null,
+  "datei": "lernen_lauf_20261008_000349_4.txt",
+  "horizont": 17716,
   "tempo": 100,
-  "geaendert": null,
-  "vergleich": null
+  "geaendert": "nahrung_ausbau",
+  "vergleich": {
+   "gegen": 3,
+   "note_vorher": 17716,
+   "differenz": -963
+  }
  },
- "wirkung_je_knopfwert": {}
+ "wirkung_je_knopfwert": {
+  "bevoelkerung_ziel=90": [
+   -1489
+  ],
+  "nahrung_ausbau=nein": [
+   -963
+  ],
+  "bevoelkerung_ziel=110": [
+   213
+  ]
+ }
 }
