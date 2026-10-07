@@ -220,3 +220,51 @@ nie, wenn der Bauer mit der kleinsten Nummer abwandert (Zustand 110, Spielcode e
 
 **Fuer 25 Streitis:** gleiche Kette, aber 25 x (60+32 Waffen + 20 Anwerben) = 2.800 Gold - Kasse mit mehr Leuten/laenger;
 Anwerben ueber mehrere Schuebe solange Beliebtheit hoch (L30/L32).
+
+## Strategie-Rat 25 Streitkolbenkaempfer, Beliebtheit NIE unter 50 (Daniel 07.10. 23:34, Rat 23:50)
+Bedingung: 25 ausgebildete Streitkolbenkaempfer ab Tick 0, kuerzeste Zeit gewinnt, Beliebtheit faellt nie unter 50.
+Marken: gemessen (Register) / abgelesen (liga_ai.json) / gerechnet / offen.
+
+**Was die Bedingung aendert**
+- Die Kasse der 10er-Laeufe (Stufe 11 bis Beliebtheit 0, L31) ist verboten.
+- Unter 50 wandert niemand ab: Zuzug 50-54 = +5, ab 95 = +40 (abgelesen, L22) -> L30/L32 (verlorene Kaempfer) faellt weg,
+  der Modul-Befehl "Bauer gezielt waehlen" wird unnoetig.
+- 25 = 5 x 5: Keulen und Leder gehen genau in 5er-Kaeufen auf, Einzelkauf (L33) unnoetig.
+- Bedarf alles gekauft: 5x300 Keulen + 5x160 Leder + 25x20 Anwerben = 2.800 Gold (abgelesen).
+- Beliebtheit je Woche (Anzeige = Tabelle/25, abgelesen): Steuer Stufe 2 +1 (0 Gold), 6 -8 (1,00/Kopf/Monat), 8 -15 (1,65),
+  9 -20 (2,00), 10 -30 (2,75), 11 -40 (4,00); Rationen extra +5, doppelt +10; 2/3/4 Nahrungssorten +1/+3/+5;
+  Gute Dinge bis +7 (Maibaum/Garten/Tanzbaer 30 G, Statue/Schrein 40 G; Leistung der Arbeiter sinkt bis 60 %);
+  Bier (Schwellen 20/40/80/100) und Kirche (Bonus 30) - Bedeutung offen.
+- Gemessen ist nur: Stufe 11 ohne Extras = -6 Punkte je 100 Ticks, Wochenschritt ~12 (L24).
+- **Kernsatz (gerechnet):** Ohne Beliebtheits-Quellen haelt nur Stufe 2 (+1) - und die zahlt 0 Gold. Dauersteuer gibt es
+  nur so hoch, wie Quellen sie tragen. Einnahme = Leute x Gold je Kopf (Stufe) / 800 Ticks + Verkauf; 70 Leute bei Stufe 9
+  = 175 Gold je 1.000 Ticks.
+
+### Hauptstrategie "Haushalt" (Vorsitz)
+1. Tick 0-1.500: Eroeffnung wie Lauf 64/69 (Holzfaeller, Steinbrueche, Huetten, Aepfel) + 4 Milchviehhoefe vor ~1.500 (L14).
+2. Wachstum: Steuer Stufe 2, Beliebtheit hoch halten (Zuzug +40), Wohnraum so gross wie Arbeitsplaetze erlauben (L27: max 24 am Feuer).
+   Kaese aus den Hoefen = 2. Sorte; 3 Gerbereien spaetestens mit der ersten Kuh (~1.400-2.000 nach dem Hof); Leder selbst spart ~500 Gold.
+3. Kasse ab Wohnraum-Ziel: Gute Dinge sofort (kein Arbeiter, kein Vorlauf), doppelte Rationen solange der Vorrat reicht.
+   Regler: Stufe 11, solange die Beliebtheit nach dem naechsten Wochenschritt noch >= 62 ist (Konto 100 -> 62 abheben),
+   danach die hoechste Stufe, die haelt. Der Regler misst seine Steigung je Stufe selbst (Wochenschritte) statt sie zu raten.
+4. Anwerben laufend: je 5 Keulen kaufen, sobald bezahlbar; Leder eigenes, Rest kaufen; Bauern vom Feuer, sonst Start-Soldaten aufloesen.
+5. Kein Abriss am Ende (Lauf 69). Lauf ungueltig, sobald einmal Beliebtheit < 50 gemessen (vorher festgelegt).
+
+### Fuenf Gegenentwuerfe
+- Skeptiker "Sicherheitsabstand": nur gemessene Ketten (Aepfel doppelt), Band >= 70, alles kaufen; doppelt +10, 2 Sorten +1
+  -> Stufe 6 haelt (70 Leute: ~88 G je 1.000 Ticks). Warnt: B9 (6 Kuehe, kein Leder, Ursache nie gesucht), Streuung 54/57.
+- Grundsatz-Denker "Weniger brauchen": Leder selbst (4 Hoefe 28 H 60 G + 3 Gerbereien 45 H 9 S 225 G statt 800 G);
+  Schmiede verworfen (Eisen 54 G gegen Keule 60 G, Mine erst ~6.500 Ticks nach Bau, B9).
+- Visionaer "Bierkoenig": Hopfen (10 H 35 G) + Brauerei (16 H) + Gasthaus (16 H 12 S 50 G); Bier traegt Steuer UND verkauft
+  sich fuer 24 G je Fass (Aepfel 3, Kaese 6). Ertrag und Bierwirkung ungemessen, ~4.000 Ticks Vorlauf (L10).
+- Aussenstehender "Arbeit statt Steuer": 2 Steinbrueche = 12 Stein je 1.000 Ticks (L4) = 60 G beim Verkauf (5 je Stein) -
+  pro Arbeiter mehr als Dauersteuer Stufe 9 (2,5 je Kopf und 1.000 Ticks). So viele Steinbrueche, wie Stein liegt.
+- Macher "Gute Dinge sofort": Lauf-64-Kette, Kasse ersetzt durch Regler + Gute Dinge + doppelte Rationen; einziger Hebel ohne Vorlauf.
+
+### Urteil
+- Einig: Gold ist der Engpass; ohne Quellen keine Dauersteuer; der Regler muss den Wochenschritt (~12) vorausschauen.
+- Streit: neue Ketten (Leder, Bier) gegen nur Gemessenes; Gute Dinge senken die Leistung der Gerber/Holzfaeller.
+- Fast uebersehen: Leute sind der staerkste Hebel (Einnahme waechst linear); doppelte Rationen kosten Nahrung je Kopf - ungemessen.
+- Empfehlung: Haushalt, gebaut in der Reihenfolge der Belege: Regler + Gute Dinge + Rationen zuerst, Leder/Bier/Stein als
+  Knoepfe fuer den Lernkreis.
+- Erster Schritt: Beliebtheits-Regler in erstes_spiel.py (Vorschau Wochenschritt, Steigung je Stufe gemessen, Protokoll "nie unter 50"), dann Lauf 1.
