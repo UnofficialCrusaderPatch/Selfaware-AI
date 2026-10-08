@@ -268,3 +268,87 @@ Marken: gemessen (Register) / abgelesen (liga_ai.json) / gerechnet / offen.
 - Empfehlung: Haushalt, gebaut in der Reihenfolge der Belege: Regler + Gute Dinge + Rationen zuerst, Leder/Bier/Stein als
   Knoepfe fuer den Lernkreis.
 - Erster Schritt: Beliebtheits-Regler in erstes_spiel.py (Vorschau Wochenschritt, Steigung je Stufe gemessen, Protokoll "nie unter 50"), dann Lauf 1.
+
+## Plan 25 Streitkolbenkaempfer in hoechstens 24 Monaten (Daniel 08.10.2026)
+
+### Ziel und ehrlicher Ausgangspunkt
+
+- 1 Monat = 800 Ticks, 20 Monate = 16.000 Ticks, 24 Monate = 19.200 Ticks (`Wissensstand.md`, Kalender gemessen).
+- Daniels Grenze: Der 25. Streitkolbenkaempfer muss spaetestens bei Tick 19.200 stehen. Wunschziel ist Tick 16.000;
+  darunter ist Rekordglueck.
+- Der beste bisherige Lauf erreichte 25 bei Tick 16.753 = 20,94 Monaten. Er liegt sicher unter 24 Monaten, aber nur
+  einmal. Die anderen Haushalt-Laeufe lagen bei 21.348, 19.205, 17.716 und 16.966 Ticks; dabei wurden mehrere
+  Stellgroessen geaendert. Der Rekord ist deshalb ein Startwert, noch kein belastbarer Normalwert.
+- Die Kontrolllaeufe 6 sind nicht wertbar: eine B-Plantage blieb bis zu 1.459 Ticks nach A offen. Vor jedem Vergleich
+  muss dieselbe Beststrategie drei gueltige Laeufe absolvieren. Gueltig: keine Beliebtheit unter 50 und keine B-Plantage
+  mehr als 200 Ticks nach A offen. Rekord und Median werden getrennt gefuehrt.
+
+### Gemeinsame Regel: Das spaeteste Glied entscheidet
+
+Die KI minimiert nicht Gold, Holz oder die Zeit einer einzelnen Werkstatt. Sie minimiert jede Runde diese Zielzeit:
+
+`Zielzeit = max(25. Keule, 25. Lederharnisch, 500 Gold, 25 verfuegbare Bauern, Kaserne/Waffenlager bereit)`
+
+Gebaut wird nur das Glied, das diese Zielzeit im Moment am weitesten nach hinten schiebt. Fuer die Vorhersage zaehlen
+nicht nur fertige Waren, sondern die ganze laufende Kette: Eisen im Minenvorrat und beim Traeger, Eisen/Keulen beim
+Schmied, lebende und laufende Kuehe, Arbeit beim Gerber sowie Waren auf dem Weg zum Waffenlager. Erst der danach
+verbleibende Rest wird am Markt gekauft. So kauft die KI nicht kurz vor einer eigenen Lieferung doppelt.
+
+### Harte Reihenfolge
+
+1. **Belegbare Grundlinie:** Die jetzige 16.753-Strategie drei gueltige Male unveraendert laufen lassen. Ziel fuer die
+   Grundlinie: jeder Lauf unter 19.200; Bestzeit und Median notieren.
+2. **Stein frueh freimachen:** Die beiden Steinbrueche stehen schon frueh, aber im Rekordlauf kam der erste Stein erst
+   bei Tick 7.640, weil die Ochsenjoche erst nach dem ersten Holzschub kamen. Direkt nach dem neuen Lager werden deshalb
+   10 Holz fuer zwei Joche reserviert oder gekauft. Erstes Zwischenziel: erster gelieferter Stein vor Tick 3.500. Ohne
+   diesen Beleg startet keine grosse Waffenbau-Variante.
+3. **Leder zuerst:** Vier Milchviehhoefe und zwei Gerbereien sind der erste Produktionsversuch. Das bindet sechs
+   Arbeiterplaetze, braucht 58 Holz, 6 Stein und 210 Gold und kann nach L39 ungefaehr 25 Leder bis vor Tick 16.000
+   liefern, wenn die Hoefe bis etwa Tick 1.500 und die Gerbereien mit den ersten Kuehen stehen. Fehlendes Leder wird
+   erst am Endpunkt in Fuenferlosen gekauft.
+4. **Keulen nur hinter dem Stein-Tor:** Danach beginnt die Eisenkette mit vier Minen und sechs Schmieden; eine fuenfte
+   Mine wird nur gebaut, wenn die laufende Eisenmenge bis Tick 14.500 weniger als 25 Keulen verspricht. Die Startwerte
+   folgen L37/L38: Mine 0,59 Eisen je 1.000 Ticks, erste Lieferung 3.600-4.000 Ticks nach Bau; Schmiede eine Keule je
+   2.000-2.300 Ticks, erste Keule etwa 3.300 Ticks nach Bau. Gekauftes Eisen ist kein Standardweg: ein Fuenferlos spart
+   gegen fertige Keulen nur 30 Gold und kostet zusaetzlich Schmiedezeit.
+5. **Arbeiter umschichten statt Bevoelkerung aufblasen:** Ziel 90 bleibt der Startwert; 110 war mit 16.966 langsamer.
+   Spaete Holzfaeller mit nur 0,3-0,4 Holz je 1.000 Ticks werden nicht weiter gebaut, sobald Mine, Schmiede oder Gerber
+   die Zielzeit staerker senken. Die 90 Leute werden zuerst in Nahrung, dann in die aktuelle Engpasskette gesetzt.
+6. **Markt als Ziellinien-Werkzeug:** Ab Tick 14.500 werden keine Betriebe mehr gebaut, deren erste echte Lieferung vor
+   Tick 16.000 nicht sicher ist. Die Bilanz reserviert 500 Gold fuer das Anwerben und kauft nur den aufgerundeten Rest
+   an Keulen und Leder. Ab Tick 17.500 gilt die 24-Monats-Sicherung: alles Verkaufbare in Gold umwandeln und jeden noch
+   fehlenden Fuenferblock kaufen; keine neue Langfrist-Investition.
+
+### Messmarken und Abbruchregeln
+
+| Marke | Soll fuer den 20-Monats-Versuch | Wenn sie verfehlt wird |
+|---|---:|---|
+| B-Plantagen nach A | hoechstens 200 Ticks | Lauf als technisch verfaelscht markieren |
+| erster Stein im Lager | vor Tick 3.500 | Joch-/Holz-Reihenfolge verbessern, keine Vollkette werten |
+| 4 Hoefe + 2 Gerbereien | bis Tick 3.500 | Leder-Variante abbrechen oder Restkauf vorrechnen |
+| 4 Minen + 6 Schmieden | nur wenn Rohstoffe und Arbeiter reichen, spaetestens Tick 6.000 | kleiner starten; keine Gebaeude auf Kredit planen |
+| 10 Keulen + 10 Leder | bis Tick 10.500 | Restbedarf neu rechnen und Marktpfad vorbereiten |
+| Kaufentscheidung | Tick 14.500 | unfertige Arbeit mitzählen, nur echten Rest kaufen |
+| Wunschziel | Tick 16.000 | Bestzeit verfehlt, Lauf bis zur harten Grenze fortsetzen |
+| Sicherungsumschaltung | Tick 17.500 | investieren stoppen, Endkauf und Anwerben |
+| Harte Grenze | Tick 19.200 | Lauf gescheitert |
+
+### Versuchsfolge
+
+1. Drei Wiederholungen der Grundlinie 16.753, nachdem die B-Plantage nicht mehr haengen kann.
+2. Nur fruehe Ochsenjoche aendern; drei Laeufe. Damit wird belegt, ob frueher Stein wirklich die Endzeit senkt.
+3. Auf dem besseren Stand Lederkette zuschalten; drei Laeufe.
+4. Erst danach Eisen/Schmieden zuschalten; drei Laeufe. Die kleinste Variante beginnt 4/6, weitere Gebaeude nur nach
+   der laufenden Zielzeitrechnung.
+5. Sieger ist die kleinste Regel, deren drei gueltige Laeufe alle unter 19.200 bleiben; der schnellste Einzellauf ist
+   der Rekord. Das 20-Monats-Ziel ist erreicht, sobald ein gueltiger Lauf unter 16.000 endet.
+
+### Gegenprobe vor dem Bauen
+
+- **Ueberladung:** Die geplante 4-Minen-/6-Schmieden-Kette samt 4 Hoefen und 2 Gerbereien kostet 258 Holz, 78 Stein
+  und 20 Arbeiterplaetze; mit Waffenlager und Kaserne sind es 263 Holz und 90 Stein. Sie darf nicht als fester Bauplan
+  starten, bevor die reale Lage diese Mittel zeigt; sonst wird nur Rohstoffmangel gemessen.
+- **Doppelkauf:** Die Restbilanz muss laufende Ware mitzählen. Kann sie das noch nicht, darf sie im Versuch erst kaufen,
+  wenn keine eigene Lieferung vor der Zielmarke mehr moeglich ist.
+- **Glueck:** Ein einzelner 16.753-Lauf beweist nur den Rekord. Fuer eine belastbare 24-Monats-Strategie muessen drei
+  gueltige Wiederholungen unter 19.200 liegen.

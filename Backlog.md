@@ -9,6 +9,10 @@ werden (und viele weitere Fragen): **1.** bauen koennen - **2.** es wirksam mach
 bauen muss - **4.** wissen, warum und WANN man es bauen sollte - **5.** selbstaendig situativ auf kreative Loesungen kommen.
 
 ## Jetzt dran
+- [ ] **25 Streitkolben in hoechstens 24 Monaten** (Daniel 08.10.): harte Grenze Tick 19.200, Wunschziel 16.000. Erst die 16.753-Grundlinie dreimal gueltig wiederholen; dann je drei Laeufe fruehe Joche, Lederkette, Eisen-/Schmiedekette. Rekord und belastbaren Drei-Lauf-Wert getrennt fuehren.
+- [ ] **Restbedarf mit laufender Produktion rechnen:** Eisen in Mine/Transport/Schmiede und Kuehe/Gerberarbeit mitzählen, bevor Keulen oder Leder gekauft werden; sonst Doppelkauf kurz vor Lieferung.
+- [ ] **Frueher Stein fuer den 25er:** zwei Ochsenjoche direkt nach dem neuen Lager aus 10 reserviertem/gekauftem Holz; erster Stein vor Tick 3.500 statt im Rekordlauf Tick 7.640.
+- [ ] **B-Plantage als Gueltigkeitsbedingung:** Kontrolllauf nur werten, wenn alle B-Plantagen hoechstens 200 Ticks nach A stehen; Lauf 6 war mit bis zu 1.459 Ticks verfaelscht.
 - [x] **Ertrags-Planer** (Daniel 19:11/19:14; Stand 4 seit 05.10. 20:10, M21): erst Messpartie (Ertrag je Gebaeude je 1.000 Ticks, Verkaufspreis Stein/Eisen, Weglaenge), dann jede Runde die Aktion mit der schnellsten Amortisation bauen, ohne feste Stueckzahlen; Umgebung bestimmt alles. Stein und Eisen vermutlich vorne.
 - [x] **Planer lernt im Spiel** (Befund 9t; erledigt 05.10. 20:10, M21): Ertrag je Gebaeudeart aus dem laufenden Spiel messen (Bestand + Verkauf + Verbrauch je Ware, geteilt durch Zahl der Betriebe) und die Startwerte ersetzen - dann hoert er von selbst auf, Jaegerhuetten zu bauen, die nichts bringen.
 - [x] **Zeithorizont fuer Investitionen** (Befund 9t; erledigt 05.10. 20:10: Gewinn bis Partieende, M21): nur bauen, was sich innerhalb des Horizonts bezahlt macht; sonst geht das Gold in Truppen.
